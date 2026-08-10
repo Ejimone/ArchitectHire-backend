@@ -10,6 +10,27 @@ from solo.models import SingletonModel
 from apps.core.models import OrderableModel, PublishableModel, TimeStampedModel
 from apps.core.scopes import validate_scope
 
+from .models_editorial import (  # noqa: F401  (re-exported for admin/serializers/migrations)
+    Author,
+    BlogCategory,
+    BlogContentBlock,
+    BlogPost,
+    CaseStudy,
+    CaseStudyCategory,
+    CaseStudyImage,
+    ContactMethod,
+    ContactSubmission,
+    ContactTopic,
+    Department,
+    InspirationItem,
+    InspirationLike,
+    JobPosting,
+    NewsletterSubscriber,
+    Perk,
+    PolicyPage,
+    PolicySection,
+)
+
 
 class SiteSettings(SingletonModel):
     """Global site toggles & content (design: promo banner, trust bar, hero media mode)."""

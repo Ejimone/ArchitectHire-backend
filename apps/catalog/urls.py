@@ -5,6 +5,7 @@ from .views import (
     CategoriesView,
     DraftingPricingView,
     PlansView,
+    ProjectTypeDetailView,
     ProjectTypesView,
     RenderMatrixView,
 )
@@ -16,6 +17,7 @@ urlpatterns = [
     path("addons/", AddonsView.as_view(), name="addons"),
     path("plans/", PlansView.as_view(), name="plans"),
     path("project-types/", ProjectTypesView.as_view(), name="project-types"),
+    path("project-types/<slug:slug>/", ProjectTypeDetailView.as_view(), name="project-type-detail"),
     path("pricing/render-matrix/", RenderMatrixView.as_view(), name="render-matrix"),
     path("pricing/drafting/", DraftingPricingView.as_view(), name="drafting-pricing"),
 ]

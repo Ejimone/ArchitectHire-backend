@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 from solo.admin import SingletonModelAdmin
 
+from . import admin_editorial  # noqa: F401
 from .models import (
     FAQ,
     CopyBlock,

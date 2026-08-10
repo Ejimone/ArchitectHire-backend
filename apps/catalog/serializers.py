@@ -62,6 +62,24 @@ class ProjectTypeSerializer(serializers.ModelSerializer):
         fields = ["group", "name", "slug", "sub", "price_display", "slot_id", "image_hint"]
 
 
+class ProjectTypeDetailSerializer(ProjectTypeSerializer):
+    class Meta(ProjectTypeSerializer.Meta):
+        fields = ProjectTypeSerializer.Meta.fields + [
+            "short_name",
+            "kicker",
+            "h1",
+            "intro",
+            "body",
+            "price_range",
+            "bar_pct",
+            "stats",
+            "includes",
+            "price_notes",
+            "steps",
+            "related",
+        ]
+
+
 class RenderDeliverableSerializer(serializers.ModelSerializer):
     class Meta:
         model = RenderDeliverable

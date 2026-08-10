@@ -96,6 +96,20 @@ class ProjectType(OrderableModel, TimeStampedModel):
     slot_id = models.CharField(max_length=40, blank=True)
     image_hint = models.CharField(max_length=120, blank=True)
 
+    # SEO landing-page content (design: Project Landing.dc.html template fields)
+    short_name = models.CharField(max_length=60, blank=True)
+    kicker = models.CharField(max_length=80, blank=True)
+    h1 = models.CharField(max_length=160, blank=True)
+    intro = models.TextField(blank=True)
+    body = models.TextField(blank=True)
+    price_range = models.CharField(max_length=40, blank=True)  # "$2,400 – $6,800"
+    bar_pct = models.PositiveSmallIntegerField(default=0)
+    stats = models.JSONField(default=list, blank=True)  # [{"value": "...", "label": "..."}]
+    includes = models.JSONField(default=list, blank=True)
+    price_notes = models.JSONField(default=list, blank=True)
+    steps = models.JSONField(default=list, blank=True)  # [{"title": "...", "description": "..."}]
+    related = models.JSONField(default=list, blank=True)  # related project-type slugs
+
     class Meta(OrderableModel.Meta):
         pass
 

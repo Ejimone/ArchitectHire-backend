@@ -34,7 +34,7 @@ jobs:
       DATABASE_URL: postgres://architecthire:architecthire@localhost:5432/architecthire
       REDIS_URL: redis://localhost:6379
       SECRET_KEY: ci-only-secret-key
-      DJANGO_SETTINGS_MODULE: architecture_backend.settings.dev
+      DJANGO_SETTINGS_MODULE: architecture_backend.settings.test
 
     steps:
       - uses: actions/checkout@v4

@@ -14,6 +14,7 @@ from .serializers import (
     AddonSerializer,
     DraftingConfigSerializer,
     PlanSerializer,
+    ProjectTypeDetailSerializer,
     ProjectTypeSerializer,
     RenderDeliverableSerializer,
     ServiceCategorySerializer,
@@ -49,6 +50,19 @@ class ProjectTypesView(CachedContentView):
 
     def build_payload(self, request):
         return {"project_types": ProjectTypeSerializer(ProjectType.objects.all(), many=True).data}
+
+
+class ProjectTypeDetailView(CachedContentView):
+    """GET /api/v1/catalog/project-types/{slug}/ — full SEO landing payload."""
+
+    def get_cache_slug(self, slug=None):
+        return f"_project_type:{slug}"
+
+    def build_payload(self, request, slug=None):
+        project_type = ProjectType.objects.filter(slug=slug).first()
+        if project_type is None:
+            return None
+        return ProjectTypeDetailSerializer(project_type).data
 
 
 class RenderMatrixView(CachedContentView):
