@@ -20,8 +20,9 @@ Backend repo: `ArchitectHire-backend` (Django 6.1 CMS + marketplace API) · Fron
   **Verified**: 19 tests green · ruff clean · `check --deploy` zero issues · migrations applied on Postgres 17.
   Note: host port **5433** → container Postgres (native Postgres owns 5432 on the dev machine).
 
-- [ ] **Stage 2 — Accounts & auth (Clerk)**
-  Clerk webhook endpoint (svix-verified: user.created/updated/deleted → local sync) · `GET/PATCH /api/v1/auth/me/` · `PATCH /api/v1/auth/me/preferences/` · role selection flow · OpenAPI auth extension so `/api/docs/` shows Bearer auth.
+- [x] **Stage 2 — Accounts & auth (Clerk)** *(2026-08-10)*
+  Clerk webhook `POST /api/webhooks/clerk/` (svix-verified; user.created/updated → upsert + JIT-user linking by email, user.deleted → deactivate) · `GET/PATCH /api/v1/auth/me/` (role self-selection, staff blocked, email read-only) · `GET/PATCH /api/v1/auth/me/preferences/` · OpenAPI bearer scheme for Clerk tokens.
+  **Verified**: 32 tests green (signed-webhook simulation incl. bad-signature 400, unconfigured 503) · ruff clean.
 
 - [ ] **Stage 3 — CMS foundation**
   SiteSettings singleton (promo banner, trust bar, hero media mode) · MediaAsset named slots (~150 from design) · Nav/Footer models · HeroCarouselSlide · scoped blocks (FAQ/Stat/Step/Testimonial/ValueProp/TrustLogo/CredentialBadge/UseCase/Persona/Principle) · draft/publish · admin UX pass #1 · composed `GET /api/v1/content/pages/{page_key}/` · Redis caching + version-bump invalidation + ETag.
