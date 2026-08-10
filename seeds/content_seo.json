@@ -1,0 +1,307 @@
+{
+  "page_seo": [
+    {
+      "page_key": "landing",
+      "title": "Hire a licensed architect. Get stamped drawings.",
+      "description": "We match you with 2–3 architects licensed in your jurisdiction who deliver permit-ready drawings — entirely remotely. No forms to fill out first."
+    },
+    {
+      "page_key": "services-landing",
+      "title": "Architectural help — without hiring a full architect",
+      "description": "Book a one-hour consult, a set of renders, or drafting by the hour. Every service is priced up front, delivered remotely, and escrow-backed — from $145."
+    },
+    {
+      "page_key": "services",
+      "title": "Not every project needs a full architect",
+      "description": "Book a one-hour consult, a set of renders, interior design, or drafting by the hour — and step up to a full stamped set only when the project calls for it. Priced up front, remote, escrow-backed."
+    },
+    {
+      "page_key": "3d-visualization",
+      "title": "See it before you build it",
+      "description": "Photoreal renders, 3D floor plans, and walkthroughs from the platform's visualization specialists — starting at $99 a still. No full-design engagement required."
+    },
+    {
+      "page_key": "cad-drafting",
+      "title": "Clean drawings, drafted by the hour",
+      "description": "CAD drafting, as-built packages, and PDF-to-CAD — the highest-volume, least-regulated work on the platform. For most single-family and ADU jobs, no architect's stamp is required at all."
+    },
+    {
+      "page_key": "architect-landing",
+      "title": "Get matched with clients. Keep control of your practice.",
+      "description": "A steady stream of vetted, scoped projects delivered to you. You set your rates, pick the work you want, and get paid fast through escrow — no cold pitching, no chasing invoices."
+    },
+    {
+      "page_key": "for-experts",
+      "title": "Do the work you're great at. We'll bring the clients.",
+      "description": "Scoped, pre-priced orders for drafting, 3D, scanning, engineering and permits — delivered to your dashboard. Set your rates, take only the work you want, and get paid fast through escrow."
+    },
+    {
+      "page_key": "projects",
+      "title": "Architecture for every kind of project",
+      "description": "From a backyard ADU to a ground-up custom home or a commercial tenant improvement — match with architects who specialize in exactly your project type, and get a stamped, permit-ready set."
+    },
+    {
+      "page_key": "cities",
+      "title": "Find a licensed architect in your city",
+      "description": "A stamped drawing set must come from an architect licensed where you're building. We match you to pros who know your jurisdiction's permit process — pick your city, or find your state below."
+    },
+    {
+      "page_key": "blog",
+      "title": "Permits, pricing & plans, explained",
+      "description": "Practical guides on hiring an architect, navigating your jurisdiction, and pricing every kind of project — written with the licensed architects in our network."
+    },
+    {
+      "page_key": "case-studies",
+      "title": "Real projects, permit to keys",
+      "description": "Every project below started with an instant estimate and ended with a stamped, permit-ready set. See the scope, the timeline, and the real number — from homeowners and builders who hired remotely."
+    },
+    {
+      "page_key": "about",
+      "title": "We exist to make great architecture accessible to anyone who wants to build.",
+      "description": "Not just for the few who already know an architect — for anyone with a project and a place to build it. A fair price, a qualified professional, a permit that clears."
+    },
+    {
+      "page_key": "careers",
+      "title": "Help rebuild how buildings get permitted",
+      "description": "We're a small, remote-first team building the data layer, pricing engine, and marketplace that make licensed architecture accessible. If you like hard problems with real-world stakes, you'll fit in."
+    },
+    {
+      "page_key": "contact",
+      "title": "Talk to us",
+      "description": "Questions about a project, joining the network, press, or partnerships — pick the fastest route below, or send us a note."
+    },
+    {
+      "page_key": "inspiration",
+      "title": "Find your look before you build",
+      "description": "Browse real spaces by room, style, and project type. Save the ones that feel right — then hand them to a licensed architect as the starting point for your own build."
+    },
+    {
+      "page_key": "jurisdiction-database",
+      "title": "Permitting guides for every US state",
+      "description": "We score every jurisdiction on the factors that drive permit cost and timeline — seismic and coastal zones, wildfire overlays, historic districts and drawing depth. Pick a state to read its full permitting guide, or start an estimate to see your exact address scored."
+    },
+    {
+      "page_key": "search",
+      "title": "",
+      "description": "Search across services, project types, cities and pages."
+    },
+    {
+      "page_key": "get-started",
+      "title": "Tell us what you're building",
+      "description": "This feeds the pricing engine and your jurisdiction score. About two minutes."
+    },
+    {
+      "page_key": "order-render",
+      "title": "What do you need rendered?",
+      "description": "No licensure or jurisdiction needed — renders travel anywhere. Priced instantly, delivered in days."
+    },
+    {
+      "page_key": "order-drafting",
+      "title": "What do you need drafted?",
+      "description": "Drafting is unstamped work — no licensed architect required for most jobs. If yours needs a stamp, we'll add it as a separate matched step."
+    }
+  ],
+  "project_types": [
+    {
+      "slug": "backyard-adu",
+      "short_name": "ADU",
+      "kicker": "Accessory Dwelling Units",
+      "h1": "Backyard ADU architects who deliver permit-ready plans",
+      "intro": "Match with licensed architects who design detached and garage-conversion ADUs day in, day out — from feasibility to a stamped set your city will approve. Remote, escrow-backed, and priced up front.",
+      "body": "An ADU set is small but detail-dense — setbacks, utility connections, fire separation and energy compliance all have to be right for a smooth plan check. Architects on the platform who specialize in ADUs know the shortcuts and the traps.",
+      "price_display": "From $2,400",
+      "price_range": "$2,400 – $6,500",
+      "bar_pct": 40,
+      "stats": [
+        {
+          "value": "From $2,400",
+          "label": "typical fixed quote"
+        },
+        {
+          "value": "2–3 wk",
+          "label": "to stamped set"
+        },
+        {
+          "value": "4.9★",
+          "label": "avg client rating"
+        }
+      ],
+      "includes": [
+        "Site plan with setbacks",
+        "Floor plans & elevations",
+        "Structural coordination",
+        "Title-24 energy compliance",
+        "Utility & MEP layout",
+        "Permit-ready stamped set"
+      ],
+      "price_notes": [
+        "Scales with size — studios stay affordable",
+        "Locked before work begins",
+        "Milestone-based escrow releases"
+      ],
+      "steps": [
+        {
+          "title": "Estimate",
+          "description": "Answer a short questionnaire and get an itemized ADU price instantly."
+        },
+        {
+          "title": "Match",
+          "description": "Meet 2–3 architects pre-cleared on ADU + jurisdiction experience."
+        },
+        {
+          "title": "Design",
+          "description": "Scope on a call, pay into escrow, iterate on plans over chat and video."
+        },
+        {
+          "title": "Permit",
+          "description": "Receive a stamped set and submit for permit — revisions supported."
+        }
+      ],
+      "related": [
+        "Home addition",
+        "Whole-home renovation",
+        "Kitchen & bath",
+        "New custom home",
+        "Garage conversion",
+        "Change of use"
+      ]
+    }
+  ],
+  "cities": [
+    {
+      "slug": "oakland",
+      "intro": "Get matched with architects licensed in California and fluent in Oakland's permit process — from seismic-retrofit additions to backyard ADUs. Entirely remote, escrow-backed, stamped and permit-ready.",
+      "body1": "Oakland sits in a high-seismic zone with its own Bureau of Building requirements, soft-story ordinances, and a design-review process that trips up out-of-area firms. Every architect we match is licensed in California and has cleared permits with the City of Oakland before.",
+      "body2": "That local fluency shows up where it counts: correctly detailed lateral systems, Title-24 energy compliance done right the first time, and drawing sets that plan-check reviewers recognize — so you spend less time in correction cycles and more time building.",
+      "permit_facts": [
+        {
+          "k": "Jurisdiction",
+          "v": "City of Oakland"
+        },
+        {
+          "k": "Avg. residential permit",
+          "v": "6–12 weeks"
+        },
+        {
+          "k": "Design review",
+          "v": "Required in some zones"
+        },
+        {
+          "k": "Seismic rules",
+          "v": "Soft-story + hillside"
+        }
+      ],
+      "service_areas": [
+        "Rockridge",
+        "Temescal",
+        "Montclair",
+        "Grand Lake",
+        "Fruitvale",
+        "West Oakland",
+        "Piedmont",
+        "Berkeley",
+        "Alameda",
+        "Emeryville",
+        "San Leandro",
+        "Albany"
+      ],
+      "stats": [
+        {
+          "value": "140+",
+          "label": "CA-licensed architects"
+        },
+        {
+          "value": "48 hrs",
+          "label": "to matched"
+        },
+        {
+          "value": "4.9★",
+          "label": "avg client rating"
+        }
+      ],
+      "featured_architect": "Maya E., AIA",
+      "featured_specialty": "Seismic-zone additions",
+      "sample_architects": [
+        {
+          "name": "Maya E., AIA",
+          "specialty": "Seismic-zone additions"
+        },
+        {
+          "name": "Daniel O., AIA",
+          "specialty": "East Bay ADUs"
+        },
+        {
+          "name": "Priya N., AIA",
+          "specialty": "Change-of-use & TI"
+        }
+      ]
+    }
+  ],
+  "states": [
+    {
+      "code": "CA",
+      "intro": "California is one of the most demanding permitting environments in the country — seismic requirements, wildfire overlays, coastal rules and Title-24 energy compliance all shape the drawing set. Here's what to expect, and how we match you to an architect licensed to stamp it.",
+      "body1": "Every set submitted in California must be stamped by an architect licensed by the California Architects Board. Beyond licensure, the state layers requirements few other jurisdictions do: mandatory Title-24 energy compliance, seismic detailing tied to the local hazard zone, and — in much of the state — wildfire (WUI) ignition-resistant construction. These aren't optional line items; a set missing them is rejected at plan check.",
+      "body2": "On top of state rules, each city and county adds its own review. Coastal jurisdictions trigger Coastal Commission steps, hillside lots require additional geotechnical and structural coordination, and historic districts add design review. Our jurisdiction database scores each of these so your estimate reflects the real complexity of your specific address, not a statewide average.",
+      "permit_steps": [
+        {
+          "title": "Scope & estimate",
+          "duration": "2–3 days",
+          "description": "Questionnaire feeds the pricing engine; you review 2–3 California-licensed architects and confirm a fixed quote or hourly on a scoping call."
+        },
+        {
+          "title": "Design & drawings",
+          "duration": "3–8 wks",
+          "description": "Your architect produces the full set — plans, elevations, structural coordination, and Title-24 compliance — with milestone reviews."
+        },
+        {
+          "title": "Plan check submission",
+          "duration": "2–6 wks",
+          "description": "The stamped set is submitted to your city or county. Complexity and backlog set the review time; corrections cycle back if needed."
+        },
+        {
+          "title": "Permit issued",
+          "duration": "—",
+          "description": "Once approved, you receive the permit and can break ground. Revision tooling keeps any change orders on-platform."
+        }
+      ],
+      "factors": [
+        {
+          "name": "Seismic zone",
+          "level": "HIGH",
+          "description": "Lateral and foundation detailing tied to the local seismic hazard zone — the single biggest structural driver."
+        },
+        {
+          "name": "Wildfire (WUI)",
+          "level": "HIGH",
+          "description": "Ignition-resistant assemblies and defensible-space requirements across large parts of the state."
+        },
+        {
+          "name": "Title-24 energy",
+          "level": "REQUIRED",
+          "description": "Mandatory energy-compliance documentation on nearly every residential and commercial set."
+        },
+        {
+          "name": "Coastal / historic",
+          "level": "PARTIAL",
+          "description": "Coastal Commission review and historic-district design review where applicable."
+        }
+      ],
+      "covered_cities": [
+        "Los Angeles",
+        "San Francisco",
+        "Oakland",
+        "San Diego",
+        "San Jose",
+        "Sacramento"
+      ],
+      "popular_projects": [
+        "ADU",
+        "Addition",
+        "New custom home",
+        "Kitchen & bath",
+        "Commercial TI"
+      ]
+    }
+  ]
+}

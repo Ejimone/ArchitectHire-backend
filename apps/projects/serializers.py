@@ -1,9 +1,11 @@
 from rest_framework import serializers
 
-from apps.catalog.models import Addon
+from apps.catalog.models import Addon, ProjectType
 from apps.jurisdictions.models import State
+from apps.providers.models import ArchitectProfile
 
-from .models import COMMERCIAL_SCOPES, RESIDENTIAL_SCOPES, TIMELINES, Estimate
+from .matching import find_matches
+from .models import COMMERCIAL_SCOPES, RESIDENTIAL_SCOPES, TIMELINES, Estimate, Match, Project
 from .pricing import compute_estimate
 
 
@@ -103,3 +105,155 @@ class EstimateSerializer(serializers.ModelSerializer):
             "multiplier": round(state.multiplier, 3),
             "factors": state.factors,
         }
+
+
+class MatchSerializer(serializers.ModelSerializer):
+    """Client-facing match card (design: Matches.dc.html)."""
+
+    architect_name = serializers.SerializerMethodField()
+    firm = serializers.SerializerMethodField()
+    profile_id = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Match
+        fields = [
+            "id",
+            "architect_name",
+            "firm",
+            "profile_id",
+            "score",
+            "tag",
+            "reasons",
+            "rate_label",
+            "rate_display",
+            "status",
+        ]
+
+    def get_architect_name(self, obj):
+        return obj.architect.get_full_name() or obj.architect.email
+
+    def get_firm(self, obj):
+        profile = ArchitectProfile.objects.filter(user=obj.architect).first()
+        return profile.firm_name if profile else ""
+
+    def get_profile_id(self, obj):
+        profile = ArchitectProfile.objects.filter(user=obj.architect).first()
+        return profile.pk if profile else None
+
+
+class ProjectSerializer(serializers.ModelSerializer):
+    state = serializers.CharField(source="state.code", read_only=True)
+    matches = MatchSerializer(many=True, read_only=True)
+    estimate = EstimateSerializer(read_only=True)
+
+    class Meta:
+        model = Project
+        fields = [
+            "id",
+            "title",
+            "project_type",
+            "scope",
+            "sqft",
+            "state",
+            "timeline",
+            "status",
+            "progress_pct",
+            "next_action",
+            "architect",
+            "estimate",
+            "matches",
+            "created_at",
+        ]
+        read_only_fields = fields
+
+
+class ProjectCreateSerializer(serializers.Serializer):
+    """Claim an estimate into a project and run matching."""
+
+    estimate_id = serializers.UUIDField()
+
+    def validate_estimate_id(self, value):
+        try:
+            estimate = Estimate.objects.select_related("state").get(pk=value)
+        except Estimate.DoesNotExist:
+            raise serializers.ValidationError("Unknown estimate.") from None
+        if Project.objects.filter(estimate=estimate).exists():
+            raise serializers.ValidationError("Estimate already claimed.")
+        return estimate
+
+    def create(self, validated_data):
+        estimate = validated_data["estimate_id"]
+        user = self.context["request"].user
+
+        if estimate.user is None:
+            estimate.user = user
+            estimate.save(update_fields=["user"])
+
+        project_type_ref = ProjectType.objects.filter(name__icontains=estimate.scope).first()
+        project = Project.objects.create(
+            owner=user,
+            estimate=estimate,
+            title=f"{estimate.scope} · {estimate.state.name}",
+            project_type=estimate.project_type,
+            project_type_ref=project_type_ref,
+            scope=estimate.scope,
+            sqft=estimate.sqft,
+            state=estimate.state,
+            timeline=estimate.timeline,
+            progress_pct=12,
+            next_action="Pick your architect",
+        )
+
+        for entry in find_matches(project):
+            profile = entry["profile"]
+            if profile.engagement_mode == "hourly" or entry["tag"] == "HOURLY OPTION":
+                rate_label = "HOURLY RATE"
+                rate_display = f"${profile.hourly_rate:.0f}/hr" if profile.hourly_rate else ""
+            else:
+                rate_label = "FIXED QUOTE"
+                rate_display = f"${estimate.total:,.0f}"
+            Match.objects.create(
+                project=project,
+                architect=profile.user,
+                score=entry["score"],
+                tag=entry["tag"],
+                reasons=entry["reasons"],
+                rate_label=rate_label,
+                rate_display=rate_display,
+            )
+        return project
+
+
+class LeadSerializer(serializers.ModelSerializer):
+    """Architect-facing lead card (design: Architect Account dashboard)."""
+
+    title = serializers.CharField(source="project.title", read_only=True)
+    detail = serializers.SerializerMethodField()
+    estimate_range = serializers.SerializerMethodField()
+    engagement = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Match
+        fields = [
+            "id",
+            "title",
+            "detail",
+            "estimate_range",
+            "engagement",
+            "score",
+            "status",
+            "created_at",
+        ]
+
+    def get_detail(self, obj):
+        project = obj.project
+        return f"{project.sqft:,} sf · {project.scope} · within your license area"
+
+    def get_estimate_range(self, obj):
+        estimate = obj.project.estimate
+        if estimate is None:
+            return ""
+        return f"${estimate.low:,.0f}–{estimate.high:,.0f}"
+
+    def get_engagement(self, obj):
+        return "Hourly · your rate" if obj.rate_label == "HOURLY RATE" else "Fixed quote"

@@ -1,0 +1,1730 @@
+[
+  {
+    "scope": "landing",
+    "key": "promo_text",
+    "text": "Get matched with a licensed architect in 48 hours.",
+    "href": ""
+  },
+  {
+    "scope": "landing",
+    "key": "promo_sub",
+    "text": "Instant estimate · escrow-backed · 100% remote.",
+    "href": ""
+  },
+  {
+    "scope": "landing",
+    "key": "promo_cta",
+    "text": "Start free →",
+    "href": "/get-started"
+  },
+  {
+    "scope": "landing",
+    "key": "hero_eyebrow",
+    "text": "Licensed · Stamped · Permit-ready",
+    "href": ""
+  },
+  {
+    "scope": "landing",
+    "key": "hero_h1",
+    "text": "Hire a licensed architect. Get stamped drawings.",
+    "href": ""
+  },
+  {
+    "scope": "landing",
+    "key": "hero_sub",
+    "text": "We match you with 2–3 architects licensed in your jurisdiction who deliver permit-ready drawings — entirely remotely. No forms to fill out first.",
+    "href": ""
+  },
+  {
+    "scope": "landing",
+    "key": "hero_cta",
+    "text": "Get matched →",
+    "href": "/get-started"
+  },
+  {
+    "scope": "landing",
+    "key": "hero_micro",
+    "text": "Free estimate · Create an account to view your matches · 48-hour match",
+    "href": ""
+  },
+  {
+    "scope": "landing",
+    "key": "trust_heading",
+    "text": "Trusted by homeowners, builders & developers",
+    "href": ""
+  },
+  {
+    "scope": "landing",
+    "key": "categories_heading",
+    "text": "An architect for every kind of project",
+    "href": ""
+  },
+  {
+    "scope": "landing",
+    "key": "categories_sub",
+    "text": "Residential or commercial — we match on licensure, jurisdiction and specialization.",
+    "href": ""
+  },
+  {
+    "scope": "landing",
+    "key": "categories_link",
+    "text": "Or start smaller with a consult, drafting or renders →",
+    "href": "/services"
+  },
+  {
+    "scope": "landing",
+    "key": "how_heading",
+    "text": "How it works",
+    "href": ""
+  },
+  {
+    "scope": "landing",
+    "key": "cases_kicker",
+    "text": "CASE STUDIES",
+    "href": ""
+  },
+  {
+    "scope": "landing",
+    "key": "cases_heading",
+    "text": "Real projects, permit to keys",
+    "href": ""
+  },
+  {
+    "scope": "landing",
+    "key": "cases_sub",
+    "text": "See how homeowners and builders went from an idea to a stamped set — the scope, the timeline, and the real number.",
+    "href": ""
+  },
+  {
+    "scope": "landing",
+    "key": "cases_cta",
+    "text": "View all case studies →",
+    "href": "/case-studies"
+  },
+  {
+    "scope": "landing",
+    "key": "pricing_kicker",
+    "text": "INSTANT ESTIMATE",
+    "href": ""
+  },
+  {
+    "scope": "landing",
+    "key": "pricing_heading",
+    "text": "Know the price before you talk to anyone",
+    "href": ""
+  },
+  {
+    "scope": "landing",
+    "key": "pricing_sub",
+    "text": "Our engine prices everything from a quick consult to a full stamped set — using scope, add-ons, and a jurisdiction complexity score — so you get a real number up front, not a vague \"it depends.\"",
+    "href": ""
+  },
+  {
+    "scope": "landing",
+    "key": "pricing_cta",
+    "text": "Get my estimate →",
+    "href": "/get-started"
+  },
+  {
+    "scope": "landing",
+    "key": "plans_heading",
+    "text": "Choose how you engage",
+    "href": ""
+  },
+  {
+    "scope": "landing",
+    "key": "plans_sub",
+    "text": "Both bill through the platform with escrow. Pick what fits how defined your project is.",
+    "href": ""
+  },
+  {
+    "scope": "landing",
+    "key": "plans_micro",
+    "text": "Rates are set by each architect — you'll see the real number on your matches before you commit.",
+    "href": ""
+  },
+  {
+    "scope": "landing",
+    "key": "testimonials_heading",
+    "text": "Proven results",
+    "href": ""
+  },
+  {
+    "scope": "landing",
+    "key": "safety_heading",
+    "text": "Trust & safety, built in",
+    "href": ""
+  },
+  {
+    "scope": "landing",
+    "key": "final_cta_heading",
+    "text": "Find an architect who can build what's next",
+    "href": ""
+  },
+  {
+    "scope": "landing",
+    "key": "final_cta_sub",
+    "text": "Free estimate. Create an account to view your matches. Matched in 48 hours.",
+    "href": ""
+  },
+  {
+    "scope": "landing",
+    "key": "final_cta_button",
+    "text": "Start your project →",
+    "href": "/get-started"
+  },
+  {
+    "scope": "services-landing",
+    "key": "hero_eyebrow",
+    "text": "Consults · Drafting · 3D · Permits",
+    "href": ""
+  },
+  {
+    "scope": "services-landing",
+    "key": "hero_h1",
+    "text": "Architectural help — without hiring a full architect",
+    "href": ""
+  },
+  {
+    "scope": "services-landing",
+    "key": "hero_sub",
+    "text": "Book a one-hour consult, a set of renders, or drafting by the hour. Every service is priced up front, delivered remotely, and escrow-backed — from $145.",
+    "href": ""
+  },
+  {
+    "scope": "services-landing",
+    "key": "hero_cta",
+    "text": "Explore all services →",
+    "href": "/services"
+  },
+  {
+    "scope": "services-landing",
+    "key": "hero_link",
+    "text": "See popular services & prices",
+    "href": "#popular"
+  },
+  {
+    "scope": "services-landing",
+    "key": "hero_badge",
+    "text": "NO STAMP NEEDED",
+    "href": ""
+  },
+  {
+    "scope": "services-landing",
+    "key": "hero_badge_sub",
+    "text": "Renders, drafting, scans & consults travel across state lines freely.",
+    "href": ""
+  },
+  {
+    "scope": "services-landing",
+    "key": "how_heading",
+    "text": "How it works",
+    "href": ""
+  },
+  {
+    "scope": "services-landing",
+    "key": "how_sub",
+    "text": "Pick what you need, see the price, and pay only when the work is approved.",
+    "href": ""
+  },
+  {
+    "scope": "services-landing",
+    "key": "categories_heading",
+    "text": "Everything, in one marketplace",
+    "href": ""
+  },
+  {
+    "scope": "services-landing",
+    "key": "categories_sub",
+    "text": "Mix and match — a consult today, drafting next week, a full permit set when you're ready.",
+    "href": ""
+  },
+  {
+    "scope": "services-landing",
+    "key": "popular_kicker",
+    "text": "MOST BOOKED",
+    "href": ""
+  },
+  {
+    "scope": "services-landing",
+    "key": "popular_heading",
+    "text": "Popular services, real prices",
+    "href": ""
+  },
+  {
+    "scope": "services-landing",
+    "key": "popular_cta",
+    "text": "See the full catalog →",
+    "href": "/services"
+  },
+  {
+    "scope": "services-landing",
+    "key": "benefits_heading",
+    "text": "Why start here",
+    "href": ""
+  },
+  {
+    "scope": "services-landing",
+    "key": "stamping_kicker",
+    "text": "GOOD TO KNOW",
+    "href": ""
+  },
+  {
+    "scope": "services-landing",
+    "key": "stamping_heading",
+    "text": "Only pay for a stamp when you actually need one",
+    "href": ""
+  },
+  {
+    "scope": "services-landing",
+    "key": "stamping_sub",
+    "text": "Most services — renders, drafting, as-builts, scans, feasibility, consults — need no license and travel anywhere. Only a stamped, permit-ready set must come from a pro licensed in your jurisdiction, and we match that separately so you're never overpaying.",
+    "href": ""
+  },
+  {
+    "scope": "services-landing",
+    "key": "testimonials_heading",
+    "text": "What clients get done",
+    "href": ""
+  },
+  {
+    "scope": "services-landing",
+    "key": "faq_heading",
+    "text": "Common questions",
+    "href": ""
+  },
+  {
+    "scope": "services-landing",
+    "key": "final_cta_heading",
+    "text": "Start small. Scale when you're ready.",
+    "href": ""
+  },
+  {
+    "scope": "services-landing",
+    "key": "final_cta_sub",
+    "text": "Browse every service with real prices — from a $145 consult to a full stamped set.",
+    "href": ""
+  },
+  {
+    "scope": "services-landing",
+    "key": "final_cta_button",
+    "text": "Explore all services →",
+    "href": "/services"
+  },
+  {
+    "scope": "services",
+    "key": "hero_eyebrow",
+    "text": "Services",
+    "href": ""
+  },
+  {
+    "scope": "services",
+    "key": "hero_h1",
+    "text": "Not every project needs a full architect",
+    "href": ""
+  },
+  {
+    "scope": "services",
+    "key": "hero_sub",
+    "text": "Book a one-hour consult, a set of renders, interior design, or drafting by the hour — and step up to a full stamped set only when the project calls for it. Priced up front, remote, escrow-backed.",
+    "href": ""
+  },
+  {
+    "scope": "services",
+    "key": "hero_cta",
+    "text": "Get an instant quote →",
+    "href": "/get-started"
+  },
+  {
+    "scope": "services",
+    "key": "hero_link",
+    "text": "Browse all services ↓",
+    "href": "#catalog"
+  },
+  {
+    "scope": "services",
+    "key": "catalog_heading",
+    "text": "Every service, one marketplace",
+    "href": ""
+  },
+  {
+    "scope": "services",
+    "key": "catalog_sub",
+    "text": "Grouped by what you need done. Mix and match — a consult today, drafting next week, a full permit set when you're ready to build.",
+    "href": ""
+  },
+  {
+    "scope": "services",
+    "key": "stamping_kicker",
+    "text": "GOOD TO KNOW",
+    "href": ""
+  },
+  {
+    "scope": "services",
+    "key": "stamping_heading",
+    "text": "Most of what you need doesn't require a stamp",
+    "href": ""
+  },
+  {
+    "scope": "services",
+    "key": "stamping_sub",
+    "text": "Renders, drafting, interior design, as-builts, scans, and feasibility work travel across state lines freely — anyone on the platform can do them for you, fast. Only a stamped, permit-ready set must come from an architect or engineer licensed in your specific jurisdiction. We keep those flows separate so you're never overpaying for a stamp you don't need.",
+    "href": ""
+  },
+  {
+    "scope": "services",
+    "key": "final_cta_heading",
+    "text": "Start small. Scale when you're ready.",
+    "href": ""
+  },
+  {
+    "scope": "services",
+    "key": "final_cta_sub",
+    "text": "Tell us what you need and get an itemized quote in minutes — from a $145 consult to a full stamped set.",
+    "href": ""
+  },
+  {
+    "scope": "services",
+    "key": "final_cta_button",
+    "text": "Get my quote →",
+    "href": "/get-started"
+  },
+  {
+    "scope": "3d-visualization",
+    "key": "hero_eyebrow",
+    "text": "3D & visualization",
+    "href": ""
+  },
+  {
+    "scope": "3d-visualization",
+    "key": "hero_h1",
+    "text": "See it before you build it",
+    "href": ""
+  },
+  {
+    "scope": "3d-visualization",
+    "key": "hero_sub",
+    "text": "Photoreal renders, 3D floor plans, and walkthroughs from the platform's visualization specialists — starting at $99 a still. No full-design engagement required.",
+    "href": ""
+  },
+  {
+    "scope": "3d-visualization",
+    "key": "hero_cta",
+    "text": "Order a render →",
+    "href": "/order/render"
+  },
+  {
+    "scope": "3d-visualization",
+    "key": "hero_micro",
+    "text": "Typical turnaround 3–7 days",
+    "href": ""
+  },
+  {
+    "scope": "3d-visualization",
+    "key": "usecases_heading",
+    "text": "What are you trying to do?",
+    "href": ""
+  },
+  {
+    "scope": "3d-visualization",
+    "key": "usecases_sub",
+    "text": "Pick the goal that sounds like yours — we'll match you with a specialist who does exactly that.",
+    "href": ""
+  },
+  {
+    "scope": "3d-visualization",
+    "key": "deliverables_heading",
+    "text": "What you can order",
+    "href": ""
+  },
+  {
+    "scope": "3d-visualization",
+    "key": "gallery_kicker",
+    "text": "RECENT WORK",
+    "href": ""
+  },
+  {
+    "scope": "3d-visualization",
+    "key": "gallery_heading",
+    "text": "Renders delivered on the platform",
+    "href": ""
+  },
+  {
+    "scope": "3d-visualization",
+    "key": "gallery_link",
+    "text": "Browse inspiration →",
+    "href": "/inspiration"
+  },
+  {
+    "scope": "3d-visualization",
+    "key": "specialists_heading",
+    "text": "Meet a few specialists",
+    "href": ""
+  },
+  {
+    "scope": "3d-visualization",
+    "key": "specialists_sub",
+    "text": "Vetted visualization artists and licensed architects, matched to your project. Full contact details stay on-platform until you hire.",
+    "href": ""
+  },
+  {
+    "scope": "3d-visualization",
+    "key": "pricing_heading",
+    "text": "Transparent pricing by quality tier",
+    "href": ""
+  },
+  {
+    "scope": "3d-visualization",
+    "key": "pricing_sub",
+    "text": "You pick the tier; the price is locked before work starts. Offshore and freelance artists come in lower, US studios at the top.",
+    "href": ""
+  },
+  {
+    "scope": "3d-visualization",
+    "key": "how_heading",
+    "text": "How it works",
+    "href": ""
+  },
+  {
+    "scope": "3d-visualization",
+    "key": "faq_heading",
+    "text": "Common questions",
+    "href": ""
+  },
+  {
+    "scope": "3d-visualization",
+    "key": "final_cta_heading",
+    "text": "Turn your plans into images that sell",
+    "href": ""
+  },
+  {
+    "scope": "3d-visualization",
+    "key": "final_cta_sub",
+    "text": "Upload what you have and get a quote back in minutes.",
+    "href": ""
+  },
+  {
+    "scope": "3d-visualization",
+    "key": "final_cta_button",
+    "text": "Start a render order →",
+    "href": "/order/render"
+  },
+  {
+    "scope": "cad-drafting",
+    "key": "hero_eyebrow",
+    "text": "Drafting & documentation",
+    "href": ""
+  },
+  {
+    "scope": "cad-drafting",
+    "key": "hero_h1",
+    "text": "Clean drawings, drafted by the hour",
+    "href": ""
+  },
+  {
+    "scope": "cad-drafting",
+    "key": "hero_sub",
+    "text": "CAD drafting, as-built packages, and PDF-to-CAD — the highest-volume, least-regulated work on the platform. For most single-family and ADU jobs, no architect's stamp is required at all.",
+    "href": ""
+  },
+  {
+    "scope": "cad-drafting",
+    "key": "hero_cta",
+    "text": "Start a drafting job →",
+    "href": "/order/drafting"
+  },
+  {
+    "scope": "cad-drafting",
+    "key": "hero_micro",
+    "text": "40–60% below architect fees",
+    "href": ""
+  },
+  {
+    "scope": "cad-drafting",
+    "key": "usecases_heading",
+    "text": "What are you trying to do?",
+    "href": ""
+  },
+  {
+    "scope": "cad-drafting",
+    "key": "usecases_sub",
+    "text": "Tell us the goal and we'll route it to a drafter — or, if your submittal needs a stamp, to a licensed pro for that step.",
+    "href": ""
+  },
+  {
+    "scope": "cad-drafting",
+    "key": "deliverables_heading",
+    "text": "What you can order",
+    "href": ""
+  },
+  {
+    "scope": "cad-drafting",
+    "key": "gallery_kicker",
+    "text": "RECENT WORK",
+    "href": ""
+  },
+  {
+    "scope": "cad-drafting",
+    "key": "gallery_heading",
+    "text": "Sets drafted on the platform",
+    "href": ""
+  },
+  {
+    "scope": "cad-drafting",
+    "key": "gallery_link",
+    "text": "See case studies →",
+    "href": "/case-studies"
+  },
+  {
+    "scope": "cad-drafting",
+    "key": "specialists_heading",
+    "text": "Meet a few specialists",
+    "href": ""
+  },
+  {
+    "scope": "cad-drafting",
+    "key": "specialists_sub",
+    "text": "Vetted CAD drafters and licensed architects, matched to your job. Full contact details stay on-platform until you hire.",
+    "href": ""
+  },
+  {
+    "scope": "cad-drafting",
+    "key": "pricing_heading",
+    "text": "Transparent pricing",
+    "href": ""
+  },
+  {
+    "scope": "cad-drafting",
+    "key": "pricing_sub",
+    "text": "Hourly for open-ended work, flat rates for defined deliverables. Freelance and offshore drafters run lower; US drafters sit at the top of each band.",
+    "href": ""
+  },
+  {
+    "scope": "cad-drafting",
+    "key": "pricing_note",
+    "text": "Drafting is unstamped work — it travels across state lines freely and, for many single-family and ADU projects under local size thresholds, needs no licensed architect at all. If your submittal does require a stamp, we'll match you to a licensed pro for that step separately, so you never overpay.",
+    "href": ""
+  },
+  {
+    "scope": "cad-drafting",
+    "key": "how_heading",
+    "text": "How it works",
+    "href": ""
+  },
+  {
+    "scope": "cad-drafting",
+    "key": "faq_heading",
+    "text": "Common questions",
+    "href": ""
+  },
+  {
+    "scope": "cad-drafting",
+    "key": "final_cta_heading",
+    "text": "Send us your sketch. Get back clean CAD.",
+    "href": ""
+  },
+  {
+    "scope": "cad-drafting",
+    "key": "final_cta_sub",
+    "text": "Hourly or flat-rate — you'll see the number before any work starts.",
+    "href": ""
+  },
+  {
+    "scope": "cad-drafting",
+    "key": "final_cta_button",
+    "text": "Start a drafting job →",
+    "href": "/order/drafting"
+  },
+  {
+    "scope": "architect-landing",
+    "key": "hero_eyebrow",
+    "text": "Now accepting licensed architects",
+    "href": ""
+  },
+  {
+    "scope": "architect-landing",
+    "key": "hero_h1",
+    "text": "Get matched with clients. Keep control of your practice.",
+    "href": ""
+  },
+  {
+    "scope": "architect-landing",
+    "key": "hero_sub",
+    "text": "A steady stream of vetted, scoped projects delivered to you. You set your rates, pick the work you want, and get paid fast through escrow — no cold pitching, no chasing invoices.",
+    "href": ""
+  },
+  {
+    "scope": "architect-landing",
+    "key": "hero_cta",
+    "text": "Apply to join →",
+    "href": "/pro"
+  },
+  {
+    "scope": "architect-landing",
+    "key": "hero_micro",
+    "text": "Free to join · No monthly fee · Verified in ~3 days",
+    "href": ""
+  },
+  {
+    "scope": "architect-landing",
+    "key": "trust_heading",
+    "text": "2,400+ licensed architects already on the network",
+    "href": ""
+  },
+  {
+    "scope": "architect-landing",
+    "key": "values_heading",
+    "text": "Everything a busy practice wants — nothing it doesn't",
+    "href": ""
+  },
+  {
+    "scope": "architect-landing",
+    "key": "values_sub",
+    "text": "Built for architects who'd rather design than sell.",
+    "href": ""
+  },
+  {
+    "scope": "architect-landing",
+    "key": "how_heading",
+    "text": "From application to first payout",
+    "href": ""
+  },
+  {
+    "scope": "architect-landing",
+    "key": "control_kicker",
+    "text": "YOU'RE IN CONTROL",
+    "href": ""
+  },
+  {
+    "scope": "architect-landing",
+    "key": "control_heading",
+    "text": "Say yes only to work that fits",
+    "href": ""
+  },
+  {
+    "scope": "architect-landing",
+    "key": "control_sub",
+    "text": "Every lead is pre-scoped and priced. Accept the ones that match your specialty, capacity, and jurisdiction — decline the rest with one tap. No obligations, ever.",
+    "href": ""
+  },
+  {
+    "scope": "architect-landing",
+    "key": "earnings_kicker",
+    "text": "TRANSPARENT & FAST",
+    "href": ""
+  },
+  {
+    "scope": "architect-landing",
+    "key": "earnings_heading",
+    "text": "Keep more of what you earn",
+    "href": ""
+  },
+  {
+    "scope": "architect-landing",
+    "key": "earnings_sub",
+    "text": "One flat service fee — no lead-buying, no subscriptions, no bidding wars. Funds sit in escrow the moment a client hires you, and release to your bank within two days of each approved milestone.",
+    "href": ""
+  },
+  {
+    "scope": "architect-landing",
+    "key": "tools_heading",
+    "text": "Admin handled, so you can design",
+    "href": ""
+  },
+  {
+    "scope": "architect-landing",
+    "key": "tools_sub",
+    "text": "The platform runs the busywork — proposals, contracts, messaging, invoicing.",
+    "href": ""
+  },
+  {
+    "scope": "architect-landing",
+    "key": "stories_heading",
+    "text": "Architects, in their words",
+    "href": ""
+  },
+  {
+    "scope": "architect-landing",
+    "key": "verify_heading",
+    "text": "A network clients trust",
+    "href": ""
+  },
+  {
+    "scope": "architect-landing",
+    "key": "verify_sub",
+    "text": "Verification protects your reputation as much as theirs.",
+    "href": ""
+  },
+  {
+    "scope": "architect-landing",
+    "key": "faq_heading",
+    "text": "Questions architects ask",
+    "href": ""
+  },
+  {
+    "scope": "architect-landing",
+    "key": "final_cta_heading",
+    "text": "Your next project is already looking for you",
+    "href": ""
+  },
+  {
+    "scope": "architect-landing",
+    "key": "final_cta_sub",
+    "text": "Free to join. Verified in about three days. Your first matched leads within 48 hours.",
+    "href": ""
+  },
+  {
+    "scope": "architect-landing",
+    "key": "final_cta_button",
+    "text": "Apply to join the network →",
+    "href": "/pro"
+  },
+  {
+    "scope": "for-experts",
+    "key": "hero_eyebrow",
+    "text": "Drafters · 3D artists · engineers · permit pros",
+    "href": ""
+  },
+  {
+    "scope": "for-experts",
+    "key": "hero_h1",
+    "text": "Do the work you're great at. We'll bring the clients.",
+    "href": ""
+  },
+  {
+    "scope": "for-experts",
+    "key": "hero_sub",
+    "text": "Scoped, pre-priced orders for drafting, 3D, scanning, engineering and permits — delivered to your dashboard. Set your rates, take only the work you want, and get paid fast through escrow.",
+    "href": ""
+  },
+  {
+    "scope": "for-experts",
+    "key": "hero_cta",
+    "text": "Apply to join →",
+    "href": "/pro/expert"
+  },
+  {
+    "scope": "for-experts",
+    "key": "hero_micro",
+    "text": "Free to join · No monthly fee · Most work needs no license",
+    "href": ""
+  },
+  {
+    "scope": "for-experts",
+    "key": "disciplines_heading",
+    "text": "Who joins the network",
+    "href": ""
+  },
+  {
+    "scope": "for-experts",
+    "key": "disciplines_sub",
+    "text": "If you deliver any of these, there's demand waiting for you.",
+    "href": ""
+  },
+  {
+    "scope": "for-experts",
+    "key": "values_heading",
+    "text": "Everything a busy specialist wants",
+    "href": ""
+  },
+  {
+    "scope": "for-experts",
+    "key": "values_sub",
+    "text": "Built for people who'd rather do the work than hunt for it.",
+    "href": ""
+  },
+  {
+    "scope": "for-experts",
+    "key": "how_heading",
+    "text": "From application to first payout",
+    "href": ""
+  },
+  {
+    "scope": "for-experts",
+    "key": "control_kicker",
+    "text": "YOU'RE IN CONTROL",
+    "href": ""
+  },
+  {
+    "scope": "for-experts",
+    "key": "control_heading",
+    "text": "Take only the orders that fit",
+    "href": ""
+  },
+  {
+    "scope": "for-experts",
+    "key": "control_sub",
+    "text": "Every order arrives scoped and priced. Accept the ones that match your skills and schedule, decline the rest with one tap. Work solo or as a studio — your call.",
+    "href": ""
+  },
+  {
+    "scope": "for-experts",
+    "key": "earnings_kicker",
+    "text": "TRANSPARENT & FAST",
+    "href": ""
+  },
+  {
+    "scope": "for-experts",
+    "key": "earnings_heading",
+    "text": "Keep more of what you earn",
+    "href": ""
+  },
+  {
+    "scope": "for-experts",
+    "key": "earnings_sub",
+    "text": "One flat service fee — no lead-buying, no subscriptions, no race-to-the-bottom bidding. Funds sit in escrow the moment a client places an order, and release to your bank within two days of approval.",
+    "href": ""
+  },
+  {
+    "scope": "for-experts",
+    "key": "tools_heading",
+    "text": "Admin handled, so you can deliver",
+    "href": ""
+  },
+  {
+    "scope": "for-experts",
+    "key": "tools_sub",
+    "text": "The platform runs the busywork — scoping, contracts, messaging, invoicing.",
+    "href": ""
+  },
+  {
+    "scope": "for-experts",
+    "key": "stories_heading",
+    "text": "Experts, in their words",
+    "href": ""
+  },
+  {
+    "scope": "for-experts",
+    "key": "faq_heading",
+    "text": "Questions experts ask",
+    "href": ""
+  },
+  {
+    "scope": "for-experts",
+    "key": "final_cta_heading",
+    "text": "Your next order is already looking for you",
+    "href": ""
+  },
+  {
+    "scope": "for-experts",
+    "key": "final_cta_sub",
+    "text": "Free to join. Most disciplines are approved in about three days. First matched orders within 48 hours.",
+    "href": ""
+  },
+  {
+    "scope": "for-experts",
+    "key": "final_cta_button",
+    "text": "Apply to join the network →",
+    "href": "/pro/expert"
+  },
+  {
+    "scope": "projects",
+    "key": "hero_eyebrow",
+    "text": "Project types",
+    "href": ""
+  },
+  {
+    "scope": "projects",
+    "key": "hero_h1",
+    "text": "Architecture for every kind of project",
+    "href": ""
+  },
+  {
+    "scope": "projects",
+    "key": "hero_sub",
+    "text": "From a backyard ADU to a ground-up custom home or a commercial tenant improvement — match with architects who specialize in exactly your project type, and get a stamped, permit-ready set.",
+    "href": ""
+  },
+  {
+    "scope": "projects",
+    "key": "hero_cta",
+    "text": "Get matched →",
+    "href": "/get-started"
+  },
+  {
+    "scope": "projects",
+    "key": "hero_micro",
+    "text": "Free estimate · 48-hour match",
+    "href": ""
+  },
+  {
+    "scope": "projects",
+    "key": "residential_heading",
+    "text": "Residential",
+    "href": ""
+  },
+  {
+    "scope": "projects",
+    "key": "residential_sub",
+    "text": "Homes, additions & ADUs",
+    "href": ""
+  },
+  {
+    "scope": "projects",
+    "key": "commercial_heading",
+    "text": "Commercial",
+    "href": ""
+  },
+  {
+    "scope": "projects",
+    "key": "commercial_sub",
+    "text": "Tenant improvements & change of use",
+    "href": ""
+  },
+  {
+    "scope": "projects",
+    "key": "final_cta_heading",
+    "text": "Not sure which fits? Start with a free estimate.",
+    "href": ""
+  },
+  {
+    "scope": "projects",
+    "key": "final_cta_sub",
+    "text": "Answer a few questions and we'll price your project and match you in 48 hours.",
+    "href": ""
+  },
+  {
+    "scope": "projects",
+    "key": "final_cta_button",
+    "text": "Get my estimate →",
+    "href": "/get-started"
+  },
+  {
+    "scope": "cities",
+    "key": "hero_eyebrow",
+    "text": "By city",
+    "href": ""
+  },
+  {
+    "scope": "cities",
+    "key": "hero_h1",
+    "text": "Find a licensed architect in your city",
+    "href": ""
+  },
+  {
+    "scope": "cities",
+    "key": "hero_sub",
+    "text": "A stamped drawing set must come from an architect licensed where you're building. We match you to pros who know your jurisdiction's permit process — pick your city, or find your state below.",
+    "href": ""
+  },
+  {
+    "scope": "cities",
+    "key": "hero_cta",
+    "text": "Get matched →",
+    "href": "/get-started"
+  },
+  {
+    "scope": "cities",
+    "key": "hero_micro",
+    "text": "Licensed in all 52 US jurisdictions",
+    "href": ""
+  },
+  {
+    "scope": "cities",
+    "key": "popular_heading",
+    "text": "Popular cities",
+    "href": ""
+  },
+  {
+    "scope": "cities",
+    "key": "popular_sub",
+    "text": "The metros where the network is deepest today.",
+    "href": ""
+  },
+  {
+    "scope": "cities",
+    "key": "states_heading",
+    "text": "Licensed architects in all 50 states",
+    "href": ""
+  },
+  {
+    "scope": "cities",
+    "key": "states_sub",
+    "text": "We match to your jurisdiction anywhere in the country — every state, plus Washington, D.C. and Puerto Rico.",
+    "href": ""
+  },
+  {
+    "scope": "cities",
+    "key": "final_cta_heading",
+    "text": "Don't see your city? We still cover it.",
+    "href": ""
+  },
+  {
+    "scope": "cities",
+    "key": "final_cta_sub",
+    "text": "Every match is verified as licensed in your jurisdiction — wherever you're building.",
+    "href": ""
+  },
+  {
+    "scope": "cities",
+    "key": "final_cta_button",
+    "text": "Get matched in your area →",
+    "href": "/get-started"
+  },
+  {
+    "scope": "blog",
+    "key": "hero_kicker",
+    "text": "GUIDES & RESOURCES",
+    "href": ""
+  },
+  {
+    "scope": "blog",
+    "key": "hero_h1",
+    "text": "Permits, pricing & plans, explained",
+    "href": ""
+  },
+  {
+    "scope": "blog",
+    "key": "hero_sub",
+    "text": "Practical guides on hiring an architect, navigating your jurisdiction, and pricing every kind of project — written with the licensed architects in our network.",
+    "href": ""
+  },
+  {
+    "scope": "blog",
+    "key": "topics_heading",
+    "text": "Browse by topic",
+    "href": ""
+  },
+  {
+    "scope": "blog",
+    "key": "newsletter_heading",
+    "text": "Get the monthly build brief",
+    "href": ""
+  },
+  {
+    "scope": "blog",
+    "key": "newsletter_sub",
+    "text": "Permit tips, pricing benchmarks and one great project teardown — straight to your inbox.",
+    "href": ""
+  },
+  {
+    "scope": "blog",
+    "key": "newsletter_button",
+    "text": "Subscribe",
+    "href": ""
+  },
+  {
+    "scope": "case-studies",
+    "key": "hero_kicker",
+    "text": "CASE STUDIES",
+    "href": ""
+  },
+  {
+    "scope": "case-studies",
+    "key": "hero_h1",
+    "text": "Real projects, permit to keys",
+    "href": ""
+  },
+  {
+    "scope": "case-studies",
+    "key": "hero_sub",
+    "text": "Every project below started with an instant estimate and ended with a stamped, permit-ready set. See the scope, the timeline, and the real number — from homeowners and builders who hired remotely.",
+    "href": ""
+  },
+  {
+    "scope": "case-studies",
+    "key": "final_cta_heading",
+    "text": "Your project could be next",
+    "href": ""
+  },
+  {
+    "scope": "case-studies",
+    "key": "final_cta_sub",
+    "text": "Free estimate. Matched with licensed architects in 48 hours.",
+    "href": ""
+  },
+  {
+    "scope": "case-studies",
+    "key": "final_cta_button",
+    "text": "Start your project →",
+    "href": "/get-started"
+  },
+  {
+    "scope": "about",
+    "key": "hero_eyebrow",
+    "text": "Our mission",
+    "href": ""
+  },
+  {
+    "scope": "about",
+    "key": "hero_h1",
+    "text": "We exist to make great architecture accessible to anyone who wants to build.",
+    "href": ""
+  },
+  {
+    "scope": "about",
+    "key": "hero_sub",
+    "text": "Not just for the few who already know an architect — for anyone with a project and a place to build it. A fair price, a qualified professional, a permit that clears.",
+    "href": ""
+  },
+  {
+    "scope": "about",
+    "key": "vision_kicker",
+    "text": "OUR VISION",
+    "href": ""
+  },
+  {
+    "scope": "about",
+    "key": "vision_heading",
+    "text": "To be the place the world goes to build.",
+    "href": ""
+  },
+  {
+    "scope": "about",
+    "key": "vision_sub",
+    "text": "Every renovation, addition, ADU, restaurant and ground-up home starts with a drawing. We want that first step to be the easy one — wherever you are, whatever you're building.",
+    "href": ""
+  },
+  {
+    "scope": "about",
+    "key": "numbers_heading",
+    "text": "The mission, in numbers",
+    "href": ""
+  },
+  {
+    "scope": "about",
+    "key": "numbers_sub",
+    "text": "A nationwide footprint from day one — because access shouldn't wait for us to open one market at a time.",
+    "href": ""
+  },
+  {
+    "scope": "about",
+    "key": "why_kicker",
+    "text": "WHY WE EXIST",
+    "href": ""
+  },
+  {
+    "scope": "about",
+    "key": "why_heading",
+    "text": "A stamped drawing is a legal instrument — and for most people, it's opaque.",
+    "href": ""
+  },
+  {
+    "scope": "about",
+    "key": "why_body1",
+    "text": "You can't see the price, judge who's qualified, or tell if it will clear your city. That opacity turns a home into a gamble for clients — and buries architects in bidding and business development instead of the work they trained for.",
+    "href": ""
+  },
+  {
+    "scope": "about",
+    "key": "why_body2",
+    "text": "We remove it from both sides at once, and put the people who matter back at the center.",
+    "href": ""
+  },
+  {
+    "scope": "about",
+    "key": "heroes_kicker",
+    "text": "WHO THIS IS FOR",
+    "href": ""
+  },
+  {
+    "scope": "about",
+    "key": "heroes_heading",
+    "text": "The client and the architect are the heroes. We're the crew.",
+    "href": ""
+  },
+  {
+    "scope": "about",
+    "key": "role_kicker",
+    "text": "OUR ROLE",
+    "href": ""
+  },
+  {
+    "scope": "about",
+    "key": "role_heading",
+    "text": "We serve the work — quietly, and only where we're useful.",
+    "href": ""
+  },
+  {
+    "scope": "about",
+    "key": "role_sub",
+    "text": "We don't design your building and we don't stamp it. We build the infrastructure that lets the right two people find each other and trust the process.",
+    "href": ""
+  },
+  {
+    "scope": "about",
+    "key": "closing_heading",
+    "text": "Build something. Or help someone build. We'll take care of the rest.",
+    "href": ""
+  },
+  {
+    "scope": "about",
+    "key": "closing_cta_primary",
+    "text": "Start a project →",
+    "href": "/get-started"
+  },
+  {
+    "scope": "about",
+    "key": "closing_cta_secondary",
+    "text": "Join as an architect →",
+    "href": "/for-architects"
+  },
+  {
+    "scope": "careers",
+    "key": "hero_kicker",
+    "text": "CAREERS",
+    "href": ""
+  },
+  {
+    "scope": "careers",
+    "key": "hero_h1",
+    "text": "Help rebuild how buildings get permitted",
+    "href": ""
+  },
+  {
+    "scope": "careers",
+    "key": "hero_sub",
+    "text": "We're a small, remote-first team building the data layer, pricing engine, and marketplace that make licensed architecture accessible. If you like hard problems with real-world stakes, you'll fit in.",
+    "href": ""
+  },
+  {
+    "scope": "careers",
+    "key": "perks_heading",
+    "text": "Why join",
+    "href": ""
+  },
+  {
+    "scope": "careers",
+    "key": "roles_heading",
+    "text": "Open roles",
+    "href": ""
+  },
+  {
+    "scope": "careers",
+    "key": "empty_note",
+    "text": "No roles in this team right now — but we're always glad to meet people.",
+    "href": ""
+  },
+  {
+    "scope": "careers",
+    "key": "empty_link",
+    "text": "Say hello →",
+    "href": "/contact"
+  },
+  {
+    "scope": "careers",
+    "key": "final_cta_heading",
+    "text": "Don't see your role?",
+    "href": ""
+  },
+  {
+    "scope": "careers",
+    "key": "final_cta_sub",
+    "text": "We hire for talent and drive. Tell us what you'd do here.",
+    "href": ""
+  },
+  {
+    "scope": "careers",
+    "key": "final_cta_button",
+    "text": "Get in touch →",
+    "href": "/contact"
+  },
+  {
+    "scope": "contact",
+    "key": "hero_kicker",
+    "text": "CONTACT",
+    "href": ""
+  },
+  {
+    "scope": "contact",
+    "key": "hero_h1",
+    "text": "Talk to us",
+    "href": ""
+  },
+  {
+    "scope": "contact",
+    "key": "hero_sub",
+    "text": "Questions about a project, joining the network, press, or partnerships — pick the fastest route below, or send us a note.",
+    "href": ""
+  },
+  {
+    "scope": "contact",
+    "key": "form_heading",
+    "text": "Send a message",
+    "href": ""
+  },
+  {
+    "scope": "contact",
+    "key": "form_button",
+    "text": "Send message →",
+    "href": ""
+  },
+  {
+    "scope": "contact",
+    "key": "form_success",
+    "text": "Thanks — message received ✓",
+    "href": ""
+  },
+  {
+    "scope": "contact",
+    "key": "form_success_sub",
+    "text": "We'll get back to you within one business day.",
+    "href": ""
+  },
+  {
+    "scope": "contact",
+    "key": "hq_kicker",
+    "text": "HEADQUARTERS",
+    "href": ""
+  },
+  {
+    "scope": "contact",
+    "key": "hq_address",
+    "text": "548 Market Street, Suite 42\nSan Francisco, CA 94104",
+    "href": ""
+  },
+  {
+    "scope": "contact",
+    "key": "support_email",
+    "text": "help@architecthire.com",
+    "href": ""
+  },
+  {
+    "scope": "contact",
+    "key": "press_email",
+    "text": "press@architecthire.com",
+    "href": ""
+  },
+  {
+    "scope": "contact",
+    "key": "hours",
+    "text": "Mon–Fri · 9am–6pm PT",
+    "href": ""
+  },
+  {
+    "scope": "inspiration",
+    "key": "hero_kicker",
+    "text": "INSPIRATION",
+    "href": ""
+  },
+  {
+    "scope": "inspiration",
+    "key": "hero_h1",
+    "text": "Find your look before you build",
+    "href": ""
+  },
+  {
+    "scope": "inspiration",
+    "key": "hero_sub",
+    "text": "Browse real spaces by room, style, and project type. Save the ones that feel right — then hand them to a licensed architect as the starting point for your own build.",
+    "href": ""
+  },
+  {
+    "scope": "inspiration",
+    "key": "collections_heading",
+    "text": "Curated collections",
+    "href": ""
+  },
+  {
+    "scope": "inspiration",
+    "key": "collections_sub",
+    "text": "Hand-picked boards for the most-requested projects.",
+    "href": ""
+  },
+  {
+    "scope": "inspiration",
+    "key": "final_cta_heading",
+    "text": "Turn a saved look into a real project",
+    "href": ""
+  },
+  {
+    "scope": "inspiration",
+    "key": "final_cta_sub",
+    "text": "Share the spaces you love with a licensed architect and get an instant estimate for building your version of them.",
+    "href": ""
+  },
+  {
+    "scope": "inspiration",
+    "key": "final_cta_button",
+    "text": "Start with your inspiration →",
+    "href": "/get-started"
+  },
+  {
+    "scope": "jurisdiction-database",
+    "key": "hero_eyebrow",
+    "text": "Proprietary data layer",
+    "href": ""
+  },
+  {
+    "scope": "jurisdiction-database",
+    "key": "hero_h1",
+    "text": "Permitting guides for every US state",
+    "href": ""
+  },
+  {
+    "scope": "jurisdiction-database",
+    "key": "hero_sub",
+    "text": "We score every jurisdiction on the factors that drive permit cost and timeline — seismic and coastal zones, wildfire overlays, historic districts and drawing depth. Pick a state to read its full permitting guide, or start an estimate to see your exact address scored.",
+    "href": ""
+  },
+  {
+    "scope": "jurisdiction-database",
+    "key": "scoring_heading",
+    "text": "How the score is built",
+    "href": ""
+  },
+  {
+    "scope": "jurisdiction-database",
+    "key": "scoring_sub",
+    "text": "Each jurisdiction is scored 0–100 by weighting the factors that add permit cost, review time, and drawing scope. Higher score means more complexity — and a higher pricing multiplier applied automatically at estimate time. Open any state guide for the full breakdown, timeline and FAQ.",
+    "href": ""
+  },
+  {
+    "scope": "jurisdiction-database",
+    "key": "final_cta_heading",
+    "text": "See your jurisdiction's score in your estimate",
+    "href": ""
+  },
+  {
+    "scope": "jurisdiction-database",
+    "key": "final_cta_sub",
+    "text": "Free instant estimate — the complexity multiplier is applied automatically.",
+    "href": ""
+  },
+  {
+    "scope": "jurisdiction-database",
+    "key": "final_cta_button",
+    "text": "Get my estimate →",
+    "href": "/get-started"
+  },
+  {
+    "scope": "search",
+    "key": "search_placeholder",
+    "text": "Search services, projects, cities, pages…",
+    "href": ""
+  },
+  {
+    "scope": "search",
+    "key": "idle_summary",
+    "text": "Search across services, project types, cities and pages.",
+    "href": ""
+  },
+  {
+    "scope": "search",
+    "key": "popular_heading",
+    "text": "Popular searches",
+    "href": ""
+  },
+  {
+    "scope": "search",
+    "key": "empty_sub",
+    "text": "Try a broader term, or browse a category:",
+    "href": ""
+  },
+  {
+    "scope": "get-started",
+    "key": "step1_kicker",
+    "text": "STEP 1 · YOUR PROJECT",
+    "href": ""
+  },
+  {
+    "scope": "get-started",
+    "key": "step1_heading",
+    "text": "Tell us what you're building",
+    "href": ""
+  },
+  {
+    "scope": "get-started",
+    "key": "step1_sub",
+    "text": "This feeds the pricing engine and your jurisdiction score. About two minutes.",
+    "href": ""
+  },
+  {
+    "scope": "get-started",
+    "key": "step1_cta",
+    "text": "See my estimate →",
+    "href": ""
+  },
+  {
+    "scope": "get-started",
+    "key": "step2_kicker",
+    "text": "STEP 2 · YOUR INSTANT ESTIMATE",
+    "href": ""
+  },
+  {
+    "scope": "get-started",
+    "key": "step2_sub",
+    "text": "A dynamic fixed-quote range, itemized. Confirmed on your scoping call.",
+    "href": ""
+  },
+  {
+    "scope": "get-started",
+    "key": "step3_kicker",
+    "text": "STEP 3 · CREATE YOUR ACCOUNT",
+    "href": ""
+  },
+  {
+    "scope": "get-started",
+    "key": "step3_heading",
+    "text": "Create an account to view your matches",
+    "href": ""
+  },
+  {
+    "scope": "get-started",
+    "key": "step3_sub",
+    "text": "Your project and estimate are saved. An account lets us hold your matches, keep messaging on-platform, and protect payments in escrow.",
+    "href": ""
+  },
+  {
+    "scope": "get-started",
+    "key": "step3_cta",
+    "text": "Create account & view matches →",
+    "href": "/matches"
+  },
+  {
+    "scope": "get-started",
+    "key": "step3_micro",
+    "text": "By continuing you agree to our Terms and Privacy Policy. No charges until you hire and fund escrow.",
+    "href": ""
+  },
+  {
+    "scope": "order-render",
+    "key": "step1_kicker",
+    "text": "STEP 1 · YOUR RENDER ORDER",
+    "href": ""
+  },
+  {
+    "scope": "order-render",
+    "key": "step1_heading",
+    "text": "What do you need rendered?",
+    "href": ""
+  },
+  {
+    "scope": "order-render",
+    "key": "step1_sub",
+    "text": "No licensure or jurisdiction needed — renders travel anywhere. Priced instantly, delivered in days.",
+    "href": ""
+  },
+  {
+    "scope": "order-render",
+    "key": "step1_cta",
+    "text": "See my price →",
+    "href": ""
+  },
+  {
+    "scope": "order-render",
+    "key": "step2_kicker",
+    "text": "STEP 2 · YOUR INSTANT PRICE",
+    "href": ""
+  },
+  {
+    "scope": "order-render",
+    "key": "step2_sub",
+    "text": "A fixed order price — locked before the artist starts.",
+    "href": ""
+  },
+  {
+    "scope": "order-render",
+    "key": "step2_cta",
+    "text": "Place order & upload files →",
+    "href": ""
+  },
+  {
+    "scope": "order-render",
+    "key": "step3_kicker",
+    "text": "STEP 3 · UPLOAD & CHECKOUT",
+    "href": ""
+  },
+  {
+    "scope": "order-render",
+    "key": "step3_heading",
+    "text": "Send your references & place the order",
+    "href": ""
+  },
+  {
+    "scope": "order-render",
+    "key": "step3_sub",
+    "text": "Drop in whatever you have — plans, photos, a sketch, or a moodboard. Your artist confirms scope within a day.",
+    "href": ""
+  },
+  {
+    "scope": "order-render",
+    "key": "step3_micro",
+    "text": "Funds are held in escrow and released only when you approve the final files.",
+    "href": ""
+  },
+  {
+    "scope": "order-render",
+    "key": "done_heading",
+    "text": "Order placed",
+    "href": ""
+  },
+  {
+    "scope": "order-render",
+    "key": "done_cta",
+    "text": "Track my order →",
+    "href": "/account"
+  },
+  {
+    "scope": "order-drafting",
+    "key": "step1_kicker",
+    "text": "STEP 1 · YOUR DRAFTING JOB",
+    "href": ""
+  },
+  {
+    "scope": "order-drafting",
+    "key": "step1_heading",
+    "text": "What do you need drafted?",
+    "href": ""
+  },
+  {
+    "scope": "order-drafting",
+    "key": "step1_sub",
+    "text": "Drafting is unstamped work — no licensed architect required for most jobs. If yours needs a stamp, we'll add it as a separate matched step.",
+    "href": ""
+  },
+  {
+    "scope": "order-drafting",
+    "key": "step1_cta",
+    "text": "See my price →",
+    "href": ""
+  },
+  {
+    "scope": "order-drafting",
+    "key": "step2_kicker",
+    "text": "STEP 2 · YOUR INSTANT PRICE",
+    "href": ""
+  },
+  {
+    "scope": "order-drafting",
+    "key": "step2_cta",
+    "text": "Place order & upload files →",
+    "href": ""
+  },
+  {
+    "scope": "order-drafting",
+    "key": "step3_kicker",
+    "text": "STEP 3 · UPLOAD & CHECKOUT",
+    "href": ""
+  },
+  {
+    "scope": "order-drafting",
+    "key": "step3_heading",
+    "text": "Send your source files & place the order",
+    "href": ""
+  },
+  {
+    "scope": "order-drafting",
+    "key": "step3_sub",
+    "text": "Sketches, photos, PDFs, or existing CAD — whatever you have. Your drafter confirms scope within a day.",
+    "href": ""
+  },
+  {
+    "scope": "order-drafting",
+    "key": "step3_micro",
+    "text": "Funds are held in escrow and released against reviewed milestones.",
+    "href": ""
+  },
+  {
+    "scope": "order-drafting",
+    "key": "done_heading",
+    "text": "Order placed",
+    "href": ""
+  },
+  {
+    "scope": "order-drafting",
+    "key": "done_cta",
+    "text": "Track my order →",
+    "href": "/account"
+  }
+]

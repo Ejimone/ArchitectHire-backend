@@ -1,0 +1,793 @@
+{
+  "blog_categories": [
+    {
+      "name": "Hiring",
+      "slug": "hiring"
+    },
+    {
+      "name": "Permits",
+      "slug": "permits"
+    },
+    {
+      "name": "Pricing",
+      "slug": "pricing"
+    },
+    {
+      "name": "ADUs",
+      "slug": "adus"
+    },
+    {
+      "name": "By city",
+      "slug": "by-city"
+    }
+  ],
+  "authors": [
+    {
+      "name": "Maya E., AIA",
+      "role": "Licensed architect · California",
+      "bio": "Maya has stamped permit-ready sets across California for over a decade, specializing in seismic-zone additions and backyard ADUs."
+    }
+  ],
+  "blog_posts": [
+    {
+      "slug": "how-to-hire-an-architect-remotely-and-get-a-permit-ready-set",
+      "title": "How to hire an architect remotely — and get a permit-ready set",
+      "dek": "A step-by-step walkthrough of vetting licensure, scoping your project, and paying safely through escrow — without a single in-person meeting.",
+      "excerpt": "A step-by-step walkthrough of vetting licensure, scoping your project, and paying safely through escrow — without a single in-person meeting.",
+      "category": "Hiring",
+      "author": "Maya E., AIA",
+      "date": "Aug 4, 2026",
+      "read_time": "9 min read",
+      "is_featured": true,
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Hiring an architect used to mean a stack of in-person meetings before you even knew a price. It doesn't anymore. Here's how to vet licensure, scope your project, and pay safely — entirely remotely — and still walk away with a stamped, permit-ready set."
+        },
+        {
+          "kind": "h2",
+          "text": "1. Confirm the license before anything else"
+        },
+        {
+          "kind": "paragraph",
+          "text": "A drawing set is only worth submitting if it's stamped by an architect licensed in the state where you're building. That's not a formality — an unlicensed set will be rejected at plan check, no matter how good the design looks."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Ask for the license number and the issuing state, then verify it against the state board's public registry. On our platform this is done for you: every match is verified as actively licensed in your state before it ever reaches you."
+        },
+        {
+          "kind": "h2",
+          "text": "2. Scope the project in writing"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Before pricing means anything, both sides need to agree on what's being drawn. A tight scope prevents the two most common blow-ups: surprise costs and missed drawings at permit time."
+        },
+        {
+          "kind": "paragraph",
+          "text": "A complete residential scope usually covers:"
+        },
+        {
+          "kind": "list",
+          "text": "Existing conditions (as-built plans or a recent survey)\nProposed floor plans, elevations, and a site plan\nStructural coordination and any required calculations\nEnergy-code compliance for your jurisdiction\nA permit-ready, stamped set as the deliverable"
+        },
+        {
+          "kind": "h2",
+          "text": "3. Get a real number up front"
+        },
+        {
+          "kind": "paragraph",
+          "text": "\"It depends\" is not a quote. Modern platforms price a drawing set from square footage, add-ons, and a jurisdiction complexity score, giving you an itemized range before you talk to anyone. Use that as your baseline, then let each architect confirm a fixed quote or hourly rate on the scoping call."
+        },
+        {
+          "kind": "cta",
+          "text": "See your project's estimate in 2 minutes",
+          "cta_label": "Get my estimate →",
+          "cta_href": "/get-started"
+        },
+        {
+          "kind": "h2",
+          "text": "4. Pay through escrow, not up front"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Remote work only feels safe when the money does too. Escrow holds your funds and releases them as you approve milestones — so you're never paying for work you haven't seen. Avoid any arrangement that asks for the full fee before drawings begin."
+        },
+        {
+          "kind": "pullquote",
+          "text": "The best remote projects feel boring — clear scope, a real number, milestones that release on approval. Boring is what gets you a clean permit.",
+          "attribution": "Maya E., AIA · Licensed CA"
+        },
+        {
+          "kind": "h2",
+          "text": "5. Keep a tracked timeline to permit"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Once drawings are underway, everything should live in one place: files, comments, milestone approvals, and the submission itself. A tracked timeline keeps revision cycles short and gives your contractor a set they recognize — which is what clears plan check the first time."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Do these five things and remote hiring isn't a compromise — it's faster, cheaper, and just as accountable as walking into a firm's office."
+        }
+      ]
+    },
+    {
+      "slug": "what-does-an-architect-actually-cost-in-2026",
+      "title": "What does an architect actually cost in 2026?",
+      "dek": "",
+      "excerpt": "Fixed quote vs. hourly, what drives the number, and honest benchmarks by project type.",
+      "category": "Pricing",
+      "author": "",
+      "date": "Aug 1, 2026",
+      "read_time": "7 min",
+      "is_featured": false,
+      "blocks": []
+    },
+    {
+      "slug": "the-complete-backyard-adu-planning-guide",
+      "title": "The complete backyard ADU planning guide",
+      "dek": "",
+      "excerpt": "Setbacks, utilities, Title-24 and the real timeline from idea to stamped set.",
+      "category": "ADUs",
+      "author": "",
+      "date": "Jul 28, 2026",
+      "read_time": "11 min",
+      "is_featured": false,
+      "blocks": []
+    },
+    {
+      "slug": "reading-your-jurisdiction-a-permit-primer",
+      "title": "Reading your jurisdiction: a permit primer",
+      "dek": "",
+      "excerpt": "Why the same project costs and takes different amounts of time from city to city.",
+      "category": "Permits",
+      "author": "",
+      "date": "Jul 22, 2026",
+      "read_time": "6 min",
+      "is_featured": false,
+      "blocks": []
+    },
+    {
+      "slug": "8-questions-to-ask-before-you-hire-an-architect",
+      "title": "8 questions to ask before you hire an architect",
+      "dek": "",
+      "excerpt": "The vetting checklist that separates a smooth project from a stalled one.",
+      "category": "Hiring",
+      "author": "",
+      "date": "Jul 15, 2026",
+      "read_time": "5 min",
+      "is_featured": false,
+      "blocks": []
+    },
+    {
+      "slug": "building-in-oakland-seismic-rules-you-should-know",
+      "title": "Building in Oakland: seismic rules you should know",
+      "dek": "",
+      "excerpt": "Soft-story, hillside and design-review basics for East Bay homeowners.",
+      "category": "By city",
+      "author": "",
+      "date": "Jul 9, 2026",
+      "read_time": "8 min",
+      "is_featured": false,
+      "blocks": []
+    },
+    {
+      "slug": "home-additions-where-the-money-really-goes",
+      "title": "Home additions: where the money really goes",
+      "dek": "",
+      "excerpt": "Structural work, jurisdiction complexity, and how to keep a second-story on budget.",
+      "category": "Pricing",
+      "author": "",
+      "date": "Jul 2, 2026",
+      "read_time": "7 min",
+      "is_featured": false,
+      "blocks": []
+    }
+  ],
+  "case_study_categories": [
+    {
+      "name": "ADUs",
+      "slug": "adus"
+    },
+    {
+      "name": "Additions",
+      "slug": "additions"
+    },
+    {
+      "name": "New home",
+      "slug": "new-home"
+    },
+    {
+      "name": "Remodel",
+      "slug": "remodel"
+    },
+    {
+      "name": "Commercial",
+      "slug": "commercial"
+    }
+  ],
+  "case_studies": [
+    {
+      "slug": "a-640-sq-ft-adu-that-cleared-plan-check-first-try",
+      "title": "A 640 sq ft ADU that cleared plan check first try",
+      "dek": "How an Oakland homeowner turned a steep, seismic hillside lot into permit-ready rental income — matched with a licensed architect and delivered entirely remotely.",
+      "location": "Oakland, CA · Seismic hillside lot",
+      "excerpt": "A homeowner wanted a rental-income unit on a steep East Bay lot. We matched them with a CA-licensed architect who handled seismic detailing and Title-24 remotely — stamped, submitted, and approved without a single revision cycle.",
+      "category": "Backyard ADU",
+      "is_featured": true,
+      "card_stats": [
+        {
+          "value": "$4,800",
+          "key": "Fixed quote"
+        },
+        {
+          "value": "6 wks",
+          "key": "To stamped set"
+        },
+        {
+          "value": "First",
+          "key": "Plan-check pass"
+        }
+      ],
+      "brief": "Turn an unused hillside backyard into a 640 sq ft, one-bedroom accessory dwelling unit for long-term rental income — with a stamped set that would clear Oakland plan check without a costly revision loop.",
+      "challenge1": "The lot sloped steeply and sat inside a designated seismic hazard zone, which meant the ADU needed careful foundation and lateral detailing before the city would even look at it. The homeowner had already been quoted vague, open-ended fees by two local firms and wanted cost certainty before committing.",
+      "challenge2": "They also had no interest in a string of in-person meetings. The whole project needed to run remotely — scoping, drawings, revisions, and submission — without ever slowing down.",
+      "match_narrative": "The estimate engine priced the drawing set from square footage, add-ons, and Oakland's jurisdiction complexity score, returning a fixed-quote range up front. Within 48 hours the homeowner was reviewing two CA-licensed architects with hillside ADU experience.",
+      "match_points": [
+        "Both architects verified as actively licensed in California",
+        "Filtered for seismic-zone and hillside foundation experience",
+        "Fixed quote confirmed on a 30-minute scoping call",
+        "Funds held in escrow, released on milestone approval"
+      ],
+      "quote": "The estimate matched the final quote almost exactly. Our architect was licensed right here in Oakland, and the permit set cleared first try — no revisions.",
+      "quote_by": "Rebecca L., homeowner · Oakland, CA",
+      "outcome1": "The architect delivered a complete, stamped set — floor plans, elevations, a site plan with the hillside grading, structural coordination, and Title-24 energy compliance — six weeks after the scoping call.",
+      "outcome2": "Oakland approved the submission on the first pass, with no revision cycle. The homeowner broke ground the following month, on budget and on the original timeline.",
+      "glance": [
+        {
+          "k": "Project",
+          "v": "640 sq ft ADU"
+        },
+        {
+          "k": "Fixed quote",
+          "v": "$3,900"
+        },
+        {
+          "k": "To stamped set",
+          "v": "6 weeks"
+        },
+        {
+          "k": "Plan check",
+          "v": "First pass"
+        }
+      ],
+      "architect_name": "Maya E., AIA",
+      "architect_role": "Licensed architect · California",
+      "architect_bio": "Maya has stamped permit-ready sets across California for over a decade, specializing in seismic-zone additions and backyard ADUs.",
+      "architect_tags": [
+        "12+ years licensed in CA",
+        "Seismic & hillside specialist",
+        "200+ ADUs delivered"
+      ]
+    },
+    {
+      "slug": "second-story-addition-on-a-1920s-bungalow",
+      "title": "Second-story addition on a 1920s bungalow",
+      "dek": "",
+      "location": "Berkeley, CA",
+      "excerpt": "Structural coordination and design review handled remotely on a complex historic lot — on a tight budget.",
+      "category": "Additions",
+      "is_featured": false,
+      "card_stats": [
+        {
+          "value": "$14,200",
+          "key": "Drawing set"
+        },
+        {
+          "value": "9 wks",
+          "key": "To permit"
+        }
+      ],
+      "brief": "",
+      "challenge1": "",
+      "challenge2": "",
+      "match_narrative": "",
+      "match_points": [],
+      "quote": "",
+      "quote_by": "",
+      "outcome1": "",
+      "outcome2": "",
+      "glance": [],
+      "architect_name": "",
+      "architect_role": "",
+      "architect_bio": "",
+      "architect_tags": []
+    },
+    {
+      "slug": "retail-to-restaurant-change-of-use",
+      "title": "Retail-to-restaurant change of use",
+      "dek": "",
+      "location": "San Jose, CA",
+      "excerpt": "A tenant improvement with accessibility and MEP scope, billed hourly through escrow with zero surprises.",
+      "category": "Commercial",
+      "is_featured": false,
+      "card_stats": [
+        {
+          "value": "118 hrs",
+          "key": "Tracked time"
+        },
+        {
+          "value": "First",
+          "key": "Plan-check pass"
+        }
+      ],
+      "brief": "",
+      "challenge1": "",
+      "challenge2": "",
+      "match_narrative": "",
+      "match_points": [],
+      "quote": "",
+      "quote_by": "",
+      "outcome1": "",
+      "outcome2": "",
+      "glance": [],
+      "architect_name": "",
+      "architect_role": "",
+      "architect_bio": "",
+      "architect_tags": []
+    },
+    {
+      "slug": "a-full-gut-kitchen-bath-in-a-victorian-flat",
+      "title": "A full-gut kitchen & bath in a Victorian flat",
+      "dek": "",
+      "location": "San Francisco, CA",
+      "excerpt": "As-built plus proposed plans with a finish schedule, coordinated around 100-year-old framing.",
+      "category": "Remodel",
+      "is_featured": false,
+      "card_stats": [
+        {
+          "value": "$3,200",
+          "key": "Fixed quote"
+        },
+        {
+          "value": "4 wks",
+          "key": "To stamped set"
+        }
+      ],
+      "brief": "",
+      "challenge1": "",
+      "challenge2": "",
+      "match_narrative": "",
+      "match_points": [],
+      "quote": "",
+      "quote_by": "",
+      "outcome1": "",
+      "outcome2": "",
+      "glance": [],
+      "architect_name": "",
+      "architect_role": "",
+      "architect_bio": "",
+      "architect_tags": []
+    },
+    {
+      "slug": "a-ground-up-custom-home-on-a-wooded-slope",
+      "title": "A ground-up custom home on a wooded slope",
+      "dek": "",
+      "location": "Marin County, CA",
+      "excerpt": "Complete construction documents with structural and MEP coordination and a 3D visualization package.",
+      "category": "New home",
+      "is_featured": false,
+      "card_stats": [
+        {
+          "value": "$38,500",
+          "key": "Full set"
+        },
+        {
+          "value": "16 wks",
+          "key": "To permit"
+        }
+      ],
+      "brief": "",
+      "challenge1": "",
+      "challenge2": "",
+      "match_narrative": "",
+      "match_points": [],
+      "quote": "",
+      "quote_by": "",
+      "outcome1": "",
+      "outcome2": "",
+      "glance": [],
+      "architect_name": "",
+      "architect_role": "",
+      "architect_bio": "",
+      "architect_tags": []
+    },
+    {
+      "slug": "garage-conversion-into-a-one-bedroom-adu",
+      "title": "Garage conversion into a one-bedroom ADU",
+      "dek": "",
+      "location": "Sacramento, CA",
+      "excerpt": "A cost-efficient conversion using existing footprint — approved under the state ADU exemptions.",
+      "category": "ADUs",
+      "is_featured": false,
+      "card_stats": [
+        {
+          "value": "$3,900",
+          "key": "Fixed quote"
+        },
+        {
+          "value": "5 wks",
+          "key": "To stamped set"
+        }
+      ],
+      "brief": "",
+      "challenge1": "",
+      "challenge2": "",
+      "match_narrative": "",
+      "match_points": [],
+      "quote": "",
+      "quote_by": "",
+      "outcome1": "",
+      "outcome2": "",
+      "glance": [],
+      "architect_name": "",
+      "architect_role": "",
+      "architect_bio": "",
+      "architect_tags": []
+    },
+    {
+      "slug": "rear-extension-to-open-up-a-hillside-kitchen",
+      "title": "Rear extension to open up a hillside kitchen",
+      "dek": "",
+      "location": "Los Angeles, CA",
+      "excerpt": "A single-story extension with a new structural opening, coordinated with the contractor from day one.",
+      "category": "Additions",
+      "is_featured": false,
+      "card_stats": [
+        {
+          "value": "$9,600",
+          "key": "Drawing set"
+        },
+        {
+          "value": "7 wks",
+          "key": "To permit"
+        }
+      ],
+      "brief": "",
+      "challenge1": "",
+      "challenge2": "",
+      "match_narrative": "",
+      "match_points": [],
+      "quote": "",
+      "quote_by": "",
+      "outcome1": "",
+      "outcome2": "",
+      "glance": [],
+      "architect_name": "",
+      "architect_role": "",
+      "architect_bio": "",
+      "architect_tags": []
+    }
+  ],
+  "departments": [
+    "Engineering",
+    "Design",
+    "Operations",
+    "Marketing"
+  ],
+  "perks": [
+    {
+      "title": "Remote-first",
+      "description": "Work from anywhere in the US. We optimize for outcomes, not hours at a desk."
+    },
+    {
+      "title": "Real ownership",
+      "description": "Meaningful equity and the autonomy to own problems end to end."
+    },
+    {
+      "title": "Full health cover",
+      "description": "Medical, dental and vision fully covered for you and dependents."
+    },
+    {
+      "title": "Learning budget",
+      "description": "Annual stipend for courses, conferences, and licensure where relevant."
+    }
+  ],
+  "jobs": [
+    {
+      "title": "Senior Full-Stack Engineer",
+      "department": "Engineering",
+      "location": "Remote (US)",
+      "employment_type": "Full-time"
+    },
+    {
+      "title": "Data Engineer — Jurisdiction Platform",
+      "department": "Engineering",
+      "location": "Remote (US)",
+      "employment_type": "Full-time"
+    },
+    {
+      "title": "Product Designer",
+      "department": "Design",
+      "location": "Remote (US)",
+      "employment_type": "Full-time"
+    },
+    {
+      "title": "Architect Success Lead",
+      "department": "Operations",
+      "location": "Remote (US)",
+      "employment_type": "Full-time"
+    },
+    {
+      "title": "Licensing & Compliance Analyst",
+      "department": "Operations",
+      "location": "Remote (US)",
+      "employment_type": "Full-time"
+    },
+    {
+      "title": "Growth Marketer — SEO/AEO",
+      "department": "Marketing",
+      "location": "Remote (US)",
+      "employment_type": "Full-time"
+    }
+  ],
+  "contact_methods": [
+    {
+      "kind": "CLIENTS",
+      "title": "Start a project",
+      "description": "The fastest path is an instant estimate — you'll meet matched architects in 48 hours.",
+      "link_label": "Get my estimate →",
+      "href": "/get-started"
+    },
+    {
+      "kind": "ARCHITECTS",
+      "title": "Join the network",
+      "description": "Licensed and want scoped, pre-qualified clients? Apply to join — verified in about three days.",
+      "link_label": "Apply to join →",
+      "href": "/for-architects"
+    },
+    {
+      "kind": "SUPPORT",
+      "title": "Existing project help",
+      "description": "Already working with an architect on-platform? Reach our support team any business day.",
+      "link_label": "help@architecthire.com",
+      "href": "#"
+    }
+  ],
+  "contact_topics": [
+    "A project I want to build",
+    "Joining as an architect",
+    "Partnerships",
+    "Press & media",
+    "Something else"
+  ],
+  "policies": [
+    {
+      "slug": "privacy",
+      "title": "Privacy Policy",
+      "sections": [
+        {
+          "anchor": "collect",
+          "heading": "1. Information we collect",
+          "body": "Account and project information you provide — name, email, project type, location, square footage, scope and timeline — used to generate estimates and match you with architects.\n\nCommunications and files exchanged on-platform, including messages, drawings, comments and milestone approvals, so both sides have a single record of the engagement.\n\nUsage and device data collected automatically, such as pages viewed, approximate location, browser and device type, to keep the service secure and improve it."
+        },
+        {
+          "anchor": "use",
+          "heading": "2. How we use information",
+          "body": "To operate the marketplace: pricing your project, surfacing qualified architects licensed in your jurisdiction, and facilitating scoping, payments and delivery.\n\nTo protect the platform through escrow, licensure verification, fraud prevention, and enforcement of our terms.\n\nTo communicate with you about your projects, and — where permitted — about relevant guides, features and offers you can opt out of at any time."
+        },
+        {
+          "anchor": "share",
+          "heading": "3. How information is shared",
+          "body": "With the architects you are matched with, limited to what they need to scope and deliver your project. Personal contact details stay on-platform until you engage.\n\nWith service providers that process payments, host data, and support operations under contract, and with authorities where required by law.\n\nWe do not sell your personal information."
+        },
+        {
+          "anchor": "jurisdiction",
+          "heading": "4. Jurisdiction data",
+          "body": "Our jurisdiction database scores cities and counties on permit complexity using public regulatory sources. Your individual project location is used to price and match, and is never published as part of that database."
+        },
+        {
+          "anchor": "rights",
+          "heading": "5. Your choices & rights",
+          "body": "You can access, correct, export or delete your account information, and opt out of marketing communications. Depending on your state, you may have additional rights under laws such as the CCPA/CPRA.\n\nTo exercise any of these, contact us at privacy@architecthire.com. We will verify your request and respond within the time required by applicable law."
+        },
+        {
+          "anchor": "security",
+          "heading": "6. Data security & retention",
+          "body": "We use administrative, technical and physical safeguards appropriate to the sensitivity of the data, including encryption in transit. No system is perfectly secure, but we work to protect your information and limit access to those who need it.\n\nWe retain information for as long as your account is active and as needed to provide the service, comply with legal obligations, resolve disputes and enforce agreements."
+        },
+        {
+          "anchor": "changes",
+          "heading": "7. Changes to this policy",
+          "body": "We may update this policy from time to time. Material changes will be posted here with an updated date, and where appropriate we will notify you directly."
+        }
+      ]
+    }
+  ],
+  "inspiration": [
+    {
+      "title": "Warm oak galley with a marble run",
+      "tag": "Kitchens",
+      "style": "Modern organic",
+      "palette": [
+        "#e8dcc6",
+        "#c9a26b",
+        "#3a3a38",
+        "#f4f1ea"
+      ],
+      "masonry_height": 340,
+      "likes": 214
+    },
+    {
+      "title": "Compact backyard studio, full-height glass",
+      "tag": "ADUs",
+      "style": "Scandinavian",
+      "palette": [
+        "#d8d3c8",
+        "#8a8577",
+        "#2f3330",
+        "#eef0ec"
+      ],
+      "masonry_height": 250,
+      "likes": 168
+    },
+    {
+      "title": "Double-height living room with a black steel stair",
+      "tag": "Living spaces",
+      "style": "Industrial warm",
+      "palette": [
+        "#1c1c1c",
+        "#b98b57",
+        "#e6e0d4",
+        "#7d7468"
+      ],
+      "masonry_height": 300,
+      "likes": 92
+    },
+    {
+      "title": "Micro-cement wet room in sage",
+      "tag": "Bathrooms",
+      "style": "Minimal spa",
+      "palette": [
+        "#b7c2ac",
+        "#e9e6dd",
+        "#4a5348",
+        "#d7cbb8"
+      ],
+      "masonry_height": 360,
+      "likes": 301
+    },
+    {
+      "title": "Second-story addition on a 1920s bungalow",
+      "tag": "Additions",
+      "style": "Transitional",
+      "palette": [
+        "#c7522a",
+        "#e5c185",
+        "#f0ece1",
+        "#33372c"
+      ],
+      "masonry_height": 260,
+      "likes": 76
+    },
+    {
+      "title": "Charred-cedar facade with bronze windows",
+      "tag": "Exteriors",
+      "style": "Modern rustic",
+      "palette": [
+        "#2a2622",
+        "#7b5e3b",
+        "#c9bfae",
+        "#4e4b45"
+      ],
+      "masonry_height": 320,
+      "likes": 188
+    },
+    {
+      "title": "Two-tone shaker with a plaster hood",
+      "tag": "Kitchens",
+      "style": "Classic revival",
+      "palette": [
+        "#2e3b46",
+        "#e7e2d6",
+        "#c3a97f",
+        "#a9b0ab"
+      ],
+      "masonry_height": 270,
+      "likes": 134
+    },
+    {
+      "title": "Retail-to-restaurant fit-out, warm brick",
+      "tag": "Commercial",
+      "style": "Brasserie",
+      "palette": [
+        "#7a3b2e",
+        "#d8b48a",
+        "#2b2723",
+        "#eae2d2"
+      ],
+      "masonry_height": 310,
+      "likes": 57
+    },
+    {
+      "title": "Sunken lounge around a plaster fireplace",
+      "tag": "Living spaces",
+      "style": "Coastal calm",
+      "palette": [
+        "#e9e3d6",
+        "#c9b59a",
+        "#6f7d78",
+        "#31352f"
+      ],
+      "masonry_height": 250,
+      "likes": 245
+    },
+    {
+      "title": "Courtyard entry with a slatted screen",
+      "tag": "Exteriors",
+      "style": "Desert modern",
+      "palette": [
+        "#c99a6a",
+        "#e6d6bd",
+        "#3b352d",
+        "#8f7f66"
+      ],
+      "masonry_height": 290,
+      "likes": 119
+    },
+    {
+      "title": "Fluted vanity in a windowed powder room",
+      "tag": "Bathrooms",
+      "style": "Warm minimal",
+      "palette": [
+        "#d9c7a8",
+        "#f1ece2",
+        "#5b5348",
+        "#b1a892"
+      ],
+      "masonry_height": 280,
+      "likes": 98
+    },
+    {
+      "title": "Garage conversion loft with a kitchenette",
+      "tag": "ADUs",
+      "style": "Loft modern",
+      "palette": [
+        "#cfcabd",
+        "#8d8676",
+        "#26282a",
+        "#ece9e1"
+      ],
+      "masonry_height": 330,
+      "likes": 163
+    }
+  ],
+  "popular_searches": [
+    {
+      "term": "ADU",
+      "href": "/search?q=ADU"
+    },
+    {
+      "term": "3D render",
+      "href": "/search?q=render"
+    },
+    {
+      "term": "Permit set",
+      "href": "/search?q=permit"
+    },
+    {
+      "term": "Oakland",
+      "href": "/search?q=Oakland"
+    },
+    {
+      "term": "CAD drafting",
+      "href": "/search?q=CAD"
+    },
+    {
+      "term": "Kitchen remodel",
+      "href": "/search?q=kitchen"
+    }
+  ]
+}

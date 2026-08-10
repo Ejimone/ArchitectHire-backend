@@ -1,0 +1,1122 @@
+{
+  "faqs": [
+    {
+      "scope": "services-landing",
+      "question": "Do I need to hire a full architect to use ArchitectHire?",
+      "answer": "No. That's the point — you can order a single consult, a set of renders, or drafting by the hour without committing to a full design engagement. Step up to a stamped set only when your project needs it.",
+      "sort": 0
+    },
+    {
+      "scope": "services-landing",
+      "question": "How is this cheaper than a traditional firm?",
+      "answer": "Most firms won't take work under a few thousand dollars because of minimum-fee overhead. We productize each service and match it to the right specialist — including offshore and freelance talent for unstamped work — so you pay only for what you order.",
+      "sort": 1
+    },
+    {
+      "scope": "services-landing",
+      "question": "When do I actually need a licensed architect?",
+      "answer": "Only for stamped, permit-ready deliverables, which must come from someone licensed in your jurisdiction. Everything else — renders, drafting, scans, feasibility, consults — needs no stamp and can be done by anyone on the platform.",
+      "sort": 2
+    },
+    {
+      "scope": "services-landing",
+      "question": "How do payments work?",
+      "answer": "Every service is priced up front and paid into escrow. Funds release to the specialist only as you approve milestones or the final files, so you're protected throughout.",
+      "sort": 3
+    },
+    {
+      "scope": "3d-visualization",
+      "question": "Do I need finished drawings to order a render?",
+      "answer": "No. A sketch, existing photos, or rough dimensions are enough to start — the artist will confirm what they need and quote accordingly. If you don't have plans yet, a 3D floor plan is a great first step.",
+      "sort": 0
+    },
+    {
+      "scope": "3d-visualization",
+      "question": "How many revisions are included?",
+      "answer": "Two rounds of revisions are included on every still. Additional rounds are billed transparently, and you'll see the cost before approving them.",
+      "sort": 1
+    },
+    {
+      "scope": "3d-visualization",
+      "question": "Who owns the final images?",
+      "answer": "You do. On final approval you receive full-resolution, print-ready files with usage rights for listings, submittals, and marketing.",
+      "sort": 2
+    },
+    {
+      "scope": "3d-visualization",
+      "question": "Can the same specialist do my permit drawings too?",
+      "answer": "Renders and drawings are separate services. Many clients start with a render, then engage a licensed architect for a stamped set — we keep those flows separate so you only pay for a stamp when you need one.",
+      "sort": 3
+    },
+    {
+      "scope": "cad-drafting",
+      "question": "Do I need a licensed architect for drafting?",
+      "answer": "Usually not. Drafting is unstamped work, and for many single-family and ADU projects under local size thresholds no licensed architect is required. If your specific submittal needs a stamp, we'll match you to a licensed pro for just that step.",
+      "sort": 0
+    },
+    {
+      "scope": "cad-drafting",
+      "question": "What file formats do I get back?",
+      "answer": "You receive editable CAD (DWG) plus flattened PDFs for printing and submittal. Layer standards can be matched to your or your builder's conventions on request.",
+      "sort": 1
+    },
+    {
+      "scope": "cad-drafting",
+      "question": "How is hourly work kept honest?",
+      "answer": "Every hour is tracked on-platform and visible to you, with escrow releasing against reviewed milestones — so there are no surprise invoices or padded time.",
+      "sort": 2
+    },
+    {
+      "scope": "cad-drafting",
+      "question": "Can you work from just a hand sketch?",
+      "answer": "Yes. A dimensioned sketch or even photos with measurements are enough to begin. The drafter will flag anything they need before starting.",
+      "sort": 3
+    },
+    {
+      "scope": "architect-landing",
+      "question": "Does it cost anything to join or receive leads?",
+      "answer": "No. Joining is free, there's no monthly subscription, and you never pay to receive or view a matched lead. We only take a flat 10% service fee on projects you actually win.",
+      "sort": 0
+    },
+    {
+      "scope": "architect-landing",
+      "question": "How are leads matched to me?",
+      "answer": "The engine matches on your verified license and jurisdiction, your chosen specialties and project types, and your current capacity. You see the pre-scoped, pre-priced project and accept or decline — nothing is ever assigned.",
+      "sort": 1
+    },
+    {
+      "scope": "architect-landing",
+      "question": "Do I set my own rates?",
+      "answer": "Yes. You set a fixed quote or your hourly rate on every project. Clients see your number before they commit, and you can decline any lead that doesn't fit your pricing.",
+      "sort": 2
+    },
+    {
+      "scope": "architect-landing",
+      "question": "When do I get paid?",
+      "answer": "Clients fund escrow when they hire you. As you complete each tracked milestone and the client approves it, the funds release to your bank — typically within two business days.",
+      "sort": 3
+    },
+    {
+      "scope": "architect-landing",
+      "question": "What do I need to apply?",
+      "answer": "Your active state license, a short portfolio of past projects, your specialties and service area, your rates, and proof of errors & omissions insurance. Verification usually takes about three days.",
+      "sort": 4
+    },
+    {
+      "scope": "for-experts",
+      "question": "Do I need to be a licensed architect to join?",
+      "answer": "No. Most services on the platform — drafting, 3D visualization, scanning, and consults — need no license and can be delivered from anywhere. Only stamped, permit-ready work requires a professional licensed in the client's jurisdiction, so we verify credentials for those disciplines only.",
+      "sort": 0
+    },
+    {
+      "scope": "for-experts",
+      "question": "What does it cost to join or receive orders?",
+      "answer": "Nothing. Joining is free, there's no monthly subscription, and you never pay to receive or view a matched order. We take a flat 10% service fee only on orders you actually deliver.",
+      "sort": 1
+    },
+    {
+      "scope": "for-experts",
+      "question": "How are orders matched to me?",
+      "answer": "The engine matches on your discipline and specialties, your capacity, your rates, and — for stamped work — your verified license and jurisdiction. You see the scoped, priced order and accept or decline; nothing is ever assigned.",
+      "sort": 2
+    },
+    {
+      "scope": "for-experts",
+      "question": "When and how do I get paid?",
+      "answer": "Clients fund escrow when they place an order. As you deliver each milestone and the client approves it, funds release to your bank, typically within two business days.",
+      "sort": 3
+    },
+    {
+      "scope": "for-experts",
+      "question": "What do I need to apply?",
+      "answer": "A short portfolio of relevant work, your disciplines and rates, and your availability. Licensed disciplines (engineering, stamped permit work) also submit their license and insurance. Most reviews take about three days.",
+      "sort": 4
+    },
+    {
+      "scope": "project-type:backyard-adu",
+      "question": "How much does it cost to design a ADU?",
+      "answer": "A Backyard ADU drawing set typically runs $2,400 – $6,500 as a fixed quote, scaling with square footage and complexity. You see an itemized instant estimate before talking to anyone, and your architect confirms the number on your scoping call.",
+      "sort": 0
+    },
+    {
+      "scope": "project-type:backyard-adu",
+      "question": "How long does the design take?",
+      "answer": "Most Backyard ADU sets reach a stamped, permit-ready state in about 2–3 weeks of active design, depending on revision cycles and how quickly site info is provided.",
+      "sort": 1
+    },
+    {
+      "scope": "project-type:backyard-adu",
+      "question": "Is the architect licensed for my area?",
+      "answer": "Yes. Every match is verified as licensed in your state, and pre-cleared for Backyard ADU work in your jurisdiction, before it reaches you.",
+      "sort": 2
+    },
+    {
+      "scope": "project-type:backyard-adu",
+      "question": "What do I need to provide?",
+      "answer": "Basic site information, measurements or a recent survey, and photos. Your architect guides you through exactly what's needed — no in-person visit required.",
+      "sort": 3
+    },
+    {
+      "scope": "city:oakland",
+      "question": "Do I need an architect licensed specifically in CA?",
+      "answer": "Yes. A permit-ready drawing set must be stamped by an architect licensed in the state where the project is built. Every match you receive is verified as licensed in CA before it reaches you.",
+      "sort": 0
+    },
+    {
+      "scope": "city:oakland",
+      "question": "How much does an architect cost in Oakland?",
+      "answer": "It depends on scope. A backyard ADU set typically starts around $3,900, a home addition around $11,000, and a new custom home from $26,000. You get an itemized instant estimate before talking to anyone, and each architect confirms a fixed quote or hourly rate on your scoping call.",
+      "sort": 1
+    },
+    {
+      "scope": "city:oakland",
+      "question": "Can this really be done remotely?",
+      "answer": "Yes. Site information, measurements, and photos are collected digitally, and Oakland plan-check submittals are handled electronically. You work with your architect over chat and video, and everything bills through escrow milestones.",
+      "sort": 2
+    },
+    {
+      "scope": "city:oakland",
+      "question": "How fast will I be matched?",
+      "answer": "Within 48 hours of completing your free estimate you'll see 2–3 CA-licensed architects pre-cleared on jurisdiction experience and capacity for your project type.",
+      "sort": 3
+    },
+    {
+      "scope": "state:CA",
+      "question": "Does my architect need to be licensed in California?",
+      "answer": "Yes. A permit set must be stamped by an architect holding an active California license. Every match we surface for a California project is verified as actively licensed in the state before it reaches you.",
+      "sort": 0
+    },
+    {
+      "scope": "state:CA",
+      "question": "How long does it take to get a permit in California?",
+      "answer": "Plan for roughly 8–14 weeks from scoping to an issued permit for a typical residential project — a few weeks of design plus 2–6 weeks of plan-check review, which varies by city and current backlog.",
+      "sort": 1
+    },
+    {
+      "scope": "state:CA",
+      "question": "What is Title-24 and do I need it?",
+      "answer": "Title-24 is California's energy-efficiency standard. Nearly every residential and commercial permit set must include Title-24 compliance documentation; your architect prepares it as part of the drawing set.",
+      "sort": 2
+    },
+    {
+      "scope": "state:CA",
+      "question": "Why is California more expensive than other states?",
+      "answer": "California scores 82/100 on our complexity index because of seismic, wildfire, Title-24 and — in many areas — coastal or historic review. That translates to a 1.35× pricing multiplier, applied automatically in your estimate.",
+      "sort": 3
+    },
+    {
+      "scope": "state:CA",
+      "question": "Can I hire an architect remotely for a California project?",
+      "answer": "Yes. The entire process — scoping, drawings, revisions and submission — runs on-platform with escrow-protected milestones. You never need an in-person meeting to reach a stamped, permit-ready set.",
+      "sort": 4
+    }
+  ],
+  "stats": [
+    {
+      "scope": "landing",
+      "value": "3,200+",
+      "label": "jurisdictions scored",
+      "sort": 0
+    },
+    {
+      "scope": "landing",
+      "value": "48 hrs",
+      "label": "to matched architects",
+      "sort": 1
+    },
+    {
+      "scope": "landing",
+      "value": "100%",
+      "label": "escrow-backed",
+      "sort": 2
+    },
+    {
+      "scope": "services-landing",
+      "value": "$145",
+      "label": "starting price",
+      "sort": 0
+    },
+    {
+      "scope": "services-landing",
+      "value": "20+",
+      "label": "services on demand",
+      "sort": 1
+    },
+    {
+      "scope": "services-landing",
+      "value": "2–7 days",
+      "label": "typical turnaround",
+      "sort": 2
+    },
+    {
+      "scope": "3d-visualization",
+      "value": "$99",
+      "label": "starting per still",
+      "sort": 0
+    },
+    {
+      "scope": "3d-visualization",
+      "value": "2",
+      "label": "revisions included",
+      "sort": 1
+    },
+    {
+      "scope": "3d-visualization",
+      "value": "4.9★",
+      "label": "avg artist rating",
+      "sort": 2
+    },
+    {
+      "scope": "cad-drafting",
+      "value": "$65",
+      "label": "per hour, US drafters",
+      "sort": 0
+    },
+    {
+      "scope": "cad-drafting",
+      "value": "no stamp",
+      "label": "needed for most jobs",
+      "sort": 1
+    },
+    {
+      "scope": "cad-drafting",
+      "value": "2–5 day",
+      "label": "typical turnaround",
+      "sort": 2
+    },
+    {
+      "scope": "architect-landing",
+      "value": "$150–$25k",
+      "label": "project range",
+      "sort": 0
+    },
+    {
+      "scope": "architect-landing",
+      "value": "48 hrs",
+      "label": "to first matched lead",
+      "sort": 1
+    },
+    {
+      "scope": "architect-landing",
+      "value": "2 days",
+      "label": "avg. payout time",
+      "sort": 2
+    },
+    {
+      "scope": "for-experts",
+      "value": "6",
+      "label": "disciplines in demand",
+      "sort": 0
+    },
+    {
+      "scope": "for-experts",
+      "value": "48 hrs",
+      "label": "to your first order",
+      "sort": 1
+    },
+    {
+      "scope": "for-experts",
+      "value": "2 days",
+      "label": "avg. payout time",
+      "sort": 2
+    },
+    {
+      "scope": "about",
+      "value": "52",
+      "label": "US jurisdictions, live from day one",
+      "sort": 0
+    },
+    {
+      "scope": "about",
+      "value": "3,200+",
+      "label": "cities & counties scored for complexity",
+      "sort": 1
+    },
+    {
+      "scope": "about",
+      "value": "1,400+",
+      "label": "permit-ready projects delivered",
+      "sort": 2
+    },
+    {
+      "scope": "about",
+      "value": "94%",
+      "label": "clear plan check on the first pass",
+      "sort": 3
+    },
+    {
+      "scope": "case-studies",
+      "value": "1,400+",
+      "label": "Projects delivered",
+      "sort": 0
+    },
+    {
+      "scope": "case-studies",
+      "value": "94%",
+      "label": "Cleared plan check first try",
+      "sort": 1
+    },
+    {
+      "scope": "case-studies",
+      "value": "48 hrs",
+      "label": "Median time to matched",
+      "sort": 2
+    },
+    {
+      "scope": "case-studies",
+      "value": "$0",
+      "label": "Released before approval",
+      "sort": 3
+    },
+    {
+      "scope": "jurisdiction-database",
+      "value": "52",
+      "label": "state guides published",
+      "sort": 0
+    },
+    {
+      "scope": "jurisdiction-database",
+      "value": "3,200+",
+      "label": "cities & counties scored",
+      "sort": 1
+    },
+    {
+      "scope": "jurisdiction-database",
+      "value": "12",
+      "label": "complexity factors weighted",
+      "sort": 2
+    },
+    {
+      "scope": "jurisdiction-database",
+      "value": "0–100",
+      "label": "score drives pricing",
+      "sort": 3
+    }
+  ],
+  "steps": [
+    {
+      "scope": "landing",
+      "title": "Answer & price",
+      "description": "A short questionnaire feeds the pricing engine and returns an instant, itemized estimate — before you talk to anyone.",
+      "sort": 0
+    },
+    {
+      "scope": "landing",
+      "title": "Meet 2–3 matches",
+      "description": "We surface only architects pre-cleared on licensure, jurisdiction experience and capacity. Review profiles, then chat or video to scope.",
+      "sort": 1
+    },
+    {
+      "scope": "landing",
+      "title": "Pick, pay, build",
+      "description": "Choose a fixed quote or hourly, pay into escrow, and receive stamped, permit-ready drawings on a tracked timeline.",
+      "sort": 2
+    },
+    {
+      "scope": "services-landing",
+      "title": "Pick a service",
+      "description": "Choose what you need and get an instant, itemized price — no forms, no \"it depends.\"",
+      "sort": 0
+    },
+    {
+      "scope": "services-landing",
+      "title": "Match & scope",
+      "description": "We route you to a vetted specialist — or, if you need a stamp, a pro licensed in your jurisdiction.",
+      "sort": 1
+    },
+    {
+      "scope": "services-landing",
+      "title": "Delivered via escrow",
+      "description": "Track progress on-platform; funds release only when you approve the final files.",
+      "sort": 2
+    },
+    {
+      "scope": "3d-visualization",
+      "title": "Share your plans",
+      "description": "Upload drawings, photos, or a sketch — whatever you have.",
+      "sort": 0
+    },
+    {
+      "scope": "3d-visualization",
+      "title": "Get a fixed quote",
+      "description": "Pick your quality tier and lock the price up front.",
+      "sort": 1
+    },
+    {
+      "scope": "3d-visualization",
+      "title": "Review a draft",
+      "description": "See a first pass and mark up changes; revisions are included.",
+      "sort": 2
+    },
+    {
+      "scope": "3d-visualization",
+      "title": "Receive final files",
+      "description": "Download print-ready images, released from escrow on approval.",
+      "sort": 3
+    },
+    {
+      "scope": "cad-drafting",
+      "title": "Upload what you have",
+      "description": "Sketches, photos, PDFs, or existing CAD — any starting point works.",
+      "sort": 0
+    },
+    {
+      "scope": "cad-drafting",
+      "title": "Scope & quote",
+      "description": "A drafter confirms scope and gives you an hourly estimate or flat price.",
+      "sort": 1
+    },
+    {
+      "scope": "cad-drafting",
+      "title": "Draft & review",
+      "description": "Track hours live, review progress, and request changes as you go.",
+      "sort": 2
+    },
+    {
+      "scope": "cad-drafting",
+      "title": "Get your files",
+      "description": "Receive final CAD and PDFs, released from escrow on approval.",
+      "sort": 3
+    },
+    {
+      "scope": "architect-landing",
+      "title": "Apply & get verified",
+      "description": "Submit your license, portfolio and insurance. We verify your credentials — usually within three days — before your profile goes live.",
+      "sort": 0
+    },
+    {
+      "scope": "architect-landing",
+      "title": "Receive matched leads",
+      "description": "Scoped, priced projects in your area arrive in your dashboard. Accept the ones you want, decline the rest, and scope on a call.",
+      "sort": 1
+    },
+    {
+      "scope": "architect-landing",
+      "title": "Deliver & get paid",
+      "description": "Work the tracked milestones. Escrow releases to your bank within two days of each client approval. Earn reviews as you go.",
+      "sort": 2
+    },
+    {
+      "scope": "for-experts",
+      "title": "Apply & get vetted",
+      "description": "Share your portfolio and, for licensed disciplines, your credentials. Most experts are approved within three days.",
+      "sort": 0
+    },
+    {
+      "scope": "for-experts",
+      "title": "Receive matched orders",
+      "description": "Scoped, priced orders in your discipline arrive in your dashboard. Accept the ones you want, decline the rest.",
+      "sort": 1
+    },
+    {
+      "scope": "for-experts",
+      "title": "Deliver & get paid",
+      "description": "Work the tracked milestones. Escrow releases to your bank within two days of each client approval.",
+      "sort": 2
+    }
+  ],
+  "testimonials": [
+    {
+      "scope": "landing",
+      "quote": "The instant estimate matched the final quote almost exactly. Our architect was licensed right here in Oakland and the permit set cleared first try.",
+      "name": "Rebecca Lin",
+      "role": "Homeowner · Berkeley, CA",
+      "audience": "client",
+      "sort": 0
+    },
+    {
+      "scope": "landing",
+      "quote": "We compared three vetted architects in an afternoon. Escrow made paying feel safe, and the drawings were the cleanest our contractor had seen.",
+      "name": "Marcus Reed",
+      "role": "Homeowner · Oakland, CA",
+      "audience": "client",
+      "sort": 1
+    },
+    {
+      "scope": "landing",
+      "quote": "For our restaurant change-of-use, hourly was the right call. Transparent time tracking, no surprises, and it moved fast.",
+      "name": "Grace Okafor",
+      "role": "Business owner · San Jose, CA",
+      "audience": "client",
+      "sort": 2
+    },
+    {
+      "scope": "services-landing",
+      "quote": "Ordered three renders for our listing on a Monday and had photoreal images by Thursday. Cheaper than any studio quoted us.",
+      "name": "Elena D.",
+      "role": "Listing agent · Oakland, CA",
+      "audience": "client",
+      "sort": 0
+    },
+    {
+      "scope": "services-landing",
+      "quote": "A $150 plan review caught two code issues before we ever paid for a full set. Saved us a whole revision cycle.",
+      "name": "Marcus R.",
+      "role": "Homeowner · Berkeley, CA",
+      "audience": "client",
+      "sort": 1
+    },
+    {
+      "scope": "services-landing",
+      "quote": "We used drafting hourly for as-builts, then had them matched to a licensed architect just for the stamp. Perfect.",
+      "name": "Grace O.",
+      "role": "Business owner · San Jose, CA",
+      "audience": "client",
+      "sort": 2
+    },
+    {
+      "scope": "architect-landing",
+      "quote": "I closed my first two matched projects the week I was verified. Both were exactly in my wheelhouse — seismic additions in the East Bay.",
+      "name": "Maya E., AIA",
+      "role": "Residential · Oakland, CA",
+      "audience": "architect",
+      "sort": 0
+    },
+    {
+      "scope": "architect-landing",
+      "quote": "The escrow payouts hit my account in two days, every milestone. I stopped chasing invoices entirely — that alone paid for itself.",
+      "name": "Daniel C., AIA",
+      "role": "ADUs & small commercial · Berkeley",
+      "audience": "architect",
+      "sort": 1
+    },
+    {
+      "scope": "architect-landing",
+      "quote": "I set my own hourly rate and only take restaurant change-of-use work. The matching is that precise. No RFPs, no cold calls.",
+      "name": "Priya N., AIA",
+      "role": "Commercial TI · San Jose, CA",
+      "audience": "architect",
+      "sort": 2
+    },
+    {
+      "scope": "for-experts",
+      "quote": "I do renders full-time now. Orders come in already scoped and priced — I just open the file and start. No more chasing leads on gig sites.",
+      "name": "Leah K.",
+      "role": "Visualization artist · remote",
+      "audience": "expert",
+      "sort": 0
+    },
+    {
+      "scope": "for-experts",
+      "quote": "Steady drafting work without the sales grind. Escrow means I never start on the promise of payment, and it hits my account in two days.",
+      "name": "Sam T.",
+      "role": "CAD drafter · Phoenix, AZ",
+      "audience": "expert",
+      "sort": 1
+    },
+    {
+      "scope": "for-experts",
+      "quote": "I only take structural stamps in states I'm licensed in, and the matching respects that perfectly. Clean, in-scope work every time.",
+      "name": "Nadia R.",
+      "role": "Structural engineer, PE · TX",
+      "audience": "expert",
+      "sort": 2
+    }
+  ],
+  "value_props": [
+    {
+      "scope": "landing",
+      "icon": "",
+      "title": "Verified licensure",
+      "description": "Every architect's state license is verified before a single match reaches you — the stamp has to be legally valid.",
+      "sort": 0
+    },
+    {
+      "scope": "landing",
+      "icon": "",
+      "title": "Escrow-backed pay",
+      "description": "Funds are held by the platform and released only as you approve milestones — never before.",
+      "sort": 1
+    },
+    {
+      "scope": "landing",
+      "icon": "",
+      "title": "Insurance on file",
+      "description": "Errors & omissions coverage is confirmed and on file for every architect you can hire.",
+      "sort": 2
+    },
+    {
+      "scope": "services-landing",
+      "icon": "",
+      "title": "Start from $145",
+      "description": "Traditional firms reject anything under a few thousand dollars. We don't — order exactly what you need.",
+      "sort": 0
+    },
+    {
+      "scope": "services-landing",
+      "icon": "",
+      "title": "No licensure friction",
+      "description": "Renders, drafting, scans and consults need no stamp and cross state lines freely — so they're fast.",
+      "sort": 1
+    },
+    {
+      "scope": "services-landing",
+      "icon": "",
+      "title": "Escrow-backed & vetted",
+      "description": "Every specialist is reviewed, and your money is held in escrow until you approve the work.",
+      "sort": 2
+    },
+    {
+      "scope": "architect-landing",
+      "icon": "",
+      "title": "A steady stream of vetted leads",
+      "description": "Pre-scoped, pre-priced projects from serious clients land in your dashboard — matched to your license, jurisdiction and specialty.",
+      "sort": 0
+    },
+    {
+      "scope": "architect-landing",
+      "icon": "",
+      "title": "You keep control",
+      "description": "Set your own rates, define your service area, and accept only the work you want. Nothing is ever assigned to you.",
+      "sort": 1
+    },
+    {
+      "scope": "architect-landing",
+      "icon": "",
+      "title": "Fast, protected payouts",
+      "description": "Clients fund escrow up front. You get paid within two days of each approved milestone — no chasing invoices.",
+      "sort": 2
+    },
+    {
+      "scope": "architect-landing",
+      "icon": "",
+      "title": "Tools that save admin time",
+      "description": "Proposals, contracts, messaging and invoicing are built in — so you spend your hours designing, not doing paperwork.",
+      "sort": 3
+    },
+    {
+      "scope": "architect-landing",
+      "icon": "",
+      "title": "Build a reputation",
+      "description": "Every completed project earns verified reviews that raise your match rate and win repeat, higher-value clients.",
+      "sort": 4
+    },
+    {
+      "scope": "architect-landing",
+      "icon": "",
+      "title": "No cold pitching",
+      "description": "Skip the RFPs and referral hustle. Clients arrive already educated on price and process, ready to hire.",
+      "sort": 5
+    },
+    {
+      "scope": "architect-landing",
+      "icon": "",
+      "title": "License verified once",
+      "description": "We confirm your state license up front so clients trust the stamp — you don't re-prove it on every job.",
+      "sort": 6
+    },
+    {
+      "scope": "architect-landing",
+      "icon": "",
+      "title": "Escrow protects you too",
+      "description": "Funds are secured before you start. You never work on the promise of payment.",
+      "sort": 7
+    },
+    {
+      "scope": "architect-landing",
+      "icon": "",
+      "title": "Reviews you own",
+      "description": "Verified client reviews travel with your profile and lift your match rate over time.",
+      "sort": 8
+    },
+    {
+      "scope": "architect-landing",
+      "icon": "",
+      "title": "Set your own rates",
+      "description": "Fixed quote or hourly — your number, shown to clients before they commit.",
+      "sort": 9
+    },
+    {
+      "scope": "architect-landing",
+      "icon": "",
+      "title": "Pick your projects",
+      "description": "Accept or decline each matched lead with one tap. No penalties.",
+      "sort": 10
+    },
+    {
+      "scope": "architect-landing",
+      "icon": "",
+      "title": "Define your capacity",
+      "description": "Pause new leads when you're full, resume when you're ready.",
+      "sort": 11
+    },
+    {
+      "scope": "architect-landing",
+      "icon": "",
+      "title": "Choose your radius",
+      "description": "Only see work inside the jurisdictions you're licensed for.",
+      "sort": 12
+    },
+    {
+      "scope": "architect-landing",
+      "icon": "",
+      "title": "Proposals",
+      "description": "Generate a branded proposal from the lead scope in one click.",
+      "sort": 13
+    },
+    {
+      "scope": "architect-landing",
+      "icon": "",
+      "title": "Contracts & e-sign",
+      "description": "Platform contracts with escrow terms, signed in-app.",
+      "sort": 14
+    },
+    {
+      "scope": "architect-landing",
+      "icon": "",
+      "title": "Messaging & files",
+      "description": "Chat, share drawings and schedule calls in one thread.",
+      "sort": 15
+    },
+    {
+      "scope": "architect-landing",
+      "icon": "",
+      "title": "Invoicing & payouts",
+      "description": "Milestone invoices and payouts handled automatically.",
+      "sort": 16
+    },
+    {
+      "scope": "for-experts",
+      "icon": "",
+      "title": "A steady stream of scoped orders",
+      "description": "Pre-scoped, pre-priced orders from real clients land in your dashboard — matched to your discipline and capacity.",
+      "sort": 0
+    },
+    {
+      "scope": "for-experts",
+      "icon": "",
+      "title": "Most work needs no license",
+      "description": "Drafting, renders, scans and consults cross state lines freely — so you can take orders from anywhere, fast.",
+      "sort": 1
+    },
+    {
+      "scope": "for-experts",
+      "icon": "",
+      "title": "You set your rates",
+      "description": "Hourly or flat, your number — shown to clients before they order. Decline anything that doesn't fit.",
+      "sort": 2
+    },
+    {
+      "scope": "for-experts",
+      "icon": "",
+      "title": "Fast, protected payouts",
+      "description": "Clients fund escrow up front. You get paid within two days of each approved delivery — no chasing invoices.",
+      "sort": 3
+    },
+    {
+      "scope": "for-experts",
+      "icon": "",
+      "title": "Build a reputation",
+      "description": "Every delivered order earns verified reviews that raise your match rate and win repeat, higher-value work.",
+      "sort": 4
+    },
+    {
+      "scope": "for-experts",
+      "icon": "",
+      "title": "No cold pitching",
+      "description": "Skip the gig-site bidding wars. Clients arrive already priced and ready to buy — you just deliver.",
+      "sort": 5
+    },
+    {
+      "scope": "for-experts",
+      "icon": "",
+      "title": "Set your own rates",
+      "description": "Hourly or per-deliverable — your number, shown before a client orders.",
+      "sort": 6
+    },
+    {
+      "scope": "for-experts",
+      "icon": "",
+      "title": "Pick your orders",
+      "description": "Accept or decline each matched order with one tap. No penalties.",
+      "sort": 7
+    },
+    {
+      "scope": "for-experts",
+      "icon": "",
+      "title": "Define your capacity",
+      "description": "Pause new orders when you're full, resume when you're ready.",
+      "sort": 8
+    },
+    {
+      "scope": "for-experts",
+      "icon": "",
+      "title": "Work solo or as a studio",
+      "description": "Freelancers and small studios are both welcome on the network.",
+      "sort": 9
+    },
+    {
+      "scope": "for-experts",
+      "icon": "",
+      "title": "Auto-scoped orders",
+      "description": "Each order arrives with scope, references and price already set.",
+      "sort": 10
+    },
+    {
+      "scope": "for-experts",
+      "icon": "",
+      "title": "Contracts & e-sign",
+      "description": "Platform terms with escrow, signed in-app — no paperwork.",
+      "sort": 11
+    },
+    {
+      "scope": "for-experts",
+      "icon": "",
+      "title": "Messaging & files",
+      "description": "Chat, share deliverables and manage revisions in one thread.",
+      "sort": 12
+    },
+    {
+      "scope": "for-experts",
+      "icon": "",
+      "title": "Invoicing & payouts",
+      "description": "Milestone invoices and payouts handled automatically.",
+      "sort": 13
+    }
+  ],
+  "trust_logos": [
+    {
+      "scope": "landing",
+      "name": "NORTHVIEW",
+      "sort": 0
+    },
+    {
+      "scope": "landing",
+      "name": "Beacon Build",
+      "sort": 1
+    },
+    {
+      "scope": "landing",
+      "name": "Oak & Iron",
+      "sort": 2
+    },
+    {
+      "scope": "landing",
+      "name": "Meridian",
+      "sort": 3
+    },
+    {
+      "scope": "landing",
+      "name": "Harbor Co.",
+      "sort": 4
+    },
+    {
+      "scope": "landing",
+      "name": "LATTICE",
+      "sort": 5
+    }
+  ],
+  "credential_badges": [
+    {
+      "scope": "architect-landing",
+      "label": "AIA",
+      "sort": 0
+    },
+    {
+      "scope": "architect-landing",
+      "label": "NCARB",
+      "sort": 1
+    },
+    {
+      "scope": "architect-landing",
+      "label": "LEED AP",
+      "sort": 2
+    },
+    {
+      "scope": "architect-landing",
+      "label": "State Licensed",
+      "sort": 3
+    },
+    {
+      "scope": "architect-landing",
+      "label": "E&O Insured",
+      "sort": 4
+    }
+  ],
+  "use_cases": [
+    {
+      "scope": "3d-visualization",
+      "icon": "",
+      "title": "Sell a listing or unit",
+      "description": "Photoreal interiors and exteriors that make a property move faster.",
+      "cta_label": "See marketing renders",
+      "href": "/order/render",
+      "sort": 0
+    },
+    {
+      "scope": "3d-visualization",
+      "icon": "",
+      "title": "Get an approval or exhibit",
+      "description": "Clear 3D views for HOA, design-review, and site-plan submittals.",
+      "cta_label": "See conceptual renders",
+      "href": "/order/render",
+      "sort": 1
+    },
+    {
+      "scope": "3d-visualization",
+      "icon": "",
+      "title": "Decide before you spend",
+      "description": "A quick still or 3D plan to test a layout before committing to full drawings.",
+      "cta_label": "See 3D floor plans",
+      "href": "/order/render",
+      "sort": 2
+    },
+    {
+      "scope": "cad-drafting",
+      "icon": "",
+      "title": "Turn a sketch into CAD",
+      "description": "Hand a drafter your napkin sketch or measurements and get clean, coordinated plans.",
+      "cta_label": "Start drafting",
+      "href": "/order/drafting",
+      "sort": 0
+    },
+    {
+      "scope": "cad-drafting",
+      "icon": "",
+      "title": "Document what exists",
+      "description": "Measured as-built drawings of a home before a remodel, sale, or addition.",
+      "cta_label": "Get as-builts",
+      "href": "/order/drafting",
+      "sort": 1
+    },
+    {
+      "scope": "cad-drafting",
+      "icon": "",
+      "title": "Modernize old drawings",
+      "description": "Convert legacy PDFs and scans into editable, layered CAD you can keep working in.",
+      "cta_label": "Convert PDFs",
+      "href": "/order/drafting",
+      "sort": 2
+    }
+  ],
+  "personas": [
+    {
+      "scope": "about",
+      "kicker": "THE CLIENT",
+      "title": "You, with a project worth getting right",
+      "body": "A homeowner adding room for a growing family. An owner turning a storefront into a restaurant. You know what you want to build — you just need the price, the person, and the permit to be within reach.",
+      "points": [
+        "Know the real number before you talk to anyone",
+        "Meet architects actually licensed where you build",
+        "Pay safely, approve each milestone, own the outcome"
+      ],
+      "cta_label": "Start your project →",
+      "cta_href": "/get-started",
+      "sort": 0
+    },
+    {
+      "scope": "about",
+      "kicker": "THE ARCHITECT",
+      "title": "You, free to do the work you trained for",
+      "body": "A licensed architect who would rather design and stamp than chase leads and write proposals. We bring you scoped, pre-qualified clients so your time goes to the building, not the business development.",
+      "points": [
+        "Receive pre-scoped clients — no cold bidding",
+        "Set your terms; get paid on time through escrow",
+        "Practice anywhere you're licensed, entirely remotely"
+      ],
+      "cta_label": "Join the network →",
+      "cta_href": "/for-architects",
+      "sort": 1
+    }
+  ],
+  "principles": [
+    {
+      "scope": "about",
+      "title": "We verify, so you don't have to",
+      "body": "Every architect's license is confirmed active in your jurisdiction before a match reaches you.",
+      "sort": 0
+    },
+    {
+      "scope": "about",
+      "title": "We price in the open",
+      "body": "An itemized estimate from real inputs — size, scope, and jurisdiction complexity — before the first conversation.",
+      "sort": 1
+    },
+    {
+      "scope": "about",
+      "title": "We hold the money safely",
+      "body": "Funds sit in escrow and release only as you approve milestones. Neither side is exposed.",
+      "sort": 2
+    },
+    {
+      "scope": "about",
+      "title": "We stay out of the way",
+      "body": "We don't design and we don't stamp. Once the right two people are working, our job is to be invisible.",
+      "sort": 3
+    }
+  ],
+  "carousel": [
+    {
+      "scope": "landing",
+      "caption": "Maya E. · Oakland addition",
+      "name": "",
+      "sort": 0
+    },
+    {
+      "scope": "landing",
+      "caption": "Daniel O. · East Bay ADU",
+      "name": "",
+      "sort": 1
+    },
+    {
+      "scope": "landing",
+      "caption": "Priya N. · Restaurant change-of-use",
+      "name": "",
+      "sort": 2
+    },
+    {
+      "scope": "services",
+      "caption": "Designed interior render",
+      "name": "",
+      "sort": 0
+    },
+    {
+      "scope": "services",
+      "caption": "Architect at drafting table",
+      "name": "",
+      "sort": 1
+    },
+    {
+      "scope": "services",
+      "caption": "3D render / finished space",
+      "name": "",
+      "sort": 2
+    },
+    {
+      "scope": "projects",
+      "caption": "Architect at work / floor plan",
+      "name": "",
+      "sort": 0
+    },
+    {
+      "scope": "projects",
+      "caption": "Finished ADU exterior",
+      "name": "",
+      "sort": 1
+    },
+    {
+      "scope": "projects",
+      "caption": "Modern renovated interior",
+      "name": "",
+      "sort": 2
+    },
+    {
+      "scope": "cities",
+      "caption": "City skyline / neighborhood",
+      "name": "",
+      "sort": 0
+    },
+    {
+      "scope": "cities",
+      "caption": "Residential street aerial",
+      "name": "",
+      "sort": 1
+    },
+    {
+      "scope": "cities",
+      "caption": "Architect reviewing local plans",
+      "name": "",
+      "sort": 2
+    }
+  ]
+}
