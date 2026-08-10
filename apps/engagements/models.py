@@ -130,7 +130,9 @@ class ChangeRequest(TimeStampedModel):
         "Something else",
     ]
 
-    milestone = models.ForeignKey(Milestone, on_delete=models.CASCADE, related_name="change_requests")
+    milestone = models.ForeignKey(
+        Milestone, on_delete=models.CASCADE, related_name="change_requests"
+    )
     requested_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     categories = models.JSONField(default=list, blank=True)
     note = models.TextField(blank=True)
@@ -175,7 +177,9 @@ class RequoteFlag(TimeStampedModel):
 class TimeEntry(TimeStampedModel):
     """Hourly transparency — tracked, on-platform, client-visible."""
 
-    engagement = models.ForeignKey(Engagement, on_delete=models.CASCADE, related_name="time_entries")
+    engagement = models.ForeignKey(
+        Engagement, on_delete=models.CASCADE, related_name="time_entries"
+    )
     provider = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     date = models.DateField()
     hours = models.DecimalField(max_digits=5, decimal_places=2)
@@ -189,7 +193,9 @@ class TimeEntry(TimeStampedModel):
 class Deliverable(TimeStampedModel):
     """Drawings & files (design: 'A-201 Proposed plan.pdf · 2.4 MB · Aug 8 · NEW')."""
 
-    engagement = models.ForeignKey(Engagement, on_delete=models.CASCADE, related_name="deliverables")
+    engagement = models.ForeignKey(
+        Engagement, on_delete=models.CASCADE, related_name="deliverables"
+    )
     uploaded_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     file = models.FileField(upload_to="engagements/deliverables/%Y/%m/", storage=private_storage)
     name = models.CharField(max_length=255)
