@@ -24,8 +24,9 @@ Backend repo: `ArchitectHire-backend` (Django 6.1 CMS + marketplace API) · Fron
   Clerk webhook `POST /api/webhooks/clerk/` (svix-verified; user.created/updated → upsert + JIT-user linking by email, user.deleted → deactivate) · `GET/PATCH /api/v1/auth/me/` (role self-selection, staff blocked, email read-only) · `GET/PATCH /api/v1/auth/me/preferences/` · OpenAPI bearer scheme for Clerk tokens.
   **Verified**: 32 tests green (signed-webhook simulation incl. bad-signature 400, unconfigured 503) · ruff clean.
 
-- [ ] **Stage 3 — CMS foundation**
-  SiteSettings singleton (promo banner, trust bar, hero media mode) · MediaAsset named slots (~150 from design) · Nav/Footer models · HeroCarouselSlide · scoped blocks (FAQ/Stat/Step/Testimonial/ValueProp/TrustLogo/CredentialBadge/UseCase/Persona/Principle) · draft/publish · admin UX pass #1 · composed `GET /api/v1/content/pages/{page_key}/` · Redis caching + version-bump invalidation + ETag.
+- [x] **Stage 3 — CMS foundation** *(2026-08-10)*
+  SiteSettings singleton (promo banner, trust bar, hero media Image/Video/Carousel, contact emails) · MediaAsset named slots · NavGroup/NavItem (3 mega-menus, price hints, featured cards) · FooterColumn/Link + SocialLink · HeroCarouselSlide · 10 scoped block types (FAQ/Stat/Step/Testimonial/ValueProp/TrustLogo/CredentialBadge/UseCase/Persona/Principle) with draft/publish + validated page scopes · admin UX pass #1 (inlines, list_editable, publish actions, thumbnails) · composed `GET /api/v1/content/pages/{key}/` + `nav/` `footer/` `settings/` `media/` · Redis payload cache with version-bump invalidation on every CMS save + ETag/304 + CDN-friendly Cache-Control.
+  **Verified**: 43 tests green (publish filtering, ordering, cache-bust-on-save, ETag 304 + rotation) · fixed a first-build ETag race (singleton creation bumping version mid-request).
 
 - [ ] **Stage 4 — Catalog + jurisdictions + estimate engine**
   ServiceCategory (8) / Service (28) / tiers / add-ons / plans / ProjectType (9) · State (52, complexity scores) / City · seeders · `POST /api/v1/estimates/` with exact design formulas + pinned-value tests.
