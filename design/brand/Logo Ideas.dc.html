@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta name="design_doc_mode" content="canvas">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #eef2fb; }
+  ::selection { background: #135bff; color: #fff; }
+</style>
+</helmet>
+<div style="font-family: 'Hanken Grotesk', sans-serif; color: #0a1440; padding: 56px 60px 90px; -webkit-font-smoothing: antialiased;">
+
+  <!-- BOARD HEADER -->
+  <div style="max-width: 1160px; margin: 0 auto 44px;">
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #135bff;">Logo exploration · v1</div>
+    <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 40px; font-weight: 800; letter-spacing: -.02em; margin-top: 10px;">ArchitectHire — mark &amp; wordmark ideas</h1>
+    <p style="font-size: 16px; line-height: 1.55; color: #5b6493; margin-top: 12px; max-width: 60ch; text-wrap: pretty;">Six directions, one word and one color for now — everything in navy so we judge the <em>shape</em> before we play with color. All built from geometric primitives (squares, corners, grids, diamonds) to echo drafting and architecture. Tell me which mark to push further.</p>
+  </div>
+
+  <!-- COLOR STUDY (turn 5) — 4b center piece -->
+  <div style="max-width: 1160px; margin: 0 auto 30px;">
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #5b6493; margin-bottom: 16px;">4b — the missing piece as a color accent</div>
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 26px;">
+
+      <!-- 5a — Brand Blue -->
+      <div id="5a" style="background: #fff; border: 1px solid #dbe2f2; border-radius: 18px; padding: 34px 34px 26px; position: relative;">
+        <div style="position: absolute; top: 18px; right: 20px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9aa2c4;">5a</div>
+        <div style="display: flex; align-items: center; gap: 15px; min-height: 92px;">
+          <div style="width: 46px; height: 46px; display: grid; grid-template-columns: repeat(3,1fr); grid-template-rows: repeat(3,1fr); gap: 5px; flex-shrink: 0;">
+            <div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div>
+            <div style="background:#0a1440;"></div><div style="background:#135bff;"></div><div style="background:#0a1440;"></div>
+            <div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div>
+          </div>
+          <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 800; letter-spacing: -.02em; color: #0a1440;">ArchitectHire</span>
+        </div>
+        <div style="border-top: 1px solid #eef2fb; margin-top: 22px; padding-top: 14px;">
+          <div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 16px;">Brand Blue</div>
+          <div style="font-size: 13.5px; color: #5b6493; margin-top: 3px;">The site’s #135bff dropped in as the found piece — on-system, trustworthy, sits quietly.</div>
+        </div>
+      </div>
+
+      <!-- 5b — Lime Pop -->
+      <div id="5b" style="background: #fff; border: 1px solid #dbe2f2; border-radius: 18px; padding: 34px 34px 26px; position: relative;">
+        <div style="position: absolute; top: 18px; right: 20px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9aa2c4;">5b</div>
+        <div style="display: flex; align-items: center; gap: 15px; min-height: 92px;">
+          <div style="width: 46px; height: 46px; display: grid; grid-template-columns: repeat(3,1fr); grid-template-rows: repeat(3,1fr); gap: 5px; flex-shrink: 0;">
+            <div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div>
+            <div style="background:#0a1440;"></div><div style="background:#ceff65;"></div><div style="background:#0a1440;"></div>
+            <div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div>
+          </div>
+          <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 800; letter-spacing: -.02em; color: #0a1440;">ArchitectHire</span>
+        </div>
+        <div style="border-top: 1px solid #eef2fb; margin-top: 22px; padding-top: 14px;">
+          <div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 16px;">Lime Pop</div>
+          <div style="font-size: 13.5px; color: #5b6493; margin-top: 3px;">The site’s accent lime — highest energy, the piece truly “lights up” when it lands.</div>
+        </div>
+      </div>
+
+      <!-- 5c — Warm Amber -->
+      <div id="5c" style="background: #fff; border: 1px solid #dbe2f2; border-radius: 18px; padding: 34px 34px 26px; position: relative;">
+        <div style="position: absolute; top: 18px; right: 20px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9aa2c4;">5c</div>
+        <div style="display: flex; align-items: center; gap: 15px; min-height: 92px;">
+          <div style="width: 46px; height: 46px; display: grid; grid-template-columns: repeat(3,1fr); grid-template-rows: repeat(3,1fr); gap: 5px; flex-shrink: 0;">
+            <div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div>
+            <div style="background:#0a1440;"></div><div style="background:oklch(0.72 0.16 62);"></div><div style="background:#0a1440;"></div>
+            <div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div>
+          </div>
+          <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 800; letter-spacing: -.02em; color: #0a1440;">ArchitectHire</span>
+        </div>
+        <div style="border-top: 1px solid #eef2fb; margin-top: 22px; padding-top: 14px;">
+          <div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 16px;">Warm Amber</div>
+          <div style="font-size: 13.5px; color: #5b6493; margin-top: 3px;">An off-system warm hue — human, crafted, distinct from the tech-blue crowd.</div>
+        </div>
+      </div>
+
+      <!-- 5d — Terracotta -->
+      <div id="5d" style="background: #fff; border: 1px solid #dbe2f2; border-radius: 18px; padding: 34px 34px 26px; position: relative;">
+        <div style="position: absolute; top: 18px; right: 20px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9aa2c4;">5d</div>
+        <div style="display: flex; align-items: center; gap: 15px; min-height: 92px;">
+          <div style="width: 46px; height: 46px; display: grid; grid-template-columns: repeat(3,1fr); grid-template-rows: repeat(3,1fr); gap: 5px; flex-shrink: 0;">
+            <div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div>
+            <div style="background:#0a1440;"></div><div style="background:oklch(0.64 0.16 32);"></div><div style="background:#0a1440;"></div>
+            <div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div>
+          </div>
+          <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 800; letter-spacing: -.02em; color: #0a1440;">ArchitectHire</span>
+        </div>
+        <div style="border-top: 1px solid #eef2fb; margin-top: 22px; padding-top: 14px;">
+          <div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 16px;">Terracotta</div>
+          <div style="font-size: 13.5px; color: #5b6493; margin-top: 3px;">Earthy clay-red — materials, brick, building. Warmest and most ownable of the set.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PUZZLE EXPLORATION (turn 4) — around 2a + 2d -->
+  <div style="max-width: 1160px; margin: 0 auto 30px;">
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #5b6493; margin-bottom: 16px;">“Completing the puzzle” — grid + corner, placement &amp; balance study</div>
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 26px;">
+
+      <!-- 4a — Missing Corner (grid, one off) -->
+      <div id="4a" style="background: #fff; border: 1px solid #dbe2f2; border-radius: 18px; padding: 34px 34px 26px; position: relative;">
+        <div style="position: absolute; top: 18px; right: 20px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9aa2c4;">4a</div>
+        <div style="display: flex; align-items: center; gap: 15px; min-height: 92px;">
+          <div style="width: 46px; height: 46px; display: grid; grid-template-columns: repeat(3,1fr); grid-template-rows: repeat(3,1fr); gap: 5px; flex-shrink: 0;">
+            <div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div>
+            <div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div>
+            <div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="border:2px solid #c3cee8; background:#fff;"></div>
+          </div>
+          <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 800; letter-spacing: -.02em; color: #0a1440;">ArchitectHire</span>
+        </div>
+        <div style="border-top: 1px solid #eef2fb; margin-top: 22px; padding-top: 14px;">
+          <div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 16px;">Missing Corner</div>
+          <div style="font-size: 13.5px; color: #5b6493; margin-top: 3px;">One open slot bottom-right — the piece you’re here to place. Weight settles diagonally, reads calm.</div>
+        </div>
+      </div>
+
+      <!-- 4b — Off Center (grid, center open) -->
+      <div id="4b" style="background: #fff; border: 1px solid #dbe2f2; border-radius: 18px; padding: 34px 34px 26px; position: relative;">
+        <div style="position: absolute; top: 18px; right: 20px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9aa2c4;">4b</div>
+        <div style="display: flex; align-items: center; gap: 15px; min-height: 92px;">
+          <div style="width: 46px; height: 46px; display: grid; grid-template-columns: repeat(3,1fr); grid-template-rows: repeat(3,1fr); gap: 5px; flex-shrink: 0;">
+            <div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div>
+            <div style="background:#0a1440;"></div><div style="border:2px solid #c3cee8; background:#fff;"></div><div style="background:#0a1440;"></div>
+            <div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div>
+          </div>
+          <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 800; letter-spacing: -.02em; color: #0a1440;">ArchitectHire</span>
+        </div>
+        <div style="border-top: 1px solid #eef2fb; margin-top: 22px; padding-top: 14px;">
+          <div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 16px;">Open Center</div>
+          <div style="font-size: 13.5px; color: #5b6493; margin-top: 3px;">Gap at the heart — perfectly symmetric, the missing piece is the focal point. Most stable, most iconic.</div>
+        </div>
+      </div>
+
+      <!-- 4c — Slotting In (piece flying into corner) -->
+      <div id="4c" style="background: #fff; border: 1px solid #dbe2f2; border-radius: 18px; padding: 34px 34px 26px; position: relative;">
+        <div style="position: absolute; top: 18px; right: 20px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9aa2c4;">4c</div>
+        <div style="display: flex; align-items: center; gap: 15px; min-height: 92px;">
+          <div style="width: 58px; height: 46px; position: relative; flex-shrink: 0;">
+            <div style="position: absolute; left: 0; top: 0; width: 46px; height: 46px; display: grid; grid-template-columns: repeat(3,1fr); grid-template-rows: repeat(3,1fr); gap: 5px;">
+              <div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div>
+              <div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div>
+              <div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="border:2px dashed #c3cee8;"></div>
+            </div>
+            <div style="position: absolute; right: 0; bottom: 0; width: 11px; height: 11px; background:#0a1440;"></div>
+          </div>
+          <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 800; letter-spacing: -.02em; color: #0a1440;">ArchitectHire</span>
+        </div>
+        <div style="border-top: 1px solid #eef2fb; margin-top: 22px; padding-top: 14px;">
+          <div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 16px;">Slotting In</div>
+          <div style="font-size: 13.5px; color: #5b6493; margin-top: 3px;">The piece caught mid-place — motion &amp; “the match arriving.” More dynamic, slightly less balanced.</div>
+        </div>
+      </div>
+
+      <!-- 4d — Corner Puzzle (2a, notch + piece) -->
+      <div id="4d" style="background: #fff; border: 1px solid #dbe2f2; border-radius: 18px; padding: 34px 34px 26px; position: relative;">
+        <div style="position: absolute; top: 18px; right: 20px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9aa2c4;">4d</div>
+        <div style="display: flex; align-items: center; gap: 15px; min-height: 92px;">
+          <div style="width: 46px; height: 46px; position: relative; flex-shrink: 0;">
+            <div style="position: absolute; inset: 0; border: 3px solid #0a1440;"></div>
+            <div style="position: absolute; bottom: 3px; right: 3px; width: 17px; height: 17px; background:#fff;"></div>
+            <div style="position: absolute; bottom: 6px; right: 6px; width: 11px; height: 11px; background:#0a1440;"></div>
+          </div>
+          <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 800; letter-spacing: -.02em; color: #0a1440;">ArchitectHire</span>
+        </div>
+        <div style="border-top: 1px solid #eef2fb; margin-top: 22px; padding-top: 14px;">
+          <div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 16px;">Corner Puzzle</div>
+          <div style="font-size: 13.5px; color: #5b6493; margin-top: 3px;">2a evolved — the title block sits inside a cut-out notch, a piece seated in its socket.</div>
+        </div>
+      </div>
+
+      <!-- 4e — Two Pieces (L + square = full) -->
+      <div id="4e" style="background: #fff; border: 1px solid #dbe2f2; border-radius: 18px; padding: 34px 34px 26px; position: relative;">
+        <div style="position: absolute; top: 18px; right: 20px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9aa2c4;">4e</div>
+        <div style="display: flex; align-items: center; gap: 15px; min-height: 92px;">
+          <div style="width: 46px; height: 46px; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 5px; flex-shrink: 0;">
+            <div style="background:#0a1440;"></div><div style="border:2px solid #c3cee8; background:#fff;"></div>
+            <div style="background:#0a1440;"></div><div style="background:#0a1440;"></div>
+          </div>
+          <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 800; letter-spacing: -.02em; color: #0a1440;">ArchitectHire</span>
+        </div>
+        <div style="border-top: 1px solid #eef2fb; margin-top: 22px; padding-top: 14px;">
+          <div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 16px;">Quarter Open</div>
+          <div style="font-size: 13.5px; color: #5b6493; margin-top: 3px;">Bold 2×2 — an L of three pieces with one quarter to fill. Biggest, cleanest read at favicon size.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ORGANIC EXPLORATION (turn 3) -->
+  <div style="max-width: 1160px; margin: 0 auto 30px;">
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #5b6493; margin-bottom: 16px;">Organic direction — softer, human counterpoint to the grid</div>
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 26px;">
+
+      <!-- 3a — Blueprint Pebble -->
+      <div id="3a" style="background: #fff; border: 1px solid #dbe2f2; border-radius: 18px; padding: 34px 34px 26px; position: relative;">
+        <div style="position: absolute; top: 18px; right: 20px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9aa2c4;">3a</div>
+        <div style="display: flex; align-items: center; gap: 15px; min-height: 92px;">
+          <div style="width: 48px; height: 48px; background: #0a1440; border-radius: 62% 38% 55% 45% / 55% 48% 52% 45%; flex-shrink: 0; display:flex; align-items:center; justify-content:center;">
+            <div style="width: 15px; height: 15px; background: #fff; border-radius: 60% 40% 55% 45% / 50% 55% 45% 50%;"></div>
+          </div>
+          <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 800; letter-spacing: -.02em; color: #0a1440;">ArchitectHire</span>
+        </div>
+        <div style="border-top: 1px solid #eef2fb; margin-top: 22px; padding-top: 14px;">
+          <div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 16px;">Pebble</div>
+          <div style="font-size: 13.5px; color: #5b6493; margin-top: 3px;">A smooth stone with a carved opening — solid and human. Softens the technical wordmark.</div>
+        </div>
+      </div>
+
+      <!-- 3b — Petals / Overlap -->
+      <div id="3b" style="background: #fff; border: 1px solid #dbe2f2; border-radius: 18px; padding: 34px 34px 26px; position: relative;">
+        <div style="position: absolute; top: 18px; right: 20px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9aa2c4;">3b</div>
+        <div style="display: flex; align-items: center; gap: 16px; min-height: 92px;">
+          <div style="width: 52px; height: 48px; position: relative; flex-shrink: 0;">
+            <div style="position: absolute; left: 2px; top: 6px; width: 34px; height: 34px; border: 3px solid #0a1440; border-radius: 50% 50% 50% 0;"></div>
+            <div style="position: absolute; right: 2px; top: 6px; width: 34px; height: 34px; border: 3px solid #0a1440; border-radius: 50% 50% 0 50%;"></div>
+          </div>
+          <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 800; letter-spacing: -.02em; color: #0a1440;">ArchitectHire</span>
+        </div>
+        <div style="border-top: 1px solid #eef2fb; margin-top: 22px; padding-top: 14px;">
+          <div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 16px;">Petals</div>
+          <div style="font-size: 13.5px; color: #5b6493; margin-top: 3px;">Two leaf forms meeting — architect &amp; client, growth, a warmer take on the match.</div>
+        </div>
+      </div>
+
+      <!-- 3c — Soft A -->
+      <div id="3c" style="background: #fff; border: 1px solid #dbe2f2; border-radius: 18px; padding: 34px 34px 26px; position: relative;">
+        <div style="position: absolute; top: 18px; right: 20px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9aa2c4;">3c</div>
+        <div style="display: flex; align-items: center; gap: 15px; min-height: 92px;">
+          <div style="width: 48px; height: 48px; background: #0a1440; border-radius: 45% 45% 45% 8%; flex-shrink: 0; display:flex; align-items:center; justify-content:center;">
+            <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 26px; font-weight: 800; color: #fff; line-height: 1;">A</span>
+          </div>
+          <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 800; letter-spacing: -.02em; color: #0a1440;">ArchitectHire</span>
+        </div>
+        <div style="border-top: 1px solid #eef2fb; margin-top: 22px; padding-top: 14px;">
+          <div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 16px;">Soft Monogram</div>
+          <div style="font-size: 13.5px; color: #5b6493; margin-top: 3px;">Rounded badge with one sharp corner — friendly, but still an anchored footing. Great app icon.</div>
+        </div>
+      </div>
+
+      <!-- 3d — Keyhole -->
+      <div id="3d" style="background: #fff; border: 1px solid #dbe2f2; border-radius: 18px; padding: 34px 34px 26px; position: relative;">
+        <div style="position: absolute; top: 18px; right: 20px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9aa2c4;">3d</div>
+        <div style="display: flex; align-items: center; gap: 16px; min-height: 92px;">
+          <div style="width: 48px; height: 48px; position: relative; flex-shrink: 0;">
+            <div style="position: absolute; inset: 0; border: 3px solid #0a1440; border-radius: 58% 42% 50% 50% / 55% 55% 45% 45%;"></div>
+            <div style="position: absolute; inset: 15px; background: #0a1440; border-radius: 55% 45% 50% 50%;"></div>
+          </div>
+          <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 800; letter-spacing: -.02em; color: #0a1440;">ArchitectHire</span>
+        </div>
+        <div style="border-top: 1px solid #eef2fb; margin-top: 22px; padding-top: 14px;">
+          <div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 16px;">Keyhole</div>
+          <div style="font-size: 13.5px; color: #5b6493; margin-top: 3px;">An organic frame holding a core — a home / the right fit found inside.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- GRID OF CONCEPTS -->
+  <div style="max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: 26px;">
+
+    <!-- 2a — Corner Block -->
+    <div id="2a" style="background: #fff; border: 1px solid #dbe2f2; border-radius: 18px; padding: 34px 34px 26px; position: relative;">
+      <div style="position: absolute; top: 18px; right: 20px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9aa2c4;">2a</div>
+      <div style="display: flex; align-items: center; gap: 14px; min-height: 92px;">
+        <div style="width: 46px; height: 46px; border: 3px solid #0a1440; position: relative; flex-shrink: 0;">
+          <div style="position: absolute; bottom: 0; right: 0; width: 18px; height: 18px; background: #0a1440;"></div>
+        </div>
+        <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 800; letter-spacing: -.02em; color: #0a1440;">ArchitectHire</span>
+      </div>
+      <div style="border-top: 1px solid #eef2fb; margin-top: 22px; padding-top: 14px;">
+        <div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 16px;">Corner Block</div>
+        <div style="font-size: 13.5px; color: #5b6493; margin-top: 3px;">Drawing sheet with a filled title block — the calmest, most literal architecture cue.</div>
+      </div>
+    </div>
+
+    <!-- 2b — Nested Squares -->
+    <div id="2b" style="background: #fff; border: 1px solid #dbe2f2; border-radius: 18px; padding: 34px 34px 26px; position: relative;">
+      <div style="position: absolute; top: 18px; right: 20px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9aa2c4;">2b</div>
+      <div style="display: flex; align-items: center; gap: 14px; min-height: 92px;">
+        <div style="width: 46px; height: 46px; position: relative; flex-shrink: 0;">
+          <div style="position: absolute; inset: 0; border: 3px solid #0a1440;"></div>
+          <div style="position: absolute; inset: 11px; border: 3px solid #0a1440;"></div>
+        </div>
+        <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 800; letter-spacing: -.02em; color: #0a1440;">ArchitectHire</span>
+      </div>
+      <div style="border-top: 1px solid #eef2fb; margin-top: 22px; padding-top: 14px;">
+        <div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 16px;">Nested Frames</div>
+        <div style="font-size: 13.5px; color: #5b6493; margin-top: 3px;">Concentric squares — layers of a plan, scale and depth. Reads well tiny.</div>
+      </div>
+    </div>
+
+    <!-- 2c — Crop Marks -->
+    <div id="2c" style="background: #fff; border: 1px solid #dbe2f2; border-radius: 18px; padding: 34px 34px 26px; position: relative;">
+      <div style="position: absolute; top: 18px; right: 20px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9aa2c4;">2c</div>
+      <div style="display: flex; align-items: center; gap: 16px; min-height: 92px;">
+        <div style="width: 48px; height: 48px; position: relative; flex-shrink: 0;">
+          <div style="position: absolute; top: 0; left: 0; width: 18px; height: 3px; background: #0a1440;"></div>
+          <div style="position: absolute; top: 0; left: 0; width: 3px; height: 18px; background: #0a1440;"></div>
+          <div style="position: absolute; bottom: 0; right: 0; width: 18px; height: 3px; background: #0a1440;"></div>
+          <div style="position: absolute; bottom: 0; right: 0; width: 3px; height: 18px; background: #0a1440;"></div>
+          <div style="position: absolute; top: 50%; left: 50%; width: 12px; height: 12px; background: #0a1440; transform: translate(-50%,-50%) rotate(45deg);"></div>
+        </div>
+        <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 800; letter-spacing: -.02em; color: #0a1440;">ArchitectHire</span>
+      </div>
+      <div style="border-top: 1px solid #eef2fb; margin-top: 22px; padding-top: 14px;">
+        <div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 16px;">Crop Marks</div>
+        <div style="font-size: 13.5px; color: #5b6493; margin-top: 3px;">Registration marks pinpointing a target — “we find the exact match.”</div>
+      </div>
+    </div>
+
+    <!-- 2d — Grid -->
+    <div id="2d" style="background: #fff; border: 1px solid #dbe2f2; border-radius: 18px; padding: 34px 34px 26px; position: relative;">
+      <div style="position: absolute; top: 18px; right: 20px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9aa2c4;">2d</div>
+      <div style="display: flex; align-items: center; gap: 15px; min-height: 92px;">
+        <div style="width: 46px; height: 46px; display: grid; grid-template-columns: repeat(3,1fr); grid-template-rows: repeat(3,1fr); gap: 5px; flex-shrink: 0;">
+          <div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div>
+          <div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#cfd8ee;"></div>
+          <div style="background:#0a1440;"></div><div style="background:#cfd8ee;"></div><div style="background:#cfd8ee;"></div>
+        </div>
+        <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 800; letter-spacing: -.02em; color: #0a1440;">ArchitectHire</span>
+      </div>
+      <div style="border-top: 1px solid #eef2fb; margin-top: 22px; padding-top: 14px;">
+        <div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 16px;">Build Grid</div>
+        <div style="font-size: 13.5px; color: #5b6493; margin-top: 3px;">Modular blocks assembling into a form — structure being built, upward momentum.</div>
+      </div>
+    </div>
+
+    <!-- 2e — Cornerstone A -->
+    <div id="2e" style="background: #fff; border: 1px solid #dbe2f2; border-radius: 18px; padding: 34px 34px 26px; position: relative;">
+      <div style="position: absolute; top: 18px; right: 20px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9aa2c4;">2e</div>
+      <div style="display: flex; align-items: center; gap: 15px; min-height: 92px;">
+        <div style="width: 48px; height: 48px; background: #0a1440; border-radius: 10px; flex-shrink: 0; display:flex; align-items:center; justify-content:center;">
+          <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 27px; font-weight: 800; color: #fff; line-height: 1;">A</span>
+        </div>
+        <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 800; letter-spacing: -.02em; color: #0a1440;">ArchitectHire</span>
+      </div>
+      <div style="border-top: 1px solid #eef2fb; margin-top: 22px; padding-top: 14px;">
+        <div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 16px;">Monogram A</div>
+        <div style="font-size: 13.5px; color: #5b6493; margin-top: 3px;">Solid badge — the cleanest app icon / favicon. Confident and simple.</div>
+      </div>
+    </div>
+
+    <!-- 2f — Keystone -->
+    <div id="2f" style="background: #fff; border: 1px solid #dbe2f2; border-radius: 18px; padding: 34px 34px 26px; position: relative;">
+      <div style="position: absolute; top: 18px; right: 20px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9aa2c4;">2f</div>
+      <div style="display: flex; align-items: center; gap: 15px; min-height: 92px;">
+        <div style="width: 48px; height: 48px; position: relative; flex-shrink: 0;">
+          <div style="position: absolute; inset: 0; border: 3px solid #0a1440; transform: rotate(45deg);"></div>
+          <div style="position: absolute; inset: 15px; background: #0a1440; transform: rotate(45deg);"></div>
+        </div>
+        <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 800; letter-spacing: -.02em; color: #0a1440;">ArchitectHire</span>
+      </div>
+      <div style="border-top: 1px solid #eef2fb; margin-top: 22px; padding-top: 14px;">
+        <div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 16px;">Keystone</div>
+        <div style="font-size: 13.5px; color: #5b6493; margin-top: 3px;">A framed diamond focal point — distinctive, holds up as a mark on its own.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- USAGE STRIP: on dark / stacked / favicon -->
+  <div style="max-width: 1160px; margin: 40px auto 0;">
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #5b6493; margin-bottom: 16px;">Lockups &amp; contexts — using 2a</div>
+    <div style="display: grid; grid-template-columns: 1.3fr 1fr .8fr; gap: 26px;">
+
+      <!-- on dark -->
+      <div style="background: #0a1440; border-radius: 18px; padding: 40px 34px; display: flex; align-items: center; gap: 14px;">
+        <div style="width: 46px; height: 46px; border: 3px solid #fff; position: relative; flex-shrink: 0;">
+          <div style="position: absolute; bottom: 0; right: 0; width: 18px; height: 18px; background: #fff;"></div>
+        </div>
+        <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; font-weight: 800; letter-spacing: -.02em; color: #fff;">ArchitectHire</span>
+      </div>
+
+      <!-- stacked -->
+      <div style="background: #fff; border: 1px solid #dbe2f2; border-radius: 18px; padding: 34px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;">
+        <div style="width: 52px; height: 52px; border: 3px solid #0a1440; position: relative;">
+          <div style="position: absolute; bottom: 0; right: 0; width: 20px; height: 20px; background: #0a1440;"></div>
+        </div>
+        <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 23px; font-weight: 800; letter-spacing: -.02em; color: #0a1440;">ArchitectHire</span>
+      </div>
+
+      <!-- favicon crops -->
+      <div style="background: #fff; border: 1px solid #dbe2f2; border-radius: 18px; padding: 28px; display: flex; align-items: center; justify-content: center; gap: 16px;">
+        <div style="width: 40px; height: 40px; border: 3px solid #0a1440; position: relative; border-radius: 8px;">
+          <div style="position: absolute; bottom: 0; right: 0; width: 15px; height: 15px; background: #0a1440;"></div>
+        </div>
+        <div style="width: 30px; height: 30px; background: #0a1440; border-radius: 7px; display:flex; align-items:center; justify-content:center;">
+          <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 800; color:#fff; line-height:1;">A</span>
+        </div>
+        <div style="width: 22px; height: 22px; border: 2.5px solid #0a1440; position: relative;">
+          <div style="position: absolute; bottom: 0; right: 0; width: 8px; height: 8px; background: #0a1440;"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

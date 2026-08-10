@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f3f6fd; }
+  ::selection { background: #135bff; color: #fff; }
+  a { color: #135bff; text-decoration: none; }
+  a:hover { color: #0b3fcc; }
+  input, textarea, select { font-family: inherit; }
+  input:focus, textarea:focus, select:focus { outline: none; border-color: #135bff !important; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  @keyframes pulseDot { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+
+  /* __resp__ responsive overrides (media queries can't be inline) */
+  @media (max-width: 900px){
+    main{ padding-left:18px !important; padding-right:18px !important; }
+    header nav{ display:none !important; }
+    [style*="repeat(4"]{ grid-template-columns:1fr 1fr !important; }
+    [style*="repeat(3"]{ grid-template-columns:1fr !important; }
+    [style*="repeat(2"]{ grid-template-columns:1fr !important; }
+    [style*="grid-template-columns: 1."]{ grid-template-columns:1fr !important; }
+    [style*="grid-template-columns: 1fr 1fr"]{ grid-template-columns:1fr !important; }
+    [style*="position: sticky"]{ position:static !important; top:auto !important; }
+    [style*="padding: 15px 32px"]{ padding:12px 18px !important; }
+    [style*="padding: 18px 32px"]{ padding-left:18px !important; padding-right:18px !important; }
+    [style*="padding: 52px 44px"],[style*="padding: 48px 44px"],[style*="padding: 44px 42px"],[style*="padding: 44px 44px"]{ padding:30px 22px !important; }
+    [style*="padding: 56px"],[style*="padding: 52px;"],[style*="padding: 48px"],[style*="padding: 44px;"],[style*="padding: 40px"],[style*="padding: 34px"]{ padding:32px 22px !important; }
+    h1{ font-size:clamp(30px,7vw,42px) !important; }
+  }
+  @media (max-width: 520px){
+    [style*="repeat(4"]{ grid-template-columns:1fr !important; }
+    [style*="gap: 38px"],[style*="gap: 40px"]{ gap:22px !important; }
+  }
+</style>
+<script src="../image-slot.js"></script>
+</helmet>
+<div style="min-height: 100vh; background: #f3f6fd; color: #0a1440; font-family: 'Hanken Grotesk', sans-serif; -webkit-font-smoothing: antialiased;">
+
+  <!-- HEADER -->
+  <header style="position: sticky; top: 0; z-index: 30; background: rgba(243,246,253,.94); backdrop-filter: blur(10px); border-bottom: 1px solid #dbe2f2;">
+    <div style="max-width: 1160px; margin: 0 auto; padding: 13px 32px; display: flex; align-items: center; gap: 24px;">
+      <div style="display: flex; align-items: center; gap: 10px; flex-shrink: 0;">
+        <div style="width: 26px; height: 26px; display: grid; grid-template-columns: repeat(3,1fr); grid-template-rows: repeat(3,1fr); gap: 2.5px; flex-shrink: 0;"><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#ceff65;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div></div>
+        <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 700; letter-spacing: -.01em;">ArchitectHire</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; color: #0b3fcc; background: #e7efff; padding: 3px 8px; border-radius: 6px; letter-spacing: .03em;">{{ roleBadge }}</span>
+      </div>
+
+      <!-- member nav -->
+      <sc-if value="{{ isMember }}" hint-placeholder-val="{{ false }}">
+      <nav style="display: flex; align-items: center; gap: 4px; margin-left: 8px;">
+        <button onClick="{{ showDash }}" style="{{ navDashStyle }}">Dashboard</button>
+        <button onClick="{{ goLeads }}" style="{{ navLeadsStyle }}">{{ leadsNavLabel }}</button>
+        <button onClick="{{ goProjects }}" style="{{ navProjectsStyle }}">{{ projectsNavLabel }}</button>
+        <a href="Account.dc.html#messages" style="padding: 8px 14px; border-radius: 9px; font-size: 14px; font-weight: 600; color: #5b6493;" style-hover="background: #eef2fb; color: #0a1440;">Messages</a>
+        <button onClick="{{ showEarnings }}" style="{{ navEarnStyle }}">Earnings</button>
+      </nav>
+      </sc-if>
+
+      <div style="margin-left: auto; display: flex; align-items: center; gap: 16px;">
+        <!-- demo role switch -->
+        <div style="display: flex; align-items: center; gap: 0; background: #e9eef8; border-radius: 10px; padding: 3px;">
+          <button onClick="{{ setArchitect }}" style="{{ swArchStyle }}">Architect</button>
+          <button onClick="{{ setExpert }}" style="{{ swExpertStyle }}">Expert</button>
+        </div>
+        <!-- demo state switch -->
+        <sc-if value="{{ showRoleToggle }}" hint-placeholder-val="{{ true }}">
+        <div style="display: flex; align-items: center; gap: 0; background: #e9eef8; border-radius: 10px; padding: 3px;">
+          <button onClick="{{ showApply }}" style="{{ swApplyStyle }}">Onboarding</button>
+          <button onClick="{{ showDash }}" style="{{ swDashStyle }}">Member</button>
+        </div>
+        </sc-if>
+        <sc-if value="{{ isMember }}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; align-items: center; gap: 9px;">
+          <div style="width: 34px; height: 34px; border-radius: 50%; overflow: hidden; border: 2px solid #e7efff;"><image-slot id="arc-me" shape="circle" fit="cover" placeholder="You"></image-slot></div>
+          <div style="font-size: 13px; font-weight: 700;">{{ memberName }}</div>
+        </div>
+        </sc-if>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================= ONBOARDING ============================= -->
+  <sc-if value="{{ isApply }}" hint-placeholder-val="{{ true }}">
+
+  <!-- submitted success -->
+  <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
+  <main style="max-width: 640px; margin: 0 auto; padding: 70px 32px 90px; text-align: center; animation: fadeUp .4s ease both;">
+    <div style="width: 76px; height: 76px; border-radius: 50%; background: #e7f6ec; border: 1px solid #c2e6cf; color: #16924e; display: flex; align-items: center; justify-content: center; margin: 0 auto 22px; font-size: 38px;">✓</div>
+    <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 34px; font-weight: 800; letter-spacing: -.02em;">Application submitted</h1>
+    <p style="font-size: 17px; color: #3f4770; margin: 12px auto 0; max-width: 30em; line-height: 1.55;">Thanks, Maya. Our team is verifying your license, portfolio and insurance. Most architects are approved within three business days.</p>
+    <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 26px; margin: 32px 0; text-align: left;">
+      <div style="font-size: 12px; color: #5b6493; letter-spacing: .05em; text-transform: uppercase; margin-bottom: 16px;">What happens next</div>
+      <sc-for list="{{ nextSteps }}" as="n" hint-placeholder-count="3">
+        <div style="display: flex; gap: 14px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid #eef2fb;">
+          <span style="{{ n.dotStyle }}">{{ n.mark }}</span>
+          <div><div style="font-weight: 700; font-size: 15px;">{{ n.t }}</div><div style="font-size: 13.5px; color: #5b6493; margin-top: 2px;">{{ n.d }}</div></div>
+        </div>
+      </sc-for>
+    </div>
+    <button onClick="{{ showDash }}" style="background: #135bff; color: #fff; border: none; padding: 15px 30px; border-radius: 11px; font-family: inherit; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 3px 0 #0b3fcc;">Preview my dashboard →</button>
+  </main>
+  </sc-if>
+
+  <!-- stepper + panels -->
+  <sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
+  <div style="border-bottom: 1px solid #dbe2f2; background: #fff;">
+    <div style="max-width: 1080px; margin: 0 auto; padding: 16px 32px; display: flex; align-items: center; gap: 6px; overflow-x: auto;">
+      <sc-for list="{{ stepper }}" as="st" hint-placeholder-count="7">
+        <div style="display: flex; align-items: center; gap: 8px; flex-shrink: 0;">
+          <span style="{{ st.numStyle }}">{{ st.mark }}</span>
+          <span style="{{ st.labelStyle }}">{{ st.label }}</span>
+          <span style="{{ st.barStyle }}"></span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <main style="max-width: 1080px; margin: 0 auto; padding: 40px 32px 120px; display: grid; grid-template-columns: 1fr 300px; gap: 36px; align-items: start;">
+    <div style="animation: fadeUp .35s ease both;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #135bff; letter-spacing: .05em;">{{ stepKicker }}</div>
+      <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 700; letter-spacing: -.02em; margin: 8px 0 6px;">{{ stepTitle }}</h1>
+      <p style="font-size: 15.5px; color: #3f4770; margin-bottom: 26px; max-width: 40em; line-height: 1.5;">{{ stepSub }}</p>
+
+      <!-- STEP 1 — FIRM & PERSONAL -->
+      <sc-if value="{{ isS1 }}" hint-placeholder-val="{{ true }}">
+      <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 26px;">
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px;">
+          <div style="width: 66px; height: 66px; border-radius: 50%; overflow: hidden; border: 2px solid #e7efff;"><image-slot id="arc-avatar" shape="circle" fit="cover" placeholder="Photo"></image-slot></div>
+          <div><button style="background: #e7efff; color: #0b3fcc; border: none; padding: 9px 16px; border-radius: 9px; font-family: inherit; font-size: 13.5px; font-weight: 700; cursor: pointer;">Upload headshot</button><div style="font-size: 12px; color: #9aa2c4; margin-top: 6px;">Shown on your profile to clients</div></div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <sc-for list="{{ firmFields }}" as="f" hint-placeholder-count="6">
+            <label style="{{ f.wrapStyle }}"><span style="font-size: 13px; color: #5b6493; font-weight: 600;">{{ f.label }}</span><input value="{{ f.value }}" placeholder="{{ f.ph }}" style="width: 100%; margin-top: 6px; background: #fbfcfe; border: 1px solid #dbe2f2; border-radius: 9px; padding: 12px 14px; font-size: 14px; color: #232c57;"></label>
+          </sc-for>
+        </div>
+        <label style="display: block; margin-top: 16px;"><span style="font-size: 13px; color: #5b6493; font-weight: 600;">Short bio</span><textarea rows="3" placeholder="A sentence or two about your practice and what you're known for." style="width: 100%; margin-top: 6px; background: #fbfcfe; border: 1px solid #dbe2f2; border-radius: 9px; padding: 12px 14px; font-size: 14px; color: #232c57; resize: vertical; line-height: 1.5;">15 years designing seismic-zone additions and ADUs across the East Bay. Licensed in California, permit-set specialist.</textarea></label>
+      </div>
+      </sc-if>
+
+      <!-- STEP 2 — LICENSE -->
+      <sc-if value="{{ isS2 }}" hint-placeholder-val="{{ false }}">
+      <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 26px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <label style="display: block;"><span style="font-size: 13px; color: #5b6493; font-weight: 600;">License state</span>
+            <select style="width: 100%; margin-top: 6px; background: #fbfcfe; border: 1px solid #dbe2f2; border-radius: 9px; padding: 12px 14px; font-size: 14px; color: #232c57;"><option>California</option><option>Oregon</option><option>Washington</option><option>Nevada</option></select></label>
+          <label style="display: block;"><span style="font-size: 13px; color: #5b6493; font-weight: 600;">License number</span><input value="C-38104" style="width: 100%; margin-top: 6px; background: #fbfcfe; border: 1px solid #dbe2f2; border-radius: 9px; padding: 12px 14px; font-size: 14px; color: #232c57; font-family: 'IBM Plex Mono', monospace;"></label>
+          <label style="display: block;"><span style="font-size: 13px; color: #5b6493; font-weight: 600;">NCARB record #</span><input value="102938" placeholder="Optional" style="width: 100%; margin-top: 6px; background: #fbfcfe; border: 1px solid #dbe2f2; border-radius: 9px; padding: 12px 14px; font-size: 14px; color: #232c57; font-family: 'IBM Plex Mono', monospace;"></label>
+          <label style="display: block;"><span style="font-size: 13px; color: #5b6493; font-weight: 600;">Expiration date</span><input value="2028-01-31" style="width: 100%; margin-top: 6px; background: #fbfcfe; border: 1px solid #dbe2f2; border-radius: 9px; padding: 12px 14px; font-size: 14px; color: #232c57;"></label>
+        </div>
+        <div style="margin-top: 18px; border: 1.5px dashed #c3cfe8; border-radius: 12px; padding: 26px; text-align: center; background: #fafcff;">
+          <div style="width: 44px; height: 44px; border-radius: 11px; background: #e7efff; color: #135bff; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;">{{ uploadIcon }}</div>
+          <div style="font-weight: 700; font-size: 15px;">Upload your license certificate</div>
+          <div style="font-size: 13px; color: #5b6493; margin-top: 3px;">PDF or image, max 10MB · we verify with the state board</div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; margin-top: 14px; background: #e7f6ec; border: 1px solid #c2e6cf; border-radius: 10px; padding: 12px 14px;"><span style="color: #16924e;">✓</span><span style="font-size: 13.5px; color: #2f6b45;"><strong>license-C38104.pdf</strong> uploaded — ready to verify</span></div>
+      </div>
+      </sc-if>
+
+      <!-- STEP 3 — PORTFOLIO -->
+      <sc-if value="{{ isS3 }}" hint-placeholder-val="{{ false }}">
+      <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 26px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <sc-for list="{{ portfolio }}" as="p" hint-placeholder-count="4">
+            <div style="border: 1px solid #e2e8f5; border-radius: 14px; overflow: hidden;">
+              <div style="height: 150px; position: relative;"><image-slot id="{{ p.slotId }}" shape="rect" fit="cover" placeholder="{{ p.ph }}"></image-slot></div>
+              <div style="padding: 12px 14px;"><input value="{{ p.title }}" placeholder="Project title" style="width: 100%; border: none; background: transparent; font-size: 14.5px; font-weight: 700; color: #232c57; padding: 0;"><input value="{{ p.meta }}" placeholder="Type · location · year" style="width: 100%; border: none; background: transparent; font-size: 12.5px; color: #5b6493; padding: 2px 0 0;"></div>
+            </div>
+          </sc-for>
+        </div>
+        <button style="margin-top: 16px; width: 100%; border: 1.5px dashed #c3cfe8; border-radius: 12px; padding: 16px; background: #fafcff; color: #0b3fcc; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer;">+ Add another project</button>
+      </div>
+      </sc-if>
+
+      <!-- STEP 4 — SPECIALTIES -->
+      <sc-if value="{{ isS4 }}" hint-placeholder-val="{{ false }}">
+      <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 26px;">
+        <div style="font-size: 14px; font-weight: 700; margin-bottom: 12px;">Project types you take on</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+          <sc-for list="{{ typeChips }}" as="c" hint-placeholder-count="8">
+            <button onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.label }}</button>
+          </sc-for>
+        </div>
+        <div style="font-size: 14px; font-weight: 700; margin: 24px 0 12px;">Specialties clients search for</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+          <sc-for list="{{ specChips }}" as="c" hint-placeholder-count="8">
+            <button onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- STEP 5 — SERVICE AREA -->
+      <sc-if value="{{ isS5 }}" hint-placeholder-val="{{ false }}">
+      <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 26px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <label style="display: block;"><span style="font-size: 13px; color: #5b6493; font-weight: 600;">Based in</span><input value="Oakland, CA" style="width: 100%; margin-top: 6px; background: #fbfcfe; border: 1px solid #dbe2f2; border-radius: 9px; padding: 12px 14px; font-size: 14px; color: #232c57;"></label>
+          <label style="display: block;"><span style="font-size: 13px; color: #5b6493; font-weight: 600;">Travel radius</span>
+            <div style="display: flex; align-items: center; gap: 12px; margin-top: 12px;"><input type="range" min="5" max="100" value="{{ radius }}" onChange="{{ onRadius }}" style="flex: 1; accent-color: #135bff;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500; color: #0a1440; min-width: 52px; text-align: right;">{{ radius }} mi</span></div></label>
+        </div>
+        <div style="font-size: 14px; font-weight: 700; margin: 22px 0 12px;">Jurisdictions you're cleared to stamp in</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+          <sc-for list="{{ jurisChips }}" as="c" hint-placeholder-count="6">
+            <button onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.label }}</button>
+          </sc-for>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-top: 24px; padding-top: 20px; border-top: 1px solid #eef2fb;">
+          <div><div style="font-weight: 700; font-size: 14.5px;">Take fully-remote projects</div><div style="font-size: 13px; color: #5b6493; margin-top: 2px;">Match with clients anywhere in your licensed states</div></div>
+          <button onClick="{{ toggleRemote }}" style="{{ remoteTrack }}"><span style="{{ remoteKnob }}"></span></button>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- STEP 6 — RATES & AVAILABILITY -->
+      <sc-if value="{{ isS6 }}" hint-placeholder-val="{{ false }}">
+      <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 26px;">
+        <div style="font-size: 14px; font-weight: 700; margin-bottom: 12px;">How you like to engage</div>
+        <div style="display: flex; gap: 12px;">
+          <sc-for list="{{ engageOpts }}" as="o" hint-placeholder-count="2">
+            <button onClick="{{ o.onClick }}" style="{{ o.style }}"><div style="font-weight: 700; font-size: 15px;">{{ o.t }}</div><div style="font-size: 13px; color: #5b6493; margin-top: 3px;">{{ o.d }}</div></button>
+          </sc-for>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px;">
+          <label style="display: block;"><span style="font-size: 13px; color: #5b6493; font-weight: 600;">Your hourly rate</span>
+            <div style="position: relative; margin-top: 6px;"><span style="position: absolute; left: 14px; top: 12px; color: #9aa2c4; font-size: 14px;">$</span><input value="135" style="width: 100%; background: #fbfcfe; border: 1px solid #dbe2f2; border-radius: 9px; padding: 12px 14px 12px 26px; font-size: 14px; color: #232c57; font-family: 'IBM Plex Mono', monospace;"><span style="position: absolute; right: 14px; top: 12px; color: #9aa2c4; font-size: 13px;">/ hr</span></div></label>
+          <label style="display: block;"><span style="font-size: 13px; color: #5b6493; font-weight: 600;">Typical turnaround</span>
+            <select style="width: 100%; margin-top: 6px; background: #fbfcfe; border: 1px solid #dbe2f2; border-radius: 9px; padding: 12px 14px; font-size: 14px; color: #232c57;"><option>2–3 weeks</option><option>3–5 weeks</option><option>6–8 weeks</option></select></label>
+        </div>
+        <div style="margin-top: 20px;"><span style="font-size: 13px; color: #5b6493; font-weight: 600;">Projects you can take at once</span>
+          <div style="display: flex; align-items: center; gap: 12px; margin-top: 12px;"><input type="range" min="1" max="10" value="{{ capacity }}" onChange="{{ onCapacity }}" style="flex: 1; accent-color: #135bff;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500; color: #0a1440; min-width: 90px; text-align: right;">{{ capacity }} projects</span></div></div>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-top: 24px; padding-top: 20px; border-top: 1px solid #eef2fb;">
+          <div><div style="font-weight: 700; font-size: 14.5px;">Accepting new leads right now</div><div style="font-size: 13px; color: #5b6493; margin-top: 2px;">You can pause this anytime from your dashboard</div></div>
+          <button onClick="{{ toggleAvail }}" style="{{ availTrack }}"><span style="{{ availKnob }}"></span></button>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- STEP 7 — INSURANCE -->
+      <sc-if value="{{ isS7 }}" hint-placeholder-val="{{ false }}">
+      <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 26px;">
+        <div style="border: 1.5px dashed #c3cfe8; border-radius: 12px; padding: 26px; text-align: center; background: #fafcff;">
+          <div style="width: 44px; height: 44px; border-radius: 11px; background: #e7efff; color: #135bff; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;">{{ uploadIcon }}</div>
+          <div style="font-weight: 700; font-size: 15px;">Upload your E&O insurance certificate</div>
+          <div style="font-size: 13px; color: #5b6493; margin-top: 3px;">Errors & omissions coverage · PDF, max 10MB</div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; margin: 14px 0 20px; background: #e7f6ec; border: 1px solid #c2e6cf; border-radius: 10px; padding: 12px 14px;"><span style="color: #16924e;">✓</span><span style="font-size: 13.5px; color: #2f6b45;"><strong>EandO-2026.pdf</strong> uploaded · $2M coverage</span></div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <label style="display: block;"><span style="font-size: 13px; color: #5b6493; font-weight: 600;">Coverage amount</span>
+            <select style="width: 100%; margin-top: 6px; background: #fbfcfe; border: 1px solid #dbe2f2; border-radius: 9px; padding: 12px 14px; font-size: 14px; color: #232c57;"><option>$1,000,000</option><option>$2,000,000</option><option>$5,000,000</option></select></label>
+          <label style="display: block;"><span style="font-size: 13px; color: #5b6493; font-weight: 600;">Business entity</span>
+            <select style="width: 100%; margin-top: 6px; background: #fbfcfe; border: 1px solid #dbe2f2; border-radius: 9px; padding: 12px 14px; font-size: 14px; color: #232c57;"><option>Sole proprietor</option><option>LLC</option><option>Corporation</option></select></label>
+        </div>
+        <label style="display: flex; align-items: flex-start; gap: 12px; margin-top: 20px; cursor: pointer;"><span style="width: 20px; height: 20px; border-radius: 6px; background: #135bff; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; margin-top: 1px;">✓</span><span style="font-size: 13.5px; color: #3f4770; line-height: 1.5;">I've completed my W-9 for payouts and agree to the <a href="#">Architect Terms</a>, <a href="#">Escrow Agreement</a> and <a href="#">Code of Conduct</a>.</span></label>
+      </div>
+      </sc-if>
+
+      <!-- nav -->
+      <div style="display: flex; align-items: center; gap: 14px; margin-top: 26px;">
+        <sc-if value="{{ canBack }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ back }}" style="background: transparent; color: #3f4770; border: 1px solid #dbe2f2; padding: 14px 22px; border-radius: 11px; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer;">← Back</button>
+        </sc-if>
+        <button onClick="{{ next }}" style="margin-left: auto; background: #135bff; color: #fff; border: none; padding: 15px 30px; border-radius: 11px; font-family: inherit; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 3px 0 #0b3fcc;">{{ nextLabel }}</button>
+      </div>
+    </div>
+
+    <!-- right rail -->
+    <aside style="position: sticky; top: 90px;">
+      <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 22px;">
+        <div style="font-size: 12px; color: #5b6493; letter-spacing: .05em; text-transform: uppercase; margin-bottom: 14px;">Your application</div>
+        <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px;"><span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; font-weight: 700;">{{ pct }}%</span><span style="font-size: 13px; color: #5b6493;">complete</span></div>
+        <div style="height: 7px; border-radius: 100px; background: #eef2fb; overflow: hidden; margin-bottom: 18px;"><div style="{{ pctBar }}"></div></div>
+        <div style="display: flex; flex-direction: column; gap: 3px;">
+          <sc-for list="{{ checklist }}" as="c" hint-placeholder-count="7">
+            <div style="display: flex; align-items: center; gap: 10px; padding: 7px 0;"><span style="{{ c.dotStyle }}">{{ c.mark }}</span><span style="{{ c.labelStyle }}">{{ c.label }}</span></div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="background: #0a1440; border-radius: 16px; padding: 20px; margin-top: 16px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #ceff65; letter-spacing: .04em;">WHY IT MATTERS</div>
+        <p style="font-size: 13.5px; color: #b9c3e8; line-height: 1.55; margin-top: 8px;">Complete profiles get matched 3× more often. Everything here is verified once — clients trust your stamp from day one.</p>
+      </div>
+    </aside>
+  </main>
+  </sc-if>
+  </sc-if>
+
+  <!-- ============================= DASHBOARD ============================= -->
+  <sc-if value="{{ isDashboard }}" hint-placeholder-val="{{ false }}">
+  <main id="top" style="max-width: 1160px; margin: 0 auto; padding: 34px 32px 90px; animation: fadeUp .4s ease both;">
+
+    <!-- verification banner -->
+    <div style="display: flex; align-items: center; gap: 14px; background: #e7f6ec; border: 1px solid #c2e6cf; border-radius: 14px; padding: 14px 20px; margin-bottom: 26px;">
+      <span style="width: 30px; height: 30px; border-radius: 50%; background: #16924e; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0;">✓</span>
+      <div style="flex: 1;"><span style="font-weight: 700; font-size: 14.5px; color: #14532d;">{{ bannerTitle }}</span> <span style="font-size: 14px; color: #2f6b45;">{{ bannerSub }}</span></div>
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #16924e; background: #d4efdd; padding: 5px 10px; border-radius: 6px;">VERIFIED</span>
+    </div>
+
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; margin-bottom: 24px;">
+      <div>
+        <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 32px; font-weight: 700; letter-spacing: -.02em;">{{ greet }}</h1>
+        <p style="font-size: 15.5px; color: #3f4770; margin-top: 4px;">{{ availLine }}</p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px; background: #fff; border: 1px solid #e2e8f5; border-radius: 12px; padding: 10px 16px;">
+        <div style="text-align: right;"><div style="font-size: 13px; font-weight: 700;">{{ dashAvailLabel }}</div><div style="font-size: 12px; color: #5b6493;">{{ availSub }}</div></div>
+        <button onClick="{{ toggleAvail }}" style="{{ availTrack }}"><span style="{{ availKnob }}"></span></button>
+      </div>
+    </div>
+
+    <!-- stats row -->
+    <div style="display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 24px;">
+      <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+        <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 14px; padding: 18px 20px;">
+          <div style="font-size: 12.5px; color: #5b6493;">{{ s.label }}</div>
+          <div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 26px; font-weight: 700; margin: 4px 0 2px;">{{ s.value }}</div>
+          <div style="font-size: 12px; color: {{ s.deltaColor }}; font-weight: 600;">{{ s.delta }}</div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 24px; align-items: start;">
+
+      <!-- LEFT COLUMN -->
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+
+        <!-- TAB SWITCHER -->
+        <div style="display: flex; gap: 4px; background: #e9eef8; border-radius: 14px; padding: 4px;">
+          <button onClick="{{ showLeads }}" style="{{ tabLeadsStyle }}">{{ leadsTabLabel }} · {{ pendingCount }}</button>
+          <button onClick="{{ showProjects }}" style="{{ tabProjectsStyle }}">{{ projectsTabLabel }} · {{ activeCount }}</button>
+        </div>
+
+        <!-- NEW LEADS -->
+        <sc-if value="{{ showLeadsTab }}" hint-placeholder-val="{{ true }}">
+        <section id="leads" style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 24px; scroll-margin-top: 80px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+            <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 700;">{{ leadsHeading }}</h2>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #0b3fcc; background: #e7efff; padding: 5px 10px; border-radius: 6px;">{{ pendingCount }} PENDING</span>
+          </div>
+          <p style="font-size: 13.5px; color: #5b6493; margin-bottom: 18px;">{{ leadsSub }}</p>
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <sc-for list="{{ leads }}" as="l" hint-placeholder-count="3">
+              <div style="{{ l.cardStyle }}">
+                <div style="display: flex; gap: 14px;">
+                  <div style="width: 84px; height: 84px; border-radius: 12px; overflow: hidden; flex-shrink: 0;"><image-slot id="{{ l.slotId }}" shape="rect" fit="cover" placeholder="Project"></image-slot></div>
+                  <div style="flex: 1; min-width: 0;">
+                    <div style="display: flex; align-items: center; gap: 8px;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #16924e; background: #e7f6ec; padding: 3px 8px; border-radius: 5px;">{{ l.match }} MATCH</span><span style="font-size: 12px; color: #9aa2c4;">{{ l.ago }}</span></div>
+                    <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 17px; font-weight: 700; margin: 7px 0 3px;">{{ l.title }}</h3>
+                    <div style="font-size: 13px; color: #5b6493;">{{ l.detail }}</div>
+                    <div style="display: flex; align-items: center; gap: 14px; margin-top: 8px;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #0a1440; background: #ceff65; padding: 4px 10px; border-radius: 7px; font-weight: 600;">{{ l.est }}</span><span style="font-size: 13px; color: #3f4770;">{{ l.engage }}</span></div>
+                  </div>
+                </div>
+                <!-- pending actions -->
+                <sc-if value="{{ l.isPending }}" hint-placeholder-val="{{ true }}">
+                <div style="display: flex; gap: 10px; margin-top: 16px;">
+                  <button onClick="{{ l.onAccept }}" style="flex: 1; background: #135bff; color: #fff; border: none; padding: 11px; border-radius: 10px; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 0 #0b3fcc;">Accept lead</button>
+                  <button onClick="{{ l.onDecline }}" style="background: #fff; color: #5b6493; border: 1px solid #dbe2f2; padding: 11px 18px; border-radius: 10px; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">Decline</button>
+                  <button style="background: #f3f6fd; color: #3f4770; border: 1px solid #e2e8f5; padding: 11px 16px; border-radius: 10px; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">View scope</button>
+                </div>
+                </sc-if>
+                <!-- accepted -->
+                <sc-if value="{{ l.isAccepted }}" hint-placeholder-val="{{ false }}">
+                <div style="display: flex; align-items: center; gap: 10px; margin-top: 14px; background: #e7f6ec; border: 1px solid #c2e6cf; border-radius: 10px; padding: 11px 14px;"><span style="color: #16924e; font-size: 15px;">✓</span><span style="font-size: 13.5px; color: #2f6b45; font-weight: 600;">Accepted — added to your active projects.</span><button onClick="{{ l.onUndo }}" style="margin-left: auto; background: transparent; border: none; color: #16924e; font-family: inherit; font-size: 13px; font-weight: 700; cursor: pointer; text-decoration: underline;">Undo</button></div>
+                </sc-if>
+                <!-- declined -->
+                <sc-if value="{{ l.isDeclined }}" hint-placeholder-val="{{ false }}">
+                <div style="display: flex; align-items: center; gap: 10px; margin-top: 14px; background: #f3f6fd; border: 1px solid #e2e8f5; border-radius: 10px; padding: 11px 14px;"><span style="color: #9aa2c4;">—</span><span style="font-size: 13.5px; color: #5b6493;">Declined. We'll match this to another architect.</span><button onClick="{{ l.onUndo }}" style="margin-left: auto; background: transparent; border: none; color: #135bff; font-family: inherit; font-size: 13px; font-weight: 700; cursor: pointer; text-decoration: underline;">Undo</button></div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+        </sc-if>
+
+        <!-- ACTIVE PROJECTS -->
+        <sc-if value="{{ showProjectsTab }}" hint-placeholder-val="{{ false }}">
+        <section id="projects" style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 24px; scroll-margin-top: 80px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px;">
+            <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 700;">{{ projectsHeading }}</h2>
+            <span style="font-size: 13px; color: #5b6493;">{{ activeCount }} in progress</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <sc-for list="{{ projects }}" as="p" hint-placeholder-count="2">
+              <div style="border: 1px solid #e2e8f5; border-radius: 14px; padding: 18px;">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 14px;">
+                  <div style="width: 44px; height: 44px; border-radius: 10px; overflow: hidden; flex-shrink: 0;"><image-slot id="{{ p.slotId }}" shape="rect" fit="cover" placeholder="P"></image-slot></div>
+                  <div style="flex: 1;"><div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 16px; font-weight: 700;">{{ p.title }}</div><div style="font-size: 12.5px; color: #5b6493;">{{ p.client }}</div></div>
+                  <div style="text-align: right;"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500; color: #0a1440;">{{ p.value }}</div><div style="font-size: 11.5px; color: #16924e;">{{ p.released }} released</div></div>
+                </div>
+                <div style="display: flex; gap: 6px;">
+                  <sc-for list="{{ p.milestones }}" as="m" hint-placeholder-count="4">
+                    <div style="flex: 1; text-align: center;"><div style="{{ m.barStyle }}"></div><div style="{{ m.labelStyle }}">{{ m.label }}</div></div>
+                  </sc-for>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; margin-top: 14px; font-size: 13px; color: #5b6493;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #135bff; flex-shrink: 0;"></span>Next: <strong style="color: #232c57;">{{ p.next }}</strong><a href="Engagement.dc.html#dashboard" style="margin-left: auto; font-size: 13.5px; font-weight: 700;">Open →</a></div>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+        </sc-if>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+
+        <!-- MESSAGES -->
+        <section style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 22px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;"><h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 700;">Messages</h2><a href="Account.dc.html#messages" style="font-size: 13px; font-weight: 700;">Open →</a></div>
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <sc-for list="{{ messages }}" as="m" hint-placeholder-count="3">
+              <div style="display: flex; gap: 12px; align-items: center; padding: 10px 0; border-bottom: 1px solid #f2f5fb;">
+                <div style="position: relative; flex-shrink: 0;"><div style="width: 38px; height: 38px; border-radius: 50%; overflow: hidden; border: 2px solid #e7efff;"><image-slot id="{{ m.slotId }}" shape="circle" fit="cover" placeholder="C"></image-slot></div><span style="{{ m.dot }}"></span></div>
+                <div style="flex: 1; min-width: 0;"><div style="display: flex; justify-content: space-between; gap: 8px;"><span style="font-weight: 700; font-size: 13.5px;">{{ m.name }}</span><span style="font-size: 11.5px; color: #9aa2c4;">{{ m.time }}</span></div><div style="font-size: 12.5px; color: {{ m.color }}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ m.last }}</div></div>
+                <span style="{{ m.unreadStyle }}">{{ m.unread }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+
+        <!-- CALENDAR -->
+        <section style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 22px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;"><h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 700;">This week</h2><a href="#" style="font-size: 13px; font-weight: 700;">Calendar →</a></div>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <sc-for list="{{ agenda }}" as="a" hint-placeholder-count="3">
+              <div style="display: flex; gap: 12px; align-items: center;"><div style="{{ a.dateStyle }}"><div style="font-size: 10px; text-transform: uppercase; letter-spacing: .03em;">{{ a.dow }}</div><div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 16px; font-weight: 700; line-height: 1;">{{ a.day }}</div></div><div style="flex: 1;"><div style="font-weight: 700; font-size: 13.5px;">{{ a.title }}</div><div style="font-size: 12px; color: #5b6493;">{{ a.time }}</div></div></div>
+            </sc-for>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+  </sc-if>
+
+  <!-- ============================= EARNINGS & PROFILE PAGE ============================= -->
+  <sc-if value="{{ isEarnings }}" hint-placeholder-val="{{ false }}">
+  <main style="max-width: 1160px; margin: 0 auto; padding: 34px 32px 90px; animation: fadeUp .4s ease both;">
+    <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 32px; font-weight: 700; letter-spacing: -.02em;">Earnings & profile</h1>
+    <p style="font-size: 15.5px; color: #3f4770; margin: 4px 0 24px;">Your payouts, escrow balance and profile completeness — all in one place.</p>
+
+    <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 24px; align-items: start;">
+      <!-- LEFT: financials -->
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        <section style="background: #0a1440; border-radius: 16px; padding: 26px; color: #fff;">
+          <div style="display: flex; align-items: center; justify-content: space-between;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #ceff65; letter-spacing: .04em;">EARNINGS · THIS MONTH</span><a href="#" style="font-size: 12.5px; color: #9fb4ff;">Download statements</a></div>
+          <div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 46px; font-weight: 700; margin: 8px 0 2px;">{{ earn.month }}</div>
+          <div style="font-size: 13.5px; color: #9fb4ff;">{{ earn.delta }}</div>
+          <div style="height: 90px; display: flex; align-items: flex-end; gap: 10px; margin: 24px 0 6px;">
+            <sc-for list="{{ earnBars }}" as="b" hint-placeholder-count="6">
+              <div style="flex: 1; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 8px;"><div style="{{ b.barStyle }}"></div><span style="font-size: 11px; color: #6f7cae;">{{ b.m }}</span></div>
+            </sc-for>
+          </div>
+          <div style="display: flex; gap: 14px; margin-top: 16px; padding-top: 18px; border-top: 1px solid #1d2f6e;">
+            <div style="flex: 1;"><div style="font-size: 12px; color: #9fb4ff;">In escrow</div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 20px; color: #fff; margin-top: 2px;">{{ earn.escrow }}</div></div>
+            <div style="flex: 1;"><div style="font-size: 12px; color: #9fb4ff;">Next payout</div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 20px; color: #ceff65; margin-top: 2px;">{{ earn.next }}</div><div style="font-size: 11.5px; color: #9fb4ff;">{{ earn.nextDate }}</div></div>
+            <div style="flex: 1;"><div style="font-size: 12px; color: #9fb4ff;">Earned this year</div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 20px; color: #fff; margin-top: 2px;">{{ earn.year }}</div></div>
+          </div>
+        </section>
+
+        <section style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 24px;">
+          <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 16px;">Recent payouts</h2>
+          <div style="display: flex; flex-direction: column;">
+            <sc-for list="{{ payouts }}" as="p" hint-placeholder-count="4">
+              <div style="display: flex; align-items: center; gap: 14px; padding: 13px 0; border-bottom: 1px solid #f2f5fb;">
+                <span style="{{ p.badgeStyle }}">{{ p.badge }}</span>
+                <div style="flex: 1; min-width: 0;"><div style="font-weight: 700; font-size: 14px;">{{ p.title }}</div><div style="font-size: 12.5px; color: #5b6493;">{{ p.sub }}</div></div>
+                <div style="text-align: right;"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: {{ p.amtColor }};">{{ p.amt }}</div><div style="font-size: 11.5px; color: #9aa2c4;">{{ p.date }}</div></div>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+      </div>
+
+      <!-- RIGHT: profile -->
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        <section style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 22px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 4px;"><h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 700;">Profile strength</h2><span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #135bff; font-weight: 500;">85%</span></div>
+          <div style="height: 7px; border-radius: 100px; background: #eef2fb; overflow: hidden; margin: 8px 0 16px;"><div style="height: 100%; width: 85%; background: linear-gradient(90deg,#135bff,#ceff65); border-radius: 100px;"></div></div>
+          <sc-for list="{{ profileItems }}" as="p" hint-placeholder-count="4">
+            <div style="display: flex; align-items: center; gap: 10px; padding: 7px 0;"><span style="{{ p.dotStyle }}">{{ p.mark }}</span><span style="font-size: 13.5px; color: {{ p.color }}; flex: 1;">{{ p.label }}</span><sc-if value="{{ p.action }}" hint-placeholder-val="{{ false }}"><a href="#" style="font-size: 12.5px; font-weight: 700;">Add</a></sc-if></div>
+          </sc-for>
+        </section>
+
+        <section style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 22px;">
+          <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 14px;">
+            <div><div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 34px; font-weight: 700; line-height: 1;">4.9</div><div style="font-size: 12px; color: #ceb700; margin-top: 3px;">★★★★★</div></div>
+            <div style="flex: 1;"><div style="font-weight: 700; font-size: 14.5px;">Client rating</div><div style="font-size: 13px; color: #5b6493;">{{ ratingCount }}</div></div>
+          </div>
+          <div style="background: #f3f6fd; border-radius: 10px; padding: 14px;"><p style="font-size: 13.5px; color: #232c57; line-height: 1.5; font-style: italic;">"{{ reviewQuote }}"</p><div style="font-size: 12px; color: #5b6493; margin-top: 8px;">{{ reviewBy }}</div></div>
+        </section>
+
+        <section style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 22px;">
+          <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 6px;">Payout account</h2>
+          <div style="display: flex; align-items: center; gap: 12px; margin-top: 10px;">
+            <div style="width: 40px; height: 40px; border-radius: 9px; background: #e7efff; color: #0b3fcc; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 13px;">••</div>
+            <div style="flex: 1;"><div style="font-weight: 700; font-size: 14px;">Chase Business ••4021</div><div style="font-size: 12.5px; color: #16924e;">Verified · deposits in ~2 days</div></div>
+            <a href="#" style="font-size: 13px; font-weight: 700;">Manage</a>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;role&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;default&quot;: &quot;architect&quot;, &quot;options&quot;: [&quot;architect&quot;, &quot;expert&quot;], &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Role&quot;}}">
+class Component extends DCLogic {
+  state = {
+    view: 'apply', step: 1, submitted: false, roleOverride: null,
+    remote: true, avail: true, radius: 35, capacity: 4, engage: 'both',
+    types: ['Addition','ADU','New home'], specs: ['Seismic / structural','Historic overlay'],
+    juris: ['Oakland','Berkeley','Alameda County'],
+    leads: { l1: 'pending', l2: 'pending', l3: 'pending' },
+    workTab: 'leads',
+  };
+
+  go(n){ this.setState({ step: Math.max(1, Math.min(7, n)) }); if (typeof window!=='undefined') window.scrollTo({top:0}); }
+  toggleIn(key, val){ this.setState(s=>{ const arr=s[key]; return { [key]: arr.includes(val) ? arr.filter(x=>x!==val) : [...arr, val] }; }); }
+  componentDidMount(){
+    let r = null;
+    try { const q = new URLSearchParams(location.search); r = q.get('role') || (location.hash==='#expert'?'expert':null) || localStorage.getItem('ah_role'); } catch(e){}
+    const role = this.props.role ?? r ?? 'architect';
+    const patch = {};
+    if (r) patch.roleOverride = r;
+    if (role==='expert' && this.state.view==='apply') patch.view = 'dashboard';
+    if (Object.keys(patch).length) this.setState(patch);
+  }
+
+  renderVals(){
+    const s = this.state;
+    const role = this.state.roleOverride ?? this.props.role ?? 'architect';
+    const expert = role === 'expert';
+    const el = React.createElement;
+    const uploadIcon = el('svg',{width:22,height:22,viewBox:'0 0 24 24',fill:'none',stroke:'currentColor',strokeWidth:1.8,strokeLinecap:'round',strokeLinejoin:'round'},[el('path',{key:0,d:'M12 16V4'}),el('path',{key:1,d:'M7 9l5-5 5 5'}),el('path',{key:2,d:'M5 20h14'})]);
+
+    const swActive = (on)=>`padding:8px 15px;border-radius:8px;border:none;cursor:pointer;font-family:inherit;font-size:13px;font-weight:${on?700:600};background:${on?'#fff':'transparent'};color:${on?'#0b3fcc':'#5b6493'};box-shadow:${on?'0 1px 2px rgba(4,10,40,.12)':'none'};`;
+
+    // ---------- toggles ----------
+    const track = (on)=>`position:relative;width:46px;height:26px;border-radius:100px;border:none;cursor:pointer;flex-shrink:0;background:${on?'#135bff':'#c9d4ec'};transition:background .18s;`;
+    const knob = (on)=>`position:absolute;top:3px;left:${on?'23px':'3px'};width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(4,10,40,.3);transition:left .18s;`;
+
+    // ================= ONBOARDING =================
+    const stepMeta = {
+      1:{k:'STEP 1 · ABOUT YOU',t:'Your firm & profile',sub:'The basics clients see first. You can polish all of this later.'},
+      2:{k:'STEP 2 · CREDENTIALS',t:'Verify your license',sub:'We confirm your license with the state board — this is what lets you stamp drawings on the platform.'},
+      3:{k:'STEP 3 · PORTFOLIO',t:'Show your best work',sub:'Add a few past projects. Strong portfolios get matched far more often.'},
+      4:{k:'STEP 4 · WHAT YOU DO',t:'Specialties & project types',sub:'Pick what you take on so we only match you with relevant, in-scope leads.'},
+      5:{k:'STEP 5 · WHERE YOU WORK',t:'Service area & jurisdictions',sub:'We only surface leads inside the areas you\u2019re licensed and willing to work.'},
+      6:{k:'STEP 6 · RATES',t:'Rates & availability',sub:'Set your own pricing and how much work you want. You\u2019re always in control.'},
+      7:{k:'STEP 7 · COMPLIANCE',t:'Insurance & agreements',sub:'The last step — proof of coverage and your payout details.'},
+    };
+    const m = stepMeta[s.step];
+
+    const stDefs = [['Firm',1],['License',2],['Portfolio',3],['Specialties',4],['Area',5],['Rates',6],['Insurance',7]];
+    const stepper = stDefs.map(([label,n],i)=>{ const done=s.step>n, active=s.step===n; return {
+      label, mark: done?'✓':String(n),
+      numStyle:`display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;${done?'background:#16924e;color:#fff;':active?'background:#135bff;color:#fff;':'background:#e2e8f5;color:#8b93b5;'}`,
+      labelStyle:`font-size:13.5px;font-weight:${active?700:600};color:${active?'#0a1440':done?'#16924e':'#8b93b5'};`,
+      barStyle:`width:${i<stDefs.length-1?22:0}px;height:2px;background:#dbe2f2;margin:0 2px;display:${i<stDefs.length-1?'inline-block':'none'};`,
+    }; });
+
+    const firmFields = [
+      {label:'Firm / practice name', value:'Ellison Studio', ph:'', wide:false},
+      {label:'Your full name', value:'Maya Ellison', ph:'', wide:false},
+      {label:'Title', value:'Principal Architect, AIA', ph:'', wide:false},
+      {label:'Years licensed', value:'15', ph:'', wide:false},
+      {label:'Email', value:'maya@ellisonstudio.com', ph:'', wide:false},
+      {label:'Phone', value:'(510) 555-0199', ph:'', wide:false},
+      {label:'Website', value:'ellisonstudio.com', ph:'Optional', wide:true},
+    ].map(f=>({...f, wrapStyle:`display:block;${f.wide?'grid-column:1/-1;':''}`}));
+
+    const portfolio = [
+      {slotId:'arc-pf1', ph:'Drop project photo', title:'Rockridge seismic addition', meta:'Addition · Oakland · 2025'},
+      {slotId:'arc-pf2', ph:'Drop project photo', title:'Elmwood garage ADU', meta:'ADU · Berkeley · 2024'},
+      {slotId:'arc-pf3', ph:'Drop project photo', title:'Temescal kitchen remodel', meta:'Kitchen · Oakland · 2024'},
+      {slotId:'arc-pf4', ph:'Drop project photo', title:'', meta:''},
+    ];
+
+    const chip = (on)=>`padding:9px 15px;border-radius:100px;border:1px solid ${on?'#135bff':'#dbe2f2'};background:${on?'#e7efff':'#fff'};color:${on?'#0b3fcc':'#3f4770'};font-family:inherit;font-size:14px;font-weight:${on?700:500};cursor:pointer;`;
+    const typeChips = ['Renovation','Addition','New home','ADU','Kitchen & bath','Commercial TI','Restaurant','Change of use'].map(t=>({label:t, style:chip(s.types.includes(t)), onClick:()=>this.toggleIn('types',t)}));
+    const specChips = ['Seismic / structural','Historic overlay','Passive house','Accessibility / ADA','Multifamily','Title-24 energy','Coastal / flood','3D visualization'].map(t=>({label:t, style:chip(s.specs.includes(t)), onClick:()=>this.toggleIn('specs',t)}));
+    const jurisChips = ['Oakland','Berkeley','Alameda County','San Francisco','Contra Costa','Marin County'].map(t=>({label:t, style:chip(s.juris.includes(t)), onClick:()=>this.toggleIn('juris',t)}));
+
+    const bigOpt=(on)=>`flex:1;text-align:left;padding:16px;border-radius:12px;border:1.5px solid ${on?'#135bff':'#e2e8f5'};background:${on?'#e7efff':'#fff'};cursor:pointer;font-family:inherit;`;
+    const engageOpts=[
+      {v:'fixed',t:'Fixed quote',d:'One price for the whole set'},
+      {v:'hourly',t:'Hourly',d:'Bill time as you go'},
+      {v:'both',t:'Both',d:'Decide per project'},
+    ].map(o=>({...o, style:bigOpt(s.engage===o.v), onClick:()=>this.setState({engage:o.v})}));
+
+    // checklist / progress
+    const stepDone = (n)=> s.step>n;
+    const checklist = stDefs.map(([label,n])=>{ const done=s.step>n, active=s.step===n; return {
+      label, mark: done?'✓':'',
+      dotStyle:`width:20px;height:20px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;${done?'background:#16924e;color:#fff;':active?'background:#135bff;color:#fff;border:none;':'background:#eef2fb;border:1px solid #dbe2f2;'}`,
+      labelStyle:`font-size:13.5px;font-weight:${active?700:600};color:${done?'#16924e':active?'#0a1440':'#8b93b5'};`,
+    }; });
+    const pct = Math.round(((s.step-1)/7)*100) + (s.step===7?0:0);
+    const pctVal = Math.round((s.step/7)*100);
+    const pctBar = `height:100%;width:${pctVal}%;background:linear-gradient(90deg,#135bff,#ceff65);border-radius:100px;transition:width .3s;`;
+
+    const nextSteps = [
+      {mark:'1',t:'Credential review',d:'We verify your license with the state board and confirm your insurance.',ok:false},
+      {mark:'2',t:'Portfolio & profile check',d:'A quick quality pass so your profile represents you well.',ok:false},
+      {mark:'3',t:'You go live',d:'Your first matched leads arrive within 48 hours of approval.',ok:false},
+    ].map(n=>({...n, dotStyle:'width:26px;height:26px;border-radius:50%;background:#e7efff;color:#0b3fcc;display:flex;align-items:center;justify-content:center;font-family:\'IBM Plex Mono\',monospace;font-size:12px;font-weight:600;flex-shrink:0;'}));
+
+    // ================= DASHBOARD =================
+    const stats = expert ? [
+      {label:'Earned this month', value:'$4,120', delta:'▲ 18% vs last', deltaColor:'#16924e'},
+      {label:'Active orders', value:'2', delta:'1 awaiting delivery', deltaColor:'#5b6493'},
+      {label:'Order match rate', value:'95%', delta:'▲ 4 pts', deltaColor:'#16924e'},
+      {label:'Client rating', value:'4.9★', delta:'32 reviews', deltaColor:'#5b6493'},
+    ] : [
+      {label:'Earned this month', value:'$18,240', delta:'▲ 22% vs last', deltaColor:'#16924e'},
+      {label:'Active projects', value:'3', delta:'1 awaiting your approval', deltaColor:'#5b6493'},
+      {label:'Lead match rate', value:'92%', delta:'▲ 6 pts', deltaColor:'#16924e'},
+      {label:'Client rating', value:'4.9★', delta:'47 reviews', deltaColor:'#5b6493'},
+    ];
+
+    const leadDefs = expert ? [
+      {id:'l1', slotId:'exp-l1', match:'96%', ago:'8 min ago', title:'As-built package · Oakland, CA', detail:'1,500 sf residence · measured set from site photos', est:'Est. $2,500', engage:'Flat package'},
+      {id:'l2', slotId:'exp-l2', match:'90%', ago:'1 h ago', title:'CAD drafting · Berkeley, CA', detail:'~18 hrs · redline cleanup on existing plans', est:'Est. $1,400', engage:'Hourly · your rate'},
+      {id:'l3', slotId:'exp-l3', match:'84%', ago:'4 h ago', title:'PDF-to-CAD · Alameda, CA', detail:'12 legacy sheets to layered CAD', est:'Est. $360', engage:'Per sheet'},
+    ] : [
+      {id:'l1', slotId:'arc-l1', match:'92%', ago:'12 min ago', title:'Backyard ADU · Oakland, CA', detail:'640 sf · permit-ready set · within your license area', est:'Est. $4,200–5,600', engage:'Fixed quote'},
+      {id:'l2', slotId:'arc-l2', match:'88%', ago:'1 h ago', title:'Two-story addition · Berkeley, CA', detail:'2,400 sf · seismic-zone · historic overlay adjacent', est:'Est. $12,000–18,000', engage:'Fixed or hourly'},
+      {id:'l3', slotId:'arc-l3', match:'81%', ago:'3 h ago', title:'Kitchen remodel · Alameda, CA', detail:'220 sf · as-built + proposed · Title-24', est:'Est. $2,400–3,600', engage:'Hourly · your rate'},
+    ];
+    const leads = leadDefs.map(l=>{ const st=s.leads[l.id]; return { ...l,
+      isPending: st==='pending', isAccepted: st==='accepted', isDeclined: st==='declined',
+      cardStyle:`border:1px solid ${st==='accepted'?'#c2e6cf':'#e2e8f5'};border-radius:14px;padding:18px;background:${st==='declined'?'#fbfcfe':'#fff'};opacity:${st==='declined'?.72:1};transition:opacity .2s;`,
+      onAccept: ()=>this.setState(cs=>({ leads:{...cs.leads,[l.id]:'accepted'} })),
+      onDecline: ()=>this.setState(cs=>({ leads:{...cs.leads,[l.id]:'declined'} })),
+      onUndo: ()=>this.setState(cs=>({ leads:{...cs.leads,[l.id]:'pending'} })),
+    }; });
+    const pendingCount = Object.values(s.leads).filter(v=>v==='pending').length;
+    const acceptedCount = Object.values(s.leads).filter(v=>v==='accepted').length;
+
+    const msBar = (state)=>`height:6px;border-radius:100px;background:${state==='done'?'#16924e':state==='active'?'#135bff':'#eef2fb'};margin-bottom:6px;`;
+    const msLabel = (state)=>`font-size:10.5px;color:${state==='done'?'#16924e':state==='active'?'#135bff':'#9aa2c4'};font-weight:${state==='active'?700:500};`;
+    const mkMs = (arr)=>arr.map(([label,st])=>({label, barStyle:msBar(st), labelStyle:msLabel(st)}));
+    const projects = expert ? [
+      {slotId:'exp-pr1', title:'As-built · Rockridge', client:'for Jordan Avery', value:'$2,500', released:'$1,250', next:'Deliver measured set', milestones:mkMs([['Scope','done'],['Draft','active'],['Review','todo'],['Deliver','todo']])},
+      {slotId:'exp-pr2', title:'PDF-to-CAD · Elmwood', client:'for Priya & Sam', value:'$480', released:'$0', next:'First sheets', milestones:mkMs([['Scope','done'],['Draft','active'],['Review','todo'],['Deliver','todo']])},
+    ] : [
+      {slotId:'arc-pr1', title:'Addition · Rockridge', client:'for Jordan Avery', value:'$14,000', released:'$3,780', next:'Approve schematic set', milestones:mkMs([['Scope','done'],['Schematic','active'],['Dev','todo'],['Permit','todo']])},
+      {slotId:'arc-pr2', title:'Garage ADU · Elmwood', client:'for Priya & Sam', value:'$5,200', released:'$2,600', next:'Design development', milestones:mkMs([['Scope','done'],['Schematic','done'],['Dev','active'],['Permit','todo']])},
+    ];
+    const activeCount = projects.length + acceptedCount;
+
+    const earnBars = [['Mar',34],['Apr',52],['May',44],['Jun',68],['Jul',58],['Aug',88]].map(([mo,h])=>({ m:mo, barStyle:`width:100%;height:${h}%;min-height:6px;border-radius:5px;background:${mo==='Aug'?'#ceff65':'#2a3b7a'};` }));
+
+    const messages = [
+      {slotId:'arc-m1', name:'Jordan Avery', last:'Approved the parcel plat — good to go.', time:'2h', unread:2, online:true},
+      {slotId:'arc-m2', name:'Priya Nair', last:'Can we push the call to Thursday?', time:'5h', unread:0, online:true},
+      {slotId:'arc-m3', name:'Marcus Reed', last:'Thanks — the permit set looks great.', time:'1d', unread:0, online:false},
+    ].map(x=>({ ...x, color: x.unread?'#232c57':'#8b93b5',
+      dot:`position:absolute;right:0;bottom:0;width:10px;height:10px;border-radius:50%;border:2px solid #fff;background:${x.online?'#16924e':'#c9d4ec'};`,
+      unreadStyle: x.unread?`background:#135bff;color:#fff;font-size:11px;font-weight:700;min-width:19px;height:19px;border-radius:100px;display:flex;align-items:center;justify-content:center;flex-shrink:0;`:'display:none;' }));
+
+    const profileItems = (expert ? [
+      {label:'Portfolio (4 samples)', done:true, action:false},
+      {label:'Software & deliverables set', done:true, action:false},
+      {label:'Payout account connected', done:true, action:false},
+      {label:'Add 2 more samples', done:false, action:true},
+    ] : [
+      {label:'License verified', done:true, action:false},
+      {label:'E&O insurance on file', done:true, action:false},
+      {label:'Portfolio (3 projects)', done:true, action:false},
+      {label:'Add 2 more portfolio pieces', done:false, action:true},
+    ]).map(p=>({...p, mark:p.done?'✓':'', color:p.done?'#3f4770':'#8b93b5',
+      dotStyle:`width:20px;height:20px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;${p.done?'background:#16924e;color:#fff;':'background:#eef2fb;border:1px solid #dbe2f2;'}`}));
+
+    const payouts = (expert ? [
+      {badge:'✓', title:'As-built delivered · Rockridge', sub:'Released to your bank ••4021', amt:'+$1,250', date:'Aug 6', ok:true},
+      {badge:'✓', title:'PDF-to-CAD · Elmwood', sub:'Released to your bank ••4021', amt:'+$360', date:'Jul 31', ok:true},
+      {badge:'●', title:'Render bundle · Temescal', sub:'In escrow · releases on approval', amt:'$540', date:'Pending', ok:false},
+      {badge:'✓', title:'Drafting hours · Alameda', sub:'Released to your bank ••4021', amt:'+$620', date:'Jul 22', ok:true},
+    ] : [
+      {badge:'✓', title:'Schematic milestone · Rockridge addition', sub:'Released to Chase ••4021', amt:'+$3,780', date:'Aug 6', ok:true},
+      {badge:'✓', title:'Design development · Elmwood ADU', sub:'Released to Chase ••4021', amt:'+$2,600', date:'Jul 29', ok:true},
+      {badge:'●', title:'Permit set · Rockridge addition', sub:'In escrow · releases on client approval', amt:'$4,410', date:'Pending', ok:false},
+      {badge:'✓', title:'Scope deposit · Alameda kitchen', sub:'Released to Chase ••4021', amt:'+$1,200', date:'Jul 18', ok:true},
+    ]).map(p=>({...p,
+      amtColor: p.ok?'#16924e':'#9aa2c4',
+      badgeStyle:`width:30px;height:30px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;${p.ok?'background:#e7f6ec;color:#16924e;':'background:#fff5e0;color:#e0a800;'}`,
+    }));
+
+    const agenda = [
+      {dow:'Thu', day:'14', title:'Scope call · Jordan Avery', time:'10:00 AM · video', accent:'#135bff'},
+      {dow:'Fri', day:'15', title:'Site measure · Elmwood ADU', time:'1:30 PM · on-site', accent:'#16924e'},
+      {dow:'Mon', day:'18', title:'Permit submission · Rockridge', time:'All day · deadline', accent:'#e0a800'},
+    ].map(a=>({...a, dateStyle:`width:46px;height:46px;border-radius:10px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;background:${a.accent};`}));
+
+    return {
+      // state switch
+      isApply: !expert && s.view==='apply', isDashboard: expert ? s.view!=='earnings' : s.view==='dashboard', isEarnings: s.view==='earnings',
+      isMember: expert ? true : (s.view==='dashboard' || s.view==='earnings'),
+      showRoleToggle: !expert,
+      roleArchitect: role==='architect', roleExpert: expert,
+      setArchitect: ()=>this.setState({ roleOverride:'architect' }),
+      setExpert: ()=>this.setState(cs=>({ roleOverride:'expert', view: cs.view==='apply'?'dashboard':cs.view })),
+      swArchStyle: swActive(role==='architect'), swExpertStyle: swActive(expert),
+      roleBadge: expert ? 'FOR EXPERTS' : 'FOR ARCHITECTS',
+      memberName: expert ? 'Sam T.' : 'Maya E., AIA',
+      greet: expert ? 'Good morning, Sam' : 'Good morning, Maya',
+      bannerTitle: expert ? 'You\u2019re verified and live.' : 'You\u2019re verified and live.',
+      bannerSub: expert ? 'Portfolio and profile confirmed — clients can find and order from you.' : 'License, insurance and portfolio all confirmed — clients can find and hire you.',
+      leadsTabLabel: expert ? 'New orders' : 'New leads',
+      projectsTabLabel: expert ? 'Active orders' : 'Active projects',
+      projectsHeading: expert ? 'Active orders' : 'Active projects',
+      leadsNavLabel: expert ? 'Orders' : 'Leads',
+      projectsNavLabel: expert ? 'Active' : 'Projects',
+      leadsHeading: expert ? 'New matched orders' : 'New matched leads',
+      leadsSub: expert ? 'Pre-scoped and priced. Accept to start, or decline — no penalty.' : 'Pre-scoped and priced. Accept to add to your projects, or decline — no penalty.',
+      dashAvailLabel: expert ? 'Accepting new orders' : 'Accepting new leads',
+      earn: expert ? {month:'$4,120', delta:'+$1,080 released in the last 7 days', escrow:'$1,750', next:'$1,250', nextDate:'Aug 16 · to your bank', year:'$38,400'} : {month:'$18,240', delta:'+$3,210 released in the last 7 days', escrow:'$8,820', next:'$4,410', nextDate:'Aug 16 · to your bank', year:'$142,600'},
+      reviewQuote: expert ? 'Fast, clean CAD from a rough sketch — turned around in two days.' : 'Cleanest permit set our contractor had seen. Cleared first try.',
+      reviewBy: expert ? '— Marcus R. · Drafting, Oakland' : '— Rebecca L. · Addition, Berkeley',
+      ratingCount: expert ? 'From 32 delivered orders' : 'From 47 completed projects',
+      showApply: ()=>this.setState({view:'apply'}), showDash: ()=>{ this.setState({view:'dashboard'}); if(typeof window!=='undefined')window.scrollTo({top:0}); }, showEarnings: ()=>{ this.setState({view:'earnings'}); if(typeof window!=='undefined')window.scrollTo({top:0}); },
+      swApplyStyle: swActive(s.view==='apply'), swDashStyle: swActive(s.view!=='apply'),
+      navDashStyle: `padding:8px 14px;border-radius:9px;font-size:14px;font-weight:${s.view==='dashboard'?700:600};border:none;font-family:inherit;cursor:pointer;background:${s.view==='dashboard'?'#e7efff':'transparent'};color:${s.view==='dashboard'?'#0b3fcc':'#5b6493'};`,
+      navEarnStyle: `padding:8px 14px;border-radius:9px;font-size:14px;font-weight:${s.view==='earnings'?700:600};border:none;font-family:inherit;cursor:pointer;background:${s.view==='earnings'?'#e7efff':'transparent'};color:${s.view==='earnings'?'#0b3fcc':'#5b6493'};`,
+      // onboarding
+      submitted: s.submitted, notSubmitted: !s.submitted,
+      stepper, stepKicker:m.k, stepTitle:m.t, stepSub:m.sub, uploadIcon,
+      isS1:s.step===1, isS2:s.step===2, isS3:s.step===3, isS4:s.step===4, isS5:s.step===5, isS6:s.step===6, isS7:s.step===7,
+      firmFields, portfolio, typeChips, specChips, jurisChips, engageOpts,
+      radius:s.radius, onRadius:(e)=>this.setState({radius:+e.target.value}),
+      capacity:s.capacity, onCapacity:(e)=>this.setState({capacity:+e.target.value}),
+      remoteTrack:track(s.remote), remoteKnob:knob(s.remote), toggleRemote:()=>this.setState({remote:!s.remote}),
+      availTrack:track(s.avail), availKnob:knob(s.avail), toggleAvail:()=>this.setState({avail:!s.avail}),
+      canBack: s.step>1, back:()=>this.go(s.step-1),
+      next: ()=> s.step<7 ? this.go(s.step+1) : this.setState({submitted:true, ...(typeof window!=='undefined'&&window.scrollTo({top:0}))}),
+      nextLabel: s.step<7 ? 'Continue →' : 'Submit application →',
+      checklist, pct:pctVal, pctBar, nextSteps,
+      // dashboard
+      stats, leads, pendingCount, projects, activeCount, earnBars, messages, profileItems, agenda, payouts,
+      showLeadsTab: s.workTab==='leads', showProjectsTab: s.workTab==='projects',
+      tabLeadsStyle: `flex:1;padding:12px;border-radius:11px;border:none;font-family:inherit;font-size:14.5px;font-weight:700;cursor:pointer;background:${s.workTab==='leads'?'#fff':'transparent'};color:${s.workTab==='leads'?'#0b3fcc':'#5b6493'};box-shadow:${s.workTab==='leads'?'0 1px 3px rgba(4,10,40,.12)':'none'};`,
+      tabProjectsStyle: `flex:1;padding:12px;border-radius:11px;border:none;font-family:inherit;font-size:14.5px;font-weight:700;cursor:pointer;background:${s.workTab==='projects'?'#fff':'transparent'};color:${s.workTab==='projects'?'#0b3fcc':'#5b6493'};box-shadow:${s.workTab==='projects'?'0 1px 3px rgba(4,10,40,.12)':'none'};`,
+      showLeads: ()=>this.setState({workTab:'leads'}), showProjects: ()=>this.setState({workTab:'projects'}),
+      goLeads: ()=>{ this.setState({view:'dashboard', workTab:'leads'}); if(typeof window!=='undefined')window.scrollTo({top:0}); },
+      goProjects: ()=>{ this.setState({view:'dashboard', workTab:'projects'}); if(typeof window!=='undefined')window.scrollTo({top:0}); },
+      navLeadsStyle: `padding:8px 14px;border-radius:9px;font-size:14px;font-weight:${s.view==='dashboard'&&s.workTab==='leads'?700:600};border:none;font-family:inherit;cursor:pointer;background:${s.view==='dashboard'&&s.workTab==='leads'?'#e7efff':'transparent'};color:${s.view==='dashboard'&&s.workTab==='leads'?'#0b3fcc':'#5b6493'};`,
+      navProjectsStyle: `padding:8px 14px;border-radius:9px;font-size:14px;font-weight:${s.view==='dashboard'&&s.workTab==='projects'?700:600};border:none;font-family:inherit;cursor:pointer;background:${s.view==='dashboard'&&s.workTab==='projects'?'#e7efff':'transparent'};color:${s.view==='dashboard'&&s.workTab==='projects'?'#0b3fcc':'#5b6493'};`,
+      availLine: s.avail ? (expert ? 'You\u2019re accepting new orders — 3 fresh matches waiting.' : 'You\u2019re accepting new leads — 3 fresh matches waiting.') : (expert ? 'New orders are paused. Turn on availability to start matching again.' : 'New leads are paused. Turn on availability to start matching again.'),
+      availSub: s.avail ? 'On · matching' : 'Off · paused',
+    };
+  }
+}
+</script>
+</body>
+</html>

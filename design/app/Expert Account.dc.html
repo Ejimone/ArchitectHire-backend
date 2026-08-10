@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f3f6fd; }
+  ::selection { background: #135bff; color: #fff; }
+  a { color: #135bff; text-decoration: none; }
+  a:hover { color: #0b3fcc; }
+  input, textarea, select { font-family: inherit; }
+  input:focus, textarea:focus, select:focus { outline: none; border-color: #135bff !important; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  @media (max-width: 900px){
+    main{ padding-left:18px !important; padding-right:18px !important; }
+    header nav{ display:none !important; }
+    [style*="repeat(3"]{ grid-template-columns:1fr !important; }
+    [style*="repeat(2"]{ grid-template-columns:1fr !important; }
+    [style*="grid-template-columns: 1fr 300px"]{ grid-template-columns:1fr !important; }
+    [style*="position: sticky"]{ position:static !important; top:auto !important; }
+    h1{ font-size:clamp(26px,7vw,34px) !important; }
+  }
+</style>
+<script src="../image-slot.js"></script>
+</helmet>
+<div style="min-height: 100vh; background: #f3f6fd; color: #0a1440; font-family: 'Hanken Grotesk', sans-serif; -webkit-font-smoothing: antialiased;">
+
+  <!-- HEADER -->
+  <header style="position: sticky; top: 0; z-index: 30; background: rgba(243,246,253,.94); backdrop-filter: blur(10px); border-bottom: 1px solid #dbe2f2;">
+    <div style="max-width: 1080px; margin: 0 auto; padding: 13px 32px; display: flex; align-items: center; gap: 24px;">
+      <a href="../marketing/For Experts.dc.html" style="display: flex; align-items: center; gap: 10px; flex-shrink: 0;">
+        <div style="width: 26px; height: 26px; display: grid; grid-template-columns: repeat(3,1fr); grid-template-rows: repeat(3,1fr); gap: 2.5px; flex-shrink: 0;"><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#ceff65;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div></div>
+        <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 700; letter-spacing: -.01em; color: #0a1440;">ArchitectHire</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; color: #0b3fcc; background: #e7efff; padding: 3px 8px; border-radius: 6px; letter-spacing: .03em;">EXPERT ONBOARDING</span>
+      </a>
+      <a href="../marketing/For Experts.dc.html" class="lk" style="margin-left: auto; font-size: 14px; color: #5b6493; font-weight: 600; flex-shrink: 0;">Save & exit</a>
+    </div>
+  </header>
+
+  <!-- SUBMITTED -->
+  <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
+  <main style="max-width: 640px; margin: 0 auto; padding: 70px 32px 90px; text-align: center; animation: fadeUp .4s ease both;">
+    <div style="width: 76px; height: 76px; border-radius: 50%; background: #e7f6ec; border: 1px solid #c2e6cf; color: #16924e; display: flex; align-items: center; justify-content: center; margin: 0 auto 22px; font-size: 38px;">✓</div>
+    <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 34px; font-weight: 800; letter-spacing: -.02em;">Application submitted</h1>
+    <p style="font-size: 17px; color: #3f4770; margin: 12px auto 0; max-width: 32em; line-height: 1.55;">{{ submitBlurb }}</p>
+    <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 26px; margin: 32px 0; text-align: left;">
+      <div style="font-size: 12px; color: #5b6493; letter-spacing: .05em; text-transform: uppercase; margin-bottom: 16px;">What happens next</div>
+      <sc-for list="{{ nextSteps }}" as="n" hint-placeholder-count="3">
+        <div style="display: flex; gap: 14px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid #eef2fb;">
+          <span style="width: 26px; height: 26px; border-radius: 50%; background: #e7efff; color: #0b3fcc; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600; flex-shrink: 0;">{{ n.mark }}</span>
+          <div><div style="font-weight: 700; font-size: 15px;">{{ n.t }}</div><div style="font-size: 13.5px; color: #5b6493; margin-top: 2px;">{{ n.d }}</div></div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+      <a href="Architect Account.dc.html?role=expert" style="background: #135bff; color: #fff; padding: 14px 26px; border-radius: 11px; font-size: 16px; font-weight: 700; box-shadow: 0 3px 0 #0b3fcc;">Preview my dashboard →</a>
+      <a href="../marketing/Services Landing.dc.html" style="background: #fff; border: 1px solid #dbe2f2; color: #0a1440; padding: 14px 26px; border-radius: 11px; font-size: 16px; font-weight: 700;">Explore the marketplace</a>
+    </div>
+  </main>
+  </sc-if>
+
+  <!-- ONBOARDING -->
+  <sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
+  <div style="border-bottom: 1px solid #dbe2f2; background: #fff;">
+    <div style="max-width: 1080px; margin: 0 auto; padding: 16px 32px; display: flex; align-items: center; gap: 6px; overflow-x: auto;">
+      <sc-for list="{{ stepper }}" as="st" hint-placeholder-count="7">
+        <div style="display: flex; align-items: center; gap: 8px; flex-shrink: 0;">
+          <span style="{{ st.numStyle }}">{{ st.mark }}</span>
+          <span style="{{ st.labelStyle }}">{{ st.label }}</span>
+          <span style="{{ st.barStyle }}"></span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <main style="max-width: 1080px; margin: 0 auto; padding: 40px 32px 120px; display: grid; grid-template-columns: 1fr 300px; gap: 36px; align-items: start;">
+    <div style="animation: fadeUp .35s ease both;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #135bff; letter-spacing: .05em;">{{ stepKicker }}</div>
+      <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 700; letter-spacing: -.02em; margin: 8px 0 6px;">{{ stepTitle }}</h1>
+      <p style="font-size: 15.5px; color: #3f4770; margin-bottom: 26px; max-width: 40em; line-height: 1.5;">{{ stepSub }}</p>
+
+      <!-- STEP 1 — DISCIPLINE & PROFILE -->
+      <sc-if value="{{ isS1 }}" hint-placeholder-val="{{ true }}">
+      <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 26px;">
+        <div style="font-size: 14px; font-weight: 700; margin-bottom: 4px;">What do you offer?</div>
+        <div style="font-size: 13px; color: #5b6493; margin-bottom: 14px;">Pick every discipline you deliver — we match orders to these.</div>
+        <div style="display: grid; grid-template-columns: repeat(2,1fr); gap: 10px;">
+          <sc-for list="{{ disciplineOpts }}" as="o" hint-placeholder-count="6">
+            <button onClick="{{ o.onClick }}" style="{{ o.style }}">
+              <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;"><span style="font-weight: 700; font-size: 14.5px; color: #232c57;">{{ o.label }}</span><span style="{{ o.checkStyle }}">{{ o.check }}</span></div>
+              <div style="font-size: 12.5px; color: #5b6493; margin-top: 3px;">{{ o.sub }}</div>
+            </button>
+          </sc-for>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 22px;">
+          <sc-for list="{{ profileFields }}" as="f" hint-placeholder-count="4">
+            <label style="{{ f.wrapStyle }}"><span style="font-size: 13px; color: #5b6493; font-weight: 600;">{{ f.label }}</span><input placeholder="{{ f.ph }}" style="width: 100%; margin-top: 6px; background: #fbfcfe; border: 1px solid #dbe2f2; border-radius: 9px; padding: 12px 14px; font-size: 14px; color: #232c57;"></label>
+          </sc-for>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- STEP 2 — PORTFOLIO -->
+      <sc-if value="{{ isS2 }}" hint-placeholder-val="{{ false }}">
+      <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 26px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <sc-for list="{{ portfolio }}" as="p" hint-placeholder-count="4">
+            <div style="border: 1px solid #e2e8f5; border-radius: 14px; overflow: hidden;">
+              <div style="height: 150px; position: relative;"><image-slot id="{{ p.slotId }}" shape="rect" fit="cover" placeholder="{{ p.ph }}"></image-slot></div>
+              <div style="padding: 12px 14px;"><input placeholder="Sample title" style="width: 100%; border: none; background: transparent; font-size: 14.5px; font-weight: 700; color: #232c57; padding: 0;"><input placeholder="Type · tool · year" style="width: 100%; border: none; background: transparent; font-size: 12.5px; color: #5b6493; padding: 2px 0 0;"></div>
+            </div>
+          </sc-for>
+        </div>
+        <button style="margin-top: 16px; width: 100%; border: 1.5px dashed #c3cfe8; border-radius: 12px; padding: 16px; background: #fafcff; color: #0b3fcc; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer;">+ Add another sample</button>
+      </div>
+      </sc-if>
+
+      <!-- STEP 3 — CREDENTIALS (discipline-aware) -->
+      <sc-if value="{{ isS3 }}" hint-placeholder-val="{{ false }}">
+      <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 26px;">
+        <!-- licensed path -->
+        <sc-if value="{{ licensed }}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 18px; background: #e7efff; border: 1px solid #cfe0ff; border-radius: 10px; padding: 12px 14px;"><span style="color: #0b3fcc;">ⓘ</span><span style="font-size: 13.5px; color: #23346b;">You selected work that requires a license or stamp ({{ licensedList }}). We verify these before those order types go live.</span></div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <label style="display: block;"><span style="font-size: 13px; color: #5b6493; font-weight: 600;">License / PE state</span>
+            <select style="width: 100%; margin-top: 6px; background: #fbfcfe; border: 1px solid #dbe2f2; border-radius: 9px; padding: 12px 14px; font-size: 14px; color: #232c57;"><option>California</option><option>Texas</option><option>New York</option><option>Florida</option></select></label>
+          <label style="display: block;"><span style="font-size: 13px; color: #5b6493; font-weight: 600;">License / PE number</span><input placeholder="e.g. PE-84021" style="width: 100%; margin-top: 6px; background: #fbfcfe; border: 1px solid #dbe2f2; border-radius: 9px; padding: 12px 14px; font-size: 14px; color: #232c57; font-family: 'IBM Plex Mono', monospace;"></label>
+        </div>
+        <div style="margin-top: 18px; border: 1.5px dashed #c3cfe8; border-radius: 12px; padding: 26px; text-align: center; background: #fafcff;">
+          <div style="width: 44px; height: 44px; border-radius: 11px; background: #e7efff; color: #135bff; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;">{{ uploadIcon }}</div>
+          <div style="font-weight: 700; font-size: 15px;">Upload your license / stamp certificate</div>
+          <div style="font-size: 13px; color: #5b6493; margin-top: 3px;">PDF or image, max 10MB · verified with the state board</div>
+        </div>
+        </sc-if>
+        <!-- unlicensed path -->
+        <sc-if value="{{ notLicensed }}" hint-placeholder-val="{{ true }}">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 18px; background: #e7f6ec; border: 1px solid #c2e6cf; border-radius: 10px; padding: 12px 14px;"><span style="color: #16924e;">✓</span><span style="font-size: 13.5px; color: #2f6b45;">No license required for your services — you can take orders nationwide. Add any certifications to stand out (optional).</span></div>
+        <div style="font-size: 14px; font-weight: 700; margin-bottom: 12px;">Certifications <span style="font-weight: 500; color: #9aa2c4;">(optional)</span></div>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+          <sc-for list="{{ certChips }}" as="c" hint-placeholder-count="5">
+            <button onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.label }}</button>
+          </sc-for>
+        </div>
+        <label style="display: block; margin-top: 20px;"><span style="font-size: 13px; color: #5b6493; font-weight: 600;">Business registration <span style="font-weight: 500; color: #9aa2c4;">(optional)</span></span><input placeholder="EIN or business number, if you have one" style="width: 100%; margin-top: 6px; background: #fbfcfe; border: 1px solid #dbe2f2; border-radius: 9px; padding: 12px 14px; font-size: 14px; color: #232c57;"></label>
+        </sc-if>
+      </div>
+      </sc-if>
+
+      <!-- STEP 4 — SKILLS & SOFTWARE -->
+      <sc-if value="{{ isS4 }}" hint-placeholder-val="{{ false }}">
+      <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 26px;">
+        <div style="font-size: 14px; font-weight: 700; margin-bottom: 12px;">Software you work in</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+          <sc-for list="{{ softwareChips }}" as="c" hint-placeholder-count="8">
+            <button onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.label }}</button>
+          </sc-for>
+        </div>
+        <div style="font-size: 14px; font-weight: 700; margin: 24px 0 12px;">Deliverables you offer</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+          <sc-for list="{{ deliverChips }}" as="c" hint-placeholder-count="8">
+            <button onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- STEP 5 — COVERAGE -->
+      <sc-if value="{{ isS5 }}" hint-placeholder-val="{{ false }}">
+      <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 26px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-bottom: 20px; border-bottom: 1px solid #eef2fb;">
+          <div><div style="font-weight: 700; font-size: 14.5px;">Work fully remote</div><div style="font-size: 13px; color: #5b6493; margin-top: 2px;">Most drafting, 3D and consult work is delivered online, anywhere.</div></div>
+          <button onClick="{{ toggleRemote }}" style="{{ remoteTrack }}"><span style="{{ remoteKnob }}"></span></button>
+        </div>
+        <label style="display: block; margin-top: 18px;"><span style="font-size: 13px; color: #5b6493; font-weight: 600;">Based in</span><input placeholder="City, State" style="width: 100%; margin-top: 6px; background: #fbfcfe; border: 1px solid #dbe2f2; border-radius: 9px; padding: 12px 14px; font-size: 14px; color: #232c57;"></label>
+        <!-- on-site radius for scanning -->
+        <sc-if value="{{ needsOnsite }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top: 18px;"><span style="font-size: 13px; color: #5b6493; font-weight: 600;">On-site radius (for scanning / site visits)</span>
+          <div style="display: flex; align-items: center; gap: 12px; margin-top: 12px;"><input type="range" min="5" max="150" value="{{ radius }}" onChange="{{ onRadius }}" style="flex: 1; accent-color: #135bff;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500; color: #0a1440; min-width: 52px; text-align: right;">{{ radius }} mi</span></div></div>
+        </sc-if>
+        <!-- licensed jurisdictions -->
+        <sc-if value="{{ licensed }}" hint-placeholder-val="{{ false }}">
+        <div style="font-size: 14px; font-weight: 700; margin: 22px 0 12px;">States you're licensed to stamp in</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+          <sc-for list="{{ stateChips }}" as="c" hint-placeholder-count="6">
+            <button onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.label }}</button>
+          </sc-for>
+        </div>
+        </sc-if>
+        <sc-if value="{{ notLicensed }}" hint-placeholder-val="{{ true }}">
+        <div style="display: flex; align-items: center; gap: 10px; margin-top: 20px; background: #e7f6ec; border: 1px solid #c2e6cf; border-radius: 10px; padding: 12px 14px;"><span style="color: #16924e;">✓</span><span style="font-size: 13.5px; color: #2f6b45;">Your services need no license, so you'll be matched with clients in all 52 US jurisdictions.</span></div>
+        </sc-if>
+      </div>
+      </sc-if>
+
+      <!-- STEP 6 — RATES -->
+      <sc-if value="{{ isS6 }}" hint-placeholder-val="{{ false }}">
+      <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 26px;">
+        <div style="font-size: 14px; font-weight: 700; margin-bottom: 12px;">How you like to price</div>
+        <div style="display: flex; gap: 12px;">
+          <sc-for list="{{ engageOpts }}" as="o" hint-placeholder-count="3">
+            <button onClick="{{ o.onClick }}" style="{{ o.style }}"><div style="font-weight: 700; font-size: 15px;">{{ o.t }}</div><div style="font-size: 13px; color: #5b6493; margin-top: 3px;">{{ o.d }}</div></button>
+          </sc-for>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px;">
+          <label style="display: block;"><span style="font-size: 13px; color: #5b6493; font-weight: 600;">Your hourly rate</span>
+            <div style="position: relative; margin-top: 6px;"><span style="position: absolute; left: 14px; top: 12px; color: #9aa2c4; font-size: 14px;">$</span><input placeholder="75" style="width: 100%; background: #fbfcfe; border: 1px solid #dbe2f2; border-radius: 9px; padding: 12px 14px 12px 26px; font-size: 14px; color: #232c57; font-family: 'IBM Plex Mono', monospace;"><span style="position: absolute; right: 14px; top: 12px; color: #9aa2c4; font-size: 13px;">/ hr</span></div></label>
+          <label style="display: block;"><span style="font-size: 13px; color: #5b6493; font-weight: 600;">Typical turnaround</span>
+            <select style="width: 100%; margin-top: 6px; background: #fbfcfe; border: 1px solid #dbe2f2; border-radius: 9px; padding: 12px 14px; font-size: 14px; color: #232c57;"><option>1–3 days</option><option>3–7 days</option><option>1–2 weeks</option></select></label>
+        </div>
+        <div style="margin-top: 20px;"><span style="font-size: 13px; color: #5b6493; font-weight: 600;">Orders you can take at once</span>
+          <div style="display: flex; align-items: center; gap: 12px; margin-top: 12px;"><input type="range" min="1" max="15" value="{{ capacity }}" onChange="{{ onCapacity }}" style="flex: 1; accent-color: #135bff;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500; color: #0a1440; min-width: 80px; text-align: right;">{{ capacity }} orders</span></div></div>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-top: 24px; padding-top: 20px; border-top: 1px solid #eef2fb;">
+          <div><div style="font-weight: 700; font-size: 14.5px;">Accepting new orders right now</div><div style="font-size: 13px; color: #5b6493; margin-top: 2px;">You can pause this anytime</div></div>
+          <button onClick="{{ toggleAvail }}" style="{{ availTrack }}"><span style="{{ availKnob }}"></span></button>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- STEP 7 — PAYOUT & AGREEMENTS -->
+      <sc-if value="{{ isS7 }}" hint-placeholder-val="{{ false }}">
+      <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 26px;">
+        <div style="font-size: 14px; font-weight: 700; margin-bottom: 12px;">Payout account</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <label style="display: block;"><span style="font-size: 13px; color: #5b6493; font-weight: 600;">Bank account (for deposits)</span><input placeholder="Connect via Stripe" style="width: 100%; margin-top: 6px; background: #fbfcfe; border: 1px solid #dbe2f2; border-radius: 9px; padding: 12px 14px; font-size: 14px; color: #232c57;"></label>
+          <label style="display: block;"><span style="font-size: 13px; color: #5b6493; font-weight: 600;">Business entity</span>
+            <select style="width: 100%; margin-top: 6px; background: #fbfcfe; border: 1px solid #dbe2f2; border-radius: 9px; padding: 12px 14px; font-size: 14px; color: #232c57;"><option>Sole proprietor / freelancer</option><option>LLC</option><option>Corporation</option></select></label>
+        </div>
+        <!-- E&O only for licensed -->
+        <sc-if value="{{ licensed }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top: 18px; border: 1.5px dashed #c3cfe8; border-radius: 12px; padding: 22px; text-align: center; background: #fafcff;">
+          <div style="width: 44px; height: 44px; border-radius: 11px; background: #e7efff; color: #135bff; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;">{{ uploadIcon }}</div>
+          <div style="font-weight: 700; font-size: 15px;">Upload your E&O insurance certificate</div>
+          <div style="font-size: 13px; color: #5b6493; margin-top: 3px;">Required for stamped / licensed work · PDF, max 10MB</div>
+        </div>
+        </sc-if>
+        <label style="display: flex; align-items: flex-start; gap: 12px; margin-top: 20px; cursor: pointer;"><span style="width: 20px; height: 20px; border-radius: 6px; background: #135bff; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; margin-top: 1px;">✓</span><span style="font-size: 13.5px; color: #3f4770; line-height: 1.5;">I've completed my W-9 and agree to the <a href="#">Provider Terms</a>, <a href="#">Escrow Agreement</a> and <a href="#">Code of Conduct</a>.</span></label>
+      </div>
+      </sc-if>
+
+      <!-- nav -->
+      <div style="display: flex; align-items: center; gap: 14px; margin-top: 26px;">
+        <sc-if value="{{ canBack }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ back }}" style="background: transparent; color: #3f4770; border: 1px solid #dbe2f2; padding: 14px 22px; border-radius: 11px; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer;">← Back</button>
+        </sc-if>
+        <button onClick="{{ next }}" style="margin-left: auto; background: #135bff; color: #fff; border: none; padding: 15px 30px; border-radius: 11px; font-family: inherit; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 3px 0 #0b3fcc;">{{ nextLabel }}</button>
+      </div>
+    </div>
+
+    <!-- right rail -->
+    <aside style="position: sticky; top: 90px;">
+      <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 22px;">
+        <div style="font-size: 12px; color: #5b6493; letter-spacing: .05em; text-transform: uppercase; margin-bottom: 14px;">Your application</div>
+        <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px;"><span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; font-weight: 700;">{{ pct }}%</span><span style="font-size: 13px; color: #5b6493;">complete</span></div>
+        <div style="height: 7px; border-radius: 100px; background: #eef2fb; overflow: hidden; margin-bottom: 18px;"><div style="{{ pctBar }}"></div></div>
+        <div style="display: flex; flex-direction: column; gap: 3px;">
+          <sc-for list="{{ checklist }}" as="c" hint-placeholder-count="7">
+            <div style="display: flex; align-items: center; gap: 10px; padding: 7px 0;"><span style="{{ c.dotStyle }}">{{ c.mark }}</span><span style="{{ c.labelStyle }}">{{ c.label }}</span></div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="background: #0a1440; border-radius: 16px; padding: 20px; margin-top: 16px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #ceff65; letter-spacing: .04em;">{{ railKicker }}</div>
+        <p style="font-size: 13.5px; color: #b9c3e8; line-height: 1.55; margin-top: 8px;">{{ railBody }}</p>
+      </div>
+    </aside>
+  </main>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1080, &quot;height&quot;: 900}}">
+class Component extends DCLogic {
+  state = {
+    step: 1, submitted: false,
+    disciplines: ['CAD drafting'],
+    certs: [], software: ['AutoCAD'], deliver: ['2D drawing sets'], states: ['California'],
+    remote: true, avail: true, radius: 40, capacity: 5, engage: 'both',
+  };
+  go(n){ this.setState({ step: Math.max(1, Math.min(7, n)) }); if (typeof window!=='undefined') window.scrollTo({top:0}); }
+  toggleIn(key, val){ this.setState(s=>{ const a=s[key]; return { [key]: a.includes(val) ? a.filter(x=>x!==val) : [...a, val] }; }); }
+
+  renderVals(){
+    const s = this.state;
+    const el = React.createElement;
+    const uploadIcon = el('svg',{width:22,height:22,viewBox:'0 0 24 24',fill:'none',stroke:'currentColor',strokeWidth:1.8,strokeLinecap:'round',strokeLinejoin:'round'},[el('path',{key:0,d:'M12 16V4'}),el('path',{key:1,d:'M7 9l5-5 5 5'}),el('path',{key:2,d:'M5 20h14'})]);
+
+    const LICENSED = ['Structural / MEP engineering','Energy / Title-24','Permit & zoning'];
+    const ONSITE = ['3D scanning & BIM'];
+    const licensedSel = s.disciplines.filter(d=>LICENSED.includes(d));
+    const licensed = licensedSel.length>0;
+    const needsOnsite = s.disciplines.some(d=>ONSITE.includes(d));
+
+    // ---- toggles ----
+    const track = (on)=>`position:relative;width:46px;height:26px;border-radius:100px;border:none;cursor:pointer;flex-shrink:0;background:${on?'#135bff':'#c9d4ec'};transition:background .18s;`;
+    const knob = (on)=>`position:absolute;top:3px;left:${on?'23px':'3px'};width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(4,10,40,.3);transition:left .18s;`;
+    const chip = (on)=>`padding:9px 15px;border-radius:100px;border:1px solid ${on?'#135bff':'#dbe2f2'};background:${on?'#e7efff':'#fff'};color:${on?'#0b3fcc':'#3f4770'};font-family:inherit;font-size:14px;font-weight:${on?700:500};cursor:pointer;`;
+    const bigOpt=(on)=>`flex:1;text-align:left;padding:16px;border-radius:12px;border:1.5px solid ${on?'#135bff':'#e2e8f5'};background:${on?'#e7efff':'#fff'};cursor:pointer;font-family:inherit;`;
+
+    // ---- step 1: disciplines ----
+    const discDefs = [
+      ['CAD drafting','Drawings from sketches & redlines'],
+      ['3D & visualization','Renders, floor plans, walkthroughs'],
+      ['3D scanning & BIM','Point clouds & scan-to-BIM'],
+      ['Structural / MEP engineering','Calcs & licensed stamps'],
+      ['Energy / Title-24','Compliance modeling'],
+      ['Permit & zoning','Expediting & entitlements'],
+    ];
+    const disciplineOpts = discDefs.map(([label,sub])=>{ const on=s.disciplines.includes(label); return {
+      label, sub, style:bigOpt(on), onClick:()=>this.toggleIn('disciplines',label),
+      check: on?'✓':'', checkStyle:`width:20px;height:20px;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;${on?'background:#135bff;color:#fff;':'background:#eef2fb;border:1px solid #dbe2f2;'}`,
+    }; });
+    const profileFields = [
+      {label:'Your full name', ph:'Sam Torres', wide:false},
+      {label:'Studio / business (optional)', ph:'Freelance', wide:false},
+      {label:'Email', ph:'you@email.com', wide:false},
+      {label:'Years of experience', ph:'8', wide:false},
+    ].map(f=>({...f, wrapStyle:'display:block;'}));
+
+    const portfolio = [
+      {slotId:'exp-pf1', ph:'Drop a work sample'},
+      {slotId:'exp-pf2', ph:'Drop a work sample'},
+      {slotId:'exp-pf3', ph:'Drop a work sample'},
+      {slotId:'exp-pf4', ph:'Drop a work sample'},
+    ];
+
+    const certChips = ['Autodesk Certified','Revit Certified','Matterport Pro','LEED Green Assoc.','OSHA-10'].map(t=>({label:t, style:chip(s.certs.includes(t)), onClick:()=>this.toggleIn('certs',t)}));
+    const softwareChips = ['AutoCAD','Revit','SketchUp','ArchiCAD','Lumion','Enscape','3ds Max','Blender','Rhino','Bluebeam'].map(t=>({label:t, style:chip(s.software.includes(t)), onClick:()=>this.toggleIn('software',t)}));
+    const deliverChips = ['2D drawing sets','As-builts','Permit sets','Interior renders','Exterior renders','3D floor plans','Walkthroughs','Point clouds','BIM models','Energy calcs'].map(t=>({label:t, style:chip(s.deliver.includes(t)), onClick:()=>this.toggleIn('deliver',t)}));
+    const stateChips = ['California','Texas','New York','Florida','Washington','Illinois'].map(t=>({label:t, style:chip(s.states.includes(t)), onClick:()=>this.toggleIn('states',t)}));
+
+    const engageOpts=[
+      {v:'hourly',t:'Hourly',d:'Bill tracked time'},
+      {v:'flat',t:'Per deliverable',d:'Flat price per item'},
+      {v:'both',t:'Both',d:'Decide per order'},
+    ].map(o=>({...o, style:bigOpt(s.engage===o.v), onClick:()=>this.setState({engage:o.v})}));
+
+    // ---- stepper / meta ----
+    const stepMeta = {
+      1:{k:'STEP 1 · YOUR SERVICES',t:'What you offer & who you are',sub:'Choose your disciplines — the rest of onboarding adapts to what you do.'},
+      2:{k:'STEP 2 · PORTFOLIO',t:'Show your best work',sub:'A few samples in your disciplines. Strong portfolios get matched far more often.'},
+      3:{k:'STEP 3 · CREDENTIALS',t: licensed ? 'Verify your license' : 'Credentials & certifications', sub: licensed ? 'Some of your services require a license or stamp — we verify those with the issuing board.' : 'Your services need no license. Add certifications to stand out (all optional).'},
+      4:{k:'STEP 4 · SKILLS',t:'Software & deliverables',sub:'Tell us what you work in and what you produce, so orders match your toolset.'},
+      5:{k:'STEP 5 · COVERAGE',t:'Where you work',sub:'Most work is remote. Licensed work is matched only where you\u2019re cleared.'},
+      6:{k:'STEP 6 · RATES',t:'Rates & availability',sub:'Set your own pricing and how much work you want. You\u2019re always in control.'},
+      7:{k:'STEP 7 · PAYOUT',t:'Payout & agreements',sub:'Where you get paid, plus the agreements that keep everyone protected.'},
+    };
+    const m = stepMeta[s.step];
+
+    const stDefs = [['Services',1],['Portfolio',2],['Credentials',3],['Skills',4],['Coverage',5],['Rates',6],['Payout',7]];
+    const stepper = stDefs.map(([label,n],i)=>{ const done=s.step>n, active=s.step===n; return {
+      label, mark: done?'✓':String(n),
+      numStyle:`display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;${done?'background:#16924e;color:#fff;':active?'background:#135bff;color:#fff;':'background:#e2e8f5;color:#8b93b5;'}`,
+      labelStyle:`font-size:13.5px;font-weight:${active?700:600};color:${active?'#0a1440':done?'#16924e':'#8b93b5'};`,
+      barStyle:`width:${i<stDefs.length-1?22:0}px;height:2px;background:#dbe2f2;margin:0 2px;display:${i<stDefs.length-1?'inline-block':'none'};`,
+    }; });
+    const checklist = stDefs.map(([label,n])=>{ const done=s.step>n, active=s.step===n; return {
+      label, mark: done?'✓':'',
+      dotStyle:`width:20px;height:20px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;${done?'background:#16924e;color:#fff;':active?'background:#135bff;color:#fff;':'background:#eef2fb;border:1px solid #dbe2f2;'}`,
+      labelStyle:`font-size:13.5px;font-weight:${active?700:600};color:${done?'#16924e':active?'#0a1440':'#8b93b5'};`,
+    }; });
+    const pctVal = Math.round((s.step/7)*100);
+    const pctBar = `height:100%;width:${pctVal}%;background:linear-gradient(90deg,#135bff,#ceff65);border-radius:100px;transition:width .3s;`;
+
+    const railKicker = licensed ? 'VERIFICATION' : 'GOOD TO KNOW';
+    const railBody = licensed
+      ? 'Licensed disciplines are verified once with the issuing board — clients trust your stamp from day one, and you never re-prove it per order.'
+      : 'No license needed for your services, so approval is fast — most drafting and 3D experts go live within about two days.';
+
+    const submitBlurb = licensed
+      ? 'Thanks! We\u2019re reviewing your portfolio and verifying your license and insurance. Licensed disciplines are usually approved within three business days.'
+      : 'Thanks! We\u2019re reviewing your portfolio and profile. Most non-licensed experts are approved within about two business days.';
+    const nextSteps = licensed
+      ? [{mark:'1',t:'Credential review',d:'We verify your license and insurance with the issuing board.'},{mark:'2',t:'Portfolio check',d:'A quick quality pass on your samples and profile.'},{mark:'3',t:'You go live',d:'Your first matched orders arrive within 48 hours of approval.'}]
+      : [{mark:'1',t:'Portfolio review',d:'A quick quality pass on your samples and profile.'},{mark:'2',t:'Profile approved',d:'Usually within two business days — no board checks needed.'},{mark:'3',t:'You go live',d:'Your first matched orders arrive within 48 hours of approval.'}];
+
+    return {
+      submitted: s.submitted, notSubmitted: !s.submitted,
+      stepper, stepKicker:m.k, stepTitle:m.t, stepSub:m.sub, uploadIcon,
+      isS1:s.step===1, isS2:s.step===2, isS3:s.step===3, isS4:s.step===4, isS5:s.step===5, isS6:s.step===6, isS7:s.step===7,
+      licensed, notLicensed: !licensed, licensedList: licensedSel.join(', '), needsOnsite,
+      disciplineOpts, profileFields, portfolio, certChips, softwareChips, deliverChips, stateChips, engageOpts,
+      radius:s.radius, onRadius:(e)=>this.setState({radius:+e.target.value}),
+      capacity:s.capacity, onCapacity:(e)=>this.setState({capacity:+e.target.value}),
+      remoteTrack:track(s.remote), remoteKnob:knob(s.remote), toggleRemote:()=>this.setState({remote:!s.remote}),
+      availTrack:track(s.avail), availKnob:knob(s.avail), toggleAvail:()=>this.setState({avail:!s.avail}),
+      canBack: s.step>1, back:()=>this.go(s.step-1),
+      next: ()=> s.step<7 ? this.go(s.step+1) : (this.setState({submitted:true}), (function(){try{localStorage.setItem('ah_role','expert')}catch(e){} if(typeof window!=='undefined')window.scrollTo({top:0});})()),
+      nextLabel: s.step<7 ? 'Continue →' : 'Submit application →',
+      checklist, pct:pctVal, pctBar, railKicker, railBody, submitBlurb, nextSteps,
+    };
+  }
+}
+</script>
+</body>
+</html>

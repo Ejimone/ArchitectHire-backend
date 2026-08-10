@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f3f6fd; }
+  ::selection { background: #135bff; color: #fff; }
+  a { color: #135bff; text-decoration: none; }
+  a:hover { color: #0b3fcc; }
+  .lk { color: #0a1440; font-weight: 600; }
+  .lk:hover { color: #135bff; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  @media (max-width: 900px){
+    main{ padding-left:18px !important; padding-right:18px !important; }
+    header nav{ display:none !important; }
+    [style*="repeat(3"]{ grid-template-columns:1fr !important; }
+    [style*="repeat(2"]{ grid-template-columns:1fr !important; }
+    [style*="column-count: 3"]{ column-count:1 !important; }
+    [style*="padding: 52px"]{ padding:30px 22px !important; }
+    h1{ font-size:clamp(30px,7vw,42px) !important; }
+  }
+  @media (max-width: 1100px) and (min-width: 901px){
+    [style*="column-count: 3"]{ column-count:2 !important; }
+  }
+</style>
+<script src="../image-slot.js"></script>
+</helmet>
+<div style="background: #f3f6fd; color: #0a1440; font-family: 'Hanken Grotesk', sans-serif; -webkit-font-smoothing: antialiased;">
+
+  <x-import component-from-global-scope="site-nav" from="./site-nav.js" style="display:contents" hint-size="100%,64px"></x-import>
+
+  <main style="max-width: 1200px; margin: 0 auto; padding: 0 32px 100px;">
+
+    <section style="margin-top: 44px; animation: fadeUp .5s ease both;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #135bff; letter-spacing: .06em;">INSPIRATION</div>
+      <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(36px, 3.4vw, 52px); font-weight: 800; letter-spacing: -.02em; margin-top: 10px; max-width: 15em; text-wrap: balance;">Find your look before you build</h1>
+      <p style="font-size: 18px; color: #3f4770; margin-top: 12px; max-width: 42em; line-height: 1.55; text-wrap: pretty;">Browse real spaces by room, style, and project type. Save the ones that feel right — then hand them to a licensed architect as the starting point for your own build.</p>
+    </section>
+
+    <!-- FILTER -->
+    <div style="margin-top: 32px; display: flex; align-items: center; flex-wrap: wrap; gap: 12px;">
+      <div style="{{ selWrap }}">
+        <label style="{{ selLabel }}">Room</label>
+        <select value="{{ cat }}" onChange="{{ onCat }}" style="{{ selEl }}">
+          <sc-for list="{{ catOpts }}" as="o" hint-placeholder-count="8"><option value="{{ o }}">{{ o }}</option></sc-for>
+        </select>
+        <span style="{{ caret }}">▾</span>
+      </div>
+      <div style="{{ selWrap }}">
+        <label style="{{ selLabel }}">Style</label>
+        <select value="{{ styleSel }}" onChange="{{ onStyle }}" style="{{ selEl }}">
+          <sc-for list="{{ styleOpts }}" as="o" hint-placeholder-count="7"><option value="{{ o }}">{{ o }}</option></sc-for>
+        </select>
+        <span style="{{ caret }}">▾</span>
+      </div>
+      <div style="{{ selWrap }}">
+        <label style="{{ selLabel }}">Sort</label>
+        <select value="{{ sortSel }}" onChange="{{ onSort }}" style="{{ selEl }}">
+          <sc-for list="{{ sortOpts }}" as="o" hint-placeholder-count="3"><option value="{{ o }}">{{ o }}</option></sc-for>
+        </select>
+        <span style="{{ caret }}">▾</span>
+      </div>
+      <span style="font-size: 13.5px; color: #8b93b5; font-family: 'IBM Plex Mono', monospace; margin-left: auto;">{{ countLine }}</span>
+    </div>
+
+    <!-- BOARD -->
+    <section style="margin-top: 24px; display: grid; grid-template-columns: repeat(3,1fr); gap: 22px;">
+      <sc-for list="{{ items }}" as="i" hint-placeholder-count="9">
+        <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; transition: all .2s ease;" style-hover="border-color: #135bff; box-shadow: 0 10px 26px rgba(19,91,255,.12); transform: translateY(-2px);">
+          <div style="height: 210px; position: relative;">
+            <image-slot id="{{ i.slotId }}" shape="rect" fit="cover" placeholder="{{ i.ph }}"></image-slot>
+            <span style="position: absolute; left: 13px; top: 13px; background: rgba(10,20,64,.82); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; padding: 5px 10px; border-radius: 100px;">{{ i.tag }}</span>
+            <button onClick="{{ i.onLike }}" aria-label="Like" style="{{ i.likeStyle }}"><span style="font-size: 14px;">{{ i.heart }}</span><span>{{ i.likes }}</span></button>
+          </div>
+          <div style="padding: 16px 18px 18px;">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #135bff; letter-spacing: .03em;">{{ i.style }}</div>
+            <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; line-height: 1.2; font-weight: 700; letter-spacing: -.01em; color: #0a1440; margin-top: 6px; text-wrap: balance;">{{ i.title }}</h3>
+          </div>
+        </div>
+      </sc-for>
+    </section>
+
+    <!-- COLLECTIONS -->
+    <section style="margin-top: 60px;">
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 700; letter-spacing: -.02em;">Curated collections</h2>
+      <p style="font-size: 16px; color: #3f4770; margin-top: 8px;">Hand-picked boards for the most-requested projects.</p>
+      <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; margin-top: 24px;">
+        <sc-for list="{{ collections }}" as="c" hint-placeholder-count="3">
+          <a href="#" style="position: relative; border-radius: 18px; overflow: hidden; min-height: 260px; display: flex; align-items: flex-end; transition: all .2s ease;" style-hover="transform: translateY(-3px); box-shadow: 0 14px 34px rgba(4,10,40,.28);">
+            <image-slot id="{{ c.slotId }}" shape="rect" fit="cover" placeholder="{{ c.ph }}" style="position: absolute; inset: 0; width: 100%; height: 100%;"></image-slot>
+            <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,20,64,.86) 8%, rgba(10,20,64,.15) 60%, transparent);"></div>
+            <div style="position: relative; padding: 22px;">
+              <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #ceff65; letter-spacing: .04em;">{{ c.count }}</div>
+              <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px; font-weight: 700; color: #fff; letter-spacing: -.01em; margin-top: 6px;">{{ c.title }}</h3>
+              <p style="font-size: 13.5px; color: #c3cdec; margin-top: 5px; line-height: 1.45;">{{ c.desc }}</p>
+            </div>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section style="margin-top: 60px; background: #0a1440; border-radius: 22px; padding: 52px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 30px; align-items: center;">
+      <div>
+        <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 34px; font-weight: 800; color: #fff; letter-spacing: -.02em; text-wrap: balance;">Turn a saved look into a real project</h2>
+        <p style="font-size: 17px; color: #b9c3e8; margin: 12px 0 26px; line-height: 1.55; max-width: 34em;">Share the spaces you love with a licensed architect and get an instant estimate for building your version of them.</p>
+        <a href="../app/Get Started.dc.html" style="display: inline-block; background: #ceff65; color: #0a1440; padding: 16px 32px; border-radius: 12px; font-size: 17px; font-weight: 800; box-shadow: 0 4px 0 #a9d94a;">Start with your inspiration →</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <sc-for list="{{ steps }}" as="s" hint-placeholder-count="3">
+          <div style="display: flex; gap: 14px; align-items: flex-start;">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #ceff65; flex-shrink: 0; padding-top: 2px;">{{ s.k }}</div>
+            <div><div style="font-weight: 700; font-size: 15px; color: #fff;">{{ s.t }}</div><div style="font-size: 13.5px; color: #9fb4ff; margin-top: 2px; line-height: 1.45;">{{ s.d }}</div></div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </main>
+
+  <x-import component-from-global-scope="site-footer" from="./site-footer.js" hint-size="100%,460px"></x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1200, &quot;height&quot;: 900}}">
+class Component extends DCLogic {
+  state = { cat: 'All', styleSel: 'All styles', sortSel: 'Most popular', liked: {} };
+  renderVals(){
+    const selWrap = 'position:relative;display:inline-flex;align-items:center;background:#fff;border:1px solid #dbe4f8;border-radius:10px;padding:0 34px 0 14px;height:44px;';
+    const selLabel = "font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8b93b5;letter-spacing:.05em;text-transform:uppercase;margin-right:8px;pointer-events:none;";
+    const selEl = 'appearance:none;-webkit-appearance:none;background:transparent;border:none;outline:none;font-family:inherit;font-size:14px;font-weight:600;color:#0a1440;cursor:pointer;padding:0;';
+    const caret = 'position:absolute;right:13px;color:#8b93b5;font-size:12px;pointer-events:none;';
+
+    const catOpts = ['All','Kitchens','ADUs','Additions','Bathrooms','Exteriors','Living spaces','Commercial'];
+    const styleOpts = ['All styles','Modern','Scandinavian','Industrial','Rustic','Minimal','Classic'];
+    const sortOpts = ['Most popular','Newest','A–Z'];
+    const onCat = (e)=>this.setState({ cat:e.target.value });
+    const onStyle = (e)=>this.setState({ styleSel:e.target.value });
+    const onSort = (e)=>this.setState({ sortSel:e.target.value });
+
+    const allItems = [
+      { slotId:'insp1', tag:'Kitchens', h:340, title:'Warm oak galley with a marble run', style:'Modern organic', ph:'Oak & marble kitchen', palette:['#e8dcc6','#c9a26b','#3a3a38','#f4f1ea'] },
+      { slotId:'insp2', tag:'ADUs', h:250, title:'Compact backyard studio, full-height glass', style:'Scandinavian', ph:'Backyard ADU exterior', palette:['#d8d3c8','#8a8577','#2f3330','#eef0ec'] },
+      { slotId:'insp3', tag:'Living spaces', h:300, title:'Double-height living room with a black steel stair', style:'Industrial warm', ph:'Double-height living room', palette:['#1c1c1c','#b98b57','#e6e0d4','#7d7468'] },
+      { slotId:'insp4', tag:'Bathrooms', h:360, title:'Micro-cement wet room in sage', style:'Minimal spa', ph:'Sage wet-room bathroom', palette:['#b7c2ac','#e9e6dd','#4a5348','#d7cbb8'] },
+      { slotId:'insp5', tag:'Additions', h:260, title:'Second-story addition on a 1920s bungalow', style:'Transitional', ph:'Bungalow second-story addition', palette:['#c7522a','#e5c185','#f0ece1','#33372c'] },
+      { slotId:'insp6', tag:'Exteriors', h:320, title:'Charred-cedar facade with bronze windows', style:'Modern rustic', ph:'Charred-cedar house facade', palette:['#2a2622','#7b5e3b','#c9bfae','#4e4b45'] },
+      { slotId:'insp7', tag:'Kitchens', h:270, title:'Two-tone shaker with a plaster hood', style:'Classic revival', ph:'Two-tone shaker kitchen', palette:['#2e3b46','#e7e2d6','#c3a97f','#a9b0ab'] },
+      { slotId:'insp8', tag:'Commercial', h:310, title:'Retail-to-restaurant fit-out, warm brick', style:'Brasserie', ph:'Restaurant dining room', palette:['#7a3b2e','#d8b48a','#2b2723','#eae2d2'] },
+      { slotId:'insp9', tag:'Living spaces', h:250, title:'Sunken lounge around a plaster fireplace', style:'Coastal calm', ph:'Sunken lounge with fireplace', palette:['#e9e3d6','#c9b59a','#6f7d78','#31352f'] },
+      { slotId:'insp10', tag:'Exteriors', h:290, title:'Courtyard entry with a slatted screen', style:'Desert modern', ph:'Courtyard entry facade', palette:['#c99a6a','#e6d6bd','#3b352d','#8f7f66'] },
+      { slotId:'insp11', tag:'Bathrooms', h:280, title:'Fluted vanity in a windowed powder room', style:'Warm minimal', ph:'Powder room vanity', palette:['#d9c7a8','#f1ece2','#5b5348','#b1a892'] },
+      { slotId:'insp12', tag:'ADUs', h:330, title:'Garage conversion loft with a kitchenette', style:'Loft modern', ph:'Garage conversion ADU interior', palette:['#cfcabd','#8d8676','#26282a','#ece9e1'] },
+    ];
+    const meta = {
+      insp1:{styleTag:'Modern',likes:214}, insp2:{styleTag:'Scandinavian',likes:168},
+      insp3:{styleTag:'Industrial',likes:92}, insp4:{styleTag:'Minimal',likes:301},
+      insp5:{styleTag:'Classic',likes:76}, insp6:{styleTag:'Rustic',likes:188},
+      insp7:{styleTag:'Classic',likes:134}, insp8:{styleTag:'Rustic',likes:57},
+      insp9:{styleTag:'Minimal',likes:245}, insp10:{styleTag:'Modern',likes:119},
+      insp11:{styleTag:'Minimal',likes:98}, insp12:{styleTag:'Modern',likes:163},
+    };
+    const styleSel = this.state.styleSel;
+    const filtered = allItems.filter(i =>
+      (this.state.cat === 'All' || i.tag === this.state.cat) &&
+      (styleSel === 'All styles' || meta[i.slotId].styleTag === styleSel));
+    const sortSel = this.state.sortSel;
+    filtered.sort((a,b)=>{
+      if (sortSel === 'Most popular') return meta[b.slotId].likes - meta[a.slotId].likes;
+      if (sortSel === 'A–Z') return a.title.localeCompare(b.title);
+      return allItems.indexOf(b) - allItems.indexOf(a); // Newest
+    });
+    const items = filtered.map(i=>{
+      const m = meta[i.slotId];
+      const on = !!this.state.liked[i.slotId];
+      return {
+        slotId:i.slotId, tag:i.tag, title:i.title, style:i.style, ph:i.ph,
+        onLike:()=>this.setState(s=>({ liked:{ ...s.liked, [i.slotId]: !s.liked[i.slotId] } })),
+        heart: on ? '♥' : '♡',
+        likes: m.likes + (on ? 1 : 0),
+        likeStyle:`position:absolute;right:12px;top:11px;height:32px;padding:0 12px;border-radius:100px;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;line-height:1;font-family:inherit;background:${on?'#135bff':'rgba(255,255,255,.92)'};color:${on?'#fff':'#0a1440'};box-shadow:0 2px 8px rgba(4,10,40,.22);transition:all .18s ease;`,
+      };
+    });
+
+    const likedCount = Object.values(this.state.liked).filter(Boolean).length;
+    const countLine = `${filtered.length} ideas${this.state.cat==='All'?'':' · '+this.state.cat}${styleSel==='All styles'?'':' · '+styleSel}${likedCount?' · '+likedCount+' liked':''}`;
+
+    const collections = [
+      { slotId:'col1', count:'24 ideas', title:'Backyard ADUs under 700 sq ft', desc:'Rental-ready studios and one-bedrooms that fit tight lots.', ph:'ADU collection cover' },
+      { slotId:'col2', count:'31 ideas', title:'Kitchens that open up', desc:'Wall removals, islands, and light-first layouts.', ph:'Kitchen collection cover' },
+      { slotId:'col3', count:'18 ideas', title:'Additions that match the original', desc:'Second stories and rear extensions done seamlessly.', ph:'Addition collection cover' },
+    ];
+
+    const steps = [
+      { k:'01', t:'Save what you love', d:'Build a board of spaces, materials, and layouts.' },
+      { k:'02', t:'Get an instant estimate', d:'Answer a few questions and see a real price range.' },
+      { k:'03', t:'Match with an architect', d:'They design your version, permit-ready and stamped.' },
+    ];
+
+    const footerCols = [
+      { h:'Product', items:[
+        {label:'How it works', href:'Landing.dc.html#how'},
+        {label:'Inspiration', href:'Inspiration.dc.html'},
+        {label:'Services', href:'Services.dc.html'},
+        {label:'Instant estimate', href:'../app/Get Started.dc.html'},
+        {label:'Case studies', href:'Case Studies.dc.html'},
+      ]},
+      { h:'Explore', items:[
+        {label:'Guides', href:'Blog.dc.html'},
+        {label:'For architects', href:'Architect Landing.dc.html'},
+        {label:'By project', href:'Project Landing.dc.html'},
+        {label:'By city', href:'City Landing.dc.html'},
+      ]},
+      { h:'Company', items:[
+        {label:'About', href:'About.dc.html'},
+        {label:'Careers', href:'Careers.dc.html'},
+        {label:'Contact', href:'Contact.dc.html'},
+        {label:'Privacy', href:'Privacy.dc.html'},
+      ]},
+    ];
+
+    return { selWrap, selLabel, selEl, caret, cat:this.state.cat, styleSel, sortSel, catOpts, styleOpts, sortOpts, onCat, onStyle, onSort, items, countLine, collections, steps, footerCols };
+  }
+}
+</script>
+</body>
+</html>

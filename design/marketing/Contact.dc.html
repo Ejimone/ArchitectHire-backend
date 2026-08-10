@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f3f6fd; }
+  ::selection { background: #135bff; color: #fff; }
+  a { color: #135bff; text-decoration: none; }
+  a:hover { color: #0b3fcc; }
+  .lk { color: #0a1440; font-weight: 600; }
+  .lk:hover { color: #135bff; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  @media (max-width: 900px){
+    main{ padding-left:18px !important; padding-right:18px !important; }
+    header nav{ display:none !important; }
+    [style*="repeat(3"]{ grid-template-columns:1fr !important; }
+    [style*="grid-template-columns: 1.1fr"]{ grid-template-columns:1fr !important; }
+    [style*="grid-template-columns: 1fr 1fr"]{ grid-template-columns:1fr !important; }
+    [style*="position: sticky"]{ position:static !important; top:auto !important; }
+    [style*="padding: 15px 32px"]{ padding:12px 18px !important; }
+    [style*="padding: 40px"]{ padding:28px 22px !important; }
+    h1{ font-size:clamp(30px,7vw,42px) !important; }
+  }
+</style>
+</helmet>
+<div style="background: #f3f6fd; color: #0a1440; font-family: 'Hanken Grotesk', sans-serif; -webkit-font-smoothing: antialiased;">
+
+  <x-import component-from-global-scope="site-nav" from="./site-nav.js" style="display:contents" hint-size="100%,64px"></x-import>
+
+  <main style="max-width: 1080px; margin: 0 auto; padding: 0 32px 100px;">
+
+    <!-- HERO -->
+    <section style="margin-top: 44px; animation: fadeUp .5s ease both;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #135bff; letter-spacing: .06em;">CONTACT</div>
+      <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(34px, 3.4vw, 48px); font-weight: 800; letter-spacing: -.02em; margin-top: 10px; max-width: 16em; text-wrap: balance;">Talk to us</h1>
+      <p style="font-size: 18px; color: #3f4770; margin-top: 12px; max-width: 40em; line-height: 1.55; text-wrap: pretty;">Questions about a project, joining the network, press, or partnerships — pick the fastest route below, or send us a note.</p>
+    </section>
+
+    <!-- CONTACT METHODS -->
+    <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 30px;">
+      <sc-for list="{{ methods }}" as="m" hint-placeholder-count="3">
+        <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 24px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #135bff; letter-spacing: .05em;">{{ m.k }}</div>
+          <div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 19px; font-weight: 700; margin: 8px 0 6px;">{{ m.t }}</div>
+          <p style="font-size: 14px; line-height: 1.55; color: #5b6493;">{{ m.d }}</p>
+          <a href="{{ m.href }}" class="lk" style="display: inline-block; margin-top: 12px; color: #135bff; font-size: 14.5px;">{{ m.link }}</a>
+        </div>
+      </sc-for>
+    </div>
+
+    <!-- FORM + INFO -->
+    <section style="margin-top: 30px; display: grid; grid-template-columns: 1.1fr .9fr; gap: 24px; align-items: start;">
+      <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 18px; padding: 32px;">
+        <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 24px; font-weight: 700; letter-spacing: -.02em;">Send a message</h2>
+        <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+          <div style="background: #e7f6ec; border: 1px solid #c2e6cf; border-radius: 12px; padding: 18px; margin-top: 18px;">
+            <div style="font-weight: 700; color: #16924e; font-size: 15px;">Thanks — message received ✓</div>
+            <p style="font-size: 14px; color: #2f6b45; margin-top: 4px; line-height: 1.5;">We'll get back to you within one business day.</p>
+          </div>
+        </sc-if>
+        <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+        <form onSubmit="{{ onSubmit }}" style="margin-top: 18px; display: flex; flex-direction: column; gap: 16px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div><label style="display: block; font-size: 13px; color: #5b6493; font-weight: 600; margin-bottom: 6px;">Name</label><input value="{{ name }}" onInput="{{ onName }}" placeholder="Jordan Rivera" style="width: 100%; border: 1px solid #dbe2f2; border-radius: 10px; padding: 12px 14px; font-size: 15px; color: #0a1440; outline: none; font-family: inherit;"></div>
+            <div><label style="display: block; font-size: 13px; color: #5b6493; font-weight: 600; margin-bottom: 6px;">Email</label><input type="email" value="{{ email }}" onInput="{{ onEmail }}" placeholder="you@email.com" style="width: 100%; border: 1px solid #dbe2f2; border-radius: 10px; padding: 12px 14px; font-size: 15px; color: #0a1440; outline: none; font-family: inherit;"></div>
+          </div>
+          <div><label style="display: block; font-size: 13px; color: #5b6493; font-weight: 600; margin-bottom: 6px;">Topic</label>
+            <select value="{{ topic }}" onChange="{{ onTopic }}" style="width: 100%; border: 1px solid #dbe2f2; border-radius: 10px; padding: 12px 14px; font-size: 15px; font-weight: 600; color: #0a1440; outline: none; font-family: inherit; background: #fff; cursor: pointer;">
+              <sc-for list="{{ topics }}" as="o" hint-placeholder-count="4"><option value="{{ o }}">{{ o }}</option></sc-for>
+            </select>
+          </div>
+          <div><label style="display: block; font-size: 13px; color: #5b6493; font-weight: 600; margin-bottom: 6px;">Message</label><textarea value="{{ message }}" onInput="{{ onMessage }}" placeholder="How can we help?" rows="5" style="width: 100%; border: 1px solid #dbe2f2; border-radius: 10px; padding: 12px 14px; font-size: 15px; color: #0a1440; outline: none; font-family: inherit; resize: vertical;"></textarea></div>
+          <button type="submit" style="background: #135bff; color: #fff; border: none; padding: 15px; border-radius: 11px; font-family: inherit; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 3px 0 #0b3fcc;">Send message →</button>
+        </form>
+        </sc-if>
+      </div>
+
+      <aside style="display: flex; flex-direction: column; gap: 16px;">
+        <div style="background: #0a1440; color: #fff; border-radius: 16px; padding: 24px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #ceff65; letter-spacing: .05em;">HEADQUARTERS</div>
+          <p style="font-size: 15px; line-height: 1.6; color: #dbe6ff; margin-top: 10px;">548 Market Street, Suite 42<br>San Francisco, CA 94104</p>
+          <div style="height: 1px; background: #1d2f6e; margin: 16px 0;"></div>
+          <div style="font-size: 14px; color: #b9c3e8; line-height: 1.7;">Support: help@architecthire.com<br>Press: press@architecthire.com<br>Mon–Fri · 9am–6pm PT</div>
+        </div>
+        <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 22px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #135bff; letter-spacing: .05em; margin-bottom: 12px;">QUICK LINKS</div>
+          <div style="display: flex; flex-direction: column; gap: 9px;">
+            <a href="../app/Get Started.dc.html" class="lk" style="font-size: 14.5px;">Start a project →</a>
+            <a href="Architect Landing.dc.html" class="lk" style="font-size: 14.5px;">Join as an architect →</a>
+            <a href="Careers.dc.html" class="lk" style="font-size: 14.5px;">See open roles →</a>
+            <a href="Blog.dc.html" class="lk" style="font-size: 14.5px;">Read the guides →</a>
+          </div>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <x-import component-from-global-scope="site-footer" from="./site-footer.js" hint-size="100%,460px"></x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1080, &quot;height&quot;: 900}}">
+class Component extends DCLogic {
+  state = { name:'', email:'', topic:'A project I want to build', message:'', sent:false };
+  renderVals(){
+    const methods = [
+      { k:'CLIENTS', t:'Start a project', d:'The fastest path is an instant estimate — you\u2019ll meet matched architects in 48 hours.', href:'../app/Get Started.dc.html', link:'Get my estimate →' },
+      { k:'ARCHITECTS', t:'Join the network', d:'Licensed and want scoped, pre-qualified clients? Apply to join — verified in about three days.', href:'Architect Landing.dc.html', link:'Apply to join →' },
+      { k:'SUPPORT', t:'Existing project help', d:'Already working with an architect on-platform? Reach our support team any business day.', href:'#', link:'help@architecthire.com' },
+    ];
+    const topics = ['A project I want to build','Joining as an architect','Partnerships','Press & media','Something else'];
+    const s = this.state;
+    return {
+      methods, topics,
+      name:s.name, email:s.email, topic:s.topic, message:s.message,
+      onName:(e)=>this.setState({name:e.target.value}),
+      onEmail:(e)=>this.setState({email:e.target.value}),
+      onTopic:(e)=>this.setState({topic:e.target.value}),
+      onMessage:(e)=>this.setState({message:e.target.value}),
+      onSubmit:(e)=>{ e.preventDefault(); this.setState({sent:true}); },
+      sent:s.sent, notSent:!s.sent,
+      footerCols:[
+        { h:'Product', items:[
+          {label:'How it works', href:'Landing.dc.html#how'},
+          {label:'Services', href:'Services.dc.html'},
+        {label:'Instant estimate', href:'../app/Get Started.dc.html'},
+          {label:'Jurisdiction database', href:'Jurisdiction Database.dc.html'},
+          {label:'Case studies', href:'Case Studies.dc.html'},
+        ]},
+        { h:'Explore', items:[
+        {label:'Inspiration', href:'Inspiration.dc.html'},
+          {label:'Guides', href:'Blog.dc.html'},
+          {label:'For architects', href:'Architect Landing.dc.html'},
+          {label:'By project', href:'Project Landing.dc.html'},
+          {label:'By city', href:'City Landing.dc.html'},
+        ]},
+        { h:'Company', items:[
+          {label:'About', href:'About.dc.html'},
+          {label:'Careers', href:'Careers.dc.html'},
+          {label:'Contact', href:'Contact.dc.html'},
+          {label:'Privacy', href:'Privacy.dc.html'},
+        ]},
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f3f6fd; }
+  ::selection { background: #135bff; color: #fff; }
+  a { color: #135bff; text-decoration: none; }
+  a:hover { color: #0b3fcc; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+  /* __resp__ responsive overrides (media queries can't be inline) */
+  @media (max-width: 900px){
+    main{ padding-left:18px !important; padding-right:18px !important; }
+    header nav{ display:none !important; }
+    [style*="repeat(4"]{ grid-template-columns:1fr 1fr !important; }
+    [style*="repeat(3"]{ grid-template-columns:1fr !important; }
+    [style*="repeat(2"]{ grid-template-columns:1fr !important; }
+    [style*="grid-template-columns: 1."]{ grid-template-columns:1fr !important; }
+    [style*="grid-template-columns: 1fr 1fr"]{ grid-template-columns:1fr !important; }
+    [style*="position: sticky"]{ position:static !important; top:auto !important; }
+    [style*="padding: 15px 32px"]{ padding:12px 18px !important; }
+    [style*="padding: 18px 32px"]{ padding-left:18px !important; padding-right:18px !important; }
+    [style*="padding: 52px 44px"],[style*="padding: 48px 44px"],[style*="padding: 44px 42px"],[style*="padding: 44px 44px"]{ padding:30px 22px !important; }
+    [style*="padding: 56px"],[style*="padding: 52px;"],[style*="padding: 48px"],[style*="padding: 44px;"],[style*="padding: 40px"],[style*="padding: 34px"]{ padding:32px 22px !important; }
+    h1{ font-size:clamp(30px,7vw,42px) !important; }
+  }
+  @media (max-width: 520px){
+    [style*="repeat(4"]{ grid-template-columns:1fr !important; }
+    [style*="gap: 38px"],[style*="gap: 40px"]{ gap:22px !important; }
+  }
+</style>
+<script src="../image-slot.js"></script>
+</helmet>
+<div style="min-height: 100vh; background: #f3f6fd; color: #0a1440; font-family: 'Hanken Grotesk', sans-serif; -webkit-font-smoothing: antialiased;">
+
+  <!-- HEADER -->
+  <header style="position: sticky; top: 0; z-index: 30; background: rgba(243,246,253,.94); backdrop-filter: blur(10px); border-bottom: 1px solid #dbe2f2;">
+    <div style="max-width: 1160px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; gap: 28px;">
+      <a href="../marketing/Landing.dc.html" style="display: flex; align-items: center; gap: 10px; flex-shrink: 0;">
+        <div style="width: 26px; height: 26px; display: grid; grid-template-columns: repeat(3,1fr); grid-template-rows: repeat(3,1fr); gap: 2.5px; flex-shrink: 0;"><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#ceff65;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div></div>
+        <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 700; letter-spacing: -.01em; color: #0a1440;">ArchitectHire</span>
+      </a>
+      <div style="margin-left: auto; display: flex; align-items: center; gap: 14px;">
+        <div style="text-align: right;"><div style="font-size: 13px; font-weight: 700;">Jordan Rivera</div><div style="font-size: 11.5px; color: #5b6493;">{{ acctScope }}</div></div>
+        <div style="width: 38px; height: 38px; border-radius: 50%; background: #0a1440; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px;">JR</div>
+      </div>
+    </div>
+  </header>
+
+  <main style="max-width: 1160px; margin: 0 auto; padding: 36px 32px 90px;">
+
+    <!-- ===== MATCHES LIST ===== -->
+    <sc-if value="{{ isList }}" hint-placeholder-val="{{ true }}">
+    <section style="animation: fadeUp .4s ease both;">
+      <div style="display: inline-flex; align-items: center; gap: 8px; background: #e7f6ec; border: 1px solid #c2e6cf; color: #16924e; padding: 7px 14px; border-radius: 100px; font-size: 13px; font-weight: 700;"><span style="width: 7px; height: 7px; border-radius: 50%; background: #16924e;"></span>Matched in 41 hours</div>
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; margin: 14px 0 8px;">
+        <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 38px; font-weight: 700; letter-spacing: -.02em;">3 architects cleared for your project</h1>
+        <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 12px; padding: 10px 16px;"><span style="font-size: 12px; color: #5b6493; font-family: 'IBM Plex Mono', monospace;">SAVED ESTIMATE</span><div style="font-family: 'IBM Plex Mono', monospace; font-size: 17px; color: #0a1440;">{{ savedRange }}</div></div>
+      </div>
+      <p style="font-size: 16px; color: #3f4770; max-width: 48em; margin-bottom: 28px;">Each is pre-filtered on the things you can't check yourself — <strong style="color:#232c57;font-weight:700;">state licensure, {{ city }} jurisdiction experience, {{ projectType }} specialization, and current capacity</strong>. We cap it at three so you're not paralyzed. Contact details stay on-platform until you hire.</p>
+
+      <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 20px;">
+        <sc-for list="{{ architects }}" as="ar" hint-placeholder-count="3">
+          <div style="{{ ar.cardStyle }}">
+            <div style="height: 190px; position: relative;">
+              <image-slot id="{{ ar.workSlotId }}" shape="rect" fit="cover" placeholder="Drop a photo of their work"></image-slot>
+              <span style="{{ ar.badgeStyle }}">{{ ar.matchTag }}</span>
+            </div>
+            <div style="padding: 20px;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="width: 46px; height: 46px; border-radius: 50%; overflow: hidden; flex-shrink: 0; border: 2px solid #e7efff;"><image-slot id="{{ ar.slotId }}" shape="circle" fit="cover" placeholder="Photo"></image-slot></div>
+                <div style="flex: 1; min-width: 0;">
+                  <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px;"><h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 700;">{{ ar.name }}</h3><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #16924e; border: 1px solid #c2e6cf; background: #e7f6ec; padding: 3px 7px; border-radius: 5px; flex-shrink: 0;">✓ {{ ar.lic }}</span></div>
+                  <div style="font-size: 13px; color: #5b6493; margin-top: 2px;">{{ ar.firm }} · {{ ar.years }} yrs · ★ {{ ar.rating }}</div>
+                </div>
+              </div>
+              <div style="height: 12px;"></div>
+              <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
+                <sc-for list="{{ ar.why }}" as="w" hint-placeholder-count="3">
+                  <div style="display: flex; gap: 9px; align-items: flex-start; font-size: 13.5px; color: #333c66; line-height: 1.4;"><span style="color: #16924e; margin-top: 1px;">✓</span><span>{{ w }}</span></div>
+                </sc-for>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 14px; border-top: 1px solid #eaeef8;"><div><div style="font-size: 11px; color: #5b6493; font-family: 'IBM Plex Mono', monospace;">{{ ar.rateLabel }}</div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 17px;">{{ ar.rate }}</div></div><button onClick="{{ ar.onClick }}" style="background: #135bff; color: #fff; border: none; padding: 11px 18px; border-radius: 9px; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 0 #0b3fcc;">View profile →</button></div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+    </sc-if>
+
+    <!-- ===== PROFILE DETAIL ===== -->
+    <sc-if value="{{ isProfile }}" hint-placeholder-val="{{ false }}">
+    <section style="animation: fadeUp .4s ease both;">
+      <button onClick="{{ goList }}" style="background: transparent; border: none; color: #5b6493; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer; padding: 0; margin-bottom: 18px;">← Back to matches</button>
+      <div style="display: grid; grid-template-columns: 1fr 340px; gap: 26px; align-items: start;">
+        <div style="display: flex; flex-direction: column; gap: 18px;">
+          <div style="border-radius: 18px; overflow: hidden; border: 1px solid #e2e8f5;">
+          <div style="height: 220px; position: relative;"><image-slot id="{{ profile.coverSlotId }}" shape="rect" fit="cover" placeholder="Drop a hero photo of their work"></image-slot></div>
+          <div style="background: #0a1440; padding: 22px 26px; display: flex; gap: 20px; align-items: center;">
+            <div style="width: 92px; height: 92px; border-radius: 50%; overflow: hidden; flex-shrink: 0; border: 3px solid #135bff; margin-top: -58px; box-shadow: 0 6px 18px rgba(4,10,40,.4);"><image-slot id="{{ profile.slotId }}" shape="circle" fit="cover" placeholder="Portrait"></image-slot></div>
+            <div style="flex: 1;">
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;"><h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 700; color: #fff; letter-spacing: -.02em;">{{ profile.name }}</h1><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #ceff65; background: rgba(206,255,101,.14); border: 1px solid rgba(206,255,101,.4); padding: 4px 9px; border-radius: 6px;">{{ profile.matchTag }}</span></div>
+              <div style="font-size: 15px; color: #b9c3e8; margin-top: 4px;">{{ profile.role }} · {{ profile.firm }}</div>
+              <div style="display: flex; align-items: center; gap: 14px; margin-top: 12px; flex-wrap: wrap;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #16924e; background: #e7f6ec; border: 1px solid #c2e6cf; padding: 4px 9px; border-radius: 6px;">✓ Licensed {{ profile.lic }} · verified</span><span style="font-size: 14px; color: #fff;"><strong style="color:#ceff65;">★ {{ profile.rating }}</strong> · {{ profile.reviewCount }} reviews</span></div>
+            </div>
+          </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(4,1fr); gap: 14px;">
+            <sc-for list="{{ profileStats }}" as="st" hint-placeholder-count="4">
+              <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 12px; padding: 18px;"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 22px; color: #0a1440;">{{ st.v }}</div><div style="font-size: 12.5px; color: #5b6493; margin-top: 2px;">{{ st.k }}</div></div>
+            </sc-for>
+          </div>
+
+          <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 14px; padding: 24px;">
+            <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 14px;">Specialties</h3>
+            <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+              <sc-for list="{{ profileSpecialties }}" as="sp" hint-placeholder-count="5"><span style="padding: 8px 14px; border-radius: 100px; border: 1px solid #c9d4ec; background: #eef2fb; color: #232c57; font-size: 14px; font-weight: 600;">{{ sp }}</span></sc-for>
+            </div>
+          </div>
+
+          <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 14px; padding: 24px;">
+            <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 10px;">About {{ profile.first }}</h3>
+            <p style="font-size: 15px; line-height: 1.6; color: #3f4770;">{{ profile.bio }}</p>
+            <div style="margin-top: 20px; padding-top: 18px; border-top: 1px solid #eaeef8;">
+              <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #135bff; letter-spacing: .05em; margin-bottom: 12px;">WHY MATCHED TO YOUR {{ city }} PROJECT</div>
+              <div style="display: flex; flex-direction: column; gap: 10px;">
+                <sc-for list="{{ profile.why }}" as="w" hint-placeholder-count="3"><div style="display: flex; gap: 10px; align-items: flex-start; font-size: 14.5px; color: #333c66; line-height: 1.45;"><span style="color: #16924e; margin-top: 1px;">✓</span><span>{{ w }}</span></div></sc-for>
+              </div>
+            </div>
+          </div>
+
+          <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 14px; padding: 24px;">
+            <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 6px;">Selected work</h3>
+            <p style="font-size: 14px; color: #5b6493; margin-bottom: 18px;">Recent projects {{ profile.first }} has designed and permitted.</p>
+            <div style="display: grid; grid-template-columns: repeat(2,1fr); gap: 16px;">
+              <sc-for list="{{ profilePortfolio }}" as="p" hint-placeholder-count="4"><div style="position: relative; aspect-ratio: 4/3; border-radius: 12px; overflow: hidden;"><image-slot id="{{ p.slotId }}" shape="rect" fit="cover" placeholder="{{ p.ph }}"></image-slot></div></sc-for>
+            </div>
+          </div>
+
+          <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 14px; padding: 24px;">
+            <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 16px;">Client reviews</h3>
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+              <sc-for list="{{ profile.reviews }}" as="r" hint-placeholder-count="2">
+                <div style="border: 1px solid #eaeef8; border-radius: 12px; padding: 18px;">
+                  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;"><div style="width: 38px; height: 38px; border-radius: 50%; overflow: hidden; flex-shrink: 0;"><image-slot id="{{ r.slotId }}" shape="circle" fit="cover" placeholder="Photo"></image-slot></div><div style="flex: 1;"><div style="font-weight: 700; font-size: 14px;">{{ r.name }}</div><div style="font-size: 12.5px; color: #5b6493;">{{ r.role }}</div></div><span style="font-size: 13px; color: #ceb700;">★★★★★</span></div>
+                  <p style="font-size: 14.5px; line-height: 1.55; color: #3f4770;">"{{ r.text }}"</p>
+                  <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: #9aa2c4; margin-top: 8px;">{{ r.date }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+
+        <aside style="position: sticky; top: 88px; display: flex; flex-direction: column; gap: 16px;">
+          <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 24px; box-shadow: 0 10px 30px rgba(10,20,64,.06);">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5b6493; letter-spacing: .05em;">{{ profile.rateLabel }}</div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 32px; color: #0a1440; margin: 6px 0 18px;">{{ profile.rate }}</div>
+            <a href="Engagement.dc.html" style="display: block; text-align: center; background: #135bff; color: #fff; padding: 15px; border-radius: 10px; font-size: 16px; font-weight: 700; box-shadow: 0 3px 0 #0b3fcc;">Message & scope →</a>
+            <a href="Engagement.dc.html" style="display: block; text-align: center; background: #0a1440; color: #fff; padding: 14px; border-radius: 10px; font-size: 15px; font-weight: 700; margin-top: 10px;">Hire {{ profile.first }} now</a>
+            <p style="font-size: 12px; color: #5b6493; margin-top: 14px; line-height: 1.5; text-align: center;">Contact details stay on-platform until you hire. Payment is escrow-backed.</p>
+          </div>
+          <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 22px;">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #16924e; letter-spacing: .05em; margin-bottom: 14px;">✓ VERIFIED CREDENTIALS</div>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <sc-for list="{{ profile.credentials }}" as="c" hint-placeholder-count="4"><div style="display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; color: #333c66; line-height: 1.4;"><span style="color: #16924e; margin-top: 1px;">✓</span><span>{{ c }}</span></div></sc-for>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+    </sc-if>
+
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1200, &quot;height&quot;: 900}}">
+class Component extends DCLogic {
+  state = { screen: 'list', pickedId: 0 };
+  go(screen){ this.setState({ screen }); if (typeof window !== 'undefined') window.scrollTo({ top: 0 }); }
+
+  renderVals(){
+    const s = this.state;
+    const city = 'Oakland, CA', projectType = 'Residential';
+    const archDefs = [
+      { name:'Maya E.', first:'Maya', firm:'Boutique residential studio', lic:'CA', years:14, rating:'4.9', matchTag:'BEST MATCH', best:true, rateLabel:'FIXED QUOTE', rate:'$21,400',
+        why:['Licensed in California — cleared to stamp in '+city, '40+ seismic-zone additions permitted in Alameda County', 'Available to start this month'] },
+      { name:'Daniel O.', first:'Daniel', firm:'Boutique East Bay studio', lic:'CA', years:11, rating:'4.8', matchTag:'STRONG', best:false, rateLabel:'FIXED QUOTE', rate:'$22,700',
+        why:['California license, '+city+' historic-overlay experience', 'Residential additions & ADUs specialist', 'Starts in ~3 weeks'] },
+      { name:'Priya N.', first:'Priya', firm:'Independent practice', lic:'CA', years:9, rating:'4.9', matchTag:'HOURLY OPTION', best:false, rateLabel:'HOURLY RATE', rate:'$135/hr',
+        why:['Licensed CA — offers hourly for evolving scope', 'Strong on complex, exploratory projects', 'Immediate availability'] },
+    ];
+    const architects = archDefs.map((a,i)=>({
+      ...a, slotId:'arch-'+i, workSlotId:'work-'+i,
+      cardStyle:`background:#fff;border:1.5px solid ${a.best?'#135bff':'#e2e8f5'};border-radius:16px;overflow:hidden;box-shadow:${a.best?'0 12px 34px rgba(19,91,255,.14)':'none'};`,
+      badgeStyle:`position:absolute;right:12px;top:12px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;padding:4px 9px;border-radius:6px;color:#fff;background:${a.best?'#135bff':'#0a1440'};`,
+      onClick: ()=>{ this.setState({ pickedId:i, screen:'profile' }); if(typeof window!=='undefined') window.scrollTo({top:0}); },
+    }));
+
+    const profileData = [
+      { role:'Principal Architect', reviewCount:64, projects:120, onTime:98, response:'~2h',
+        specialties:['Seismic-zone additions','Historic overlays','Custom residential','ADUs','Permit expediting'],
+        bio:'Maya founded her studio in 2015 after a decade at a large civic practice. She specializes in complex residential additions in seismically active, historically sensitive jurisdictions — exactly the kind of work your project needs. She runs a fully remote process with weekly milestone reviews.',
+        credentials:['California Architect License #C-38214 — verified','LEED AP BD+C','AIA Member since 2011','Errors & Omissions insurance on file'],
+        reviews:[{ name:'Rebecca Lin', role:'Homeowner · Berkeley, CA', date:'Jun 2026', slotId:'rev-0-0', text:'Maya navigated our historic-overlay review without a single resubmission. The stamped set sailed through permitting.' },{ name:'Marcus Reed', role:'Homeowner · Oakland, CA', date:'Apr 2026', slotId:'rev-0-1', text:'Clear pricing, weekly check-ins, and drawings that our contractor said were the cleanest he\u2019d seen.' }] },
+      { role:'Founder & Architect', reviewCount:41, projects:86, onTime:96, response:'~4h',
+        specialties:['Residential additions','ADUs','Historic districts','Interior remodels'],
+        bio:'Daniel leads a boutique studio focused on residential additions and ADUs across the East Bay. He\u2019s known for design-forward work that still clears permitting cleanly, with deep familiarity in local historic districts.',
+        credentials:['California Architect License #C-41902 — verified','AIA Member since 2016','Errors & Omissions insurance on file'],
+        reviews:[{ name:'Sofia Alvarez', role:'Homeowner · Alameda, CA', date:'May 2026', slotId:'rev-1-0', text:'Daniel turned a tricky lot into a beautiful ADU. Communicative and on schedule the whole way.' },{ name:'Tom Becker', role:'Homeowner · Oakland, CA', date:'Feb 2026', slotId:'rev-1-1', text:'Great balance of design and pragmatism. The permit set was thorough.' }] },
+      { role:'Architect', reviewCount:29, projects:58, onTime:99, response:'~1h',
+        specialties:['Complex / exploratory scope','Commercial TIs','Change of use','Hourly engagements'],
+        bio:'Priya works best on evolving, exploratory projects where scope isn\u2019t fully defined yet. She offers hourly engagements with transparent time tracking, and is comfortable with commercial tenant improvements and change-of-use work in addition to residential.',
+        credentials:['California Architect License #C-45571 — verified','NCARB Certified','Errors & Omissions insurance on file'],
+        reviews:[{ name:'Grace Okafor', role:'Business owner · San Jose, CA', date:'Jul 2026', slotId:'rev-2-0', text:'Priya scoped a messy change-of-use with total clarity. Hourly billing was transparent and fair.' },{ name:'Daniel Wu', role:'Homeowner · Fremont, CA', date:'Mar 2026', slotId:'rev-2-1', text:'Responsive and thoughtful. She flagged issues early instead of surprising us later.' }] },
+    ];
+    const profile = { ...archDefs[s.pickedId], slotId:'arch-'+s.pickedId, coverSlotId:'cover-'+s.pickedId, ...profileData[s.pickedId] };
+    const profileSpecialties = profile.specialties;
+    const profileStats = [
+      { v:profile.years+' yrs', k:'experience' },
+      { v:profile.projects+'+', k:'projects delivered' },
+      { v:profile.onTime+'%', k:'on-time rate' },
+      { v:profile.response, k:'avg response' },
+    ];
+    const profilePortfolio = [0,1,2,3].map(k=>({ slotId:'port-'+s.pickedId+'-'+k, ph:'Project '+(k+1) }));
+
+    return {
+      isList: s.screen==='list', isProfile: s.screen==='profile', goList: ()=>this.go('list'),
+      city, projectType, acctScope: 'Addition · Oakland, CA', savedRange: '$21,052 – $24,713',
+      architects, profile, profileSpecialties, profileStats, profilePortfolio,
+    };
+  }
+}
+</script>
+</body>
+</html>

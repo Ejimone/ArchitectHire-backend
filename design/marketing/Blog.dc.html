@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f3f6fd; }
+  ::selection { background: #135bff; color: #fff; }
+  a { color: #135bff; text-decoration: none; }
+  a:hover { color: #0b3fcc; }
+  .lk { color: #0a1440; font-weight: 600; }
+  .lk:hover { color: #135bff; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+  /* __resp__ responsive overrides (media queries can't be inline) */
+  @media (max-width: 900px){
+    main{ padding-left:18px !important; padding-right:18px !important; }
+    header nav{ display:none !important; }
+    [style*="repeat(4"]{ grid-template-columns:1fr 1fr !important; }
+    [style*="repeat(3"]{ grid-template-columns:1fr !important; }
+    [style*="repeat(2"]{ grid-template-columns:1fr !important; }
+    [style*="grid-template-columns: 1."]{ grid-template-columns:1fr !important; }
+    [style*="grid-template-columns: 1fr 1fr"]{ grid-template-columns:1fr !important; }
+    [style*="position: sticky"]{ position:static !important; top:auto !important; }
+    [style*="padding: 15px 32px"]{ padding:12px 18px !important; }
+    [style*="padding: 18px 32px"]{ padding-left:18px !important; padding-right:18px !important; }
+    [style*="padding: 52px 44px"],[style*="padding: 48px 44px"],[style*="padding: 44px 42px"],[style*="padding: 44px 44px"]{ padding:30px 22px !important; }
+    [style*="padding: 56px"],[style*="padding: 52px;"],[style*="padding: 48px"],[style*="padding: 44px;"],[style*="padding: 40px"],[style*="padding: 34px"]{ padding:32px 22px !important; }
+    h1{ font-size:clamp(30px,7vw,42px) !important; }
+  }
+  @media (max-width: 520px){
+    [style*="repeat(4"]{ grid-template-columns:1fr !important; }
+    [style*="gap: 38px"],[style*="gap: 40px"]{ gap:22px !important; }
+  }
+</style>
+<script src="../image-slot.js"></script>
+</helmet>
+<div style="background: #f3f6fd; color: #0a1440; font-family: 'Hanken Grotesk', sans-serif; -webkit-font-smoothing: antialiased;">
+
+  <x-import component-from-global-scope="site-nav" from="./site-nav.js" active="guides" style="display:contents" hint-size="100%,64px"></x-import>
+
+  <main style="max-width: 1200px; margin: 0 auto; padding: 0 32px 100px;">
+
+    <!-- INTRO -->
+    <section style="margin-top: 44px; animation: fadeUp .5s ease both;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #135bff; letter-spacing: .06em;">GUIDES & RESOURCES</div>
+      <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(36px, 3.4vw, 52px); font-weight: 800; letter-spacing: -.02em; margin-top: 10px; max-width: 16em; text-wrap: balance;">Permits, pricing & plans, explained</h1>
+      <p style="font-size: 18px; color: #3f4770; margin-top: 12px; max-width: 40em; line-height: 1.55; text-wrap: pretty;">Practical guides on hiring an architect, navigating your jurisdiction, and pricing every kind of project — written with the licensed architects in our network.</p>
+    </section>
+
+    <!-- CATEGORY FILTER -->
+    <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px;">
+      <sc-for list="{{ cats }}" as="c" hint-placeholder-count="6">
+        <button onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.name }}</button>
+      </sc-for>
+    </div>
+
+    <!-- FEATURED -->
+    <a href="Blog Post.dc.html" style="display: grid; grid-template-columns: 1.1fr .9fr; gap: 0; margin-top: 26px; background: #0a1440; border-radius: 22px; overflow: hidden; align-items: stretch;">
+      <div style="padding: 44px 42px; display: flex; flex-direction: column; justify-content: center;">
+        <span style="display: inline-flex; align-self: flex-start; align-items: center; gap: 8px; padding: 6px 13px; border-radius: 100px; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: #0a1440; background: #ceff65; font-weight: 700;">Featured · {{ featured.cat }}</span>
+        <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 34px; line-height: 1.08; font-weight: 700; color: #fff; letter-spacing: -.02em; margin: 18px 0 14px; text-wrap: balance;">{{ featured.title }}</h2>
+        <p style="font-size: 16px; line-height: 1.6; color: #b9c3e8; max-width: 34em;">{{ featured.excerpt }}</p>
+        <div style="display: flex; align-items: center; gap: 12px; margin-top: 24px;">
+          <div style="width: 38px; height: 38px; border-radius: 50%; overflow: hidden;"><image-slot id="blog-feat-face" shape="circle" fit="cover" placeholder="Author"></image-slot></div>
+          <div><div style="font-size: 14px; font-weight: 700; color: #fff;">{{ featured.author }}</div><div style="font-size: 12.5px; color: #9fb4ff;">{{ featured.date }} · {{ featured.read }}</div></div>
+        </div>
+      </div>
+      <div style="position: relative; min-height: 340px;"><image-slot id="blog-feat" shape="rect" fit="cover" placeholder="Featured article image" style="position: absolute; inset: 0; width: 100%; height: 100%;"></image-slot></div>
+    </a>
+
+    <!-- ARTICLE GRID -->
+    <section style="margin-top: 40px;">
+      <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 22px;">
+        <sc-for list="{{ posts }}" as="p" hint-placeholder-count="6">
+          <a href="Blog Post.dc.html" style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column;" style-hover="border-color: #135bff; box-shadow: 0 10px 26px rgba(19,91,255,.12); transform: translateY(-2px);">
+            <div style="height: 180px; position: relative;">
+              <image-slot id="{{ p.slotId }}" shape="rect" fit="cover" placeholder="{{ p.ph }}"></image-slot>
+              <span style="position: absolute; left: 14px; top: 14px; background: rgba(10,20,64,.82); color: #fff; font-size: 11.5px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; padding: 5px 10px; border-radius: 100px;">{{ p.cat }}</span>
+            </div>
+            <div style="padding: 20px 20px 22px; display: flex; flex-direction: column; flex: 1;">
+              <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; line-height: 1.18; font-weight: 700; letter-spacing: -.01em; color: #0a1440; text-wrap: balance;">{{ p.title }}</h3>
+              <p style="font-size: 14px; line-height: 1.55; color: #5b6493; margin-top: 10px; flex: 1;">{{ p.excerpt }}</p>
+              <div style="display: flex; align-items: center; gap: 8px; margin-top: 16px; font-size: 12.5px; color: #8b93b5;"><span>{{ p.date }}</span><span>·</span><span>{{ p.read }}</span></div>
+            </div>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- POPULAR TOPICS (internal SEO links) -->
+    <section style="margin-top: 60px; background: #fff; border: 1px solid #e2e8f5; border-radius: 18px; padding: 34px;">
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 24px; font-weight: 700; letter-spacing: -.02em;">Browse by topic</h2>
+      <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 26px; margin-top: 22px;">
+        <sc-for list="{{ topicCols }}" as="tc" hint-placeholder-count="3">
+          <div>
+            <div style="font-size: 13px; letter-spacing: .05em; text-transform: uppercase; color: #135bff; margin-bottom: 12px; font-family: 'IBM Plex Mono', monospace;">{{ tc.h }}</div>
+            <div style="display: flex; flex-direction: column; gap: 9px;">
+              <sc-for list="{{ tc.items }}" as="it" hint-placeholder-count="5">
+                <a href="{{ it.href }}" class="lk" style="font-size: 14.5px;">{{ it.label }}</a>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER CTA -->
+    <section style="margin-top: 40px; background: #135bff; border-radius: 22px; padding: 48px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center;">
+      <div>
+        <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 32px; font-weight: 800; color: #fff; letter-spacing: -.02em; text-wrap: balance;">Get the monthly build brief</h2>
+        <p style="font-size: 16px; color: #dbe6ff; margin-top: 10px; max-width: 30em;">Permit tips, pricing benchmarks and one great project teardown — straight to your inbox.</p>
+      </div>
+      <form onSubmit="{{ onSubmit }}" style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <input value="{{ email }}" onChange="{{ onEmail }}" type="email" placeholder="you@email.com" style="flex: 1; min-width: 200px; background: #fff; border: none; border-radius: 10px; padding: 15px 16px; font-family: inherit; font-size: 15px; color: #0a1440;">
+        <button type="submit" style="background: #ceff65; color: #0a1440; border: none; padding: 15px 24px; border-radius: 10px; font-size: 15px; font-weight: 800; cursor: pointer; font-family: inherit; box-shadow: 0 3px 0 #a9d94a;">{{ subLabel }}</button>
+      </form>
+    </section>
+  </main>
+
+  <x-import component-from-global-scope="site-footer" from="./site-footer.js" hint-size="100%,460px"></x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1200, &quot;height&quot;: 900}}">
+class Component extends DCLogic {
+  state = { cat: 'All', email: '', subbed: false };
+
+  renderVals(){
+    const catNames = ['All','Hiring','Permits','Pricing','ADUs','By city'];
+    const cats = catNames.map(n=>{
+      const active = this.state.cat === n;
+      return {
+        name:n, onClick:()=>this.setState({ cat:n }),
+        style:`border:1px solid ${active?'#135bff':'#dbe4f8'};background:${active?'#135bff':'#fff'};color:${active?'#fff':'#16305c'};padding:9px 18px;border-radius:100px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s ease;`,
+      };
+    });
+
+    const featured = {
+      cat:'Hiring', title:'How to hire an architect remotely — and get a permit-ready set',
+      excerpt:'A step-by-step walkthrough of vetting licensure, scoping your project, and paying safely through escrow — without a single in-person meeting.',
+      author:'Maya E., AIA', date:'Aug 4, 2026', read:'9 min read',
+    };
+
+    const allPosts = [
+      { cat:'Pricing', slotId:'bp1', ph:'Cost breakdown graphic', title:'What does an architect actually cost in 2026?', excerpt:'Fixed quote vs. hourly, what drives the number, and honest benchmarks by project type.', date:'Aug 1, 2026', read:'7 min' },
+      { cat:'ADUs', slotId:'bp2', ph:'Backyard ADU photo', title:'The complete backyard ADU planning guide', excerpt:'Setbacks, utilities, Title-24 and the real timeline from idea to stamped set.', date:'Jul 28, 2026', read:'11 min' },
+      { cat:'Permits', slotId:'bp3', ph:'Permit counter photo', title:'Reading your jurisdiction: a permit primer', excerpt:'Why the same project costs and takes different amounts of time from city to city.', date:'Jul 22, 2026', read:'6 min' },
+      { cat:'Hiring', slotId:'bp4', ph:'Architect review photo', title:'8 questions to ask before you hire an architect', excerpt:'The vetting checklist that separates a smooth project from a stalled one.', date:'Jul 15, 2026', read:'5 min' },
+      { cat:'By city', slotId:'bp5', ph:'Oakland skyline photo', title:'Building in Oakland: seismic rules you should know', excerpt:'Soft-story, hillside and design-review basics for East Bay homeowners.', date:'Jul 9, 2026', read:'8 min' },
+      { cat:'Pricing', slotId:'bp6', ph:'Home addition photo', title:'Home additions: where the money really goes', excerpt:'Structural work, jurisdiction complexity, and how to keep a second-story on budget.', date:'Jul 2, 2026', read:'7 min' },
+    ];
+    const posts = this.state.cat === 'All' ? allPosts : allPosts.filter(p=>p.cat===this.state.cat);
+
+    const topicCols = [
+      { h:'By project', items:[
+        {label:'Backyard ADU architects', href:'Project Landing.dc.html'},
+        {label:'Home addition architects', href:'Project Landing.dc.html'},
+        {label:'New custom home', href:'Project Landing.dc.html'},
+        {label:'Kitchen & bath remodels', href:'Project Landing.dc.html'},
+        {label:'Commercial TI & restaurants', href:'Project Landing.dc.html'},
+      ]},
+      { h:'By city', items:[
+        {label:'Architects in Oakland, CA', href:'City Landing.dc.html'},
+        {label:'Architects in San Francisco, CA', href:'City Landing.dc.html'},
+        {label:'Architects in Los Angeles, CA', href:'City Landing.dc.html'},
+        {label:'Architects in Austin, TX', href:'City Landing.dc.html'},
+        {label:'Architects in Seattle, WA', href:'City Landing.dc.html'},
+      ]},
+      { h:'Get started', items:[
+        {label:'How it works', href:'Landing.dc.html#how'},
+        {label:'Instant estimate', href:'Get Started.dc.html'},
+        {label:'Pricing explained', href:'Landing.dc.html#pricing'},
+        {label:'Trust & safety', href:'Landing.dc.html#architects'},
+        {label:'For architects', href:'Architect Landing.dc.html'},
+      ]},
+    ];
+
+    const footerCols = [
+      { h:'Product', items:[
+        {label:'How it works', href:'Landing.dc.html#how'},
+        {label:'Services', href:'Services.dc.html'},
+        {label:'Instant estimate', href:'../app/Get Started.dc.html'},
+        {label:'Jurisdiction database', href:'Jurisdiction Database.dc.html'},
+        {label:'Case studies', href:'Case Studies.dc.html'},
+      ]},
+      { h:'Explore', items:[
+        {label:'Inspiration', href:'Inspiration.dc.html'},
+        {label:'Guides', href:'Blog.dc.html'},
+        {label:'For architects', href:'Architect Landing.dc.html'},
+        {label:'By project', href:'Project Landing.dc.html'},
+        {label:'By city', href:'City Landing.dc.html'},
+      ]},
+      { h:'Company', items:[
+        {label:'About', href:'About.dc.html'},
+        {label:'Careers', href:'Careers.dc.html'},
+        {label:'Contact', href:'Contact.dc.html'},
+        {label:'Privacy', href:'Privacy.dc.html'},
+      ]},
+    ];
+
+    return {
+      cats, featured, posts, topicCols, footerCols,
+      email:this.state.email, onEmail:(e)=>this.setState({ email:e.target.value }),
+      onSubmit:(e)=>{ e.preventDefault(); this.setState({ subbed:true }); },
+      subLabel:this.state.subbed ? 'Subscribed ✓' : 'Subscribe',
+    };
+  }
+}
+</script>
+</body>
+</html>

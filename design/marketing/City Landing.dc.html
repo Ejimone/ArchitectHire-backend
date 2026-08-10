@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f3f6fd; }
+  ::selection { background: #135bff; color: #fff; }
+  a { color: #135bff; text-decoration: none; }
+  a:hover { color: #0b3fcc; }
+  .lk { color: #0a1440; font-weight: 600; }
+  .lk:hover { color: #135bff; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+  /* __resp__ responsive overrides (media queries can't be inline) */
+  @media (max-width: 900px){
+    main{ padding-left:18px !important; padding-right:18px !important; }
+    header nav{ display:none !important; }
+    [style*="repeat(4"]{ grid-template-columns:1fr 1fr !important; }
+    [style*="repeat(3"]{ grid-template-columns:1fr !important; }
+    [style*="repeat(2"]{ grid-template-columns:1fr !important; }
+    [style*="grid-template-columns: 1."]{ grid-template-columns:1fr !important; }
+    [style*="grid-template-columns: 1fr 1fr"]{ grid-template-columns:1fr !important; }
+    [style*="position: sticky"]{ position:static !important; top:auto !important; }
+    [style*="padding: 15px 32px"]{ padding:12px 18px !important; }
+    [style*="padding: 18px 32px"]{ padding-left:18px !important; padding-right:18px !important; }
+    [style*="padding: 52px 44px"],[style*="padding: 48px 44px"],[style*="padding: 44px 42px"],[style*="padding: 44px 44px"]{ padding:30px 22px !important; }
+    [style*="padding: 56px"],[style*="padding: 52px;"],[style*="padding: 48px"],[style*="padding: 44px;"],[style*="padding: 40px"],[style*="padding: 34px"]{ padding:32px 22px !important; }
+    h1{ font-size:clamp(30px,7vw,42px) !important; }
+  }
+  @media (max-width: 520px){
+    [style*="repeat(4"]{ grid-template-columns:1fr !important; }
+    [style*="gap: 38px"],[style*="gap: 40px"]{ gap:22px !important; }
+  }
+</style>
+<script src="../image-slot.js"></script>
+</helmet>
+<div style="background: #f3f6fd; color: #0a1440; font-family: 'Hanken Grotesk', sans-serif; -webkit-font-smoothing: antialiased;">
+
+  <x-import component-from-global-scope="site-nav" from="./site-nav.js" style="display:contents" hint-size="100%,64px"></x-import>
+
+  <main style="max-width: 1200px; margin: 0 auto; padding: 0 32px 100px;">
+
+    <!-- BREADCRUMB -->
+    <nav style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #5b6493; margin-top: 22px;">
+      <a href="Landing.dc.html" style="color: #5b6493;">Home</a><span>/</span>
+      <a href="#" style="color: #5b6493;">Architects by city</a><span>/</span>
+      <span style="color: #0a1440; font-weight: 600;">{{ city.name }}, {{ city.state }}</span>
+    </nav>
+
+    <!-- HERO -->
+    <section style="margin-top: 16px; background: #0a1440; border-radius: 24px; overflow: hidden; display: grid; grid-template-columns: 1.05fr .95fr; align-items: stretch; min-height: 480px; animation: fadeUp .5s ease both;">
+      <div style="padding: 48px 44px; display: flex; flex-direction: column; justify-content: center; min-width: 0;">
+        <div style="display: inline-flex; align-self: flex-start; align-items: center; gap: 8px; padding: 6px 13px; border-radius: 100px; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: #0a1440; background: #ceff65; font-weight: 700; margin-bottom: 22px;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #0a1440;"></span>{{ city.county }} · {{ city.state }}</div>
+        <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(34px, 3vw, 46px); line-height: 1.03; letter-spacing: -.02em; font-weight: 800; color: #fff; text-wrap: balance;">Hire a licensed architect in {{ city.name }}, {{ city.state }}</h1>
+        <p style="font-size: 18px; line-height: 1.55; color: #b9c3e8; margin: 22px 0 28px; max-width: 30em; text-wrap: pretty;">{{ city.intro }}</p>
+        <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+          <a href="../app/Get Started.dc.html" style="background: #135bff; color: #fff; padding: 15px 28px; border-radius: 11px; font-size: 16px; font-weight: 700; white-space: nowrap; box-shadow: 0 3px 0 #0b3fcc;">Get matched in {{ city.name }} →</a>
+          <span style="font-size: 14px; color: #9fb4ff;">Free estimate · 48-hour match</span>
+        </div>
+        <div style="display: flex; gap: 38px; margin-top: 34px;">
+          <sc-for list="{{ city.stats }}" as="s" hint-placeholder-count="3">
+            <div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 26px; color: #ceff65;">{{ s.v }}</div><div style="font-size: 13px; color: #9fb4ff;">{{ s.l }}</div></div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="position: relative; min-width: 0; min-height: 440px; overflow: hidden;">
+        <image-slot id="city-hero" shape="rect" fit="cover" placeholder="{{ city.heroPh }}" style="position: absolute; inset: 0; width: 100%; height: 100%;"></image-slot>
+        <div style="position: absolute; left: 20px; bottom: 20px; right: 20px; background: #fff; border-radius: 12px; padding: 14px; display: flex; align-items: center; gap: 14px; box-shadow: 0 12px 30px rgba(4,10,40,.35);">
+          <div style="width: 46px; height: 46px; border-radius: 50%; overflow: hidden; flex-shrink: 0;"><image-slot id="city-arch" shape="circle" fit="cover" placeholder="Portrait"></image-slot></div>
+          <div style="flex: 1;"><div style="font-weight: 700; font-size: 14px;">{{ city.featArch }}</div><div style="font-size: 12px; color: #5b6493;">Licensed {{ city.state }} · {{ city.featSpec }}</div></div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #16924e; border: 1px solid #c2e6cf; padding: 4px 8px; border-radius: 6px; background: #e7f6ec;">STAMP ✓</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOCAL CONTEXT -->
+    <section style="margin-top: 56px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: start;">
+      <div>
+        <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 700; letter-spacing: -.02em;">Building in {{ city.name }}? Local licensure matters.</h2>
+        <p style="font-size: 16px; line-height: 1.65; color: #333c66; margin-top: 14px; text-wrap: pretty;">{{ city.body1 }}</p>
+        <p style="font-size: 16px; line-height: 1.65; color: #333c66; margin-top: 14px; text-wrap: pretty;">{{ city.body2 }}</p>
+      </div>
+      <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 26px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #135bff; letter-spacing: .05em;">{{ city.name }} PERMIT SNAPSHOT</div>
+        <div style="display: flex; flex-direction: column; gap: 14px; margin-top: 16px;">
+          <sc-for list="{{ city.permit }}" as="p" hint-placeholder-count="4">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 12px; border-bottom: 1px solid #eef2fa;">
+              <span style="font-size: 14px; color: #5b6493;">{{ p.k }}</span>
+              <span style="font-size: 14.5px; font-weight: 700; color: #0a1440; text-align: right; max-width: 55%;">{{ p.v }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <!-- POPULAR PROJECT TYPES IN CITY (internal links) -->
+    <section style="margin-top: 72px;">
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 700; letter-spacing: -.02em;">Popular projects in {{ city.name }}</h2>
+      <p style="font-size: 16px; color: #3f4770; margin-top: 8px;">Typical fixed-quote ranges for {{ city.name }} homeowners and businesses.</p>
+      <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 26px;">
+        <sc-for list="{{ city.projects }}" as="pr" hint-placeholder-count="6">
+          <a href="Project Landing.dc.html" style="background: #fff; border: 1px solid #e2e8f5; border-radius: 14px; padding: 22px; display: block;" style-hover="border-color: #135bff; box-shadow: 0 8px 22px rgba(19,91,255,.12); transform: translateY(-2px);">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+              <div style="width: 44px; height: 44px; border-radius: 11px; background: #e7efff; display: flex; align-items: center; justify-content: center; margin-bottom: 14px;">{{ pr.icon }}</div>
+              <span style="color: #135bff; font-size: 18px;">→</span>
+            </div>
+            <div style="font-weight: 700; font-size: 17px;">{{ pr.name }}</div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: #16924e; margin-top: 10px;">{{ pr.price }}</div>
+            <div style="font-size: 13px; color: #5b6493; margin-top: 4px;">{{ pr.sub }}</div>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- LOCAL ARCHITECTS SHOWCASE -->
+    <section style="margin-top: 72px;">
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 700; letter-spacing: -.02em;">Architects licensed in {{ city.state }}</h2>
+      <p style="font-size: 16px; color: #3f4770; margin-top: 8px;">A sample of the vetted network serving {{ city.name }}. See your real matches after a free estimate.</p>
+      <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 26px;">
+        <sc-for list="{{ city.archs }}" as="a" hint-placeholder-count="3">
+          <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; overflow: hidden;">
+            <div style="height: 180px; position: relative;"><image-slot id="{{ a.slotId }}" shape="rect" fit="cover" placeholder="{{ a.ph }}"></image-slot></div>
+            <div style="padding: 18px; display: flex; align-items: center; gap: 12px;">
+              <div style="width: 44px; height: 44px; border-radius: 50%; overflow: hidden; flex-shrink: 0;"><image-slot id="{{ a.faceId }}" shape="circle" fit="cover" placeholder="Face"></image-slot></div>
+              <div style="flex: 1; min-width: 0;">
+                <div style="font-weight: 700; font-size: 15px;">{{ a.name }}</div>
+                <div style="font-size: 12.5px; color: #5b6493;">{{ a.spec }}</div>
+              </div>
+              <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #16924e; border: 1px solid #c2e6cf; padding: 3px 7px; border-radius: 6px; background: #e7f6ec;">✓</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- NATIONWIDE COVERAGE (internal SEO links) -->
+    <section style="margin-top: 64px;">
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 700; letter-spacing: -.02em;">Licensed architects in all 50 states</h2>
+      <p style="font-size: 16px; color: #3f4770; margin-top: 8px; max-width: 46em;">We match to your jurisdiction anywhere in the country — every state, every city. Find architects licensed where you're building.</p>
+      <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 26px;">
+        <sc-for list="{{ states }}" as="st" hint-placeholder-count="12">
+          <a href="City Landing.dc.html" style="background: #135bff; color: #fff; border-radius: 14px; padding: 18px 22px; display: flex; justify-content: space-between; align-items: center; gap: 12px;" style-hover="background: #0b3fcc;">
+            <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 17px; font-weight: 700; letter-spacing: -.01em;">{{ st }}</span>
+            <span style="font-size: 18px; opacity: .85;">→</span>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section style="margin-top: 72px; text-align: center;">
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 700; letter-spacing: -.02em;">{{ city.name }} architect FAQs</h2>
+      <div style="margin: 24px auto 0; display: flex; flex-direction: column; gap: 12px; max-width: 860px; text-align: left;">
+        <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="4">
+          <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 14px; overflow: hidden;">
+            <button onClick="{{ f.toggle }}" style="width: 100%; text-align: left; background: none; border: none; cursor: pointer; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-family: inherit;">
+              <span style="font-size: 17px; font-weight: 700; color: #0a1440;">{{ f.q }}</span>
+              <span style="{{ f.iconStyle }}">+</span>
+            </button>
+            <div style="{{ f.bodyStyle }}"><p style="font-size: 15px; line-height: 1.6; color: #333c66;">{{ f.a }}</p></div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section style="margin-top: 64px; background: #135bff; border-radius: 22px; padding: 52px; text-align: center;">
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 36px; font-weight: 800; color: #fff; letter-spacing: -.02em; text-wrap: balance;">Start your {{ city.name }} project today</h2>
+      <p style="font-size: 17px; color: #dbe6ff; margin: 12px 0 26px;">Free estimate. Matched with {{ city.state }}-licensed architects in 48 hours.</p>
+      <a href="../app/Get Started.dc.html" style="display: inline-block; background: #ceff65; color: #0a1440; padding: 17px 34px; border-radius: 12px; font-size: 17px; font-weight: 800; box-shadow: 0 4px 0 #a9d94a;">Get matched in {{ city.name }} →</a>
+    </section>
+  </main>
+
+  <x-import component-from-global-scope="site-footer" from="./site-footer.js" hint-size="100%,460px"></x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1200, &quot;height&quot;: 900}, &quot;cityName&quot;: {&quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;Oakland&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;SEO target&quot;}, &quot;stateCode&quot;: {&quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;CA&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;SEO target&quot;}}">
+class Component extends DCLogic {
+  state = { open: 0 };
+
+  renderVals(){
+    const mk = (...ds)=>React.createElement('svg', { width:22, height:22, viewBox:'0 0 24 24', fill:'none', stroke:'#135bff', strokeWidth:1.8, strokeLinecap:'round', strokeLinejoin:'round' }, ds.map((d,i)=>React.createElement('path',{ key:i, d })));
+    const ic = {
+      adu: mk('M5 13l7-5 7 5','M7 12v7h10v-7','M14 3h5v4'),
+      addition: mk('M4 12l8-6 8 6','M6 11v9h12v-9','M12 12v5','M9.5 14.5h5'),
+      renovation: mk('M3 11l9-7 9 7','M5 10v10h14V10','M9 20v-5h6v5','M15 4l3 2'),
+      kitchenbath: mk('M12 3s6 5.5 6 10a6 6 0 0 1-12 0c0-4.5 6-10 6-10z'),
+      newhome: mk('M3 11l9-8 9 8','M5 10v10h14V10','M10 20v-6h4v6'),
+      commercial: mk('M4 21V4h9v17','M13 9h7v12','M7 8h1M7 12h1M7 16h1','M16 12h1M16 16h1'),
+    };
+    const cities = {
+      'Oakland': {
+        name:'Oakland', state:'CA', county:'Alameda County',
+        intro:'Get matched with architects licensed in California and fluent in Oakland\u2019s permit process — from seismic-retrofit additions to backyard ADUs. Entirely remote, escrow-backed, stamped and permit-ready.',
+        heroPh:'Oakland home / project photo', featArch:'Maya E., AIA', featSpec:'Seismic-zone additions',
+        stats:[{v:'140+',l:'CA-licensed architects'},{v:'48 hrs',l:'to matched'},{v:'4.9\u2605',l:'avg client rating'}],
+        body1:'Oakland sits in a high-seismic zone with its own Bureau of Building requirements, soft-story ordinances, and a design-review process that trips up out-of-area firms. Every architect we match is licensed in California and has cleared permits with the City of Oakland before.',
+        body2:'That local fluency shows up where it counts: correctly detailed lateral systems, Title-24 energy compliance done right the first time, and drawing sets that plan-check reviewers recognize \u2014 so you spend less time in correction cycles and more time building.',
+        permit:[{k:'Jurisdiction',v:'City of Oakland'},{k:'Avg. residential permit',v:'6\u201312 weeks'},{k:'Design review',v:'Required in some zones'},{k:'Seismic rules',v:'Soft-story + hillside'}],
+        projects:[
+          {name:'Backyard ADU',price:'From $3,900',sub:'Detached & garage conversions',icon:ic.adu},
+          {name:'Home addition',price:'From $11,000',sub:'Second-story & footprint',icon:ic.addition},
+          {name:'Whole-home renovation',price:'From $8,500',sub:'Interior & structural',icon:ic.renovation},
+          {name:'Kitchen & bath',price:'From $2,400',sub:'Focused remodels',icon:ic.kitchenbath},
+          {name:'New custom home',price:'From $26,000',sub:'Ground-up hillside builds',icon:ic.newhome},
+          {name:'Restaurant / TI',price:'From $8,000',sub:'Change-of-use & commercial',icon:ic.commercial},
+        ],
+        archs:[
+          {name:'Maya E., AIA',spec:'Seismic-zone additions',slotId:'oak-a1',ph:'Portfolio work',faceId:'oak-f1'},
+          {name:'Daniel O., AIA',spec:'East Bay ADUs',slotId:'oak-a2',ph:'Portfolio work',faceId:'oak-f2'},
+          {name:'Priya N., AIA',spec:'Change-of-use & TI',slotId:'oak-a3',ph:'Portfolio work',faceId:'oak-f3'},
+        ],
+        areas:['Rockridge','Temescal','Montclair','Grand Lake','Fruitvale','West Oakland','Piedmont','Berkeley','Alameda','Emeryville','San Leandro','Albany'],
+      },
+    };
+    const city = cities['Oakland'];
+    // allow prop-driven single-city override of the name-bearing fields
+    const cn = this.props.cityName;
+    if (cn && cn !== city.name) { city.name = cn; }
+    if (this.props.stateCode) city.state = this.props.stateCode;
+
+    const faqData = [
+      { q:'Do I need an architect licensed specifically in '+city.state+'?', a:'Yes. A permit-ready drawing set must be stamped by an architect licensed in the state where the project is built. Every match you receive is verified as licensed in '+city.state+' before it reaches you.' },
+      { q:'How much does an architect cost in '+city.name+'?', a:'It depends on scope. A backyard ADU set typically starts around $3,900, a home addition around $11,000, and a new custom home from $26,000. You get an itemized instant estimate before talking to anyone, and each architect confirms a fixed quote or hourly rate on your scoping call.' },
+      { q:'Can this really be done remotely?', a:'Yes. Site information, measurements, and photos are collected digitally, and '+city.name+' plan-check submittals are handled electronically. You work with your architect over chat and video, and everything bills through escrow milestones.' },
+      { q:'How fast will I be matched?', a:'Within 48 hours of completing your free estimate you\u2019ll see 2\u20133 '+city.state+'-licensed architects pre-cleared on jurisdiction experience and capacity for your project type.' },
+    ];
+    const faqs = faqData.map((f,i)=>({
+      q:f.q, a:f.a, toggle:()=>this.setState(s=>({ open: s.open===i?-1:i })),
+      iconStyle:`font-size:24px;color:#135bff;font-weight:400;transition:transform .2s ease;transform:rotate(${this.state.open===i?45:0}deg);`,
+      bodyStyle:`padding:${this.state.open===i?'0 24px 20px':'0 24px'};max-height:${this.state.open===i?'240px':'0'};overflow:hidden;transition:all .28s ease;`,
+    }));
+
+    const footerCols = [
+      { h:'Product', items:[
+        {label:'How it works', href:'Landing.dc.html#how'},
+        {label:'Services', href:'Services.dc.html'},
+        {label:'Instant estimate', href:'../app/Get Started.dc.html'},
+        {label:'Jurisdiction database', href:'Jurisdiction Database.dc.html'},
+        {label:'Case studies', href:'Case Studies.dc.html'},
+      ]},
+      { h:'Explore', items:[
+        {label:'Inspiration', href:'Inspiration.dc.html'},
+        {label:'Guides', href:'Blog.dc.html'},
+        {label:'For architects', href:'Architect Landing.dc.html'},
+        {label:'By project', href:'Project Landing.dc.html'},
+        {label:'By city', href:'City Landing.dc.html'},
+      ]},
+      { h:'Company', items:[
+        {label:'About', href:'About.dc.html'},
+        {label:'Careers', href:'Careers.dc.html'},
+        {label:'Contact', href:'Contact.dc.html'},
+        {label:'Privacy', href:'Privacy.dc.html'},
+      ]},
+    ];
+
+    const states = ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming'];
+
+    return { city, faqs, footerCols, states };
+  }
+}
+</script>
+</body>
+</html>

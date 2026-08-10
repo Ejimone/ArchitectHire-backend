@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f3f6fd; }
+  ::selection { background: #135bff; color: #fff; }
+  a { color: #135bff; text-decoration: none; }
+  a:hover { color: #0b3fcc; }
+  .lk { color: #0a1440; font-weight: 600; }
+  .lk:hover { color: #135bff; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  @media (max-width: 900px){
+    main{ padding-left:18px !important; padding-right:18px !important; }
+    header nav{ display:none !important; }
+    [style*="repeat(4"]{ grid-template-columns:1fr 1fr !important; }
+    [style*="repeat(3"]{ grid-template-columns:1fr !important; }
+    [style*="grid-template-columns: 1fr 1fr"]{ grid-template-columns:1fr !important; }
+    [style*="position: sticky"]{ position:static !important; top:auto !important; }
+    [style*="padding: 15px 32px"]{ padding:12px 18px !important; }
+    [style*="padding: 44px"],[style*="padding: 52px"]{ padding:28px 22px !important; }
+    [style*="grid-template-columns: 1fr auto"]{ grid-template-columns:1fr !important; gap:12px !important; }
+    h1{ font-size:clamp(30px,7vw,42px) !important; }
+  }
+</style>
+</helmet>
+<div style="background: #f3f6fd; color: #0a1440; font-family: 'Hanken Grotesk', sans-serif; -webkit-font-smoothing: antialiased;">
+
+  <x-import component-from-global-scope="site-nav" from="./site-nav.js" style="display:contents" hint-size="100%,64px"></x-import>
+
+  <main style="max-width: 1200px; margin: 0 auto; padding: 0 32px 100px;">
+
+    <!-- HERO -->
+    <section style="margin-top: 24px; background: #0a1440; border-radius: 22px; padding: 44px; animation: fadeUp .5s ease both;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #ceff65; letter-spacing: .06em;">CAREERS</div>
+      <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(34px, 3.4vw, 48px); font-weight: 800; letter-spacing: -.02em; color: #fff; margin-top: 12px; max-width: 16em; text-wrap: balance;">Help rebuild how buildings get permitted</h1>
+      <p style="font-size: 18px; color: #b9c3e8; margin-top: 14px; max-width: 42em; line-height: 1.55; text-wrap: pretty;">We're a small, remote-first team building the data layer, pricing engine, and marketplace that make licensed architecture accessible. If you like hard problems with real-world stakes, you'll fit in.</p>
+    </section>
+
+    <!-- PERKS -->
+    <section style="margin-top: 40px;">
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; font-weight: 700; letter-spacing: -.02em;">Why join</h2>
+      <div style="display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-top: 22px;">
+        <sc-for list="{{ perks }}" as="p" hint-placeholder-count="4">
+          <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 14px; padding: 22px;">
+            <div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 17px; font-weight: 700;">{{ p.t }}</div>
+            <p style="font-size: 13.5px; line-height: 1.55; color: #5b6493; margin-top: 6px;">{{ p.d }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- OPEN ROLES -->
+    <section style="margin-top: 44px;">
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+        <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; font-weight: 700; letter-spacing: -.02em;">Open roles</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+          <sc-for list="{{ deptChips }}" as="c" hint-placeholder-count="4">
+            <button onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+      <div style="margin-top: 20px; background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; overflow: hidden;">
+        <sc-for list="{{ roles }}" as="r" hint-placeholder-count="6">
+          <a href="Contact.dc.html" style="display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: center; padding: 20px 24px; border-bottom: 1px solid #eef2fa; text-decoration: none;" style-hover="background: #f7f9fe;">
+            <div>
+              <div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 700; color: #0a1440;">{{ r.title }}</div>
+              <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; font-size: 13px; color: #5b6493;"><span>{{ r.dept }}</span><span>·</span><span>{{ r.location }}</span><span>·</span><span>{{ r.type }}</span></div>
+            </div>
+            <span style="font-size: 14px; font-weight: 700; color: #135bff; white-space: nowrap;">Apply →</span>
+          </a>
+        </sc-for>
+        <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+          <div style="padding: 34px 24px; text-align: center; color: #5b6493; font-size: 15px;">No roles in this team right now — but we're always glad to meet people. <a href="Contact.dc.html">Say hello →</a></div>
+        </sc-if>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section style="margin-top: 40px; background: #ceff65; border-radius: 22px; padding: 48px; text-align: center;">
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 32px; font-weight: 800; color: #0a1440; letter-spacing: -.02em; text-wrap: balance;">Don't see your role?</h2>
+      <p style="font-size: 16px; color: #16305c; margin: 10px 0 24px;">We hire for talent and drive. Tell us what you'd do here.</p>
+      <a href="Contact.dc.html" style="display: inline-block; background: #0a1440; color: #fff; padding: 16px 30px; border-radius: 12px; font-size: 16px; font-weight: 700;">Get in touch →</a>
+    </section>
+  </main>
+
+  <x-import component-from-global-scope="site-footer" from="./site-footer.js" hint-size="100%,460px"></x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1200, &quot;height&quot;: 900}}">
+class Component extends DCLogic {
+  state = { dept: 'All' };
+  renderVals(){
+    const perks = [
+      { t:'Remote-first', d:'Work from anywhere in the US. We optimize for outcomes, not hours at a desk.' },
+      { t:'Real ownership', d:'Meaningful equity and the autonomy to own problems end to end.' },
+      { t:'Full health cover', d:'Medical, dental and vision fully covered for you and dependents.' },
+      { t:'Learning budget', d:'Annual stipend for courses, conferences, and licensure where relevant.' },
+    ];
+    const allRoles = [
+      { title:'Senior Full-Stack Engineer', dept:'Engineering', location:'Remote (US)', type:'Full-time' },
+      { title:'Data Engineer — Jurisdiction Platform', dept:'Engineering', location:'Remote (US)', type:'Full-time' },
+      { title:'Product Designer', dept:'Design', location:'Remote (US)', type:'Full-time' },
+      { title:'Architect Success Lead', dept:'Operations', location:'Remote (US)', type:'Full-time' },
+      { title:'Licensing & Compliance Analyst', dept:'Operations', location:'Remote (US)', type:'Full-time' },
+      { title:'Growth Marketer — SEO/AEO', dept:'Marketing', location:'Remote (US)', type:'Full-time' },
+    ];
+    const depts = ['All','Engineering','Design','Operations','Marketing'];
+    const deptChips = depts.map(d=>{
+      const active = this.state.dept===d;
+      return { label:d, onClick:()=>this.setState({dept:d}),
+        style:`border:1px solid ${active?'#135bff':'#dbe4f8'};background:${active?'#135bff':'#fff'};color:${active?'#fff':'#16305c'};padding:8px 15px;border-radius:100px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s ease;`,
+      };
+    });
+    const roles = this.state.dept==='All' ? allRoles : allRoles.filter(r=>r.dept===this.state.dept);
+    const footerCols = [
+      { h:'Product', items:[
+        {label:'How it works', href:'Landing.dc.html#how'},
+        {label:'Services', href:'Services.dc.html'},
+        {label:'Instant estimate', href:'../app/Get Started.dc.html'},
+        {label:'Jurisdiction database', href:'Jurisdiction Database.dc.html'},
+        {label:'Case studies', href:'Case Studies.dc.html'},
+      ]},
+      { h:'Explore', items:[
+        {label:'Inspiration', href:'Inspiration.dc.html'},
+        {label:'Guides', href:'Blog.dc.html'},
+        {label:'For architects', href:'Architect Landing.dc.html'},
+        {label:'By project', href:'Project Landing.dc.html'},
+        {label:'By city', href:'City Landing.dc.html'},
+      ]},
+      { h:'Company', items:[
+        {label:'About', href:'About.dc.html'},
+        {label:'Careers', href:'Careers.dc.html'},
+        {label:'Contact', href:'Contact.dc.html'},
+        {label:'Privacy', href:'Privacy.dc.html'},
+      ]},
+    ];
+    return { perks, deptChips, roles, empty: roles.length===0, footerCols };
+  }
+}
+</script>
+</body>
+</html>

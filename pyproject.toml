@@ -1,0 +1,63 @@
+[project]
+name = "architecthire-backend"
+version = "0.1.0"
+description = "ArchitectHire — CMS-driven marketplace API (Django + DRF + Channels + Celery)"
+requires-python = ">=3.13"
+dependencies = [
+    "django>=6.1,<6.2",
+    "djangorestframework>=3.18,<3.19",
+    "clerk-backend-api>=3.0",
+    "PyJWT[crypto]>=2.10",
+    "drf-spectacular>=0.28",
+    "django-filter>=25.1",
+    "django-cors-headers>=4.7",
+    "django-redis>=6.0",
+    "django-environ>=0.12",
+    "django-solo>=2.4",
+    "django-import-export>=4.3",
+    "django-storages[s3]>=1.14",
+    "channels>=4.3,<5",
+    "channels-redis>=4.3,<5",
+    "celery[redis]>=5.6,<5.7",
+    "psycopg[binary]>=3.2",
+    "gunicorn>=23.0",
+    "uvicorn>=0.35",
+    "uvicorn-worker>=0.3",
+    "whitenoise>=6.9",
+    "pywebpush>=2.0",
+    "stripe>=12.0",
+    "sentry-sdk[django]>=2.30",
+    "Pillow>=11.0",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.12",
+    "pytest>=8.3",
+    "pytest-django>=4.11",
+    "pytest-cov>=6.0",
+    "pytest-asyncio>=1.0",
+    "factory-boy>=3.3",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+extend-exclude = ["*/migrations/*", "venv", ".venv", "design"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "C4", "DJ", "T20"]
+ignore = ["DJ001"]
+
+[tool.ruff.lint.per-file-ignores]
+"architecture_backend/settings/*" = ["F403", "F405"]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "architecture_backend.settings.dev"
+python_files = ["test_*.py"]
+addopts = "--reuse-db"
+asyncio_mode = "auto"
+
+[tool.coverage.run]
+source = ["apps"]
+omit = ["*/migrations/*", "*/tests/*", "*/factories.py"]

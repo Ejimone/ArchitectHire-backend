@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f3f6fd; }
+  ::selection { background: #135bff; color: #fff; }
+  a { color: #135bff; text-decoration: none; }
+  a:hover { color: #0b3fcc; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  @media (max-width: 900px){
+    main{ padding-left:18px !important; padding-right:18px !important; }
+    [style*="repeat(3"]{ grid-template-columns:1fr 1fr !important; }
+    [style*="grid-template-columns: 1.05fr"]{ grid-template-columns:1fr !important; }
+    h1{ font-size:clamp(30px,7vw,42px) !important; }
+  }
+  @media (max-width: 560px){ [style*="repeat(3"]{ grid-template-columns:1fr !important; } }
+</style>
+<script src="../image-slot.js"></script>
+<script src="./site-nav.js"></script>
+</helmet>
+<div style="background: #f3f6fd; color: #0a1440; font-family: 'Hanken Grotesk', sans-serif; -webkit-font-smoothing: antialiased;">
+
+  <x-import component-from-global-scope="site-nav" from="./site-nav.js" active="locations" style="display:contents" hint-size="100%,64px"></x-import>
+
+  <main style="max-width: 1200px; margin: 0 auto; padding: 0 32px 100px;">
+
+    <nav style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #5b6493; margin-top: 22px;">
+      <a href="Landing.dc.html" style="color: #5b6493;">Home</a><span>/</span>
+      <span style="color: #0a1440; font-weight: 600;">Architects by city</span>
+    </nav>
+
+    <!-- HERO -->
+    <section style="margin-top: 16px; background: #0a1440; border-radius: 24px; overflow: hidden; display: grid; grid-template-columns: 1.05fr .95fr; align-items: stretch; min-height: 460px; animation: fadeUp .5s ease both;">
+      <div style="padding: 52px 44px; display: flex; flex-direction: column; justify-content: center; min-width: 0;">
+        <div style="display: inline-flex; align-self: flex-start; align-items: center; gap: 8px; padding: 6px 13px; border-radius: 100px; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: #0a1440; background: #ceff65; font-weight: 700; margin-bottom: 22px;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #0a1440;"></span>By city</div>
+        <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(34px, 3.2vw, 46px); line-height: 1.03; letter-spacing: -.02em; font-weight: 800; color: #fff; max-width: 13em; text-wrap: balance;">Find a licensed architect in your city</h1>
+        <p style="font-size: 18px; line-height: 1.55; color: #b9c3e8; margin: 20px 0 28px; max-width: 32em; text-wrap: pretty;">A stamped drawing set must come from an architect licensed where you're building. We match you to pros who know your jurisdiction's permit process — pick your city, or find your state below.</p>
+        <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+          <a href="../app/Get Started.dc.html" style="background: #135bff; color: #fff; padding: 15px 28px; border-radius: 11px; font-size: 16px; font-weight: 700; box-shadow: 0 3px 0 #0b3fcc;">Get matched →</a>
+          <span style="font-size: 14px; color: #9fb4ff;">Licensed in all 52 US jurisdictions</span>
+        </div>
+      </div>
+      <div style="position: relative; min-width: 0; min-height: 380px; overflow: hidden;">
+        <sc-for list="{{ heroSlots }}" as="hs" hint-placeholder-count="3">
+          <div style="{{ hs.wrapStyle }}"><image-slot id="{{ hs.id }}" shape="rect" fit="cover" placeholder="{{ hs.ph }}" style="position: absolute; inset: 0; width: 100%; height: 100%;"></image-slot></div>
+        </sc-for>
+        <div style="position: absolute; left: 20px; bottom: 20px; display: flex; gap: 7px; z-index: 6;">
+          <sc-for list="{{ heroDots }}" as="d" hint-placeholder-count="3">
+            <button onClick="{{ d.onClick }}" aria-label="Slide" style="{{ d.style }}"></button>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED CITIES -->
+    <section style="margin-top: 56px;">
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; font-weight: 700; letter-spacing: -.02em;">Popular cities</h2>
+      <p style="font-size: 16px; color: #3f4770; margin-top: 8px;">The metros where the network is deepest today.</p>
+      <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-top: 24px;">
+        <sc-for list="{{ cities }}" as="c" hint-placeholder-count="9">
+          <a href="{{ c.href }}" style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; overflow: hidden; display: block;" style-hover="border-color: #135bff; box-shadow: 0 12px 28px rgba(19,91,255,.14); transform: translateY(-2px);">
+            <div style="height: 156px; position: relative; background: #eef2fb;">
+              <image-slot id="{{ c.slotId }}" shape="rect" fit="cover" placeholder="{{ c.ph }}" style="position: absolute; inset: 0; width: 100%; height: 100%;"></image-slot>
+              <div style="position: absolute; left: 14px; bottom: 14px; background: rgba(10,20,64,.72); backdrop-filter: blur(6px); color: #fff; padding: 5px 11px; border-radius: 100px; font-size: 12px; font-weight: 600;">{{ c.count }} architects</div>
+            </div>
+            <div style="padding: 18px 22px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+              <div>
+                <div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 20px;">{{ c.name }}</div>
+                <div style="font-size: 13px; color: #5b6493; margin-top: 2px;">{{ c.state }}</div>
+              </div>
+              <span style="color: #135bff; font-size: 18px; flex-shrink: 0;">→</span>
+            </div>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- ALL STATES -->
+    <section style="margin-top: 64px;">
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; font-weight: 700; letter-spacing: -.02em;">Licensed architects in all 50 states</h2>
+      <p style="font-size: 16px; color: #3f4770; margin-top: 8px; max-width: 46em;">We match to your jurisdiction anywhere in the country — every state, plus Washington, D.C. and Puerto Rico.</p>
+      <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 24px;">
+        <sc-for list="{{ states }}" as="st" hint-placeholder-count="12">
+          <a href="City Landing.dc.html" style="background: #135bff; color: #fff; border-radius: 12px; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; gap: 12px;" style-hover="background: #0b3fcc;">
+            <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 16px; font-weight: 700; letter-spacing: -.01em;">{{ st }}</span>
+            <span style="font-size: 17px; opacity: .85;">→</span>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section style="margin-top: 64px; background: #ceff65; border-radius: 22px; padding: 48px; text-align: center;">
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 32px; font-weight: 800; color: #0a1440; letter-spacing: -.02em; text-wrap: balance;">Don't see your city? We still cover it.</h2>
+      <p style="font-size: 17px; color: #16305c; margin: 12px 0 26px;">Every match is verified as licensed in your jurisdiction — wherever you're building.</p>
+      <a href="../app/Get Started.dc.html" style="display: inline-block; background: #0a1440; color: #fff; padding: 16px 32px; border-radius: 12px; font-size: 17px; font-weight: 800;">Get matched in your area →</a>
+    </section>
+  </main>
+
+  <x-import component-from-global-scope="site-footer" from="./site-footer.js" hint-size="100%,460px"></x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1200, &quot;height&quot;: 900}}">
+class Component extends DCLogic {
+  state = { ci: 0 };
+  componentDidMount(){ this._t = setInterval(()=>this.setState(s=>({ ci:(s.ci+1)%3 })), 3800); }
+  componentWillUnmount(){ clearInterval(this._t); }
+
+  renderVals(){
+    const href = 'City Landing.dc.html';
+    const cities = [
+      { name:'Oakland', state:'California', count:'140+', slotId:'ct-oak', ph:'Oakland skyline / homes', href },
+      { name:'San Francisco', state:'California', count:'210+', slotId:'ct-sf', ph:'San Francisco cityscape', href },
+      { name:'San Jose', state:'California', count:'120+', slotId:'ct-sj', ph:'San Jose neighborhood', href },
+      { name:'Los Angeles', state:'California', count:'320+', slotId:'ct-la', ph:'Los Angeles homes', href },
+      { name:'San Diego', state:'California', count:'160+', slotId:'ct-sd', ph:'San Diego coastline', href },
+      { name:'Sacramento', state:'California', count:'90+', slotId:'ct-sac', ph:'Sacramento streets', href },
+      { name:'Seattle', state:'Washington', count:'130+', slotId:'ct-sea', ph:'Seattle skyline', href },
+      { name:'Portland', state:'Oregon', count:'95+', slotId:'ct-pdx', ph:'Portland neighborhood', href },
+      { name:'Austin', state:'Texas', count:'110+', slotId:'ct-atx', ph:'Austin cityscape', href },
+      { name:'Denver', state:'Colorado', count:'85+', slotId:'ct-den', ph:'Denver homes', href },
+      { name:'Phoenix', state:'Arizona', count:'100+', slotId:'ct-phx', ph:'Phoenix desert homes', href },
+      { name:'New York', state:'New York', count:'280+', slotId:'ct-nyc', ph:'New York brownstones', href },
+    ];
+    const states = ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming'];
+
+    const heroDefs = [
+      { id:'city-hero-1', ph:'City skyline / neighborhood' },
+      { id:'city-hero-2', ph:'Residential street aerial' },
+      { id:'city-hero-3', ph:'Architect reviewing local plans' },
+    ];
+    const ci = this.state.ci % heroDefs.length;
+    const heroSlots = heroDefs.map((h,i)=>({
+      id:h.id, ph:'Drop image — '+h.ph,
+      wrapStyle:`position:absolute;inset:0;transition:opacity .8s ease;opacity:${i===ci?1:0};z-index:${i===ci?2:1};`,
+    }));
+    const heroDots = heroDefs.map((h,i)=>({
+      onClick:()=>this.setState({ ci:i }),
+      style:`width:${i===ci?24:8}px;height:8px;border-radius:100px;border:none;cursor:pointer;padding:0;background:${i===ci?'#ceff65':'rgba(255,255,255,.55)'};transition:all .3s ease;`,
+    }));
+
+    return { cities, states, heroSlots, heroDots };
+  }
+}
+</script>
+</body>
+</html>

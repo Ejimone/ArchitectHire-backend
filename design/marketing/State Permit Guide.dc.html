@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f3f6fd; }
+  ::selection { background: #135bff; color: #fff; }
+  a { color: #135bff; text-decoration: none; }
+  a:hover { color: #0b3fcc; }
+  .lk { color: #0a1440; font-weight: 600; }
+  .lk:hover { color: #135bff; }
+  .prose p { font-size: 17px; line-height: 1.72; color: #2b345c; margin-top: 18px; }
+  .prose strong { color: #0a1440; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  @media (max-width: 900px){
+    main{ padding-left:18px !important; padding-right:18px !important; }
+    header nav{ display:none !important; }
+    [style*="repeat(4"]{ grid-template-columns:1fr 1fr !important; }
+    [style*="repeat(3"]{ grid-template-columns:1fr !important; }
+    [style*="repeat(2"]{ grid-template-columns:1fr !important; }
+    [style*="grid-template-columns: 1.4fr"]{ grid-template-columns:1fr !important; }
+    [style*="position: sticky"]{ position:static !important; top:auto !important; }
+    [style*="padding: 15px 32px"]{ padding:12px 18px !important; }
+    [style*="padding: 44px"]{ padding:28px 22px !important; }
+    h1{ font-size:clamp(30px,7vw,42px) !important; }
+  }
+</style>
+</helmet>
+<div style="background: #f3f6fd; color: #0a1440; font-family: 'Hanken Grotesk', sans-serif; -webkit-font-smoothing: antialiased;">
+
+  <x-import component-from-global-scope="site-nav" from="./site-nav.js" style="display:contents" hint-size="100%,64px"></x-import>
+
+  <main style="max-width: 1200px; margin: 0 auto; padding: 0 32px 100px;">
+
+    <!-- HERO -->
+    <section style="margin-top: 24px; background: #0a1440; border-radius: 22px; padding: 44px; animation: fadeUp .5s ease both;">
+      <nav style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #9fb4ff; margin-bottom: 22px;">
+        <a href="Landing.dc.html" style="color: #9fb4ff;">Home</a><span>/</span>
+        <a href="Jurisdiction Database.dc.html" style="color: #9fb4ff;">Jurisdiction database</a><span>/</span>
+        <span style="color: #fff; font-weight: 600;">{{ g.state }}</span>
+      </nav>
+      <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: center;">
+        <div>
+          <div style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 13px; border-radius: 100px; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: #0a1440; background: #ceff65; font-weight: 700;">Permitting guide</div>
+          <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(34px, 3.4vw, 46px); line-height: 1.04; font-weight: 800; color: #fff; letter-spacing: -.02em; margin: 18px 0 14px; text-wrap: balance;">Hiring an architect &amp; getting permits in {{ g.state }}</h1>
+          <p style="font-size: 18px; line-height: 1.6; color: #b9c3e8; max-width: 40em; text-wrap: pretty;">{{ g.intro }}</p>
+          <a href="../app/Get Started.dc.html" style="display: inline-block; margin-top: 24px; background: #135bff; color: #fff; padding: 15px 28px; border-radius: 11px; font-size: 16px; font-weight: 700; box-shadow: 0 3px 0 #0b3fcc;">Get a {{ g.state }} estimate →</a>
+        </div>
+        <div style="background: #0c1a4a; border: 1px solid #1d2f6e; border-radius: 16px; padding: 24px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9fb4ff; letter-spacing: .05em;">COMPLEXITY SCORE</div>
+          <div style="display: flex; align-items: baseline; gap: 10px; margin: 8px 0 6px;"><span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 52px; font-weight: 700; color: #fff;">{{ g.score }}</span><span style="font-size: 14px; color: #9fb4ff;">/ 100 · {{ g.band }}</span></div>
+          <div style="height: 8px; border-radius: 6px; background: #16265f; overflow: hidden; margin-bottom: 18px;"><div style="{{ g.barStyle }}"></div></div>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div style="display: flex; justify-content: space-between; font-size: 13.5px;"><span style="color: #9fb4ff;">Typical time to permit</span><span style="color: #fff; font-family: 'IBM Plex Mono', monospace;">{{ g.timeline }}</span></div>
+            <div style="display: flex; justify-content: space-between; font-size: 13.5px;"><span style="color: #9fb4ff;">Pricing multiplier</span><span style="color: #fff; font-family: 'IBM Plex Mono', monospace;">{{ g.mult }}×</span></div>
+            <div style="display: flex; justify-content: space-between; font-size: 13.5px;"><span style="color: #9fb4ff;">Licensed architects</span><span style="color: #fff; font-family: 'IBM Plex Mono', monospace;">{{ g.archCount }}</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BODY GRID -->
+    <div style="display: grid; grid-template-columns: 1fr 300px; gap: 44px; margin-top: 40px; align-items: start;">
+
+      <div style="min-width: 0;">
+        <!-- OVERVIEW -->
+        <article class="prose">
+          <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; font-weight: 700; letter-spacing: -.02em;">Permitting in {{ g.state }}, explained</h2>
+          <p>{{ g.body1 }}</p>
+          <p>{{ g.body2 }}</p>
+        </article>
+
+        <!-- COMPLEXITY FACTORS -->
+        <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 24px; font-weight: 700; letter-spacing: -.02em; margin-top: 44px;">What drives complexity here</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px;">
+          <sc-for list="{{ g.factors }}" as="f" hint-placeholder-count="4">
+            <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 14px; padding: 20px;">
+              <div style="display: flex; align-items: center; justify-content: space-between;"><div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 17px; font-weight: 700;">{{ f.name }}</div><span style="{{ f.tagStyle }}">{{ f.level }}</span></div>
+              <p style="font-size: 13.5px; line-height: 1.55; color: #5b6493; margin-top: 8px;">{{ f.desc }}</p>
+            </div>
+          </sc-for>
+        </div>
+
+        <!-- TIMELINE -->
+        <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 24px; font-weight: 700; letter-spacing: -.02em; margin-top: 44px;">Typical path to a stamped permit</h2>
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 18px;">
+          <sc-for list="{{ g.steps }}" as="st" hint-placeholder-count="4">
+            <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 14px; padding: 18px 20px; display: flex; gap: 16px; align-items: flex-start;">
+              <span style="flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%; background: #135bff; color: #fff; font-family: 'IBM Plex Mono', monospace; font-size: 14px; display: flex; align-items: center; justify-content: center;">{{ st.n }}</span>
+              <div><div style="font-weight: 700; font-size: 15.5px;">{{ st.t }} <span style="font-weight: 500; color: #8b93b5; font-family: 'IBM Plex Mono', monospace; font-size: 13px;">· {{ st.dur }}</span></div><p style="font-size: 14px; line-height: 1.55; color: #3f4770; margin-top: 4px;">{{ st.d }}</p></div>
+            </div>
+          </sc-for>
+        </div>
+
+        <!-- FAQ (AEO) -->
+        <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 24px; font-weight: 700; letter-spacing: -.02em; margin-top: 44px;">Frequently asked questions</h2>
+        <div style="margin-top: 18px; background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; overflow: hidden;">
+          <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="5">
+            <div style="border-bottom: 1px solid #eef2fa;">
+              <button onClick="{{ f.onClick }}" style="width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 22px; background: none; border: none; cursor: pointer; text-align: left; font-family: inherit;">
+                <span style="font-weight: 700; font-size: 15.5px; color: #0a1440;">{{ f.q }}</span>
+                <span style="font-size: 18px; color: #9aa2c4; flex-shrink: 0;">{{ f.caret }}</span>
+              </button>
+              <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}">
+                <p style="padding: 0 22px 20px; font-size: 15px; line-height: 1.65; color: #3f4770;">{{ f.a }}</p>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <aside style="position: sticky; top: 90px; display: flex; flex-direction: column; gap: 18px;">
+        <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 22px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #135bff; letter-spacing: .05em;">CITIES WE COVER</div>
+          <div style="display: flex; flex-direction: column; gap: 4px; margin-top: 12px;">
+            <sc-for list="{{ g.cities }}" as="c" hint-placeholder-count="5">
+              <a href="City Landing.dc.html" class="lk" style="font-size: 14.5px; padding: 6px 0;">{{ c }} →</a>
+            </sc-for>
+          </div>
+        </div>
+        <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 22px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #135bff; letter-spacing: .05em;">POPULAR PROJECTS</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px;">
+            <sc-for list="{{ g.projects }}" as="p" hint-placeholder-count="5">
+              <a href="Project Landing.dc.html" style="font-size: 13px; font-weight: 600; color: #16305c; background: #f3f6fd; border: 1px solid #e2e8f5; padding: 7px 12px; border-radius: 100px;">{{ p }}</a>
+            </sc-for>
+          </div>
+        </div>
+        <div style="background: #ceff65; border-radius: 16px; padding: 22px;">
+          <div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 19px; font-weight: 700; color: #0a1440; line-height: 1.2;">Price a {{ g.state }} project</div>
+          <p style="font-size: 13.5px; color: #16305c; margin-top: 8px; line-height: 1.5;">Instant estimate with the {{ g.state }} complexity multiplier applied automatically.</p>
+          <a href="../app/Get Started.dc.html" style="display: block; text-align: center; margin-top: 14px; background: #0a1440; color: #fff; padding: 13px; border-radius: 10px; font-size: 15px; font-weight: 700;">Get my estimate →</a>
+        </div>
+      </aside>
+    </div>
+
+    <!-- RELATED STATES -->
+    <section style="margin-top: 56px;">
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 24px; font-weight: 700; letter-spacing: -.02em;">Explore other state guides</h2>
+      <div style="display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-top: 18px;">
+        <sc-for list="{{ related }}" as="r" hint-placeholder-count="4">
+          <a href="State Permit Guide.dc.html" style="background: #fff; border: 1px solid #e2e8f5; border-radius: 14px; padding: 18px;" style-hover="border-color: #135bff; box-shadow: 0 8px 20px rgba(19,91,255,.1); transform: translateY(-2px);">
+            <div style="display: flex; align-items: center; justify-content: space-between;"><span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 17px; font-weight: 700;">{{ r.state }}</span><span style="{{ r.tagStyle }}">{{ r.score }}</span></div>
+            <div style="font-size: 13px; color: #5b6493; margin-top: 4px;">{{ r.band }} complexity</div>
+          </a>
+        </sc-for>
+      </div>
+      <a href="Jurisdiction Database.dc.html" style="display: inline-block; margin-top: 20px; font-size: 15px; font-weight: 700; color: #135bff;">Browse all 52 jurisdictions →</a>
+    </section>
+  </main>
+
+  <x-import component-from-global-scope="site-footer" from="./site-footer.js" hint-size="100%,460px"></x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1200, &quot;height&quot;: 900}}">
+class Component extends DCLogic {
+  state = { openFaq: 0 };
+  renderVals(){
+    const g = {
+      state:'California', score:82, band:'High complexity', mult:'1.35', timeline:'8–14 wks', archCount:'640+',
+      barStyle:'height:100%;width:82%;background:#135bff;border-radius:6px;',
+      intro:'California is one of the most demanding permitting environments in the country — seismic requirements, wildfire overlays, coastal rules and Title-24 energy compliance all shape the drawing set. Here\u2019s what to expect, and how we match you to an architect licensed to stamp it.',
+      body1:'Every set submitted in California must be stamped by an architect licensed by the California Architects Board. Beyond licensure, the state layers requirements few other jurisdictions do: mandatory Title-24 energy compliance, seismic detailing tied to the local hazard zone, and — in much of the state — wildfire (WUI) ignition-resistant construction. These aren\u2019t optional line items; a set missing them is rejected at plan check.',
+      body2:'On top of state rules, each city and county adds its own review. Coastal jurisdictions trigger Coastal Commission steps, hillside lots require additional geotechnical and structural coordination, and historic districts add design review. Our jurisdiction database scores each of these so your estimate reflects the real complexity of your specific address, not a statewide average.',
+      factors:[
+        { name:'Seismic zone', level:'HIGH', tagStyle:tag(2), desc:'Lateral and foundation detailing tied to the local seismic hazard zone — the single biggest structural driver.' },
+        { name:'Wildfire (WUI)', level:'HIGH', tagStyle:tag(2), desc:'Ignition-resistant assemblies and defensible-space requirements across large parts of the state.' },
+        { name:'Title-24 energy', level:'REQUIRED', tagStyle:tag(1), desc:'Mandatory energy-compliance documentation on nearly every residential and commercial set.' },
+        { name:'Coastal / historic', level:'PARTIAL', tagStyle:tag(1), desc:'Coastal Commission review and historic-district design review where applicable.' },
+      ],
+      steps:[
+        { n:'1', t:'Scope & estimate', dur:'2–3 days', d:'Questionnaire feeds the pricing engine; you review 2–3 California-licensed architects and confirm a fixed quote or hourly on a scoping call.' },
+        { n:'2', t:'Design & drawings', dur:'3–8 wks', d:'Your architect produces the full set — plans, elevations, structural coordination, and Title-24 compliance — with milestone reviews.' },
+        { n:'3', t:'Plan check submission', dur:'2–6 wks', d:'The stamped set is submitted to your city or county. Complexity and backlog set the review time; corrections cycle back if needed.' },
+        { n:'4', t:'Permit issued', dur:'—', d:'Once approved, you receive the permit and can break ground. Revision tooling keeps any change orders on-platform.' },
+      ],
+      cities:['Los Angeles','San Francisco','Oakland','San Diego','San Jose','Sacramento'],
+      projects:['ADU','Addition','New custom home','Kitchen & bath','Commercial TI'],
+    };
+    function tag(lv){ const c = lv>=2?['#b0613d','#f3e6df']:lv===1?['#8a6d2f','#f2ecd9']:['#16924e','#e7f6ec']; return `font-family:'IBM Plex Mono',monospace;font-size:11px;padding:3px 8px;border-radius:5px;font-weight:600;color:${c[0]};background:${c[1]};`; }
+
+    const faqData = [
+      { q:'Does my architect need to be licensed in California?', a:'Yes. A permit set must be stamped by an architect holding an active California license. Every match we surface for a California project is verified as actively licensed in the state before it reaches you.' },
+      { q:'How long does it take to get a permit in California?', a:'Plan for roughly 8–14 weeks from scoping to an issued permit for a typical residential project — a few weeks of design plus 2–6 weeks of plan-check review, which varies by city and current backlog.' },
+      { q:'What is Title-24 and do I need it?', a:'Title-24 is California\u2019s energy-efficiency standard. Nearly every residential and commercial permit set must include Title-24 compliance documentation; your architect prepares it as part of the drawing set.' },
+      { q:'Why is California more expensive than other states?', a:'California scores 82/100 on our complexity index because of seismic, wildfire, Title-24 and — in many areas — coastal or historic review. That translates to a 1.35× pricing multiplier, applied automatically in your estimate.' },
+      { q:'Can I hire an architect remotely for a California project?', a:'Yes. The entire process — scoping, drawings, revisions and submission — runs on-platform with escrow-protected milestones. You never need an in-person meeting to reach a stamped, permit-ready set.' },
+    ];
+    const faqs = faqData.map((f,i)=>({ ...f, open: this.state.openFaq===i, caret: this.state.openFaq===i?'\u2212':'+', onClick:()=>this.setState(st=>({ openFaq: st.openFaq===i?-1:i })) }));
+
+    const related = [
+      { state:'Texas', score:54, band:'Moderate', tagStyle:relTag(54) },
+      { state:'New York', score:76, band:'High', tagStyle:relTag(76) },
+      { state:'Florida', score:72, band:'High', tagStyle:relTag(72) },
+      { state:'Colorado', score:52, band:'Moderate', tagStyle:relTag(52) },
+    ];
+    function relTag(sc){ const c = sc>65?['#b0613d','#f3e6df']:sc>=49?['#8a6d2f','#f2ecd9']:['#16924e','#e7f6ec']; return `font-family:'IBM Plex Mono',monospace;font-size:12px;padding:3px 8px;border-radius:6px;font-weight:600;color:${c[0]};background:${c[1]};`; }
+
+    const footerCols = [
+      { h:'Product', items:[
+        {label:'How it works', href:'Landing.dc.html#how'},
+        {label:'Services', href:'Services.dc.html'},
+        {label:'Instant estimate', href:'../app/Get Started.dc.html'},
+        {label:'Jurisdiction database', href:'Jurisdiction Database.dc.html'},
+        {label:'Case studies', href:'Case Studies.dc.html'},
+      ]},
+      { h:'Explore', items:[
+        {label:'Inspiration', href:'Inspiration.dc.html'},
+        {label:'Guides', href:'Blog.dc.html'},
+        {label:'For architects', href:'Architect Landing.dc.html'},
+        {label:'By project', href:'Project Landing.dc.html'},
+        {label:'By city', href:'City Landing.dc.html'},
+      ]},
+      { h:'Company', items:[
+        {label:'About', href:'#'},{label:'Careers', href:'#'},{label:'Contact', href:'#'},{label:'Privacy', href:'#'},
+      ]},
+    ];
+
+    return { g, faqs, related, footerCols };
+  }
+}
+</script>
+</body>
+</html>

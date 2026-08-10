@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  doc-page:not(:defined) { visibility: hidden; }
+  ::selection { background: #135bff; color: #fff; }
+  a { color: #135bff; text-decoration: none; }
+  a:hover { color: #0b3fcc; }
+  .wiki h2 { break-after: avoid; }
+  .wiki .keep { break-inside: avoid; }
+</style>
+<script src="./doc-page.js"></script>
+</helmet>
+<doc-page margin="0.85in">
+  <div class="wiki" style="font-family: 'Hanken Grotesk', sans-serif; color: #0a1440; -webkit-font-smoothing: antialiased;">
+
+    <!-- MASTHEAD -->
+    <div class="keep" style="border-bottom: 2px solid #0a1440; padding-bottom: 20px; margin-bottom: 28px;">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div style="width: 24px; height: 24px; display: grid; grid-template-columns: repeat(3,1fr); grid-template-rows: repeat(3,1fr); gap: 2.5px; flex-shrink: 0;"><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#135bff;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div></div>
+        <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 19px; font-weight: 700; letter-spacing: -.01em;">ArchitectHire</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; font-weight: 500; color: #0a1440; background: #ceff65; padding: 3px 9px; border-radius: 6px; letter-spacing: .04em;">INTERNAL WIKI</span>
+      </div>
+      <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 38px; font-weight: 800; letter-spacing: -.02em; margin: 20px 0 0; max-width: 18em; text-wrap: balance; line-height: 1.08;">Business context &amp; product brief</h1>
+      <p style="font-size: 15.5px; line-height: 1.55; color: #3f4770; margin-top: 12px; max-width: 42em; text-wrap: pretty;">The single source of truth for what ArchitectHire is, who it serves, how it prices, and how it makes money — read this first whenever you return to the design doc.</p>
+      <div style="display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap;">
+        <div style="background: #f3f6fd; border: 1px solid #e2e8f5; border-radius: 10px; padding: 11px 16px;"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 20px; color: #135bff;">52</div><div style="font-size: 11.5px; color: #5b6493;">states at launch (all US + DC &amp; PR)</div></div>
+        <div style="background: #f3f6fd; border: 1px solid #e2e8f5; border-radius: 10px; padding: 11px 16px;"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 20px; color: #135bff;">2–3</div><div style="font-size: 11.5px; color: #5b6493;">architect matches per client</div></div>
+        <div style="background: #f3f6fd; border: 1px solid #e2e8f5; border-radius: 10px; padding: 11px 16px;"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 20px; color: #135bff;">15–30%</div><div style="font-size: 11.5px; color: #5b6493;">platform take rate</div></div>
+      </div>
+    </div>
+
+    <!-- CONCEPT -->
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #135bff; letter-spacing: .05em; margin-top: 4px;">01 · THE CONCEPT</div>
+    <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 23px; font-weight: 700; letter-spacing: -.02em; margin: 8px 0 10px;">A Havenly-style marketplace for architecture</h2>
+    <p style="font-size: 15px; line-height: 1.7; color: #2b345c; margin-bottom: 26px;">ArchitectHire connects clients with licensed architects who deliver stamped, permit-ready drawings <strong>entirely remotely</strong>. It serves both residential work — renovations, additions, new custom homes — and commercial spaces — tenant improvements, office and retail fit-outs, restaurant build-outs — where permit complexity and repeat business are highest. Beyond full design, the marketplace productizes the <strong>surrounding service ecosystem</strong> — consults, drafting, 3D visualization, scanning, engineering, and permit help — so a client can start with a $145 consult and scale up to a stamped set only when the project demands it.</p>
+
+    <!-- COVERAGE -->
+    <div class="keep" style="background: #ceff65; border-radius: 14px; padding: 24px; margin-bottom: 26px;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #16305c; letter-spacing: .05em;">02 · COVERAGE</div>
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 23px; font-weight: 700; letter-spacing: -.02em; margin: 8px 0 10px; color: #0a1440;">Launching in all 52 states at once</h2>
+      <p style="font-size: 15px; line-height: 1.7; color: #16305c;">We're starting out across <strong>all 52 US jurisdictions</strong> — the 50 states plus Washington, D.C. and Puerto Rico. The client questionnaire captures the project's state up front, and every match is filtered to architects actively licensed there. The jurisdiction database (below) is what makes nationwide launch viable: complexity is scored per city/county rather than hand-managed market by market.</p>
+    </div>
+
+    <!-- DIFFERENTIATORS -->
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #135bff; letter-spacing: .05em;">03 · DIFFERENTIATORS</div>
+    <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 23px; font-weight: 700; letter-spacing: -.02em; margin: 8px 0 14px;">Two moats competitors can't easily copy</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 26px;">
+      <div class="keep" style="background: #f3f6fd; border: 1px solid #e2e8f5; border-radius: 12px; padding: 20px;">
+        <div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 16.5px; font-weight: 700;">The deliverable is a legal document</div>
+        <p style="font-size: 13.5px; line-height: 1.6; color: #3f4770; margin-top: 7px;">Unlike interior-design platforms, the output is stamped drawings carrying the architect's professional liability — which must come from an architect licensed in the client's jurisdiction. That requirement is the barrier clients can't navigate alone.</p>
+      </div>
+      <div class="keep" style="background: #f3f6fd; border: 1px solid #e2e8f5; border-radius: 12px; padding: 20px;">
+        <div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 16.5px; font-weight: 700;">The jurisdiction database</div>
+        <p style="font-size: 13.5px; line-height: 1.6; color: #3f4770; margin-top: 7px;">A proprietary data layer scoring every city and county on permit complexity — historic overlays, seismic / coastal / wildfire zones, drawing requirements — powering pricing, matching, and quality. A data asset competitors can't replicate quickly.</p>
+      </div>
+    </div>
+
+    <!-- JOURNEY -->
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #135bff; letter-spacing: .05em;">04 · THE CLIENT JOURNEY</div>
+    <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 23px; font-weight: 700; letter-spacing: -.02em; margin: 8px 0 14px;">Questionnaire → estimate → matches → escrow</h2>
+    <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 26px;">
+      <div class="keep" style="display: flex; gap: 14px; align-items: flex-start;"><span style="flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; background: #135bff; color: #fff; font-family: 'IBM Plex Mono', monospace; font-size: 13px; display: flex; align-items: center; justify-content: center;">1</span><p style="font-size: 14.5px; line-height: 1.6; color: #2b345c;"><strong>Questionnaire &amp; instant estimate.</strong> Project type, square footage, location, scope and timeline feed the pricing engine and return an instant, itemized estimate.</p></div>
+      <div class="keep" style="display: flex; gap: 14px; align-items: flex-start;"><span style="flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; background: #135bff; color: #fff; font-family: 'IBM Plex Mono', monospace; font-size: 13px; display: flex; align-items: center; justify-content: center;">2</span><p style="font-size: 14.5px; line-height: 1.6; color: #2b345c;"><strong>2–3 best-fit matches.</strong> Pre-filtered on the hard requirements clients can't judge — state licensure, jurisdiction experience, residential vs commercial specialization, and capacity. Capped at 2–3 to avoid decision paralysis.</p></div>
+      <div class="keep" style="display: flex; gap: 14px; align-items: flex-start;"><span style="flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; background: #135bff; color: #fff; font-family: 'IBM Plex Mono', monospace; font-size: 13px; display: flex; align-items: center; justify-content: center;">3</span><p style="font-size: 14.5px; line-height: 1.6; color: #2b345c;"><strong>Scope on-platform.</strong> Chat or video with matches (doubling as the scoping call). Contact details stay off-platform until payment; repeat clients can request a specific architect.</p></div>
+      <div class="keep" style="display: flex; gap: 14px; align-items: flex-start;"><span style="flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; background: #135bff; color: #fff; font-family: 'IBM Plex Mono', monospace; font-size: 13px; display: flex; align-items: center; justify-content: center;">4</span><p style="font-size: 14.5px; line-height: 1.6; color: #2b345c;"><strong>Pick, pay into escrow, begin.</strong> The client chooses their architect and contract type, funds escrow, and the project starts on a tracked timeline.</p></div>
+    </div>
+
+    <!-- PRICING -->
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #135bff; letter-spacing: .05em;">05 · PRICING MODEL</div>
+    <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 23px; font-weight: 700; letter-spacing: -.02em; margin: 8px 0 8px;">Two contract types — the client's choice</h2>
+    <p style="font-size: 14.5px; line-height: 1.65; color: #3f4770; margin-bottom: 16px;">Offering both widens the funnel: cost-certain clients take the fixed quote, while commercial and evolving projects that would never fit a fixed price stay on-platform instead of going elsewhere.</p>
+
+    <div class="keep" style="background: #f3f6fd; border: 1px solid #e2e8f5; border-radius: 12px; padding: 20px; margin-bottom: 16px;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #135bff; letter-spacing: .04em;">PRODUCTIZED SERVICE TIERS</div>
+      <p style="font-size: 13.5px; line-height: 1.6; color: #3f4770; margin: 7px 0 12px;">The whole opportunity is the sub-$3k work traditional firms reject on minimum-fee grounds. The catalog spans three tiers — priced from current US market rates, not steep full-service anchors.</p>
+      <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 10px;">
+        <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 10px; padding: 13px;"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #16924e;">$50–500</div><div style="font-weight: 700; font-size: 13.5px; margin: 4px 0 2px;">Volume</div><div style="font-size: 12px; color: #5b6493; line-height: 1.45;">Consults, plan reviews, single renders, drafting hours. No licensure friction; crosses state lines.</div></div>
+        <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 10px; padding: 13px;"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #0b3fcc;">$500–5k</div><div style="font-weight: 700; font-size: 13.5px; margin: 4px 0 2px;">Core</div><div style="font-size: 12px; color: #5b6493; line-height: 1.45;">Zoning studies, as-builts, render bundles, small-residential permit sets, scan-to-BIM. The biggest gap.</div></div>
+        <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 10px; padding: 13px;"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #5b6493;">$5k+</div><div style="font-weight: 700; font-size: 13.5px; margin: 4px 0 2px;">Full-project</div><div style="font-size: 12px; color: #5b6493; line-height: 1.45;">Full design, ADU packages, commercial TI, entitlements — the two contract types below.</div></div>
+      </div>
+      <p style="font-size: 12px; line-height: 1.55; color: #8b93b5; margin-top: 11px;"><strong style="color:#5b6493;">Keep the stamp line clean:</strong> non-stamped work (renders, drafting, consults, feasibility) travels anywhere; stamped deliverables must come from a pro licensed in that jurisdiction. Separate the flows structurally from day one.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 26px;">
+      <div class="keep" style="background: #0a1440; border-radius: 12px; padding: 20px; color: #fff;">
+        <div style="display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .05em; padding: 4px 9px; border-radius: 6px; background: #135bff; color: #fff;">FLAGSHIP</div>
+        <div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 700; margin: 11px 0 7px;">Dynamic fixed quote</div>
+        <p style="font-size: 13px; line-height: 1.6; color: #b9c3e8;">Engine-generated from project type, square footage on a declining rate curve, modular add-ons (structural, MEP, 3D viz, energy calcs), a jurisdiction complexity multiplier, and timeline / revision terms. Confirmed after the scoping call, with an architect-triggered re-quote flag for hidden complexity. Best for well-defined projects and clients who want cost certainty.</p>
+      </div>
+      <div class="keep" style="background: #f3f6fd; border: 1px solid #e2e8f5; border-radius: 12px; padding: 20px;">
+        <div style="display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .05em; padding: 4px 9px; border-radius: 6px; background: #e7efff; color: #0b3fcc;">FLEXIBLE</div>
+        <div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 700; margin: 11px 0 7px;">Hourly</div>
+        <p style="font-size: 13px; line-height: 1.6; color: #3f4770;">Platform-standardized rates (tiered by architect experience and market), billed through the platform with time tracking and escrow milestones. Best for open-ended, exploratory or unusually complex work — common in commercial projects where scope evolves.</p>
+      </div>
+    </div>
+
+    <!-- REVENUE -->
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #135bff; letter-spacing: .05em;">06 · HOW IT MAKES MONEY</div>
+    <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 23px; font-weight: 700; letter-spacing: -.02em; margin: 8px 0 10px;">Take rate now, construction referrals later</h2>
+    <p style="font-size: 14.5px; line-height: 1.7; color: #2b345c;">A <strong>15–30% take rate</strong> on every project — fixed quotes and hourly billings alike — justified by delivering architects pre-scoped clients with zero business development. Around that: higher-margin add-ons, near-pure-margin rush and revision fees, and eventually an architect subscription tier.</p>
+    <div class="keep" style="background: #e7f6ec; border: 1px solid #c2e6cf; border-radius: 12px; padding: 18px; margin: 14px 0 26px;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #16924e; letter-spacing: .04em;">THE LONG-TERM PRIZE</div>
+      <p style="font-size: 14px; line-height: 1.65; color: #2f6b45; margin-top: 7px;">Contractor and supplier referrals. Drawings are only 5–10% of project cost, so a 2–5% referral fee on construction can exceed the design revenue — making stamped drawings the <strong>acquisition product</strong> for the far larger downstream transaction. Commercial clients amplify this: they build repeatedly and refer at higher volumes.</p>
+    </div>
+
+    <!-- RISKS -->
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #135bff; letter-spacing: .05em;">07 · KEY RISKS TO MANAGE</div>
+    <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 23px; font-weight: 700; letter-spacing: -.02em; margin: 8px 0 14px;">What to watch</h2>
+    <div style="display: flex; flex-direction: column; gap: 11px; margin-bottom: 26px;">
+      <div class="keep" style="display: flex; gap: 12px; align-items: flex-start; padding-bottom: 11px; border-bottom: 1px solid #eaeef8;"><span style="color: #b0613d; font-weight: 700;">!</span><p style="font-size: 14px; line-height: 1.6; color: #2b345c;"><strong>Cross-state licensure</strong> limits which architects can match which clients — matching must respect it strictly.</p></div>
+      <div class="keep" style="display: flex; gap: 12px; align-items: flex-start; padding-bottom: 11px; border-bottom: 1px solid #eaeef8;"><span style="color: #b0613d; font-weight: 700;">!</span><p style="font-size: 14px; line-height: 1.6; color: #2b345c;"><strong>Liability</strong> means architects won't stamp underscoped work — scoping quality is non-negotiable.</p></div>
+      <div class="keep" style="display: flex; gap: 12px; align-items: flex-start; padding-bottom: 11px; border-bottom: 1px solid #eaeef8;"><span style="color: #b0613d; font-weight: 700;">!</span><p style="font-size: 14px; line-height: 1.6; color: #2b345c;"><strong>Hourly transparency</strong> — time tracking must be visible to prevent client distrust and hour-padding disputes.</p></div>
+      <div class="keep" style="display: flex; gap: 12px; align-items: flex-start;"><span style="color: #b0613d; font-weight: 700;">!</span><p style="font-size: 14px; line-height: 1.6; color: #2b345c;"><strong>Disintermediation</strong> — countered with what participants can't take offline: escrow, the pricing engine, on-platform comms before close, an insurance umbrella, and revision tooling.</p></div>
+    </div>
+
+    <!-- ONE LINE -->
+    <div class="keep" style="background: #135bff; border-radius: 14px; padding: 26px; color: #fff;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #ceff65; letter-spacing: .05em;">08 · IN ONE LINE</div>
+      <p style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; line-height: 1.4; font-weight: 600; margin-top: 10px; text-wrap: pretty;">ArchitectHire is a remote architecture marketplace where a questionnaire matches residential and commercial clients to 2–3 qualified architects, clients choose between a dynamic fixed quote or hourly billing, and permit-ready stamped drawings become the doorway to the far larger construction transaction.</p>
+    </div>
+
+  </div>
+</doc-page>
+</x-dc>
+</body>
+</html>

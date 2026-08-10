@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f3f6fd; }
+  ::selection { background: #135bff; color: #fff; }
+  a { color: #135bff; text-decoration: none; }
+  a:hover { color: #0b3fcc; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  @media (max-width: 900px){
+    main{ padding-left:18px !important; padding-right:18px !important; }
+    [style*="repeat(3"]{ grid-template-columns:1fr !important; }
+    [style*="grid-template-columns: 1.05fr"]{ grid-template-columns:1fr !important; }
+    [style*="grid-template-columns: 1.1fr"]{ grid-template-columns:1fr !important; }
+    h1{ font-size:clamp(30px,7vw,42px) !important; }
+  }
+  @media (max-width: 560px){ [style*="repeat(3"]{ grid-template-columns:1fr !important; } }
+</style>
+<script src="../image-slot.js"></script>
+<script src="./site-nav.js"></script>
+</helmet>
+<div style="background: #f3f6fd; color: #0a1440; font-family: 'Hanken Grotesk', sans-serif; -webkit-font-smoothing: antialiased;">
+
+  <x-import component-from-global-scope="site-nav" from="./site-nav.js" active="services" style="display:contents" hint-size="100%,64px"></x-import>
+
+  <main style="max-width: 1200px; margin: 0 auto; padding: 0 32px 100px;">
+
+    <nav style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #5b6493; margin-top: 22px;">
+      <a href="Landing.dc.html" style="color: #5b6493;">Home</a><span>/</span>
+      <span style="color: #0a1440; font-weight: 600;">Services</span>
+    </nav>
+
+    <!-- HERO -->
+    <section style="margin-top: 16px; background: #0a1440; border-radius: 24px; overflow: hidden; display: grid; grid-template-columns: 1.05fr .95fr; align-items: stretch; min-height: 460px; animation: fadeUp .5s ease both;">
+      <div style="padding: 52px 44px; display: flex; flex-direction: column; justify-content: center; min-width: 0;">
+        <div style="display: inline-flex; align-self: flex-start; align-items: center; gap: 8px; padding: 6px 13px; border-radius: 100px; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: #0a1440; background: #ceff65; font-weight: 700; margin-bottom: 22px;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #0a1440;"></span>Services</div>
+        <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(34px, 3.2vw, 46px); line-height: 1.03; letter-spacing: -.02em; font-weight: 800; color: #fff; max-width: 14em; text-wrap: balance;">Not every project needs a full architect</h1>
+        <p style="font-size: 18px; line-height: 1.55; color: #b9c3e8; margin: 20px 0 28px; max-width: 32em; text-wrap: pretty;">Book a one-hour consult, a set of renders, interior design, or drafting by the hour — and step up to a full stamped set only when the project calls for it. Priced up front, remote, escrow-backed.</p>
+        <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+          <a href="../app/Get Started.dc.html" style="background: #135bff; color: #fff; padding: 15px 28px; border-radius: 11px; font-size: 16px; font-weight: 700; box-shadow: 0 3px 0 #0b3fcc;">Get an instant quote →</a>
+          <a href="#catalog" style="color: #ceff65; font-size: 15px; font-weight: 700;">Browse all services ↓</a>
+        </div>
+      </div>
+      <div style="position: relative; min-width: 0; min-height: 380px; overflow: hidden;">
+        <sc-for list="{{ heroSlots }}" as="hs" hint-placeholder-count="3">
+          <div style="{{ hs.wrapStyle }}"><image-slot id="{{ hs.id }}" shape="rect" fit="cover" placeholder="{{ hs.ph }}" style="position: absolute; inset: 0; width: 100%; height: 100%;"></image-slot></div>
+        </sc-for>
+        <div style="position: absolute; left: 20px; bottom: 20px; display: flex; gap: 7px; z-index: 6;">
+          <sc-for list="{{ heroDots }}" as="d" hint-placeholder-count="3">
+            <button onClick="{{ d.onClick }}" aria-label="Slide" style="{{ d.style }}"></button>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATALOG -->
+    <section id="catalog" style="margin-top: 56px;">
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 34px; font-weight: 700; letter-spacing: -.02em;">Every service, one marketplace</h2>
+      <p style="font-size: 16px; color: #3f4770; margin-top: 8px; max-width: 46em;">Grouped by what you need done. Mix and match — a consult today, drafting next week, a full permit set when you're ready to build.</p>
+
+      <div style="display: flex; flex-direction: column; gap: 40px; margin-top: 32px;">
+        <sc-for list="{{ groups }}" as="g" hint-placeholder-count="6">
+          <div>
+            <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;">
+              <div style="width: 40px; height: 40px; border-radius: 11px; background: #e7efff; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">{{ g.icon }}</div>
+              <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: -.01em;">{{ g.name }}</h3>
+              <span style="font-size: 13.5px; color: #5b6493;">{{ g.tagline }}</span>
+              <sc-if value="{{ g.hasDetail }}" hint-placeholder-val="{{ false }}"><a href="{{ g.detailHref }}" style="margin-left: auto; font-size: 14px; font-weight: 700;">Learn more →</a></sc-if>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 16px;">
+              <sc-for list="{{ g.services }}" as="s" hint-placeholder-count="3">
+                <a href="{{ s.href }}" style="background: #fff; border: 1px solid #e2e8f5; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; min-height: 140px;" style-hover="border-color: #135bff; box-shadow: 0 8px 22px rgba(19,91,255,.12); transform: translateY(-2px);">
+                  <div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 16.5px; font-weight: 700; line-height: 1.2;">{{ s.name }}</div>
+                  <p style="font-size: 13px; line-height: 1.5; color: #5b6493; margin-top: 8px; flex: 1;">{{ s.desc }}</p>
+                  <div style="display: flex; align-items: baseline; justify-content: space-between; margin-top: 14px; padding-top: 12px; border-top: 1px solid #eef2fa;">
+                    <span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: #135bff; font-weight: 500;">{{ s.price }}</span>
+                    <span style="font-size: 12px; color: #8b93b5;">{{ s.unit }}</span>
+                  </div>
+                </a>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- STAMPING NOTE -->
+    <section style="margin-top: 60px; background: #fff; border: 1px solid #e2e8f5; border-radius: 20px; padding: 40px; display: grid; grid-template-columns: 1.1fr 1fr; gap: 36px; align-items: center;">
+      <div>
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #135bff; letter-spacing: .05em;">GOOD TO KNOW</div>
+        <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; font-weight: 700; letter-spacing: -.02em; margin: 10px 0 12px;">Most of what you need doesn't require a stamp</h2>
+        <p style="font-size: 15.5px; line-height: 1.65; color: #3f4770;">Renders, drafting, interior design, as-builts, scans, and feasibility work travel across state lines freely — anyone on the platform can do them for you, fast. Only a <strong>stamped, permit-ready set</strong> must come from an architect or engineer licensed in your specific jurisdiction. We keep those flows separate so you're never overpaying for a stamp you don't need.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <sc-for list="{{ splitRows }}" as="r" hint-placeholder-count="2">
+          <div style="background: {{ r.bg }}; border: 1px solid {{ r.bd }}; border-radius: 14px; padding: 18px 20px;">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: {{ r.kc }}; letter-spacing: .04em;">{{ r.k }}</div>
+            <div style="font-size: 14px; color: #2b345c; margin-top: 6px; line-height: 1.5;">{{ r.v }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section style="margin-top: 32px; background: #135bff; border-radius: 22px; padding: 56px; text-align: center;">
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 38px; font-weight: 800; color: #fff; letter-spacing: -.02em; text-wrap: balance;">Start small. Scale when you're ready.</h2>
+      <p style="font-size: 17px; color: #dbe6ff; margin: 12px 0 26px;">Tell us what you need and get an itemized quote in minutes — from a $145 consult to a full stamped set.</p>
+      <a href="../app/Get Started.dc.html" style="display: inline-block; background: #ceff65; color: #0a1440; padding: 17px 34px; border-radius: 12px; font-size: 17px; font-weight: 800; box-shadow: 0 4px 0 #a9d94a;">Get my quote →</a>
+    </section>
+  </main>
+
+  <x-import component-from-global-scope="site-footer" from="./site-footer.js" hint-size="100%,460px"></x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1200, &quot;height&quot;: 900}}">
+class Component extends DCLogic {
+  state = { ci: 0 };
+  componentDidMount(){ this._t = setInterval(()=>this.setState(s=>({ ci:(s.ci+1)%3 })), 3800); }
+  componentWillUnmount(){ clearInterval(this._t); }
+
+  renderVals(){
+    const _H = React.createElement;
+    const mk = (...ds)=>_H('svg', { width:22, height:22, viewBox:'0 0 24 24', fill:'none', stroke:'#135bff', strokeWidth:1.8, strokeLinecap:'round', strokeLinejoin:'round' }, ds.map((d,i)=>_H('path',{ key:i, d })));
+    const icons = {
+      consult: mk('M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'),
+      draft: mk('M12 3v18','M5 21V7l7-4 7 4v14','M9 21v-6h6v6'),
+      viz: mk('M2 7l10-4 10 4-10 4z','M2 7v10l10 4 10-4V7','M12 11v10'),
+      interior: mk('M4 11V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4','M3 11h18v6H3z','M6 17v2','M18 17v2'),
+      scan: mk('M3 7V4h3','M21 7V4h-3','M3 17v3h3','M21 17v3h-3','M7 12h10'),
+      eng: mk('M4 21V9l8-5 8 5v12','M9 21v-6h6v6','M12 3v1'),
+      permit: mk('M9 12l2 2 4-4','M12 3l7 4v5c0 5-3.5 8-7 9-3.5-1-7-4-7-9V7z'),
+      full: mk('M3 21h18','M5 21V8l7-5 7 5v13','M9 21v-5h6v5','M9 11h.01M15 11h.01'),
+    };
+
+    const S = (name, desc, price, unit, href)=>({ name, desc, price, unit, href: href||'../app/Get Started.dc.html' });
+
+    const groups = [
+      { name:'Consults & plan reviews', icon:icons.consult, tagline:'Talk to a pro before you spend real money', hasDetail:false, detailHref:'#',
+        services:[
+          S('1-hour video consult','A licensed architect walks your project, flags issues, and points you to the right next step.','from $145','per session'),
+          S('Plan review & markup','Send existing plans; get a redlined markup and a written punch list back.','from $150','flat / per set'),
+          S('Feasibility check','Quick go / no-go read on whether your idea works on your lot and budget.','from $250','flat'),
+        ]},
+      { name:'Drafting & documentation', icon:icons.draft, tagline:'The highest-volume, lowest-friction category', hasDetail:true, detailHref:'CAD Drafting.dc.html',
+        services:[
+          S('CAD drafting','Clean, coordinated drawings drafted from your sketches or redlines, billed by the hour.','$65 – $90','per hour','CAD Drafting.dc.html'),
+          S('2D as-built package','Measured drawings of an existing residence, ready for design or permitting.','from $2,500','per residence','CAD Drafting.dc.html'),
+          S('PDF-to-CAD conversion','Turn scanned or PDF sheets into editable, layered CAD files.','from $10','per sheet','CAD Drafting.dc.html'),
+        ]},
+      { name:'3D & visualization', icon:icons.viz, tagline:'The most marketplace-ready category', hasDetail:true, detailHref:'3D Visualization.dc.html',
+        services:[
+          S('Single 3D render','One photoreal interior or exterior still to see your space before you build.','from $99','per still','3D Visualization.dc.html'),
+          S('3D floor plan','A furnished, dollhouse-style 3D plan that reads instantly for listings and reviews.','from $100','per plan','3D Visualization.dc.html'),
+          S('Render & marketing bundle','A set of professional stills — interiors, exteriors, and an aerial — for approvals or sales.','from $800','per bundle','3D Visualization.dc.html'),
+          S('Animated walkthrough','A cinematic fly-through of the finished design, priced by the second.','$50 – $300','per second','3D Visualization.dc.html'),
+        ]},
+      { name:'Interior design', icon:icons.interior, tagline:'Make the space work — and look right', hasDetail:false, detailHref:'#',
+        services:[
+          S('Interior design package','Room-by-room layouts, finish palettes, and a shoppable furniture list from a designer.','from $1,200','per room'),
+          S('Materials & finishes','Curated finish, fixture, and material selections coordinated to your budget.','from $400','per project'),
+          S('Furniture & FF&E plan','A furniture and fixtures plan with sourcing links, ready to order.','from $600','per room'),
+          S('Virtual staging','Photoreal staging of empty rooms for listings, approvals, or client buy-in.','from $75','per image'),
+        ]},
+      { name:'Scanning & BIM', icon:icons.scan, tagline:'Capture what exists, precisely', hasDetail:false, detailHref:'#',
+        services:[
+          S('3D laser scanning','A millimeter-accurate point cloud of your space, captured on site.','from $0.20','per sq ft'),
+          S('Scan-to-BIM / Revit model','Your scan turned into a working BIM model at the level of detail you need.','from $0.50','per sq ft'),
+          S('BIM clash coordination','Detect and resolve conflicts across architectural, structural, and MEP models.','hourly','per project'),
+        ]},
+      { name:'Engineering & consulting', icon:icons.eng, tagline:'The stamps and calcs a build needs', hasDetail:false, detailHref:'#',
+        services:[
+          S('Title-24 / energy modeling','Residential energy-compliance documentation for your permit set.','from $300','per project'),
+          S('Structural stamp — residential','Structural review and a licensed stamp for small residential work.','from $1,500','per project'),
+          S('Code consulting','On-demand answers on code, egress, and accessibility from a specialist.','from $150','per hour'),
+        ]},
+      { name:'Permits & entitlements', icon:icons.permit, tagline:'Getting it approved, faster', hasDetail:false, detailHref:'#',
+        services:[
+          S('Permit set — small residential','A stamped, permit-ready drawing set for ADUs, additions, and remodels.','from $2,000','per project'),
+          S('Permit expediting','A specialist shepherds your submittal through the local building department.','from $500','per project'),
+          S('Zoning & feasibility study','A written study of what your zoning allows before you commit to design.','from $1,500','per study'),
+          S('Entitlements & variances','Full representation for variances, CUPs, and complex approvals.','from $20,000','per case'),
+        ]},
+      { name:'Full architecture & design', icon:icons.full, tagline:'When the project needs the whole thing', hasDetail:true, detailHref:'Project Landing.dc.html',
+        services:[
+          S('Full ADU package','Design through stamped permit set for a detached or garage-conversion unit.','from $7,490','per project','Project Landing.dc.html'),
+          S('Custom home design','Complete design and construction documents for a ground-up home.','from $12,000','per project','Project Landing.dc.html'),
+          S('Commercial tenant improvement','Full TI drawing set with code, accessibility, and MEP coordination.','from $6,000','per project','Project Landing.dc.html'),
+        ]},
+    ];
+
+    const splitRows = [
+      { bg:'#e7f6ec', bd:'#c2e6cf', kc:'#16924e', k:'NO STAMP NEEDED · TRAVELS ANYWHERE', v:'Renders, drafting, interior design, as-builts, 3D scans, feasibility, consults — done by anyone on the platform, in any state.' },
+      { bg:'#eef2fa', bd:'#dbe2f2', kc:'#0b3fcc', k:'STAMP REQUIRED · JURISDICTION-MATCHED', v:'Permit sets, structural stamps, entitlements — matched to a pro licensed in your exact city or county.' },
+    ];
+
+    const heroDefs = [
+      { id:'svc-hero-1', ph:'Designed interior render' },
+      { id:'svc-hero-2', ph:'Architect at drafting table' },
+      { id:'svc-hero-3', ph:'3D render / finished space' },
+    ];
+    const ci = this.state.ci % heroDefs.length;
+    const heroSlots = heroDefs.map((h,i)=>({
+      id:h.id, ph:'Drop image — '+h.ph,
+      wrapStyle:`position:absolute;inset:0;transition:opacity .8s ease;opacity:${i===ci?1:0};z-index:${i===ci?2:1};`,
+    }));
+    const heroDots = heroDefs.map((h,i)=>({
+      onClick:()=>this.setState({ ci:i }),
+      style:`width:${i===ci?24:8}px;height:8px;border-radius:100px;border:none;cursor:pointer;padding:0;background:${i===ci?'#ceff65':'rgba(255,255,255,.55)'};transition:all .3s ease;`,
+    }));
+
+    return { groups, splitRows, heroSlots, heroDots };
+  }
+}
+</script>
+</body>
+</html>

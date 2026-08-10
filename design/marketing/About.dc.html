@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f3f6fd; }
+  ::selection { background: #135bff; color: #fff; }
+  a { color: #135bff; text-decoration: none; }
+  a:hover { color: #0b3fcc; }
+  .lk { color: #0a1440; font-weight: 600; }
+  .lk:hover { color: #135bff; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  @media (max-width: 900px){
+    main{ padding-left:18px !important; padding-right:18px !important; }
+    header nav{ display:none !important; }
+    [style*="repeat(4"]{ grid-template-columns:1fr 1fr !important; }
+    [style*="repeat(3"]{ grid-template-columns:1fr !important; }
+    [style*="grid-template-columns: 1.02fr"]{ grid-template-columns:1fr !important; }
+    [style*="grid-template-columns: 1fr 1fr"]{ grid-template-columns:1fr !important; }
+    [style*="grid-template-columns: 1.4fr"]{ grid-template-columns:1fr !important; }
+    [style*="position: sticky"]{ position:static !important; top:auto !important; }
+    [style*="padding: 15px 32px"]{ padding:12px 18px !important; }
+    [style*="padding: 52px 44px"],[style*="padding: 64px"],[style*="padding: 56px"]{ padding:32px 22px !important; }
+    [style*="min-height: 500px"]{ min-height:320px !important; }
+    h1{ font-size:clamp(34px,7.5vw,48px) !important; }
+  }
+</style>
+<script src="../image-slot.js"></script>
+</helmet>
+<div style="background: #f3f6fd; color: #0a1440; font-family: 'Hanken Grotesk', sans-serif; -webkit-font-smoothing: antialiased;">
+
+  <x-import component-from-global-scope="site-nav" from="./site-nav.js" style="display:contents" hint-size="100%,64px"></x-import>
+
+  <main style="max-width: 1200px; margin: 0 auto; padding: 0 32px 100px;">
+
+    <!-- HERO — MISSION -->
+    <section style="margin-top: 24px; background: #0a1440; border-radius: 24px; overflow: hidden; display: grid; grid-template-columns: 1.02fr .98fr; align-items: stretch; min-height: 540px; animation: fadeUp .6s ease both;">
+      <div style="padding: 56px 44px; display: flex; flex-direction: column; justify-content: center; min-width: 0;">
+        <div style="display: inline-flex; align-self: flex-start; align-items: center; gap: 8px; padding: 6px 13px; border-radius: 100px; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: #0a1440; background: #ceff65; font-weight: 700; margin-bottom: 22px;">Our mission</div>
+        <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(38px, 3.6vw, 54px); line-height: 1.04; letter-spacing: -.025em; font-weight: 800; color: #fff; text-wrap: balance;">We exist to make great architecture accessible to anyone who wants to build.</h1>
+        <p style="font-size: 19px; line-height: 1.55; color: #b9c3e8; margin: 24px 0 0; max-width: 32em; text-wrap: pretty;">Not just for the few who already know an architect — for anyone with a project and a place to build it. A fair price, a qualified professional, a permit that clears.</p>
+      </div>
+      <div style="position: relative; min-width: 0; min-height: 500px; overflow: hidden;">
+        <image-slot id="about-hero" shape="rect" fit="cover" placeholder="Architect reviewing drawings on-site" style="position: absolute; inset: 0; width: 100%; height: 100%;"></image-slot>
+        <div style="position: absolute; left: 20px; bottom: 20px; right: 20px; background: #fff; border-radius: 12px; padding: 14px; display: flex; align-items: center; gap: 14px; box-shadow: 0 12px 30px rgba(4,10,40,.35);">
+          <div style="width: 46px; height: 46px; border-radius: 50%; overflow: hidden; flex-shrink: 0;"><image-slot id="about-hero-face" shape="circle" fit="cover" placeholder="Portrait"></image-slot></div>
+          <div style="flex: 1;"><div style="font-weight: 700; font-size: 14px;">A licensed architect, matched to your jurisdiction</div><div style="font-size: 12px; color: #5b6493;">Stamped, permit-ready — entirely remote</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISION -->
+    <section style="margin-top: 20px; background: #ceff65; border-radius: 22px; padding: 56px 44px; display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; align-items: center;">
+      <div>
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #16305c; letter-spacing: .06em;">OUR VISION</div>
+        <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(34px, 3.6vw, 52px); line-height: 1.02; font-weight: 800; color: #0a1440; letter-spacing: -.02em; margin-top: 14px; text-wrap: balance;">To be the place the world goes to build.</h2>
+      </div>
+      <p style="font-size: 18px; line-height: 1.6; color: #16305c; text-wrap: pretty;">Every renovation, addition, ADU, restaurant and ground-up home starts with a drawing. We want that first step to be the easy one — wherever you are, whatever you're building.</p>
+    </section>
+
+    <!-- BIG NUMBERS -->
+    <section style="margin-top: 64px;">
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+        <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 32px; font-weight: 700; letter-spacing: -.02em;">The mission, in numbers</h2>
+        <p style="font-size: 15px; color: #5b6493; max-width: 26em;">A nationwide footprint from day one — because access shouldn't wait for us to open one market at a time.</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-top: 28px;">
+        <sc-for list="{{ bigStats }}" as="s" hint-placeholder-count="4">
+          <div style="{{ s.cardStyle }}">
+            <div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 52px; line-height: 1; font-weight: 800; letter-spacing: -.02em; color: {{ s.numColor }};">{{ s.v }}</div>
+            <div style="font-size: 14px; color: {{ s.labelColor }}; margin-top: 12px; line-height: 1.4;">{{ s.k }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- WHY WE EXIST -->
+    <section style="margin-top: 64px; background: #fff; border: 1px solid #e2e8f5; border-radius: 22px; overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; align-items: stretch;">
+      <div style="padding: 52px 44px; display: flex; flex-direction: column; justify-content: center;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #135bff; letter-spacing: .06em;">WHY WE EXIST</div>
+        <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 700; letter-spacing: -.02em; margin: 12px 0 16px; text-wrap: balance;">A stamped drawing is a legal instrument — and for most people, it's opaque.</h2>
+        <p style="font-size: 16.5px; line-height: 1.72; color: #2b345c;">You can't see the price, judge who's qualified, or tell if it will clear your city. That opacity turns a home into a gamble for clients — and buries architects in bidding and business development instead of the work they trained for.</p>
+        <p style="font-size: 16.5px; line-height: 1.72; color: #2b345c; margin-top: 16px;">We remove it from both sides at once, and put the people who matter back at the center.</p>
+      </div>
+      <div style="position: relative; min-height: 380px;"><image-slot id="about-why" shape="rect" fit="cover" placeholder="Homeowner and architect reviewing plans together" style="position: absolute; inset: 0; width: 100%; height: 100%;"></image-slot></div>
+    </section>
+
+    <!-- HEROES -->
+    <section style="margin-top: 64px;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #135bff; letter-spacing: .06em;">WHO THIS IS FOR</div>
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(30px, 3vw, 40px); font-weight: 800; letter-spacing: -.02em; margin-top: 12px; max-width: 16em; text-wrap: balance;">The client and the architect are the heroes. We're the crew.</h2>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px;">
+        <sc-for list="{{ heroes }}" as="h" hint-placeholder-count="2">
+          <div style="{{ h.cardStyle }}">
+            <div style="position: relative; height: 220px;"><image-slot id="{{ h.slotId }}" shape="rect" fit="cover" placeholder="{{ h.ph }}" style="position: absolute; inset: 0; width: 100%; height: 100%;"></image-slot><span style="position: absolute; left: 16px; top: 16px; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; letter-spacing: .05em; background: rgba(10,20,64,.82); color: #fff; padding: 5px 11px; border-radius: 100px;">{{ h.k }}</span></div>
+            <div style="padding: 30px;">
+              <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 25px; font-weight: 700; letter-spacing: -.02em; color: {{ h.titleColor }};">{{ h.title }}</h3>
+              <p style="font-size: 15.5px; line-height: 1.66; color: {{ h.bodyColor }}; margin-top: 12px;">{{ h.body }}</p>
+              <div style="height: 1px; background: {{ h.rule }}; margin: 22px 0;"></div>
+              <div style="display: flex; flex-direction: column; gap: 11px;">
+                <sc-for list="{{ h.points }}" as="p" hint-placeholder-count="3">
+                  <div style="display: flex; gap: 11px; align-items: flex-start; font-size: 14.5px; line-height: 1.5; color: {{ h.pointColor }};"><span style="color: {{ h.tick }}; margin-top: 1px;">→</span><span>{{ p }}</span></div>
+                </sc-for>
+              </div>
+              <a href="{{ h.href }}" style="display: inline-block; margin-top: 24px; font-size: 15px; font-weight: 700; color: {{ h.linkColor }};">{{ h.cta }}</a>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- HOW WE SERVE -->
+    <section style="margin-top: 64px;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #135bff; letter-spacing: .06em;">OUR ROLE</div>
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(28px, 3vw, 38px); font-weight: 800; letter-spacing: -.02em; margin-top: 12px; max-width: 18em; text-wrap: balance;">We serve the work — quietly, and only where we're useful.</h2>
+      <p style="font-size: 17px; line-height: 1.6; color: #3f4770; margin-top: 12px; max-width: 42em;">We don't design your building and we don't stamp it. We build the infrastructure that lets the right two people find each other and trust the process.</p>
+      <div style="display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-top: 30px;">
+        <sc-for list="{{ principles }}" as="p" hint-placeholder-count="4">
+          <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 26px;">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #135bff;">{{ p.k }}</div>
+            <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 700; margin: 10px 0 8px;">{{ p.t }}</h3>
+            <p style="font-size: 14px; line-height: 1.6; color: #3f4770;">{{ p.d }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- CLOSING -->
+    <section style="margin-top: 64px; background: #135bff; border-radius: 24px; padding: 64px 52px; text-align: center;">
+      <p style="font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.14; font-weight: 800; color: #fff; letter-spacing: -.02em; max-width: 20em; margin: 0 auto; text-wrap: balance;">Build something. Or help someone build. We'll take care of the rest.</p>
+      <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 30px;">
+        <a href="../app/Get Started.dc.html" style="display: inline-block; background: #ceff65; color: #0a1440; padding: 16px 30px; border-radius: 12px; font-size: 16px; font-weight: 800; box-shadow: 0 4px 0 #a9d94a;">Start a project →</a>
+        <a href="Architect Landing.dc.html" style="display: inline-block; background: #0a1440; color: #fff; padding: 16px 30px; border-radius: 12px; font-size: 16px; font-weight: 700;">Join as an architect →</a>
+      </div>
+    </section>
+  </main>
+
+  <x-import component-from-global-scope="site-footer" from="./site-footer.js" hint-size="100%,460px"></x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1200, &quot;height&quot;: 900}}">
+class Component extends DCLogic {
+  renderVals(){
+    const bigStats = [
+      { v:'52', k:'US jurisdictions, live from day one', dark:true },
+      { v:'3,200+', k:'cities & counties scored for complexity', dark:false },
+      { v:'1,400+', k:'permit-ready projects delivered', dark:false },
+      { v:'94%', k:'clear plan check on the first pass', dark:true },
+    ].map(s=>({
+      v:s.v, k:s.k,
+      cardStyle: s.dark
+        ? 'background:#0a1440;border-radius:16px;padding:30px 26px;'
+        : 'background:#fff;border:1px solid #e2e8f5;border-radius:16px;padding:30px 26px;',
+      numColor: s.dark ? '#ceff65' : '#135bff',
+      labelColor: s.dark ? '#9fb4ff' : '#5b6493',
+    }));
+
+    const heroes = [
+      {
+        k:'THE CLIENT', slotId:'about-client', ph:'Homeowner in a newly built space',
+        title:'You, with a project worth getting right',
+        body:'A homeowner adding room for a growing family. An owner turning a storefront into a restaurant. You know what you want to build — you just need the price, the person, and the permit to be within reach.',
+        points:[
+          'Know the real number before you talk to anyone',
+          'Meet architects actually licensed where you build',
+          'Pay safely, approve each milestone, own the outcome',
+        ],
+        href:'../app/Get Started.dc.html', cta:'Start your project →',
+        cardStyle:'background:#fff;border:1px solid #e2e8f5;border-radius:20px;overflow:hidden;',
+        titleColor:'#0a1440', bodyColor:'#2b345c', rule:'#eaeef8', pointColor:'#333c66', tick:'#135bff', linkColor:'#135bff',
+      },
+      {
+        k:'THE ARCHITECT', slotId:'about-architect', ph:'Architect at work in studio',
+        title:'You, free to do the work you trained for',
+        body:'A licensed architect who would rather design and stamp than chase leads and write proposals. We bring you scoped, pre-qualified clients so your time goes to the building, not the business development.',
+        points:[
+          'Receive pre-scoped clients — no cold bidding',
+          'Set your terms; get paid on time through escrow',
+          'Practice anywhere you\u2019re licensed, entirely remotely',
+        ],
+        href:'Architect Landing.dc.html', cta:'Join the network →',
+        cardStyle:'background:#0a1440;border:1px solid #0a1440;border-radius:20px;overflow:hidden;',
+        titleColor:'#ffffff', bodyColor:'#b9c3e8', rule:'#1d2f6e', pointColor:'#dbe6ff', tick:'#ceff65', linkColor:'#ceff65',
+      },
+    ];
+
+    const principles = [
+      { k:'01', t:'We verify, so you don\u2019t have to', d:'Every architect\u2019s license is confirmed active in your jurisdiction before a match reaches you.' },
+      { k:'02', t:'We price in the open', d:'An itemized estimate from real inputs — size, scope, and jurisdiction complexity — before the first conversation.' },
+      { k:'03', t:'We hold the money safely', d:'Funds sit in escrow and release only as you approve milestones. Neither side is exposed.' },
+      { k:'04', t:'We stay out of the way', d:'We don\u2019t design and we don\u2019t stamp. Once the right two people are working, our job is to be invisible.' },
+    ];
+
+    const footerCols = [
+      { h:'Product', items:[
+        {label:'How it works', href:'Landing.dc.html#how'},
+        {label:'Services', href:'Services.dc.html'},
+        {label:'Instant estimate', href:'../app/Get Started.dc.html'},
+        {label:'Jurisdiction database', href:'Jurisdiction Database.dc.html'},
+        {label:'Case studies', href:'Case Studies.dc.html'},
+      ]},
+      { h:'Explore', items:[
+        {label:'Inspiration', href:'Inspiration.dc.html'},
+        {label:'Guides', href:'Blog.dc.html'},
+        {label:'For architects', href:'Architect Landing.dc.html'},
+        {label:'By project', href:'Project Landing.dc.html'},
+        {label:'By city', href:'City Landing.dc.html'},
+      ]},
+      { h:'Company', items:[
+        {label:'About', href:'About.dc.html'},
+        {label:'Careers', href:'Careers.dc.html'},
+        {label:'Contact', href:'Contact.dc.html'},
+        {label:'Privacy', href:'Privacy.dc.html'},
+      ]},
+    ];
+    return { bigStats, heroes, principles, footerCols };
+  }
+}
+</script>
+</body>
+</html>

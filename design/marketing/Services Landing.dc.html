@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f3f6fd; }
+  ::selection { background: #135bff; color: #fff; }
+  a { color: #135bff; text-decoration: none; }
+  a:hover { color: #0b3fcc; }
+  .lk { color: #0a1440; font-weight: 600; }
+  .lk:hover { color: #135bff; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  @media (max-width: 900px){
+    main{ padding-left:18px !important; padding-right:18px !important; }
+    header nav{ display:none !important; }
+    [style*="repeat(4"]{ grid-template-columns:1fr 1fr !important; }
+    [style*="repeat(3"]{ grid-template-columns:1fr !important; }
+    [style*="repeat(2"]{ grid-template-columns:1fr !important; }
+    [style*="grid-template-columns: 1.02fr"]{ grid-template-columns:1fr !important; }
+    [style*="grid-template-columns: 1.1fr"]{ grid-template-columns:1fr !important; }
+    [style*="padding: 52px 44px"],[style*="padding: 56px"]{ padding:30px 22px !important; }
+    h1{ font-size:clamp(30px,7vw,42px) !important; }
+  }
+  @media (max-width: 520px){
+    [style*="repeat(4"]{ grid-template-columns:1fr !important; }
+  }
+</style>
+<script src="../image-slot.js"></script>
+</helmet>
+<div style="background: #f3f6fd; color: #0a1440; font-family: 'Hanken Grotesk', sans-serif; -webkit-font-smoothing: antialiased;">
+
+  <x-import component-from-global-scope="site-nav" from="./site-nav.js" active="services" style="display:contents" hint-size="100%,64px"></x-import>
+
+  <main style="max-width: 1200px; margin: 0 auto; padding: 0 32px 100px;">
+
+    <!-- HERO -->
+    <section style="margin-top: 20px; background: #0a1440; border-radius: 24px; overflow: hidden; display: grid; grid-template-columns: 1.02fr .98fr; align-items: stretch; min-height: 540px; animation: fadeUp .5s ease both;">
+      <div style="padding: 52px 44px; display: flex; flex-direction: column; justify-content: center; min-width: 0;">
+        <div style="display: inline-flex; align-self: flex-start; align-items: center; gap: 8px; padding: 6px 13px; border-radius: 100px; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: #0a1440; background: #ceff65; font-weight: 700; margin-bottom: 22px;">Consults · Drafting · 3D · Permits</div>
+        <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(38px, 3.4vw, 50px); line-height: 1.03; letter-spacing: -.02em; font-weight: 800; color: #fff; text-wrap: balance;">Architectural help — without hiring a full architect</h1>
+        <p style="font-size: 19px; line-height: 1.55; color: #b9c3e8; margin: 24px 0 30px; max-width: 30em; text-wrap: pretty;">Book a one-hour consult, a set of renders, or drafting by the hour. Every service is priced up front, delivered remotely, and escrow-backed — from $145.</p>
+        <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+          <a href="Services.dc.html" style="background: #135bff; color: #fff; padding: 16px 30px; border-radius: 11px; font-size: 17px; font-weight: 700; white-space: nowrap; box-shadow: 0 3px 0 #0b3fcc;">Explore all services →</a>
+          <a href="#popular" style="color: #dbe6ff; font-size: 15px; font-weight: 700;">See popular services & prices</a>
+        </div>
+        <div style="display: flex; gap: 40px; margin-top: 36px;">
+          <div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 28px; color: #ceff65;">$145</div><div style="font-size: 13px; color: #9fb4ff;">starting price</div></div>
+          <div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 28px; color: #ceff65;">20+</div><div style="font-size: 13px; color: #9fb4ff;">services on demand</div></div>
+          <div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 28px; color: #ceff65;">2–7 days</div><div style="font-size: 13px; color: #9fb4ff;">typical turnaround</div></div>
+        </div>
+      </div>
+      <div style="position: relative; min-width: 0; min-height: 460px; overflow: hidden;">
+        <image-slot id="svl-hero" shape="rect" fit="cover" placeholder="Hero — renders / drawings / a specialist at work" style="position: absolute; inset: 0; width: 100%; height: 100%;"></image-slot>
+        <div style="position: absolute; left: 20px; bottom: 20px; right: 20px; background: #fff; border-radius: 12px; padding: 14px 16px; display: flex; align-items: center; gap: 14px; box-shadow: 0 12px 30px rgba(4,10,40,.35);">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #16924e; border: 1px solid #c2e6cf; padding: 6px 9px; border-radius: 6px; background: #e7f6ec; white-space: nowrap;">NO STAMP NEEDED</div>
+          <div style="font-size: 13px; color: #3f4770; line-height: 1.4;">Renders, drafting, scans & consults travel across state lines freely.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section style="margin-top: 72px;">
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 34px; font-weight: 700; letter-spacing: -.02em;">How it works</h2>
+      <p style="font-size: 16px; color: #3f4770; margin-top: 8px;">Pick what you need, see the price, and pay only when the work is approved.</p>
+      <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 28px;">
+        <sc-for list="{{ steps }}" as="s" hint-placeholder-count="3">
+          <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 26px;">
+            <div style="display: flex; align-items: center; gap: 10px;"><span style="width: 28px; height: 28px; border-radius: 50%; background: #135bff; color: #fff; font-family: 'IBM Plex Mono', monospace; font-size: 13px; display: flex; align-items: center; justify-content: center;">{{ s.n }}</span><h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 700;">{{ s.t }}</h3></div>
+            <p style="font-size: 14.5px; line-height: 1.55; color: #3f4770; margin-top: 12px;">{{ s.d }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section style="margin-top: 76px;">
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 34px; font-weight: 700; letter-spacing: -.02em;">Everything, in one marketplace</h2>
+      <p style="font-size: 16px; color: #3f4770; margin-top: 8px;">Mix and match — a consult today, drafting next week, a full permit set when you're ready.</p>
+      <div style="display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-top: 28px;">
+        <sc-for list="{{ categories }}" as="c" hint-placeholder-count="8">
+          <a href="{{ c.href }}" style="background: #fff; border: 1px solid #e2e8f5; border-radius: 14px; padding: 22px; display: block;" style-hover="border-color: #135bff; box-shadow: 0 8px 22px rgba(19,91,255,.12); transform: translateY(-2px);">
+            <div style="width: 44px; height: 44px; border-radius: 11px; background: #e7efff; display: flex; align-items: center; justify-content: center; margin-bottom: 14px;">{{ c.icon }}</div>
+            <div style="font-weight: 700; font-size: 16px;">{{ c.name }}</div>
+            <div style="font-size: 13px; color: #5b6493; margin-top: 3px;">{{ c.sub }}</div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: #135bff; margin-top: 10px;">{{ c.from }}</div>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- POPULAR SERVICES -->
+    <section id="popular" style="margin-top: 76px;">
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+        <div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #135bff; letter-spacing: .06em;">MOST BOOKED</div>
+          <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 34px; font-weight: 700; letter-spacing: -.02em; margin-top: 8px;">Popular services, real prices</h2>
+        </div>
+        <a href="Services.dc.html" style="flex-shrink: 0; background: #0a1440; color: #fff; padding: 12px 22px; border-radius: 10px; font-size: 15px; font-weight: 700;">See the full catalog →</a>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 28px;">
+        <sc-for list="{{ popular }}" as="p" hint-placeholder-count="6">
+          <a href="{{ p.href }}" style="background: #fff; border: 1px solid #e2e8f5; border-radius: 14px; padding: 22px; display: flex; flex-direction: column; min-height: 150px;" style-hover="border-color: #135bff; box-shadow: 0 8px 22px rgba(19,91,255,.12); transform: translateY(-2px);">
+            <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 10px;">
+              <div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 17px; font-weight: 700; line-height: 1.2;">{{ p.name }}</div>
+              <span style="{{ p.badgeStyle }}">{{ p.tier }}</span>
+            </div>
+            <p style="font-size: 13px; line-height: 1.5; color: #5b6493; margin-top: 8px; flex: 1;">{{ p.desc }}</p>
+            <div style="display: flex; align-items: baseline; justify-content: space-between; margin-top: 14px; padding-top: 12px; border-top: 1px solid #eef2fa;">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: #135bff; font-weight: 500;">{{ p.price }}</span>
+              <span style="font-size: 12.5px; color: #135bff; font-weight: 700;">Start →</span>
+            </div>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- BENEFITS -->
+    <section style="margin-top: 76px; background: #fff; border: 1px solid #e2e8f5; border-radius: 22px; padding: 40px;">
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 700; letter-spacing: -.02em;">Why start here</h2>
+      <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; margin-top: 26px;">
+        <sc-for list="{{ benefits }}" as="b" hint-placeholder-count="3">
+          <div style="background: #f3f6fd; border: 1px solid #e2e8f5; border-radius: 14px; padding: 24px;">
+            <div style="width: 44px; height: 44px; border-radius: 11px; background: #e7efff; display: flex; align-items: center; justify-content: center; margin-bottom: 14px;">{{ b.icon }}</div>
+            <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 19px; font-weight: 700;">{{ b.t }}</h3>
+            <p style="font-size: 14px; line-height: 1.55; color: #3f4770; margin-top: 8px;">{{ b.d }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- STAMPING NOTE -->
+    <section style="margin-top: 32px; background: #fff; border: 1px solid #e2e8f5; border-radius: 22px; padding: 40px; display: grid; grid-template-columns: 1.1fr 1fr; gap: 36px; align-items: center;">
+      <div>
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #135bff; letter-spacing: .05em;">GOOD TO KNOW</div>
+        <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; font-weight: 700; letter-spacing: -.02em; margin: 10px 0 12px;">Only pay for a stamp when you actually need one</h2>
+        <p style="font-size: 15.5px; line-height: 1.65; color: #3f4770;">Most services — renders, drafting, as-builts, scans, feasibility, consults — need no license and travel anywhere. Only a <strong>stamped, permit-ready set</strong> must come from a pro licensed in your jurisdiction, and we match that separately so you're never overpaying.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <sc-for list="{{ splitRows }}" as="r" hint-placeholder-count="2">
+          <div style="background: {{ r.bg }}; border: 1px solid {{ r.bd }}; border-radius: 14px; padding: 18px 20px;">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: {{ r.kc }}; letter-spacing: .04em;">{{ r.k }}</div>
+            <div style="font-size: 14px; color: #2b345c; margin-top: 6px; line-height: 1.5;">{{ r.v }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section style="margin-top: 76px;">
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 34px; font-weight: 700; letter-spacing: -.02em;">What clients get done</h2>
+      <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 28px;">
+        <sc-for list="{{ testimonials }}" as="t" hint-placeholder-count="3">
+          <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 24px;">
+            <span style="font-size: 13px; color: #ceb700;">★★★★★</span>
+            <p style="font-size: 15px; line-height: 1.6; color: #232c57; margin: 12px 0 18px;">"{{ t.quote }}"</p>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div style="width: 42px; height: 42px; border-radius: 50%; overflow: hidden; flex-shrink: 0;"><image-slot id="{{ t.slotId }}" shape="circle" fit="cover" placeholder="Photo"></image-slot></div>
+              <div><div style="font-weight: 700; font-size: 14px;">{{ t.name }}</div><div style="font-size: 12.5px; color: #5b6493;">{{ t.role }}</div></div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section style="margin-top: 76px;">
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 32px; font-weight: 700; letter-spacing: -.02em; text-align: center;">Common questions</h2>
+      <div style="display: flex; flex-direction: column; gap: 12px; margin: 24px auto 0; max-width: 760px;">
+        <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="4">
+          <button onClick="{{ f.toggle }}" style="text-align: left; background: #fff; border: 1px solid #e2e8f5; border-radius: 14px; padding: 20px 24px; cursor: pointer; font-family: inherit;">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px;"><span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 17px; font-weight: 700; color: #0a1440;">{{ f.q }}</span><span style="{{ f.iconStyle }}">+</span></div>
+            <div style="{{ f.bodyStyle }}"><p style="font-size: 14.5px; line-height: 1.6; color: #3f4770; padding-top: 12px;">{{ f.a }}</p></div>
+          </button>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section style="margin-top: 40px; background: #135bff; border-radius: 22px; padding: 56px; text-align: center;">
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 40px; font-weight: 800; color: #fff; letter-spacing: -.02em; text-wrap: balance;">Start small. Scale when you're ready.</h2>
+      <p style="font-size: 17px; color: #dbe6ff; margin: 12px 0 26px;">Browse every service with real prices — from a $145 consult to a full stamped set.</p>
+      <a href="Services.dc.html" style="display: inline-block; background: #ceff65; color: #0a1440; padding: 17px 34px; border-radius: 12px; font-size: 17px; font-weight: 800; box-shadow: 0 4px 0 #a9d94a;">Explore all services →</a>
+    </section>
+  </main>
+
+  <x-import component-from-global-scope="site-footer" from="./site-footer.js" hint-size="100%,360px"></x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1200, &quot;height&quot;: 900}}">
+class Component extends DCLogic {
+  state = { svcOpen: false, faq: 0 };
+  renderVals(){
+    const _H = React.createElement;
+    const mk = (...ds)=>_H('svg', { width:22, height:22, viewBox:'0 0 24 24', fill:'none', stroke:'#135bff', strokeWidth:1.8, strokeLinecap:'round', strokeLinejoin:'round' }, ds.map((d,i)=>_H('path',{ key:i, d })));
+
+    const svcGroups = [
+      { name:'Consults & reviews', items:[
+        {label:'Video consult', price:'$145', href:'Services.dc.html#catalog'},
+        {label:'Plan review & markup', price:'$150', href:'Services.dc.html#catalog'},
+        {label:'Feasibility check', price:'$250', href:'Services.dc.html#catalog'}]},
+      { name:'Drafting & docs', items:[
+        {label:'CAD drafting', price:'$65/hr', href:'CAD Drafting.dc.html'},
+        {label:'As-built package', price:'$2,500', href:'CAD Drafting.dc.html'},
+        {label:'PDF-to-CAD', price:'$10/sht', href:'CAD Drafting.dc.html'}]},
+      { name:'3D & visualization', items:[
+        {label:'Single render', price:'$99', href:'3D Visualization.dc.html'},
+        {label:'3D floor plan', price:'$100', href:'3D Visualization.dc.html'},
+        {label:'Walkthrough', price:'$50/s', href:'3D Visualization.dc.html'}]},
+      { name:'Scanning & BIM', items:[
+        {label:'3D laser scanning', price:'$0.20/sf', href:'Services.dc.html#catalog'},
+        {label:'Scan-to-BIM', price:'$0.50/sf', href:'Services.dc.html#catalog'}]},
+      { name:'Engineering', items:[
+        {label:'Title-24 / energy', price:'$300', href:'Services.dc.html#catalog'},
+        {label:'Structural stamp', price:'$1,500', href:'Services.dc.html#catalog'},
+        {label:'Code consulting', price:'$150/hr', href:'Services.dc.html#catalog'}]},
+      { name:'Permits & full design', items:[
+        {label:'Permit set', price:'$2,000', href:'Services.dc.html#catalog'},
+        {label:'Zoning study', price:'$1,500', href:'Services.dc.html#catalog'},
+        {label:'Full ADU / home', price:'$7,490', href:'Project Landing.dc.html'}]},
+    ];
+    const open = this.state.svcOpen;
+    const svcPanelStyle = `position:absolute;left:-24px;top:calc(100% + 14px);width:720px;background:#fff;border:1px solid #e2e8f5;border-radius:16px;box-shadow:0 20px 50px rgba(10,20,64,.18);padding:18px 20px;z-index:60;opacity:${open?1:0};visibility:${open?'visible':'hidden'};transform:translateY(${open?'0':'-6px'});transition:opacity .16s ease, transform .16s ease, visibility .16s;`;
+    const caretStyle = `display:inline-block;font-size:11px;transition:transform .16s ease;transform:rotate(${open?180:0}deg);`;
+
+    const steps = [
+      { n:'1', t:'Pick a service', d:'Choose what you need and get an instant, itemized price — no forms, no "it depends."' },
+      { n:'2', t:'Match & scope', d:'We route you to a vetted specialist — or, if you need a stamp, a pro licensed in your jurisdiction.' },
+      { n:'3', t:'Delivered via escrow', d:'Track progress on-platform; funds release only when you approve the final files.' },
+    ];
+
+    const categories = [
+      { name:'Consults & reviews', sub:'Talk to a pro first', from:'from $145', icon:mk('M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'), href:'Services.dc.html#catalog' },
+      { name:'Drafting & docs', sub:'CAD, as-builts, PDF→CAD', from:'from $65/hr', icon:mk('M12 3v18','M5 21V7l7-4 7 4v14','M9 21v-6h6v6'), href:'CAD Drafting.dc.html' },
+      { name:'3D & visualization', sub:'Renders & floor plans', from:'from $99', icon:mk('M2 7l10-4 10 4-10 4z','M2 7v10l10 4 10-4V7','M12 11v10'), href:'3D Visualization.dc.html' },
+      { name:'Scanning & BIM', sub:'Capture what exists', from:'from $0.20/sf', icon:mk('M3 7V4h3','M21 7V4h-3','M3 17v3h3','M21 17v3h-3','M7 12h10'), href:'Services.dc.html#catalog' },
+      { name:'Engineering', sub:'Stamps, calcs, code', from:'from $150', icon:mk('M4 21V9l8-5 8 5v12','M9 21v-6h6v6','M12 3v1'), href:'Services.dc.html#catalog' },
+      { name:'Permits & entitlements', sub:'Approved, faster', from:'from $500', icon:mk('M9 12l2 2 4-4','M12 3l7 4v5c0 5-3.5 8-7 9-3.5-1-7-4-7-9V7z'), href:'Services.dc.html#catalog' },
+      { name:'Full architecture', sub:'Stamped design sets', from:'from $2,000', icon:mk('M3 21h18','M5 21V8l7-5 7 5v13','M9 21v-5h6v5'), href:'Project Landing.dc.html' },
+      { name:'Not sure?', sub:'Start with a consult', from:'from $145', icon:mk('M12 17h.01','M12 13a3 3 0 1 0-3-3','M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z'), href:'Services.dc.html#catalog' },
+    ];
+
+    const badge = (tier)=>{ const m={Volume:['#eaf7cf','#5c7a12'],Core:['#e7efff','#0b3fcc']}; const [bg,c]=m[tier]||m.Core; return `font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.04em;padding:3px 7px;border-radius:5px;background:${bg};color:${c};white-space:nowrap;flex-shrink:0;`; };
+    const popularDefs = [
+      { name:'1-hour video consult', tier:'Volume', desc:'A licensed architect walks your project and points you to the right next step.', price:'from $145', href:'../app/Get Started.dc.html' },
+      { name:'Single 3D render', tier:'Volume', desc:'One photoreal interior or exterior still to see your space before you build.', price:'from $99', href:'3D Visualization.dc.html' },
+      { name:'CAD drafting', tier:'Volume', desc:'Clean, coordinated drawings from your sketches or redlines, billed by the hour.', price:'$65–$90/hr', href:'CAD Drafting.dc.html' },
+      { name:'As-built package', tier:'Core', desc:'Measured drawings of an existing home, ready for design or permitting.', price:'from $2,500', href:'CAD Drafting.dc.html' },
+      { name:'Zoning & feasibility study', tier:'Core', desc:'A written study of what your zoning allows before you commit to design.', price:'from $1,500', href:'Services.dc.html#catalog' },
+      { name:'Permit set — small residential', tier:'Core', desc:'A stamped, permit-ready drawing set for ADUs, additions, and remodels.', price:'from $2,000', href:'Services.dc.html#catalog' },
+    ].map(p=>({ ...p, badgeStyle: badge(p.tier) }));
+
+    const benefits = [
+      { icon:mk('M12 1v22','M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6'), t:'Start from $145', d:'Traditional firms reject anything under a few thousand dollars. We don\u2019t — order exactly what you need.' },
+      { icon:mk('M20 11a8 8 0 1 0-1.8 5','M20 4v5h-5'), t:'No licensure friction', d:'Renders, drafting, scans and consults need no stamp and cross state lines freely — so they\u2019re fast.' },
+      { icon:mk('M12 3l7 4v5c0 5-3.5 8-7 9-3.5-1-7-4-7-9V7z','M9 12l2 2 4-4'), t:'Escrow-backed & vetted', d:'Every specialist is reviewed, and your money is held in escrow until you approve the work.' },
+    ];
+
+    const splitRows = [
+      { bg:'#e7f6ec', bd:'#c2e6cf', kc:'#16924e', k:'NO STAMP NEEDED · TRAVELS ANYWHERE', v:'Renders, drafting, as-builts, 3D scans, feasibility, consults — done by anyone on the platform, in any state.' },
+      { bg:'#eef2fa', bd:'#dbe2f2', kc:'#0b3fcc', k:'STAMP REQUIRED · JURISDICTION-MATCHED', v:'Permit sets, structural stamps, entitlements — matched to a pro licensed in your exact city or county.' },
+    ];
+
+    const testimonials = [
+      { quote:'Ordered three renders for our listing on a Monday and had photoreal images by Thursday. Cheaper than any studio quoted us.', name:'Elena D.', role:'Listing agent · Oakland, CA', slotId:'svl-t1' },
+      { quote:'A $150 plan review caught two code issues before we ever paid for a full set. Saved us a whole revision cycle.', name:'Marcus R.', role:'Homeowner · Berkeley, CA', slotId:'svl-t2' },
+      { quote:'We used drafting hourly for as-builts, then had them matched to a licensed architect just for the stamp. Perfect.', name:'Grace O.', role:'Business owner · San Jose, CA', slotId:'svl-t3' },
+    ];
+
+    const faqDefs = [
+      { q:'Do I need to hire a full architect to use ArchitectHire?', a:'No. That\u2019s the point — you can order a single consult, a set of renders, or drafting by the hour without committing to a full design engagement. Step up to a stamped set only when your project needs it.' },
+      { q:'How is this cheaper than a traditional firm?', a:'Most firms won\u2019t take work under a few thousand dollars because of minimum-fee overhead. We productize each service and match it to the right specialist — including offshore and freelance talent for unstamped work — so you pay only for what you order.' },
+      { q:'When do I actually need a licensed architect?', a:'Only for stamped, permit-ready deliverables, which must come from someone licensed in your jurisdiction. Everything else — renders, drafting, scans, feasibility, consults — needs no stamp and can be done by anyone on the platform.' },
+      { q:'How do payments work?', a:'Every service is priced up front and paid into escrow. Funds release to the specialist only as you approve milestones or the final files, so you\u2019re protected throughout.' },
+    ];
+    const faqs = faqDefs.map((f,i)=>({
+      q:f.q, a:f.a, toggle:()=>this.setState(s=>({ faq: s.faq===i?-1:i })),
+      iconStyle:`font-size:22px;color:#135bff;font-weight:400;transition:transform .2s ease;transform:rotate(${this.state.faq===i?45:0}deg);`,
+      bodyStyle:`max-height:${this.state.faq===i?'240px':'0'};overflow:hidden;transition:max-height .28s ease;`,
+    }));
+
+    return {
+      openSvc: ()=>this.setState({ svcOpen:true }), closeSvc: ()=>this.setState({ svcOpen:false }),
+      svcGroups, svcPanelStyle, caretStyle,
+      steps, categories, popular: popularDefs, benefits, splitRows, testimonials, faqs,
+    };
+  }
+}
+</script>
+</body>
+</html>

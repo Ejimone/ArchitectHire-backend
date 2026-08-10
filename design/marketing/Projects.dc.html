@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f3f6fd; }
+  ::selection { background: #135bff; color: #fff; }
+  a { color: #135bff; text-decoration: none; }
+  a:hover { color: #0b3fcc; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  @media (max-width: 900px){
+    main{ padding-left:18px !important; padding-right:18px !important; }
+    [style*="repeat(3"]{ grid-template-columns:1fr !important; }
+    [style*="grid-template-columns: 1.05fr"]{ grid-template-columns:1fr !important; }
+    h1{ font-size:clamp(30px,7vw,42px) !important; }
+  }
+  @media (max-width: 560px){ [style*="repeat(3"]{ grid-template-columns:1fr !important; } }
+</style>
+<script src="../image-slot.js"></script>
+<script src="./site-nav.js"></script>
+</helmet>
+<div style="background: #f3f6fd; color: #0a1440; font-family: 'Hanken Grotesk', sans-serif; -webkit-font-smoothing: antialiased;">
+
+  <x-import component-from-global-scope="site-nav" from="./site-nav.js" active="projects" style="display:contents" hint-size="100%,64px"></x-import>
+
+  <main style="max-width: 1200px; margin: 0 auto; padding: 0 32px 100px;">
+
+    <nav style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #5b6493; margin-top: 22px;">
+      <a href="Landing.dc.html" style="color: #5b6493;">Home</a><span>/</span>
+      <span style="color: #0a1440; font-weight: 600;">Project types</span>
+    </nav>
+
+    <!-- HERO -->
+    <section style="margin-top: 16px; background: #0a1440; border-radius: 24px; overflow: hidden; display: grid; grid-template-columns: 1.05fr .95fr; align-items: stretch; min-height: 460px; animation: fadeUp .5s ease both;">
+      <div style="padding: 52px 44px; display: flex; flex-direction: column; justify-content: center; min-width: 0;">
+        <div style="display: inline-flex; align-self: flex-start; align-items: center; gap: 8px; padding: 6px 13px; border-radius: 100px; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: #0a1440; background: #ceff65; font-weight: 700; margin-bottom: 22px;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #0a1440;"></span>Project types</div>
+        <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(34px, 3.2vw, 46px); line-height: 1.03; letter-spacing: -.02em; font-weight: 800; color: #fff; max-width: 14em; text-wrap: balance;">Architecture for every kind of project</h1>
+        <p style="font-size: 18px; line-height: 1.55; color: #b9c3e8; margin: 20px 0 28px; max-width: 32em; text-wrap: pretty;">From a backyard ADU to a ground-up custom home or a commercial tenant improvement — match with architects who specialize in exactly your project type, and get a stamped, permit-ready set.</p>
+        <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+          <a href="../app/Get Started.dc.html" style="background: #135bff; color: #fff; padding: 15px 28px; border-radius: 11px; font-size: 16px; font-weight: 700; box-shadow: 0 3px 0 #0b3fcc;">Get matched →</a>
+          <span style="font-size: 14px; color: #9fb4ff;">Free estimate · 48-hour match</span>
+        </div>
+      </div>
+      <div style="position: relative; min-width: 0; min-height: 380px; overflow: hidden;">
+        <sc-for list="{{ heroSlots }}" as="hs" hint-placeholder-count="3">
+          <div style="{{ hs.wrapStyle }}"><image-slot id="{{ hs.id }}" shape="rect" fit="cover" placeholder="{{ hs.ph }}" style="position: absolute; inset: 0; width: 100%; height: 100%;"></image-slot></div>
+        </sc-for>
+        <div style="position: absolute; left: 20px; bottom: 20px; display: flex; gap: 7px; z-index: 6;">
+          <sc-for list="{{ heroDots }}" as="d" hint-placeholder-count="3">
+            <button onClick="{{ d.onClick }}" aria-label="Slide" style="{{ d.style }}"></button>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <!-- GROUPS -->
+    <sc-for list="{{ groups }}" as="grp" hint-placeholder-count="2">
+      <section style="margin-top: 56px;">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+          <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; font-weight: 700; letter-spacing: -.02em;">{{ grp.name }}</h2>
+          <span style="font-size: 14px; color: #5b6493;">{{ grp.note }}</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-top: 24px;">
+          <sc-for list="{{ grp.items }}" as="pr" hint-placeholder-count="6">
+            <a href="{{ pr.href }}" style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; overflow: hidden; display: block;" style-hover="border-color: #135bff; box-shadow: 0 12px 28px rgba(19,91,255,.14); transform: translateY(-2px);">
+              <div style="height: 172px; position: relative; background: #eef2fb;"><image-slot id="{{ pr.slotId }}" shape="rect" fit="cover" placeholder="{{ pr.ph }}" style="position: absolute; inset: 0; width: 100%; height: 100%;"></image-slot></div>
+              <div style="padding: 20px 22px;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;">
+                  <div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 19px;">{{ pr.name }}</div>
+                  <span style="color: #135bff; font-size: 18px; flex-shrink: 0;">→</span>
+                </div>
+                <p style="font-size: 14px; line-height: 1.5; color: #5b6493; margin-top: 6px;">{{ pr.sub }}</p>
+                <div style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: #16924e; margin-top: 12px;">{{ pr.price }}</div>
+              </div>
+            </a>
+          </sc-for>
+        </div>
+      </section>
+    </sc-for>
+
+    <!-- CTA -->
+    <section style="margin-top: 64px; background: #135bff; border-radius: 22px; padding: 52px; text-align: center;">
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 34px; font-weight: 800; color: #fff; letter-spacing: -.02em; text-wrap: balance;">Not sure which fits? Start with a free estimate.</h2>
+      <p style="font-size: 17px; color: #dbe6ff; margin: 12px 0 26px;">Answer a few questions and we'll price your project and match you in 48 hours.</p>
+      <a href="../app/Get Started.dc.html" style="display: inline-block; background: #ceff65; color: #0a1440; padding: 17px 34px; border-radius: 12px; font-size: 17px; font-weight: 800; box-shadow: 0 4px 0 #a9d94a;">Get my estimate →</a>
+    </section>
+  </main>
+
+  <x-import component-from-global-scope="site-footer" from="./site-footer.js" hint-size="100%,460px"></x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1200, &quot;height&quot;: 900}}">
+class Component extends DCLogic {
+  state = { ci: 0 };
+  componentDidMount(){ this._t = setInterval(()=>this.setState(s=>({ ci:(s.ci+1)%3 })), 3800); }
+  componentWillUnmount(){ clearInterval(this._t); }
+
+  renderVals(){
+    const href = 'Project Landing.dc.html';
+    const groups = [
+      { name:'Residential', note:'Homes, additions & ADUs', items:[
+        { name:'Backyard ADU', sub:'Detached & garage-conversion units', price:'From $2,400', slotId:'pr-adu', ph:'Backyard ADU exterior', href },
+        { name:'Home addition', sub:'Second-story & footprint expansions', price:'From $11,000', slotId:'pr-add', ph:'Home addition / second story', href },
+        { name:'Whole-home renovation', sub:'Interior & structural remodels', price:'From $8,500', slotId:'pr-reno', ph:'Renovated interior', href },
+        { name:'Kitchen & bath', sub:'Focused single-room remodels', price:'From $2,400', slotId:'pr-kb', ph:'Modern kitchen remodel', href },
+        { name:'New custom home', sub:'Ground-up custom builds', price:'From $26,000', slotId:'pr-new', ph:'New custom home exterior', href },
+        { name:'Garage conversion', sub:'Convert a garage to living space', price:'From $4,500', slotId:'pr-gar', ph:'Garage conversion interior', href },
+      ]},
+      { name:'Commercial', note:'Tenant improvements & change of use', items:[
+        { name:'Commercial TI', sub:'Office & retail tenant improvements', price:'From $8,000', slotId:'pr-ti', ph:'Office tenant improvement', href },
+        { name:'Restaurant build-out', sub:'Food & beverage spaces', price:'From $9,000', slotId:'pr-rest', ph:'Restaurant interior', href },
+        { name:'Change of use', sub:'Re-permit & convert an existing space', price:'From $6,000', slotId:'pr-cou', ph:'Converted retail space', href },
+      ]},
+    ];
+
+    const heroDefs = [
+      { id:'proj-hero-1', ph:'Architect at work / floor plan' },
+      { id:'proj-hero-2', ph:'Finished ADU exterior' },
+      { id:'proj-hero-3', ph:'Modern renovated interior' },
+    ];
+    const ci = this.state.ci % heroDefs.length;
+    const heroSlots = heroDefs.map((h,i)=>({
+      id:h.id, ph:'Drop image — '+h.ph,
+      wrapStyle:`position:absolute;inset:0;transition:opacity .8s ease;opacity:${i===ci?1:0};z-index:${i===ci?2:1};`,
+    }));
+    const heroDots = heroDefs.map((h,i)=>({
+      onClick:()=>this.setState({ ci:i }),
+      style:`width:${i===ci?24:8}px;height:8px;border-radius:100px;border:none;cursor:pointer;padding:0;background:${i===ci?'#ceff65':'rgba(255,255,255,.55)'};transition:all .3s ease;`,
+    }));
+
+    return { groups, heroSlots, heroDots };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f3f6fd; }
+  ::selection { background: #135bff; color: #fff; }
+  a { color: #135bff; text-decoration: none; }
+  a:hover { color: #0b3fcc; }
+  .lk { color: #0a1440; font-weight: 600; }
+  .lk:hover { color: #135bff; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+  /* __resp__ responsive overrides (media queries can't be inline) */
+  @media (max-width: 900px){
+    main{ padding-left:18px !important; padding-right:18px !important; }
+    header nav{ display:none !important; }
+    [style*="repeat(4"]{ grid-template-columns:1fr 1fr !important; }
+    [style*="repeat(3"]{ grid-template-columns:1fr !important; }
+    [style*="repeat(2"]{ grid-template-columns:1fr !important; }
+    [style*="grid-template-columns: 1."]{ grid-template-columns:1fr !important; }
+    [style*="grid-template-columns: 1fr 1fr"]{ grid-template-columns:1fr !important; }
+    [style*="position: sticky"]{ position:static !important; top:auto !important; }
+    [style*="padding: 15px 32px"]{ padding:12px 18px !important; }
+    [style*="padding: 18px 32px"]{ padding-left:18px !important; padding-right:18px !important; }
+    [style*="padding: 52px 44px"],[style*="padding: 48px 44px"],[style*="padding: 44px 42px"],[style*="padding: 44px 44px"]{ padding:30px 22px !important; }
+    [style*="padding: 56px"],[style*="padding: 52px;"],[style*="padding: 48px"],[style*="padding: 44px;"],[style*="padding: 40px"],[style*="padding: 34px"]{ padding:32px 22px !important; }
+    h1{ font-size:clamp(30px,7vw,42px) !important; }
+  }
+  @media (max-width: 520px){
+    [style*="repeat(4"]{ grid-template-columns:1fr !important; }
+    [style*="gap: 38px"],[style*="gap: 40px"]{ gap:22px !important; }
+  }
+</style>
+<script src="../image-slot.js"></script>
+</helmet>
+<div style="background: #f3f6fd; color: #0a1440; font-family: 'Hanken Grotesk', sans-serif; -webkit-font-smoothing: antialiased;">
+
+  <x-import component-from-global-scope="site-nav" from="./site-nav.js" style="display:contents" hint-size="100%,64px"></x-import>
+
+  <main style="max-width: 1200px; margin: 0 auto; padding: 0 32px 100px;">
+
+    <!-- PROMO BANNER -->
+    <sc-if value="{{ showBanner }}" hint-placeholder-val="{{ true }}">
+    <div style="margin: 20px 0 0; background: #ceff65; border-radius: 12px; padding: 14px 22px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+      <span style="font-weight: 700; color: #0a1440; font-size: 15px;">Get matched with a licensed architect in 48 hours.</span>
+      <span style="font-size: 14px; color: #16305c;">Instant estimate · escrow-backed · 100% remote.</span>
+      <a href="../app/Get Started.dc.html" style="margin-left: auto; background: #0a1440; color: #fff; padding: 9px 18px; border-radius: 8px; font-size: 14px; font-weight: 700;">Start free →</a>
+    </div>
+    </sc-if>
+
+    <!-- HERO -->
+    <section style="margin-top: 20px; background: #0a1440; border-radius: 24px; overflow: hidden; display: grid; grid-template-columns: 1.02fr .98fr; align-items: stretch; min-height: 560px; animation: fadeUp .5s ease both;">
+      <div style="padding: 52px 44px 56px; display: flex; flex-direction: column; justify-content: center; min-width: 0;">
+        <div style="display: inline-flex; align-self: flex-start; align-items: center; gap: 8px; padding: 6px 13px; border-radius: 100px; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: #0a1440; background: #ceff65; font-weight: 700; margin-bottom: 22px;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #0a1440;"></span>Licensed · Stamped · Permit-ready</div>
+        <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(38px, 3.4vw, 50px); line-height: 1.02; letter-spacing: -.02em; font-weight: 800; color: #fff; text-wrap: balance;">Hire a licensed architect. Get stamped drawings.</h1>
+        <p style="font-size: 19px; line-height: 1.55; color: #b9c3e8; margin: 24px 0 30px; max-width: 30em; text-wrap: pretty;">We match you with 2–3 architects licensed in your jurisdiction who deliver permit-ready drawings — entirely remotely. No forms to fill out first.</p>
+        <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+          <a href="../app/Get Started.dc.html" style="background: #135bff; color: #fff; padding: 16px 30px; border-radius: 11px; font-size: 17px; font-weight: 700; white-space: nowrap; box-shadow: 0 3px 0 #0b3fcc;">Get matched →</a>
+          <span style="font-size: 14px; color: #9fb4ff;">Free estimate · Create an account to view your matches · 48-hour match</span>
+        </div>
+        <div style="display: flex; gap: 40px; margin-top: 36px;">
+          <div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 28px; color: #ceff65;">3,200+</div><div style="font-size: 13px; color: #9fb4ff;">jurisdictions scored</div></div>
+          <div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 28px; color: #ceff65;">48 hrs</div><div style="font-size: 13px; color: #9fb4ff;">to matched architects</div></div>
+          <div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 28px; color: #ceff65;">100%</div><div style="font-size: 13px; color: #9fb4ff;">escrow-backed</div></div>
+        </div>
+      </div>
+      <div style="position: relative; min-width: 0; min-height: 500px; overflow: hidden;">
+        <sc-if value="{{ isSingle }}" hint-placeholder-val="{{ true }}">
+          <image-slot id="lp-hero" shape="rect" fit="cover" src="../uploads/Generated Image August 05, 2026 - 5_48AM.png" placeholder="{{ heroPlaceholder }}" style="position: absolute; inset: 0; width: 100%; height: 100%;"></image-slot>
+        </sc-if>
+        <sc-if value="{{ isCarousel }}" hint-placeholder-val="{{ false }}">
+          <sc-for list="{{ carouselSlots }}" as="cs" hint-placeholder-count="3">
+            <div style="{{ cs.wrapStyle }}"><image-slot id="{{ cs.id }}" shape="rect" fit="cover" src="{{ cs.src }}" placeholder="{{ cs.ph }}" style="position: absolute; inset: 0; width: 100%; height: 100%;"></image-slot></div>
+          </sc-for>
+          <div style="position: absolute; left: 20px; top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(10,20,64,.72); backdrop-filter: blur(6px); color: #fff; padding: 7px 13px; border-radius: 100px; font-size: 12.5px; font-weight: 600; z-index: 6;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #ceff65;"></span>{{ carouselCaption }}</div>
+          <div style="position: absolute; left: 20px; bottom: 92px; display: flex; gap: 7px; z-index: 6;">
+            <sc-for list="{{ carouselDots }}" as="d" hint-placeholder-count="3">
+              <button onClick="{{ d.onClick }}" aria-label="Show work" style="{{ d.style }}"></button>
+            </sc-for>
+          </div>
+        </sc-if>
+        <div style="position: absolute; left: 20px; bottom: 20px; right: 20px; background: #fff; border-radius: 12px; padding: 14px; display: flex; align-items: center; gap: 14px; box-shadow: 0 12px 30px rgba(4,10,40,.35); z-index: 7;">
+          <div style="width: 46px; height: 46px; border-radius: 50%; overflow: hidden; flex-shrink: 0;"><image-slot id="hero-arch" shape="circle" fit="cover" src="../brand/photos/p-maya.png" placeholder="Portrait"></image-slot></div>
+          <div style="flex: 1;"><div style="font-weight: 700; font-size: 14px;">Maya E., AIA</div><div style="font-size: 12px; color: #5b6493;">Licensed CA · Seismic-zone additions</div></div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #16924e; border: 1px solid #c2e6cf; padding: 4px 8px; border-radius: 6px; background: #e7f6ec;">STAMP ✓</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUST BAR -->
+    <sc-if value="{{ showTrust }}" hint-placeholder-val="{{ true }}">
+    <div style="margin-top: 34px; text-align: center;">
+      <div style="font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: #5b6493;">Trusted by homeowners, builders & developers</div>
+      <div style="display: flex; justify-content: center; align-items: center; gap: 40px; margin-top: 18px; flex-wrap: wrap; opacity: .8;">
+        <sc-for list="{{ trustLogos }}" as="t" hint-placeholder-count="6">
+          <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 700; color: #8b93b5;">{{ t }}</span>
+        </sc-for>
+      </div>
+    </div>
+    </sc-if>
+
+    <!-- CATEGORIES -->
+    <section id="categories" style="margin-top: 72px;">
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 34px; font-weight: 700; letter-spacing: -.02em;">An architect for every kind of project</h2>
+      <p style="font-size: 16px; color: #3f4770; margin-top: 8px;">Residential or commercial — we match on licensure, jurisdiction and specialization. <a href="Services.dc.html" style="font-weight: 700;">Or start smaller with a consult, drafting or renders →</a></p>
+      <div style="display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-top: 28px;">
+        <sc-for list="{{ categories }}" as="c" hint-placeholder-count="8">
+          <a href="../app/Get Started.dc.html" style="background: #fff; border: 1px solid #e2e8f5; border-radius: 14px; padding: 22px; display: block;" style-hover="border-color: #135bff; box-shadow: 0 8px 22px rgba(19,91,255,.12); transform: translateY(-2px);">
+            <div style="width: 44px; height: 44px; border-radius: 11px; background: #e7efff; display: flex; align-items: center; justify-content: center; margin-bottom: 14px;">{{ c.icon }}</div>
+            <div style="font-weight: 700; font-size: 16px;">{{ c.name }}</div>
+            <div style="font-size: 13px; color: #5b6493; margin-top: 3px;">{{ c.sub }}</div>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how" style="margin-top: 80px;">
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 34px; font-weight: 700; letter-spacing: -.02em;">How it works</h2>
+      <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 28px;">
+        <sc-for list="{{ steps }}" as="s" hint-placeholder-count="3">
+          <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; overflow: hidden;">
+            <div style="height: 160px; position: relative; background: linear-gradient(135deg,#0a1440,#14235a); overflow: hidden;">{{ s.art }}</div>
+            <div style="padding: 22px;">
+              <div style="display: flex; align-items: center; gap: 10px;"><span style="width: 26px; height: 26px; border-radius: 50%; background: #135bff; color: #fff; font-family: 'IBM Plex Mono', monospace; font-size: 13px; display: flex; align-items: center; justify-content: center;">{{ s.n }}</span><h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 700;">{{ s.t }}</h3></div>
+              <p style="font-size: 14.5px; line-height: 1.55; color: #3f4770; margin-top: 12px;">{{ s.d }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- CASE STUDIES -->
+    <section id="cases" style="margin-top: 80px;">
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+        <div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #135bff; letter-spacing: .06em;">CASE STUDIES</div>
+          <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 34px; font-weight: 700; letter-spacing: -.02em; margin-top: 8px;">Real projects, permit to keys</h2>
+          <p style="font-size: 16px; color: #3f4770; margin-top: 8px; max-width: 40em;">See how homeowners and builders went from an idea to a stamped set — the scope, the timeline, and the real number.</p>
+        </div>
+        <a href="Case Studies.dc.html" style="flex-shrink: 0; background: #0a1440; color: #fff; padding: 12px 22px; border-radius: 10px; font-size: 15px; font-weight: 700;">View all case studies →</a>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; margin-top: 28px;">
+        <sc-for list="{{ cases }}" as="c" hint-placeholder-count="3">
+          <a href="Case Study.dc.html" style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column;" style-hover="border-color: #135bff; box-shadow: 0 10px 26px rgba(19,91,255,.12); transform: translateY(-2px);">
+            <div style="height: 190px; position: relative;">
+              <image-slot id="{{ c.slotId }}" shape="rect" fit="cover" placeholder="{{ c.ph }}"></image-slot>
+              <span style="position: absolute; left: 14px; top: 14px; background: rgba(10,20,64,.82); color: #fff; font-size: 11.5px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; padding: 5px 10px; border-radius: 100px;">{{ c.cat }}</span>
+            </div>
+            <div style="padding: 20px 20px 22px; display: flex; flex-direction: column; flex: 1;">
+              <div style="font-size: 12.5px; color: #8b93b5; font-family: 'IBM Plex Mono', monospace;">{{ c.location }}</div>
+              <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; line-height: 1.18; font-weight: 700; letter-spacing: -.01em; color: #0a1440; margin-top: 6px; text-wrap: balance;">{{ c.title }}</h3>
+              <p style="font-size: 14px; line-height: 1.55; color: #5b6493; margin-top: 10px; flex: 1;">{{ c.excerpt }}</p>
+              <div style="display: flex; gap: 22px; margin-top: 18px; padding-top: 16px; border-top: 1px solid #eaeef8;">
+                <sc-for list="{{ c.stats }}" as="s" hint-placeholder-count="2">
+                  <div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 18px; color: #135bff; font-weight: 500;">{{ s.v }}</div><div style="font-size: 12px; color: #5b6493;">{{ s.k }}</div></div>
+                </sc-for>
+              </div>
+            </div>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- PRICING ESTIMATE TEASER -->
+    <section id="pricing" style="margin-top: 80px; background: #0a1440; border-radius: 22px; padding: 44px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
+      <div>
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #ceff65; letter-spacing: .05em;">INSTANT ESTIMATE</div>
+        <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 34px; font-weight: 700; color: #fff; letter-spacing: -.02em; margin: 12px 0 12px;">Know the price before you talk to anyone</h2>
+        <p style="font-size: 16px; line-height: 1.55; color: #b9c3e8; max-width: 32em;">Our engine prices everything from a quick consult to a full stamped set — using scope, add-ons, and a jurisdiction complexity score — so you get a real number up front, not a vague "it depends."</p>
+        <a href="../app/Get Started.dc.html" style="display: inline-block; margin-top: 24px; background: #135bff; color: #fff; padding: 15px 26px; border-radius: 10px; font-size: 16px; font-weight: 700; box-shadow: 0 3px 0 #0b3fcc;">Get my estimate →</a>
+      </div>
+      <div style="background: #0c1a4a; border: 1px solid #1d2f6e; border-radius: 16px; padding: 24px 24px 26px;">
+        <label style="display: block; font-size: 12px; color: #9fb4ff; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 8px;">Choose a service or project</label>
+        <select value="{{ estType }}" onChange="{{ onEstType }}" style="width: 100%; appearance: none; background: #0a1440 url(&quot;data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%239fb4ff' stroke-width='2'&gt;&lt;path d='M4 6l4 4 4-4'/&gt;&lt;/svg&gt;&quot;) no-repeat right 16px center; border: 1px solid #1d2f6e; color: #fff; font-family: inherit; font-size: 15px; font-weight: 600; padding: 13px 40px 13px 15px; border-radius: 10px; cursor: pointer;">
+          <sc-for list="{{ estOptions }}" as="o" hint-placeholder-count="5">
+            <option value="{{ o }}">{{ o }}</option>
+          </sc-for>
+        </select>
+        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 20px;"><span style="font-size: 14px; color: #9fb4ff;">Typical price range</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #ceff65;">Oakland, CA</span></div>
+        <div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 40px; font-weight: 700; color: #fff; margin: 4px 0 2px;">{{ est.range }}</div>
+        <div style="height: 8px; border-radius: 6px; background: #16265f; margin: 16px 0 8px; overflow: hidden;"><div style="{{ est.barStyle }}"></div></div>
+        <div style="display: flex; justify-content: space-between; font-size: 13px; color: #9fb4ff;"><span>Affordable</span><span>Typical</span><span>Premium</span></div>
+        <div style="margin-top: 18px; padding-top: 18px; border-top: 1px solid #1d2f6e;">
+          <div style="font-size: 12px; color: #9fb4ff; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 12px;">What you get</div>
+          <div style="display: flex; flex-direction: column; gap: 9px;">
+            <sc-for list="{{ est.includes }}" as="it" hint-placeholder-count="4">
+              <div style="display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; color: #dbe6ff; line-height: 1.4;"><span style="color: #ceff65;">✓</span><span>{{ it }}</span></div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLANS -->
+    <section style="margin-top: 80px;">
+      <div style="text-align: center;">
+        <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 34px; font-weight: 700; letter-spacing: -.02em;">Choose how you engage</h2>
+        <p style="font-size: 16px; color: #3f4770; margin-top: 8px;">Both bill through the platform with escrow. Pick what fits how defined your project is.</p>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 30px; max-width: 900px; margin-left: auto; margin-right: auto;">
+        <sc-for list="{{ plans }}" as="p" hint-placeholder-count="2">
+          <div style="{{ p.cardStyle }}">
+            <div style="{{ p.tagStyle }}">{{ p.tag }}</div>
+            <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 26px; font-weight: 700; margin: 12px 0 4px;">{{ p.title }}</h3>
+            <p style="font-size: 14px; color: #3f4770; line-height: 1.5; margin: 8px 0 16px; min-height: 40px;">{{ p.blurb }}</p>
+            <div style="display: flex; flex-direction: column; gap: 10px; padding-top: 16px; border-top: 1px solid #eaeef8;">
+              <sc-for list="{{ p.points }}" as="pt" hint-placeholder-count="4">
+                <div style="display: flex; gap: 10px; font-size: 13.5px; color: #333c66; line-height: 1.4;"><span style="color: #16924e;">✓</span><span>{{ pt }}</span></div>
+              </sc-for>
+            </div>
+            <a href="../app/Get Started.dc.html" style="{{ p.ctaStyle }}">{{ p.cta }}</a>
+          </div>
+        </sc-for>
+      </div>
+      <p style="text-align: center; font-size: 13px; color: #5b6493; margin-top: 16px;">Rates are set by each architect — you'll see the real number on your matches before you commit.</p>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section style="margin-top: 80px;">
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 34px; font-weight: 700; letter-spacing: -.02em;">Proven results</h2>
+      <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 28px;">
+        <sc-for list="{{ testimonials }}" as="t" hint-placeholder-count="3">
+          <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 24px;">
+            <span style="font-size: 13px; color: #ceb700;">★★★★★</span>
+            <p style="font-size: 15px; line-height: 1.6; color: #232c57; margin: 12px 0 18px;">"{{ t.quote }}"</p>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div style="width: 42px; height: 42px; border-radius: 50%; overflow: hidden; flex-shrink: 0;"><image-slot id="{{ t.slotId }}" shape="circle" fit="cover" src="{{ t.src }}" placeholder="Photo"></image-slot></div>
+              <div><div style="font-weight: 700; font-size: 14px;">{{ t.name }}</div><div style="font-size: 12.5px; color: #5b6493;">{{ t.role }}</div></div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- TRUST & SAFETY -->
+    <section id="architects" style="margin-top: 80px; background: #fff; border: 1px solid #e2e8f5; border-radius: 22px; padding: 40px;">
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 700; letter-spacing: -.02em;">Trust & safety, built in</h2>
+      <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; margin-top: 26px;">
+        <sc-for list="{{ safety }}" as="f" hint-placeholder-count="3">
+          <div style="background: #e7f6ec; border: 1px solid #c2e6cf; border-radius: 14px; padding: 22px;">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #16924e;">{{ f.k }}</div>
+            <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 19px; font-weight: 700; margin: 8px 0 8px;">{{ f.t }}</h3>
+            <p style="font-size: 14px; line-height: 1.5; color: #2f6b45;">{{ f.d }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section style="margin-top: 32px; background: #135bff; border-radius: 22px; padding: 56px; text-align: center;">
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 40px; font-weight: 800; color: #fff; letter-spacing: -.02em; text-wrap: balance;">Find an architect who can build what's next</h2>
+      <p style="font-size: 17px; color: #dbe6ff; margin: 12px 0 26px;">Free estimate. Create an account to view your matches. Matched in 48 hours.</p>
+      <a href="../app/Get Started.dc.html" style="display: inline-block; background: #ceff65; color: #0a1440; padding: 17px 34px; border-radius: 12px; font-size: 17px; font-weight: 800; box-shadow: 0 4px 0 #a9d94a;">Start your project →</a>
+    </section>
+  </main>
+
+  <x-import component-from-global-scope="site-footer" from="./site-footer.js" hint-size="100%,460px"></x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showPromoBanner&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Layout&quot;}, &quot;showTrustBar&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Layout&quot;}, &quot;heroMedia&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;default&quot;: &quot;Image&quot;, &quot;options&quot;: [&quot;Image&quot;, &quot;Video&quot;, &quot;Carousel&quot;], &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Hero&quot;}}">
+class Component extends DCLogic {
+  state = { carouselIndex: 0, estType: 'Consult or plan review', svcOpen: false };
+  componentDidMount(){
+    this._t = setInterval(()=>{
+      if ((this.props.heroMedia ?? 'Image') === 'Carousel') this.setState(s=>({ carouselIndex: (s.carouselIndex + 1) % 3 }));
+    }, 3800);
+  }
+  componentWillUnmount(){ clearInterval(this._t); }
+
+  renderVals(){
+    const svcGroups = [
+      { name:'Consults & reviews', items:[
+        {label:'Video consult', price:'$145', href:'Services.dc.html#catalog'},
+        {label:'Plan review & markup', price:'$150', href:'Services.dc.html#catalog'},
+        {label:'Feasibility check', price:'$250', href:'Services.dc.html#catalog'}]},
+      { name:'Drafting & docs', items:[
+        {label:'CAD drafting', price:'$65/hr', href:'CAD Drafting.dc.html'},
+        {label:'As-built package', price:'$2,500', href:'CAD Drafting.dc.html'},
+        {label:'PDF-to-CAD', price:'$10/sht', href:'CAD Drafting.dc.html'}]},
+      { name:'3D & visualization', items:[
+        {label:'Single render', price:'$99', href:'3D Visualization.dc.html'},
+        {label:'3D floor plan', price:'$100', href:'3D Visualization.dc.html'},
+        {label:'Walkthrough', price:'$50/s', href:'3D Visualization.dc.html'}]},
+      { name:'Scanning & BIM', items:[
+        {label:'3D laser scanning', price:'$0.20/sf', href:'Services.dc.html#catalog'},
+        {label:'Scan-to-BIM', price:'$0.50/sf', href:'Services.dc.html#catalog'}]},
+      { name:'Engineering', items:[
+        {label:'Title-24 / energy', price:'$300', href:'Services.dc.html#catalog'},
+        {label:'Structural stamp', price:'$1,500', href:'Services.dc.html#catalog'},
+        {label:'Code consulting', price:'$150/hr', href:'Services.dc.html#catalog'}]},
+      { name:'Permits & full design', items:[
+        {label:'Permit set', price:'$2,000', href:'Services.dc.html#catalog'},
+        {label:'Zoning study', price:'$1,500', href:'Services.dc.html#catalog'},
+        {label:'Full ADU / home', price:'$7,490', href:'Project Landing.dc.html'}]},
+    ];
+    const svcO = this.state.svcOpen;
+    const svcPanelStyle = `position:absolute;left:-24px;top:calc(100% + 14px);width:720px;background:#fff;border:1px solid #e2e8f5;border-radius:16px;box-shadow:0 20px 50px rgba(10,20,64,.18);padding:18px 20px;z-index:60;opacity:${svcO?1:0};visibility:${svcO?'visible':'hidden'};transform:translateY(${svcO?'0':'-6px'});transition:opacity .16s ease, transform .16s ease, visibility .16s;`;
+    const caretStyle = `display:inline-block;font-size:11px;transition:transform .16s ease;transform:rotate(${svcO?180:0}deg);`;
+    const openSvc = ()=>this.setState({ svcOpen:true });
+    const closeSvc = ()=>this.setState({ svcOpen:false });
+    const showBanner = this.props.showPromoBanner ?? true;
+    const showTrust = this.props.showTrustBar ?? true;
+    const heroMedia = this.props.heroMedia ?? 'Image';
+    const isCarousel = heroMedia === 'Carousel';
+    const isSingle = !isCarousel;
+    const heroPlaceholder = heroMedia === 'Video' ? 'Drop a hero video still' : 'Drop a hero image — architect at work / floor plan';
+
+    // ---- hero carousel (drop-fillable work photos) ----
+    const workDefs = [
+      { id:'lp-work1', src:'../uploads/Generated Image August 05, 2026 - 5_48AM.png', name:'Maya E. · Oakland addition' },
+      { id:'lp-work2', src:'', name:'Daniel O. · East Bay ADU' },
+      { id:'lp-work3', src:'', name:'Priya N. · Restaurant change-of-use' },
+    ];
+    const ci = this.state.carouselIndex % workDefs.length;
+    const carouselSlots = workDefs.map((w,i)=>({
+      id:w.id, src:w.src, ph:'Drop work photo — '+w.name,
+      wrapStyle:`position:absolute;inset:0;transition:opacity .8s ease;opacity:${i===ci?1:0};z-index:${i===ci?2:1};`,
+    }));
+    const carouselDots = workDefs.map((w,i)=>({
+      onClick: ()=>this.setState({ carouselIndex:i }),
+      style:`width:${i===ci?24:8}px;height:8px;border-radius:100px;border:none;cursor:pointer;padding:0;background:${i===ci?'#ceff65':'rgba(255,255,255,.55)'};transition:all .3s ease;`,
+    }));
+    const carouselCaption = workDefs[ci].name;
+
+    // ---- line icons ----
+    const mk = (...ds)=>React.createElement('svg', { width:22, height:22, viewBox:'0 0 24 24', fill:'none', stroke:'#135bff', strokeWidth:1.8, strokeLinecap:'round', strokeLinejoin:'round' }, ds.map((d,i)=>React.createElement('path',{ key:i, d })));
+    const icons = {
+      renovation: mk('M3 11l9-7 9 7','M5 10v10h14V10','M9 20v-5h6v5','M15 4l3 2'),
+      addition: mk('M4 12l8-6 8 6','M6 11v9h12v-9','M12 12v5','M9.5 14.5h5'),
+      newhome: mk('M3 11l9-8 9 8','M5 10v10h14V10','M10 20v-6h4v6'),
+      adu: mk('M5 13l7-5 7 5','M7 12v7h10v-7','M14 3h5v4'),
+      kitchenbath: mk('M12 3s6 5.5 6 10a6 6 0 0 1-12 0c0-4.5 6-10 6-10z'),
+      commercial: mk('M4 21V4h9v17','M13 9h7v12','M7 8h1M7 12h1M7 16h1','M16 12h1M16 16h1'),
+      restaurant: mk('M6 3v7a2 2 0 0 0 2 2 2 2 0 0 0 2-2V3','M8 12v9','M18 3c-1.6 0-2.5 1.8-2.5 4s.9 3 2.5 3','M18 3v18'),
+      changeofuse: mk('M20 11a8 8 0 1 0-1.8 5','M20 4v5h-5'),
+    };
+    const categories = [
+      { name:'Renovation', sub:'Whole-home & interior', icon:icons.renovation },
+      { name:'Addition', sub:'Extend your footprint', icon:icons.addition },
+      { name:'New home', sub:'Custom ground-up', icon:icons.newhome },
+      { name:'ADU', sub:'Backyard & garage units', icon:icons.adu },
+      { name:'Kitchen & bath', sub:'Focused remodels', icon:icons.kitchenbath },
+      { name:'Commercial TI', sub:'Tenant improvements', icon:icons.commercial },
+      { name:'Restaurant', sub:'Food & beverage builds', icon:icons.restaurant },
+      { name:'Change of use', sub:'Re-permit & convert', icon:icons.changeofuse },
+    ];
+
+    // ---- instant estimate dropdown ----
+    const estData = {
+      'Consult or plan review': { range:'$145 – $500', bar:6, includes:['1-hour consult with a licensed architect','Written notes & clear next steps','Optional redline of existing plans','No full engagement required'] },
+      'Renders & 3D floor plan': { range:'$99 – $800', bar:14, includes:['Photoreal interior or exterior stills','Furnished 3D floor plan','Revisions included','Print-ready files'] },
+      'CAD drafting / as-built': { range:'$65/hr – $2,500', bar:22, includes:['Drafting billed by the hour','Or a flat as-built package','No stamp needed for most jobs','Editable CAD + PDF delivery'] },
+      'Backyard ADU (permit set)': { range:'$2,400 – $6,500', bar:40, includes:['Floor plans, elevations & site plan','Structural coordination','Title-24 energy compliance','Permit-ready stamped set'] },
+      'Kitchen / bath remodel': { range:'$900 – $2,400', bar:22, includes:['As-built + proposed plans','Electrical & plumbing layout','Finish & fixture schedule','Permit-ready stamped set'] },
+      'Home addition':     { range:'$3,500 – $9,000', bar:56, includes:['Full architectural drawing set','Structural coordination','Seismic / jurisdiction detailing','Permit-ready stamped set'] },
+      'New custom home':   { range:'$12,000 – $28,000', bar:85, includes:['Complete design + construction docs','Structural & MEP coordination','3D visualization option','Permit-ready stamped set'] },
+      'Commercial TI':     { range:'$4,000 – $12,000',  bar:60, includes:['Tenant-improvement drawing set','Code & accessibility compliance','MEP coordination','Permit-ready stamped set'] },
+    };
+    const estOptions = Object.keys(estData);
+    const estType = this.state.estType;
+    const ed = estData[estType] || estData['Consult or plan review'];
+    const est = { range: ed.range, includes: ed.includes, barStyle:`height:100%;width:${ed.bar}%;background:linear-gradient(90deg,#135bff,#ceff65);border-radius:6px;transition:width .4s ease;` };
+
+    const steps = [
+      { n:'1', t:'Answer & price', d:'A short questionnaire feeds the pricing engine and returns an instant, itemized estimate — before you talk to anyone.', slotId:'lp-step1', ph:'How it works — step 1' },
+      { n:'2', t:'Meet 2–3 matches', d:'We surface only architects pre-cleared on licensure, jurisdiction experience and capacity. Review profiles, then chat or video to scope.', slotId:'lp-step2', ph:'How it works — step 2' },
+      { n:'3', t:'Pick, pay, build', d:'Choose a fixed quote or hourly, pay into escrow, and receive stamped, permit-ready drawings on a tracked timeline.', slotId:'lp-step3', ph:'How it works — step 3' },
+    ];
+
+    const plans = [
+      { key:'fixed', tag:'FLAGSHIP', title:'Dynamic fixed quote', blurb:'One engine-generated price for your whole drawing set, confirmed on your call — so you have cost certainty before work begins.',
+        points:['Scales to your project — small jobs stay affordable','Locked price from size, add-ons & jurisdiction','Re-quote only with your approval','Milestone-based escrow releases'], cta:'Start with fixed →', best:true },
+      { key:'hourly', tag:'FLEXIBLE', title:'Hourly', blurb:'Transparent time tracking through escrow milestones. Each architect sets their own rate — you see it before you commit.',
+        points:['Rates vary by architect — many well below big-firm pricing','Pay for exactly the work done','Ideal when scope is still evolving','Common for commercial & exploratory work'], cta:'Start hourly →', best:false },
+    ];
+    const planCta = (best)=>`display:block;text-align:center;margin-top:18px;padding:14px;border-radius:10px;font-size:15px;font-weight:700;${best?'background:#135bff;color:#fff;box-shadow:0 3px 0 #0b3fcc;':'background:#0a1440;color:#fff;'}`;
+    const mappedPlans = plans.map(p=>({
+      ...p,
+      cardStyle:`background:#fff;border:1.5px solid ${p.best?'#135bff':'#e2e8f5'};border-radius:18px;padding:28px;box-shadow:${p.best?'0 12px 34px rgba(19,91,255,.14)':'none'};`,
+      tagStyle:`display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.05em;padding:4px 9px;border-radius:6px;color:${p.best?'#fff':'#0b3fcc'};background:${p.best?'#135bff':'#e7efff'};`,
+      ctaStyle: planCta(p.best),
+    }));
+
+    const testimonials = [
+      { quote:'The instant estimate matched the final quote almost exactly. Our architect was licensed right here in Oakland and the permit set cleared first try.', name:'Rebecca Lin', role:'Homeowner · Berkeley, CA', slotId:'tst-0', src:'../brand/photos/p-priya.png' },
+      { quote:'We compared three vetted architects in an afternoon. Escrow made paying feel safe, and the drawings were the cleanest our contractor had seen.', name:'Marcus Reed', role:'Homeowner · Oakland, CA', slotId:'tst-1', src:'../brand/photos/p-marcus.png' },
+      { quote:'For our restaurant change-of-use, hourly was the right call. Transparent time tracking, no surprises, and it moved fast.', name:'Grace Okafor', role:'Business owner · San Jose, CA', slotId:'tst-2', src:'../brand/photos/p-maya.png' },
+    ];
+    const cases = [
+      { slotId:'lp-case1', ph:'Finished ADU exterior', cat:'Backyard ADU', location:'Oakland, CA', title:'A 640 sq ft ADU that cleared plan check first try',
+        excerpt:'A rental-income unit in a seismic hillside lot — stamped, submitted, and approved without a single revision cycle.',
+        stats:[{v:'$3,900',k:'Fixed quote'},{v:'6 wks',k:'To stamped set'}] },
+      { slotId:'lp-case2', ph:'Home addition interior', cat:'Addition', location:'Berkeley, CA', title:'Second-story addition on a 1920s bungalow',
+        excerpt:'Structural coordination and design review handled remotely, keeping a tight budget on a complex historic lot.',
+        stats:[{v:'$7,400',k:'Drawing set'},{v:'9 wks',k:'To permit'}] },
+      { slotId:'lp-case3', ph:'Restaurant dining room', cat:'Change of use', location:'San Jose, CA', title:'Retail-to-restaurant change of use, hourly',
+        excerpt:'A tenant improvement with accessibility and MEP scope — billed hourly through escrow with zero surprises.',
+        stats:[{v:'118 hrs',k:'Tracked time'},{v:'First',k:'Plan-check pass'}] },
+    ];
+    const trustLogos = ['NORTHVIEW','Beacon Build','Oak & Iron','Meridian','Harbor Co.','LATTICE'];
+    const safety = [
+      { k:'01', t:'Verified licensure', d:'Every architect\u2019s state license is verified before a single match reaches you — the stamp has to be legally valid.' },
+      { k:'02', t:'Escrow-backed pay', d:'Funds are held by the platform and released only as you approve milestones — never before.' },
+      { k:'03', t:'Insurance on file', d:'Errors & omissions coverage is confirmed and on file for every architect you can hire.' },
+    ];
+    const footerCols = [
+      { h:'Product', items:[
+        {label:'How it works', href:'Landing.dc.html#how'},
+        {label:'Services', href:'Services.dc.html'},
+        {label:'Instant estimate', href:'../app/Get Started.dc.html'},
+        {label:'Jurisdiction database', href:'Jurisdiction Database.dc.html'},
+        {label:'Case studies', href:'Case Studies.dc.html'},
+      ]},
+      { h:'Explore', items:[
+        {label:'Inspiration', href:'Inspiration.dc.html'},
+        {label:'Guides', href:'Blog.dc.html'},
+        {label:'For architects', href:'Architect Landing.dc.html'},
+        {label:'By project', href:'Project Landing.dc.html'},
+        {label:'By city', href:'City Landing.dc.html'},
+      ]},
+      { h:'Company', items:[
+        {label:'About', href:'About.dc.html'},
+        {label:'Careers', href:'Careers.dc.html'},
+        {label:'Contact', href:'Contact.dc.html'},
+        {label:'Privacy', href:'Privacy.dc.html'},
+      ]},
+    ];
+
+    // ---- designed step illustrations (branded, communicate each step) ----
+    const _H=React.createElement;
+    const _S=(...k)=>_H('svg',{viewBox:'0 0 360 160',width:'100%',height:'100%',preserveAspectRatio:'xMidYMid meet',style:{display:'block'}},k);
+    const _R=(x,y,w,h,r,f,ex)=>_H('rect',Object.assign({x,y,width:w,height:h,rx:r,fill:f},ex||{}));
+    const _C=(cx,cy,r,f,ex)=>_H('circle',Object.assign({cx,cy,r,fill:f},ex||{}));
+    const _P=(d,ex)=>_H('path',Object.assign({d,fill:'none'},ex||{}));
+    const _T=(x,y,fs,f,txt,ex)=>_H('text',Object.assign({x,y,fill:f,fontFamily:"'IBM Plex Mono', monospace",fontSize:fs,fontWeight:700},ex||{}),txt);
+
+    const artAnswer = _S(
+      _R(30,36,150,90,12,'#ffffff'),
+      _R(48,56,92,9,4,'#dbe4f8'), _R(48,74,116,9,4,'#e7efff'), _R(48,92,66,9,4,'#dbe4f8'),
+      _R(48,108,58,15,5,'#135bff'),
+      _P('M190 82 h30',{stroke:'#9fb4ff',strokeWidth:3,strokeLinecap:'round'}),
+      _P('M214 74 l10 8 -10 8',{stroke:'#9fb4ff',strokeWidth:3,strokeLinecap:'round',strokeLinejoin:'round'}),
+      _R(238,58,92,48,12,'#ceff65'),
+      _T(256,79,10,'#16305c','EST.'), _T(256,98,20,'#0a1440','$3.9k')
+    );
+    const artMatch = _S([0,1,2].map(i=>{
+      const x=30+i*112, mid=i===1;
+      return _H('g',{key:i},
+        _R(x,44,84,84,12,'#ffffff', mid?{stroke:'#ceff65',strokeWidth:3}:{stroke:'#e2e8f5',strokeWidth:1}),
+        _C(x+42,68,13, mid?'#135bff':'#9fb4ff'),
+        _R(x+22,92,40,6,3,'#dbe4f8'), _R(x+30,104,24,6,3,'#e7efff'),
+        mid?_C(x+70,52,11,'#ceff65'):null,
+        mid?_P('M'+(x+65)+' 52 l3 4 6 -8',{stroke:'#0a1440',strokeWidth:2.4,strokeLinecap:'round',strokeLinejoin:'round'}):null
+      );
+    }));
+    const artBuild = _S(
+      _R(28,40,120,84,10,'#ffffff'),
+      _R(40,52,44,30,3,'#e7efff'), _R(40,88,44,24,3,'#eef3ff'), _R(92,52,44,60,3,'#dbe4f8'),
+      _P('M255 44 L295 58 L295 84 C295 108 278 120 255 130 C232 120 215 108 215 84 L215 58 Z',{fill:'#ceff65'}),
+      _P('M239 86 l11 12 21 -24',{stroke:'#0a1440',strokeWidth:5,strokeLinecap:'round',strokeLinejoin:'round'})
+    );
+    [artAnswer,artMatch,artBuild].forEach((a,i)=>{ if(steps[i]) steps[i].art=a; });
+
+    return {
+      showBanner, showTrust, heroPlaceholder, isSingle, isCarousel, carouselSlots, carouselDots, carouselCaption,
+      svcGroups, svcPanelStyle, caretStyle, openSvc, closeSvc,
+      estOptions, estType, est, onEstType: (e)=>this.setState({ estType: e.target.value }),
+      categories, steps, cases, plans: mappedPlans, testimonials, trustLogos, safety, footerCols,
+    };
+  }
+}
+</script>
+</body>
+</html>

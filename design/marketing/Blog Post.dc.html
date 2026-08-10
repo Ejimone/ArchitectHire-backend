@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f3f6fd; }
+  ::selection { background: #135bff; color: #fff; }
+  a { color: #135bff; text-decoration: none; }
+  a:hover { color: #0b3fcc; }
+  .lk { color: #0a1440; font-weight: 600; }
+  .lk:hover { color: #135bff; }
+  .prose p { font-size: 18px; line-height: 1.72; color: #2b345c; margin-top: 22px; }
+  .prose h2 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 27px; font-weight: 700; letter-spacing: -.02em; color: #0a1440; margin-top: 44px; }
+  .prose h3 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 21px; font-weight: 700; color: #0a1440; margin-top: 30px; }
+  .prose ul { margin: 18px 0 0; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .prose li { font-size: 17px; line-height: 1.6; color: #2b345c; padding-left: 30px; position: relative; }
+  .prose li::before { content: '✓'; position: absolute; left: 0; top: 0; color: #16924e; font-weight: 700; }
+  .prose strong { color: #0a1440; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+  /* __resp__ responsive overrides (media queries can't be inline) */
+  @media (max-width: 900px){
+    main{ padding-left:18px !important; padding-right:18px !important; }
+    header nav{ display:none !important; }
+    [style*="repeat(4"]{ grid-template-columns:1fr 1fr !important; }
+    [style*="repeat(3"]{ grid-template-columns:1fr !important; }
+    [style*="repeat(2"]{ grid-template-columns:1fr !important; }
+    [style*="grid-template-columns: 1."]{ grid-template-columns:1fr !important; }
+    [style*="grid-template-columns: 1fr 1fr"]{ grid-template-columns:1fr !important; }
+    [style*="position: sticky"]{ position:static !important; top:auto !important; }
+    [style*="padding: 15px 32px"]{ padding:12px 18px !important; }
+    [style*="padding: 18px 32px"]{ padding-left:18px !important; padding-right:18px !important; }
+    [style*="padding: 52px 44px"],[style*="padding: 48px 44px"],[style*="padding: 44px 42px"],[style*="padding: 44px 44px"]{ padding:30px 22px !important; }
+    [style*="padding: 56px"],[style*="padding: 52px;"],[style*="padding: 48px"],[style*="padding: 44px;"],[style*="padding: 40px"],[style*="padding: 34px"]{ padding:32px 22px !important; }
+    h1{ font-size:clamp(30px,7vw,42px) !important; }
+  }
+  @media (max-width: 520px){
+    [style*="repeat(4"]{ grid-template-columns:1fr !important; }
+    [style*="gap: 38px"],[style*="gap: 40px"]{ gap:22px !important; }
+  }
+</style>
+<script src="../image-slot.js"></script>
+</helmet>
+<div style="background: #f3f6fd; color: #0a1440; font-family: 'Hanken Grotesk', sans-serif; -webkit-font-smoothing: antialiased;">
+
+  <x-import component-from-global-scope="site-nav" from="./site-nav.js" active="guides" style="display:contents" hint-size="100%,64px"></x-import>
+
+  <!-- ARTICLE HEADER -->
+  <div style="max-width: 780px; margin: 0 auto; padding: 40px 32px 0; animation: fadeUp .5s ease both;">
+    <nav style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #5b6493;">
+      <a href="Landing.dc.html" style="color: #5b6493;">Home</a><span>/</span>
+      <a href="Blog.dc.html" style="color: #5b6493;">Guides</a><span>/</span>
+      <span style="color: #0a1440; font-weight: 600;">{{ post.cat }}</span>
+    </nav>
+    <span style="display: inline-block; margin-top: 22px; background: #135bff; color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 6px 13px; border-radius: 100px;">{{ post.cat }}</span>
+    <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(34px, 4vw, 48px); line-height: 1.08; font-weight: 800; letter-spacing: -.02em; margin-top: 16px; text-wrap: balance;">{{ post.title }}</h1>
+    <p style="font-size: 20px; line-height: 1.55; color: #3f4770; margin-top: 16px; text-wrap: pretty;">{{ post.dek }}</p>
+    <div style="display: flex; align-items: center; gap: 14px; margin-top: 26px; padding-bottom: 30px; border-bottom: 1px solid #dbe2f2;">
+      <div style="width: 46px; height: 46px; border-radius: 50%; overflow: hidden; flex-shrink: 0;"><image-slot id="post-author" shape="circle" fit="cover" placeholder="Author"></image-slot></div>
+      <div style="flex: 1;"><div style="font-weight: 700; font-size: 15px;">{{ post.author }}</div><div style="font-size: 13px; color: #5b6493;">{{ post.role }}</div></div>
+      <div style="text-align: right; font-size: 13px; color: #5b6493;"><div>{{ post.date }}</div><div>{{ post.read }}</div></div>
+    </div>
+  </div>
+
+  <!-- HERO IMAGE -->
+  <div style="max-width: 960px; margin: 30px auto 0; padding: 0 32px;">
+    <div style="height: 440px; border-radius: 20px; overflow: hidden; position: relative;"><image-slot id="post-hero" shape="rect" fit="cover" placeholder="Article hero image" style="position: absolute; inset: 0; width: 100%; height: 100%;"></image-slot></div>
+  </div>
+
+  <!-- ARTICLE BODY -->
+  <article class="prose" style="max-width: 720px; margin: 0 auto; padding: 40px 32px 20px;">
+    <p style="font-size: 20px !important; color: #1c2547 !important;"><strong>Hiring an architect used to mean a stack of in-person meetings before you even knew a price.</strong> It doesn't anymore. Here's how to vet licensure, scope your project, and pay safely — entirely remotely — and still walk away with a stamped, permit-ready set.</p>
+
+    <h2>1. Confirm the license before anything else</h2>
+    <p>A drawing set is only worth submitting if it's stamped by an architect licensed in the state where you're building. That's not a formality — an unlicensed set will be rejected at plan check, no matter how good the design looks.</p>
+    <p>Ask for the license number and the issuing state, then verify it against the state board's public registry. On our platform this is done for you: <strong>every match is verified as actively licensed in your state before it ever reaches you.</strong></p>
+
+    <h2>2. Scope the project in writing</h2>
+    <p>Before pricing means anything, both sides need to agree on what's being drawn. A tight scope prevents the two most common blow-ups: surprise costs and missed drawings at permit time.</p>
+    <p>A complete residential scope usually covers:</p>
+    <ul>
+      <li>Existing conditions (as-built plans or a recent survey)</li>
+      <li>Proposed floor plans, elevations, and a site plan</li>
+      <li>Structural coordination and any required calculations</li>
+      <li>Energy-code compliance for your jurisdiction</li>
+      <li>A permit-ready, stamped set as the deliverable</li>
+    </ul>
+
+    <h2>3. Get a real number up front</h2>
+    <p>"It depends" is not a quote. Modern platforms price a drawing set from square footage, add-ons, and a jurisdiction complexity score, giving you an itemized range before you talk to anyone. Use that as your baseline, then let each architect confirm a fixed quote or hourly rate on the scoping call.</p>
+
+    <!-- INLINE CTA -->
+    <div style="background: #0a1440; border-radius: 18px; padding: 30px 32px; margin: 40px 0; text-align: center;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #ceff65; letter-spacing: .05em;">TRY IT FREE</div>
+      <div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 24px; font-weight: 700; color: #fff; margin: 8px 0 16px; letter-spacing: -.01em;">See your project's estimate in 2 minutes</div>
+      <a href="../app/Get Started.dc.html" style="display: inline-block; background: #135bff; color: #fff; padding: 14px 26px; border-radius: 10px; font-size: 15px; font-weight: 700; box-shadow: 0 3px 0 #0b3fcc;">Get my estimate →</a>
+    </div>
+
+    <h2>4. Pay through escrow, not up front</h2>
+    <p>Remote work only feels safe when the money does too. Escrow holds your funds and releases them as you approve milestones — so you're never paying for work you haven't seen. Avoid any arrangement that asks for the full fee before drawings begin.</p>
+
+    <!-- PULL QUOTE -->
+    <blockquote style="border-left: 4px solid #135bff; padding: 6px 0 6px 24px; margin: 40px 0;">
+      <p style="font-size: 24px !important; line-height: 1.4 !important; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 600; color: #0a1440 !important; margin: 0 !important;">"The best remote projects feel boring — clear scope, a real number, milestones that release on approval. Boring is what gets you a clean permit."</p>
+      <cite style="display: block; font-style: normal; font-size: 14px; color: #5b6493; margin-top: 14px;">— Maya E., AIA · Licensed CA</cite>
+    </blockquote>
+
+    <h2>5. Keep a tracked timeline to permit</h2>
+    <p>Once drawings are underway, everything should live in one place: files, comments, milestone approvals, and the submission itself. A tracked timeline keeps revision cycles short and gives your contractor a set they recognize — which is what clears plan check the first time.</p>
+    <p>Do these five things and remote hiring isn't a compromise — it's faster, cheaper, and just as accountable as walking into a firm's office.</p>
+  </article>
+
+  <!-- AUTHOR BIO -->
+  <div style="max-width: 720px; margin: 24px auto 0; padding: 0 32px;">
+    <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 24px; display: flex; gap: 18px; align-items: center;">
+      <div style="width: 64px; height: 64px; border-radius: 50%; overflow: hidden; flex-shrink: 0;"><image-slot id="post-bio" shape="circle" fit="cover" placeholder="Author"></image-slot></div>
+      <div>
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #135bff; letter-spacing: .05em;">WRITTEN BY</div>
+        <div style="font-weight: 700; font-size: 17px; margin-top: 4px;">{{ post.author }}</div>
+        <p style="font-size: 14px; line-height: 1.55; color: #5b6493; margin-top: 6px;">{{ post.bio }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- RELATED -->
+  <section style="max-width: 1200px; margin: 64px auto 0; padding: 0 32px;">
+    <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; font-weight: 700; letter-spacing: -.02em;">Keep reading</h2>
+    <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; margin-top: 24px;">
+      <sc-for list="{{ related }}" as="r" hint-placeholder-count="3">
+        <a href="Blog Post.dc.html" style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column;" style-hover="border-color: #135bff; box-shadow: 0 10px 26px rgba(19,91,255,.12); transform: translateY(-2px);">
+          <div style="height: 170px; position: relative;">
+            <image-slot id="{{ r.slotId }}" shape="rect" fit="cover" placeholder="{{ r.ph }}"></image-slot>
+            <span style="position: absolute; left: 14px; top: 14px; background: rgba(10,20,64,.82); color: #fff; font-size: 11.5px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; padding: 5px 10px; border-radius: 100px;">{{ r.cat }}</span>
+          </div>
+          <div style="padding: 18px 20px 20px;">
+            <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; line-height: 1.2; font-weight: 700; color: #0a1440; text-wrap: balance;">{{ r.title }}</h3>
+            <div style="font-size: 12.5px; color: #8b93b5; margin-top: 10px;">{{ r.date }} · {{ r.read }}</div>
+          </div>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section style="max-width: 1200px; margin: 48px auto 100px; padding: 0 32px;">
+    <div style="background: #135bff; border-radius: 22px; padding: 52px; text-align: center;">
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 36px; font-weight: 800; color: #fff; letter-spacing: -.02em; text-wrap: balance;">Ready to hire an architect?</h2>
+      <p style="font-size: 17px; color: #dbe6ff; margin: 12px 0 26px;">Free estimate. Matched with licensed architects in 48 hours.</p>
+      <a href="../app/Get Started.dc.html" style="display: inline-block; background: #ceff65; color: #0a1440; padding: 17px 34px; border-radius: 12px; font-size: 17px; font-weight: 800; box-shadow: 0 4px 0 #a9d94a;">Start your project →</a>
+    </div>
+  </section>
+
+  <x-import component-from-global-scope="site-footer" from="./site-footer.js" hint-size="100%,460px"></x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1200, &quot;height&quot;: 900}}">
+class Component extends DCLogic {
+  renderVals(){
+    const post = {
+      cat:'Hiring',
+      title:'How to hire an architect remotely — and get a permit-ready set',
+      dek:'A step-by-step walkthrough of vetting licensure, scoping your project, and paying safely through escrow — without a single in-person meeting.',
+      author:'Maya E., AIA', role:'Licensed architect · California', date:'Aug 4, 2026', read:'9 min read',
+      bio:'Maya has stamped permit-ready sets across California for over a decade, specializing in seismic-zone additions and backyard ADUs.',
+    };
+    const related = [
+      { cat:'Pricing', slotId:'rp1', ph:'Cost breakdown graphic', title:'What does an architect actually cost in 2026?', date:'Aug 1, 2026', read:'7 min' },
+      { cat:'ADUs', slotId:'rp2', ph:'Backyard ADU photo', title:'The complete backyard ADU planning guide', date:'Jul 28, 2026', read:'11 min' },
+      { cat:'Permits', slotId:'rp3', ph:'Permit counter photo', title:'Reading your jurisdiction: a permit primer', date:'Jul 22, 2026', read:'6 min' },
+    ];
+    const footerCols = [
+      { h:'Product', items:[
+        {label:'How it works', href:'Landing.dc.html#how'},
+        {label:'Services', href:'Services.dc.html'},
+        {label:'Instant estimate', href:'../app/Get Started.dc.html'},
+        {label:'Jurisdiction database', href:'Jurisdiction Database.dc.html'},
+        {label:'Case studies', href:'Case Studies.dc.html'},
+      ]},
+      { h:'Explore', items:[
+        {label:'Inspiration', href:'Inspiration.dc.html'},
+        {label:'Guides', href:'Blog.dc.html'},
+        {label:'For architects', href:'Architect Landing.dc.html'},
+        {label:'By project', href:'Project Landing.dc.html'},
+        {label:'By city', href:'City Landing.dc.html'},
+      ]},
+      { h:'Company', items:[
+        {label:'About', href:'About.dc.html'},
+        {label:'Careers', href:'Careers.dc.html'},
+        {label:'Contact', href:'Contact.dc.html'},
+        {label:'Privacy', href:'Privacy.dc.html'},
+      ]},
+    ];
+    return { post, related, footerCols };
+  }
+}
+</script>
+</body>
+</html>

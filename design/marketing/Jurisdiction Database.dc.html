@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f3f6fd; }
+  ::selection { background: #135bff; color: #fff; }
+  a { color: #135bff; text-decoration: none; }
+  a:hover { color: #0b3fcc; }
+  .lk { color: #0a1440; font-weight: 600; }
+  .lk:hover { color: #135bff; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  @media (max-width: 900px){
+    main{ padding-left:18px !important; padding-right:18px !important; }
+    header nav{ display:none !important; }
+    [style*="repeat(4"]{ grid-template-columns:1fr 1fr !important; }
+    [style*="repeat(3"]{ grid-template-columns:1fr !important; }
+    [style*="grid-template-columns: 2.2fr"]{ grid-template-columns:1fr !important; gap:6px !important; }
+    [style*="position: sticky"]{ position:static !important; top:auto !important; }
+    [style*="padding: 15px 32px"]{ padding:12px 18px !important; }
+    [style*="grid-template-columns: 220px"]{ grid-template-columns:1fr auto !important; }
+    [style*="grid-template-columns: 200px"]{ grid-template-columns:1fr auto !important; }
+    .colhide{ display:none !important; }
+    h1{ font-size:clamp(30px,7vw,42px) !important; }
+  }
+</style>
+</helmet>
+<div style="background: #f3f6fd; color: #0a1440; font-family: 'Hanken Grotesk', sans-serif; -webkit-font-smoothing: antialiased;">
+
+  <x-import component-from-global-scope="site-nav" from="./site-nav.js" style="display:contents" hint-size="100%,64px"></x-import>
+
+  <main style="max-width: 1200px; margin: 0 auto; padding: 0 32px 100px;">
+
+    <!-- HERO -->
+    <section style="margin-top: 24px; background: #0a1440; border-radius: 22px; padding: 44px; animation: fadeUp .5s ease both;">
+      <nav style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #9fb4ff; margin-bottom: 22px;">
+        <a href="Landing.dc.html" style="color: #9fb4ff;">Home</a><span>/</span>
+        <span style="color: #fff; font-weight: 600;">Jurisdiction database</span>
+      </nav>
+      <div style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 13px; border-radius: 100px; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: #0a1440; background: #ceff65; font-weight: 700;">Proprietary data layer</div>
+      <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(34px, 3.4vw, 48px); line-height: 1.04; font-weight: 800; color: #fff; letter-spacing: -.02em; margin: 18px 0 14px; max-width: 18em; text-wrap: balance;">Permitting guides for every US state</h1>
+      <p style="font-size: 18px; line-height: 1.6; color: #b9c3e8; max-width: 44em; text-wrap: pretty;">We score every jurisdiction on the factors that drive permit cost and timeline — seismic and coastal zones, wildfire overlays, historic districts and drawing depth. Pick a state to read its full permitting guide, or start an estimate to see your exact address scored.</p>
+      <div style="display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-top: 30px;">
+        <sc-for list="{{ heroStats }}" as="s" hint-placeholder-count="4">
+          <div style="background: #0c1a4a; border: 1px solid #1d2f6e; border-radius: 12px; padding: 18px;"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 26px; color: #ceff65;">{{ s.v }}</div><div style="font-size: 12.5px; color: #9fb4ff; margin-top: 2px;">{{ s.k }}</div></div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- CONTROLS -->
+    <section style="margin-top: 30px;">
+      <div style="display: grid; grid-template-columns: 2.2fr 1fr 1fr; gap: 12px; align-items: end;">
+        <div>
+          <label style="display: block; font-size: 12.5px; font-weight: 700; color: #5b6493; margin-bottom: 7px;">Search state</label>
+          <input value="{{ query }}" onInput="{{ onQuery }}" placeholder="State name or abbreviation…" style="width: 100%; background: #fff; border: 1.5px solid #dbe2f2; border-radius: 10px; padding: 12px 14px; font-family: inherit; font-size: 15px; color: #0a1440; outline: none;">
+        </div>
+        <div>
+          <label style="display: block; font-size: 12.5px; font-weight: 700; color: #5b6493; margin-bottom: 7px;">Region</label>
+          <select value="{{ region }}" onChange="{{ onRegion }}" style="width: 100%; background: #fff; border: 1.5px solid #dbe2f2; border-radius: 10px; padding: 12px 14px; font-family: inherit; font-size: 15px; font-weight: 600; color: #0a1440; cursor: pointer;">
+            <sc-for list="{{ regionOpts }}" as="o" hint-placeholder-count="6"><option value="{{ o }}">{{ o }}</option></sc-for>
+          </select>
+        </div>
+        <div>
+          <label style="display: block; font-size: 12.5px; font-weight: 700; color: #5b6493; margin-bottom: 7px;">Sort by</label>
+          <select value="{{ sort }}" onChange="{{ onSort }}" style="width: 100%; background: #fff; border: 1.5px solid #dbe2f2; border-radius: 10px; padding: 12px 14px; font-family: inherit; font-size: 15px; font-weight: 600; color: #0a1440; cursor: pointer;">
+            <sc-for list="{{ sortOpts }}" as="o" hint-placeholder-count="3"><option value="{{ o }}">{{ o }}</option></sc-for>
+          </select>
+        </div>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px;">
+        <sc-for list="{{ bandChips }}" as="c" hint-placeholder-count="4">
+          <button onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.label }}</button>
+        </sc-for>
+        <span style="margin-left: auto; align-self: center; font-size: 13px; color: #5b6493; font-family: 'IBM Plex Mono', monospace;">{{ countLabel }}</span>
+      </div>
+    </section>
+
+    <!-- DIRECTORY -->
+    <section style="margin-top: 18px; background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; overflow: hidden;">
+      <div style="display: grid; grid-template-columns: 220px 1fr 150px 130px 130px; gap: 16px; padding: 14px 22px; background: #f7f9fe; border-bottom: 1px solid #e2e8f5; font-size: 12px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; color: #8b93b5;">
+        <div>State</div><div>Complexity score</div><div class="colhide">Band</div><div class="colhide">Typical permit</div><div></div>
+      </div>
+      <sc-for list="{{ rows }}" as="r" hint-placeholder-count="10">
+        <a href="State Permit Guide.dc.html" style="display: grid; grid-template-columns: 220px 1fr 150px 130px 130px; gap: 16px; align-items: center; padding: 15px 22px; border-bottom: 1px solid #eef2fa; text-decoration: none;" style-hover="background: #f7f9fe;">
+          <div><div style="font-weight: 700; font-size: 15px; color: #0a1440;">{{ r.state }}</div><div style="font-size: 12.5px; color: #5b6493;">{{ r.sub }}</div></div>
+          <div style="display: flex; align-items: center; gap: 12px;"><div style="flex: 1; height: 8px; border-radius: 6px; background: #eef2fa; overflow: hidden;"><div style="{{ r.barStyle }}"></div></div><span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #0a1440; width: 26px;">{{ r.score }}</span></div>
+          <div class="colhide"><span style="{{ r.bandStyle }}">{{ r.band }}</span></div>
+          <div class="colhide" style="font-size: 13.5px; color: #3f4770; font-family: 'IBM Plex Mono', monospace;">{{ r.timeline }}</div>
+          <div style="text-align: right;"><span style="font-size: 13.5px; font-weight: 700; color: #135bff;">Permit guide →</span></div>
+        </a>
+      </sc-for>
+      <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+        <div style="padding: 40px 22px; text-align: center; color: #5b6493; font-size: 15px;">No states match your filters. Try a broader search — we cover all 52.</div>
+      </sc-if>
+    </section>
+
+    <!-- HOW SCORING WORKS -->
+    <section style="margin-top: 40px; background: #fff; border: 1px solid #e2e8f5; border-radius: 18px; padding: 34px;">
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 26px; font-weight: 700; letter-spacing: -.02em;">How the score is built</h2>
+      <p style="font-size: 16px; color: #3f4770; margin-top: 8px; max-width: 46em;">Each jurisdiction is scored 0–100 by weighting the factors that add permit cost, review time, and drawing scope. Higher score means more complexity — and a higher pricing multiplier applied automatically at estimate time. Open any state guide for the full breakdown, timeline and FAQ.</p>
+      <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 24px;">
+        <sc-for list="{{ factorLegend }}" as="l" hint-placeholder-count="6">
+          <div style="background: #f7f9fe; border: 1px solid #e2e8f5; border-radius: 14px; padding: 20px;">
+            <div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 17px; font-weight: 700;">{{ l.name }}</div>
+            <p style="font-size: 13.5px; line-height: 1.55; color: #5b6493; margin-top: 6px;">{{ l.desc }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section style="margin-top: 32px; background: #135bff; border-radius: 22px; padding: 52px; text-align: center;">
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 36px; font-weight: 800; color: #fff; letter-spacing: -.02em; text-wrap: balance;">See your jurisdiction's score in your estimate</h2>
+      <p style="font-size: 17px; color: #dbe6ff; margin: 12px 0 26px;">Free instant estimate — the complexity multiplier is applied automatically.</p>
+      <a href="../app/Get Started.dc.html" style="display: inline-block; background: #ceff65; color: #0a1440; padding: 17px 34px; border-radius: 12px; font-size: 17px; font-weight: 800; box-shadow: 0 4px 0 #a9d94a;">Get my estimate →</a>
+    </section>
+  </main>
+
+  <x-import component-from-global-scope="site-footer" from="./site-footer.js" hint-size="100%,460px"></x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1200, &quot;height&quot;: 900}}">
+class Component extends DCLogic {
+  state = { query: '', region: 'All regions', band: 'All', sort: 'Complexity: high → low' };
+
+  renderVals(){
+    const s = this.state;
+    // [name, abbr, score, region, headline city]
+    const DATA = [
+      ['Alabama','AL',44,'South','Birmingham'],['Alaska','AK',58,'West','Anchorage'],['Arizona','AZ',48,'Southwest','Phoenix'],
+      ['Arkansas','AR',40,'South','Little Rock'],['California','CA',82,'West','Los Angeles'],['Colorado','CO',52,'West','Denver'],
+      ['Connecticut','CT',60,'Northeast','Hartford'],['Delaware','DE',46,'Northeast','Wilmington'],['District of Columbia','DC',74,'Northeast','Washington'],
+      ['Florida','FL',72,'South','Miami'],['Georgia','GA',47,'South','Atlanta'],['Hawaii','HI',70,'West','Honolulu'],
+      ['Idaho','ID',45,'West','Boise'],['Illinois','IL',58,'Midwest','Chicago'],['Indiana','IN',43,'Midwest','Indianapolis'],
+      ['Iowa','IA',39,'Midwest','Des Moines'],['Kansas','KS',38,'Midwest','Wichita'],['Kentucky','KY',42,'South','Louisville'],
+      ['Louisiana','LA',66,'South','New Orleans'],['Maine','ME',54,'Northeast','Portland'],['Maryland','MD',59,'Northeast','Baltimore'],
+      ['Massachusetts','MA',68,'Northeast','Boston'],['Michigan','MI',50,'Midwest','Detroit'],['Minnesota','MN',52,'Midwest','Minneapolis'],
+      ['Mississippi','MS',43,'South','Jackson'],['Missouri','MO',44,'Midwest','St. Louis'],['Montana','MT',47,'West','Billings'],
+      ['Nebraska','NE',38,'Midwest','Omaha'],['Nevada','NV',55,'West','Las Vegas'],['New Hampshire','NH',53,'Northeast','Manchester'],
+      ['New Jersey','NJ',64,'Northeast','Newark'],['New Mexico','NM',46,'Southwest','Albuquerque'],['New York','NY',76,'Northeast','New York City'],
+      ['North Carolina','NC',49,'South','Charlotte'],['North Dakota','ND',37,'Midwest','Fargo'],['Ohio','OH',48,'Midwest','Columbus'],
+      ['Oklahoma','OK',45,'Southwest','Oklahoma City'],['Oregon','OR',63,'West','Portland'],['Pennsylvania','PA',57,'Northeast','Philadelphia'],
+      ['Puerto Rico','PR',69,'South','San Juan'],['Rhode Island','RI',58,'Northeast','Providence'],['South Carolina','SC',55,'South','Charleston'],
+      ['South Dakota','SD',37,'Midwest','Sioux Falls'],['Tennessee','TN',44,'South','Nashville'],['Texas','TX',54,'South','Houston'],
+      ['Utah','UT',56,'West','Salt Lake City'],['Vermont','VT',52,'Northeast','Burlington'],['Virginia','VA',56,'South','Virginia Beach'],
+      ['Washington','WA',65,'West','Seattle'],['West Virginia','WV',41,'South','Charleston'],['Wisconsin','WI',48,'Midwest','Milwaukee'],
+      ['Wyoming','WY',42,'West','Cheyenne'],
+    ].map(([name,abbr,score,region,city])=>({name,abbr,score,region,city}));
+
+    const regionOpts = ['All regions','West','Southwest','Midwest','South','Northeast'];
+    const sortOpts = ['Complexity: high → low','Complexity: low → high','A–Z'];
+    const bandOf = (sc)=> sc>65?'High':sc>=49?'Moderate':'Low';
+    const bandColor = (b)=> b==='High'?['#b0613d','#f3e6df']: b==='Moderate'?['#8a6d2f','#f2ecd9']:['#16924e','#e7f6ec'];
+    const timelineOf = (sc)=> sc>75?'12–18 wks': sc>60?'9–14 wks': sc>=49?'7–11 wks':'5–9 wks';
+
+    const bands = ['All','Low','Moderate','High'];
+    const bandChips = bands.map(b=>{
+      const active = s.band===b;
+      return { label: b==='All'?'All bands':b+' complexity', onClick:()=>this.setState({band:b}),
+        style:`border:1px solid ${active?'#135bff':'#dbe4f8'};background:${active?'#135bff':'#fff'};color:${active?'#fff':'#16305c'};padding:8px 15px;border-radius:100px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s ease;`,
+      };
+    });
+
+    const q = s.query.trim().toLowerCase();
+    let filtered = DATA.filter(d=>{
+      const band = bandOf(d.score);
+      if (s.region!=='All regions' && d.region!==s.region) return false;
+      if (s.band!=='All' && band!==s.band) return false;
+      if (q && !(`${d.name} ${d.abbr}`.toLowerCase().includes(q))) return false;
+      return true;
+    });
+    if (s.sort==='Complexity: high → low') filtered.sort((a,b)=>b.score-a.score);
+    else if (s.sort==='Complexity: low → high') filtered.sort((a,b)=>a.score-b.score);
+    else filtered.sort((a,b)=>a.name.localeCompare(b.name));
+
+    const rows = filtered.map(d=>{
+      const band = bandOf(d.score);
+      const bc = bandColor(band);
+      return {
+        state:d.name, sub:`${d.abbr} · ${d.region} · ${d.city}`, score:d.score, band:band+' complexity', timeline:timelineOf(d.score),
+        barStyle:`height:100%;width:${d.score}%;background:${d.score>65?'#135bff':d.score>=49?'#8a6d2f':'#16924e'};border-radius:6px;`,
+        bandStyle:`font-family:'IBM Plex Mono',monospace;font-size:11.5px;padding:4px 9px;border-radius:6px;font-weight:600;color:${bc[0]};background:${bc[1]};`,
+      };
+    });
+
+    const heroStats = [
+      { v:'52', k:'state guides published' },
+      { v:'3,200+', k:'cities & counties scored' },
+      { v:'12', k:'complexity factors weighted' },
+      { v:'0–100', k:'score drives pricing' },
+    ];
+    const factorLegend = [
+      { name:'Seismic zone', desc:'Ground-motion risk requiring lateral and foundation detailing — highest across the West Coast.' },
+      { name:'Coastal & flood', desc:'Flood-plain, coastal-construction and drainage rules that add scope and review steps.' },
+      { name:'Wildfire (WUI)', desc:'Wildland-urban interface ignition-resistant construction requirements.' },
+      { name:'Historic overlay', desc:'Landmark and historic-district design review that lengthens approval.' },
+      { name:'Snow & climate load', desc:'Structural sizing for snow, wind and hurricane loads by climate zone.' },
+      { name:'Drawing-set depth', desc:'How extensive a permit set the jurisdiction requires at submission.' },
+    ];
+    const footerCols = [
+      { h:'Product', items:[
+        {label:'How it works', href:'Landing.dc.html#how'},
+        {label:'Services', href:'Services.dc.html'},
+        {label:'Instant estimate', href:'../app/Get Started.dc.html'},
+        {label:'Jurisdiction database', href:'Jurisdiction Database.dc.html'},
+        {label:'Case studies', href:'Case Studies.dc.html'},
+      ]},
+      { h:'Explore', items:[
+        {label:'Inspiration', href:'Inspiration.dc.html'},
+        {label:'Guides', href:'Blog.dc.html'},
+        {label:'For architects', href:'Architect Landing.dc.html'},
+        {label:'By project', href:'Project Landing.dc.html'},
+        {label:'By city', href:'City Landing.dc.html'},
+      ]},
+      { h:'Company', items:[
+        {label:'About', href:'#'},{label:'Careers', href:'#'},{label:'Contact', href:'#'},{label:'Privacy', href:'#'},
+      ]},
+    ];
+
+    return {
+      query:s.query, onQuery:(e)=>this.setState({query:e.target.value}),
+      region:s.region, onRegion:(e)=>this.setState({region:e.target.value}), regionOpts,
+      sort:s.sort, onSort:(e)=>this.setState({sort:e.target.value}), sortOpts,
+      bandChips, rows, empty: rows.length===0,
+      countLabel: `${rows.length} of ${DATA.length} states`,
+      heroStats, factorLegend, footerCols,
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+name: architecthire
+
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: architecthire
+      POSTGRES_PASSWORD: architecthire
+      POSTGRES_DB: architecthire
+    ports:
+      # 5433 on the host: a native Postgres already occupies 5432 on this machine
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U architecthire"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  web:
+    build: .
+    command: uv run --frozen uvicorn architecture_backend.asgi:application --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - .:/app
+      - /app/.venv
+    ports:
+      - "8000:8000"
+    env_file: .env
+    environment:
+      DJANGO_SETTINGS_MODULE: architecture_backend.settings.dev
+      DATABASE_URL: postgres://architecthire:architecthire@db:5432/architecthire
+      REDIS_URL: redis://redis:6379
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  worker:
+    build: .
+    command: uv run --frozen celery -A architecture_backend worker -l info -Q default,notifications
+    volumes:
+      - .:/app
+      - /app/.venv
+    env_file: .env
+    environment:
+      DJANGO_SETTINGS_MODULE: architecture_backend.settings.dev
+      DATABASE_URL: postgres://architecthire:architecthire@db:5432/architecthire
+      REDIS_URL: redis://redis:6379
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  beat:
+    build: .
+    command: uv run --frozen celery -A architecture_backend beat -l info
+    volumes:
+      - .:/app
+      - /app/.venv
+    env_file: .env
+    environment:
+      DJANGO_SETTINGS_MODULE: architecture_backend.settings.dev
+      DATABASE_URL: postgres://architecthire:architecthire@db:5432/architecthire
+      REDIS_URL: redis://redis:6379
+    depends_on:
+      redis:
+        condition: service_healthy
+
+volumes:
+  pgdata:

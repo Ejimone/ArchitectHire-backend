@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f3f6fd; }
+  ::selection { background: #135bff; color: #fff; }
+  a { color: #135bff; text-decoration: none; }
+  a:hover { color: #0b3fcc; }
+  @media (max-width: 900px){
+    main{ padding-left:18px !important; padding-right:18px !important; }
+    [style*="repeat(2"]{ grid-template-columns:1fr !important; }
+  }
+</style>
+<script src="./site-nav.js"></script>
+</helmet>
+<div style="background: #f3f6fd; color: #0a1440; font-family: 'Hanken Grotesk', sans-serif; -webkit-font-smoothing: antialiased; min-height: 100vh;">
+
+  <x-import component-from-global-scope="site-nav" from="./site-nav.js" style="display:contents" hint-size="100%,64px"></x-import>
+
+  <main style="max-width: 960px; margin: 0 auto; padding: 40px 32px 100px;">
+
+    <!-- SEARCH FIELD -->
+    <div style="position: relative;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8b93b5" stroke-width="2" stroke-linecap="round" style="position: absolute; left: 18px; top: 50%; transform: translateY(-50%); pointer-events: none;"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+      <input value="{{ q }}" onInput="{{ onInput }}" placeholder="Search services, projects, cities, pages…" autofocus style="width: 100%; background: #fff; border: 1.5px solid #dbe2f2; border-radius: 14px; padding: 18px 18px 18px 50px; font-size: 18px; font-family: inherit; color: #0a1440; outline: none;">
+    </div>
+
+    <div style="margin-top: 14px; font-size: 14px; color: #5b6493;">{{ summary }}</div>
+
+    <!-- RESULTS -->
+    <div style="margin-top: 22px; display: flex; flex-direction: column; gap: 30px;">
+      <sc-for list="{{ groups }}" as="g" hint-placeholder-count="3">
+        <section>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: #8b93b5; margin-bottom: 12px;">{{ g.label }} · {{ g.count }}</div>
+          <div style="display: grid; grid-template-columns: repeat(2,1fr); gap: 12px;">
+            <sc-for list="{{ g.items }}" as="it" hint-placeholder-count="4">
+              <a href="{{ it.href }}" style="background: #fff; border: 1px solid #e2e8f5; border-radius: 14px; padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; gap: 14px;" style-hover="border-color: #135bff; box-shadow: 0 8px 20px rgba(19,91,255,.1);">
+                <div style="min-width: 0;">
+                  <div style="font-weight: 700; font-size: 16px; color: #0a1440;">{{ it.label }}</div>
+                  <div style="font-size: 13px; color: #5b6493; margin-top: 2px;">{{ it.meta }}</div>
+                </div>
+                <span style="color: #135bff; font-size: 18px; flex-shrink: 0;">→</span>
+              </a>
+            </sc-for>
+          </div>
+        </section>
+      </sc-for>
+    </div>
+
+    <!-- EMPTY STATE -->
+    <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}">
+      <div style="text-align: center; padding: 60px 20px; background: #fff; border: 1px solid #e2e8f5; border-radius: 18px; margin-top: 22px;">
+        <div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px; font-weight: 700;">No results for "{{ q }}"</div>
+        <p style="font-size: 15px; color: #5b6493; margin: 10px 0 20px;">Try a broader term, or browse a category:</p>
+        <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+          <a href="Services.dc.html" style="padding: 10px 18px; border-radius: 100px; background: #e7efff; color: #0b3fcc; font-weight: 600; font-size: 14px;">All services</a>
+          <a href="Projects.dc.html" style="padding: 10px 18px; border-radius: 100px; background: #e7efff; color: #0b3fcc; font-weight: 600; font-size: 14px;">Project types</a>
+          <a href="Cities.dc.html" style="padding: 10px 18px; border-radius: 100px; background: #e7efff; color: #0b3fcc; font-weight: 600; font-size: 14px;">By city</a>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- SUGGESTIONS (no query) -->
+    <sc-if value="{{ isIdle }}" hint-placeholder-val="{{ false }}">
+      <div style="margin-top: 22px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: #8b93b5; margin-bottom: 12px;">Popular searches</div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <sc-for list="{{ popular }}" as="p" hint-placeholder-count="6">
+            <a href="Search.dc.html?q={{ p.q }}" style="padding: 10px 18px; border-radius: 100px; background: #fff; border: 1px solid #dbe2f2; color: #232c57; font-weight: 600; font-size: 14px;" style-hover="border-color: #135bff; color: #135bff;">{{ p.label }}</a>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+  </main>
+
+  <x-import component-from-global-scope="site-footer" from="./site-footer.js" hint-size="100%,460px"></x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 960, &quot;height&quot;: 800}}">
+class Component extends DCLogic {
+  state = { q: '' };
+
+  componentDidMount(){
+    try {
+      const p = new URLSearchParams(window.location.search).get('q');
+      if (p) this.setState({ q: p });
+    } catch(e) {}
+  }
+
+  renderVals(){
+    const INDEX = [
+      // Services
+      ['Services','Video consult','1-hour consult with a licensed architect','Services.dc.html#catalog'],
+      ['Services','Plan review & markup','Redline of your existing plans','Services.dc.html#catalog'],
+      ['Services','Feasibility check','Is your project viable?','Services.dc.html#catalog'],
+      ['Services','CAD drafting','Drafting billed by the hour','CAD Drafting.dc.html'],
+      ['Services','As-built package','Measured drawings of an existing building','CAD Drafting.dc.html'],
+      ['Services','PDF-to-CAD','Convert PDFs to editable CAD','CAD Drafting.dc.html'],
+      ['Services','3D renders','Photoreal stills','3D Visualization.dc.html'],
+      ['Services','3D floor plan','Furnished 3D plans','3D Visualization.dc.html'],
+      ['Services','Walkthrough & VR','Animated walkthroughs','3D Visualization.dc.html'],
+      ['Services','3D laser scanning','Point-cloud capture','Services.dc.html#catalog'],
+      ['Services','Scan-to-BIM','Point cloud to BIM model','Services.dc.html#catalog'],
+      ['Services','Title-24 / energy','Energy compliance','Services.dc.html#catalog'],
+      ['Services','Structural stamp','Engineered & stamped','Services.dc.html#catalog'],
+      ['Services','Permit set','Permit-ready drawing set','Services.dc.html#catalog'],
+      ['Services','Zoning study','Zoning & code analysis','Services.dc.html#catalog'],
+      // Project types
+      ['Project types','Backyard ADU','From $2,400 · detached & garage conversions','Project Landing.dc.html'],
+      ['Project types','Home addition','From $11,000 · second-story & footprint','Project Landing.dc.html'],
+      ['Project types','Whole-home renovation','From $8,500 · interior & structural','Project Landing.dc.html'],
+      ['Project types','Kitchen & bath','From $2,400 · focused remodels','Project Landing.dc.html'],
+      ['Project types','New custom home','From $26,000 · ground-up builds','Project Landing.dc.html'],
+      ['Project types','Garage conversion','From $4,500 · convert to living space','Project Landing.dc.html'],
+      ['Project types','Commercial TI','From $8,000 · office & retail','Project Landing.dc.html'],
+      ['Project types','Restaurant build-out','From $9,000 · food & beverage','Project Landing.dc.html'],
+      ['Project types','Change of use','From $6,000 · re-permit & convert','Project Landing.dc.html'],
+      // Cities
+      ['Cities','Oakland, CA','140+ licensed architects','City Landing.dc.html'],
+      ['Cities','San Francisco, CA','210+ licensed architects','City Landing.dc.html'],
+      ['Cities','San Jose, CA','120+ licensed architects','City Landing.dc.html'],
+      ['Cities','Los Angeles, CA','320+ licensed architects','City Landing.dc.html'],
+      ['Cities','San Diego, CA','160+ licensed architects','City Landing.dc.html'],
+      ['Cities','Seattle, WA','130+ licensed architects','City Landing.dc.html'],
+      ['Cities','Austin, TX','110+ licensed architects','City Landing.dc.html'],
+      ['Cities','New York, NY','280+ licensed architects','City Landing.dc.html'],
+      // Pages
+      ['Pages','How it works','The client journey, end to end','Landing.dc.html#how'],
+      ['Pages','Instant estimate','Price your project in minutes','../app/Get Started.dc.html'],
+      ['Pages','Jurisdiction database','Permit complexity, scored','Jurisdiction Database.dc.html'],
+      ['Pages','Case studies','Real projects & outcomes','Case Studies.dc.html'],
+      ['Pages','Guides','Articles & permit primers','Blog.dc.html'],
+      ['Pages','Inspiration','Browse finished work','Inspiration.dc.html'],
+      ['Pages','State permit guides','Permit rules by state','State Permit Guide.dc.html'],
+      ['Pages','About','Our mission & team','About.dc.html'],
+      ['Pages','Careers','Open roles','Careers.dc.html'],
+      ['Pages','Contact','Get in touch','Contact.dc.html'],
+      ['Pages','For architects','Join the network','Architect Landing.dc.html'],
+      ['Pages','For service experts','Offer drafting, 3D & more','For Experts.dc.html'],
+    ];
+
+    const q = this.state.q.trim();
+    const ql = q.toLowerCase();
+    const order = ['Services','Project types','Cities','Pages'];
+
+    let matches = INDEX;
+    if (ql) matches = INDEX.filter(r => (r[1] + ' ' + r[2] + ' ' + r[0]).toLowerCase().includes(ql));
+
+    const byCat = {};
+    matches.forEach(r => { (byCat[r[0]] = byCat[r[0]] || []).push({ label:r[1], meta:r[2], href:r[3] }); });
+    const groups = order.filter(c => byCat[c]).map(c => ({ label:c, count:byCat[c].length, items:byCat[c] }));
+
+    const total = matches.length;
+    const isIdle = !ql;
+    const isEmpty = !!ql && total === 0;
+    const summary = ql
+      ? (total ? `${total} result${total===1?'':'s'} for "${q}"` : '')
+      : 'Search across services, project types, cities and pages.';
+
+    const popular = [
+      { label:'ADU', q:'ADU' }, { label:'3D render', q:'render' }, { label:'Permit set', q:'permit' },
+      { label:'Oakland', q:'Oakland' }, { label:'CAD drafting', q:'CAD' }, { label:'Kitchen remodel', q:'kitchen' },
+    ];
+
+    return {
+      q: this.state.q,
+      onInput: (e)=>this.setState({ q: e.target.value }),
+      groups: isIdle ? [] : groups,
+      summary, isEmpty, isIdle, popular,
+    };
+  }
+}
+</script>
+</body>
+</html>
