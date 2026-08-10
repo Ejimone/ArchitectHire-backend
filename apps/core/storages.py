@@ -21,3 +21,11 @@ class PrivateMediaStorage(S3Storage):
     querystring_expire = 600  # 10 minutes
     file_overwrite = False
     custom_domain = False  # signed URLs must hit the bucket endpoint, not the CDN
+
+
+def private_storage():
+    """Callable storage for FileFields — resolves the 'private' STORAGES alias at runtime
+    (local filesystem in dev, presigned DO Spaces in prod)."""
+    from django.core.files.storage import storages
+
+    return storages["private"]

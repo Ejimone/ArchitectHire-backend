@@ -29,6 +29,7 @@ X_FRAME_OPTIONS = "DENY"
 
 STORAGES = {
     "default": {"BACKEND": "apps.core.storages.PublicMediaStorage"},
+    "private": {"BACKEND": "apps.core.storages.PrivateMediaStorage"},
     "staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"},
 }
 

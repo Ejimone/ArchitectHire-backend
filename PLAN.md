@@ -35,8 +35,9 @@ Backend repo: `ArchitectHire-backend` (Django 6.1 CMS + marketplace API) · Fron
 - [ ] **Stage 5 — CMS long tail + full seed**
   Blog (block bodies) · CaseStudy · ProjectType/City/State SEO payloads · Careers · Contact · Policies · Inspiration + likes · PageSEO · search index + endpoint · newsletter · `manage.py seed --all` (zero-placeholder guarantee).
 
-- [ ] **Stage 6 — Providers**
-  Architect/Expert profiles · Discipline flags · Credential state machine + admin verification queue · portfolio · reviews · private-storage credential docs.
+- [x] **Stage 6 — Providers** *(2026-08-10)*
+  ArchitectProfile / ExpertProfile (role-aware `me/profile/`, onboarding step tracking → submit → credential review → approved/live, 409 on double-submit) · Discipline taxonomy (6 seeded with licensure/on-site gating flags; `ExpertProfile.requires_license` derives from selected disciplines) · Credential state machine (uploaded → verified/rejected, staff attribution, admin verification queue with bulk verify/reject) · credential docs on the **private** storage alias (filesystem dev / presigned Spaces prod) · portfolio CRUD · Review model + denormalized provider reputation fields · public architect endpoint (live profiles only: portfolio, published reviews, verified-credential list).
+  **Verified**: 80 tests green (state machine, role-aware profiles, owner-only credentials, live-only public gating).
 
 - [ ] **Stage 7 — Projects, matching, orders**
   Project lifecycle · estimate claim-on-signup · matching engine (licensure ∩ specialization ∩ capacity → 2–3 scored leads) · lead accept/decline with undo · render/drafting order calculators (design price matrices).

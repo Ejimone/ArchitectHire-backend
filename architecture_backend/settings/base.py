@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "apps.jurisdictions",
     "apps.projects",
     "apps.search",
+    "apps.providers",
 ]
 
 MIDDLEWARE = [
@@ -202,6 +203,10 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 STORAGES = {
     "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
+    "private": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "OPTIONS": {"location": str(BASE_DIR / "media" / "private")},
+    },
     "staticfiles": {"BACKEND": "whitenoise.storage.CompressedStaticFilesStorage"},
 }
 

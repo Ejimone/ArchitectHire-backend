@@ -52,7 +52,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         domains = (
-            ["jurisdictions", "catalog", "cms", "content", "searchindex"]
+            ["jurisdictions", "catalog", "cms", "providers", "content", "searchindex"]
             if options["all"]
             else [d.strip() for d in options["domain"].split(",") if d.strip()]
         )
@@ -617,3 +617,78 @@ class Command(BaseCommand):
 
         count = rebuild_index()
         self.stdout.write(f"  search index: {count} entries")
+
+    def seed_providers(self):
+        """The 6 expert disciplines (design: For Experts + Expert Account)."""
+        from apps.providers.models import Discipline
+
+        disciplines = [
+            (
+                "cad-drafting",
+                "CAD drafting",
+                "Drawings from sketches & redlines",
+                "$65–90/hr",
+                "NO LICENSE",
+                False,
+                False,
+            ),
+            (
+                "3d-visualization",
+                "3D & visualization",
+                "Renders, floor plans, walkthroughs",
+                "$99–4,000",
+                "NO LICENSE",
+                False,
+                False,
+            ),
+            (
+                "3d-scanning-bim",
+                "3D scanning & BIM",
+                "Point clouds & scan-to-BIM",
+                "$0.20–10/sf",
+                "NO LICENSE",
+                False,
+                True,
+            ),
+            (
+                "structural-mep",
+                "Structural / MEP engineering",
+                "Calcs & licensed stamps",
+                "from $1,500",
+                "LICENSE REQ",
+                True,
+                False,
+            ),
+            (
+                "energy-title-24",
+                "Energy / Title-24",
+                "Compliance modeling",
+                "from $300",
+                "CERTIFIED",
+                True,
+                False,
+            ),
+            (
+                "permit-zoning",
+                "Permit & zoning",
+                "Expediting & entitlements",
+                "$500–20k+",
+                "SPECIALIST",
+                True,
+                False,
+            ),
+        ]
+        for order, (key, name, description, rate, tag, lic, onsite) in enumerate(disciplines):
+            Discipline.objects.update_or_create(
+                key=key,
+                defaults={
+                    "name": name,
+                    "description": description,
+                    "typical_rate": rate,
+                    "licensure_tag": tag,
+                    "requires_license": lic,
+                    "requires_onsite": onsite,
+                    "sort_order": order,
+                },
+            )
+        self.stdout.write(f"  providers: {Discipline.objects.count()} disciplines")
