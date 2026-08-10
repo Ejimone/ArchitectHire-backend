@@ -1,0 +1,26 @@
+[
+  {
+    "key": "structural",
+    "label": "Structural coordination",
+    "sub": "Engineer stamp & framing plans",
+    "price": 2400
+  },
+  {
+    "key": "mep",
+    "label": "MEP drawings",
+    "sub": "Mechanical, electrical, plumbing",
+    "price": 3200
+  },
+  {
+    "key": "viz",
+    "label": "3D visualization",
+    "sub": "Renderings & walkthrough",
+    "price": 1800
+  },
+  {
+    "key": "energy",
+    "label": "Energy calcs",
+    "sub": "Title-24 / code compliance",
+    "price": 1200
+  }
+]

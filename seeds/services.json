@@ -1,0 +1,298 @@
+[
+  {
+    "name": "Consults & plan reviews",
+    "slug": "consults-and-plan-reviews",
+    "icon": "consult",
+    "tagline": "Talk to a pro before you spend real money",
+    "has_detail": false,
+    "detail_href": "",
+    "services": [
+      {
+        "name": "1-hour video consult",
+        "description": "A licensed architect walks your project, flags issues, and points you to the right next step.",
+        "price_display": "from $145",
+        "price_unit": "per session",
+        "detail_href": "",
+        "slug": "1-hour-video-consult"
+      },
+      {
+        "name": "Plan review & markup",
+        "description": "Send existing plans; get a redlined markup and a written punch list back.",
+        "price_display": "from $150",
+        "price_unit": "flat / per set",
+        "detail_href": "",
+        "slug": "plan-review-and-markup"
+      },
+      {
+        "name": "Feasibility check",
+        "description": "Quick go / no-go read on whether your idea works on your lot and budget.",
+        "price_display": "from $250",
+        "price_unit": "flat",
+        "detail_href": "",
+        "slug": "feasibility-check"
+      }
+    ]
+  },
+  {
+    "name": "Drafting & documentation",
+    "slug": "drafting-and-documentation",
+    "icon": "draft",
+    "tagline": "The highest-volume, lowest-friction category",
+    "has_detail": true,
+    "detail_href": "/services/cad-drafting",
+    "services": [
+      {
+        "name": "CAD drafting",
+        "description": "Clean, coordinated drawings drafted from your sketches or redlines, billed by the hour.",
+        "price_display": "$65 – $90",
+        "price_unit": "per hour",
+        "detail_href": "/services/cad-drafting",
+        "slug": "cad-drafting"
+      },
+      {
+        "name": "2D as-built package",
+        "description": "Measured drawings of an existing residence, ready for design or permitting.",
+        "price_display": "from $2,500",
+        "price_unit": "per residence",
+        "detail_href": "/services/cad-drafting",
+        "slug": "2d-as-built-package"
+      },
+      {
+        "name": "PDF-to-CAD conversion",
+        "description": "Turn scanned or PDF sheets into editable, layered CAD files.",
+        "price_display": "from $10",
+        "price_unit": "per sheet",
+        "detail_href": "/services/cad-drafting",
+        "slug": "pdf-to-cad-conversion"
+      }
+    ]
+  },
+  {
+    "name": "3D & visualization",
+    "slug": "3d-and-visualization",
+    "icon": "viz",
+    "tagline": "The most marketplace-ready category",
+    "has_detail": true,
+    "detail_href": "/services/3d-visualization",
+    "services": [
+      {
+        "name": "Single 3D render",
+        "description": "One photoreal interior or exterior still to see your space before you build.",
+        "price_display": "from $99",
+        "price_unit": "per still",
+        "detail_href": "/services/3d-visualization",
+        "slug": "single-3d-render"
+      },
+      {
+        "name": "3D floor plan",
+        "description": "A furnished, dollhouse-style 3D plan that reads instantly for listings and reviews.",
+        "price_display": "from $100",
+        "price_unit": "per plan",
+        "detail_href": "/services/3d-visualization",
+        "slug": "3d-floor-plan"
+      },
+      {
+        "name": "Render & marketing bundle",
+        "description": "A set of professional stills — interiors, exteriors, and an aerial — for approvals or sales.",
+        "price_display": "from $800",
+        "price_unit": "per bundle",
+        "detail_href": "/services/3d-visualization",
+        "slug": "render-and-marketing-bundle"
+      },
+      {
+        "name": "Animated walkthrough",
+        "description": "A cinematic fly-through of the finished design, priced by the second.",
+        "price_display": "$50 – $300",
+        "price_unit": "per second",
+        "detail_href": "/services/3d-visualization",
+        "slug": "animated-walkthrough"
+      }
+    ]
+  },
+  {
+    "name": "Interior design",
+    "slug": "interior-design",
+    "icon": "interior",
+    "tagline": "Make the space work — and look right",
+    "has_detail": false,
+    "detail_href": "",
+    "services": [
+      {
+        "name": "Interior design package",
+        "description": "Room-by-room layouts, finish palettes, and a shoppable furniture list from a designer.",
+        "price_display": "from $1,200",
+        "price_unit": "per room",
+        "detail_href": "",
+        "slug": "interior-design-package"
+      },
+      {
+        "name": "Materials & finishes",
+        "description": "Curated finish, fixture, and material selections coordinated to your budget.",
+        "price_display": "from $400",
+        "price_unit": "per project",
+        "detail_href": "",
+        "slug": "materials-and-finishes"
+      },
+      {
+        "name": "Furniture & FF&E plan",
+        "description": "A furniture and fixtures plan with sourcing links, ready to order.",
+        "price_display": "from $600",
+        "price_unit": "per room",
+        "detail_href": "",
+        "slug": "furniture-and-ffande-plan"
+      },
+      {
+        "name": "Virtual staging",
+        "description": "Photoreal staging of empty rooms for listings, approvals, or client buy-in.",
+        "price_display": "from $75",
+        "price_unit": "per image",
+        "detail_href": "",
+        "slug": "virtual-staging"
+      }
+    ]
+  },
+  {
+    "name": "Scanning & BIM",
+    "slug": "scanning-and-bim",
+    "icon": "scan",
+    "tagline": "Capture what exists, precisely",
+    "has_detail": false,
+    "detail_href": "",
+    "services": [
+      {
+        "name": "3D laser scanning",
+        "description": "A millimeter-accurate point cloud of your space, captured on site.",
+        "price_display": "from $0.20",
+        "price_unit": "per sq ft",
+        "detail_href": "",
+        "slug": "3d-laser-scanning"
+      },
+      {
+        "name": "Scan-to-BIM / Revit model",
+        "description": "Your scan turned into a working BIM model at the level of detail you need.",
+        "price_display": "from $0.50",
+        "price_unit": "per sq ft",
+        "detail_href": "",
+        "slug": "scan-to-bim-revit-model"
+      },
+      {
+        "name": "BIM clash coordination",
+        "description": "Detect and resolve conflicts across architectural, structural, and MEP models.",
+        "price_display": "hourly",
+        "price_unit": "per project",
+        "detail_href": "",
+        "slug": "bim-clash-coordination"
+      }
+    ]
+  },
+  {
+    "name": "Engineering & consulting",
+    "slug": "engineering-and-consulting",
+    "icon": "eng",
+    "tagline": "The stamps and calcs a build needs",
+    "has_detail": false,
+    "detail_href": "",
+    "services": [
+      {
+        "name": "Title-24 / energy modeling",
+        "description": "Residential energy-compliance documentation for your permit set.",
+        "price_display": "from $300",
+        "price_unit": "per project",
+        "detail_href": "",
+        "slug": "title-24-energy-modeling"
+      },
+      {
+        "name": "Structural stamp — residential",
+        "description": "Structural review and a licensed stamp for small residential work.",
+        "price_display": "from $1,500",
+        "price_unit": "per project",
+        "detail_href": "",
+        "slug": "structural-stamp-residential"
+      },
+      {
+        "name": "Code consulting",
+        "description": "On-demand answers on code, egress, and accessibility from a specialist.",
+        "price_display": "from $150",
+        "price_unit": "per hour",
+        "detail_href": "",
+        "slug": "code-consulting"
+      }
+    ]
+  },
+  {
+    "name": "Permits & entitlements",
+    "slug": "permits-and-entitlements",
+    "icon": "permit",
+    "tagline": "Getting it approved, faster",
+    "has_detail": false,
+    "detail_href": "",
+    "services": [
+      {
+        "name": "Permit set — small residential",
+        "description": "A stamped, permit-ready drawing set for ADUs, additions, and remodels.",
+        "price_display": "from $2,000",
+        "price_unit": "per project",
+        "detail_href": "",
+        "slug": "permit-set-small-residential"
+      },
+      {
+        "name": "Permit expediting",
+        "description": "A specialist shepherds your submittal through the local building department.",
+        "price_display": "from $500",
+        "price_unit": "per project",
+        "detail_href": "",
+        "slug": "permit-expediting"
+      },
+      {
+        "name": "Zoning & feasibility study",
+        "description": "A written study of what your zoning allows before you commit to design.",
+        "price_display": "from $1,500",
+        "price_unit": "per study",
+        "detail_href": "",
+        "slug": "zoning-and-feasibility-study"
+      },
+      {
+        "name": "Entitlements & variances",
+        "description": "Full representation for variances, CUPs, and complex approvals.",
+        "price_display": "from $20,000",
+        "price_unit": "per case",
+        "detail_href": "",
+        "slug": "entitlements-and-variances"
+      }
+    ]
+  },
+  {
+    "name": "Full architecture & design",
+    "slug": "full-architecture-and-design",
+    "icon": "full",
+    "tagline": "When the project needs the whole thing",
+    "has_detail": true,
+    "detail_href": "/projects/backyard-adu",
+    "services": [
+      {
+        "name": "Full ADU package",
+        "description": "Design through stamped permit set for a detached or garage-conversion unit.",
+        "price_display": "from $7,490",
+        "price_unit": "per project",
+        "detail_href": "/projects/backyard-adu",
+        "slug": "full-adu-package"
+      },
+      {
+        "name": "Custom home design",
+        "description": "Complete design and construction documents for a ground-up home.",
+        "price_display": "from $12,000",
+        "price_unit": "per project",
+        "detail_href": "/projects/backyard-adu",
+        "slug": "custom-home-design"
+      },
+      {
+        "name": "Commercial tenant improvement",
+        "description": "Full TI drawing set with code, accessibility, and MEP coordination.",
+        "price_display": "from $6,000",
+        "price_unit": "per project",
+        "detail_href": "/projects/backyard-adu",
+        "slug": "commercial-tenant-improvement"
+      }
+    ]
+  }
+]

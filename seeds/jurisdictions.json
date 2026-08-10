@@ -1,0 +1,366 @@
+[
+  {
+    "name": "Alabama",
+    "code": "AL",
+    "score": 44,
+    "region": "South",
+    "largest_city": "Birmingham"
+  },
+  {
+    "name": "Alaska",
+    "code": "AK",
+    "score": 58,
+    "region": "West",
+    "largest_city": "Anchorage"
+  },
+  {
+    "name": "Arizona",
+    "code": "AZ",
+    "score": 48,
+    "region": "Southwest",
+    "largest_city": "Phoenix"
+  },
+  {
+    "name": "Arkansas",
+    "code": "AR",
+    "score": 40,
+    "region": "South",
+    "largest_city": "Little Rock"
+  },
+  {
+    "name": "California",
+    "code": "CA",
+    "score": 82,
+    "region": "West",
+    "largest_city": "Los Angeles"
+  },
+  {
+    "name": "Colorado",
+    "code": "CO",
+    "score": 52,
+    "region": "West",
+    "largest_city": "Denver"
+  },
+  {
+    "name": "Connecticut",
+    "code": "CT",
+    "score": 60,
+    "region": "Northeast",
+    "largest_city": "Hartford"
+  },
+  {
+    "name": "Delaware",
+    "code": "DE",
+    "score": 46,
+    "region": "Northeast",
+    "largest_city": "Wilmington"
+  },
+  {
+    "name": "District of Columbia",
+    "code": "DC",
+    "score": 74,
+    "region": "Northeast",
+    "largest_city": "Washington"
+  },
+  {
+    "name": "Florida",
+    "code": "FL",
+    "score": 72,
+    "region": "South",
+    "largest_city": "Miami"
+  },
+  {
+    "name": "Georgia",
+    "code": "GA",
+    "score": 47,
+    "region": "South",
+    "largest_city": "Atlanta"
+  },
+  {
+    "name": "Hawaii",
+    "code": "HI",
+    "score": 70,
+    "region": "West",
+    "largest_city": "Honolulu"
+  },
+  {
+    "name": "Idaho",
+    "code": "ID",
+    "score": 45,
+    "region": "West",
+    "largest_city": "Boise"
+  },
+  {
+    "name": "Illinois",
+    "code": "IL",
+    "score": 58,
+    "region": "Midwest",
+    "largest_city": "Chicago"
+  },
+  {
+    "name": "Indiana",
+    "code": "IN",
+    "score": 43,
+    "region": "Midwest",
+    "largest_city": "Indianapolis"
+  },
+  {
+    "name": "Iowa",
+    "code": "IA",
+    "score": 39,
+    "region": "Midwest",
+    "largest_city": "Des Moines"
+  },
+  {
+    "name": "Kansas",
+    "code": "KS",
+    "score": 38,
+    "region": "Midwest",
+    "largest_city": "Wichita"
+  },
+  {
+    "name": "Kentucky",
+    "code": "KY",
+    "score": 42,
+    "region": "South",
+    "largest_city": "Louisville"
+  },
+  {
+    "name": "Louisiana",
+    "code": "LA",
+    "score": 66,
+    "region": "South",
+    "largest_city": "New Orleans"
+  },
+  {
+    "name": "Maine",
+    "code": "ME",
+    "score": 54,
+    "region": "Northeast",
+    "largest_city": "Portland"
+  },
+  {
+    "name": "Maryland",
+    "code": "MD",
+    "score": 59,
+    "region": "Northeast",
+    "largest_city": "Baltimore"
+  },
+  {
+    "name": "Massachusetts",
+    "code": "MA",
+    "score": 68,
+    "region": "Northeast",
+    "largest_city": "Boston"
+  },
+  {
+    "name": "Michigan",
+    "code": "MI",
+    "score": 50,
+    "region": "Midwest",
+    "largest_city": "Detroit"
+  },
+  {
+    "name": "Minnesota",
+    "code": "MN",
+    "score": 52,
+    "region": "Midwest",
+    "largest_city": "Minneapolis"
+  },
+  {
+    "name": "Mississippi",
+    "code": "MS",
+    "score": 43,
+    "region": "South",
+    "largest_city": "Jackson"
+  },
+  {
+    "name": "Missouri",
+    "code": "MO",
+    "score": 44,
+    "region": "Midwest",
+    "largest_city": "St. Louis"
+  },
+  {
+    "name": "Montana",
+    "code": "MT",
+    "score": 47,
+    "region": "West",
+    "largest_city": "Billings"
+  },
+  {
+    "name": "Nebraska",
+    "code": "NE",
+    "score": 38,
+    "region": "Midwest",
+    "largest_city": "Omaha"
+  },
+  {
+    "name": "Nevada",
+    "code": "NV",
+    "score": 55,
+    "region": "West",
+    "largest_city": "Las Vegas"
+  },
+  {
+    "name": "New Hampshire",
+    "code": "NH",
+    "score": 53,
+    "region": "Northeast",
+    "largest_city": "Manchester"
+  },
+  {
+    "name": "New Jersey",
+    "code": "NJ",
+    "score": 64,
+    "region": "Northeast",
+    "largest_city": "Newark"
+  },
+  {
+    "name": "New Mexico",
+    "code": "NM",
+    "score": 46,
+    "region": "Southwest",
+    "largest_city": "Albuquerque"
+  },
+  {
+    "name": "New York",
+    "code": "NY",
+    "score": 76,
+    "region": "Northeast",
+    "largest_city": "New York City"
+  },
+  {
+    "name": "North Carolina",
+    "code": "NC",
+    "score": 49,
+    "region": "South",
+    "largest_city": "Charlotte"
+  },
+  {
+    "name": "North Dakota",
+    "code": "ND",
+    "score": 37,
+    "region": "Midwest",
+    "largest_city": "Fargo"
+  },
+  {
+    "name": "Ohio",
+    "code": "OH",
+    "score": 48,
+    "region": "Midwest",
+    "largest_city": "Columbus"
+  },
+  {
+    "name": "Oklahoma",
+    "code": "OK",
+    "score": 45,
+    "region": "Southwest",
+    "largest_city": "Oklahoma City"
+  },
+  {
+    "name": "Oregon",
+    "code": "OR",
+    "score": 63,
+    "region": "West",
+    "largest_city": "Portland"
+  },
+  {
+    "name": "Pennsylvania",
+    "code": "PA",
+    "score": 57,
+    "region": "Northeast",
+    "largest_city": "Philadelphia"
+  },
+  {
+    "name": "Puerto Rico",
+    "code": "PR",
+    "score": 69,
+    "region": "South",
+    "largest_city": "San Juan"
+  },
+  {
+    "name": "Rhode Island",
+    "code": "RI",
+    "score": 58,
+    "region": "Northeast",
+    "largest_city": "Providence"
+  },
+  {
+    "name": "South Carolina",
+    "code": "SC",
+    "score": 55,
+    "region": "South",
+    "largest_city": "Charleston"
+  },
+  {
+    "name": "South Dakota",
+    "code": "SD",
+    "score": 37,
+    "region": "Midwest",
+    "largest_city": "Sioux Falls"
+  },
+  {
+    "name": "Tennessee",
+    "code": "TN",
+    "score": 44,
+    "region": "South",
+    "largest_city": "Nashville"
+  },
+  {
+    "name": "Texas",
+    "code": "TX",
+    "score": 54,
+    "region": "South",
+    "largest_city": "Houston"
+  },
+  {
+    "name": "Utah",
+    "code": "UT",
+    "score": 56,
+    "region": "West",
+    "largest_city": "Salt Lake City"
+  },
+  {
+    "name": "Vermont",
+    "code": "VT",
+    "score": 52,
+    "region": "Northeast",
+    "largest_city": "Burlington"
+  },
+  {
+    "name": "Virginia",
+    "code": "VA",
+    "score": 56,
+    "region": "South",
+    "largest_city": "Virginia Beach"
+  },
+  {
+    "name": "Washington",
+    "code": "WA",
+    "score": 65,
+    "region": "West",
+    "largest_city": "Seattle"
+  },
+  {
+    "name": "West Virginia",
+    "code": "WV",
+    "score": 41,
+    "region": "South",
+    "largest_city": "Charleston"
+  },
+  {
+    "name": "Wisconsin",
+    "code": "WI",
+    "score": 48,
+    "region": "Midwest",
+    "largest_city": "Milwaukee"
+  },
+  {
+    "name": "Wyoming",
+    "code": "WY",
+    "score": 42,
+    "region": "West",
+    "largest_city": "Cheyenne"
+  }
+]

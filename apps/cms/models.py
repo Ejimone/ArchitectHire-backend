@@ -252,6 +252,26 @@ class HeroCarouselSlide(ScopedBlock):
         return self.caption or f"Slide {self.pk}"
 
 
+class CopyBlock(TimeStampedModel):
+    """A single piece of page copy — headline, subcopy, button label, badge text.
+
+    Keyed per page scope (e.g. scope="landing", key="hero_cta") so literally every
+    string the frontend renders is owner-editable. Buttons carry an optional href.
+    """
+
+    scope = models.CharField(max_length=80, db_index=True, validators=[validate_scope])
+    key = models.SlugField(max_length=80)
+    text = models.TextField(blank=True)
+    href = models.CharField(max_length=255, blank=True, help_text="Only for links/buttons")
+
+    class Meta:
+        unique_together = [("scope", "key")]
+        ordering = ["scope", "key"]
+
+    def __str__(self):
+        return f"{self.scope}:{self.key}"
+
+
 class PageSEO(TimeStampedModel):
     page_key = models.CharField(max_length=80, unique=True, validators=[validate_scope])
     title = models.CharField(max_length=160)

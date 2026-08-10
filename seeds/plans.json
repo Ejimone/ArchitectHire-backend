@@ -1,0 +1,30 @@
+[
+  {
+    "key": "fixed",
+    "tag": "FLAGSHIP",
+    "title": "Dynamic fixed quote",
+    "blurb": "One engine-generated price for your whole drawing set, confirmed on your call — so you have cost certainty before work begins.",
+    "points": [
+      "Scales to your project — small jobs stay affordable",
+      "Locked price from size, add-ons & jurisdiction",
+      "Re-quote only with your approval",
+      "Milestone-based escrow releases"
+    ],
+    "cta_label": "Start with fixed →",
+    "is_recommended": true
+  },
+  {
+    "key": "hourly",
+    "tag": "FLEXIBLE",
+    "title": "Hourly",
+    "blurb": "Transparent time tracking through escrow milestones. Each architect sets their own rate — you see it before you commit.",
+    "points": [
+      "Rates vary by architect — many well below big-firm pricing",
+      "Pay for exactly the work done",
+      "Ideal when scope is still evolving",
+      "Common for commercial & exploratory work"
+    ],
+    "cta_label": "Start hourly →",
+    "is_recommended": false
+  }
+]

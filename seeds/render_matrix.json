@@ -1,0 +1,37 @@
+[
+  {
+    "deliverable": "Interior still",
+    "conceptual": 120,
+    "professional": 400,
+    "photoreal": 1200,
+    "unit": "still"
+  },
+  {
+    "deliverable": "Exterior still",
+    "conceptual": 180,
+    "professional": 600,
+    "photoreal": 2000,
+    "unit": "still"
+  },
+  {
+    "deliverable": "3D floor plan",
+    "conceptual": 100,
+    "professional": 300,
+    "photoreal": 800,
+    "unit": "plan"
+  },
+  {
+    "deliverable": "Aerial view",
+    "conceptual": 450,
+    "professional": 800,
+    "photoreal": 1600,
+    "unit": "view"
+  },
+  {
+    "deliverable": "360° / VR tour",
+    "conceptual": 750,
+    "professional": 1200,
+    "photoreal": 2400,
+    "unit": "tour"
+  }
+]

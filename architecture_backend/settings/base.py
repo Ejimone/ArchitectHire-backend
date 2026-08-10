@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     "apps.core",
     "apps.accounts",
     "apps.cms",
+    "apps.catalog",
+    "apps.jurisdictions",
+    "apps.projects",
 ]
 
 MIDDLEWARE = [

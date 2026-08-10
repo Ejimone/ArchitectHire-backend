@@ -1,0 +1,231 @@
+{
+  "services": [
+    {
+      "heading": "Consults & reviews",
+      "items": [
+        {
+          "label": "Video consult",
+          "price_hint": "$145",
+          "href": "/services#catalog"
+        },
+        {
+          "label": "Plan review & markup",
+          "price_hint": "$150",
+          "href": "/services#catalog"
+        },
+        {
+          "label": "Feasibility check",
+          "price_hint": "$250",
+          "href": "/services#catalog"
+        }
+      ]
+    },
+    {
+      "heading": "Drafting & docs",
+      "items": [
+        {
+          "label": "CAD drafting",
+          "price_hint": "$65/hr",
+          "href": "/services/cad-drafting"
+        },
+        {
+          "label": "As-built package",
+          "price_hint": "$2,500",
+          "href": "/services/cad-drafting"
+        },
+        {
+          "label": "PDF-to-CAD",
+          "price_hint": "$10/sht",
+          "href": "/services/cad-drafting"
+        }
+      ]
+    },
+    {
+      "heading": "3D & visualization",
+      "items": [
+        {
+          "label": "Single render",
+          "price_hint": "$99",
+          "href": "/services/3d-visualization"
+        },
+        {
+          "label": "3D floor plan",
+          "price_hint": "$100",
+          "href": "/services/3d-visualization"
+        },
+        {
+          "label": "Walkthrough",
+          "price_hint": "$50/s",
+          "href": "/services/3d-visualization"
+        }
+      ]
+    },
+    {
+      "heading": "Scanning & BIM",
+      "items": [
+        {
+          "label": "3D laser scanning",
+          "price_hint": "$0.20/sf",
+          "href": "/services#catalog"
+        },
+        {
+          "label": "Scan-to-BIM",
+          "price_hint": "$0.50/sf",
+          "href": "/services#catalog"
+        }
+      ]
+    },
+    {
+      "heading": "Engineering",
+      "items": [
+        {
+          "label": "Title-24 / energy",
+          "price_hint": "$300",
+          "href": "/services#catalog"
+        },
+        {
+          "label": "Structural stamp",
+          "price_hint": "$1,500",
+          "href": "/services#catalog"
+        },
+        {
+          "label": "Code consulting",
+          "price_hint": "$150/hr",
+          "href": "/services#catalog"
+        }
+      ]
+    },
+    {
+      "heading": "Permits & full design",
+      "items": [
+        {
+          "label": "Permit set",
+          "price_hint": "$2,000",
+          "href": "/services#catalog"
+        },
+        {
+          "label": "Zoning study",
+          "price_hint": "$1,500",
+          "href": "/services#catalog"
+        },
+        {
+          "label": "Full ADU / home",
+          "price_hint": "$7,490",
+          "href": "/projects/backyard-adu"
+        }
+      ]
+    },
+    {
+      "heading": "Interior design",
+      "items": [
+        {
+          "label": "Interior design package",
+          "price_hint": "$1,200",
+          "href": "/services#catalog"
+        },
+        {
+          "label": "Virtual staging",
+          "price_hint": "$75",
+          "href": "/services#catalog"
+        },
+        {
+          "label": "Furniture & FF&E plan",
+          "price_hint": "$600",
+          "href": "/services#catalog"
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "label": "Backyard ADU",
+      "price_hint": "From $2,400",
+      "href": "/projects/backyard-adu"
+    },
+    {
+      "label": "Home addition",
+      "price_hint": "From $11,000",
+      "href": "/projects/home-addition"
+    },
+    {
+      "label": "Whole-home renovation",
+      "price_hint": "From $8,500",
+      "href": "/projects/whole-home-renovation"
+    },
+    {
+      "label": "Kitchen & bath",
+      "price_hint": "From $2,400",
+      "href": "/projects/kitchen-and-bath"
+    },
+    {
+      "label": "New custom home",
+      "price_hint": "From $26,000",
+      "href": "/projects/new-custom-home"
+    },
+    {
+      "label": "Garage conversion",
+      "price_hint": "From $4,500",
+      "href": "/projects/garage-conversion"
+    },
+    {
+      "label": "Commercial TI",
+      "price_hint": "From $8,000",
+      "href": "/projects/commercial-ti"
+    },
+    {
+      "label": "Change of use",
+      "price_hint": "From $6,000",
+      "href": "/projects/change-of-use"
+    }
+  ],
+  "locations": [
+    {
+      "label": "Oakland, CA",
+      "href": "/cities/oakland"
+    },
+    {
+      "label": "San Francisco, CA",
+      "href": "/cities/san-francisco"
+    },
+    {
+      "label": "San Jose, CA",
+      "href": "/cities/san-jose"
+    },
+    {
+      "label": "Los Angeles, CA",
+      "href": "/cities/los-angeles"
+    },
+    {
+      "label": "San Diego, CA",
+      "href": "/cities/san-diego"
+    },
+    {
+      "label": "Sacramento, CA",
+      "href": "/cities/sacramento"
+    },
+    {
+      "label": "Seattle, WA",
+      "href": "/cities/seattle"
+    },
+    {
+      "label": "Portland, OR",
+      "href": "/cities/portland"
+    },
+    {
+      "label": "Austin, TX",
+      "href": "/cities/austin"
+    },
+    {
+      "label": "Denver, CO",
+      "href": "/cities/denver"
+    },
+    {
+      "label": "Phoenix, AZ",
+      "href": "/cities/phoenix"
+    },
+    {
+      "label": "New York, NY",
+      "href": "/cities/new-york"
+    }
+  ]
+}

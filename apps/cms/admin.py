@@ -4,6 +4,7 @@ from solo.admin import SingletonModelAdmin
 
 from .models import (
     FAQ,
+    CopyBlock,
     CredentialBadge,
     FooterColumn,
     FooterLink,
@@ -185,3 +186,15 @@ class MediaAssetAdmin(admin.ModelAdmin):
 class PageSEOAdmin(admin.ModelAdmin):
     list_display = ["page_key", "title"]
     search_fields = ["page_key", "title"]
+
+
+@admin.register(CopyBlock)
+class CopyBlockAdmin(admin.ModelAdmin):
+    list_display = ["scope", "key", "short_text", "href"]
+    list_filter = ["scope"]
+    search_fields = ["scope", "key", "text"]
+    ordering = ["scope", "key"]
+
+    @admin.display(description="Text")
+    def short_text(self, obj):
+        return (obj.text[:80] + "…") if len(obj.text) > 80 else obj.text

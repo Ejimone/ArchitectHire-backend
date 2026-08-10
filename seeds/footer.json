@@ -1,0 +1,155 @@
+{
+  "columns": [
+    {
+      "heading": "Solutions",
+      "links": [
+        {
+          "label": "By project type",
+          "href": "/projects"
+        },
+        {
+          "label": "By city",
+          "href": "/cities"
+        },
+        {
+          "label": "Full architecture",
+          "href": "/projects/backyard-adu"
+        },
+        {
+          "label": "Commercial TI",
+          "href": "/services-landing"
+        },
+        {
+          "label": "Jurisdiction database",
+          "href": "/jurisdictions"
+        }
+      ]
+    },
+    {
+      "heading": "Services",
+      "links": [
+        {
+          "label": "Video consult",
+          "href": "/services#catalog"
+        },
+        {
+          "label": "Plan review & markup",
+          "href": "/services#catalog"
+        },
+        {
+          "label": "CAD drafting",
+          "href": "/services/cad-drafting"
+        },
+        {
+          "label": "As-built packages",
+          "href": "/services/cad-drafting"
+        },
+        {
+          "label": "3D renders & floor plans",
+          "href": "/services/3d-visualization"
+        },
+        {
+          "label": "Interior design",
+          "href": "/services#catalog"
+        },
+        {
+          "label": "Scan-to-BIM",
+          "href": "/services#catalog"
+        },
+        {
+          "label": "Permit sets",
+          "href": "/services#catalog"
+        },
+        {
+          "label": "All services",
+          "href": "/services"
+        }
+      ]
+    },
+    {
+      "heading": "Resources",
+      "links": [
+        {
+          "label": "Case studies",
+          "href": "/case-studies"
+        },
+        {
+          "label": "Guides",
+          "href": "/guides"
+        },
+        {
+          "label": "Inspiration",
+          "href": "/inspiration"
+        },
+        {
+          "label": "State permit guides",
+          "href": "/jurisdictions/ca"
+        }
+      ]
+    },
+    {
+      "heading": "Company",
+      "links": [
+        {
+          "label": "About",
+          "href": "/about"
+        },
+        {
+          "label": "Careers",
+          "href": "/careers"
+        },
+        {
+          "label": "Contact",
+          "href": "/contact"
+        },
+        {
+          "label": "Blog",
+          "href": "/guides"
+        },
+        {
+          "label": "Privacy",
+          "href": "/privacy"
+        }
+      ]
+    },
+    {
+      "heading": "Join us",
+      "links": [
+        {
+          "label": "For architects",
+          "href": "/for-architects"
+        },
+        {
+          "label": "For service experts",
+          "href": "/for-experts"
+        },
+        {
+          "label": "Log in",
+          "href": "/account"
+        },
+        {
+          "label": "Sign up",
+          "href": "/get-started"
+        }
+      ]
+    }
+  ],
+  "social": [
+    {
+      "platform": "X",
+      "url": "https://x.com"
+    },
+    {
+      "platform": "LinkedIn",
+      "url": "https://linkedin.com"
+    },
+    {
+      "platform": "Instagram",
+      "url": "https://instagram.com"
+    },
+    {
+      "platform": "Facebook",
+      "url": "https://facebook.com"
+    }
+  ]
+}

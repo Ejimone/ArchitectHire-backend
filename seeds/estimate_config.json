@@ -1,0 +1,9 @@
+{
+  "rate_base": 3.2,
+  "rate_coeff": 5.3,
+  "rate_decay_sqft": 2600,
+  "round_to": 50,
+  "multiplier_floor": 1.05,
+  "multiplier_span": 0.35,
+  "range_pct": 8
+}

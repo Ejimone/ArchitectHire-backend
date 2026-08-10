@@ -1,0 +1,86 @@
+[
+  {
+    "group": "Residential",
+    "note": "Homes, additions & ADUs",
+    "items": [
+      {
+        "name": "Backyard ADU",
+        "sub": "Detached & garage-conversion units",
+        "price_display": "From $2,400",
+        "slot_id": "pr-adu",
+        "image_hint": "Backyard ADU exterior",
+        "slug": "backyard-adu"
+      },
+      {
+        "name": "Home addition",
+        "sub": "Second-story & footprint expansions",
+        "price_display": "From $11,000",
+        "slot_id": "pr-add",
+        "image_hint": "Home addition / second story",
+        "slug": "home-addition"
+      },
+      {
+        "name": "Whole-home renovation",
+        "sub": "Interior & structural remodels",
+        "price_display": "From $8,500",
+        "slot_id": "pr-reno",
+        "image_hint": "Renovated interior",
+        "slug": "whole-home-renovation"
+      },
+      {
+        "name": "Kitchen & bath",
+        "sub": "Focused single-room remodels",
+        "price_display": "From $2,400",
+        "slot_id": "pr-kb",
+        "image_hint": "Modern kitchen remodel",
+        "slug": "kitchen-and-bath"
+      },
+      {
+        "name": "New custom home",
+        "sub": "Ground-up custom builds",
+        "price_display": "From $26,000",
+        "slot_id": "pr-new",
+        "image_hint": "New custom home exterior",
+        "slug": "new-custom-home"
+      },
+      {
+        "name": "Garage conversion",
+        "sub": "Convert a garage to living space",
+        "price_display": "From $4,500",
+        "slot_id": "pr-gar",
+        "image_hint": "Garage conversion interior",
+        "slug": "garage-conversion"
+      }
+    ]
+  },
+  {
+    "group": "Commercial",
+    "note": "Tenant improvements & change of use",
+    "items": [
+      {
+        "name": "Commercial TI",
+        "sub": "Office & retail tenant improvements",
+        "price_display": "From $8,000",
+        "slot_id": "pr-ti",
+        "image_hint": "Office tenant improvement",
+        "slug": "commercial-ti"
+      },
+      {
+        "name": "Restaurant build-out",
+        "sub": "Food & beverage spaces",
+        "price_display": "From $9,000",
+        "slot_id": "pr-rest",
+        "image_hint": "Restaurant interior",
+        "slug": "restaurant-build-out"
+      },
+      {
+        "name": "Change of use",
+        "sub": "Re-permit & convert an existing space",
+        "price_display": "From $6,000",
+        "slot_id": "pr-cou",
+        "image_hint": "Converted retail space",
+        "slug": "change-of-use"
+      }
+    ]
+  }
+]

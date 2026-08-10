@@ -1,0 +1,98 @@
+[
+  {
+    "name": "Oakland",
+    "state": "California",
+    "architect_count": "140+",
+    "slot_id": "ct-oak",
+    "image_hint": "Oakland skyline / homes",
+    "slug": "oakland"
+  },
+  {
+    "name": "San Francisco",
+    "state": "California",
+    "architect_count": "210+",
+    "slot_id": "ct-sf",
+    "image_hint": "San Francisco cityscape",
+    "slug": "san-francisco"
+  },
+  {
+    "name": "San Jose",
+    "state": "California",
+    "architect_count": "120+",
+    "slot_id": "ct-sj",
+    "image_hint": "San Jose neighborhood",
+    "slug": "san-jose"
+  },
+  {
+    "name": "Los Angeles",
+    "state": "California",
+    "architect_count": "320+",
+    "slot_id": "ct-la",
+    "image_hint": "Los Angeles homes",
+    "slug": "los-angeles"
+  },
+  {
+    "name": "San Diego",
+    "state": "California",
+    "architect_count": "160+",
+    "slot_id": "ct-sd",
+    "image_hint": "San Diego coastline",
+    "slug": "san-diego"
+  },
+  {
+    "name": "Sacramento",
+    "state": "California",
+    "architect_count": "90+",
+    "slot_id": "ct-sac",
+    "image_hint": "Sacramento streets",
+    "slug": "sacramento"
+  },
+  {
+    "name": "Seattle",
+    "state": "Washington",
+    "architect_count": "130+",
+    "slot_id": "ct-sea",
+    "image_hint": "Seattle skyline",
+    "slug": "seattle"
+  },
+  {
+    "name": "Portland",
+    "state": "Oregon",
+    "architect_count": "95+",
+    "slot_id": "ct-pdx",
+    "image_hint": "Portland neighborhood",
+    "slug": "portland"
+  },
+  {
+    "name": "Austin",
+    "state": "Texas",
+    "architect_count": "110+",
+    "slot_id": "ct-atx",
+    "image_hint": "Austin cityscape",
+    "slug": "austin"
+  },
+  {
+    "name": "Denver",
+    "state": "Colorado",
+    "architect_count": "85+",
+    "slot_id": "ct-den",
+    "image_hint": "Denver homes",
+    "slug": "denver"
+  },
+  {
+    "name": "Phoenix",
+    "state": "Arizona",
+    "architect_count": "100+",
+    "slot_id": "ct-phx",
+    "image_hint": "Phoenix desert homes",
+    "slug": "phoenix"
+  },
+  {
+    "name": "New York",
+    "state": "New York",
+    "architect_count": "280+",
+    "slot_id": "ct-nyc",
+    "image_hint": "New York brownstones",
+    "slug": "new-york"
+  }
+]

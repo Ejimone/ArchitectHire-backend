@@ -15,6 +15,7 @@ from apps.core.scopes import is_valid_scope
 
 from .models import (
     FAQ,
+    CopyBlock,
     CredentialBadge,
     FooterColumn,
     HeroCarouselSlide,
@@ -129,10 +130,16 @@ class PageContentView(CachedContentView):
             for asset in media
         }
 
+        copy = {
+            block.key: {"text": block.text, "href": block.href}
+            for block in CopyBlock.objects.filter(scope=page_key)
+        }
+
         return {
             "page": page_key,
             "seo": PageSEOSerializer(seo, context={"request": request}).data if seo else None,
             "settings": SiteSettingsSerializer(settings_obj, context={"request": request}).data,
+            "copy": copy,
             "blocks": blocks,
             "media": media_map,
         }
