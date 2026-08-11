@@ -25,13 +25,22 @@ CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_HTTPONLY = True
 X_FRAME_OPTIONS = "DENY"
 
-# --- Media on DigitalOcean Spaces -------------------------------------------
+# --- Media -------------------------------------------------------------------
+# DigitalOcean Spaces when configured; droplet-local files otherwise (test-mode
+# deploys without a Spaces bucket — Caddy serves /media from a shared volume).
 
-STORAGES = {
-    "default": {"BACKEND": "apps.core.storages.PublicMediaStorage"},
-    "private": {"BACKEND": "apps.core.storages.PrivateMediaStorage"},
-    "staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"},
-}
+if AWS_ACCESS_KEY_ID:
+    STORAGES = {
+        "default": {"BACKEND": "apps.core.storages.PublicMediaStorage"},
+        "private": {"BACKEND": "apps.core.storages.PrivateMediaStorage"},
+        "staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"},
+    }
+else:
+    STORAGES = {
+        "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
+        "private": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
+        "staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"},
+    }
 
 # --- Email ------------------------------------------------------------------
 

@@ -12,3 +12,6 @@ media/
 htmlcov/
 .ruff_cache/
 .DS_Store
+
+# Production secrets — never commit
+.env.prod

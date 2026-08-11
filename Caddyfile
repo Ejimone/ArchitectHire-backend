@@ -1,0 +1,24 @@
+# One origin for the whole platform. Caddy terminates HTTPS (automatic
+# certificates once SITE_HOST resolves to the droplet) and routes:
+#   /api/* /admin/* /ws/*  → Django
+#   /media/*               → uploaded files (droplet-local mode; with Spaces
+#                            configured, media URLs bypass Caddy entirely)
+#   everything else        → Next.js
+
+{$SITE_HOST} {
+	encode gzip
+
+	@backend path /api/* /admin/* /ws/*
+	handle @backend {
+		reverse_proxy web:8000
+	}
+
+	handle_path /media/* {
+		root * /srv/media
+		file_server
+	}
+
+	handle {
+		reverse_proxy frontend:3000
+	}
+}

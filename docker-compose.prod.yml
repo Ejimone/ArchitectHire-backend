@@ -1,6 +1,9 @@
-# Production compose — for a DigitalOcean droplet deployment.
-# Managed Postgres/Redis are recommended instead of containers; if using managed
-# services, remove db/redis here and point DATABASE_URL/REDIS_URL at them.
+# Production compose — one DigitalOcean droplet runs the whole stack.
+#
+# Postgres is NOT here: it lives in the owner's existing shared managed cluster
+# (create a database for architecthire inside it and point DATABASE_URL at it —
+# see DEPLOY.md). Redis stays local to the droplet; it holds only cache,
+# queues and presence, nothing that needs managed durability.
 #
 #   docker compose -f docker-compose.prod.yml build
 #   docker compose -f docker-compose.prod.yml run --rm web python manage.py migrate
@@ -11,16 +14,30 @@
 name: architecthire-prod
 
 services:
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
   web:
     build: .
     restart: unless-stopped
     env_file: .env.prod
     environment:
       DJANGO_SETTINGS_MODULE: architecture_backend.settings.prod
-    ports:
-      - "8000:8000"
+      REDIS_URL: redis://redis:6379
+    expose:
+      - "8000"
     volumes:
       - staticfiles:/app/staticfiles
+      - media:/app/media
+    depends_on:
+      redis:
+        condition: service_healthy
 
   worker:
     build: .
@@ -29,6 +46,12 @@ services:
     env_file: .env.prod
     environment:
       DJANGO_SETTINGS_MODULE: architecture_backend.settings.prod
+      REDIS_URL: redis://redis:6379
+    volumes:
+      - media:/app/media
+    depends_on:
+      redis:
+        condition: service_healthy
 
   beat:
     build: .
@@ -37,6 +60,57 @@ services:
     env_file: .env.prod
     environment:
       DJANGO_SETTINGS_MODULE: architecture_backend.settings.prod
+      REDIS_URL: redis://redis:6379
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  frontend:
+    # The frontend repo sits beside this one on the droplet:
+    #   /srv/architecthire/ArchitectHire-backend  (this file)
+    #   /srv/architecthire/Architecture-hire
+    build:
+      context: ../Architecture-hire
+      args:
+        # NEXT_PUBLIC_* ship to the browser and are baked at build time.
+        # API_URL is used server-side during the build's prerender pass, so the
+        # backend must be up before building the frontend (DEPLOY.md orders this).
+        API_URL: http://web:8000
+        NEXT_PUBLIC_API_URL: https://${SITE_HOST}
+        NEXT_PUBLIC_SITE_URL: https://${SITE_HOST}
+        NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+        NEXT_PUBLIC_VAPID_PUBLIC_KEY: ${NEXT_PUBLIC_VAPID_PUBLIC_KEY}
+        NEXT_PUBLIC_ENABLE_PUSH: ${NEXT_PUBLIC_ENABLE_PUSH:-1}
+        BACKEND_MEDIA_HOST: ${SITE_HOST}
+    restart: unless-stopped
+    environment:
+      API_URL: http://web:8000
+      CLERK_SECRET_KEY: ${CLERK_SECRET_KEY}
+      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+    expose:
+      - "3000"
+    depends_on:
+      - web
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      SITE_HOST: ${SITE_HOST}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - media:/srv/media:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - web
+      - frontend
 
 volumes:
   staticfiles:
+  media:
+  caddy_data:
+  caddy_config:

@@ -4,7 +4,12 @@ from .base import *
 
 DEBUG = env.bool("DEBUG", default=True)
 
-ALLOWED_HOSTS = env("ALLOWED_HOSTS", default=["localhost", "127.0.0.1", "0.0.0.0", "web"])
+ALLOWED_HOSTS = env(
+    "ALLOWED_HOSTS",
+    # host.docker.internal: the frontend Docker image build prerenders against
+    # the host machine's backend.
+    default=["localhost", "127.0.0.1", "0.0.0.0", "web", "host.docker.internal"],
+)
 
 if not CORS_ALLOWED_ORIGINS:
     CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "http://127.0.0.1:3000"]
