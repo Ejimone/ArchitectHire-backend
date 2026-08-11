@@ -34,6 +34,13 @@ class Estimate(TimeStampedModel):
         related_name="estimates",
     )
 
+    # Which arm of the Get Started quiz produced this (design | drafting |
+    # consult | viz | scan | engineering). "design" is the original fixed-quote
+    # curve; the others are flat/unit-priced and carry no jurisdiction multiplier.
+    goal = models.CharField(max_length=16, default="design")
+    answers = models.JSONField(default=dict, blank=True)  # the quiz answer set
+    quote = models.JSONField(default=dict, blank=True)  # rendered breakdown + brief
+
     project_type = models.CharField(max_length=16, choices=ProjectKind.choices)
     scope = models.CharField(max_length=40)
     sqft = models.PositiveIntegerField()
@@ -108,7 +115,7 @@ class Project(TimeStampedModel):
     def hire(self, architect_user):
         self.architect = architect_user
         self.status = self.Status.UNDERWAY
-        self.next_action = "Fund escrow to begin"
+        self.next_action = "Hire your architect to begin"
         self.save(update_fields=["architect", "status", "next_action"])
 
 

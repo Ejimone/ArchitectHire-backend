@@ -1,0 +1,81 @@
+{
+  "_note": "Editorial records rewritten when the design moved from an escrow marketplace to an introductions platform. seeds/content_editorial.json was extracted from the superseded revision and re-seeds the old wording on every run, so the current design is restored here. Blog: the remote-hiring guide's dek/excerpt (also the featured card on design/marketing/Blog.dc.html) and the five body rows the article rewrote — section 3's pricing paragraph, section 4's heading and paragraph (was \"Pay through escrow, not up front\"), the pull quote, and section 5's paragraph — addressed by post slug + sort_order, the order _seed_editorial writes them in. Case studies: the ADU story's match narrative, match points, client quote and at-a-glance table (design/marketing/Case Study.dc.html), the restaurant excerpt, and every card stat labelled \"Fixed quote\", which is now the architect's own price (design/marketing/Case Studies.dc.html).",
+  "editorial": {
+    "blog_posts": [
+      {
+        "slug": "how-to-hire-an-architect-remotely-and-get-a-permit-ready-set",
+        "dek": "A step-by-step walkthrough of vetting licensure, scoping your project, and agreeing payment terms directly — without a single in-person meeting.",
+        "excerpt": "A step-by-step walkthrough of vetting licensure, scoping your project, and agreeing payment terms directly — without a single in-person meeting."
+      }
+    ],
+    "blog_blocks": [
+      {
+        "post": "how-to-hire-an-architect-remotely-and-get-a-permit-ready-set",
+        "sort_order": 9,
+        "text": "\"It depends\" is not a starting point. A good platform gives you an itemized typical range from square footage, add-ons, and a jurisdiction complexity score before you talk to anyone. Use it as your baseline — then each architect sets their own price, fixed or hourly, on the scoping call."
+      },
+      {
+        "post": "how-to-hire-an-architect-remotely-and-get-a-permit-ready-set",
+        "sort_order": 11,
+        "text": "4. Agree the payment terms directly"
+      },
+      {
+        "post": "how-to-hire-an-architect-remotely-and-get-a-permit-ready-set",
+        "sort_order": 12,
+        "text": "You hire and pay your architect directly, so settle terms in writing before drawings begin: a deposit, then payments tied to milestones you approve — schematic, design development, permit set. Avoid any arrangement that asks for the full fee up front, before you've seen a thing."
+      },
+      {
+        "post": "how-to-hire-an-architect-remotely-and-get-a-permit-ready-set",
+        "sort_order": 13,
+        "text": "The best remote projects feel boring — clear scope, a real number, milestones you sign off before the next payment. Boring is what gets you a clean permit."
+      },
+      {
+        "post": "how-to-hire-an-architect-remotely-and-get-a-permit-ready-set",
+        "sort_order": 15,
+        "text": "Once drawings are underway, everything should live in one place: files, comments, milestone sign-offs, and the submission itself. A tracked timeline keeps revision cycles short and gives your contractor a set they recognize — which is what clears plan check the first time."
+      }
+    ],
+    "case_studies": [
+      {
+        "slug": "a-640-sq-ft-adu-that-cleared-plan-check-first-try",
+        "match_narrative": "The estimate engine returned a typical price range from square footage, add-ons, and Oakland’s jurisdiction complexity score — a realistic baseline, not a quote. Within 48 hours the homeowner was reviewing two CA-licensed architects with hillside ADU experience, and hired one of them directly.",
+        "match_points": [
+          "Both architects verified as actively licensed in California",
+          "Filtered for seismic-zone and hillside foundation experience",
+          "Final price agreed directly with the architect on a scoping call",
+          "Hired and paid the architect directly — ArchitectHire took nothing from the project"
+        ],
+        "quote": "The estimate landed right in the range our architect quoted. She was licensed right here in Oakland, and the permit set cleared first try — no revisions.",
+        "glance": [
+          {"k": "Project", "v": "640 sq ft ADU"},
+          {"k": "Architect’s price", "v": "$3,900"},
+          {"k": "To stamped set", "v": "6 weeks"},
+          {"k": "Plan check", "v": "First pass"}
+        ],
+        "card_stats": [
+          {"key": "Architect’s price", "value": "$4,800"},
+          {"key": "To stamped set", "value": "6 wks"},
+          {"key": "Plan-check pass", "value": "First"}
+        ]
+      },
+      {
+        "slug": "retail-to-restaurant-change-of-use",
+        "excerpt": "A tenant improvement with accessibility and MEP scope, billed hourly and paid directly, with zero surprises."
+      },
+      {
+        "slug": "a-full-gut-kitchen-bath-in-a-victorian-flat",
+        "card_stats": [
+          {"key": "Architect’s price", "value": "$3,200"},
+          {"key": "To stamped set", "value": "4 wks"}
+        ]
+      },
+      {
+        "slug": "garage-conversion-into-a-one-bedroom-adu",
+        "card_stats": [
+          {"key": "Architect’s price", "value": "$3,900"},
+          {"key": "To stamped set", "value": "5 wks"}
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,657 @@
+{
+  "_note": "The four engagement screens (design/app/Engagement.dc.html): scoping call, contract choice, hire & agree terms, and the live project dashboard. The design moved off escrow - step 3 is 'HIRE & AGREE TERMS', the order summary shows an ArchitectHire fee of $0 and the dashboard tiles read REMAINING / PAID TO - and these rows carry that wording; no row here mentions holding funds. Sentences the design writes around the demo architect's name or gender are seeded as the fragments either side of the name, with 'they/them' where the design's demo copy said 'she/her', because the real architect is whoever the client hired. The two contract cards are personas (group 'dynamic_fixed_quote' / 'hourly', matching engagements.Engagement.Kind), the three trust tiles are value_props, and the scoping checklist and request-changes chips are credential_badges.",
+  "copy": [
+    {
+      "scope": "engagement",
+      "key": "seo_title",
+      "text": "Your project",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "seo_description",
+      "text": "Milestones, drawings and payments for your project.",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "step_scoping",
+      "text": "Scoping",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "step_contract",
+      "text": "Contract",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "step_payment",
+      "text": "Payment",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "step_dashboard",
+      "text": "Dashboard",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "s1_kicker",
+      "text": "STEP 1 · SCOPING CALL",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "s1_h1_prefix",
+      "text": "Scope it out with",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "s1_sub_pre",
+      "text": "On-platform chat and video double as your scoping call — this is where you agree scope and a price with",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "s1_sub_post",
+      "text": "directly. Everything stays here until you hire.",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "start_video",
+      "text": "▶ Start video",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "online_now",
+      "text": "Online now",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "composer_prefix",
+      "text": "Message",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "send",
+      "text": "Send",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "checklist_kicker",
+      "text": "SCOPING CHECKLIST",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "hire_cta_prefix",
+      "text": "Hire",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "s2_kicker",
+      "text": "STEP 2 · CHOOSE HOW YOU ENGAGE",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "s2_h1",
+      "text": "One project, two ways to contract",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "s2_sub_pre",
+      "text": "These are the terms",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "s2_sub_post",
+      "text": "offers. Pick the one that fits how defined your project is — you'll contract and pay them directly, and agree everything before any money changes hands.",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "best_for_label",
+      "text": "Best for:",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "contract_fixed_bestfor",
+      "text": "well-defined projects and clients who want cost certainty.",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "contract_hourly_bestfor",
+      "text": "open-ended, exploratory, or unusually complex work.",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "continue_cta_prefix",
+      "text": "Continue with",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "continue_note",
+      "text": "You can review everything before you hire.",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "s3_kicker",
+      "text": "STEP 3 · HIRE & AGREE TERMS",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "s3_h1_prefix",
+      "text": "Hire",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "s3_h1_suffix",
+      "text": "to begin",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "s3_sub_pre",
+      "text": "You contract and pay",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "s3_sub_post",
+      "text": "directly, at their rate. ArchitectHire takes nothing from the project — we've made the introduction, and keep your records, messaging and files on-platform.",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "how_you_pay_heading_prefix",
+      "text": "How you pay",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "how_you_pay_body",
+      "text": "You pay them directly, on the schedule you agreed — typically a deposit to start, then a payment as you approve each milestone. ArchitectHire never handles the funds and takes no cut of your project. Hiring here unlocks contact details and starts your tracked timeline.",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "order_summary_kicker",
+      "text": "ORDER SUMMARY",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "summary_contract_type",
+      "text": "Contract type",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "summary_project_total",
+      "text": "Project total",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "summary_deposit_fixed",
+      "text": "Deposit to",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "summary_deposit_fixed_suffix",
+      "text": "(25%)",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "summary_deposit_hourly",
+      "text": "Initial payment (20 hrs)",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "summary_fee_label",
+      "text": "ArchitectHire fee",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "summary_total_prefix",
+      "text": "Deposit to",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "confirm_cta_prefix",
+      "text": "Confirm & hire",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "payment_note_pre",
+      "text": "Paid directly to",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "payment_note_post",
+      "text": "on your agreed schedule. Contact details unlock now that you've hired.",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "contract_kind_fixed",
+      "text": "Fixed price",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "contract_kind_hourly",
+      "text": "Hourly",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "hourly_rate_suffix",
+      "text": "/hr",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "hired_badge",
+      "text": "Hired · Project underway",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "all_projects_link",
+      "text": "← All projects",
+      "href": "/account"
+    },
+    {
+      "scope": "engagement",
+      "key": "dash_meta_prefix",
+      "text": "with",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "tile_remaining",
+      "text": "REMAINING",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "tile_paid_prefix",
+      "text": "PAID TO",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "upnext_kicker",
+      "text": "UP NEXT · NEEDS YOU",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "upnext_body_pre",
+      "text": "Your architect uploaded",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "upnext_body_post",
+      "text": "for your project. Approving signs off this milestone, clears your payment of",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "upnext_body_tail",
+      "text": "to them, and unlocks the next stage.",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "review_cta",
+      "text": "Review & approve →",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "request_changes_cta",
+      "text": "Request changes",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "approved_kicker",
+      "text": "APPROVED · JUST NOW",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "approved_h3_suffix",
+      "text": "approved",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "approved_body_pre",
+      "text": "Milestone approved — your payment of",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "approved_body_post",
+      "text": "is cleared. The next stage is now underway.",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "undo",
+      "text": "Undo",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "changes_kicker",
+      "text": "CHANGES REQUESTED · SENT TO",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "requested_h3",
+      "text": "Waiting on a revised set",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "requested_body",
+      "text": "Your architect has your notes and will re-upload the set. Nothing is due until you approve.",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "milestones_heading",
+      "text": "Milestones",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "ms_done",
+      "text": "DONE",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "ms_in_review",
+      "text": "IN REVIEW",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "ms_revising",
+      "text": "REVISING",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "ms_upcoming",
+      "text": "UPCOMING",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "msg_new_suffix",
+      "text": "new",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "open_messages",
+      "text": "Open messages →",
+      "href": "/account?view=messages"
+    },
+    {
+      "scope": "engagement",
+      "key": "files_kicker",
+      "text": "DRAWINGS & FILES",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "file_new_tag",
+      "text": "NEW",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "requote_kicker",
+      "text": "RE-QUOTE FLAG",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "requote_body_none",
+      "text": "Your architect hasn't flagged any hidden complexity. If they do, you'll review and approve the change before it affects your quote.",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "requote_body_pending_pre",
+      "text": "Your architect flagged a change taking the quote to",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "requote_body_pending_post",
+      "text": "Review and approve it before it affects your quote.",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "approve_modal_prefix",
+      "text": "Approve",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "approve_modal_body",
+      "text": "You've reviewed the drawings and they're good to build on. Approving marks this milestone complete and moves the project on to the next stage.",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "approve_modal_released_prefix",
+      "text": "Released to",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "approve_modal_remaining",
+      "text": "Remaining on contract",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "approve_confirm",
+      "text": "Confirm approval",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "cancel",
+      "text": "Cancel",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "changes_modal_title",
+      "text": "Request changes",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "changes_modal_body_pre",
+      "text": "Tell",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "changes_modal_body_post",
+      "text": "what to revise. They'll update the set and re-upload it for your approval — nothing is due until then.",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "changes_textarea_placeholder",
+      "text": "e.g. Can we widen the rear opening and move the powder room to the north wall?",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "attach_markup",
+      "text": "Attach a markup",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "attach_hint",
+      "text": "PDF, JPG or PNG",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "changes_send_prefix",
+      "text": "Send to",
+      "href": ""
+    }
+  ],
+  "blocks": {
+    "personas": [
+      {
+        "scope": "engagement",
+        "group": "dynamic_fixed_quote",
+        "kicker": "FLAGSHIP",
+        "title": "Fixed price",
+        "body": "One price your architect sets for the whole set, agreed on your call. No surprises unless scope changes and you approve it.",
+        "points": "One agreed price for the full scope\nCost certainty before work begins\nYour architect can flag a re-quote — you approve any change\nPay by milestone as you approve work",
+        "cta_label": "agreed fixed price",
+        "sort": 0
+      },
+      {
+        "scope": "engagement",
+        "group": "hourly",
+        "kicker": "FLEXIBLE",
+        "title": "Hourly",
+        "body": "Their hourly rate with transparent time tracking, billed as the work progresses.",
+        "points": "Transparent time tracking on every entry\nPay for exactly the work done\nIdeal when scope is still evolving\nCommon for commercial & exploratory work",
+        "cta_label": "billed hourly",
+        "sort": 1
+      }
+    ],
+    "value_props": [
+      {
+        "scope": "engagement",
+        "group": "protections",
+        "icon": "lock",
+        "title": "Pay by milestone",
+        "description": "You pay your architect as you approve work",
+        "sort": 0
+      },
+      {
+        "scope": "engagement",
+        "group": "protections",
+        "icon": "shield",
+        "title": "Stamped work",
+        "description": "Licensed, permit-ready drawings",
+        "sort": 1
+      },
+      {
+        "scope": "engagement",
+        "group": "protections",
+        "icon": "revise",
+        "title": "Revision tooling",
+        "description": "Tracked rounds, on-platform",
+        "sort": 2
+      }
+    ],
+    "credential_badges": [
+      {
+        "scope": "engagement",
+        "group": "scoping-checklist",
+        "label": "Scope confirmed",
+        "sort": 0
+      },
+      {
+        "scope": "engagement",
+        "group": "scoping-checklist",
+        "label": "Jurisdiction requirements reviewed",
+        "sort": 1
+      },
+      {
+        "scope": "engagement",
+        "group": "scoping-checklist",
+        "label": "Add-ons agreed",
+        "sort": 2
+      },
+      {
+        "scope": "engagement",
+        "group": "scoping-checklist",
+        "label": "Price agreed",
+        "sort": 3
+      },
+      {
+        "scope": "engagement",
+        "group": "scoping-checklist",
+        "label": "Timeline & revisions set",
+        "sort": 4
+      },
+      {
+        "scope": "engagement",
+        "group": "change-chips",
+        "label": "Adjust the floor plan",
+        "sort": 0
+      },
+      {
+        "scope": "engagement",
+        "group": "change-chips",
+        "label": "Window / door changes",
+        "sort": 1
+      },
+      {
+        "scope": "engagement",
+        "group": "change-chips",
+        "label": "Structural concern",
+        "sort": 2
+      },
+      {
+        "scope": "engagement",
+        "group": "change-chips",
+        "label": "Something else",
+        "sort": 3
+      }
+    ]
+  }
+}

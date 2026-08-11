@@ -187,6 +187,7 @@ class PublicArchitectSerializer(serializers.ModelSerializer):
             "role_label",
             "bio",
             "based_in",
+            "years_licensed",
             "engagement_mode",
             "hourly_rate",
             "rating",

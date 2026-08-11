@@ -1,0 +1,47 @@
+{
+  "_note": "Live-messaging states the static design never drew: the typing indicator and the failed-send retry hint, for the Account messages view (scope account) and the Engagement scoping chat (scope engagement). Added in the F8 real-time build.",
+  "copy": [
+    {
+      "scope": "account",
+      "key": "messages_typing",
+      "text": "typing…",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "messages_failed",
+      "text": "Couldn’t send — tap to retry",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "typing_now",
+      "text": "typing…",
+      "href": ""
+    },
+    {
+      "scope": "engagement",
+      "key": "send_failed",
+      "text": "Couldn’t send — tap to retry",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "notif_push_label",
+      "text": "Browser notifications",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "notif_push_sub",
+      "text": "Get notified on this device even when the tab is closed.",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "notif_push_denied",
+      "text": "Notifications are blocked for this site in your browser settings.",
+      "href": ""
+    }
+  ]
+}

@@ -1726,5 +1726,335 @@
     "key": "done_cta",
     "text": "Track my order →",
     "href": "/account"
+  },
+  {
+    "scope": "chrome",
+    "key": "nav_brand",
+    "text": "ArchitectHire",
+    "href": "/"
+  },
+  {
+    "scope": "chrome",
+    "key": "nav_menu_services",
+    "text": "Services",
+    "href": "/services-landing"
+  },
+  {
+    "scope": "chrome",
+    "key": "nav_menu_projects",
+    "text": "Projects",
+    "href": "/projects"
+  },
+  {
+    "scope": "chrome",
+    "key": "nav_menu_locations",
+    "text": "Locations",
+    "href": "/cities"
+  },
+  {
+    "scope": "chrome",
+    "key": "nav_search_placeholder",
+    "text": "Search services, projects, cities…",
+    "href": "/search"
+  },
+  {
+    "scope": "chrome",
+    "key": "nav_search_placeholder_mobile",
+    "text": "Search…",
+    "href": "/search"
+  },
+  {
+    "scope": "chrome",
+    "key": "nav_login",
+    "text": "Log in",
+    "href": "/account"
+  },
+  {
+    "scope": "chrome",
+    "key": "nav_signup",
+    "text": "Get matched",
+    "href": "/get-started"
+  },
+  {
+    "scope": "chrome",
+    "key": "nav_services_cta",
+    "text": "Browse the full services catalog →",
+    "href": "/services"
+  },
+  {
+    "scope": "chrome",
+    "key": "nav_projects_heading",
+    "text": "By project type",
+    "href": ""
+  },
+  {
+    "scope": "chrome",
+    "key": "nav_projects_cta",
+    "text": "Browse all project types →",
+    "href": "/projects"
+  },
+  {
+    "scope": "chrome",
+    "key": "nav_featured_slot",
+    "text": "featured project",
+    "href": ""
+  },
+  {
+    "scope": "chrome",
+    "key": "nav_featured_kicker",
+    "text": "MOST POPULAR",
+    "href": ""
+  },
+  {
+    "scope": "chrome",
+    "key": "nav_featured_title",
+    "text": "Backyard ADUs",
+    "href": "/projects/backyard-adu"
+  },
+  {
+    "scope": "chrome",
+    "key": "nav_featured_sub",
+    "text": "2–3 weeks to a stamped set",
+    "href": ""
+  },
+  {
+    "scope": "chrome",
+    "key": "nav_locations_heading",
+    "text": "By city",
+    "href": ""
+  },
+  {
+    "scope": "chrome",
+    "key": "nav_locations_cta",
+    "text": "Browse all cities →",
+    "href": "/cities"
+  },
+  {
+    "scope": "chrome",
+    "key": "footer_brand",
+    "text": "ArchitectHire",
+    "href": "/"
+  },
+  {
+    "scope": "chrome",
+    "key": "footer_copyright",
+    "text": "© 2026 ArchitectHire, Inc.",
+    "href": ""
+  },
+  {
+    "scope": "chrome",
+    "key": "footer_terms",
+    "text": "Terms of Service",
+    "href": "/privacy#terms"
+  },
+  {
+    "scope": "chrome",
+    "key": "footer_privacy",
+    "text": "Privacy Policy",
+    "href": "/privacy"
+  },
+  {
+    "scope": "landing",
+    "key": "hero_card_name",
+    "text": "Maya E., AIA",
+    "href": ""
+  },
+  {
+    "scope": "landing",
+    "key": "hero_card_role",
+    "text": "Licensed CA · Seismic-zone additions",
+    "href": ""
+  },
+  {
+    "scope": "landing",
+    "key": "hero_card_badge",
+    "text": "STAMP ✓",
+    "href": ""
+  },
+  {
+    "scope": "landing",
+    "key": "pricing_label",
+    "text": "Choose a service or project",
+    "href": ""
+  },
+  {
+    "scope": "landing",
+    "key": "pricing_range_label",
+    "text": "Typical price range",
+    "href": ""
+  },
+  {
+    "scope": "landing",
+    "key": "pricing_location_chip",
+    "text": "Oakland, CA",
+    "href": ""
+  },
+  {
+    "scope": "landing",
+    "key": "pricing_scale_low",
+    "text": "Affordable",
+    "href": ""
+  },
+  {
+    "scope": "landing",
+    "key": "pricing_scale_mid",
+    "text": "Typical",
+    "href": ""
+  },
+  {
+    "scope": "landing",
+    "key": "pricing_scale_high",
+    "text": "Premium",
+    "href": ""
+  },
+  {
+    "scope": "landing",
+    "key": "pricing_includes_label",
+    "text": "What you get",
+    "href": ""
+  },
+  {
+    "scope": "for-experts",
+    "key": "hero_card_kicker",
+    "text": "NEW ORDER MATCHED",
+    "href": ""
+  },
+  {
+    "scope": "for-experts",
+    "key": "hero_card_time",
+    "text": "3 min ago",
+    "href": ""
+  },
+  {
+    "scope": "for-experts",
+    "key": "hero_card_title",
+    "text": "3 interior renders · Professional",
+    "href": ""
+  },
+  {
+    "scope": "for-experts",
+    "key": "hero_card_sub",
+    "text": "Full plans provided · standard turnaround",
+    "href": ""
+  },
+  {
+    "scope": "for-experts",
+    "key": "hero_card_price",
+    "text": "$1,200 order",
+    "href": ""
+  },
+  {
+    "scope": "for-experts",
+    "key": "hero_card_match",
+    "text": "96% match",
+    "href": ""
+  },
+  {
+    "scope": "for-experts",
+    "key": "hero_payout_label",
+    "text": "Payout released",
+    "href": ""
+  },
+  {
+    "scope": "for-experts",
+    "key": "hero_payout_amount",
+    "text": "+$1,080.00",
+    "href": ""
+  },
+  {
+    "scope": "for-experts",
+    "key": "hero_payout_sub",
+    "text": "Render bundle approved · to your bank in 2 days",
+    "href": ""
+  },
+  {
+    "scope": "for-experts",
+    "key": "earnings_example_label",
+    "text": "On a $1,200 render bundle",
+    "href": ""
+  },
+  {
+    "scope": "for-experts",
+    "key": "earnings_release_label",
+    "text": "Released as you deliver",
+    "href": ""
+  },
+  {
+    "scope": "for-experts",
+    "key": "disciplines_rate_prefix",
+    "text": "Typical order",
+    "href": ""
+  },
+  {
+    "scope": "architect-landing",
+    "key": "hero_card_kicker",
+    "text": "NEW LEAD MATCHED",
+    "href": ""
+  },
+  {
+    "scope": "architect-landing",
+    "key": "hero_card_time",
+    "text": "2 min ago",
+    "href": ""
+  },
+  {
+    "scope": "architect-landing",
+    "key": "hero_card_title",
+    "text": "Backyard ADU · Oakland, CA",
+    "href": ""
+  },
+  {
+    "scope": "architect-landing",
+    "key": "hero_card_sub",
+    "text": "640 sf · permit-ready set · within your license area",
+    "href": ""
+  },
+  {
+    "scope": "architect-landing",
+    "key": "hero_card_price",
+    "text": "Est. $4,200–5,600",
+    "href": ""
+  },
+  {
+    "scope": "architect-landing",
+    "key": "hero_card_match",
+    "text": "92% match",
+    "href": ""
+  },
+  {
+    "scope": "architect-landing",
+    "key": "hero_payout_label",
+    "text": "Payout released",
+    "href": ""
+  },
+  {
+    "scope": "architect-landing",
+    "key": "hero_payout_amount",
+    "text": "+$3,210.00",
+    "href": ""
+  },
+  {
+    "scope": "architect-landing",
+    "key": "hero_payout_sub",
+    "text": "Schematic milestone · to your bank in 2 days",
+    "href": ""
+  },
+  {
+    "scope": "architect-landing",
+    "key": "earnings_example_label",
+    "text": "On a $14,000 project",
+    "href": ""
+  },
+  {
+    "scope": "architect-landing",
+    "key": "earnings_release_label",
+    "text": "Released as you deliver",
+    "href": ""
+  },
+  {
+    "scope": "chrome",
+    "key": "nav_account",
+    "text": "My account",
+    "href": "/account"
   }
 ]

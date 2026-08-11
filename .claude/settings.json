@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/evidenceejimone/Architecture-hire/**)",
+      "Bash(pnpm add *)"
+    ]
+  }
+}

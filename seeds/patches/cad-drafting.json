@@ -1,0 +1,211 @@
+{
+  "_note": "Missing-content patch for design/marketing/CAD Drafting.dc.html. The canonical seeds cover hero/headings/faqs/stats/steps/use_cases; this patch adds the breadcrumb copy, the 'What you can order' deliverables (value_props — icon key also selects the unit its price is formatted in from /api/v1/catalog/pricing/drafting/), the work gallery (carousel — caption = tag, name = image-slot placeholder), the specialist cards (case_cards — location = role, stat1 = rating), and the three pricing cards (personas — kicker = label, title = unit caption, cta_label = MOST POPULAR badge; the figures themselves come from the drafting pricing config, never from copy). The route change is here too: design/app/Order Render.dc.html and Order Drafting.dc.html are now redirects into the unified quiz, so every CTA and use-case card on this page points at /get-started?intent=drafting instead of /order/drafting. The steps and FAQ that described escrow releases are restored to the current design, which has the client paying the specialist directly. The three pricing personas carry group 'pricing' and their design price in cta_href: the hero's ?svc= variants live on this same scope as personas too (seeds/patches/cad-drafting-variants.json, group 'service-variant'), so the pricing section selects its own group rather than every persona on the page.",
+  "copy": [
+    {
+      "scope": "cad-drafting",
+      "key": "breadcrumb_parent",
+      "text": "Services",
+      "href": "/services"
+    },
+    {
+      "scope": "cad-drafting",
+      "key": "breadcrumb_current",
+      "text": "Drafting & documentation",
+      "href": ""
+    },
+    {
+      "scope": "cad-drafting",
+      "key": "deliverables_price_hourly",
+      "text": "hourly",
+      "href": ""
+    },
+    {
+      "scope": "cad-drafting",
+      "key": "hero_cta",
+      "text": "Start a drafting job →",
+      "href": "/get-started?intent=drafting"
+    },
+    {
+      "scope": "cad-drafting",
+      "key": "final_cta_button",
+      "text": "Start a drafting job →",
+      "href": "/get-started?intent=drafting"
+    }
+  ],
+  "blocks": {
+    "value_props": [
+      {
+        "scope": "cad-drafting",
+        "icon": "draft",
+        "title": "CAD drafting",
+        "description": "Coordinated plans, sections, and details drafted from your sketches or markups.",
+        "sort": 0
+      },
+      {
+        "scope": "cad-drafting",
+        "icon": "asbuilt",
+        "title": "2D as-built drawings",
+        "description": "Accurate measured drawings of an existing space, priced by area or as a flat package.",
+        "sort": 1
+      },
+      {
+        "scope": "cad-drafting",
+        "icon": "pdf",
+        "title": "PDF-to-CAD conversion",
+        "description": "Legacy PDFs and scans rebuilt as editable, layered CAD you can keep working in.",
+        "sort": 2
+      },
+      {
+        "scope": "cad-drafting",
+        "icon": "redline",
+        "title": "Redline & markup cleanup",
+        "description": "Incorporate reviewer redlines and comments into a clean, submission-ready set.",
+        "sort": 3
+      }
+    ],
+    "carousel": [
+      {
+        "scope": "cad-drafting",
+        "caption": "Floor plan",
+        "name": "Feature — full floor plan sheet",
+        "sort": 0
+      },
+      {
+        "scope": "cad-drafting",
+        "caption": "Elevation",
+        "name": "Elevation drawing",
+        "sort": 1
+      },
+      {
+        "scope": "cad-drafting",
+        "caption": "As-built",
+        "name": "As-built measured plan",
+        "sort": 2
+      },
+      {
+        "scope": "cad-drafting",
+        "caption": "Detail",
+        "name": "Section detail",
+        "sort": 3
+      },
+      {
+        "scope": "cad-drafting",
+        "caption": "PDF→CAD",
+        "name": "PDF-to-CAD conversion",
+        "sort": 4
+      }
+    ],
+    "case_cards": [
+      {
+        "scope": "cad-drafting",
+        "title": "Sam T.",
+        "category_tag": "Drafting",
+        "location": "CAD drafter · residential",
+        "excerpt": "Fast, tidy plan sets from sketches and site measurements. Comfortable with ADU and remodel packages.",
+        "href": "",
+        "stat1_value": "4.9",
+        "stat1_label": "rating",
+        "stat2_value": "",
+        "stat2_label": "",
+        "sort": 0
+      },
+      {
+        "scope": "cad-drafting",
+        "title": "Nadia R.",
+        "category_tag": "As-builts",
+        "location": "As-built & scan specialist",
+        "excerpt": "Measured drawings and PDF-to-CAD conversions with meticulous layer discipline and quick turnarounds.",
+        "href": "",
+        "stat1_value": "4.8",
+        "stat1_label": "rating",
+        "stat2_value": "",
+        "stat2_label": "",
+        "sort": 1
+      },
+      {
+        "scope": "cad-drafting",
+        "title": "Maya E.",
+        "category_tag": "Architect",
+        "location": "Licensed architect · CA",
+        "excerpt": "Steps in when a drafted set needs a stamp — reviews and stamps permit-ready drawings in her jurisdictions.",
+        "href": "",
+        "stat1_value": "4.9",
+        "stat1_label": "rating",
+        "stat2_value": "",
+        "stat2_label": "",
+        "sort": 2
+      }
+    ],
+    "personas": [
+      {
+        "scope": "cad-drafting",
+        "kicker": "CAD DRAFTING · HOURLY",
+        "title": "per hour (US)",
+        "body": "Open-ended drafting, redline cleanup, and revisions billed by the hour with tracked time. Offshore from $15–40.",
+        "points": "",
+        "cta_label": "",
+        "cta_href": "$65–$90",
+        "sort": 0,
+        "group": "pricing"
+      },
+      {
+        "scope": "cad-drafting",
+        "kicker": "AS-BUILT PACKAGE",
+        "title": "per residence",
+        "body": "A complete measured set of an existing home — the standard starting point for a remodel or addition.",
+        "points": "",
+        "cta_label": "MOST POPULAR",
+        "cta_href": "$2,500+",
+        "sort": 1,
+        "group": "pricing"
+      },
+      {
+        "scope": "cad-drafting",
+        "kicker": "PDF-TO-CAD",
+        "title": "per sheet",
+        "body": "Turn flat PDFs or scans into clean, layered, editable CAD files — fast and per-sheet.",
+        "points": "",
+        "cta_label": "",
+        "cta_href": "$10–$50",
+        "sort": 2,
+        "group": "pricing"
+      }
+    ],
+    "use_cases": [
+      {
+        "scope": "cad-drafting",
+        "sort": 0,
+        "title": "Turn a sketch into CAD",
+        "href": "/get-started?intent=drafting"
+      },
+      {
+        "scope": "cad-drafting",
+        "sort": 1,
+        "title": "Document what exists",
+        "href": "/get-started?intent=drafting"
+      },
+      {
+        "scope": "cad-drafting",
+        "sort": 2,
+        "title": "Modernize old drawings",
+        "href": "/get-started?intent=drafting"
+      }
+    ],
+    "steps": [
+      {
+        "scope": "cad-drafting",
+        "sort": 3,
+        "title": "Get your files",
+        "description": "Receive final CAD and PDFs on approval — you pay the drafter directly."
+      }
+    ],
+    "faqs": [
+      {
+        "scope": "cad-drafting",
+        "sort": 2,
+        "question": "How is hourly work kept honest?",
+        "answer": "Every hour is tracked on-platform and visible to you, and you approve each stage before you pay the drafter — so there are no surprise invoices or padded time."
+      }
+    ]
+  }
+}

@@ -1,0 +1,327 @@
+{
+  "_note": "Gallery for the rebuilt 'projects from the network' carousel on design/marketing/Project Landing.dc.html (and the hero carousel above it, which reuses the same slides). The design's per-type `gallery` array — mirrored into seeds/project_landing.json[*].gallery — carries a tag pill, a title and a meta line per slide, none of which the previous three-up grid had a home for. Stored as case_cards in group 'gallery' so the owner edits them per project type: category_tag = the lime tag pill, title = the slide headline, excerpt = the meta line, location = the image-slot placeholder text the design shows until an image is uploaded (CaseCard has no dedicated hint field; the same repurposing as the cad-drafting specialist cards). The image itself comes from the card's own upload slot — MediaAsset 'project-type:<slug>:p-g<n>' for the gallery and 'project-type:<slug>:proj-hero<n>' for the hero — so nothing here sets it. The `delete` block drops the superseded ungrouped cards that seeds/patches/project-types.json used to seed for the old three-up grid (title + location only); that file no longer creates them. 'Home addition' is the one type whose gallery the design re-authored in its own file (Home Addition.dc.html, four slides) rather than in the Project Landing template — its file is the source used here.",
+  "delete": {
+    "case_cards": [
+      {
+        "scope": "project-type:backyard-adu",
+        "group": ""
+      },
+      {
+        "scope": "project-type:home-addition",
+        "group": ""
+      },
+      {
+        "scope": "project-type:whole-home-renovation",
+        "group": ""
+      },
+      {
+        "scope": "project-type:kitchen-and-bath",
+        "group": ""
+      },
+      {
+        "scope": "project-type:new-custom-home",
+        "group": ""
+      },
+      {
+        "scope": "project-type:garage-conversion",
+        "group": ""
+      },
+      {
+        "scope": "project-type:commercial-ti",
+        "group": ""
+      },
+      {
+        "scope": "project-type:change-of-use",
+        "group": ""
+      },
+      {
+        "scope": "project-type:restaurant-build-out",
+        "group": ""
+      }
+    ]
+  },
+  "blocks": {
+    "case_cards": [
+      {
+        "scope": "project-type:backyard-adu",
+        "group": "gallery",
+        "sort": 0,
+        "category_tag": "Detached",
+        "title": "Detached 2-bed ADU",
+        "excerpt": "Oakland, CA · 720 sq ft · stamped in 6 wks",
+        "location": "ADU project photo",
+        "href": ""
+      },
+      {
+        "scope": "project-type:backyard-adu",
+        "group": "gallery",
+        "sort": 1,
+        "category_tag": "Conversion",
+        "title": "Garage conversion",
+        "excerpt": "San Jose, CA · 480 sq ft · permit-ready",
+        "location": "ADU project photo",
+        "href": ""
+      },
+      {
+        "scope": "project-type:backyard-adu",
+        "group": "gallery",
+        "sort": 2,
+        "category_tag": "Studio",
+        "title": "Studio ADU + deck",
+        "excerpt": "Berkeley, CA · 400 sq ft · first-pass approval",
+        "location": "ADU project photo",
+        "href": ""
+      },
+      {
+        "scope": "project-type:home-addition",
+        "group": "gallery",
+        "sort": 0,
+        "category_tag": "Second story",
+        "title": "Second-story addition",
+        "excerpt": "Berkeley, CA · 640 sq ft added",
+        "location": "Home addition photo",
+        "href": ""
+      },
+      {
+        "scope": "project-type:home-addition",
+        "group": "gallery",
+        "sort": 1,
+        "category_tag": "Two-story",
+        "title": "Two-story rear addition",
+        "excerpt": "Oakland, CA · 880 sq ft added",
+        "location": "Home addition photo",
+        "href": ""
+      },
+      {
+        "scope": "project-type:home-addition",
+        "group": "gallery",
+        "sort": 2,
+        "category_tag": "Rear addition",
+        "title": "Rear great-room + pool wing",
+        "excerpt": "San Jose, CA · 620 sq ft added",
+        "location": "Home addition photo",
+        "href": ""
+      },
+      {
+        "scope": "project-type:home-addition",
+        "group": "gallery",
+        "sort": 3,
+        "category_tag": "Upper level",
+        "title": "Upper-level + garage addition",
+        "excerpt": "Livermore, CA · 720 sq ft added",
+        "location": "Home addition photo",
+        "href": ""
+      },
+      {
+        "scope": "project-type:whole-home-renovation",
+        "group": "gallery",
+        "sort": 0,
+        "category_tag": "Interior gut",
+        "title": "Full interior gut renovation",
+        "excerpt": "Oakland, CA · 1,850 sq ft",
+        "location": "Renovation photo",
+        "href": ""
+      },
+      {
+        "scope": "project-type:whole-home-renovation",
+        "group": "gallery",
+        "sort": 1,
+        "category_tag": "Open-plan",
+        "title": "Open-plan main floor",
+        "excerpt": "Berkeley, CA · 1,200 sq ft",
+        "location": "Renovation photo",
+        "href": ""
+      },
+      {
+        "scope": "project-type:whole-home-renovation",
+        "group": "gallery",
+        "sort": 2,
+        "category_tag": "Exterior",
+        "title": "Exterior & envelope refresh",
+        "excerpt": "San Jose, CA · whole home",
+        "location": "Renovation photo",
+        "href": ""
+      },
+      {
+        "scope": "project-type:kitchen-and-bath",
+        "group": "gallery",
+        "sort": 0,
+        "category_tag": "Kitchen",
+        "title": "Chef’s kitchen remodel",
+        "excerpt": "Oakland, CA · 260 sq ft",
+        "location": "Kitchen photo",
+        "href": ""
+      },
+      {
+        "scope": "project-type:kitchen-and-bath",
+        "group": "gallery",
+        "sort": 1,
+        "category_tag": "Primary bath",
+        "title": "Spa primary bath",
+        "excerpt": "Berkeley, CA · 140 sq ft",
+        "location": "Bath photo",
+        "href": ""
+      },
+      {
+        "scope": "project-type:kitchen-and-bath",
+        "group": "gallery",
+        "sort": 2,
+        "category_tag": "Powder room",
+        "title": "Powder room refresh",
+        "excerpt": "San Jose, CA · 45 sq ft",
+        "location": "Bath photo",
+        "href": ""
+      },
+      {
+        "scope": "project-type:new-custom-home",
+        "group": "gallery",
+        "sort": 0,
+        "category_tag": "Modern",
+        "title": "Modern courtyard home",
+        "excerpt": "Oakland, CA · 3,200 sq ft",
+        "location": "Custom home photo",
+        "href": ""
+      },
+      {
+        "scope": "project-type:new-custom-home",
+        "group": "gallery",
+        "sort": 1,
+        "category_tag": "Farmhouse",
+        "title": "Modern farmhouse",
+        "excerpt": "Berkeley, CA · 2,700 sq ft",
+        "location": "Custom home photo",
+        "href": ""
+      },
+      {
+        "scope": "project-type:new-custom-home",
+        "group": "gallery",
+        "sort": 2,
+        "category_tag": "Hillside",
+        "title": "Hillside stepped home",
+        "excerpt": "San Jose, CA · 2,900 sq ft",
+        "location": "Custom home photo",
+        "href": ""
+      },
+      {
+        "scope": "project-type:garage-conversion",
+        "group": "gallery",
+        "sort": 0,
+        "category_tag": "ADU",
+        "title": "Garage-to-ADU conversion",
+        "excerpt": "Oakland, CA · 400 sq ft",
+        "location": "Garage conversion photo",
+        "href": ""
+      },
+      {
+        "scope": "project-type:garage-conversion",
+        "group": "gallery",
+        "sort": 1,
+        "category_tag": "Studio",
+        "title": "Studio suite conversion",
+        "excerpt": "Berkeley, CA · 320 sq ft",
+        "location": "Garage conversion photo",
+        "href": ""
+      },
+      {
+        "scope": "project-type:garage-conversion",
+        "group": "gallery",
+        "sort": 2,
+        "category_tag": "Home office",
+        "title": "Detached home office",
+        "excerpt": "San Jose, CA · 280 sq ft",
+        "location": "Garage conversion photo",
+        "href": ""
+      },
+      {
+        "scope": "project-type:commercial-ti",
+        "group": "gallery",
+        "sort": 0,
+        "category_tag": "Office",
+        "title": "Open office fit-out",
+        "excerpt": "Oakland, CA · 4,200 sq ft",
+        "location": "Commercial TI photo",
+        "href": ""
+      },
+      {
+        "scope": "project-type:commercial-ti",
+        "group": "gallery",
+        "sort": 1,
+        "category_tag": "Retail",
+        "title": "Retail storefront TI",
+        "excerpt": "Berkeley, CA · 1,800 sq ft",
+        "location": "Commercial TI photo",
+        "href": ""
+      },
+      {
+        "scope": "project-type:commercial-ti",
+        "group": "gallery",
+        "sort": 2,
+        "category_tag": "Medical",
+        "title": "Medical suite fit-out",
+        "excerpt": "San Jose, CA · 2,600 sq ft",
+        "location": "Commercial TI photo",
+        "href": ""
+      },
+      {
+        "scope": "project-type:change-of-use",
+        "group": "gallery",
+        "sort": 0,
+        "category_tag": "Retail → cafe",
+        "title": "Retail to cafe",
+        "excerpt": "Oakland, CA · 1,400 sq ft",
+        "location": "Change-of-use photo",
+        "href": ""
+      },
+      {
+        "scope": "project-type:change-of-use",
+        "group": "gallery",
+        "sort": 1,
+        "category_tag": "Warehouse → studio",
+        "title": "Warehouse to studio",
+        "excerpt": "Berkeley, CA · 3,000 sq ft",
+        "location": "Change-of-use photo",
+        "href": ""
+      },
+      {
+        "scope": "project-type:change-of-use",
+        "group": "gallery",
+        "sort": 2,
+        "category_tag": "Office → clinic",
+        "title": "Office to clinic",
+        "excerpt": "San Jose, CA · 2,100 sq ft",
+        "location": "Change-of-use photo",
+        "href": ""
+      },
+      {
+        "scope": "project-type:restaurant-build-out",
+        "group": "gallery",
+        "sort": 0,
+        "category_tag": "Full-service",
+        "title": "Full-service dining room",
+        "excerpt": "Oakland, CA · 3,400 sq ft",
+        "location": "Restaurant photo",
+        "href": ""
+      },
+      {
+        "scope": "project-type:restaurant-build-out",
+        "group": "gallery",
+        "sort": 1,
+        "category_tag": "Fast-casual",
+        "title": "Fast-casual counter",
+        "excerpt": "Berkeley, CA · 1,600 sq ft",
+        "location": "Restaurant photo",
+        "href": ""
+      },
+      {
+        "scope": "project-type:restaurant-build-out",
+        "group": "gallery",
+        "sort": 2,
+        "category_tag": "Cafe",
+        "title": "Neighborhood cafe",
+        "excerpt": "San Jose, CA · 1,100 sq ft",
+        "location": "Restaurant photo",
+        "href": ""
+      }
+    ]
+  }
+}

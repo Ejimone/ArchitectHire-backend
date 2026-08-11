@@ -18,6 +18,25 @@ from django.core.management.base import BaseCommand, CommandError
 
 SEEDS = Path(settings.BASE_DIR) / "seeds"
 
+# Block types a patch file may target, with the fields that identify a row
+# within its (scope, group). Mirrors cms.views.BLOCK_REGISTRY.
+BLOCK_NATURAL_KEYS = {
+    "faqs": ["question"],
+    "stats": ["value", "label"],
+    "steps": ["title"],
+    "testimonials": ["name"],
+    "value_props": ["title"],
+    "trust_logos": ["name"],
+    "credential_badges": ["label"],
+    "use_cases": ["title"],
+    "personas": ["title"],
+    "principles": ["title"],
+    "carousel": ["caption"],
+    "case_cards": ["title"],
+    "estimate_teaser": ["label"],
+    "feature_matrix": ["label"],
+}
+
 # Services whose deliverable carries a licensed stamp (the design's "stamp line").
 STAMPED_SERVICE_SLUGS = {
     "structural-stamp-residential",
@@ -52,7 +71,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         domains = (
-            ["jurisdictions", "catalog", "cms", "providers", "content", "searchindex"]
+            ["jurisdictions", "catalog", "cms", "providers", "payments", "content", "searchindex"]
             if options["all"]
             else [d.strip() for d in options["domain"].split(",") if d.strip()]
         )
@@ -179,6 +198,29 @@ class Command(BaseCommand):
                 )
                 order += 1
 
+        # Per-type landing content, extracted from the design's `projects` map.
+        landing = load_optional("project_landing") or {}
+        by_name = {pt.name: pt for pt in ProjectType.objects.all()}
+        for design_name, row in landing.items():
+            project_type = by_name.get(design_name)
+            if project_type is None:
+                continue
+            ProjectType.objects.filter(pk=project_type.pk).update(
+                short_name=row.get("short", ""),
+                kicker=row.get("kicker", ""),
+                h1=row.get("h1", ""),
+                intro=row.get("intro", ""),
+                body=row.get("body", ""),
+                price_display=row.get("price", project_type.price_display),
+                price_range=row.get("range", ""),
+                bar_pct=row.get("bar", 0),
+                stats=row.get("stats", []),
+                includes=row.get("includes", []),
+                price_notes=row.get("priceNotes", []),
+                steps=row.get("steps", []),
+                image_hint=row.get("heroPh", project_type.image_hint),
+            )
+
         for order, row in enumerate(load("render_matrix")):
             RenderDeliverable.objects.update_or_create(
                 name=row["deliverable"],
@@ -277,6 +319,215 @@ class Command(BaseCommand):
         self._seed_scoped_blocks()
         self._seed_editorial()
         self._seed_seo()
+        self._seed_patches()
+
+    def _seed_patches(self):
+        """Apply seeds/patches/*.json — content the design implies but the
+        extracted seeds don't cover (per-page chrome, gallery cards, the
+        landing records for project types the design only templated once),
+        plus copy the extractor captured from a superseded revision of the
+        design and therefore still re-seeds with stale wording.
+
+        Kept separate from the extracted seeds so re-running the extractor
+        never clobbers them, and so the owner can see exactly what was authored
+        by hand: each file carries a `_note` explaining its gaps.
+
+        A file may declare, in this order of application:
+
+        ``delete``   {block_type: [{scope, group?, <natural key fields>}]} —
+                     removes rows whose natural key the design renamed, so the
+                     extracted seed's version doesn't linger beside the new one.
+        ``copy``     CopyBlock rows.
+        ``blocks``   scoped block rows.
+        ``plans``    catalog.Plan rows, keyed on ``key``.
+        ``service_categories``  catalog.ServiceCategory rows, keyed on ``slug``.
+        ``page_seo`` PageSEO rows, keyed on ``page_key``.
+        ``editorial``  authors, blog posts/blocks/bodies, case studies,
+                     case study galleries and policy sections.
+        ``project_types`` / ``cities`` / ``states``  partial record updates.
+        """
+        from apps.catalog.models import Plan, ProjectType, ServiceCategory
+        from apps.cms.models import CopyBlock, PageSEO
+        from apps.cms.views import BLOCK_REGISTRY
+        from apps.jurisdictions.models import City, State
+
+        block_models = {name: model for name, model, _ in BLOCK_REGISTRY}
+        directory = SEEDS / "patches"
+        if not directory.is_dir():
+            return
+
+        totals = {"copy": 0, "blocks": 0, "records": 0, "deleted": 0}
+        for path in sorted(directory.glob("*.json")):
+            data = json.loads(path.read_text(encoding="utf-8"))
+
+            for name, rows in data.get("delete", {}).items():
+                model = block_models.get(name)
+                if model is None:
+                    raise CommandError(f"{path.name}: unknown block type '{name}'")
+                for row in rows:
+                    deleted, _ = model.objects.filter(**row).delete()
+                    totals["deleted"] += deleted
+
+            for row in data.get("copy", []):
+                CopyBlock.objects.update_or_create(
+                    scope=row["scope"],
+                    key=row["key"],
+                    defaults={"text": row.get("text", ""), "href": row.get("href", "")},
+                )
+                totals["copy"] += 1
+
+            for name, rows in data.get("blocks", {}).items():
+                model = block_models.get(name)
+                if model is None:
+                    raise CommandError(f"{path.name}: unknown block type '{name}'")
+                natural = BLOCK_NATURAL_KEYS[name]
+                for row in rows:
+                    lookup = {field: row[field] for field in natural}
+                    defaults = {
+                        key: value
+                        for key, value in row.items()
+                        if key not in {"scope", "sort", *natural}
+                    }
+                    defaults["sort_order"] = row.get("sort", 0)
+                    defaults.pop("group", None)
+                    model.objects.update_or_create(
+                        scope=row["scope"], group=row.get("group", ""), **lookup, defaults=defaults
+                    )
+                    totals["blocks"] += 1
+
+            for row in data.get("plans", []):
+                fields = {k: v for k, v in row.items() if k != "key"}
+                totals["records"] += Plan.objects.filter(key=row["key"]).update(**fields)
+
+            for row in data.get("service_categories", []):
+                fields = {k: v for k, v in row.items() if k != "slug"}
+                totals["records"] += ServiceCategory.objects.filter(slug=row["slug"]).update(
+                    **fields
+                )
+
+            for row in data.get("page_seo", []):
+                fields = {k: v for k, v in row.items() if k != "page_key"}
+                totals["records"] += PageSEO.objects.filter(page_key=row["page_key"]).update(
+                    **fields
+                )
+
+            totals["records"] += self._patch_editorial(data.get("editorial", {}))
+
+            for row in data.get("project_types", []):
+                fields = {k: v for k, v in row.items() if k != "slug"}
+                totals["records"] += ProjectType.objects.filter(slug=row["slug"]).update(**fields)
+
+            for row in data.get("cities", []):
+                fields = {k: v for k, v in row.items() if k != "slug"}
+                totals["records"] += City.objects.filter(slug=row["slug"]).update(**fields)
+
+            for row in data.get("states", []):
+                fields = {k: v for k, v in row.items() if k != "code"}
+                totals["records"] += State.objects.filter(code=row["code"]).update(**fields)
+
+        self.stdout.write(
+            f"  patches: {totals['copy']} copy, {totals['blocks']} blocks, "
+            f"{totals['records']} records, {totals['deleted']} removed"
+        )
+
+    @staticmethod
+    def _patch_editorial(data):
+        """Partial updates to editorial records seeded from content_editorial.json.
+
+        Blog body rows carry no natural key of their own, so they are addressed
+        by ``post`` slug + ``sort_order`` — the order ``_seed_editorial`` writes
+        them in, which is the order they appear in the article.
+
+        ``authors``, ``blog_bodies`` and ``case_study_galleries`` author whole
+        records rather than patching fields, for the articles and projects the
+        extracted seeds left as a headline with no body: an author the extract
+        never captured, an article body ``content_editorial.json`` has no
+        ``blocks`` list for, and the gallery rows a case study needs before its
+        design's photo grid renders at all. Each replaces the record's child
+        rows outright, so re-running the seeder is idempotent.
+        """
+        from apps.cms.models import (
+            Author,
+            BlogContentBlock,
+            BlogPost,
+            CaseStudy,
+            CaseStudyCategory,
+            CaseStudyImage,
+            PolicySection,
+        )
+
+        updated = 0
+        for row in data.get("authors", []):
+            Author.objects.update_or_create(
+                name=row["name"],
+                defaults={k: v for k, v in row.items() if k != "name"},
+            )
+            updated += 1
+
+        for row in data.get("blog_posts", []):
+            fields = {k: v for k, v in row.items() if k != "slug"}
+            updated += BlogPost.objects.filter(slug=row["slug"]).update(**fields)
+
+        for row in data.get("blog_blocks", []):
+            fields = {k: v for k, v in row.items() if k not in {"post", "sort_order"}}
+            updated += BlogContentBlock.objects.filter(
+                post__slug=row["post"], sort_order=row["sort_order"]
+            ).update(**fields)
+
+        for row in data.get("blog_bodies", []):
+            post = BlogPost.objects.filter(slug=row["post"]).first()
+            if post is None:
+                continue
+            if row.get("author"):
+                post.author = Author.objects.filter(name=row["author"]).first()
+                post.save(update_fields=["author"])
+            post.content_blocks.all().delete()
+            BlogContentBlock.objects.bulk_create(
+                BlogContentBlock(
+                    post=post,
+                    kind=block.get("kind", "paragraph"),
+                    text=block.get("text", ""),
+                    attribution=block.get("attribution", ""),
+                    cta_label=block.get("cta_label", ""),
+                    cta_href=block.get("cta_href", ""),
+                    sort_order=order,
+                )
+                for order, block in enumerate(row.get("blocks", []))
+            )
+            updated += 1
+
+        for row in data.get("case_studies", []):
+            fields = {k: v for k, v in row.items() if k != "slug"}
+            if "category" in fields:
+                # Addressed by name, like content_editorial.json does, so a patch
+                # never has to name a primary key that a fresh seed reassigns.
+                fields["category"] = CaseStudyCategory.objects.filter(
+                    name=fields["category"]
+                ).first()
+            updated += CaseStudy.objects.filter(slug=row["slug"]).update(**fields)
+
+        for row in data.get("case_study_galleries", []):
+            case_study = CaseStudy.objects.filter(slug=row["case_study"]).first()
+            if case_study is None:
+                continue
+            case_study.gallery.all().delete()
+            CaseStudyImage.objects.bulk_create(
+                CaseStudyImage(
+                    case_study=case_study,
+                    caption=image.get("caption", ""),
+                    sort_order=order,
+                )
+                for order, image in enumerate(row.get("images", []))
+            )
+            updated += 1
+
+        for row in data.get("policy_sections", []):
+            fields = {k: v for k, v in row.items() if k not in {"page", "anchor"}}
+            updated += PolicySection.objects.filter(
+                page__slug=row["page"], anchor=row["anchor"]
+            ).update(**fields)
+
+        return updated
 
     def _seed_copy(self):
         from apps.cms.models import CopyBlock
@@ -296,7 +547,9 @@ class Command(BaseCommand):
     def _seed_scoped_blocks(self):
         from apps.cms.models import (
             FAQ,
+            CaseCard,
             CredentialBadge,
+            EstimateTeaserOption,
             HeroCarouselSlide,
             Persona,
             Principle,
@@ -316,7 +569,11 @@ class Command(BaseCommand):
         def sync(model, rows, natural_fields, extra=lambda r: {}):
             for row in rows:
                 lookup = {f: row[f] for f in natural_fields}
-                defaults = {"sort_order": row.get("sort", 0), **extra(row)}
+                defaults = {
+                    "sort_order": row.get("sort", 0),
+                    "group": row.get("group", ""),
+                    **extra(row),
+                }
                 model.objects.update_or_create(scope=row["scope"], **lookup, defaults=defaults)
 
         sync(FAQ, data.get("faqs", []), ["question"], lambda r: {"answer": r["answer"]})
@@ -376,6 +633,31 @@ class Command(BaseCommand):
             data.get("carousel", []),
             ["caption"],
             lambda r: {"name": r.get("name", "")},
+        )
+        sync(
+            CaseCard,
+            data.get("case_cards", []),
+            ["title"],
+            lambda r: {
+                "category_tag": r.get("category_tag", ""),
+                "location": r.get("location", ""),
+                "excerpt": r.get("excerpt", ""),
+                "href": r.get("href", ""),
+                "stat1_value": r.get("stat1_value", ""),
+                "stat1_label": r.get("stat1_label", ""),
+                "stat2_value": r.get("stat2_value", ""),
+                "stat2_label": r.get("stat2_label", ""),
+            },
+        )
+        sync(
+            EstimateTeaserOption,
+            data.get("estimate_teaser", []),
+            ["label"],
+            lambda r: {
+                "price_range": r.get("price_range", ""),
+                "bar_pct": r.get("bar_pct", 0),
+                "includes": "\n".join(r.get("includes", [])),
+            },
         )
         self.stdout.write(
             f"  blocks: {FAQ.objects.count()} faqs, {Stat.objects.count()} stats, "
@@ -692,3 +974,39 @@ class Command(BaseCommand):
                 },
             )
         self.stdout.write(f"  providers: {Discipline.objects.count()} disciplines")
+
+    def seed_payments(self):
+        """Subscription tiers (the platform's revenue) + the legacy zero fee policy."""
+        from apps.payments.models import FeePolicy, SubscriptionPlan
+
+        if not FeePolicy.objects.filter(is_active=True).exists():
+            FeePolicy.objects.create(
+                percent=0, is_active=True, note="Platform takes 0% of a project"
+            )
+
+        data = load_optional("subscription_plans") or {}
+        for group in (SubscriptionPlan.Group.STANDARD, SubscriptionPlan.Group.PRICING_PAGE):
+            for row in data.get(group, []):
+                SubscriptionPlan.objects.update_or_create(
+                    group=group,
+                    key=row["key"],
+                    defaults={
+                        "name": row["name"],
+                        "tagline": row.get("tagline", ""),
+                        "price_monthly": row["price_monthly"],
+                        "price_yearly": row.get("price_yearly"),
+                        "per_unit": row.get("per_unit", ""),
+                        "project_ceiling": row.get("project_ceiling", ""),
+                        "metro_coverage": row.get("metro_coverage", ""),
+                        "pursuit_limit": row.get("pursuit_limit", ""),
+                        "fits": row.get("fits", ""),
+                        "points": row.get("points", []),
+                        "cta_label": row.get("cta_label", ""),
+                        "is_recommended": row.get("is_recommended", False),
+                        "sort_order": row.get("sort", 0),
+                    },
+                )
+        self.stdout.write(
+            f"  payments: {SubscriptionPlan.objects.count()} plans, "
+            f"fee policy {FeePolicy.current_percent()}%"
+        )

@@ -1,0 +1,600 @@
+{
+  "_note": "Fills the gaps between design/marketing/Blog.dc.html + design/marketing/Blog Post.dc.html and the blog payload. Copy: the index page's \"All\" filter chip, the featured pill's \"Featured\" prefix, the newsletter field placeholder and its post-submit button label, the three \"Browse by topic\" column headings (addressed as topic_col_<group>, matching the use_cases group slugs below), the eyebrow the design prints above every in-article CTA card, and the whole Blog Post template's chrome, which had no CMS row at all — breadcrumb labels, the WRITTEN BY eyebrow, the \"Keep reading\" related heading and the article's own final CTA. Blocks: the fifteen \"Browse by topic\" links as use_cases rows grouped by column (by-project / by-city / get-started), pointed at the real routes in the Next app rather than the design's .dc.html filenames. Editorial: six of the seven seeded posts were a headline and an excerpt with no dek, no author and zero content blocks, so their detail pages rendered as an empty shell; two more authors and a full body are authored here for each of them, matching each post's existing title, excerpt, category and read_time. All six describe the client hiring and paying the architect directly — the platform takes no percentage of a project and holds no client money. The seventh post (how-to-hire-an-architect-remotely-and-get-a-permit-ready-set) already has its 17-block body and is patched by seeds/patches/editorial.json, so it is deliberately absent from blog_bodies.",
+  "copy": [
+    {
+      "scope": "blog",
+      "key": "filter_all",
+      "text": "All",
+      "href": ""
+    },
+    {
+      "scope": "blog",
+      "key": "featured_prefix",
+      "text": "Featured",
+      "href": ""
+    },
+    {
+      "scope": "blog",
+      "key": "newsletter_placeholder",
+      "text": "you@email.com",
+      "href": ""
+    },
+    {
+      "scope": "blog",
+      "key": "newsletter_button_done",
+      "text": "Subscribed ✓",
+      "href": ""
+    },
+    {
+      "scope": "blog",
+      "key": "topics_col_by-project",
+      "text": "By project",
+      "href": ""
+    },
+    {
+      "scope": "blog",
+      "key": "topics_col_by-city",
+      "text": "By city",
+      "href": ""
+    },
+    {
+      "scope": "blog",
+      "key": "topics_col_get-started",
+      "text": "Get started",
+      "href": ""
+    },
+    {
+      "scope": "blog",
+      "key": "body_cta_eyebrow",
+      "text": "TRY IT FREE",
+      "href": ""
+    },
+    {
+      "scope": "blog",
+      "key": "detail_breadcrumb_home",
+      "text": "Home",
+      "href": "/"
+    },
+    {
+      "scope": "blog",
+      "key": "detail_breadcrumb_parent",
+      "text": "Guides",
+      "href": "/guides"
+    },
+    {
+      "scope": "blog",
+      "key": "detail_author_eyebrow",
+      "text": "WRITTEN BY",
+      "href": ""
+    },
+    {
+      "scope": "blog",
+      "key": "detail_related_heading",
+      "text": "Keep reading",
+      "href": ""
+    },
+    {
+      "scope": "blog",
+      "key": "detail_final_cta_heading",
+      "text": "Ready to hire an architect?",
+      "href": ""
+    },
+    {
+      "scope": "blog",
+      "key": "detail_final_cta_sub",
+      "text": "Free estimate. Matched with licensed architects in 48 hours.",
+      "href": ""
+    },
+    {
+      "scope": "blog",
+      "key": "detail_final_cta_button",
+      "text": "Start your project →",
+      "href": "/get-started"
+    }
+  ],
+  "blocks": {
+    "use_cases": [
+      {
+        "scope": "blog",
+        "group": "by-project",
+        "sort": 0,
+        "title": "Backyard ADU architects",
+        "href": "/projects/backyard-adu"
+      },
+      {
+        "scope": "blog",
+        "group": "by-project",
+        "sort": 1,
+        "title": "Home addition architects",
+        "href": "/projects/home-addition"
+      },
+      {
+        "scope": "blog",
+        "group": "by-project",
+        "sort": 2,
+        "title": "New custom home",
+        "href": "/projects/new-custom-home"
+      },
+      {
+        "scope": "blog",
+        "group": "by-project",
+        "sort": 3,
+        "title": "Kitchen & bath remodels",
+        "href": "/projects/kitchen-and-bath"
+      },
+      {
+        "scope": "blog",
+        "group": "by-project",
+        "sort": 4,
+        "title": "Commercial TI & restaurants",
+        "href": "/projects/commercial-ti"
+      },
+      {
+        "scope": "blog",
+        "group": "by-city",
+        "sort": 0,
+        "title": "Architects in Oakland, CA",
+        "href": "/cities/oakland"
+      },
+      {
+        "scope": "blog",
+        "group": "by-city",
+        "sort": 1,
+        "title": "Architects in San Francisco, CA",
+        "href": "/cities/san-francisco"
+      },
+      {
+        "scope": "blog",
+        "group": "by-city",
+        "sort": 2,
+        "title": "Architects in Los Angeles, CA",
+        "href": "/cities/los-angeles"
+      },
+      {
+        "scope": "blog",
+        "group": "by-city",
+        "sort": 3,
+        "title": "Architects in Austin, TX",
+        "href": "/cities/austin"
+      },
+      {
+        "scope": "blog",
+        "group": "by-city",
+        "sort": 4,
+        "title": "Architects in Seattle, WA",
+        "href": "/cities/seattle"
+      },
+      {
+        "scope": "blog",
+        "group": "get-started",
+        "sort": 0,
+        "title": "How it works",
+        "href": "/#how"
+      },
+      {
+        "scope": "blog",
+        "group": "get-started",
+        "sort": 1,
+        "title": "Instant estimate",
+        "href": "/get-started"
+      },
+      {
+        "scope": "blog",
+        "group": "get-started",
+        "sort": 2,
+        "title": "Pricing explained",
+        "href": "/#pricing"
+      },
+      {
+        "scope": "blog",
+        "group": "get-started",
+        "sort": 3,
+        "title": "Trust & safety",
+        "href": "/#architects"
+      },
+      {
+        "scope": "blog",
+        "group": "get-started",
+        "sort": 4,
+        "title": "For architects",
+        "href": "/for-architects"
+      }
+    ]
+  },
+  "editorial": {
+    "authors": [
+      {
+        "name": "Devon P., AIA",
+        "role": "Licensed architect · California",
+        "bio": "Devon prices and draws residential work across the Bay Area and has spent ten years explaining to homeowners exactly which line item is moving their number."
+      },
+      {
+        "name": "Priya N., AIA",
+        "role": "Licensed architect · California",
+        "bio": "Priya has taken permit sets through plan check in more than forty California jurisdictions and writes the checklists our architects use before they submit."
+      }
+    ],
+    "blog_posts": [
+      {
+        "slug": "what-does-an-architect-actually-cost-in-2026",
+        "dek": "Fixed quote versus hourly, the five things that actually move the number, and honest 2026 benchmarks for every common residential project."
+      },
+      {
+        "slug": "the-complete-backyard-adu-planning-guide",
+        "dek": "Setbacks, utilities, Title-24 and the real week-by-week timeline from first sketch to a stamped set your city will accept."
+      },
+      {
+        "slug": "reading-your-jurisdiction-a-permit-primer",
+        "dek": "Why the same 600 sq ft addition sails through one city and stalls for months in the next — and how to read your jurisdiction before you commit."
+      },
+      {
+        "slug": "8-questions-to-ask-before-you-hire-an-architect",
+        "dek": "The eight-question vetting call that separates a project which clears plan check from one that stalls at the counter."
+      },
+      {
+        "slug": "building-in-oakland-seismic-rules-you-should-know",
+        "dek": "Soft-story retrofits, hillside foundations and design review — what East Bay homeowners need to know before drawings start."
+      },
+      {
+        "slug": "home-additions-where-the-money-really-goes",
+        "dek": "Structural work, jurisdiction complexity and the choices that decide whether a second storey lands on budget."
+      }
+    ],
+    "blog_bodies": [
+      {
+        "post": "what-does-an-architect-actually-cost-in-2026",
+        "author": "Devon P., AIA",
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "Every architect you call will answer this question with “it depends” — and they are not being evasive. The number genuinely moves with your square footage, your jurisdiction, and how much of the job is drawing versus problem-solving. Here is how the pieces add up, so you can tell a fair number from a vague one."
+          },
+          {
+            "kind": "h2",
+            "text": "Fixed quote or hourly — and when each is honest"
+          },
+          {
+            "kind": "paragraph",
+            "text": "A fixed quote is the right structure when the scope is knowable up front: a kitchen remodel, a detached ADU from a clean survey, a straightforward rear extension. The architect can see the whole job, price it, and carry the risk of their own estimate."
+          },
+          {
+            "kind": "paragraph",
+            "text": "Hourly is the honest structure when the scope genuinely is not knowable — a change of use, a historic property, anything where the first month is discovery. Be wary of a fixed quote on an unknowable scope: it is either padded to cover the architect's risk, or it comes back later as a change order."
+          },
+          {
+            "kind": "h2",
+            "text": "What actually moves the number"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Five factors explain most of the spread between two quotes for what looks like the same project:"
+          },
+          {
+            "kind": "list",
+            "text": "Square footage, and whether the drawings cover one storey or two\nStructural scope — a new opening in a bearing wall costs far more to draw than a partition\nJurisdiction complexity, which decides how many review cycles to budget for\nWhether usable as-built drawings exist, or the building must be measured first\nWhich consultants are folded into the fee: structural, Title-24 energy, survey, geotechnical"
+          },
+          {
+            "kind": "h2",
+            "text": "Honest benchmarks by project type"
+          },
+          {
+            "kind": "paragraph",
+            "text": "As a 2026 starting point, a permit-ready residential set typically begins around $2,400 for a focused kitchen or bath remodel, from $2,400 for a detached backyard ADU, from $4,500 for a garage conversion, from $11,000 for a home addition, and from $26,000 for a ground-up custom home. Commercial tenant improvements start around $8,000 and a restaurant build-out around $9,000. Treat every one of those as the floor of a range rather than a quote — the architect sets their own price once they have seen your site."
+          },
+          {
+            "kind": "cta",
+            "cta_label": "Get my estimate →",
+            "cta_href": "/get-started",
+            "text": "See your project's estimate in 2 minutes"
+          },
+          {
+            "kind": "h2",
+            "text": "What the platform costs you"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Nothing. You hire and pay your architect directly, at the rate the two of you agree — ArchitectHire takes no percentage of your project and never holds your money. Architects pay a flat subscription to be in the network, which is why the price you negotiate is the price you pay."
+          },
+          {
+            "kind": "pullquote",
+            "text": "The cheapest set of drawings is the one that clears plan check the first time. Everything else is a discount you pay back in revision cycles.",
+            "attribution": "Devon P., AIA · Licensed CA"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Ask for the fee structure in writing, ask what is excluded, and ask how many plan-check revision cycles are included. An architect who answers those three clearly is usually the one whose number holds."
+          }
+        ]
+      },
+      {
+        "post": "the-complete-backyard-adu-planning-guide",
+        "author": "Maya E., AIA",
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "A backyard ADU is the most-requested project on this platform, and the one where good planning saves the most money. Almost every expensive surprise arrives in the first three weeks — in the setbacks, the utilities, or the energy code. Here is the whole sequence, in order."
+          },
+          {
+            "kind": "h2",
+            "text": "Start with the envelope your lot allows"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Before a single line is drawn, your lot sets the maximum: rear and side setbacks, lot coverage, the height limit, and how close the unit may sit to the main house. California's state ADU exemptions override a great deal of restrictive local zoning, but they do not override everything, and every city applies them slightly differently."
+          },
+          {
+            "kind": "paragraph",
+            "text": "A first-pass feasibility check answers the only question that matters this early: how many square feet can legally stand in your backyard, and where."
+          },
+          {
+            "kind": "h2",
+            "text": "Utilities are the line item people forget"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Drawings are rarely the expensive part of an ADU — the trench is. Before you commit to a location, find out:"
+          },
+          {
+            "kind": "list",
+            "text": "Whether the existing electrical panel has capacity or needs a service upgrade\nHow far the sewer lateral runs, and whether the unit can gravity-feed into it\nWhether the water meter is sized for a second dwelling\nWhether a new gas line is needed, or the unit will be all-electric\nWhere fire-department access and the egress path will run"
+          },
+          {
+            "kind": "image",
+            "text": "A site plan settles setbacks, the utility trench route and the fire access path before any interior layout is drawn."
+          },
+          {
+            "kind": "h2",
+            "text": "Title-24 and the all-electric question"
+          },
+          {
+            "kind": "paragraph",
+            "text": "California's energy code treats an ADU as its own dwelling. In practice most new ADUs now pencil out cheaper all-electric — a heat-pump mini-split and a heat-pump water heater — because it avoids a new gas line and clears Title-24 with less effort. Your architect models the compliance path and the forms go into the permit set."
+          },
+          {
+            "kind": "h2",
+            "text": "The real timeline"
+          },
+          {
+            "kind": "paragraph",
+            "text": "From a signed scope to a stamped set, a straightforward detached ADU runs about five to seven weeks: a week of as-builts and site measurement, two to three weeks of schematic and design development, then two weeks producing the permit set with structural and energy coordination. Plan check sits on top of that, and it is your jurisdiction's clock rather than your architect's."
+          },
+          {
+            "kind": "pullquote",
+            "text": "Every week people spend agonising over finishes at the start is a week they wish they had spent on the utility trench.",
+            "attribution": "Maya E., AIA · Licensed CA"
+          },
+          {
+            "kind": "cta",
+            "cta_label": "Get my estimate →",
+            "cta_href": "/get-started",
+            "text": "See what your ADU would cost to draw"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Settle the envelope, the utilities and the energy path first. The interior layout is the easy part, and it is the only part you can still change late without paying for it twice."
+          }
+        ]
+      },
+      {
+        "post": "reading-your-jurisdiction-a-permit-primer",
+        "author": "Priya N., AIA",
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "Two identical additions, two cities forty minutes apart: one is permitted in three weeks, the other takes five months and two rounds of corrections. Nothing about the drawings explains the gap. The jurisdiction does."
+          },
+          {
+            "kind": "h2",
+            "text": "What a jurisdiction actually controls"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Your city or county decides far more about your project's cost and timeline than most homeowners expect:"
+          },
+          {
+            "kind": "list",
+            "text": "Which building and energy code edition is in force, and any local amendments\nWhether your project needs planning approval before it reaches building plan check\nHow many review cycles are typical, and how long each one takes\nWhich consultant reports are mandatory — soils, survey, arborist, drainage\nWhether design review, historic review or a neighbourhood notice applies"
+          },
+          {
+            "kind": "h2",
+            "text": "Why review times differ so much"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Most of the variation is staffing and process, not strictness. A well-resourced counter with an over-the-counter path for simple residential work turns a small addition around quickly. A department with one plans examiner and a paper intake queue does not, no matter how clean your set is."
+          },
+          {
+            "kind": "paragraph",
+            "text": "The rest is code layering. Seismic zones, wildland-urban interface areas, coastal overlays and hillside ordinances each add sheets to the set and reviewers to the queue — and they compound."
+          },
+          {
+            "kind": "cta",
+            "cta_label": "Get my estimate →",
+            "cta_href": "/get-started",
+            "text": "See how your jurisdiction scores"
+          },
+          {
+            "kind": "h2",
+            "text": "How to read yours before you commit"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Look up three things before you sign a scope: the code edition in force, the published plan-check turnaround, and whether your parcel sits in any overlay district. Our jurisdiction database scores all fifty-two US jurisdictions on exactly these factors, and the estimate engine folds that score into the range it shows you."
+          },
+          {
+            "kind": "pullquote",
+            "text": "A clean set does not make a slow city fast. Knowing it is slow before you start is what keeps the project calm.",
+            "attribution": "Priya N., AIA · Licensed CA"
+          },
+          {
+            "kind": "paragraph",
+            "text": "None of this is a reason to hesitate — it is a reason to plan. An architect who has submitted in your jurisdiction before knows which sheets that plans examiner reads first, and that knowledge is worth more than any shortcut."
+          }
+        ]
+      },
+      {
+        "post": "8-questions-to-ask-before-you-hire-an-architect",
+        "author": "Priya N., AIA",
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "You will speak to two or three architects before you choose one, and those calls are short. These eight questions surface almost everything that goes wrong later, and they take about twenty minutes to work through."
+          },
+          {
+            "kind": "h2",
+            "text": "The eight questions"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Ask them on the scoping call, in this order:"
+          },
+          {
+            "kind": "list",
+            "text": "Are you licensed in the state where I am building, and what is your licence number?\nHave you permitted a project like mine in this jurisdiction before?\nWhat exactly is in the deliverable — which sheets, at which phase?\nWhat is explicitly excluded, and which consultants will I need to hire separately?\nIs this a fixed fee or hourly, and what triggers a change order?\nHow many plan-check revision cycles are included in that fee?\nWho stamps the drawings, and who answers the plans examiner's corrections?\nWhat do you need from me, and by when, to keep the schedule?"
+          },
+          {
+            "kind": "h2",
+            "text": "What good answers sound like"
+          },
+          {
+            "kind": "paragraph",
+            "text": "A strong answer is specific and unflattering where it needs to be. “Two revision cycles are included; a third is billed hourly” is a good answer. “We handle everything” is not — it usually means the exclusions have not been thought about yet."
+          },
+          {
+            "kind": "paragraph",
+            "text": "On licensure, the answer should come immediately and with a number you can verify against the state board's public registry. On this platform that check is already done: every architect you are matched with is verified as actively licensed in your state before they reach you."
+          },
+          {
+            "kind": "pullquote",
+            "text": "The architect who tells you what is not included is the one who has actually thought about your project.",
+            "attribution": "Priya N., AIA · Licensed CA"
+          },
+          {
+            "kind": "cta",
+            "cta_label": "Get my estimate →",
+            "cta_href": "/get-started",
+            "text": "Meet architects licensed in your state"
+          },
+          {
+            "kind": "h2",
+            "text": "One question to ask yourself"
+          },
+          {
+            "kind": "paragraph",
+            "text": "After the call, ask whether you understood the answers. You are about to hire and pay this person directly for months of technical work — clarity on a twenty-minute call is the best predictor you get of clarity when a correction notice lands."
+          }
+        ]
+      },
+      {
+        "post": "building-in-oakland-seismic-rules-you-should-know",
+        "author": "Maya E., AIA",
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "Oakland sits on and between two of the most closely studied fault systems in the world, and its building department reflects that. None of it should stop your project — but three rules decide the shape of your budget, and it is much cheaper to meet them at the drawing stage than at the counter."
+          },
+          {
+            "kind": "h2",
+            "text": "Soft-story: the one that catches people"
+          },
+          {
+            "kind": "paragraph",
+            "text": "A soft-storey building has a weak ground floor — typically tuck-under parking or a wide garage opening beneath living space. Oakland's retrofit programme has been working through these for years, and if your property is on the list, that obligation does not pause because you are doing unrelated work."
+          },
+          {
+            "kind": "paragraph",
+            "text": "If you are already opening walls, folding the retrofit into the same permit is usually far cheaper than doing it twice. Your architect should establish this in the first week, not the last."
+          },
+          {
+            "kind": "h2",
+            "text": "Hillside lots and the foundation question"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Above the flatlands, the foundation becomes the project. Expect the scope to include:"
+          },
+          {
+            "kind": "list",
+            "text": "A soils or geotechnical report, which usually drives the foundation type\nStepped or drilled-pier foundations rather than a simple slab\nLateral detailing and a continuous load path from roof to foundation\nDrainage design, because hillside water is a structural problem\nA survey establishing existing grade, which the city will check against"
+          },
+          {
+            "kind": "cta",
+            "cta_label": "Get my estimate →",
+            "cta_href": "/get-started",
+            "text": "Price a project on your Oakland lot"
+          },
+          {
+            "kind": "h2",
+            "text": "Design review, and when it applies"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Not every project triggers design review, but visible additions, hillside work and anything in a historic district often do. It adds weeks rather than impossibility, and the delay is usually caused by a submission that anticipated the wrong review path — not by the review itself."
+          },
+          {
+            "kind": "pullquote",
+            "text": "On an Oakland hillside the foundation is not a line item under the house. It is the house.",
+            "attribution": "Maya E., AIA · Licensed CA"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Hire an architect who has submitted in Oakland recently. They will know which reports the plans examiner wants attached at intake, and that single piece of local knowledge is what turns a five-month permit into a six-week one."
+          }
+        ]
+      },
+      {
+        "post": "home-additions-where-the-money-really-goes",
+        "author": "Devon P., AIA",
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "text": "Additions are where budgets drift the furthest, and almost never because of the things people worry about. Nobody's addition went over because of the tile. It went over because of what was holding the roof up."
+          },
+          {
+            "kind": "h2",
+            "text": "Structure is the whole ballgame"
+          },
+          {
+            "kind": "paragraph",
+            "text": "The moment you remove a bearing wall, raise a roof or add a storey, you are changing how the building carries load and resists lateral force. That means engineering, new framing, a continuous load path, and often a foundation upgrade underneath the new work."
+          },
+          {
+            "kind": "paragraph",
+            "text": "This is also why two quotes for “a 600 sq ft addition” can differ by a factor of three. One of them has looked at the framing; the other has looked at the square footage."
+          },
+          {
+            "kind": "h2",
+            "text": "Where the money actually goes"
+          },
+          {
+            "kind": "list",
+            "text": "Structural engineering and the framing the calculations require\nFoundation work under new or newly loaded walls\nBringing affected parts of the existing house up to current code\nRe-routing mechanical, plumbing and electrical around the new structure\nJurisdiction complexity — extra reports, extra sheets, extra review cycles"
+          },
+          {
+            "kind": "h2",
+            "text": "Second storey versus footprint"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Going up preserves your yard but almost always means a foundation upgrade, a new stair, and a temporary roof-off period. Going out is structurally simpler and usually cheaper per square foot, but it consumes lot coverage and can push you into setback or drainage problems. The right answer is a site-specific question, and it is worth deciding it before schematic design rather than during it."
+          },
+          {
+            "kind": "cta",
+            "cta_label": "Get my estimate →",
+            "cta_href": "/get-started",
+            "text": "Compare both options for your house"
+          },
+          {
+            "kind": "pullquote",
+            "text": "Decide up or out before schematic design. Changing your mind afterwards is the single most expensive thing a homeowner can do.",
+            "attribution": "Devon P., AIA · Licensed CA"
+          },
+          {
+            "kind": "paragraph",
+            "text": "Get the structural approach settled early, agree the fee structure in writing with the architect you hire and pay directly, and the rest of an addition is surprisingly predictable."
+          }
+        ]
+      }
+    ]
+  }
+}

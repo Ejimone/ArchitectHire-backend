@@ -4,14 +4,14 @@
   // ---- Services mega-dropdown (wide, 3-col) ----
   var SVC = [
     { name: 'Consults & reviews', items: [
-      ['Video consult', '$145', 'Services.dc.html#catalog'],
-      ['Plan review & markup', '$150', 'Services.dc.html#catalog'],
-      ['Feasibility check', '$250', 'Services.dc.html#catalog'],
+      ['Video consult', '$145', 'CAD Drafting.dc.html?svc=video-consult'],
+      ['Plan review & markup', '$150', 'CAD Drafting.dc.html?svc=plan-review'],
+      ['Feasibility check', '$250', 'CAD Drafting.dc.html?svc=feasibility'],
     ]},
     { name: 'Drafting & docs', items: [
       ['CAD drafting', '$65/hr', 'CAD Drafting.dc.html'],
-      ['As-built package', '$2,500', 'CAD Drafting.dc.html'],
-      ['PDF-to-CAD', '$10/sht', 'CAD Drafting.dc.html'],
+      ['As-built package', '$2,500', 'CAD Drafting.dc.html?svc=as-built'],
+      ['PDF-to-CAD', '$10/sht', 'CAD Drafting.dc.html?svc=pdf-to-cad'],
     ]},
     { name: '3D & visualization', items: [
       ['Single render', '$99', '3D Visualization.dc.html'],
@@ -19,36 +19,37 @@
       ['Walkthrough', '$50/s', '3D Visualization.dc.html'],
     ]},
     { name: 'Scanning & BIM', items: [
-      ['3D laser scanning', '$0.20/sf', 'Services.dc.html#catalog'],
-      ['Scan-to-BIM', '$0.50/sf', 'Services.dc.html#catalog'],
+      ['3D laser scanning', '$0.20/sf', 'CAD Drafting.dc.html?svc=laser-scanning'],
+      ['Scan-to-BIM', '$0.50/sf', 'CAD Drafting.dc.html?svc=scan-to-bim'],
     ]},
     { name: 'Engineering', items: [
-      ['Title-24 / energy', '$300', 'Services.dc.html#catalog'],
-      ['Structural stamp', '$1,500', 'Services.dc.html#catalog'],
-      ['Code consulting', '$150/hr', 'Services.dc.html#catalog'],
+      ['Title-24 / energy', '$300', 'CAD Drafting.dc.html?svc=title-24'],
+      ['Structural stamp', '$1,500', 'CAD Drafting.dc.html?svc=structural-stamp'],
+      ['Code consulting', '$150/hr', 'CAD Drafting.dc.html?svc=code-consulting'],
     ]},
     { name: 'Permits & full design', items: [
-      ['Permit set', '$2,000', 'Services.dc.html#catalog'],
-      ['Zoning study', '$1,500', 'Services.dc.html#catalog'],
+      ['Permit set', '$2,000', 'CAD Drafting.dc.html?svc=permit-set'],
+      ['Zoning study', '$1,500', 'CAD Drafting.dc.html?svc=zoning-study'],
       ['Full ADU / home', '$7,490', 'Project Landing.dc.html'],
     ]},
     { name: 'Interior design', items: [
-      ['Interior design package', '$1,200', 'Services.dc.html#catalog'],
-      ['Virtual staging', '$75', 'Services.dc.html#catalog'],
-      ['Furniture & FF&E plan', '$600', 'Services.dc.html#catalog'],
+      ['Interior design package', '$1,200', 'CAD Drafting.dc.html?svc=interior-design'],
+      ['Virtual staging', '$75', 'CAD Drafting.dc.html?svc=virtual-staging'],
+      ['Furniture & FF&E plan', '$600', 'CAD Drafting.dc.html?svc=ffe-plan'],
     ]},
   ];
 
   // ---- Projects (architecture project types) ----
   var PROJECTS = [
     ['Backyard ADU', 'From $2,400', 'Project Landing.dc.html'],
-    ['Home addition', 'From $11,000', 'Project Landing.dc.html'],
-    ['Whole-home renovation', 'From $8,500', 'Project Landing.dc.html'],
-    ['Kitchen & bath', 'From $2,400', 'Project Landing.dc.html'],
-    ['New custom home', 'From $26,000', 'Project Landing.dc.html'],
-    ['Garage conversion', 'From $4,500', 'Project Landing.dc.html'],
-    ['Commercial TI', 'From $8,000', 'Project Landing.dc.html'],
-    ['Change of use', 'From $6,000', 'Project Landing.dc.html'],
+    ['Home addition', 'From $3,500', 'Home Addition.dc.html'],
+    ['Whole-home renovation', 'From $4,000', 'Whole-Home Renovation.dc.html'],
+    ['Kitchen & bath', 'From $900', 'Kitchen and Bath.dc.html'],
+    ['New custom home', 'From $12,000', 'New Custom Home.dc.html'],
+    ['Garage conversion', 'From $2,000', 'Garage Conversion.dc.html'],
+    ['Commercial TI', 'From $4,000', 'Commercial TI.dc.html'],
+    ['Change of use', 'From $1,500', 'Change of Use.dc.html'],
+    ['Restaurant build-out', 'From $5,000', 'Restaurant Build-Out.dc.html'],
   ];
 
   // ---- Locations (cities) ----
@@ -175,7 +176,7 @@
             searchForm +
             '<div class="sn-cta" style="display:flex;align-items:center;gap:14px;flex-shrink:0;">' +
               '<a href="../app/Account.dc.html" class="sn-link" style="' + LK + 'font-size:15px;">Log in</a>' +
-              '<a href="../app/Get Started.dc.html" style="background:#135bff;color:#fff;padding:11px 20px;border-radius:9px;font-size:15px;font-weight:700;text-decoration:none;white-space:nowrap;box-shadow:0 2px 0 #0b3fcc;">Sign up</a>' +
+              '<a href="../app/Get Started.dc.html" style="background:#135bff;color:#fff;padding:11px 20px;border-radius:9px;font-size:15px;font-weight:700;text-decoration:none;white-space:nowrap;box-shadow:0 2px 0 #0b3fcc;">Get matched</a>' +
             '</div>' +
             '<button class="sn-burger" aria-label="Menu" style="display:none;margin-left:auto;flex-shrink:0;align-items:center;justify-content:center;width:42px;height:42px;border:1px solid #dbe2f2;border-radius:10px;background:#fff;cursor:pointer;">' +
               '<span style="display:block;width:18px;height:2px;background:#0a1440;box-shadow:0 -6px 0 #0a1440,0 6px 0 #0a1440;"></span></button>' +
@@ -184,7 +185,7 @@
             '<div style="max-width:1200px;margin:0 auto;padding:8px 24px 18px;display:flex;flex-direction:column;gap:2px;">' + mobileSearch + mobileLinks +
               '<div style="display:flex;gap:12px;margin-top:12px;">' +
                 '<a href="../app/Account.dc.html" style="flex:1;text-align:center;padding:12px;border-radius:9px;border:1px solid #dbe2f2;color:#232c57;font-weight:700;font-size:15px;text-decoration:none;">Log in</a>' +
-                '<a href="../app/Get Started.dc.html" style="flex:1;text-align:center;padding:12px;border-radius:9px;background:#135bff;color:#fff;font-weight:700;font-size:15px;text-decoration:none;">Sign up</a>' +
+                '<a href="../app/Get Started.dc.html" style="flex:1;text-align:center;padding:12px;border-radius:9px;background:#135bff;color:#fff;font-weight:700;font-size:15px;text-decoration:none;">Get matched</a>' +
               '</div>' +
             '</div>' +
           '</div>' +

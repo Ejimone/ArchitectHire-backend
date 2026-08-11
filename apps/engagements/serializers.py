@@ -140,8 +140,11 @@ class EngagementCreateSerializer(serializers.Serializer):
             if hourly_rate is None:
                 raise serializers.ValidationError("Architect has no hourly rate configured.")
 
-        fee_percent = Decimal("10")
-        try:  # payments app lands in Stage 9; fall back to the default until then
+        # Locked business decision: the platform takes 0% of a project —
+        # clients pay their architect directly. The FeePolicy singleton stays
+        # authoritative (its default is 0), and the fallback matches it.
+        fee_percent = Decimal("0")
+        try:
             from apps.payments.models import FeePolicy
 
             fee_percent = FeePolicy.current_percent()

@@ -10,7 +10,9 @@ import re
 from django.core.exceptions import ValidationError
 
 # Static marketing/app surfaces (mirrors design/README.md page inventory).
+# "chrome" holds site-wide shell copy (nav labels, auth buttons, footer legal).
 STATIC_PAGE_KEYS = [
+    "chrome",
     "landing",
     "services-landing",
     "services",
@@ -18,6 +20,8 @@ STATIC_PAGE_KEYS = [
     "cad-drafting",
     "architect-landing",
     "for-experts",
+    "expert-pricing",
+    "professional-tools",
     "projects",
     "cities",
     "blog",
@@ -33,6 +37,11 @@ STATIC_PAGE_KEYS = [
     "get-started",
     "order-render",
     "order-drafting",
+    # Signed-in app surfaces (design/app/*.dc.html).
+    "account",
+    "matches",
+    "engagement",
+    "pro",
 ]
 
 # Parameterized scope prefixes -> slug pattern.

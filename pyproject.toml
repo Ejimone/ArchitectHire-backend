@@ -19,9 +19,9 @@ dependencies = [
     "channels>=4.3,<5",
     "channels-redis>=4.3,<5",
     "celery[redis]>=5.6,<5.7",
-    "psycopg[binary]>=3.2",
+    "psycopg[binary,pool]>=3.2",
     "gunicorn>=23.0",
-    "uvicorn>=0.35",
+    "uvicorn[standard]>=0.35",
     "uvicorn-worker>=0.3",
     "whitenoise>=6.9",
     "pywebpush>=2.0",
@@ -39,6 +39,7 @@ dev = [
     "pytest-cov>=6.0",
     "pytest-asyncio>=1.0",
     "factory-boy>=3.3",
+    "daphne>=4.2.3",
 ]
 
 [tool.ruff]
@@ -56,7 +57,7 @@ ignore = ["DJ001"]
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "architecture_backend.settings.test"
 python_files = ["test_*.py"]
-addopts = "--reuse-db"
+addopts = "--reuse-db --cov=apps --cov-fail-under=100"
 asyncio_mode = "auto"
 
 [tool.coverage.run]

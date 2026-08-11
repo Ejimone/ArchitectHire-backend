@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f3f6fd; }
+  ::selection { background: #135bff; color: #fff; }
+  a { color: #135bff; text-decoration: none; }
+  a:hover { color: #0b3fcc; }
+  .lk { color: #0a1440; font-weight: 600; }
+  .lk:hover { color: #135bff; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+  /* __resp__ responsive overrides (media queries can't be inline) */
+  @media (max-width: 900px){
+    main{ padding-left:18px !important; padding-right:18px !important; }
+    header nav{ display:none !important; }
+    [style*="repeat(4"]{ grid-template-columns:1fr 1fr !important; }
+    [style*="repeat(3"]{ grid-template-columns:1fr !important; }
+    [style*="repeat(2"]{ grid-template-columns:1fr !important; }
+    [style*="grid-template-columns: 1."]{ grid-template-columns:1fr !important; }
+    [style*="grid-template-columns: 1fr 1fr"]{ grid-template-columns:1fr !important; }
+    [style*="position: sticky"]{ position:static !important; top:auto !important; }
+    [style*="padding: 15px 32px"]{ padding:12px 18px !important; }
+    [style*="padding: 18px 32px"]{ padding-left:18px !important; padding-right:18px !important; }
+    [style*="padding: 52px 44px"],[style*="padding: 48px 44px"],[style*="padding: 44px 42px"],[style*="padding: 44px 44px"]{ padding:30px 22px !important; }
+    [style*="padding: 56px"],[style*="padding: 52px;"],[style*="padding: 48px"],[style*="padding: 44px;"],[style*="padding: 40px"],[style*="padding: 34px"]{ padding:32px 22px !important; }
+    h1{ font-size:clamp(30px,7vw,42px) !important; }
+  }
+  @media (max-width: 520px){
+    [style*="repeat(4"]{ grid-template-columns:1fr !important; }
+    [style*="gap: 38px"],[style*="gap: 40px"]{ gap:22px !important; }
+  }
+</style>
+<script src="../image-slot.js"></script>
+</helmet>
+<div style="background: #f3f6fd; color: #0a1440; font-family: 'Hanken Grotesk', sans-serif; -webkit-font-smoothing: antialiased;">
+
+  <x-import component-from-global-scope="site-nav" from="./site-nav.js" style="display:contents" hint-size="100%,64px"></x-import>
+
+  <main style="max-width: 1200px; margin: 0 auto; padding: 0 32px 100px;">
+
+    <!-- BREADCRUMB -->
+    <nav style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #5b6493; margin-top: 22px;">
+      <a href="Landing.dc.html" style="color: #5b6493;">Home</a><span>/</span>
+      <a href="Landing.dc.html#categories" style="color: #5b6493;">Project types</a><span>/</span>
+      <span style="color: #0a1440; font-weight: 600;">{{ proj.name }}</span>
+    </nav>
+
+    <!-- HERO -->
+    <section style="margin-top: 16px; background: #0a1440; border-radius: 24px; overflow: hidden; display: grid; grid-template-columns: 1.05fr .95fr; align-items: stretch; min-height: 500px; animation: fadeUp .5s ease both;">
+      <div style="padding: 48px 44px; display: flex; flex-direction: column; justify-content: center; min-width: 0;">
+        <div style="display: inline-flex; align-self: flex-start; align-items: center; gap: 8px; padding: 6px 13px; border-radius: 100px; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: #0a1440; background: #ceff65; font-weight: 700; margin-bottom: 22px;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #0a1440;"></span>{{ proj.kicker }}</div>
+        <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(34px, 3vw, 46px); line-height: 1.03; letter-spacing: -.02em; font-weight: 800; color: #fff; text-wrap: balance;">{{ proj.h1 }}</h1>
+        <p style="font-size: 18px; line-height: 1.55; color: #b9c3e8; margin: 22px 0 26px; max-width: 30em; text-wrap: pretty;">{{ proj.intro }}</p>
+        <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+          <a href="../app/Get Started.dc.html" style="background: #135bff; color: #fff; padding: 15px 28px; border-radius: 11px; font-size: 16px; font-weight: 700; white-space: nowrap; box-shadow: 0 3px 0 #0b3fcc;">Get my {{ proj.short }} estimate →</a>
+        </div>
+        <div style="display: flex; gap: 38px; margin-top: 34px;">
+          <sc-for list="{{ proj.stats }}" as="s" hint-placeholder-count="3">
+            <div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 26px; color: #ceff65;">{{ s.v }}</div><div style="font-size: 13px; color: #9fb4ff;">{{ s.l }}</div></div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="position: relative; min-width: 0; min-height: 460px; overflow: hidden;">
+        <sc-for list="{{ heroSlides }}" as="h" hint-placeholder-count="3">
+          <div style="{{ h.wrapStyle }}">
+            <image-slot id="{{ h.slotId }}" shape="rect" fit="cover" src="{{ h.src }}" placeholder="{{ h.ph }}" style="position: absolute; inset: 0; width: 100%; height: 100%;"></image-slot>
+            <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(6,12,40,.72) 0%, rgba(6,12,40,.12) 40%, rgba(6,12,40,0) 62%);"></div>
+            <div style="position: absolute; left: 24px; bottom: 24px; right: 24px;">
+              <span style="display: inline-block; background: #ceff65; color: #0a1440; font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: .04em; padding: 4px 10px; border-radius: 100px; margin-bottom: 10px;">{{ h.tag }}</span>
+              <div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px; font-weight: 800; color: #fff; letter-spacing: -.01em;">{{ h.title }}</div>
+              <div style="font-size: 13px; color: #c7d2f2; margin-top: 3px;">{{ h.meta }}</div>
+            </div>
+          </div>
+        </sc-for>
+        <div style="position: absolute; right: 20px; top: 20px; display: flex; gap: 10px; z-index: 6;">
+          <button onClick="{{ heroPrev }}" aria-label="Previous project" style="width: 40px; height: 40px; border-radius: 50%; border: none; background: rgba(10,20,64,.55); backdrop-filter: blur(6px); color: #fff; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center;">←</button>
+          <button onClick="{{ heroNext }}" aria-label="Next project" style="width: 40px; height: 40px; border-radius: 50%; border: none; background: rgba(10,20,64,.55); backdrop-filter: blur(6px); color: #fff; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center;">→</button>
+        </div>
+        <div style="position: absolute; left: 24px; top: 24px; display: flex; gap: 7px; z-index: 6;">
+          <sc-for list="{{ heroDots }}" as="d" hint-placeholder-count="3">
+            <button onClick="{{ d.onClick }}" aria-label="Show project" style="{{ d.style }}"></button>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT'S INCLUDED -->
+    <section style="margin-top: 56px; display: grid; grid-template-columns: 1.25fr 1fr; gap: 40px; align-items: start;">
+      <div>
+        <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 700; letter-spacing: -.02em;">What a {{ proj.short }} drawing set includes</h2>
+        <p style="font-size: 16px; line-height: 1.65; color: #333c66; margin-top: 14px; text-wrap: pretty;">{{ proj.body }}</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 22px;">
+          <sc-for list="{{ proj.includes }}" as="it" hint-placeholder-count="6">
+            <div style="display: flex; gap: 10px; align-items: flex-start; background: #fff; border: 1px solid #e2e8f5; border-radius: 12px; padding: 14px 16px;">
+              <span style="color: #16924e; font-weight: 700;">✓</span>
+              <span style="font-size: 14.5px; color: #232c57; line-height: 1.4;">{{ it }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="background: #0a1440; border-radius: 16px; padding: 26px; position: sticky; top: 92px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #ceff65; letter-spacing: .05em;">TYPICAL PRICE RANGE</div>
+        <div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 38px; font-weight: 700; color: #fff; margin: 10px 0 2px;">{{ proj.range }}</div>
+        <div style="height: 8px; border-radius: 6px; background: #16265f; margin: 14px 0 8px; overflow: hidden;"><div style="{{ proj.barStyle }}"></div></div>
+        <div style="display: flex; justify-content: space-between; font-size: 13px; color: #9fb4ff;"><span>Affordable</span><span>Typical</span><span>Premium</span></div>
+        <div style="margin-top: 20px; padding-top: 18px; border-top: 1px solid #1d2f6e; display: flex; flex-direction: column; gap: 10px;">
+          <sc-for list="{{ proj.priceNotes }}" as="pn" hint-placeholder-count="3">
+            <div style="display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; color: #dbe6ff; line-height: 1.4;"><span style="color: #ceff65;">✓</span><span>{{ pn }}</span></div>
+          </sc-for>
+        </div>
+        <a href="../app/Get Started.dc.html" style="display: block; text-align: center; margin-top: 20px; background: #135bff; color: #fff; padding: 14px; border-radius: 10px; font-size: 15px; font-weight: 700; box-shadow: 0 3px 0 #0b3fcc;">Get my estimate →</a>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section style="margin-top: 72px;">
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 700; letter-spacing: -.02em;">How your {{ proj.short }} gets built</h2>
+      <div style="display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-top: 26px;">
+        <sc-for list="{{ proj.steps }}" as="st" hint-placeholder-count="4">
+          <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 22px;">
+            <span style="width: 28px; height: 28px; border-radius: 50%; background: #135bff; color: #fff; font-family: 'IBM Plex Mono', monospace; font-size: 13px; display: inline-flex; align-items: center; justify-content: center;">{{ st.n }}</span>
+            <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 700; margin: 12px 0 6px;">{{ st.t }}</h3>
+            <p style="font-size: 14px; line-height: 1.5; color: #3f4770;">{{ st.d }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- SAMPLE WORK CAROUSEL -->
+    <section style="margin-top: 72px;">
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+        <div>
+          <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 700; letter-spacing: -.02em;">{{ proj.name }} projects from the network</h2>
+          <p style="font-size: 16px; color: #3f4770; margin-top: 8px;">Recent stamped sets delivered by architects on the platform.</p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #5b6493;">{{ galleryCounter }}</div>
+          <button onClick="{{ galleryPrev }}" aria-label="Previous project" style="width: 46px; height: 46px; border-radius: 50%; border: 1px solid #d4ddf0; background: #fff; color: #0a1440; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center;" style-hover="border-color: #135bff; color: #135bff;">←</button>
+          <button onClick="{{ galleryNext }}" aria-label="Next project" style="width: 46px; height: 46px; border-radius: 50%; border: none; background: #135bff; color: #fff; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 3px 0 #0b3fcc;">→</button>
+        </div>
+      </div>
+      <div style="position: relative; margin-top: 26px; border-radius: 22px; overflow: hidden; background: #0a1440; height: min(72vh, 720px); min-height: 460px;">
+        <sc-for list="{{ gallerySlides }}" as="g" hint-placeholder-count="3">
+          <div style="{{ g.wrapStyle }}">
+            <image-slot id="{{ g.slotId }}" shape="rect" fit="cover" src="{{ g.src }}" placeholder="{{ g.ph }}" style="position: absolute; inset: 0; width: 100%; height: 100%;"></image-slot>
+            <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(6,12,40,.82) 0%, rgba(6,12,40,.28) 42%, rgba(6,12,40,0) 70%);"></div>
+            <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 44px; display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap;">
+              <div>
+                <span style="display: inline-block; background: #ceff65; color: #0a1440; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: .04em; padding: 5px 11px; border-radius: 100px; margin-bottom: 14px;">{{ g.tag }}</span>
+                <div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 34px; font-weight: 800; color: #fff; letter-spacing: -.02em;">{{ g.title }}</div>
+                <div style="font-size: 15px; color: #c7d2f2; margin-top: 6px;">{{ g.meta }}</div>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+        <div style="position: absolute; left: 44px; top: 28px; display: flex; gap: 8px; z-index: 6;">
+          <sc-for list="{{ galleryDots }}" as="d" hint-placeholder-count="3">
+            <button onClick="{{ d.onClick }}" aria-label="Show project" style="{{ d.style }}"></button>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section style="margin-top: 72px; text-align: center;">
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 700; letter-spacing: -.02em;">{{ proj.name }} FAQs</h2>
+      <div style="margin: 24px auto 0; display: flex; flex-direction: column; gap: 12px; max-width: 860px; text-align: left;">
+        <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="4">
+          <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 14px; overflow: hidden;">
+            <button onClick="{{ f.toggle }}" style="width: 100%; text-align: left; background: none; border: none; cursor: pointer; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-family: inherit;">
+              <span style="font-size: 17px; font-weight: 700; color: #0a1440;">{{ f.q }}</span>
+              <span style="{{ f.iconStyle }}">+</span>
+            </button>
+            <div style="{{ f.bodyStyle }}"><p style="font-size: 15px; line-height: 1.6; color: #333c66;">{{ f.a }}</p></div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- RELATED PROJECT TYPES (internal links) -->
+    <section style="margin-top: 64px;">
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 700; letter-spacing: -.02em;">Related project types</h2>
+      <p style="font-size: 16px; color: #3f4770; margin-top: 8px;">Explore typical price ranges for other kinds of projects.</p>
+      <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 26px;">
+        <sc-for list="{{ related }}" as="r" hint-placeholder-count="6">
+          <a href="{{ r.href }}" style="background: #135bff; color: #fff; border-radius: 14px; padding: 18px 22px; display: flex; justify-content: space-between; align-items: center; gap: 12px;" style-hover="background: #0b3fcc;">
+            <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 17px; font-weight: 700; letter-spacing: -.01em;">{{ r.label }}</span>
+            <span style="font-size: 18px; opacity: .85;">→</span>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section style="margin-top: 64px; background: #135bff; border-radius: 22px; padding: 52px; text-align: center;">
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 36px; font-weight: 800; color: #fff; letter-spacing: -.02em; text-wrap: balance;">Ready to price your {{ proj.short }}?</h2>
+      <p style="font-size: 17px; color: #dbe6ff; margin: 12px 0 26px;">Free instant estimate. Matched with licensed architects in 48 hours.</p>
+      <a href="../app/Get Started.dc.html" style="display: inline-block; background: #ceff65; color: #0a1440; padding: 17px 34px; border-radius: 12px; font-size: 17px; font-weight: 800; box-shadow: 0 4px 0 #a9d94a;">Start my {{ proj.short }} →</a>
+    </section>
+  </main>
+
+  <x-import component-from-global-scope="site-footer" from="./site-footer.js" hint-size="100%,460px"></x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1200, &quot;height&quot;: 900}, &quot;projectName&quot;: {&quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;Kitchen & bath&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;SEO target&quot;}}">
+class Component extends DCLogic {
+  state = { open: 0, galleryIndex: 0, heroIndex: 0 };
+
+  renderVals(){
+    const projects = {
+      'Backyard ADU': {
+        name:'Backyard ADU', short:'ADU', kicker:'Accessory Dwelling Units',
+        h1:'Backyard ADU architects who deliver permit-ready plans',
+        intro:'Match with licensed architects who design detached and garage-conversion ADUs day in, day out \u2014 from feasibility to a stamped set your city will approve. Remote, hired directly, with clear pricing up front.',
+        price:'From $2,400', range:'$2,400 – $6,500', bar:40,
+        heroPh:'Backyard ADU exterior photo',
+        stats:[{v:'From $2,400',l:'typical price range'},{v:'2\u20133 wk',l:'to stamped set'}],
+        body:'An ADU set is small but detail-dense \u2014 setbacks, utility connections, fire separation and energy compliance all have to be right for a smooth plan check. Architects on the platform who specialize in ADUs know the shortcuts and the traps.',
+        includes:['Site plan with setbacks','Floor plans & elevations','Structural coordination','Title-24 energy compliance','Utility & MEP layout','Permit-ready stamped set'],
+        priceNotes:['Scales with size \u2014 studios stay affordable','Agreed with your architect up front','Pay by milestone as you approve work'],
+        steps:[
+          {n:'1',t:'Estimate',d:'Answer a short questionnaire and get an itemized ADU price instantly.'},
+          {n:'2',t:'Match',d:'Meet 2\u20133 architects pre-cleared on ADU + jurisdiction experience.'},
+          {n:'3',t:'Design',d:'Scope on a call, hire your architect directly, and iterate on plans over chat and video.'},
+          {n:'4',t:'Permit',d:'Receive a stamped set and submit for permit \u2014 revisions supported.'},
+        ],
+        gallery:[
+          {slotId:'p-g1',ph:'ADU project photo',src:'../uploads/Generated Image August 10, 2026 - 3_04PM.jpg',tag:'Detached',title:'Detached 2-bed ADU',meta:'Oakland, CA · 720 sq ft · stamped in 6 wks'},
+          {slotId:'p-g2',ph:'ADU project photo',src:'../uploads/Generated Image August 10, 2026 - 3_09PM.jpg',tag:'Conversion',title:'Garage conversion',meta:'San Jose, CA · 480 sq ft · permit-ready'},
+          {slotId:'p-g3',ph:'ADU project photo',src:'../uploads/Generated Image August 10, 2026 - 3_15PM.jpg',tag:'Studio',title:'Studio ADU + deck',meta:'Berkeley, CA · 400 sq ft · first-pass approval'},
+        ],
+      },
+      'Home addition': {
+        name:'Home addition', short:'addition', kicker:'Home Additions',
+        h1:'Home addition architects who deliver permit-ready plans',
+        intro:'Match with licensed architects who design room additions, second stories and bump-outs \u2014 tying new structure cleanly into your existing home, all the way to a stamped set. Remote, hired directly, with clear pricing up front.',
+        price:'From $3,500', range:'$3,500 \u2013 $9,000', bar:56,
+        heroPh:'Home addition exterior photo',
+        stats:[{v:'From $3,500',l:'typical price range'},{v:'3\u20134 wk',l:'to stamped set'}],
+        body:'An addition has to marry new framing, foundation and roofline to what is already there \u2014 and satisfy structural, energy and setback rules along the way. Architects who do additions constantly know how to keep the tie-in clean and the plan check smooth.',
+        includes:['Existing & proposed plans','Structural coordination','Foundation & framing details','Title-24 energy compliance','Roof & exterior tie-in','Permit-ready stamped set'],
+        priceNotes:['Scales with size & scope','Agreed with your architect up front','Pay by milestone as you approve work'],
+        steps:[{n:'1',t:'Estimate',d:'Answer a short questionnaire and get an itemized price instantly.'},{n:'2',t:'Match',d:'Meet 2\u20133 architects pre-cleared on additions + your jurisdiction.'},{n:'3',t:'Design',d:'Scope on a call, hire directly, and iterate on plans over chat and video.'},{n:'4',t:'Permit',d:'Receive a stamped set and submit for permit \u2014 revisions supported.'}],
+        gallery:[
+          {slotId:'p-g1',ph:'Home addition photo',src:'',tag:'Second story',title:'Second-story addition',meta:'Berkeley, CA \u00b7 640 sq ft added'},
+          {slotId:'p-g2',ph:'Home addition photo',src:'',tag:'Bump-out',title:'Kitchen bump-out',meta:'Oakland, CA \u00b7 180 sq ft added'},
+          {slotId:'p-g3',ph:'Home addition photo',src:'',tag:'Rear addition',title:'Rear great-room addition',meta:'San Jose, CA \u00b7 420 sq ft added'},
+        ],
+      },
+      'Whole-home renovation': {
+        name:'Whole-home renovation', short:'renovation', kicker:'Whole-Home Renovations',
+        h1:'Whole-home renovation architects who deliver permit-ready plans',
+        intro:'Match with licensed architects who reimagine entire homes \u2014 reworking layouts, opening up plans and modernizing systems, all the way to a stamped set your city will approve. Remote, hired directly, with clear pricing up front.',
+        price:'From $4,000', range:'$4,000 \u2013 $12,000', bar:60,
+        heroPh:'Whole-home renovation photo',
+        stats:[{v:'From $4,000',l:'typical price range'},{v:'4\u20136 wk',l:'to stamped set'}],
+        body:'A full renovation touches structure, layout and every system at once. Architects who take on whole-home work sequence the drawings so demolition, framing and finishes all line up \u2014 and the permit set holds together.',
+        includes:['As-built & proposed plans','Structural where walls move','Kitchen & bath layouts','Electrical & plumbing plans','Finish & fixture schedule','Permit-ready stamped set'],
+        priceNotes:['Scales with size & scope','Agreed with your architect up front','Pay by milestone as you approve work'],
+        steps:[{n:'1',t:'Estimate',d:'Answer a short questionnaire and get an itemized price instantly.'},{n:'2',t:'Match',d:'Meet 2\u20133 architects pre-cleared on renovations + your jurisdiction.'},{n:'3',t:'Design',d:'Scope on a call, hire directly, and iterate on plans over chat and video.'},{n:'4',t:'Permit',d:'Receive a stamped set and submit for permit \u2014 revisions supported.'}],
+        gallery:[
+          {slotId:'p-g1',ph:'Renovation photo',src:'',tag:'Interior gut',title:'Full interior gut renovation',meta:'Oakland, CA \u00b7 1,850 sq ft'},
+          {slotId:'p-g2',ph:'Renovation photo',src:'',tag:'Open-plan',title:'Open-plan main floor',meta:'Berkeley, CA \u00b7 1,200 sq ft'},
+          {slotId:'p-g3',ph:'Renovation photo',src:'',tag:'Exterior',title:'Exterior & envelope refresh',meta:'San Jose, CA \u00b7 whole home'},
+        ],
+      },
+      'Kitchen & bath': {
+        name:'Kitchen & bath', short:'remodel', kicker:'Kitchen & Bath',
+        h1:'Kitchen & bath architects who deliver permit-ready plans',
+        intro:'Match with licensed architects who focus on kitchens and baths \u2014 tight, detail-dense remodels where layout, plumbing and finishes all have to be exact. Remote, hired directly, with clear pricing up front.',
+        price:'From $900', range:'$900 \u2013 $2,400', bar:22,
+        heroPh:'Kitchen or bath remodel photo',
+        stats:[{v:'From $900',l:'typical price range'},{v:'1\u20132 wk',l:'to stamped set'}],
+        body:'Kitchens and baths pack plumbing, electrical, ventilation and cabinetry into a small footprint. Architects who specialize here draw layouts your contractor can build from and your inspector will pass.',
+        includes:['As-built & proposed plans','Electrical & plumbing layout','Cabinet & fixture schedule','Finish selections','Ventilation details','Permit-ready stamped set'],
+        priceNotes:['Scales with size & scope','Agreed with your architect up front','Pay by milestone as you approve work'],
+        steps:[{n:'1',t:'Estimate',d:'Answer a short questionnaire and get an itemized price instantly.'},{n:'2',t:'Match',d:'Meet 2\u20133 architects pre-cleared on kitchen & bath + your jurisdiction.'},{n:'3',t:'Design',d:'Scope on a call, hire directly, and iterate on plans over chat and video.'},{n:'4',t:'Permit',d:'Receive a stamped set and submit for permit \u2014 revisions supported.'}],
+        gallery:[
+          {slotId:'p-g1',ph:'Kitchen photo',src:'',tag:'Kitchen',title:'Chef\u2019s kitchen remodel',meta:'Oakland, CA \u00b7 260 sq ft'},
+          {slotId:'p-g2',ph:'Bath photo',src:'',tag:'Primary bath',title:'Spa primary bath',meta:'Berkeley, CA \u00b7 140 sq ft'},
+          {slotId:'p-g3',ph:'Bath photo',src:'',tag:'Powder room',title:'Powder room refresh',meta:'San Jose, CA \u00b7 45 sq ft'},
+        ],
+      },
+      'New custom home': {
+        name:'New custom home', short:'home', kicker:'New Custom Homes',
+        h1:'New custom home architects who deliver permit-ready plans',
+        intro:'Match with licensed architects who design ground-up custom homes \u2014 from concept through a complete, stamped construction set. Remote, hired directly, with clear pricing up front.',
+        price:'From $12,000', range:'$12,000 \u2013 $28,000', bar:85,
+        heroPh:'New custom home exterior photo',
+        stats:[{v:'From $12,000',l:'typical price range'},{v:'8\u201312 wk',l:'to stamped set'}],
+        body:'A ground-up home is the deepest set on the platform \u2014 site, structure, envelope and every system designed from scratch. Architects who do custom homes carry the whole thing from massing to construction docs.',
+        includes:['Full design & construction docs','Structural & MEP coordination','Site & grading plan','Title-24 energy compliance','3D visualization option','Permit-ready stamped set'],
+        priceNotes:['Scales with size & scope','Agreed with your architect up front','Pay by milestone as you approve work'],
+        steps:[{n:'1',t:'Estimate',d:'Answer a short questionnaire and get an itemized price instantly.'},{n:'2',t:'Match',d:'Meet 2\u20133 architects pre-cleared on custom homes + your jurisdiction.'},{n:'3',t:'Design',d:'Scope on a call, hire directly, and iterate on plans over chat and video.'},{n:'4',t:'Permit',d:'Receive a stamped set and submit for permit \u2014 revisions supported.'}],
+        gallery:[
+          {slotId:'p-g1',ph:'Custom home photo',src:'',tag:'Modern',title:'Modern courtyard home',meta:'Oakland, CA \u00b7 3,200 sq ft'},
+          {slotId:'p-g2',ph:'Custom home photo',src:'',tag:'Farmhouse',title:'Modern farmhouse',meta:'Berkeley, CA \u00b7 2,700 sq ft'},
+          {slotId:'p-g3',ph:'Custom home photo',src:'',tag:'Hillside',title:'Hillside stepped home',meta:'San Jose, CA \u00b7 2,900 sq ft'},
+        ],
+      },
+      'Garage conversion': {
+        name:'Garage conversion', short:'conversion', kicker:'Garage Conversions',
+        h1:'Garage conversion architects who deliver permit-ready plans',
+        intro:'Match with licensed architects who turn garages into living space \u2014 ADUs, offices and suites \u2014 handling egress, light and ventilation to a stamped set. Remote, hired directly, with clear pricing up front.',
+        price:'From $2,000', range:'$2,000 \u2013 $5,000', bar:34,
+        heroPh:'Garage conversion photo',
+        stats:[{v:'From $2,000',l:'typical price range'},{v:'2\u20133 wk',l:'to stamped set'}],
+        body:'Converting a garage means adding egress, light, ventilation and insulation while reworking the slab and openings. Architects who do conversions know exactly what a plan checker will look for.',
+        includes:['Existing & proposed plans','Egress, light & ventilation','Structural at openings','Title-24 energy compliance','Utility & MEP layout','Permit-ready stamped set'],
+        priceNotes:['Scales with size & scope','Agreed with your architect up front','Pay by milestone as you approve work'],
+        steps:[{n:'1',t:'Estimate',d:'Answer a short questionnaire and get an itemized price instantly.'},{n:'2',t:'Match',d:'Meet 2\u20133 architects pre-cleared on conversions + your jurisdiction.'},{n:'3',t:'Design',d:'Scope on a call, hire directly, and iterate on plans over chat and video.'},{n:'4',t:'Permit',d:'Receive a stamped set and submit for permit \u2014 revisions supported.'}],
+        gallery:[
+          {slotId:'p-g1',ph:'Garage conversion photo',src:'',tag:'ADU',title:'Garage-to-ADU conversion',meta:'Oakland, CA \u00b7 400 sq ft'},
+          {slotId:'p-g2',ph:'Garage conversion photo',src:'',tag:'Studio',title:'Studio suite conversion',meta:'Berkeley, CA \u00b7 320 sq ft'},
+          {slotId:'p-g3',ph:'Garage conversion photo',src:'',tag:'Home office',title:'Detached home office',meta:'San Jose, CA \u00b7 280 sq ft'},
+        ],
+      },
+      'Commercial TI': {
+        name:'Commercial TI', short:'TI', kicker:'Commercial Tenant Improvements',
+        h1:'Commercial TI architects who deliver permit-ready plans',
+        intro:'Match with licensed architects who fit out commercial space \u2014 offices, retail and clinics \u2014 handling code, accessibility and MEP to a stamped set. Remote, hired directly, with clear pricing up front.',
+        price:'From $4,000', range:'$4,000 \u2013 $12,000', bar:60,
+        heroPh:'Commercial tenant improvement photo',
+        stats:[{v:'From $4,000',l:'typical price range'},{v:'3\u20135 wk',l:'to stamped set'}],
+        body:'A tenant improvement has to satisfy occupancy, accessibility and egress code while coordinating mechanical, electrical and plumbing. Architects who do TI work move fast and keep plan check clean.',
+        includes:['Tenant-improvement plan set','Code & accessibility compliance','Egress & occupancy analysis','MEP coordination','Title-24 energy compliance','Permit-ready stamped set'],
+        priceNotes:['Scales with size & scope','Agreed with your architect up front','Pay by milestone as you approve work'],
+        steps:[{n:'1',t:'Estimate',d:'Answer a short questionnaire and get an itemized price instantly.'},{n:'2',t:'Match',d:'Meet 2\u20133 architects pre-cleared on commercial TI + your jurisdiction.'},{n:'3',t:'Design',d:'Scope on a call, hire directly, and iterate on plans over chat and video.'},{n:'4',t:'Permit',d:'Receive a stamped set and submit for permit \u2014 revisions supported.'}],
+        gallery:[
+          {slotId:'p-g1',ph:'Commercial TI photo',src:'',tag:'Office',title:'Open office fit-out',meta:'Oakland, CA \u00b7 4,200 sq ft'},
+          {slotId:'p-g2',ph:'Commercial TI photo',src:'',tag:'Retail',title:'Retail storefront TI',meta:'Berkeley, CA \u00b7 1,800 sq ft'},
+          {slotId:'p-g3',ph:'Commercial TI photo',src:'',tag:'Medical',title:'Medical suite fit-out',meta:'San Jose, CA \u00b7 2,600 sq ft'},
+        ],
+      },
+      'Change of use': {
+        name:'Change of use', short:'change of use', kicker:'Change of Use',
+        h1:'Change-of-use architects who deliver permit-ready plans',
+        intro:'Match with licensed architects who re-permit buildings for a new use \u2014 reclassifying occupancy and bringing accessibility and egress up to code, all the way to a stamped set. Remote, hired directly, with clear pricing up front.',
+        price:'From $1,500', range:'$1,500 \u2013 $8,000', bar:45,
+        heroPh:'Change-of-use project photo',
+        stats:[{v:'From $1,500',l:'typical price range'},{v:'3\u20135 wk',l:'to stamped set'}],
+        body:'Changing a building\u2019s use triggers a new occupancy classification and a cascade of code, accessibility and egress requirements. Architects who handle change-of-use map the path before you commit.',
+        includes:['Existing & proposed plans','Occupancy classification','Accessibility upgrades','Egress analysis','MEP coordination','Permit-ready stamped set'],
+        priceNotes:['Scales with size & scope','Agreed with your architect up front','Pay by milestone as you approve work'],
+        steps:[{n:'1',t:'Estimate',d:'Answer a short questionnaire and get an itemized price instantly.'},{n:'2',t:'Match',d:'Meet 2\u20133 architects pre-cleared on change-of-use + your jurisdiction.'},{n:'3',t:'Design',d:'Scope on a call, hire directly, and iterate on plans over chat and video.'},{n:'4',t:'Permit',d:'Receive a stamped set and submit for permit \u2014 revisions supported.'}],
+        gallery:[
+          {slotId:'p-g1',ph:'Change-of-use photo',src:'',tag:'Retail \u2192 cafe',title:'Retail to cafe',meta:'Oakland, CA \u00b7 1,400 sq ft'},
+          {slotId:'p-g2',ph:'Change-of-use photo',src:'',tag:'Warehouse \u2192 studio',title:'Warehouse to studio',meta:'Berkeley, CA \u00b7 3,000 sq ft'},
+          {slotId:'p-g3',ph:'Change-of-use photo',src:'',tag:'Office \u2192 clinic',title:'Office to clinic',meta:'San Jose, CA \u00b7 2,100 sq ft'},
+        ],
+      },
+      'Restaurant build-out': {
+        name:'Restaurant build-out', short:'build-out', kicker:'Restaurant Build-Outs',
+        h1:'Restaurant build-out architects who deliver permit-ready plans',
+        intro:'Match with licensed architects who design restaurants \u2014 front-of-house, kitchen and hood layouts \u2014 coordinating health-department and code review to a stamped set. Remote, hired directly, with clear pricing up front.',
+        price:'From $5,000', range:'$5,000 \u2013 $15,000', bar:70,
+        heroPh:'Restaurant interior photo',
+        stats:[{v:'From $5,000',l:'typical price range'},{v:'4\u20136 wk',l:'to stamped set'}],
+        body:'A restaurant build-out layers health-department, fire and accessibility review on top of a demanding kitchen and MEP scope. Architects who do food-and-beverage work coordinate all of it into one clean set.',
+        includes:['Floor plan & seating layout','Kitchen & hood layout','Health-department compliance','Accessibility & egress','MEP & grease coordination','Permit-ready stamped set'],
+        priceNotes:['Scales with size & scope','Agreed with your architect up front','Pay by milestone as you approve work'],
+        steps:[{n:'1',t:'Estimate',d:'Answer a short questionnaire and get an itemized price instantly.'},{n:'2',t:'Match',d:'Meet 2\u20133 architects pre-cleared on restaurant work + your jurisdiction.'},{n:'3',t:'Design',d:'Scope on a call, hire directly, and iterate on plans over chat and video.'},{n:'4',t:'Permit',d:'Receive a stamped set and submit for permit \u2014 revisions supported.'}],
+        gallery:[
+          {slotId:'p-g1',ph:'Restaurant photo',src:'',tag:'Full-service',title:'Full-service dining room',meta:'Oakland, CA \u00b7 3,400 sq ft'},
+          {slotId:'p-g2',ph:'Restaurant photo',src:'',tag:'Fast-casual',title:'Fast-casual counter',meta:'Berkeley, CA \u00b7 1,600 sq ft'},
+          {slotId:'p-g3',ph:'Restaurant photo',src:'',tag:'Cafe',title:'Neighborhood cafe',meta:'San Jose, CA \u00b7 1,100 sq ft'},
+        ],
+      },
+    };
+    const nameToFile = {
+      'Backyard ADU':'Project Landing.dc.html',
+      'Home addition':'Home Addition.dc.html',
+      'Whole-home renovation':'Whole-Home Renovation.dc.html',
+      'Kitchen & bath':'Kitchen and Bath.dc.html',
+      'New custom home':'New Custom Home.dc.html',
+      'Garage conversion':'Garage Conversion.dc.html',
+      'Commercial TI':'Commercial TI.dc.html',
+      'Change of use':'Change of Use.dc.html',
+      'Restaurant build-out':'Restaurant Build-Out.dc.html',
+    };
+    const ACTIVE = 'Kitchen & bath'; /*__ACTIVE__*/
+    const proj = projects[ACTIVE] || projects['Backyard ADU'];
+    const pn = this.props.projectName;
+    if (pn && pn !== proj.name) proj.name = pn;
+    proj.barStyle = `height:100%;width:${proj.bar}%;background:linear-gradient(90deg,#135bff,#ceff65);border-radius:6px;`;
+
+    const faqData = [
+      { q:'How much does it cost to design a '+proj.short+'?', a:'A '+proj.name+' drawing set typically runs '+proj.range+' as a typical range, scaling with square footage and complexity. You see an itemized instant estimate before talking to anyone, and each architect sets their own price — confirmed on your scoping call.' },
+      { q:'How long does the design take?', a:'Most '+proj.name+' sets reach a stamped, permit-ready state in about 2\u20133 weeks of active design, depending on revision cycles and how quickly site info is provided.' },
+      { q:'Is the architect licensed for my area?', a:'Yes. Every match is verified as licensed in your state, and pre-cleared for '+proj.name+' work in your jurisdiction, before it reaches you.' },
+      { q:'What do I need to provide?', a:'Basic site information, measurements or a recent survey, and photos. Your architect guides you through exactly what\u2019s needed \u2014 no in-person visit required.' },
+    ];
+    const faqs = faqData.map((f,i)=>({
+      q:f.q, a:f.a, toggle:()=>this.setState(s=>({ open: s.open===i?-1:i })),
+      iconStyle:`font-size:24px;color:#135bff;font-weight:400;transition:transform .2s ease;transform:rotate(${this.state.open===i?45:0}deg);`,
+      bodyStyle:`padding:${this.state.open===i?'0 24px 20px':'0 24px'};max-height:${this.state.open===i?'260px':'0'};overflow:hidden;transition:all .28s ease;`,
+    }));
+
+    const related = Object.keys(projects).filter(k=>k!==ACTIVE).map(k=>({ label: projects[k].name, href: nameToFile[k] }));    const footerCols = [
+      { h:'Product', items:[
+        {label:'How it works', href:'Landing.dc.html#how'},
+        {label:'Services', href:'Services.dc.html'},
+        {label:'Instant estimate', href:'../app/Get Started.dc.html'},
+        {label:'Jurisdiction database', href:'Jurisdiction Database.dc.html'},
+        {label:'Case studies', href:'Case Studies.dc.html'},
+      ]},
+      { h:'Explore', items:[
+        {label:'Inspiration', href:'Inspiration.dc.html'},
+        {label:'Guides', href:'Blog.dc.html'},
+        {label:'For architects', href:'Architect Landing.dc.html'},
+        {label:'By project', href:'Project Landing.dc.html'},
+        {label:'By city', href:'City Landing.dc.html'},
+      ]},
+      { h:'Company', items:[
+        {label:'About', href:'About.dc.html'},
+        {label:'Careers', href:'Careers.dc.html'},
+        {label:'Contact', href:'Contact.dc.html'},
+        {label:'Privacy', href:'Privacy.dc.html'},
+      ]},
+    ];
+
+    // ---- hero carousel (from this project's gallery) ----
+    const heroDefs = proj.gallery.map((g,i)=>({ slotId:'proj-hero'+(i+1), src:g.src, tag:g.tag, title:g.title, meta:g.meta }));
+    const hLen = heroDefs.length;
+    const hi = ((this.state.heroIndex % hLen) + hLen) % hLen;
+    const heroSlides = heroDefs.map((h,i)=>({
+      ...h, ph:proj.heroPh,
+      wrapStyle:`position:absolute;inset:0;transition:opacity .6s ease;opacity:${i===hi?1:0};z-index:${i===hi?2:1};`,
+    }));
+    const heroDots = heroDefs.map((h,i)=>({
+      onClick:()=>this.setState({ heroIndex:i }),
+      style:`width:${i===hi?22:8}px;height:8px;border-radius:100px;border:none;cursor:pointer;padding:0;background:${i===hi?'#ceff65':'rgba(255,255,255,.55)'};transition:all .3s ease;`,
+    }));
+    const heroNext = ()=>this.setState(s=>({ heroIndex:s.heroIndex+1 }));
+    const heroPrev = ()=>this.setState(s=>({ heroIndex:s.heroIndex-1 }));
+
+    // ---- sample-work carousel ----
+    const gLen = proj.gallery.length;
+    const gi = ((this.state.galleryIndex % gLen) + gLen) % gLen;
+    const gallerySlides = proj.gallery.map((g,i)=>({
+      ...g,
+      wrapStyle:`position:absolute;inset:0;transition:opacity .6s ease;opacity:${i===gi?1:0};z-index:${i===gi?2:1};`,
+    }));
+    const galleryDots = proj.gallery.map((g,i)=>({
+      onClick:()=>this.setState({ galleryIndex:i }),
+      style:`width:${i===gi?26:9}px;height:9px;border-radius:100px;border:none;cursor:pointer;padding:0;background:${i===gi?'#ceff65':'rgba(255,255,255,.5)'};transition:all .3s ease;`,
+    }));
+    const galleryCounter = `${String(gi+1).padStart(2,'0')} / ${String(gLen).padStart(2,'0')}`;
+    const galleryNext = ()=>this.setState(s=>({ galleryIndex:s.galleryIndex+1 }));
+    const galleryPrev = ()=>this.setState(s=>({ galleryIndex:s.galleryIndex-1 }));
+
+    return { proj, faqs, related, footerCols, gallerySlides, galleryDots, galleryCounter, galleryNext, galleryPrev, heroSlides, heroDots, heroNext, heroPrev };
+  }
+}
+</script>
+</body>
+</html>

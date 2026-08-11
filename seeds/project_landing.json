@@ -1,0 +1,721 @@
+{
+  "Backyard ADU": {
+    "name": "Backyard ADU",
+    "short": "ADU",
+    "kicker": "Accessory Dwelling Units",
+    "h1": "Backyard ADU architects who deliver permit-ready plans",
+    "intro": "Match with licensed architects who design detached and garage-conversion ADUs day in, day out — from feasibility to a stamped set your city will approve. Remote, hired directly, with clear pricing up front.",
+    "price": "From $2,400",
+    "range": "$2,400 – $6,500",
+    "bar": 40,
+    "heroPh": "Backyard ADU exterior photo",
+    "body": "An ADU set is small but detail-dense — setbacks, utility connections, fire separation and energy compliance all have to be right for a smooth plan check. Architects on the platform who specialize in ADUs know the shortcuts and the traps.",
+    "stats": [
+      {
+        "value": "From $2,400",
+        "label": "typical price range"
+      },
+      {
+        "value": "2–3 wk",
+        "label": "to stamped set"
+      }
+    ],
+    "includes": [
+      "Site plan with setbacks",
+      "Floor plans & elevations",
+      "Structural coordination",
+      "Title-24 energy compliance",
+      "Utility & MEP layout",
+      "Permit-ready stamped set"
+    ],
+    "priceNotes": [
+      "Scales with size — studios stay affordable",
+      "Agreed with your architect up front",
+      "Pay by milestone as you approve work"
+    ],
+    "steps": [
+      {
+        "title": "Estimate",
+        "description": "Answer a short questionnaire and get an itemized ADU price instantly."
+      },
+      {
+        "title": "Match",
+        "description": "Meet 2–3 architects pre-cleared on ADU + jurisdiction experience."
+      },
+      {
+        "title": "Design",
+        "description": "Scope on a call, hire your architect directly, and iterate on plans over chat and video."
+      },
+      {
+        "title": "Permit",
+        "description": "Receive a stamped set and submit for permit — revisions supported."
+      }
+    ],
+    "gallery": [
+      {
+        "slotId": "p-g1",
+        "ph": "ADU project photo",
+        "src": "../uploads/Generated Image August 10, 2026 - 3_04PM.jpg",
+        "tag": "Detached",
+        "title": "Detached 2-bed ADU",
+        "meta": "Oakland, CA · 720 sq ft · stamped in 6 wks"
+      },
+      {
+        "slotId": "p-g2",
+        "ph": "ADU project photo",
+        "src": "../uploads/Generated Image August 10, 2026 - 3_09PM.jpg",
+        "tag": "Conversion",
+        "title": "Garage conversion",
+        "meta": "San Jose, CA · 480 sq ft · permit-ready"
+      },
+      {
+        "slotId": "p-g3",
+        "ph": "ADU project photo",
+        "src": "../uploads/Generated Image August 10, 2026 - 3_15PM.jpg",
+        "tag": "Studio",
+        "title": "Studio ADU + deck",
+        "meta": "Berkeley, CA · 400 sq ft · first-pass approval"
+      }
+    ]
+  },
+  "Home addition": {
+    "name": "Home addition",
+    "short": "addition",
+    "kicker": "Home Additions",
+    "h1": "Home addition architects who deliver permit-ready plans",
+    "intro": "Match with licensed architects who design room additions, second stories and bump-outs — tying new structure cleanly into your existing home, all the way to a stamped set. Remote, hired directly, with clear pricing up front.",
+    "price": "From $3,500",
+    "range": "$3,500 – $9,000",
+    "bar": 56,
+    "heroPh": "Home addition exterior photo",
+    "body": "An addition has to marry new framing, foundation and roofline to what is already there — and satisfy structural, energy and setback rules along the way. Architects who do additions constantly know how to keep the tie-in clean and the plan check smooth.",
+    "stats": [
+      {
+        "value": "From $3,500",
+        "label": "typical price range"
+      },
+      {
+        "value": "3–4 wk",
+        "label": "to stamped set"
+      }
+    ],
+    "includes": [
+      "Existing & proposed plans",
+      "Structural coordination",
+      "Foundation & framing details",
+      "Title-24 energy compliance",
+      "Roof & exterior tie-in",
+      "Permit-ready stamped set"
+    ],
+    "priceNotes": [
+      "Scales with size & scope",
+      "Agreed with your architect up front",
+      "Pay by milestone as you approve work"
+    ],
+    "steps": [
+      {
+        "title": "Estimate",
+        "description": "Answer a short questionnaire and get an itemized price instantly."
+      },
+      {
+        "title": "Match",
+        "description": "Meet 2–3 architects pre-cleared on additions + your jurisdiction."
+      },
+      {
+        "title": "Design",
+        "description": "Scope on a call, hire directly, and iterate on plans over chat and video."
+      },
+      {
+        "title": "Permit",
+        "description": "Receive a stamped set and submit for permit — revisions supported."
+      }
+    ],
+    "gallery": [
+      {
+        "slotId": "p-g1",
+        "ph": "Home addition photo",
+        "src": "../uploads/Generated Image August 10, 2026 - 3_53PM.jpg",
+        "tag": "Second story",
+        "title": "Second-story addition",
+        "meta": "Berkeley, CA · 640 sq ft added"
+      },
+      {
+        "slotId": "p-g2",
+        "ph": "Home addition photo",
+        "src": "../uploads/Generated Image August 10, 2026 - 3_43PM.jpg",
+        "tag": "Two-story",
+        "title": "Two-story rear addition",
+        "meta": "Oakland, CA · 880 sq ft added"
+      },
+      {
+        "slotId": "p-g3",
+        "ph": "Home addition photo",
+        "src": "../uploads/Generated Image August 10, 2026 - 3_50PM.jpg",
+        "tag": "Rear addition",
+        "title": "Rear great-room + pool wing",
+        "meta": "San Jose, CA · 620 sq ft added"
+      },
+      {
+        "slotId": "p-g4",
+        "ph": "Home addition photo",
+        "src": "../uploads/Generated Image August 10, 2026 - 3_56PM.jpg",
+        "tag": "Upper level",
+        "title": "Upper-level + garage addition",
+        "meta": "Livermore, CA · 720 sq ft added"
+      }
+    ]
+  },
+  "Whole-home renovation": {
+    "name": "Whole-home renovation",
+    "short": "renovation",
+    "kicker": "Whole-Home Renovations",
+    "h1": "Whole-home renovation architects who deliver permit-ready plans",
+    "intro": "Match with licensed architects who reimagine entire homes — reworking layouts, opening up plans and modernizing systems, all the way to a stamped set your city will approve. Remote, hired directly, with clear pricing up front.",
+    "price": "From $4,000",
+    "range": "$4,000 – $12,000",
+    "bar": 60,
+    "heroPh": "Whole-home renovation photo",
+    "body": "A full renovation touches structure, layout and every system at once. Architects who take on whole-home work sequence the drawings so demolition, framing and finishes all line up — and the permit set holds together.",
+    "stats": [
+      {
+        "value": "From $4,000",
+        "label": "typical price range"
+      },
+      {
+        "value": "4–6 wk",
+        "label": "to stamped set"
+      }
+    ],
+    "includes": [
+      "As-built & proposed plans",
+      "Structural where walls move",
+      "Kitchen & bath layouts",
+      "Electrical & plumbing plans",
+      "Finish & fixture schedule",
+      "Permit-ready stamped set"
+    ],
+    "priceNotes": [
+      "Scales with size & scope",
+      "Agreed with your architect up front",
+      "Pay by milestone as you approve work"
+    ],
+    "steps": [
+      {
+        "title": "Estimate",
+        "description": "Answer a short questionnaire and get an itemized price instantly."
+      },
+      {
+        "title": "Match",
+        "description": "Meet 2–3 architects pre-cleared on renovations + your jurisdiction."
+      },
+      {
+        "title": "Design",
+        "description": "Scope on a call, hire directly, and iterate on plans over chat and video."
+      },
+      {
+        "title": "Permit",
+        "description": "Receive a stamped set and submit for permit — revisions supported."
+      }
+    ],
+    "gallery": [
+      {
+        "slotId": "p-g1",
+        "ph": "Renovation photo",
+        "src": "",
+        "tag": "Interior gut",
+        "title": "Full interior gut renovation",
+        "meta": "Oakland, CA · 1,850 sq ft"
+      },
+      {
+        "slotId": "p-g2",
+        "ph": "Renovation photo",
+        "src": "",
+        "tag": "Open-plan",
+        "title": "Open-plan main floor",
+        "meta": "Berkeley, CA · 1,200 sq ft"
+      },
+      {
+        "slotId": "p-g3",
+        "ph": "Renovation photo",
+        "src": "",
+        "tag": "Exterior",
+        "title": "Exterior & envelope refresh",
+        "meta": "San Jose, CA · whole home"
+      }
+    ]
+  },
+  "Kitchen & bath": {
+    "name": "Kitchen & bath",
+    "short": "remodel",
+    "kicker": "Kitchen & Bath",
+    "h1": "Kitchen & bath architects who deliver permit-ready plans",
+    "intro": "Match with licensed architects who focus on kitchens and baths — tight, detail-dense remodels where layout, plumbing and finishes all have to be exact. Remote, hired directly, with clear pricing up front.",
+    "price": "From $900",
+    "range": "$900 – $2,400",
+    "bar": 22,
+    "heroPh": "Kitchen or bath remodel photo",
+    "body": "Kitchens and baths pack plumbing, electrical, ventilation and cabinetry into a small footprint. Architects who specialize here draw layouts your contractor can build from and your inspector will pass.",
+    "stats": [
+      {
+        "value": "From $900",
+        "label": "typical price range"
+      },
+      {
+        "value": "1–2 wk",
+        "label": "to stamped set"
+      }
+    ],
+    "includes": [
+      "As-built & proposed plans",
+      "Electrical & plumbing layout",
+      "Cabinet & fixture schedule",
+      "Finish selections",
+      "Ventilation details",
+      "Permit-ready stamped set"
+    ],
+    "priceNotes": [
+      "Scales with size & scope",
+      "Agreed with your architect up front",
+      "Pay by milestone as you approve work"
+    ],
+    "steps": [
+      {
+        "title": "Estimate",
+        "description": "Answer a short questionnaire and get an itemized price instantly."
+      },
+      {
+        "title": "Match",
+        "description": "Meet 2–3 architects pre-cleared on kitchen & bath + your jurisdiction."
+      },
+      {
+        "title": "Design",
+        "description": "Scope on a call, hire directly, and iterate on plans over chat and video."
+      },
+      {
+        "title": "Permit",
+        "description": "Receive a stamped set and submit for permit — revisions supported."
+      }
+    ],
+    "gallery": [
+      {
+        "slotId": "p-g1",
+        "ph": "Kitchen photo",
+        "src": "",
+        "tag": "Kitchen",
+        "title": "Chef’s kitchen remodel",
+        "meta": "Oakland, CA · 260 sq ft"
+      },
+      {
+        "slotId": "p-g2",
+        "ph": "Bath photo",
+        "src": "",
+        "tag": "Primary bath",
+        "title": "Spa primary bath",
+        "meta": "Berkeley, CA · 140 sq ft"
+      },
+      {
+        "slotId": "p-g3",
+        "ph": "Bath photo",
+        "src": "",
+        "tag": "Powder room",
+        "title": "Powder room refresh",
+        "meta": "San Jose, CA · 45 sq ft"
+      }
+    ]
+  },
+  "New custom home": {
+    "name": "New custom home",
+    "short": "home",
+    "kicker": "New Custom Homes",
+    "h1": "New custom home architects who deliver permit-ready plans",
+    "intro": "Match with licensed architects who design ground-up custom homes — from concept through a complete, stamped construction set. Remote, hired directly, with clear pricing up front.",
+    "price": "From $12,000",
+    "range": "$12,000 – $28,000",
+    "bar": 85,
+    "heroPh": "New custom home exterior photo",
+    "body": "A ground-up home is the deepest set on the platform — site, structure, envelope and every system designed from scratch. Architects who do custom homes carry the whole thing from massing to construction docs.",
+    "stats": [
+      {
+        "value": "From $12,000",
+        "label": "typical price range"
+      },
+      {
+        "value": "8–12 wk",
+        "label": "to stamped set"
+      }
+    ],
+    "includes": [
+      "Full design & construction docs",
+      "Structural & MEP coordination",
+      "Site & grading plan",
+      "Title-24 energy compliance",
+      "3D visualization option",
+      "Permit-ready stamped set"
+    ],
+    "priceNotes": [
+      "Scales with size & scope",
+      "Agreed with your architect up front",
+      "Pay by milestone as you approve work"
+    ],
+    "steps": [
+      {
+        "title": "Estimate",
+        "description": "Answer a short questionnaire and get an itemized price instantly."
+      },
+      {
+        "title": "Match",
+        "description": "Meet 2–3 architects pre-cleared on custom homes + your jurisdiction."
+      },
+      {
+        "title": "Design",
+        "description": "Scope on a call, hire directly, and iterate on plans over chat and video."
+      },
+      {
+        "title": "Permit",
+        "description": "Receive a stamped set and submit for permit — revisions supported."
+      }
+    ],
+    "gallery": [
+      {
+        "slotId": "p-g1",
+        "ph": "Custom home photo",
+        "src": "",
+        "tag": "Modern",
+        "title": "Modern courtyard home",
+        "meta": "Oakland, CA · 3,200 sq ft"
+      },
+      {
+        "slotId": "p-g2",
+        "ph": "Custom home photo",
+        "src": "",
+        "tag": "Farmhouse",
+        "title": "Modern farmhouse",
+        "meta": "Berkeley, CA · 2,700 sq ft"
+      },
+      {
+        "slotId": "p-g3",
+        "ph": "Custom home photo",
+        "src": "",
+        "tag": "Hillside",
+        "title": "Hillside stepped home",
+        "meta": "San Jose, CA · 2,900 sq ft"
+      }
+    ]
+  },
+  "Garage conversion": {
+    "name": "Garage conversion",
+    "short": "conversion",
+    "kicker": "Garage Conversions",
+    "h1": "Garage conversion architects who deliver permit-ready plans",
+    "intro": "Match with licensed architects who turn garages into living space — ADUs, offices and suites — handling egress, light and ventilation to a stamped set. Remote, hired directly, with clear pricing up front.",
+    "price": "From $2,000",
+    "range": "$2,000 – $5,000",
+    "bar": 34,
+    "heroPh": "Garage conversion photo",
+    "body": "Converting a garage means adding egress, light, ventilation and insulation while reworking the slab and openings. Architects who do conversions know exactly what a plan checker will look for.",
+    "stats": [
+      {
+        "value": "From $2,000",
+        "label": "typical price range"
+      },
+      {
+        "value": "2–3 wk",
+        "label": "to stamped set"
+      }
+    ],
+    "includes": [
+      "Existing & proposed plans",
+      "Egress, light & ventilation",
+      "Structural at openings",
+      "Title-24 energy compliance",
+      "Utility & MEP layout",
+      "Permit-ready stamped set"
+    ],
+    "priceNotes": [
+      "Scales with size & scope",
+      "Agreed with your architect up front",
+      "Pay by milestone as you approve work"
+    ],
+    "steps": [
+      {
+        "title": "Estimate",
+        "description": "Answer a short questionnaire and get an itemized price instantly."
+      },
+      {
+        "title": "Match",
+        "description": "Meet 2–3 architects pre-cleared on conversions + your jurisdiction."
+      },
+      {
+        "title": "Design",
+        "description": "Scope on a call, hire directly, and iterate on plans over chat and video."
+      },
+      {
+        "title": "Permit",
+        "description": "Receive a stamped set and submit for permit — revisions supported."
+      }
+    ],
+    "gallery": [
+      {
+        "slotId": "p-g1",
+        "ph": "Garage conversion photo",
+        "src": "",
+        "tag": "ADU",
+        "title": "Garage-to-ADU conversion",
+        "meta": "Oakland, CA · 400 sq ft"
+      },
+      {
+        "slotId": "p-g2",
+        "ph": "Garage conversion photo",
+        "src": "",
+        "tag": "Studio",
+        "title": "Studio suite conversion",
+        "meta": "Berkeley, CA · 320 sq ft"
+      },
+      {
+        "slotId": "p-g3",
+        "ph": "Garage conversion photo",
+        "src": "",
+        "tag": "Home office",
+        "title": "Detached home office",
+        "meta": "San Jose, CA · 280 sq ft"
+      }
+    ]
+  },
+  "Commercial TI": {
+    "name": "Commercial TI",
+    "short": "TI",
+    "kicker": "Commercial Tenant Improvements",
+    "h1": "Commercial TI architects who deliver permit-ready plans",
+    "intro": "Match with licensed architects who fit out commercial space — offices, retail and clinics — handling code, accessibility and MEP to a stamped set. Remote, hired directly, with clear pricing up front.",
+    "price": "From $4,000",
+    "range": "$4,000 – $12,000",
+    "bar": 60,
+    "heroPh": "Commercial tenant improvement photo",
+    "body": "A tenant improvement has to satisfy occupancy, accessibility and egress code while coordinating mechanical, electrical and plumbing. Architects who do TI work move fast and keep plan check clean.",
+    "stats": [
+      {
+        "value": "From $4,000",
+        "label": "typical price range"
+      },
+      {
+        "value": "3–5 wk",
+        "label": "to stamped set"
+      }
+    ],
+    "includes": [
+      "Tenant-improvement plan set",
+      "Code & accessibility compliance",
+      "Egress & occupancy analysis",
+      "MEP coordination",
+      "Title-24 energy compliance",
+      "Permit-ready stamped set"
+    ],
+    "priceNotes": [
+      "Scales with size & scope",
+      "Agreed with your architect up front",
+      "Pay by milestone as you approve work"
+    ],
+    "steps": [
+      {
+        "title": "Estimate",
+        "description": "Answer a short questionnaire and get an itemized price instantly."
+      },
+      {
+        "title": "Match",
+        "description": "Meet 2–3 architects pre-cleared on commercial TI + your jurisdiction."
+      },
+      {
+        "title": "Design",
+        "description": "Scope on a call, hire directly, and iterate on plans over chat and video."
+      },
+      {
+        "title": "Permit",
+        "description": "Receive a stamped set and submit for permit — revisions supported."
+      }
+    ],
+    "gallery": [
+      {
+        "slotId": "p-g1",
+        "ph": "Commercial TI photo",
+        "src": "",
+        "tag": "Office",
+        "title": "Open office fit-out",
+        "meta": "Oakland, CA · 4,200 sq ft"
+      },
+      {
+        "slotId": "p-g2",
+        "ph": "Commercial TI photo",
+        "src": "",
+        "tag": "Retail",
+        "title": "Retail storefront TI",
+        "meta": "Berkeley, CA · 1,800 sq ft"
+      },
+      {
+        "slotId": "p-g3",
+        "ph": "Commercial TI photo",
+        "src": "",
+        "tag": "Medical",
+        "title": "Medical suite fit-out",
+        "meta": "San Jose, CA · 2,600 sq ft"
+      }
+    ]
+  },
+  "Change of use": {
+    "name": "Change of use",
+    "short": "change of use",
+    "kicker": "Change of Use",
+    "h1": "Change-of-use architects who deliver permit-ready plans",
+    "intro": "Match with licensed architects who re-permit buildings for a new use — reclassifying occupancy and bringing accessibility and egress up to code, all the way to a stamped set. Remote, hired directly, with clear pricing up front.",
+    "price": "From $1,500",
+    "range": "$1,500 – $8,000",
+    "bar": 45,
+    "heroPh": "Change-of-use project photo",
+    "body": "Changing a building’s use triggers a new occupancy classification and a cascade of code, accessibility and egress requirements. Architects who handle change-of-use map the path before you commit.",
+    "stats": [
+      {
+        "value": "From $1,500",
+        "label": "typical price range"
+      },
+      {
+        "value": "3–5 wk",
+        "label": "to stamped set"
+      }
+    ],
+    "includes": [
+      "Existing & proposed plans",
+      "Occupancy classification",
+      "Accessibility upgrades",
+      "Egress analysis",
+      "MEP coordination",
+      "Permit-ready stamped set"
+    ],
+    "priceNotes": [
+      "Scales with size & scope",
+      "Agreed with your architect up front",
+      "Pay by milestone as you approve work"
+    ],
+    "steps": [
+      {
+        "title": "Estimate",
+        "description": "Answer a short questionnaire and get an itemized price instantly."
+      },
+      {
+        "title": "Match",
+        "description": "Meet 2–3 architects pre-cleared on change-of-use + your jurisdiction."
+      },
+      {
+        "title": "Design",
+        "description": "Scope on a call, hire directly, and iterate on plans over chat and video."
+      },
+      {
+        "title": "Permit",
+        "description": "Receive a stamped set and submit for permit — revisions supported."
+      }
+    ],
+    "gallery": [
+      {
+        "slotId": "p-g1",
+        "ph": "Change-of-use photo",
+        "src": "",
+        "tag": "Retail → cafe",
+        "title": "Retail to cafe",
+        "meta": "Oakland, CA · 1,400 sq ft"
+      },
+      {
+        "slotId": "p-g2",
+        "ph": "Change-of-use photo",
+        "src": "",
+        "tag": "Warehouse → studio",
+        "title": "Warehouse to studio",
+        "meta": "Berkeley, CA · 3,000 sq ft"
+      },
+      {
+        "slotId": "p-g3",
+        "ph": "Change-of-use photo",
+        "src": "",
+        "tag": "Office → clinic",
+        "title": "Office to clinic",
+        "meta": "San Jose, CA · 2,100 sq ft"
+      }
+    ]
+  },
+  "Restaurant build-out": {
+    "name": "Restaurant build-out",
+    "short": "build-out",
+    "kicker": "Restaurant Build-Outs",
+    "h1": "Restaurant build-out architects who deliver permit-ready plans",
+    "intro": "Match with licensed architects who design restaurants — front-of-house, kitchen and hood layouts — coordinating health-department and code review to a stamped set. Remote, hired directly, with clear pricing up front.",
+    "price": "From $5,000",
+    "range": "$5,000 – $15,000",
+    "bar": 70,
+    "heroPh": "Restaurant interior photo",
+    "body": "A restaurant build-out layers health-department, fire and accessibility review on top of a demanding kitchen and MEP scope. Architects who do food-and-beverage work coordinate all of it into one clean set.",
+    "stats": [
+      {
+        "value": "From $5,000",
+        "label": "typical price range"
+      },
+      {
+        "value": "4–6 wk",
+        "label": "to stamped set"
+      }
+    ],
+    "includes": [
+      "Floor plan & seating layout",
+      "Kitchen & hood layout",
+      "Health-department compliance",
+      "Accessibility & egress",
+      "MEP & grease coordination",
+      "Permit-ready stamped set"
+    ],
+    "priceNotes": [
+      "Scales with size & scope",
+      "Agreed with your architect up front",
+      "Pay by milestone as you approve work"
+    ],
+    "steps": [
+      {
+        "title": "Estimate",
+        "description": "Answer a short questionnaire and get an itemized price instantly."
+      },
+      {
+        "title": "Match",
+        "description": "Meet 2–3 architects pre-cleared on restaurant work + your jurisdiction."
+      },
+      {
+        "title": "Design",
+        "description": "Scope on a call, hire directly, and iterate on plans over chat and video."
+      },
+      {
+        "title": "Permit",
+        "description": "Receive a stamped set and submit for permit — revisions supported."
+      }
+    ],
+    "gallery": [
+      {
+        "slotId": "p-g1",
+        "ph": "Restaurant photo",
+        "src": "",
+        "tag": "Full-service",
+        "title": "Full-service dining room",
+        "meta": "Oakland, CA · 3,400 sq ft"
+      },
+      {
+        "slotId": "p-g2",
+        "ph": "Restaurant photo",
+        "src": "",
+        "tag": "Fast-casual",
+        "title": "Fast-casual counter",
+        "meta": "Berkeley, CA · 1,600 sq ft"
+      },
+      {
+        "slotId": "p-g3",
+        "ph": "Restaurant photo",
+        "src": "",
+        "tag": "Cafe",
+        "title": "Neighborhood cafe",
+        "meta": "San Jose, CA · 1,100 sq ft"
+      }
+    ]
+  }
+}

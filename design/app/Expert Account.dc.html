@@ -225,12 +225,39 @@
       </div>
       </sc-if>
 
-      <!-- STEP 7 — PAYOUT & AGREEMENTS -->
+      <!-- STEP 7 — BILLING & AGREEMENTS -->
       <sc-if value="{{ isS7 }}" hint-placeholder-val="{{ false }}">
+
+      <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 26px; margin-bottom: 16px;">
+        <div style="font-size: 14px; font-weight: 700; margin-bottom: 4px;">Choose your plan</div>
+        <div style="font-size: 13px; color: #5b6493; margin-bottom: 20px;">A flat monthly subscription is our only charge — we never take a cut of your projects. Switch tiers or cancel anytime.</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;">
+          <sc-for list="{{ planCards }}" as="p" hint-placeholder-count="3">
+            <button onClick="{{ p.select }}" style="{{ p.cardStyle }}">
+              <sc-if value="{{ p.recommended }}" hint-placeholder-val="{{ false }}">
+              <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: #135bff; color: #fff; font-size: 10.5px; font-weight: 700; letter-spacing: .04em; padding: 3px 10px; border-radius: 100px; white-space: nowrap;">MOST POPULAR</div>
+              </sc-if>
+              <div style="display: flex; align-items: center; justify-content: space-between;">
+                <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 700;">{{ p.name }}</span>
+                <span style="{{ p.checkStyle }}">✓</span>
+              </div>
+              <div style="margin-top: 8px;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 26px; font-weight: 500; color: #232c57;">{{ p.price }}</span><span style="font-size: 13px; color: #5b6493;">/mo</span></div>
+              <div style="font-size: 12px; color: #8b93b5; margin-top: 1px;">{{ p.annual }}</div>
+              <div style="font-size: 12.5px; color: #3f4770; margin-top: 12px; line-height: 1.5; min-height: 38px;">{{ p.fits }}</div>
+              <div style="height: 1px; background: #eef2fb; margin: 12px 0 14px;"></div>
+              <div style="display: flex; flex-direction: column; gap: 9px;">
+                <sc-for list="{{ p.features }}" as="f" hint-placeholder-count="4">
+                  <div style="display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; color: #3f4770; line-height: 1.4;"><span style="color: #16924e; flex-shrink: 0;">✓</span><span>{{ f }}</span></div>
+                </sc-for>
+              </div>
+            </button>
+          </sc-for>
+        </div>
+      </div>
       <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 26px;">
-        <div style="font-size: 14px; font-weight: 700; margin-bottom: 12px;">Payout account</div>
+        <div style="font-size: 14px; font-weight: 700; margin-bottom: 12px;">Subscription & billing</div>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-          <label style="display: block;"><span style="font-size: 13px; color: #5b6493; font-weight: 600;">Bank account (for deposits)</span><input placeholder="Connect via Stripe" style="width: 100%; margin-top: 6px; background: #fbfcfe; border: 1px solid #dbe2f2; border-radius: 9px; padding: 12px 14px; font-size: 14px; color: #232c57;"></label>
+          <label style="display: block;"><span style="font-size: 13px; color: #5b6493; font-weight: 600;">Card on file (for your plan)</span><input placeholder="Add card via Stripe" style="width: 100%; margin-top: 6px; background: #fbfcfe; border: 1px solid #dbe2f2; border-radius: 9px; padding: 12px 14px; font-size: 14px; color: #232c57;"></label>
           <label style="display: block;"><span style="font-size: 13px; color: #5b6493; font-weight: 600;">Business entity</span>
             <select style="width: 100%; margin-top: 6px; background: #fbfcfe; border: 1px solid #dbe2f2; border-radius: 9px; padding: 12px 14px; font-size: 14px; color: #232c57;"><option>Sole proprietor / freelancer</option><option>LLC</option><option>Corporation</option></select></label>
         </div>
@@ -242,7 +269,7 @@
           <div style="font-size: 13px; color: #5b6493; margin-top: 3px;">Required for stamped / licensed work · PDF, max 10MB</div>
         </div>
         </sc-if>
-        <label style="display: flex; align-items: flex-start; gap: 12px; margin-top: 20px; cursor: pointer;"><span style="width: 20px; height: 20px; border-radius: 6px; background: #135bff; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; margin-top: 1px;">✓</span><span style="font-size: 13.5px; color: #3f4770; line-height: 1.5;">I've completed my W-9 and agree to the <a href="#">Provider Terms</a>, <a href="#">Escrow Agreement</a> and <a href="#">Code of Conduct</a>.</span></label>
+        <label style="display: flex; align-items: flex-start; gap: 12px; margin-top: 20px; cursor: pointer;"><span style="width: 20px; height: 20px; border-radius: 6px; background: #135bff; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; margin-top: 1px;">✓</span><span style="font-size: 13.5px; color: #3f4770; line-height: 1.5;">I agree to the <a href="#">Provider Terms</a>, <a href="#">Subscription Agreement</a> and <a href="#">Code of Conduct</a>.</span></label>
       </div>
       </sc-if>
 
@@ -283,7 +310,7 @@ class Component extends DCLogic {
     step: 1, submitted: false,
     disciplines: ['CAD drafting'],
     certs: [], software: ['AutoCAD'], deliver: ['2D drawing sets'], states: ['California'],
-    remote: true, avail: true, radius: 40, capacity: 5, engage: 'both',
+    remote: true, avail: true, radius: 40, capacity: 5, engage: 'both', plan: 'practice',
   };
   go(n){ this.setState({ step: Math.max(1, Math.min(7, n)) }); if (typeof window!=='undefined') window.scrollTo({top:0}); }
   toggleIn(key, val){ this.setState(s=>{ const a=s[key]; return { [key]: a.includes(val) ? a.filter(x=>x!==val) : [...a, val] }; }); }
@@ -351,11 +378,22 @@ class Component extends DCLogic {
       4:{k:'STEP 4 · SKILLS',t:'Software & deliverables',sub:'Tell us what you work in and what you produce, so orders match your toolset.'},
       5:{k:'STEP 5 · COVERAGE',t:'Where you work',sub:'Most work is remote. Licensed work is matched only where you\u2019re cleared.'},
       6:{k:'STEP 6 · RATES',t:'Rates & availability',sub:'Set your own pricing and how much work you want. You\u2019re always in control.'},
-      7:{k:'STEP 7 · PAYOUT',t:'Payout & agreements',sub:'Where you get paid, plus the agreements that keep everyone protected.'},
+      7:{k:'STEP 7 · BILLING',t:'Billing & agreements',sub:'Your subscription details, plus the agreements that keep everyone protected.'},
     };
     const m = stepMeta[s.step];
 
-    const stDefs = [['Services',1],['Portfolio',2],['Credentials',3],['Skills',4],['Coverage',5],['Rates',6],['Payout',7]];
+    const planDefs = [
+      { id:'studio', name:'Studio', price:'$79', annual:'or $790 billed annually', fits:'Drafters, 3D artists, staging, consults', features:['Projects up to $1,500','1 metro area','5 active pursuits','Verified profile & reviews'] },
+      { id:'practice', name:'Practice', price:'$299', annual:'or $2,990 billed annually', fits:'ADUs, additions, permit sets — the core', features:['Projects up to $15,000','3 metro areas','15 active pursuits','Priority match placement'], recommended:true },
+      { id:'firm', name:'Firm', price:'$699', annual:'or $6,990 billed annually', fits:'Custom homes, commercial TI, restaurants', features:['No project ceiling','Statewide coverage','Unlimited active pursuits','Dedicated success manager'] },
+    ];
+    const planCards = planDefs.map(p=>{ const on = s.plan===p.id; return { ...p, recommended: !!p.recommended,
+      select: ()=>this.setState({plan:p.id}),
+      cardStyle:`position:relative;text-align:left;font-family:inherit;cursor:pointer;background:${on?'#f5f8ff':'#fff'};border:2px solid ${on?'#135bff':'#e2e8f5'};border-radius:14px;padding:18px 16px 20px;transition:border-color .15s;`,
+      checkStyle:`width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;${on?'background:#135bff;color:#fff;':'background:#eef2fb;color:transparent;'}`,
+    };});
+
+    const stDefs = [['Services',1],['Portfolio',2],['Credentials',3],['Skills',4],['Coverage',5],['Rates',6],['Billing',7]];
     const stepper = stDefs.map(([label,n],i)=>{ const done=s.step>n, active=s.step===n; return {
       label, mark: done?'✓':String(n),
       numStyle:`display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;${done?'background:#16924e;color:#fff;':active?'background:#135bff;color:#fff;':'background:#e2e8f5;color:#8b93b5;'}`,
@@ -385,7 +423,7 @@ class Component extends DCLogic {
     return {
       submitted: s.submitted, notSubmitted: !s.submitted,
       stepper, stepKicker:m.k, stepTitle:m.t, stepSub:m.sub, uploadIcon,
-      isS1:s.step===1, isS2:s.step===2, isS3:s.step===3, isS4:s.step===4, isS5:s.step===5, isS6:s.step===6, isS7:s.step===7,
+      isS1:s.step===1, isS2:s.step===2, isS3:s.step===3, isS4:s.step===4, isS5:s.step===5, isS6:s.step===6, isS7:s.step===7, planCards,
       licensed, notLicensed: !licensed, licensedList: licensedSel.join(', '), needsOnsite,
       disciplineOpts, profileFields, portfolio, certChips, softwareChips, deliverChips, stateChips, engageOpts,
       radius:s.radius, onRadius:(e)=>this.setState({radius:+e.target.value}),

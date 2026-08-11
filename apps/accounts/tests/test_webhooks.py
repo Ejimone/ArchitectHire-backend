@@ -119,3 +119,29 @@ class TestClerkWebhook:
         settings.CLERK_WEBHOOK_SIGNING_SECRET = ""
         response = client.post(WEBHOOK_URL, data=b"{}", content_type="application/json")
         assert response.status_code == 503
+
+    def test_falls_back_to_the_first_email_when_no_primary_matches(self, client):
+        event = {
+            "type": "user.created",
+            "data": {
+                "id": "user_nofallbackid",
+                "primary_email_address_id": "em_missing",
+                "email_addresses": [{"id": "em_1", "email_address": "first@example.com"}],
+                "first_name": "First",
+                "last_name": "Email",
+                "image_url": "",
+            },
+        }
+        assert _post_event(client, event).status_code == 204
+        assert User.objects.get(clerk_id="user_nofallbackid").email == "first@example.com"
+
+    def test_event_without_a_clerk_id_is_ignored(self, client):
+        before = User.objects.count()
+        event = {"type": "user.created", "data": {"email_addresses": []}}
+        assert _post_event(client, event).status_code == 204
+        assert User.objects.count() == before
+
+    def test_new_user_without_an_email_is_skipped(self, client):
+        event = {"type": "user.created", "data": {"id": "user_noemail", "email_addresses": []}}
+        assert _post_event(client, event).status_code == 204
+        assert not User.objects.filter(clerk_id="user_noemail").exists()

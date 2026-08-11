@@ -1,10 +1,13 @@
 from django.core.exceptions import ValidationError as DjangoValidationError
+from django.db import transaction
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from rest_framework import generics, status
 from rest_framework.parsers import FormParser, JSONParser, MultiPartParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
+
+from apps.notifications.tasks import notify
 
 from .models import Engagement, Milestone, RequoteFlag
 from .serializers import (
@@ -32,6 +35,8 @@ class EngagementListCreateView(generics.ListCreateAPIView):
         return EngagementCreateSerializer if self.request.method == "POST" else EngagementSerializer
 
     def get_queryset(self):
+        if getattr(self, "swagger_fake_view", False):
+            return Engagement.objects.none()
         return (
             _my_engagements(self.request.user)
             .select_related("project")
@@ -123,7 +128,35 @@ class MilestoneActionView(APIView):
         except DjangoValidationError as exc:
             return Response({"detail": exc.messages[0]}, status=status.HTTP_409_CONFLICT)
 
+        self._notify_counterpart(action, milestone, engagement)
         return Response(MilestoneSerializer(milestone).data)
+
+    @staticmethod
+    def _notify_counterpart(action, milestone, engagement):
+        data = {
+            "engagement_id": engagement.pk,
+            "project_id": engagement.project_id,
+            "milestone_id": milestone.pk,
+        }
+        if action == "submit":
+            recipient, kind, title = (
+                engagement.client_id,
+                "milestone",
+                f"{milestone.title} is ready for review",
+            )
+        elif action == "approve":
+            recipient, kind, title = (
+                engagement.provider_id,
+                "payout",
+                f"{milestone.title} approved",
+            )
+        else:  # request-changes
+            recipient, kind, title = (
+                engagement.provider_id,
+                "milestone",
+                f"Changes requested on {milestone.title}",
+            )
+        transaction.on_commit(lambda: notify.delay(recipient, kind, title, "", data))
 
     @staticmethod
     def _on_approved(milestone):
@@ -152,6 +185,15 @@ class RequoteListCreateView(APIView):
         requote = serializer.save(
             engagement=engagement, raised_by=request.user, old_total=engagement.total or 0
         )
+        transaction.on_commit(
+            lambda: notify.delay(
+                engagement.client_id,
+                "requote",
+                "Your architect flagged a re-quote",
+                requote.reason[:120],
+                {"engagement_id": engagement.pk, "project_id": engagement.project_id},
+            )
+        )
         return Response(RequoteFlagSerializer(requote).data, status=status.HTTP_201_CREATED)
 
 
@@ -164,6 +206,17 @@ class RequoteResolveView(APIView):
             requote.resolve(approve=(action == "approve"))
         except DjangoValidationError as exc:
             return Response({"detail": exc.messages[0]}, status=status.HTTP_409_CONFLICT)
+        engagement = requote.engagement
+        outcome = "approved" if action == "approve" else "declined"
+        transaction.on_commit(
+            lambda: notify.delay(
+                engagement.provider_id,
+                "requote",
+                f"Re-quote {outcome}",
+                "",
+                {"engagement_id": engagement.pk, "project_id": engagement.project_id},
+            )
+        )
         return Response(RequoteFlagSerializer(requote).data)
 
 
@@ -212,10 +265,19 @@ class DeliverableListCreateView(APIView):
         serializer = DeliverableSerializer(data=request.data, context={"request": request})
         serializer.is_valid(raise_exception=True)
         upload = request.FILES.get("file")
-        serializer.save(
+        deliverable = serializer.save(
             engagement=engagement,
             uploaded_by=request.user,
             size_bytes=upload.size if upload else 0,
             name=serializer.validated_data.get("name") or (upload.name if upload else "file"),
+        )
+        transaction.on_commit(
+            lambda: notify.delay(
+                engagement.client_id,
+                "milestone",
+                f"New file: {deliverable.name}",
+                "",
+                {"engagement_id": engagement.pk, "project_id": engagement.project_id},
+            )
         )
         return Response(serializer.data, status=status.HTTP_201_CREATED)

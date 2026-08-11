@@ -6,17 +6,17 @@
         {
           "label": "Video consult",
           "price_hint": "$145",
-          "href": "/services#catalog"
+          "href": "/services/cad-drafting?svc=video-consult"
         },
         {
           "label": "Plan review & markup",
           "price_hint": "$150",
-          "href": "/services#catalog"
+          "href": "/services/cad-drafting?svc=plan-review"
         },
         {
           "label": "Feasibility check",
           "price_hint": "$250",
-          "href": "/services#catalog"
+          "href": "/services/cad-drafting?svc=feasibility"
         }
       ]
     },
@@ -31,12 +31,12 @@
         {
           "label": "As-built package",
           "price_hint": "$2,500",
-          "href": "/services/cad-drafting"
+          "href": "/services/cad-drafting?svc=as-built"
         },
         {
           "label": "PDF-to-CAD",
           "price_hint": "$10/sht",
-          "href": "/services/cad-drafting"
+          "href": "/services/cad-drafting?svc=pdf-to-cad"
         }
       ]
     },
@@ -66,12 +66,12 @@
         {
           "label": "3D laser scanning",
           "price_hint": "$0.20/sf",
-          "href": "/services#catalog"
+          "href": "/services/cad-drafting?svc=laser-scanning"
         },
         {
           "label": "Scan-to-BIM",
           "price_hint": "$0.50/sf",
-          "href": "/services#catalog"
+          "href": "/services/cad-drafting?svc=scan-to-bim"
         }
       ]
     },
@@ -81,17 +81,17 @@
         {
           "label": "Title-24 / energy",
           "price_hint": "$300",
-          "href": "/services#catalog"
+          "href": "/services/cad-drafting?svc=title-24"
         },
         {
           "label": "Structural stamp",
           "price_hint": "$1,500",
-          "href": "/services#catalog"
+          "href": "/services/cad-drafting?svc=structural-stamp"
         },
         {
           "label": "Code consulting",
           "price_hint": "$150/hr",
-          "href": "/services#catalog"
+          "href": "/services/cad-drafting?svc=code-consulting"
         }
       ]
     },
@@ -101,12 +101,12 @@
         {
           "label": "Permit set",
           "price_hint": "$2,000",
-          "href": "/services#catalog"
+          "href": "/services/cad-drafting?svc=permit-set"
         },
         {
           "label": "Zoning study",
           "price_hint": "$1,500",
-          "href": "/services#catalog"
+          "href": "/services/cad-drafting?svc=zoning-study"
         },
         {
           "label": "Full ADU / home",
@@ -121,17 +121,17 @@
         {
           "label": "Interior design package",
           "price_hint": "$1,200",
-          "href": "/services#catalog"
+          "href": "/services/cad-drafting?svc=interior-design"
         },
         {
           "label": "Virtual staging",
           "price_hint": "$75",
-          "href": "/services#catalog"
+          "href": "/services/cad-drafting?svc=virtual-staging"
         },
         {
           "label": "Furniture & FF&E plan",
           "price_hint": "$600",
-          "href": "/services#catalog"
+          "href": "/services/cad-drafting?svc=ffe-plan"
         }
       ]
     }
@@ -144,87 +144,104 @@
     },
     {
       "label": "Home addition",
-      "price_hint": "From $11,000",
+      "price_hint": "From $3,500",
       "href": "/projects/home-addition"
     },
     {
       "label": "Whole-home renovation",
-      "price_hint": "From $8,500",
+      "price_hint": "From $4,000",
       "href": "/projects/whole-home-renovation"
     },
     {
       "label": "Kitchen & bath",
-      "price_hint": "From $2,400",
+      "price_hint": "From $900",
       "href": "/projects/kitchen-and-bath"
     },
     {
       "label": "New custom home",
-      "price_hint": "From $26,000",
+      "price_hint": "From $12,000",
       "href": "/projects/new-custom-home"
     },
     {
       "label": "Garage conversion",
-      "price_hint": "From $4,500",
+      "price_hint": "From $2,000",
       "href": "/projects/garage-conversion"
     },
     {
       "label": "Commercial TI",
-      "price_hint": "From $8,000",
+      "price_hint": "From $4,000",
       "href": "/projects/commercial-ti"
     },
     {
       "label": "Change of use",
-      "price_hint": "From $6,000",
+      "price_hint": "From $1,500",
       "href": "/projects/change-of-use"
+    },
+    {
+      "label": "Restaurant build-out",
+      "price_hint": "From $5,000",
+      "href": "/projects/restaurant-build-out"
     }
   ],
   "locations": [
     {
       "label": "Oakland, CA",
+      "price_hint": "",
       "href": "/cities/oakland"
     },
     {
       "label": "San Francisco, CA",
+      "price_hint": "",
       "href": "/cities/san-francisco"
     },
     {
       "label": "San Jose, CA",
+      "price_hint": "",
       "href": "/cities/san-jose"
     },
     {
       "label": "Los Angeles, CA",
+      "price_hint": "",
       "href": "/cities/los-angeles"
     },
     {
       "label": "San Diego, CA",
+      "price_hint": "",
       "href": "/cities/san-diego"
     },
     {
       "label": "Sacramento, CA",
+      "price_hint": "",
       "href": "/cities/sacramento"
     },
     {
       "label": "Seattle, WA",
+      "price_hint": "",
       "href": "/cities/seattle"
     },
     {
       "label": "Portland, OR",
+      "price_hint": "",
       "href": "/cities/portland"
     },
     {
       "label": "Austin, TX",
+      "price_hint": "",
       "href": "/cities/austin"
     },
     {
       "label": "Denver, CO",
+      "price_hint": "",
       "href": "/cities/denver"
     },
     {
       "label": "Phoenix, AZ",
+      "price_hint": "",
       "href": "/cities/phoenix"
     },
     {
       "label": "New York, NY",
+      "price_hint": "",
       "href": "/cities/new-york"
     }
   ]

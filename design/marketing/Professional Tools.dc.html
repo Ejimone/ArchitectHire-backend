@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f3f6fd; }
+  ::selection { background: #135bff; color: #fff; }
+  a { color: #135bff; text-decoration: none; }
+  a:hover { color: #0b3fcc; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  @keyframes pulseDot { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
+  @media (max-width: 960px){
+    main{ padding-left:18px !important; padding-right:18px !important; }
+    [style*="repeat(3"]{ grid-template-columns:1fr !important; }
+    [style*="grid-template-columns: 1fr 1fr"]{ grid-template-columns:1fr !important; }
+    [style*="grid-template-columns: 1."]{ grid-template-columns:1fr !important; }
+    .feature-row{ grid-template-columns:1fr !important; }
+    .feature-media{ order:-1 !important; min-height:240px !important; }
+    [style*="padding: 52px 44px"],[style*="padding: 56px"],[style*="padding: 48px"],[style*="padding: 44px"]{ padding:32px 22px !important; }
+    h1{ font-size:clamp(30px,7vw,42px) !important; }
+  }
+</style>
+<script src="../image-slot.js"></script>
+<template id="__bundler_thumbnail" data-bg-color="#0a1440">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#0a1440"/>
+    <rect x="360" y="250" width="480" height="150" rx="24" fill="#135bff"/>
+    <text x="600" y="345" font-family="Bricolage Grotesque, sans-serif" font-size="92" font-weight="800" fill="#ffffff" text-anchor="middle">AH</text>
+    <rect x="470" y="440" width="260" height="26" rx="13" fill="#ceff65"/>
+  </svg>
+</template>
+</helmet>
+<div style="background: #f3f6fd; color: #0a1440; font-family: 'Hanken Grotesk', sans-serif; -webkit-font-smoothing: antialiased;">
+
+  <x-import component-from-global-scope="site-nav" from="./site-nav.js" active="architects" style="display:contents" hint-size="100%,64px"></x-import>
+
+  <main style="max-width: 1200px; margin: 0 auto; padding: 0 32px 100px;">
+
+    <!-- HERO -->
+    <section style="margin-top: 20px; background: #0a1440; border-radius: 24px; overflow: hidden; display: grid; grid-template-columns: 1.05fr .95fr; align-items: stretch; min-height: 540px; animation: fadeUp .5s ease both;">
+      <div style="padding: 52px 44px 56px; display: flex; flex-direction: column; justify-content: center; min-width: 0;">
+        <div style="display: inline-flex; align-self: flex-start; align-items: center; gap: 8px; padding: 6px 13px; border-radius: 100px; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: #0a1440; background: #ceff65; font-weight: 700; margin-bottom: 22px;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #0a1440;"></span>For architects &amp; service experts</div>
+        <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(38px, 3.4vw, 54px); line-height: 1.0; letter-spacing: -.02em; font-weight: 800; color: #fff; text-wrap: balance;">One platform to run your whole practice.</h1>
+        <p style="font-size: 19px; line-height: 1.55; color: #b9c3e8; margin: 24px 0 30px; max-width: 32em; text-wrap: pretty;">Clients, your profile, scheduling, proposals and the answers you need for any city — all in one place. Spend your time designing, not chasing work.</p>
+        <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+          <a href="#join" style="background: #135bff; color: #fff; padding: 16px 30px; border-radius: 11px; font-size: 17px; font-weight: 700; white-space: nowrap; box-shadow: 0 3px 0 #0b3fcc;">See plans &amp; join →</a>
+          <a href="../app/Expert Account.dc.html" style="color: #ceff65; font-size: 15px; font-weight: 700;">Apply free →</a>
+        </div>
+        <div style="display: flex; gap: 40px; margin-top: 36px;">
+          <div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 28px; color: #ceff65;">$0</div><div style="font-size: 13px; color: #9fb4ff;">taken from your fees</div></div>
+          <div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 28px; color: #ceff65;">3,200+</div><div style="font-size: 13px; color: #9fb4ff;">cities in the database</div></div>
+          <div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 28px; color: #ceff65;">1</div><div style="font-size: 13px; color: #9fb4ff;">login for everything</div></div>
+        </div>
+      </div>
+      <div style="position: relative; min-width: 0; min-height: 480px; overflow: hidden;">
+        <image-slot id="pt-hero" shape="rect" fit="cover" placeholder="Drop a hero image — a professional at work / their dashboard" style="position: absolute; inset: 0; width: 100%; height: 100%;"></image-slot>
+        <div style="position: absolute; left: 20px; top: 20px; right: 20px; background: #fff; border-radius: 14px; padding: 15px 16px; box-shadow: 0 14px 34px rgba(4,10,40,.38); z-index: 7;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;"><span style="width: 8px; height: 8px; border-radius: 50%; background: #16924e; animation: pulseDot 1.5s infinite;"></span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #16924e; letter-spacing: .04em;">NEW CLIENT MATCHED</span><span style="margin-left: auto; font-size: 11.5px; color: #9aa2c4;">2 min ago</span></div>
+          <div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 16px;">Backyard ADU · Oakland, CA</div>
+          <div style="font-size: 12.5px; color: #5b6493; margin: 3px 0 12px;">Briefed &amp; pre-qualified · ready to book a call</div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #0a1440; background: #ceff65; padding: 5px 10px; border-radius: 7px; font-weight: 600;">Your rate applies</span>
+            <span style="font-size: 12px; color: #16924e; font-weight: 700; margin-left: auto;">96% match</span>
+          </div>
+        </div>
+        <div style="position: absolute; left: 20px; bottom: 20px; background: #0a1440; border: 1px solid #1d2f6e; border-radius: 12px; padding: 13px 16px; box-shadow: 0 12px 30px rgba(4,10,40,.35); z-index: 7;">
+          <div style="font-size: 11px; color: #9fb4ff; letter-spacing: .04em; text-transform: uppercase;">This month, one login</div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: #ceff65; margin-top: 3px;">4 clients · 2 proposals · 1 booking</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WITH VS WITHOUT -->
+    <section style="margin-top: 80px;">
+      <div style="text-align: center; max-width: 40em; margin: 0 auto;">
+        <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 34px; font-weight: 700; letter-spacing: -.02em;">Your week, before and after</h2>
+        <p style="font-size: 16px; color: #3f4770; margin-top: 8px; line-height: 1.55;">Same skills. Completely different day.</p>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 30px; align-items: stretch;">
+        <div style="background: #faf1f2; border: 1px solid #f0d5da; border-radius: 20px; padding: 32px;">
+          <div style="display: inline-flex; align-items: center; gap: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #b0455c; letter-spacing: .04em;">ON YOUR OWN</div>
+          <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px; font-weight: 700; margin: 10px 0 18px; color: #7a2f3c;">Chasing the work</h3>
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <sc-for list="{{ without }}" as="w" hint-placeholder-count="5">
+              <div style="display: flex; gap: 12px; align-items: flex-start;"><span style="width: 22px; height: 22px; border-radius: 50%; background: #f0d5da; color: #b0455c; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; margin-top: 1px;">✕</span><span style="font-size: 15px; color: #7a4a53; line-height: 1.5;">{{ w }}</span></div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="background: #0a1440; border: 1px solid #1d2f6e; border-radius: 20px; padding: 32px; box-shadow: 0 18px 44px rgba(10,20,64,.18);">
+          <div style="display: inline-flex; align-items: center; gap: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #ceff65; letter-spacing: .04em;">WITH ARCHITECTHIRE</div>
+          <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px; font-weight: 700; margin: 10px 0 18px; color: #fff;">Doing the work</h3>
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <sc-for list="{{ withUs }}" as="w" hint-placeholder-count="5">
+              <div style="display: flex; gap: 12px; align-items: flex-start;"><span style="width: 22px; height: 22px; border-radius: 50%; background: rgba(206,255,101,.16); color: #ceff65; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; margin-top: 1px;">✓</span><span style="font-size: 15px; color: #dbe6ff; line-height: 1.5;">{{ w }}</span></div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT YOU GET — alternating feature rows -->
+    <section style="margin-top: 88px;">
+      <div style="text-align: center; max-width: 40em; margin: 0 auto;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #135bff; letter-spacing: .06em;">WHAT YOU GET</div>
+        <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 34px; font-weight: 700; letter-spacing: -.02em; margin-top: 8px;">Everything the business side needs</h2>
+        <p style="font-size: 16px; color: #3f4770; margin-top: 8px; line-height: 1.55;">One subscription. Each piece earns its place.</p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 26px; margin-top: 40px;">
+        <sc-for list="{{ features }}" as="f" hint-placeholder-count="6">
+          <div class="feature-row" style="background: #fff; border: 1px solid #e2e8f5; border-radius: 20px; overflow: hidden; display: grid; grid-template-columns: {{ f.cols }}; align-items: stretch; min-height: 320px;">
+            <div style="{{ f.textStyle }}">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="width: 44px; height: 44px; border-radius: 11px; background: #e7efff; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">{{ f.icon }}</div>
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #135bff; letter-spacing: .05em;">{{ f.kicker }}</span>
+              </div>
+              <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 27px; font-weight: 700; letter-spacing: -.02em; margin: 18px 0 10px; text-wrap: balance;">{{ f.title }}</h3>
+              <p style="font-size: 16px; line-height: 1.6; color: #3f4770; max-width: 34em;">{{ f.desc }}</p>
+              <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">
+                <sc-for list="{{ f.gets }}" as="g" hint-placeholder-count="3">
+                  <div style="display: flex; gap: 10px; align-items: flex-start; font-size: 14.5px; color: #333c66; line-height: 1.45;"><span style="color: #16924e; margin-top: 1px;">✓</span><span>{{ g }}</span></div>
+                </sc-for>
+              </div>
+              <div style="margin-top: 20px; display: inline-flex; align-self: flex-start; align-items: center; gap: 8px; background: #eef6ef; border: 1px solid #cfe8d6; border-radius: 10px; padding: 10px 14px;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #16924e; letter-spacing: .04em;">THE PAYOFF</span><span style="font-size: 13.5px; font-weight: 600; color: #1f6b41;">{{ f.payoff }}</span></div>
+            </div>
+            <div class="feature-media" style="{{ f.mediaStyle }}">
+              <image-slot id="{{ f.slotId }}" shape="rect" fit="cover" placeholder="{{ f.ph }}" style="position: absolute; inset: 0; width: 100%; height: 100%;"></image-slot>
+              <span style="position: absolute; left: 18px; bottom: 18px; background: rgba(10,20,64,.82); backdrop-filter: blur(6px); color: #fff; font-size: 12.5px; font-weight: 600; padding: 7px 13px; border-radius: 100px; z-index: 4;">{{ f.caption }}</span>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- JOIN US + PRICING -->
+    <section id="join" style="margin-top: 88px; background: #0a1440; border-radius: 24px; padding: 56px 44px;">
+      <div style="text-align: center; max-width: 40em; margin: 0 auto;">
+        <div style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 13px; border-radius: 100px; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: #0a1440; background: #ceff65; font-weight: 700;">Join us</div>
+        <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 38px; font-weight: 800; color: #fff; letter-spacing: -.02em; margin-top: 18px; text-wrap: balance;">Pick a plan and bring your skill</h2>
+        <p style="font-size: 17px; color: #b9c3e8; margin-top: 12px; line-height: 1.55;">A flat monthly fee — never a cut of your work. Apply free; subscribe once you're live. Cancel anytime.</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 36px; align-items: stretch;">
+        <sc-for list="{{ tiers }}" as="t" hint-placeholder-count="3">
+          <div style="{{ t.cardStyle }}">
+            <sc-if value="{{ t.featured }}" hint-placeholder-val="{{ false }}"><div style="position: absolute; top: -13px; left: 50%; transform: translateX(-50%); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .06em; color: #0a1440; background: #ceff65; padding: 5px 14px; border-radius: 100px; font-weight: 700; white-space: nowrap;">MOST POPULAR</div></sc-if>
+            <div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px; font-weight: 700; color: {{ t.nameColor }};">{{ t.name }}</div>
+            <p style="font-size: 13.5px; color: {{ t.subColor }}; margin-top: 6px; min-height: 38px; line-height: 1.45;">{{ t.tagline }}</p>
+            <div style="display: flex; align-items: baseline; gap: 6px; margin-top: 14px;">
+              <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 40px; font-weight: 800; letter-spacing: -.02em; color: {{ t.nameColor }};">{{ t.price }}</span>
+              <span style="font-size: 14px; color: {{ t.subColor }};">/mo{{ t.per }}</span>
+            </div>
+            <a href="../app/Expert Account.dc.html" style="{{ t.ctaStyle }}">{{ t.cta }}</a>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">
+              <sc-for list="{{ t.points }}" as="pt" hint-placeholder-count="4">
+                <div style="display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; line-height: 1.45; color: {{ t.pointColor }};"><span style="color: {{ t.checkColor }}; margin-top: 1px; flex-shrink: 0;">✓</span><span>{{ pt }}</span></div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <p style="text-align: center; font-size: 13px; color: #9fb4ff; margin-top: 22px;">Full plan comparison on the <a href="Expert Pricing.dc.html" style="color:#ceff65; font-weight:700;">pricing page →</a></p>
+    </section>
+  </main>
+
+  <x-import component-from-global-scope="site-footer" from="./site-footer.js" hint-size="100%,460px"></x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals(){
+    const H = React.createElement;
+    const b = (...ds) => H('svg', { width:22, height:22, viewBox:'0 0 24 24', fill:'none', stroke:'#135bff', strokeWidth:1.8, strokeLinecap:'round', strokeLinejoin:'round' }, ds.map((d,i)=>H('path',{key:i,d})));
+    const I = {
+      client:  b('M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2','M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z','M23 21v-2a4 4 0 0 0-3-3.9','M16 3.1a4 4 0 0 1 0 7.8'),
+      profile: b('M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z','M5 20a7 7 0 0 1 14 0'),
+      reply:   b('M21 11.5a8.4 8.4 0 0 1-11.9 7.6L3 21l1.9-6.1A8.4 8.4 0 1 1 21 11.5z','M8 11h.01M12 11h.01M16 11h.01'),
+      juris:   b('M3 21h18','M5 21V8l7-5 7 5v13','M9 21v-6h6v6'),
+      booking: b('M4 5h16v16H4z','M4 9h16','M8 3v4M16 3v4','M9 14l2 2 4-4'),
+      proposal:b('M7 3h7l4 4v14H7z','M14 3v4h4','M10 12h5M10 16h5'),
+      pipeline:b('M4 5h5v14H4zM10 5h4v9h-4zM15 5h5v6h-5z'),
+    };
+
+    const without = [
+      'Cold-pitching and hunting for the next job between projects',
+      'Guessing at the rules when a client is in a city you don\u2019t know',
+      'Losing leads because you replied a day too late',
+      'Starting every proposal from a blank page',
+      'Your work scattered across email, a website you never update, and sticky notes',
+    ];
+    const withUs = [
+      'Briefed, pre-qualified clients arrive in your dashboard',
+      'Instant answers on submittal rules and timelines for any city',
+      'Every new match gets an instant reply in your voice',
+      'Proposals that start pre-filled from the client\u2019s brief',
+      'One clean profile, one pipeline, one login for all of it',
+    ];
+
+    const mediaBg = (a,b) => `position:relative;min-width:0;overflow:hidden;background:linear-gradient(135deg,${a},${b});`;
+    const textPad = 'padding:44px 40px;display:flex;flex-direction:column;justify-content:center;min-width:0;';
+
+    const fdefs = [
+      { icon:I.client, kicker:'CLIENTS', title:'A steady flow of clients who want you',
+        desc:'We match you with owners whose projects fit your disciplines, licensure and capacity — and hand them over already briefed. No cold outreach, no bidding wars.',
+        gets:['Scoped project matches in your specialties','Only clients you\u2019re actually a fit for','You set your rate — hire and invoice them directly'],
+        payoff:'Fill your calendar without pitching', slotId:'ft-clients', ph:'Screenshot — matched clients in the dashboard', caption:'New matches, briefed and ready' },
+      { icon:I.profile, kicker:'YOUR PROFILE', title:'A profile that sells while you sleep',
+        desc:'A clean, public page with your portfolio, disciplines, licensure and rates. Put the link in your email signature and social bio — it works as your website and gets you found.',
+        gets:['Portfolio, credentials and rates in one page','A shareable link you\u2019re proud to send','Found by the owners searching in your area'],
+        payoff:'Look established from day one', slotId:'ft-profile', ph:'Screenshot — a professional\u2019s public profile page', caption:'architecthire.com/your-name' },
+      { icon:I.reply, kicker:'INSTANT REPLY', title:'Never lose a client to a slow reply',
+        desc:'The moment a match lands, an on-brand reply goes out in your voice — acknowledging the project and offering times. You look responsive even when you\u2019re heads-down on a deadline.',
+        gets:['Automatic first response, every time','Written in your own tone','Offers times and opens the conversation'],
+        payoff:'Win the clients who go with whoever answers first', slotId:'ft-reply', ph:'Screenshot — an instant reply message', caption:'Replied in seconds' },
+      { icon:I.juris, kicker:'JURISDICTION DATABASE', title:'Take work in any city with confidence',
+        desc:'Look up exactly what a jurisdiction requires — submittal checklist, typical plan-check timeline, local amendments and the mistakes that get projects rejected. 3,200 cities, kept current.',
+        gets:['Submittal requirements by project type','Realistic plan-check timelines','Common rejection reasons, flagged upfront'],
+        payoff:'Say yes to projects outside your home turf', slotId:'ft-juris', ph:'Screenshot — jurisdiction lookup results', caption:'3,200+ cities, always current' },
+      { icon:I.booking, kicker:'BOOKING', title:'Let clients book you in one click',
+        desc:'Share your availability for consults, plan reviews and scoping calls. Clients pick a slot themselves — the back-and-forth disappears and the first conversation happens sooner.',
+        gets:['Self-serve scheduling for calls','No email tag to find a time','Consults, reviews and scoping in one place'],
+        payoff:'Go from \u201Csaw your profile\u201D to \u201Con a call\u201D faster', slotId:'ft-booking', ph:'Screenshot — a booking calendar', caption:'Pick a time, done' },
+      { icon:I.proposal, kicker:'PROPOSALS', title:'Send proposals in minutes, not evenings',
+        desc:'Because the client already answered the questionnaire, your proposal starts pre-filled with scope, a fair price range and the likely permit path. You review, adjust and send — it\u2019s always yours.',
+        gets:['Pre-filled scope, pricing and permit path','Edit and brand it as your own','Send a polished proposal same day'],
+        payoff:'Win more work with less admin', slotId:'ft-proposal', ph:'Screenshot — a generated proposal draft', caption:'Draft ready to review' },
+      { icon:I.pipeline, kicker:'PIPELINE', title:'See every opportunity in one board',
+        desc:'All your active pursuits and projects on one simple board, plus a shared timeline your clients can follow. Fewer \u201Cwhere are we?\u201D emails, and nothing slips through the cracks.',
+        gets:['Every pursuit and project at a glance','Shared client-update timelines','Know what needs your attention next'],
+        payoff:'Run more work without dropping a ball', slotId:'ft-pipeline', ph:'Screenshot — the pipeline board', caption:'Your whole practice, one view' },
+    ];
+    const features = fdefs.map((f,i)=>{
+      const imgLeft = i % 2 === 1;
+      return {
+        ...f,
+        cols: imgLeft ? '.92fr 1.08fr' : '1.08fr .92fr',
+        textStyle: textPad + (imgLeft ? 'order:2;' : 'order:1;'),
+        mediaStyle: mediaBg('#14235a','#0a1440') + (imgLeft ? 'order:1;' : 'order:2;'),
+      };
+    });
+
+    // ---- pricing tiers ----
+    const tierDefs = [
+      { key:'studio', name:'Studio', featured:false, price:'$79', per:'', tagline:'Solo pros getting a steady flow of clients going.', cta:'Start with Studio',
+        points:['Client matches in your disciplines','Public profile / mini-site','Instant reply & booking','Pipeline board','Jurisdiction lookup (limited)'] },
+      { key:'practice', name:'Practice', featured:true, price:'$149', per:'', tagline:'The full toolkit for running real project work.', cta:'Start with Practice',
+        points:['Everything in Studio, plus:','Full jurisdiction database','AI intake & scope templates','Proposal generation','Fee schedule builder'] },
+      { key:'firm', name:'Firm', featured:false, price:'$299', per:' / seat', tagline:'For teams that need shared visibility.', cta:'Talk to us',
+        points:['Everything in Practice, plus:','Shared client-update timelines','Team seats & shared pipeline','Priority match placement','Dedicated onboarding'] },
+    ];
+    const tiers = tierDefs.map(t=>{
+      const feat = t.featured;
+      return { ...t,
+        nameColor: '#fff',
+        subColor: '#9fb4ff',
+        pointColor: '#dbe6ff',
+        checkColor: feat ? '#ceff65' : '#7fe6a6',
+        cardStyle: feat
+          ? 'position:relative;background:#12235f;border:1.5px solid #ceff65;border-radius:18px;padding:30px 26px;box-shadow:0 20px 50px rgba(0,0,0,.28);display:flex;flex-direction:column;'
+          : 'position:relative;background:#0c1a4a;border:1px solid #1d2f6e;border-radius:18px;padding:30px 26px;display:flex;flex-direction:column;',
+        ctaStyle: feat
+          ? 'display:block;text-align:center;margin-top:18px;padding:14px;border-radius:11px;background:#ceff65;color:#0a1440;font-size:15px;font-weight:800;box-shadow:0 3px 0 #a9d94a;'
+          : 'display:block;text-align:center;margin-top:18px;padding:14px;border-radius:11px;background:#135bff;color:#fff;font-size:15px;font-weight:700;box-shadow:0 3px 0 #0b3fcc;',
+      };
+    });
+
+    return { without, withUs, features, tiers };
+  }
+}
+</script>
+</body>
+</html>

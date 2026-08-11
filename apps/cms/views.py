@@ -15,8 +15,11 @@ from apps.core.scopes import is_valid_scope
 
 from .models import (
     FAQ,
+    CaseCard,
     CopyBlock,
     CredentialBadge,
+    EstimateTeaserOption,
+    FeatureMatrixRow,
     FooterColumn,
     HeroCarouselSlide,
     MediaAsset,
@@ -34,8 +37,11 @@ from .models import (
     ValueProp,
 )
 from .serializers import (
+    CaseCardSerializer,
     CredentialBadgeSerializer,
+    EstimateTeaserOptionSerializer,
     FAQSerializer,
+    FeatureMatrixRowSerializer,
     FooterColumnSerializer,
     HeroCarouselSlideSerializer,
     MediaAssetSerializer,
@@ -65,6 +71,9 @@ BLOCK_REGISTRY = [
     ("personas", Persona, PersonaSerializer),
     ("principles", Principle, PrincipleSerializer),
     ("carousel", HeroCarouselSlide, HeroCarouselSlideSerializer),
+    ("case_cards", CaseCard, CaseCardSerializer),
+    ("estimate_teaser", EstimateTeaserOption, EstimateTeaserOptionSerializer),
+    ("feature_matrix", FeatureMatrixRow, FeatureMatrixRowSerializer),
 ]
 
 PUBLIC_CACHE_CONTROL = "public, s-maxage=300, stale-while-revalidate=600"
@@ -100,7 +109,7 @@ class CachedContentView(APIView):
     def get_cache_slug(self, **kwargs):
         return self.cache_slug
 
-    def build_payload(self, request, **kwargs):  # pragma: no cover - abstract
+    def build_payload(self, request, **kwargs):
         raise NotImplementedError
 
 
@@ -145,6 +154,14 @@ class PageContentView(CachedContentView):
         }
 
 
+def _chrome_copy():
+    """Site-shell copy (nav labels, auth buttons, footer legal) — scope 'chrome'."""
+    return {
+        block.key: {"text": block.text, "href": block.href}
+        for block in CopyBlock.objects.filter(scope="chrome")
+    }
+
+
 class NavigationView(CachedContentView):
     """GET /api/v1/content/nav/ — the three mega-dropdowns, grouped."""
 
@@ -157,7 +174,7 @@ class NavigationView(CachedContentView):
             menus.setdefault(group.menu, []).append(
                 NavGroupSerializer(group, context={"request": request}).data
             )
-        return {"menus": menus}
+        return {"menus": menus, "copy": _chrome_copy()}
 
 
 class FooterView(CachedContentView):
@@ -172,6 +189,7 @@ class FooterView(CachedContentView):
                 columns, many=True, context={"request": request}
             ).data,
             "social": SocialLinkSerializer(SocialLink.objects.all(), many=True).data,
+            "copy": _chrome_copy(),
         }
 
 

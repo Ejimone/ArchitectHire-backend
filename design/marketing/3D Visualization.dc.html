@@ -49,7 +49,7 @@
         <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(34px, 3.2vw, 46px); line-height: 1.03; letter-spacing: -.02em; font-weight: 800; color: #fff; text-wrap: balance;">See it before you build it</h1>
         <p style="font-size: 18px; line-height: 1.55; color: #b9c3e8; margin: 20px 0 28px; max-width: 30em;">Photoreal renders, 3D floor plans, and walkthroughs from the platform's visualization specialists — starting at $99 a still. No full-design engagement required.</p>
         <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
-          <a href="../app/Order Render.dc.html" style="background: #135bff; color: #fff; padding: 15px 28px; border-radius: 11px; font-size: 16px; font-weight: 700; box-shadow: 0 3px 0 #0b3fcc;">Order a render →</a>
+          <a href="../app/Get Started.dc.html?intent=viz" style="background: #135bff; color: #fff; padding: 15px 28px; border-radius: 11px; font-size: 16px; font-weight: 700; box-shadow: 0 3px 0 #0b3fcc;">Order a render →</a>
           <span style="font-size: 14px; color: #9fb4ff;">Typical turnaround 3–7 days</span>
         </div>
         <div style="display: flex; gap: 34px; margin-top: 34px;">
@@ -69,7 +69,7 @@
       <p style="font-size: 16px; color: #3f4770; margin-top: 8px; max-width: 46em;">Pick the goal that sounds like yours — we'll match you with a specialist who does exactly that.</p>
       <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 24px;">
         <sc-for list="{{ useCases }}" as="u" hint-placeholder-count="3">
-          <a href="../app/Order Render.dc.html" style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 24px; display: block;" style-hover="border-color: #135bff; box-shadow: 0 8px 22px rgba(19,91,255,.12); transform: translateY(-2px);">
+          <a href="../app/Get Started.dc.html?intent=viz" style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 24px; display: block;" style-hover="border-color: #135bff; box-shadow: 0 8px 22px rgba(19,91,255,.12); transform: translateY(-2px);">
             <div style="width: 44px; height: 44px; border-radius: 11px; background: #e7efff; display: flex; align-items: center; justify-content: center; margin-bottom: 14px;">{{ u.icon }}</div>
             <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 700;">{{ u.t }}</h3>
             <p style="font-size: 14px; line-height: 1.55; color: #5b6493; margin-top: 8px;">{{ u.d }}</p>
@@ -190,7 +190,7 @@
     <section style="margin-top: 40px; background: #135bff; border-radius: 22px; padding: 52px; text-align: center;">
       <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 36px; font-weight: 800; color: #fff; letter-spacing: -.02em; text-wrap: balance;">Turn your plans into images that sell</h2>
       <p style="font-size: 17px; color: #dbe6ff; margin: 12px 0 26px;">Upload what you have and get a quote back in minutes.</p>
-      <a href="../app/Order Render.dc.html" style="display: inline-block; background: #ceff65; color: #0a1440; padding: 16px 32px; border-radius: 12px; font-size: 17px; font-weight: 800; box-shadow: 0 4px 0 #a9d94a;">Start a render order →</a>
+      <a href="../app/Get Started.dc.html?intent=viz" style="display: inline-block; background: #ceff65; color: #0a1440; padding: 16px 32px; border-radius: 12px; font-size: 17px; font-weight: 800; box-shadow: 0 4px 0 #a9d94a;">Start a render order →</a>
     </section>
   </main>
 
@@ -277,9 +277,9 @@ class Component extends DCLogic {
 
     const steps = [
       { n:'1', t:'Share your plans', d:'Upload drawings, photos, or a sketch — whatever you have.' },
-      { n:'2', t:'Get a fixed quote', d:'Pick your quality tier and lock the price up front.' },
+      { n:'2', t:'Get a price', d:'Pick your quality tier and see the artist’s price up front.' },
       { n:'3', t:'Review a draft', d:'See a first pass and mark up changes; revisions are included.' },
-      { n:'4', t:'Receive final files', d:'Download print-ready images, released from escrow on approval.' },
+      { n:'4', t:'Receive final files', d:'Download print-ready images on approval — you pay the artist directly.' },
     ];
 
     const faqDefs = [

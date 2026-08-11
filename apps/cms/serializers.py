@@ -2,7 +2,10 @@ from rest_framework import serializers
 
 from .models import (
     FAQ,
+    CaseCard,
     CredentialBadge,
+    EstimateTeaserOption,
+    FeatureMatrixRow,
     FooterColumn,
     HeroCarouselSlide,
     MediaAsset,
@@ -25,13 +28,13 @@ from .models import (
 class FAQSerializer(serializers.ModelSerializer):
     class Meta:
         model = FAQ
-        fields = ["id", "question", "answer"]
+        fields = ["id", "group", "question", "answer"]
 
 
 class StatSerializer(serializers.ModelSerializer):
     class Meta:
         model = Stat
-        fields = ["id", "value", "label"]
+        fields = ["id", "group", "value", "label"]
 
 
 class StepSerializer(serializers.ModelSerializer):
@@ -39,7 +42,7 @@ class StepSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Step
-        fields = ["id", "title", "description", "image"]
+        fields = ["id", "group", "title", "description", "image"]
 
 
 class TestimonialSerializer(serializers.ModelSerializer):
@@ -47,13 +50,13 @@ class TestimonialSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Testimonial
-        fields = ["id", "quote", "name", "role", "audience", "photo"]
+        fields = ["id", "group", "quote", "name", "role", "audience", "photo"]
 
 
 class ValuePropSerializer(serializers.ModelSerializer):
     class Meta:
         model = ValueProp
-        fields = ["id", "icon", "title", "description"]
+        fields = ["id", "group", "icon", "title", "description"]
 
 
 class TrustLogoSerializer(serializers.ModelSerializer):
@@ -61,19 +64,19 @@ class TrustLogoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TrustLogo
-        fields = ["id", "name", "image"]
+        fields = ["id", "group", "name", "image"]
 
 
 class CredentialBadgeSerializer(serializers.ModelSerializer):
     class Meta:
         model = CredentialBadge
-        fields = ["id", "label"]
+        fields = ["id", "group", "label"]
 
 
 class UseCaseSerializer(serializers.ModelSerializer):
     class Meta:
         model = UseCase
-        fields = ["id", "icon", "title", "description", "cta_label", "href"]
+        fields = ["id", "group", "icon", "title", "description", "cta_label", "href"]
 
 
 class PersonaSerializer(serializers.ModelSerializer):
@@ -84,13 +87,62 @@ class PersonaSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Persona
-        fields = ["id", "kicker", "title", "body", "points", "image", "cta_label", "cta_href"]
+        fields = [
+            "id",
+            "group",
+            "kicker",
+            "title",
+            "body",
+            "points",
+            "image",
+            "cta_label",
+            "cta_href",
+        ]
+
+
+class CaseCardSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(read_only=True, use_url=True)
+
+    class Meta:
+        model = CaseCard
+        fields = [
+            "id",
+            "group",
+            "category_tag",
+            "location",
+            "title",
+            "excerpt",
+            "image",
+            "href",
+            "stat1_value",
+            "stat1_label",
+            "stat2_value",
+            "stat2_label",
+        ]
+
+
+class EstimateTeaserOptionSerializer(serializers.ModelSerializer):
+    includes = serializers.ListField(
+        source="includes_list", child=serializers.CharField(), read_only=True
+    )
+
+    class Meta:
+        model = EstimateTeaserOption
+        fields = ["id", "group", "label", "price_range", "bar_pct", "includes"]
+
+
+class FeatureMatrixRowSerializer(serializers.ModelSerializer):
+    marks = serializers.ListField(child=serializers.CharField(), read_only=True)
+
+    class Meta:
+        model = FeatureMatrixRow
+        fields = ["id", "group", "label", "is_flagship", "marks"]
 
 
 class PrincipleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Principle
-        fields = ["id", "title", "body"]
+        fields = ["id", "group", "title", "body"]
 
 
 class HeroCarouselSlideSerializer(serializers.ModelSerializer):
@@ -98,7 +150,7 @@ class HeroCarouselSlideSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = HeroCarouselSlide
-        fields = ["id", "image", "caption", "name"]
+        fields = ["id", "group", "image", "caption", "name"]
 
 
 class PageSEOSerializer(serializers.ModelSerializer):

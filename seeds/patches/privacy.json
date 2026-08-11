@@ -1,0 +1,27 @@
+{
+  "_note": "Chrome for design/marketing/Privacy.dc.html at /privacy. The policy title, effective date and the seven sections come from the PolicyPage model (seeds/content_editorial.json); these rows are the surrounding page furniture the design hardcodes — legal eyebrow, intro paragraph, contents heading and the closing help card. {privacy_email} in help_body is filled from SiteSettings.contact_email_privacy so the owner changes it in one place. `editorial.policy_sections` restores sections 2 and 3, which the design rewrote when the business model moved from an escrow marketplace to an introductions platform: we no longer facilitate payments or hold funds, and the only payments we process are the architects' own subscriptions.",
+  "copy": [
+    {"scope": "privacy", "key": "eyebrow", "text": "LEGAL", "href": ""},
+    {"scope": "privacy", "key": "updated_prefix", "text": "Last updated:", "href": ""},
+    {"scope": "privacy", "key": "intro", "text": "This policy explains what information ArchitectHire, Inc. (\"ArchitectHire\", \"we\") collects, how we use it, and the choices you have. It applies to our website and platform across all 52 US jurisdictions we serve. This summary is provided for product design and is not legal advice.", "href": ""},
+    {"scope": "privacy", "key": "toc_heading", "text": "CONTENTS", "href": ""},
+    {"scope": "privacy", "key": "help_lead", "text": "Questions about this policy or your data? Email", "href": ""},
+    {"scope": "privacy", "key": "help_middle", "text": "or use our", "href": ""},
+    {"scope": "privacy", "key": "help_link", "text": "contact page", "href": "/contact"},
+    {"scope": "privacy", "key": "help_tail", "text": ".", "href": ""}
+  ],
+  "editorial": {
+    "policy_sections": [
+      {
+        "page": "privacy",
+        "anchor": "use",
+        "body": "To operate the platform: estimating a typical price range, surfacing qualified architects licensed in your jurisdiction, and supporting scoping and introductions.\n\nTo protect the platform through licensure verification, fraud prevention, and enforcement of our terms.\n\nTo communicate with you about your projects, and — where permitted — about relevant guides, features and offers you can opt out of at any time."
+      },
+      {
+        "page": "privacy",
+        "anchor": "share",
+        "body": "With the architects you are matched with, limited to what they need to scope and deliver your project. Personal contact details stay on-platform until you engage.\n\nWith service providers that process our subscription billing, host data, and support operations under contract, and with authorities where required by law.\n\nWe do not sell your personal information."
+      }
+    ]
+  }
+}

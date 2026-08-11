@@ -180,8 +180,8 @@ class Component extends DCLogic {
         { name:'Coastal / historic', level:'PARTIAL', tagStyle:tag(1), desc:'Coastal Commission review and historic-district design review where applicable.' },
       ],
       steps:[
-        { n:'1', t:'Scope & estimate', dur:'2–3 days', d:'Questionnaire feeds the pricing engine; you review 2–3 California-licensed architects and confirm a fixed quote or hourly on a scoping call.' },
-        { n:'2', t:'Design & drawings', dur:'3–8 wks', d:'Your architect produces the full set — plans, elevations, structural coordination, and Title-24 compliance — with milestone reviews.' },
+        { n:'1', t:'Scope & estimate', dur:'2–3 days', d:'The questionnaire returns a typical price range; you review 2–3 California-licensed architects and agree a price directly with one — fixed or hourly, their rate — on a scoping call.' },
+        { n:'2', t:'Design & drawings', dur:'3–8 wks', d:'Your architect produces the full set — plans, elevations, structural coordination, and Title-24 compliance — with milestone reviews you sign off.' },
         { n:'3', t:'Plan check submission', dur:'2–6 wks', d:'The stamped set is submitted to your city or county. Complexity and backlog set the review time; corrections cycle back if needed.' },
         { n:'4', t:'Permit issued', dur:'—', d:'Once approved, you receive the permit and can break ground. Revision tooling keeps any change orders on-platform.' },
       ],
@@ -195,7 +195,7 @@ class Component extends DCLogic {
       { q:'How long does it take to get a permit in California?', a:'Plan for roughly 8–14 weeks from scoping to an issued permit for a typical residential project — a few weeks of design plus 2–6 weeks of plan-check review, which varies by city and current backlog.' },
       { q:'What is Title-24 and do I need it?', a:'Title-24 is California\u2019s energy-efficiency standard. Nearly every residential and commercial permit set must include Title-24 compliance documentation; your architect prepares it as part of the drawing set.' },
       { q:'Why is California more expensive than other states?', a:'California scores 82/100 on our complexity index because of seismic, wildfire, Title-24 and — in many areas — coastal or historic review. That translates to a 1.35× pricing multiplier, applied automatically in your estimate.' },
-      { q:'Can I hire an architect remotely for a California project?', a:'Yes. The entire process — scoping, drawings, revisions and submission — runs on-platform with escrow-protected milestones. You never need an in-person meeting to reach a stamped, permit-ready set.' },
+      { q:'Can I hire an architect remotely for a California project?', a:'Yes. The entire process — scoping, drawings, revisions and submission — runs on-platform, and you contract and pay your architect directly. You never need an in-person meeting to reach a stamped, permit-ready set.' },
     ];
     const faqs = faqData.map((f,i)=>({ ...f, open: this.state.openFaq===i, caret: this.state.openFaq===i?'\u2212':'+', onClick:()=>this.setState(st=>({ openFaq: st.openFaq===i?-1:i })) }));
 

@@ -4,11 +4,16 @@ from .models import NotificationPreference, User
 
 
 class UserSerializer(serializers.ModelSerializer):
+    display_name = serializers.CharField(read_only=True)
+    has_placeholder_email = serializers.BooleanField(read_only=True)
+
     class Meta:
         model = User
         fields = [
             "id",
             "email",
+            "display_name",
+            "has_placeholder_email",
             "first_name",
             "last_name",
             "role",

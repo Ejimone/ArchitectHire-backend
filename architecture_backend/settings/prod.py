@@ -50,5 +50,14 @@ if SENTRY_DSN:
         send_default_pii=False,
     )
 
+# Structured JSON logs for aggregation (DO App Platform / Papertrail / Loki).
+LOGGING["formatters"]["json"] = {
+    "format": (
+        '{{"level": "{levelname}", "time": "{asctime}", '
+        '"logger": "{name}", "message": {message!r}}}'
+    ),
+    "style": "{",
+}
+LOGGING["handlers"]["console"]["formatter"] = "json"
 LOGGING["root"]["level"] = "WARNING"
 LOGGING["loggers"]["apps"]["level"] = "INFO"

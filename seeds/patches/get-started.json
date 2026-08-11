@@ -1,0 +1,1445 @@
+{
+  "_note": "Get Started was rebuilt from a three-step form into the unified adaptive quiz in design/app/Get Started.dc.html: a 4-phase machine (quiz → brief → estimate → account) whose step list is rebuilt from the answers on every render, across six branches. Every literal string in that design lives here — the extracted seeds only ever covered the retired three-step form. Keys: q_<branch>_<step>_{title,sub}, q_<branch>_<step>_opt_<option>_{label,sub}, q_<branch>_<step>_aside_{hint,caption}, q_<branch>_kicker, plus the shell/brief/estimate/account chrome. The estimate's own prose (headline, row labels, footnote, match blurbs, the generated brief) is NOT here: it is templated from the answers by the pricing engine (apps/projects/pricing.py) and arrives with the quote, because the frontend is forbidden from computing any of it. The design-branch add-on rows come from catalog.Addon so their labels and prices stay in one place. step3_sub/step3_micro/step3_cta carry over unchanged; step3_kicker is restated ('LAST STEP', not 'STEP 3'). Superseded and now unrendered: step1_kicker, step1_heading, step1_sub, step1_cta, step2_kicker, step2_sub, step3_heading — the surfaces they labelled no longer exist. `order-render` and `order-drafting` remain as before: those designs are now redirects into this one (?intent=viz / ?intent=drafting).",
+  "copy": [
+    {
+      "scope": "get-started",
+      "key": "step3_sub",
+      "text": "Your answers and estimate are saved. An account holds your matches and keeps messaging and files in one place.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "step3_micro",
+      "text": "By continuing you agree to our Terms and Privacy Policy. Free to get matched — you hire and pay your pro directly.",
+      "href": ""
+    },
+    {
+      "scope": "order-render",
+      "key": "step3_micro",
+      "text": "You pay the artist directly, only once you approve the final files.",
+      "href": ""
+    },
+    {
+      "scope": "order-drafting",
+      "key": "step3_micro",
+      "text": "You pay the drafter directly, approving each reviewed milestone as you go.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "nav_save_exit",
+      "text": "Save & exit",
+      "href": "/"
+    },
+    {
+      "scope": "get-started",
+      "key": "progress_question",
+      "text": "Question {n} of {m}",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "progress_summary",
+      "text": "Your brief",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "progress_estimate",
+      "text": "Your instant estimate",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "progress_account",
+      "text": "Create your account",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "quiz_back",
+      "text": "← Back",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "quiz_next",
+      "text": "Continue",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "quiz_next_last",
+      "text": "Review my answers",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "state_complexity_label",
+      "text": "Jurisdiction complexity",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "unit_sf",
+      "text": "sf",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "unit_sec",
+      "text": "sec",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "unit_hrs",
+      "text": "hrs",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "unit_sheets",
+      "text": "sheets",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "unit_plans",
+      "text": "plans",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "unit_images",
+      "text": "images",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_goal_kicker",
+      "text": "GET STARTED",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_kicker",
+      "text": "DESIGN & PERMITTING",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_drafting_kicker",
+      "text": "DRAFTING & DOCS",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_consult_kicker",
+      "text": "ADVICE & REVIEW",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_viz_kicker",
+      "text": "3D VISUALIZATION",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_scan_kicker",
+      "text": "SCANNING & BIM",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_engineering_kicker",
+      "text": "ENGINEERING",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_goal_title",
+      "text": "What do you need help with?",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_goal_sub",
+      "text": "One question decides the rest — we only ask what your kind of job actually needs.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_goal_opt_design_label",
+      "text": "Design & permitting",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_goal_opt_design_sub",
+      "text": "Plans and a permit-ready set for a real project",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_goal_opt_drafting_label",
+      "text": "Drafting & documentation",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_goal_opt_drafting_sub",
+      "text": "CAD, as-builts, PDF-to-CAD — no stamp for most jobs",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_goal_opt_consult_label",
+      "text": "Advice or a plan review",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_goal_opt_consult_sub",
+      "text": "A video consult, feasibility check, or markup",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_goal_opt_viz_label",
+      "text": "3D visualization",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_goal_opt_viz_sub",
+      "text": "Photoreal renders, 3D floor plans, walkthroughs",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_goal_opt_scan_label",
+      "text": "Scanning & BIM",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_goal_opt_scan_sub",
+      "text": "3D laser scanning and scan-to-BIM models",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_goal_opt_engineering_label",
+      "text": "Engineering & compliance",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_goal_opt_engineering_sub",
+      "text": "Structural stamp, Title-24 energy, or code consulting",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_ptype_title",
+      "text": "Residential or commercial?",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_ptype_sub",
+      "text": "This sets the questions and the pricing curve.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_ptype_opt_residential_label",
+      "text": "Residential",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_ptype_opt_residential_sub",
+      "text": "Renovations, additions, new homes, ADUs",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_ptype_opt_commercial_label",
+      "text": "Commercial",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_ptype_opt_commercial_sub",
+      "text": "TIs, retail, office, restaurant",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_scope_title",
+      "text": "What are you building?",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_scope_sub",
+      "text": "Pick the closest — you can refine it with your architect.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_scope_opt_renovation_label",
+      "text": "Renovation",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_scope_opt_addition_label",
+      "text": "Addition",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_scope_opt_new_custom_home_label",
+      "text": "New custom home",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_scope_opt_adu_label",
+      "text": "ADU",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_scope_opt_kitchen_bath_label",
+      "text": "Kitchen / bath",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_scope_opt_tenant_improvement_label",
+      "text": "Tenant improvement",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_scope_opt_office_fit_out_label",
+      "text": "Office fit-out",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_scope_opt_retail_build_out_label",
+      "text": "Retail build-out",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_scope_opt_restaurant_label",
+      "text": "Restaurant",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_scope_opt_change_of_use_label",
+      "text": "Change of use",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_beds_title",
+      "text": "How many bedrooms?",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_beds_sub",
+      "text": "The program is what makes a match — roughly how many.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_beds_aside_hint",
+      "text": "Reference: bedroom count / floor plan",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_beds_aside_caption",
+      "text": "Not sure? A rough count is plenty — your architect refines the program with you.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_beds_opt_studio_label",
+      "text": "Studio",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_beds_opt_1_label",
+      "text": "1",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_beds_opt_2_label",
+      "text": "2",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_beds_opt_3_label",
+      "text": "3",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_beds_opt_4_label",
+      "text": "4",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_beds_opt_5plus_label",
+      "text": "5+",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_baths_title",
+      "text": "How many bathrooms?",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_baths_sub",
+      "text": "Count half-baths too.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_baths_aside_hint",
+      "text": "Reference: full bath vs. half-bath",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_baths_aside_caption",
+      "text": "A full bath has a tub/shower; a half-bath (just toilet + sink) counts as 0.5.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_baths_opt_1_label",
+      "text": "1",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_baths_opt_1_5_label",
+      "text": "1.5",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_baths_opt_2_label",
+      "text": "2",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_baths_opt_2_5_label",
+      "text": "2.5",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_baths_opt_3_label",
+      "text": "3",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_baths_opt_4plus_label",
+      "text": "4+",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_stories_title",
+      "text": "How many stories?",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_stories_sub",
+      "text": "Multi-story affects structure and cost.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_stories_aside_hint",
+      "text": "Reference: 1 vs. 2-story massing",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_stories_aside_caption",
+      "text": "Stories = floors of living space. It drives stairs, structure, and cost.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_stories_opt_1_story_label",
+      "text": "1 story",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_stories_opt_2_stories_label",
+      "text": "2 stories",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_stories_opt_3plus_label",
+      "text": "3+",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_rooms_title",
+      "text": "Which areas are involved?",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_rooms_sub",
+      "text": "Select every space in scope.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_rooms_opt_kitchen_label",
+      "text": "Kitchen",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_rooms_opt_primaryBath_label",
+      "text": "Primary bath",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_rooms_opt_guestBath_label",
+      "text": "Guest / hall bath",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_rooms_opt_living_label",
+      "text": "Living / dining",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_rooms_opt_bedrooms_label",
+      "text": "Bedrooms",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_rooms_opt_basement_label",
+      "text": "Basement",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_rooms_opt_garage_label",
+      "text": "Garage",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_rooms_opt_outdoor_label",
+      "text": "Outdoor / deck",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_style_title",
+      "text": "What style are you drawn to?",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_style_sub",
+      "text": "Pick the look that pulls at you — the pictures matter more than the label. It helps us match an architect whose portfolio fits your taste.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_style_opt_modern_label",
+      "text": "Modern",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_style_opt_modern_sub",
+      "text": "Clean lines, glass, flat roofs",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_style_opt_contemporary_label",
+      "text": "Contemporary",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_style_opt_contemporary_sub",
+      "text": "Current, mixed materials",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_style_opt_farmhouse_label",
+      "text": "Modern farmhouse",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_style_opt_farmhouse_sub",
+      "text": "Gabled, warm, rustic-modern",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_style_opt_craftsman_label",
+      "text": "Craftsman",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_style_opt_craftsman_sub",
+      "text": "Natural wood, porches",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_style_opt_mediterranean_label",
+      "text": "Mediterranean",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_style_opt_mediterranean_sub",
+      "text": "Stucco, tile roofs, arches",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_style_opt_traditional_label",
+      "text": "Traditional",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_style_opt_traditional_sub",
+      "text": "Classic, symmetrical",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_style_opt_not_sure_label",
+      "text": "Not sure yet",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_style_opt_not_sure_sub",
+      "text": "Open to the architect's ideas",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_sqft_title",
+      "text": "Roughly how big?",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_sqft_sub",
+      "text": "A ballpark is fine — it drives your per-square-foot rate.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_site_title",
+      "text": "Do you have the lot?",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_site_sub",
+      "text": "Site status changes what we scope first.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_site_opt_own_label",
+      "text": "Yes — I own the lot",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_site_opt_own_sub",
+      "text": "Ready to design to the site",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_site_opt_escrow_label",
+      "text": "In escrow / closing",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_site_opt_escrow_sub",
+      "text": "Under contract now",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_site_opt_shopping_label",
+      "text": "Still shopping",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_site_opt_shopping_sub",
+      "text": "Want feasibility before I buy",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_budget_title",
+      "text": "What's your construction budget?",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_budget_sub",
+      "text": "For the build itself — this helps us match the right architect fee tier. Rough is fine.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_budget_opt_under_250k_label",
+      "text": "Under $250k",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_budget_opt_250k_500k_label",
+      "text": "$250k – $500k",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_budget_opt_500k_1m_label",
+      "text": "$500k – $1M",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_budget_opt_1m_2m_label",
+      "text": "$1M – $2M",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_budget_opt_2m_plus_label",
+      "text": "$2M+",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_budget_opt_not_sure_label",
+      "text": "Not sure yet",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_state_title",
+      "text": "Where are you building?",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_state_sub",
+      "text": "We match to architects licensed in your state and score its permit complexity.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_timeline_title",
+      "text": "What's your timeline?",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_timeline_sub",
+      "text": "Rough is fine — it helps us match on capacity.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_timeline_opt_rush_label",
+      "text": "Rush (6–8 wks)",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_timeline_opt_standard_label",
+      "text": "Standard (10–12 wks)",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_timeline_opt_flexible_label",
+      "text": "Flexible (14+ wks)",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_addons_title",
+      "text": "Anything else in the set?",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_design_addons_sub",
+      "text": "Add only what you need — each is optional and priced separately.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_drafting_service_title",
+      "text": "What do you need drafted?",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_drafting_service_sub",
+      "text": "Drafting is unstamped work — no licensed architect required for most jobs.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_drafting_service_opt_cad_label",
+      "text": "CAD drafting",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_drafting_service_opt_cad_sub",
+      "text": "Hourly, from your sketches or redlines",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_drafting_service_opt_asbuilt_label",
+      "text": "2D as-built package",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_drafting_service_opt_asbuilt_sub",
+      "text": "Measured drawings of an existing space",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_drafting_service_opt_pdf_to_cad_label",
+      "text": "PDF-to-CAD",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_drafting_service_opt_pdf_to_cad_sub",
+      "text": "Convert PDFs or scans to editable CAD",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_drafting_service_opt_redline_label",
+      "text": "Redline cleanup",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_drafting_service_opt_redline_sub",
+      "text": "Incorporate reviewer markups",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_drafting_size_title_asbuilt",
+      "text": "Approximate square footage",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_drafting_size_title_sheets",
+      "text": "How many sheets?",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_drafting_size_title_hours",
+      "text": "Estimated hours",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_drafting_size_sub",
+      "text": "Just an estimate — the drafter confirms before starting.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_drafting_stamp_title",
+      "text": "Does your submittal need a licensed stamp?",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_drafting_stamp_sub",
+      "text": "If it does, we add a licensed pro as a separate step — so you only pay for a stamp when you need one.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_drafting_stamp_opt_no_label",
+      "text": "No — unstamped drafting",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_drafting_stamp_opt_no_sub",
+      "text": "Most single-family & ADU jobs",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_drafting_stamp_opt_yes_label",
+      "text": "Yes — it needs a stamp",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_drafting_stamp_opt_yes_sub",
+      "text": "We match a licensed pro for that step",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_drafting_have_title",
+      "text": "What do you have to start?",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_drafting_have_sub",
+      "text": "Any starting point works.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_drafting_have_opt_sketch_label",
+      "text": "Sketch or dims",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_drafting_have_opt_pdfs_label",
+      "text": "PDFs / scans",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_drafting_have_opt_cad_label",
+      "text": "Existing CAD",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_drafting_rush_title",
+      "text": "How fast do you need it?",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_drafting_rush_sub",
+      "text": "Rush adds 25% for 24–48h turnaround.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_drafting_rush_opt_standard_label",
+      "text": "Standard (2–5 days)",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_drafting_rush_opt_rush_label",
+      "text": "Rush · 24–48h (+25%)",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_consult_type_title",
+      "text": "What kind of help do you want?",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_consult_type_sub",
+      "text": "Flat rates — book, meet, and get clear next steps.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_consult_type_opt_video_label",
+      "text": "1-hour video consult",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_consult_type_opt_video_sub",
+      "text": "Walk your project with a licensed architect · $145",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_consult_type_opt_plan_review_label",
+      "text": "Plan review & markup",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_consult_type_opt_plan_review_sub",
+      "text": "A marked-up, prioritized review of your drawings · $150",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_consult_type_opt_feasibility_label",
+      "text": "Feasibility check",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_consult_type_opt_feasibility_sub",
+      "text": "Zoning, setbacks & code before you commit · $250",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_consult_ptype_title",
+      "text": "Residential or commercial?",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_consult_ptype_sub",
+      "text": "So we match the right kind of expertise.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_consult_ptype_opt_residential_label",
+      "text": "Residential",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_consult_ptype_opt_residential_sub",
+      "text": "Homes, additions, ADUs",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_consult_ptype_opt_commercial_label",
+      "text": "Commercial",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_consult_ptype_opt_commercial_sub",
+      "text": "Retail, office, restaurant, TI",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_consult_state_title",
+      "text": "Where's the project?",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_consult_state_sub",
+      "text": "We match to a pro licensed in your state.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_viz_type_title",
+      "text": "What do you want visualized?",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_viz_type_sub",
+      "text": "Turn plans or a model into images that sell.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_viz_type_opt_render_label",
+      "text": "Photoreal render",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_viz_type_opt_render_sub",
+      "text": "One interior or exterior still · from $99",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_viz_type_opt_floor_plan_label",
+      "text": "3D floor plan",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_viz_type_opt_floor_plan_sub",
+      "text": "A dollhouse view of the layout · from $100",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_viz_type_opt_walkthrough_label",
+      "text": "Animated walkthrough",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_viz_type_opt_walkthrough_sub",
+      "text": "A moving video tour · from $50/sec",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_viz_qty_title_secs",
+      "text": "How long a walkthrough?",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_viz_qty_title_qty",
+      "text": "How many do you need?",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_viz_qty_sub",
+      "text": "You can adjust the exact list with your artist.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_viz_have_title",
+      "text": "What do you have to work from?",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_viz_have_sub",
+      "text": "The more we start with, the faster it goes.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_viz_have_opt_cad_label",
+      "text": "CAD / model",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_viz_have_opt_plans_label",
+      "text": "2D plans",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_viz_have_opt_sketch_label",
+      "text": "Sketch or photos",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_scan_type_title",
+      "text": "What do you need captured?",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_scan_type_sub",
+      "text": "On-site reality capture of an existing building or space.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_scan_type_opt_laser_label",
+      "text": "3D laser scanning",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_scan_type_opt_laser_sub",
+      "text": "A precise point cloud of existing conditions · from $0.20/sf",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_scan_type_opt_bim_label",
+      "text": "Scan-to-BIM model",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_scan_type_opt_bim_sub",
+      "text": "Point cloud converted to a working BIM model · from $0.50/sf",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_scan_area_title",
+      "text": "How large is the space?",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_scan_area_sub",
+      "text": "Gross floor area to be captured.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_scan_state_title",
+      "text": "Where's the site?",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_scan_state_sub",
+      "text": "We dispatch a capture crew near you.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_engineering_type_title",
+      "text": "Which service do you need?",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_engineering_type_sub",
+      "text": "Matched to a licensed engineer or code specialist.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_engineering_type_opt_stamp_label",
+      "text": "Structural stamp",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_engineering_type_opt_stamp_sub",
+      "text": "Review & stamp of your framing / lateral design · from $1,500",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_engineering_type_opt_title24_label",
+      "text": "Title-24 / energy calcs",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_engineering_type_opt_title24_sub",
+      "text": "Energy compliance documentation · from $300",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_engineering_type_opt_code_label",
+      "text": "Code consulting",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_engineering_type_opt_code_sub",
+      "text": "Untangle occupancy, egress & accessibility · $150/hr",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_engineering_hours_title",
+      "text": "About how many hours?",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_engineering_hours_sub",
+      "text": "An estimate — you only pay for tracked time.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_engineering_state_title",
+      "text": "Where's the project?",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "q_engineering_state_sub",
+      "text": "Compliance is jurisdiction-specific — we match accordingly.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "summary_kicker",
+      "text": "YOUR BRIEF",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "summary_heading",
+      "text": "Here's what we understand",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "summary_sub",
+      "text": "Read it over — if anything's off, edit it before we price and match. Getting this right is how we find the perfect pro.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "summary_back",
+      "text": "← Edit answers",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "summary_cta",
+      "text": "Looks right — see my estimate →",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "estimate_kicker",
+      "text": "YOUR INSTANT ESTIMATE",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "estimate_breakdown_heading",
+      "text": "Price breakdown",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "estimate_juris_kicker",
+      "text": "JURISDICTION SCORE",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "estimate_juris_scale",
+      "text": "/ 100",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "estimate_match_kicker",
+      "text": "WE'LL MATCH YOU WITH",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "estimate_back",
+      "text": "← Edit my answers",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "estimate_loading",
+      "text": "Pricing your project…",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "estimate_error",
+      "text": "We couldn't price that just now. Check your connection and try again.",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "estimate_retry",
+      "text": "Try again",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "step3_kicker",
+      "text": "LAST STEP · CREATE YOUR ACCOUNT",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "match_headline",
+      "text": "We'll match you with {role}",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "match_saved_kicker",
+      "text": "YOUR SAVED ESTIMATE",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "match_list_kicker",
+      "text": "YOUR MATCH",
+      "href": ""
+    },
+    {
+      "scope": "get-started",
+      "key": "match_back",
+      "text": "← Back to estimate",
+      "href": ""
+    }
+  ]
+}

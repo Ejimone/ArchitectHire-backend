@@ -145,9 +145,17 @@ class FooterLink(OrderableModel, TimeStampedModel):
 
 
 class ScopedBlock(TimeStampedModel, PublishableModel, OrderableModel):
-    """Base for content blocks attached to a page scope."""
+    """Base for content blocks attached to a page scope.
+
+    `group` separates several lists of the same block type on one page — e.g. the
+    For Experts page shows hero stats and earnings stats, or three distinct grids
+    of value props. Blank means "the page's default list".
+    """
 
     scope = models.CharField(max_length=80, db_index=True, validators=[validate_scope])
+    group = models.SlugField(
+        max_length=40, blank=True, help_text="Optional section key, e.g. 'earnings' or 'tools'"
+    )
 
     class Meta(OrderableModel.Meta):
         abstract = True
@@ -271,6 +279,79 @@ class HeroCarouselSlide(ScopedBlock):
 
     def __str__(self):
         return self.caption or f"Slide {self.pk}"
+
+
+class CaseCard(ScopedBlock):
+    """Curated case-study teaser card (e.g. the three on the landing page).
+
+    Distinct from the CaseStudy model: these are hand-written card variants the
+    owner places on marketing pages, each linking to a full case study.
+    """
+
+    category_tag = models.CharField(max_length=48, blank=True)  # "Backyard ADU"
+    location = models.CharField(max_length=80, blank=True)  # "Oakland, CA"
+    title = models.CharField(max_length=160)
+    excerpt = models.TextField(blank=True)
+    image = models.ImageField(upload_to="cms/case-cards/", blank=True)
+    href = models.CharField(max_length=255, blank=True)
+    stat1_value = models.CharField(max_length=32, blank=True)
+    stat1_label = models.CharField(max_length=64, blank=True)
+    stat2_value = models.CharField(max_length=32, blank=True)
+    stat2_label = models.CharField(max_length=64, blank=True)
+
+    def __str__(self):
+        return self.title
+
+
+class EstimateTeaserOption(ScopedBlock):
+    """One row of the landing 'Instant estimate' teaser dropdown."""
+
+    label = models.CharField(max_length=80)  # "Backyard ADU (permit set)"
+    price_range = models.CharField(max_length=48)  # "$2,400 – $6,500"
+    bar_pct = models.PositiveSmallIntegerField(default=0, help_text="Range bar fill, 0–100")
+    includes = models.TextField(blank=True, help_text="One 'What you get' line per row")
+
+    def __str__(self):
+        return f"{self.label} ({self.price_range})"
+
+    @property
+    def includes_list(self):
+        return [line.strip() for line in self.includes.splitlines() if line.strip()]
+
+
+class FeatureMatrixRow(ScopedBlock):
+    """One row of a plan comparison table: a capability, and how it lands on each tier.
+
+    The design's pricing table (design/marketing/Expert Pricing.dc.html) is a
+    tri-state grid — included / limited / not included — which no other block
+    type can express: every existing block stores prose, and a free-text list
+    would let a typo silently drop a cell to "—". The columns are positional and
+    line up with ``payments.SubscriptionPlan`` rows in their own sort order, so
+    the table stays three wide only because that plan group is.
+    """
+
+    class Mark(models.TextChoices):
+        YES = "yes", "Included"
+        LIMITED = "limited", "Limited"
+        NO = "no", "Not included"
+
+    label = models.CharField(max_length=120)  # "Jurisdiction lookup"
+    is_flagship = models.BooleanField(default=False, help_text="Shows the ★ FLAGSHIP chip")
+    tier1 = models.CharField(max_length=8, choices=Mark.choices, default=Mark.NO)
+    tier2 = models.CharField(max_length=8, choices=Mark.choices, default=Mark.NO)
+    tier3 = models.CharField(max_length=8, choices=Mark.choices, default=Mark.NO)
+
+    class Meta(ScopedBlock.Meta):
+        verbose_name = "feature matrix row"
+        verbose_name_plural = "feature matrix rows"
+
+    def __str__(self):
+        return self.label
+
+    @property
+    def marks(self):
+        """The row's cells, left to right — one per plan in the table."""
+        return [self.tier1, self.tier2, self.tier3]
 
 
 class CopyBlock(TimeStampedModel):

@@ -1,0 +1,577 @@
+{
+  "_note": "Per-city content for the /cities/[slug] SEO template (design/marketing/City Landing.dc.html). `cities` patches jurisdictions.City fields the canonical seeds leave blank — county on all 12, and the local prose/permit snapshot on the 11 cities seeds/content_seo.json never covered (Oakland is the design's authored example and is left untouched). `blocks.testimonials` is the per-city 'Architects licensed in {state}' line-up on scope city:<slug>; the first row also fills the hero's featured-architect card (the design derives it the same way). Names are placeholder network samples for the owner to replace as real providers go live; quote is unused by this template. The `intro` on every city is also restored here: the design moved from an escrow marketplace to an introductions platform, so each city hero now reads \"Entirely remote, hired directly, stamped and permit-ready\" (design/marketing/City Landing.dc.html), while seeds/cities.json still carries the superseded \"escrow-backed\" wording.",
+  "cities": [
+    {
+      "slug": "austin",
+      "county": "Travis County",
+      "intro": "Get matched with architects licensed in Texas and fluent in Austin’s permit process — from garage-apartment ADUs to ground-up custom homes. Entirely remote, hired directly, stamped and permit-ready.",
+      "body1": "Austin’s Development Services Department reviews impervious cover, McMansion (Subchapter F) tent limits and heritage-tree protection alongside the building code — three constraints that decide a project long before framing does. Every architect we match is licensed in Texas and has cleared permits with the City of Austin before.",
+      "body2": "That local fluency shows up where it counts: cover and setback maths resolved at concept, tree and floodplain review anticipated, and drawing sets formatted for Austin’s residential intake — so you spend less time in correction cycles and more time building.",
+      "permit_facts": [
+        {
+          "k": "Jurisdiction",
+          "v": "Austin DSD"
+        },
+        {
+          "k": "Avg. residential permit",
+          "v": "6–12 weeks"
+        },
+        {
+          "k": "Design review",
+          "v": "Local historic districts"
+        },
+        {
+          "k": "Site rules",
+          "v": "Impervious cover + heritage trees"
+        }
+      ]
+    },
+    {
+      "slug": "denver",
+      "county": "Denver County",
+      "intro": "Get matched with architects licensed in Colorado and fluent in Denver’s permit process — from pop-top additions to ADUs and carriage houses. Entirely remote, hired directly, stamped and permit-ready.",
+      "body1": "Denver Community Planning & Development reviews form-based zoning — bulk plane, building form and lot coverage — plus landmark districts that add a design hearing to an otherwise routine addition. Every architect we match is licensed in Colorado and has cleared permits with the City and County of Denver before.",
+      "body2": "That local fluency shows up where it counts: bulk-plane and height envelopes tested before drawings start, snow-load and energy detailing done properly, and submittals the zoning reviewers recognise — so approvals land in one pass.",
+      "permit_facts": [
+        {
+          "k": "Jurisdiction",
+          "v": "Denver Community Planning & Dev."
+        },
+        {
+          "k": "Avg. residential permit",
+          "v": "6–11 weeks"
+        },
+        {
+          "k": "Design review",
+          "v": "Required in landmark districts"
+        },
+        {
+          "k": "Structural rules",
+          "v": "Snow load + bulk plane"
+        }
+      ]
+    },
+    {
+      "slug": "los-angeles",
+      "county": "Los Angeles County",
+      "intro": "Get matched with architects licensed in California and fluent in Los Angeles’ permit process — from hillside additions to backyard ADUs and small-lot infill. Entirely remote, hired directly, stamped and permit-ready.",
+      "body1": "Los Angeles layers LADBS plan check on top of Planning: the Baseline Hillside Ordinance, HPOZ design boards and a fast-moving ADU standard plan program each carry their own drawing requirements. Every architect we match is licensed in California and has cleared permits with the City of Los Angeles before.",
+      "body2": "That local fluency shows up where it counts: grading and slope-band calculations that survive first review, seismic retrofit detailing, and Title-24 documentation packaged the way LADBS wants it — so corrections stay short.",
+      "permit_facts": [
+        {
+          "k": "Jurisdiction",
+          "v": "City of L.A. LADBS"
+        },
+        {
+          "k": "Avg. residential permit",
+          "v": "8–14 weeks"
+        },
+        {
+          "k": "Design review",
+          "v": "HPOZ & hillside review"
+        },
+        {
+          "k": "Seismic rules",
+          "v": "Hillside + retrofit ordinance"
+        }
+      ]
+    },
+    {
+      "slug": "new-york",
+      "county": "New York County",
+      "intro": "Get matched with architects licensed in New York and fluent in the city’s permit process — from brownstone gut renovations to commercial fit-outs. Entirely remote, hired directly, stamped and permit-ready.",
+      "body1": "New York filings run through DOB NOW with a registered architect of record, zoning resolution checks, and Landmarks review on any protected façade — a process that punishes drawings prepared for anywhere else. Every architect we match is licensed in New York and has filed with the Department of Buildings before.",
+      "body2": "That local fluency shows up where it counts: correct filing category and special-inspection schedule from day one, NYC Energy Code compliance documented properly, and sets an examiner recognises — so objections stay few and short.",
+      "permit_facts": [
+        {
+          "k": "Jurisdiction",
+          "v": "NYC Dept. of Buildings"
+        },
+        {
+          "k": "Avg. residential permit",
+          "v": "12–20 weeks"
+        },
+        {
+          "k": "Design review",
+          "v": "Landmarks (LPC) review"
+        },
+        {
+          "k": "Filing rules",
+          "v": "DOB NOW + special inspections"
+        }
+      ]
+    },
+    {
+      "slug": "oakland",
+      "county": "Alameda County",
+      "intro": "Get matched with architects licensed in California and fluent in Oakland's permit process — from seismic-retrofit additions to backyard ADUs. Entirely remote, hired directly, stamped and permit-ready."
+    },
+    {
+      "slug": "phoenix",
+      "county": "Maricopa County",
+      "intro": "Get matched with architects licensed in Arizona and fluent in Phoenix’s permit process — from guest casitas to ground-up desert homes. Entirely remote, hired directly, stamped and permit-ready.",
+      "body1": "Phoenix’s Planning & Development Department moves quickly, but historic overlays, shade and orientation requirements and HOA design approvals still decide the schedule. Every architect we match is licensed in Arizona and has cleared permits with the City of Phoenix before.",
+      "body2": "That local fluency shows up where it counts: envelope and glazing detailed for real desert loads, energy compliance handled up front, and drawing sets formatted for Phoenix’s online intake — so corrections stay short and construction starts sooner.",
+      "permit_facts": [
+        {
+          "k": "Jurisdiction",
+          "v": "Phoenix PDD"
+        },
+        {
+          "k": "Avg. residential permit",
+          "v": "4–9 weeks"
+        },
+        {
+          "k": "Design review",
+          "v": "Required in historic overlays"
+        },
+        {
+          "k": "Climate rules",
+          "v": "Heat, shade & energy code"
+        }
+      ]
+    },
+    {
+      "slug": "portland",
+      "county": "Multnomah County",
+      "intro": "Get matched with architects licensed in Oregon and fluent in Portland’s permit process — from ADUs and infill housing to whole-home renovations. Entirely remote, hired directly, stamped and permit-ready.",
+      "body1": "Portland’s Bureau of Development Services reviews against design overlays, the residential infill standards and a tree code that can reshape a footprint late in the game. Every architect we match is licensed in Oregon and has cleared permits with the City of Portland before.",
+      "body2": "That local fluency shows up where it counts: FAR and massing checked against the infill rules before drawings start, seismic and energy detailing done properly, and submittals the BDS reviewers recognise — so corrections stay short.",
+      "permit_facts": [
+        {
+          "k": "Jurisdiction",
+          "v": "Portland BDS"
+        },
+        {
+          "k": "Avg. residential permit",
+          "v": "6–12 weeks"
+        },
+        {
+          "k": "Design review",
+          "v": "Required in design overlays"
+        },
+        {
+          "k": "Site rules",
+          "v": "Infill standards + tree code"
+        }
+      ]
+    },
+    {
+      "slug": "sacramento",
+      "county": "Sacramento County",
+      "intro": "Get matched with architects licensed in California and fluent in Sacramento’s permit process — from Midtown bungalow additions to backyard ADUs. Entirely remote, hired directly, stamped and permit-ready.",
+      "body1": "Sacramento’s Community Development Department pairs a straightforward residential counter with historic-district review in Midtown and Land Park, plus flood-zone elevation rules that shape any addition near the rivers. Every architect we match is licensed in California and has cleared permits with the City of Sacramento before.",
+      "body2": "That local fluency shows up where it counts: finished-floor elevations documented correctly, Title-24 compliance handled up front, and preservation-board submittals that read the way the reviewers expect — so approvals land in one pass, not three.",
+      "permit_facts": [
+        {
+          "k": "Jurisdiction",
+          "v": "City of Sacramento CDD"
+        },
+        {
+          "k": "Avg. residential permit",
+          "v": "5–10 weeks"
+        },
+        {
+          "k": "Design review",
+          "v": "Required in historic districts"
+        },
+        {
+          "k": "Flood rules",
+          "v": "Flood-zone elevation limits"
+        }
+      ]
+    },
+    {
+      "slug": "san-diego",
+      "county": "San Diego County",
+      "intro": "Get matched with architects licensed in California and fluent in San Diego’s permit process — from coastal remodels to ADU bonus units and restaurant build-outs. Entirely remote, hired directly, stamped and permit-ready.",
+      "body1": "San Diego’s Development Services Department reviews against coastal overlays, brush-management zones and an ADU bonus program that can add density most out-of-area firms miss. Every architect we match is licensed in California and has cleared permits with the City of San Diego before.",
+      "body2": "That local fluency shows up where it counts: coastal setbacks and view corridors resolved before submittal, Title-24 compliance right the first time, and drawing sets a plan-check reviewer recognises — so you spend less time in correction cycles.",
+      "permit_facts": [
+        {
+          "k": "Jurisdiction",
+          "v": "City of San Diego DSD"
+        },
+        {
+          "k": "Avg. residential permit",
+          "v": "6–12 weeks"
+        },
+        {
+          "k": "Design review",
+          "v": "Coastal overlay review"
+        },
+        {
+          "k": "Seismic rules",
+          "v": "Seismic + coastal setbacks"
+        }
+      ]
+    },
+    {
+      "slug": "san-francisco",
+      "county": "San Francisco County",
+      "intro": "Get matched with architects licensed in California and fluent in San Francisco’s permit process — from Victorian remodels to rear-yard additions and ADUs. Entirely remote, hired directly, stamped and permit-ready.",
+      "body1": "San Francisco reviews most residential work twice: the Department of Building Inspection for code, and Planning for neighbourhood notification, rear-yard and light-well rules that stop out-of-area firms cold. Every architect we match is licensed in California and has carried a set through DBI intake before.",
+      "body2": "That local fluency shows up where it counts: soft-story and liquefaction detailing done properly, Title-24 energy compliance right the first time, and drawing sets a plan-check reviewer recognises — so you spend less time in correction cycles and more time building.",
+      "permit_facts": [
+        {
+          "k": "Jurisdiction",
+          "v": "San Francisco DBI"
+        },
+        {
+          "k": "Avg. residential permit",
+          "v": "8–16 weeks"
+        },
+        {
+          "k": "Design review",
+          "v": "Planning review on most work"
+        },
+        {
+          "k": "Seismic rules",
+          "v": "Soft-story + liquefaction"
+        }
+      ]
+    },
+    {
+      "slug": "san-jose",
+      "county": "Santa Clara County",
+      "intro": "Get matched with architects licensed in California and fluent in San José’s permit process — from garage-conversion ADUs to two-story additions in Willow Glen and Almaden. Entirely remote, hired directly, stamped and permit-ready.",
+      "body1": "San José runs its own Planning, Building & Code Enforcement counter with single-family design standards, fault-zone mapping and an ADU program that rewards sets drawn to the city’s exact checklist. Every architect we match is licensed in California and has cleared permits with the City of San José before.",
+      "body2": "That local fluency shows up where it counts: correct lateral detailing near mapped fault traces, Title-24 compliance handled up front, and submittals formatted the way plan check expects — which is the difference between one review cycle and three.",
+      "permit_facts": [
+        {
+          "k": "Jurisdiction",
+          "v": "City of San José PBCE"
+        },
+        {
+          "k": "Avg. residential permit",
+          "v": "6–11 weeks"
+        },
+        {
+          "k": "Design review",
+          "v": "Required in some zones"
+        },
+        {
+          "k": "Seismic rules",
+          "v": "Fault-zone + soft-story"
+        }
+      ]
+    },
+    {
+      "slug": "seattle",
+      "county": "King County",
+      "intro": "Get matched with architects licensed in Washington and fluent in Seattle’s permit process — from backyard DADUs to whole-house remodels. Entirely remote, hired directly, stamped and permit-ready.",
+      "body1": "Seattle’s SDCI reviews against environmentally critical areas, steep-slope and tree rules, plus a DADU code that changes what fits on a lot far more than square footage does. Every architect we match is licensed in Washington and has cleared permits with the City of Seattle before.",
+      "body2": "That local fluency shows up where it counts: ECA and setback exceptions identified before design starts, Seattle Energy Code compliance built into the set, and submittals formatted for SDCI’s online intake — so you spend less time in correction cycles and more time building.",
+      "permit_facts": [
+        {
+          "k": "Jurisdiction",
+          "v": "Seattle SDCI"
+        },
+        {
+          "k": "Avg. residential permit",
+          "v": "8–14 weeks"
+        },
+        {
+          "k": "Design review",
+          "v": "Required for most multifamily"
+        },
+        {
+          "k": "Site rules",
+          "v": "ECA, steep slope & tree code"
+        }
+      ]
+    }
+  ],
+  "blocks": {
+    "testimonials": [
+      {
+        "scope": "city:oakland",
+        "sort": 0,
+        "audience": "architect",
+        "quote": "",
+        "name": "Maya E., AIA",
+        "role": "Seismic-zone additions"
+      },
+      {
+        "scope": "city:oakland",
+        "sort": 1,
+        "audience": "architect",
+        "quote": "",
+        "name": "Daniel O., AIA",
+        "role": "East Bay ADUs"
+      },
+      {
+        "scope": "city:oakland",
+        "sort": 2,
+        "audience": "architect",
+        "quote": "",
+        "name": "Priya N., AIA",
+        "role": "Change-of-use & TI"
+      },
+      {
+        "scope": "city:san-francisco",
+        "sort": 0,
+        "audience": "architect",
+        "quote": "",
+        "name": "Elena R., AIA",
+        "role": "Victorian remodels"
+      },
+      {
+        "scope": "city:san-francisco",
+        "sort": 1,
+        "audience": "architect",
+        "quote": "",
+        "name": "Marcus T., AIA",
+        "role": "Rear-yard additions"
+      },
+      {
+        "scope": "city:san-francisco",
+        "sort": 2,
+        "audience": "architect",
+        "quote": "",
+        "name": "Sofia L., AIA",
+        "role": "Planning entitlements"
+      },
+      {
+        "scope": "city:san-jose",
+        "sort": 0,
+        "audience": "architect",
+        "quote": "",
+        "name": "Anh P., AIA",
+        "role": "Garage-conversion ADUs"
+      },
+      {
+        "scope": "city:san-jose",
+        "sort": 1,
+        "audience": "architect",
+        "quote": "",
+        "name": "Raj S., AIA",
+        "role": "Two-story additions"
+      },
+      {
+        "scope": "city:san-jose",
+        "sort": 2,
+        "audience": "architect",
+        "quote": "",
+        "name": "Claire M., AIA",
+        "role": "Office & lab TI"
+      },
+      {
+        "scope": "city:los-angeles",
+        "sort": 0,
+        "audience": "architect",
+        "quote": "",
+        "name": "Jordan V., AIA",
+        "role": "Hillside additions"
+      },
+      {
+        "scope": "city:los-angeles",
+        "sort": 1,
+        "audience": "architect",
+        "quote": "",
+        "name": "Camila F., AIA",
+        "role": "ADUs & small-lot infill"
+      },
+      {
+        "scope": "city:los-angeles",
+        "sort": 2,
+        "audience": "architect",
+        "quote": "",
+        "name": "Theo B., AIA",
+        "role": "HPOZ renovations"
+      },
+      {
+        "scope": "city:san-diego",
+        "sort": 0,
+        "audience": "architect",
+        "quote": "",
+        "name": "Nina C., AIA",
+        "role": "Coastal overlay permits"
+      },
+      {
+        "scope": "city:san-diego",
+        "sort": 1,
+        "audience": "architect",
+        "quote": "",
+        "name": "Andre K., AIA",
+        "role": "Backyard ADUs"
+      },
+      {
+        "scope": "city:san-diego",
+        "sort": 2,
+        "audience": "architect",
+        "quote": "",
+        "name": "Lucia G., AIA",
+        "role": "Restaurant & retail TI"
+      },
+      {
+        "scope": "city:sacramento",
+        "sort": 0,
+        "audience": "architect",
+        "quote": "",
+        "name": "Grace H., AIA",
+        "role": "Midtown additions"
+      },
+      {
+        "scope": "city:sacramento",
+        "sort": 1,
+        "audience": "architect",
+        "quote": "",
+        "name": "Owen D., AIA",
+        "role": "Backyard ADUs"
+      },
+      {
+        "scope": "city:sacramento",
+        "sort": 2,
+        "audience": "architect",
+        "quote": "",
+        "name": "Bianca J., AIA",
+        "role": "Historic-district remodels"
+      },
+      {
+        "scope": "city:seattle",
+        "sort": 0,
+        "audience": "architect",
+        "quote": "",
+        "name": "Tessa W., AIA",
+        "role": "DADUs & backyard cottages"
+      },
+      {
+        "scope": "city:seattle",
+        "sort": 1,
+        "audience": "architect",
+        "quote": "",
+        "name": "Ravi M., AIA",
+        "role": "Whole-house remodels"
+      },
+      {
+        "scope": "city:seattle",
+        "sort": 2,
+        "audience": "architect",
+        "quote": "",
+        "name": "Colin A., AIA",
+        "role": "Steep-slope & ECA sites"
+      },
+      {
+        "scope": "city:portland",
+        "sort": 0,
+        "audience": "architect",
+        "quote": "",
+        "name": "Ingrid S., AIA",
+        "role": "ADUs & infill housing"
+      },
+      {
+        "scope": "city:portland",
+        "sort": 1,
+        "audience": "architect",
+        "quote": "",
+        "name": "Mateo R., AIA",
+        "role": "Design-overlay review"
+      },
+      {
+        "scope": "city:portland",
+        "sort": 2,
+        "audience": "architect",
+        "quote": "",
+        "name": "Hana K., AIA",
+        "role": "Whole-home renovations"
+      },
+      {
+        "scope": "city:austin",
+        "sort": 0,
+        "audience": "architect",
+        "quote": "",
+        "name": "Wes T., AIA",
+        "role": "Custom home design"
+      },
+      {
+        "scope": "city:austin",
+        "sort": 1,
+        "audience": "architect",
+        "quote": "",
+        "name": "Priyanka D., AIA",
+        "role": "Garage-apartment ADUs"
+      },
+      {
+        "scope": "city:austin",
+        "sort": 2,
+        "audience": "architect",
+        "quote": "",
+        "name": "Luis N., AIA",
+        "role": "Restaurant & retail TI"
+      },
+      {
+        "scope": "city:denver",
+        "sort": 0,
+        "audience": "architect",
+        "quote": "",
+        "name": "Hollis B., AIA",
+        "role": "Pop-top additions"
+      },
+      {
+        "scope": "city:denver",
+        "sort": 1,
+        "audience": "architect",
+        "quote": "",
+        "name": "Zoe P., AIA",
+        "role": "ADUs & carriage houses"
+      },
+      {
+        "scope": "city:denver",
+        "sort": 2,
+        "audience": "architect",
+        "quote": "",
+        "name": "Ethan L., AIA",
+        "role": "Landmark-district review"
+      },
+      {
+        "scope": "city:phoenix",
+        "sort": 0,
+        "audience": "architect",
+        "quote": "",
+        "name": "Dana M., AIA",
+        "role": "Desert custom homes"
+      },
+      {
+        "scope": "city:phoenix",
+        "sort": 1,
+        "audience": "architect",
+        "quote": "",
+        "name": "Carlos V., AIA",
+        "role": "Casitas & guest suites"
+      },
+      {
+        "scope": "city:phoenix",
+        "sort": 2,
+        "audience": "architect",
+        "quote": "",
+        "name": "Amara O., AIA",
+        "role": "Commercial TI"
+      },
+      {
+        "scope": "city:new-york",
+        "sort": 0,
+        "audience": "architect",
+        "quote": "",
+        "name": "Julia S., AIA",
+        "role": "Brownstone renovations"
+      },
+      {
+        "scope": "city:new-york",
+        "sort": 1,
+        "audience": "architect",
+        "quote": "",
+        "name": "Ben H., AIA",
+        "role": "DOB filings & alterations"
+      },
+      {
+        "scope": "city:new-york",
+        "sort": 2,
+        "audience": "architect",
+        "quote": "",
+        "name": "Rosa I., AIA",
+        "role": "Loft & commercial fit-out"
+      }
+    ]
+  }
+}

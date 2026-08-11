@@ -1,0 +1,35 @@
+{
+  "_note": "Business-model rewrite of design/marketing/Landing.dc.html at /. The design moved from an escrow marketplace (platform holds funds, takes 10%) to an introductions platform: clients hire and pay architects directly and we take $0. seeds/content_copy.json and seeds/content_blocks.json were extracted from the superseded revision, so they still re-seed the escrow wording — these rows restore the current design verbatim. `delete` removes the two blocks whose natural key the design renamed (the 100%/escrow-backed hero stat and the 'Pick, pay, build' step), so the stale extracted row can't linger beside its replacement. The catalog.Plan rows are the two contract-type cards ('Choose how you engage'), which the design also rewrote.",
+  "copy": [
+    {"scope": "landing", "key": "promo_sub", "text": "Instant estimate · hire directly · 100% remote.", "href": ""},
+    {"scope": "landing", "key": "pricing_sub", "text": "Our engine estimates a typical range for everything from a quick consult to a full stamped set — using scope, add-ons, and a jurisdiction complexity score — so you get a real number up front, not a vague \"it depends.\" Each architect sets their own price from there.", "href": ""},
+    {"scope": "landing", "key": "plans_sub", "text": "Two ways architects price their work — you hire and pay them directly. Pick what fits how defined your project is.", "href": ""}
+  ],
+  "delete": {
+    "stats": [{"scope": "landing", "value": "100%", "label": "escrow-backed"}],
+    "steps": [{"scope": "landing", "title": "Pick, pay, build"}],
+    "value_props": [{"scope": "landing", "title": "Escrow-backed pay"}]
+  },
+  "blocks": {
+    "stats": [
+      {"scope": "landing", "sort": 2, "value": "$0", "label": "taken from your project"}
+    ],
+    "steps": [
+      {"scope": "landing", "sort": 2, "title": "Hire & build", "description": "Agree a fixed price or hourly rate, hire your architect directly, and receive stamped, permit-ready drawings on a tracked timeline."}
+    ],
+    "value_props": [
+      {"scope": "landing", "sort": 1, "title": "Pay directly, by milestone", "description": "You contract and pay your architect directly — a deposit, then payments as you approve each milestone. We never touch the funds."}
+    ],
+    "testimonials": [
+      {"scope": "landing", "sort": 1, "name": "Marcus Reed", "quote": "We compared three vetted architects in an afternoon. Hiring directly kept it simple, and the drawings were the cleanest our contractor had seen.", "role": "Homeowner · Oakland, CA", "audience": "client"}
+    ],
+    "case_cards": [
+      {"scope": "landing", "sort": 0, "title": "A 640 sq ft ADU that cleared plan check first try", "stat1_label": "Architect’s price"},
+      {"scope": "landing", "sort": 2, "title": "Retail-to-restaurant change of use, hourly", "excerpt": "A tenant improvement with accessibility and MEP scope — billed hourly, paid directly, with zero surprises."}
+    ]
+  },
+  "plans": [
+    {"key": "fixed", "title": "Fixed price", "blurb": "One agreed price for your whole drawing set, set by your architect and confirmed on your call — cost certainty before work begins.", "points": ["Scales to your project — small jobs stay affordable", "One agreed price for the full scope", "Re-quote only with your approval", "Pay by milestone as you approve work"]},
+    {"key": "hourly", "blurb": "Transparent time tracking as the work progresses. Each architect sets their own rate — you see it before you commit."}
+  ]
+}

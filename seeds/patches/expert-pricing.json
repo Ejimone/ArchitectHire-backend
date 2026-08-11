@@ -1,0 +1,355 @@
+{
+  "_note": "Port of design/marketing/Expert Pricing.dc.html at /for-experts/pricing — a page the extracted seeds never covered because the design file is new (nothing in the site linked to it). Prices are NOT here: the three tiers come from payments.SubscriptionPlan group 'pricing-page' (seeds/subscription_plans.json), which already carries name, tagline, price_monthly, price_yearly, per_unit, points[], cta_label and is_recommended — the monthly/yearly toggle just picks a field. What lives here is the page chrome around them. `hero_sub` / `hero_sub_emphasis` / `hero_sub_end` are one design sentence split so the owner can still edit it while the design's bold '$0' survives (same split as the landing page's categories_sub + categories_link). The comparison grid uses the cms.FeatureMatrixRow block — added for this page because a tri-state (included / limited / not included) cell has no home in any prose block. value_props group 'why' is the dark 'Why a subscription, not commission' panel. The platform takes 0% and clients pay the professional directly — no funds ever pass through us.",
+  "copy": [
+    {
+      "scope": "expert-pricing",
+      "key": "hero_eyebrow",
+      "text": "For architects & service experts",
+      "href": ""
+    },
+    {
+      "scope": "expert-pricing",
+      "key": "hero_h1",
+      "text": "A subscription, not a cut of your work",
+      "href": ""
+    },
+    {
+      "scope": "expert-pricing",
+      "key": "hero_sub",
+      "text": "You pay a flat monthly fee for matches, tools and the jurisdiction database. Whatever you charge the client is yours — we take",
+      "href": ""
+    },
+    {
+      "scope": "expert-pricing",
+      "key": "hero_sub_emphasis",
+      "text": "$0",
+      "href": ""
+    },
+    {
+      "scope": "expert-pricing",
+      "key": "hero_sub_end",
+      "text": "of your project fee.",
+      "href": ""
+    },
+    {
+      "scope": "expert-pricing",
+      "key": "toggle_monthly",
+      "text": "Monthly",
+      "href": ""
+    },
+    {
+      "scope": "expert-pricing",
+      "key": "toggle_yearly",
+      "text": "Yearly",
+      "href": ""
+    },
+    {
+      "scope": "expert-pricing",
+      "key": "toggle_yearly_note",
+      "text": "−2 months",
+      "href": ""
+    },
+    {
+      "scope": "expert-pricing",
+      "key": "tier_badge",
+      "text": "MOST POPULAR",
+      "href": ""
+    },
+    {
+      "scope": "expert-pricing",
+      "key": "tier_price_unit",
+      "text": "/mo",
+      "href": ""
+    },
+    {
+      "scope": "expert-pricing",
+      "key": "tier_note_monthly",
+      "text": "billed monthly",
+      "href": ""
+    },
+    {
+      "scope": "expert-pricing",
+      "key": "tier_note_yearly",
+      "text": "billed annually · 2 months free",
+      "href": ""
+    },
+    {
+      "scope": "expert-pricing",
+      "key": "tier_features_label",
+      "text": "INCLUDED",
+      "href": ""
+    },
+    {
+      "scope": "expert-pricing",
+      "key": "tier_features_label_plus",
+      "text": "EVERYTHING BEFORE, PLUS",
+      "href": ""
+    },
+    {
+      "scope": "expert-pricing",
+      "key": "tier_cta",
+      "text": "",
+      "href": "/pro/expert"
+    },
+    {
+      "scope": "expert-pricing",
+      "key": "tiers_footnote",
+      "text": "Apply free — you only subscribe once you’re approved and live. Cancel anytime. Most disciplines need no license.",
+      "href": ""
+    },
+    {
+      "scope": "expert-pricing",
+      "key": "matrix_kicker",
+      "text": "WHAT'S INCLUDED",
+      "href": ""
+    },
+    {
+      "scope": "expert-pricing",
+      "key": "matrix_heading",
+      "text": "Every tool, every tier",
+      "href": ""
+    },
+    {
+      "scope": "expert-pricing",
+      "key": "matrix_sub",
+      "text": "Profile, booking and instant reply stay universal — they’re worth more to us as full coverage. Proposals and intake gate at Practice, where they map to people running real project work.",
+      "href": ""
+    },
+    {
+      "scope": "expert-pricing",
+      "key": "matrix_flagship_label",
+      "text": "FLAGSHIP",
+      "href": ""
+    },
+    {
+      "scope": "expert-pricing",
+      "key": "matrix_limited_label",
+      "text": "Limited",
+      "href": ""
+    },
+    {
+      "scope": "expert-pricing",
+      "key": "matrix_price_unit",
+      "text": "/mo",
+      "href": ""
+    },
+    {
+      "scope": "expert-pricing",
+      "key": "matrix_footnote_text",
+      "text": "= capped queries or reduced access. Full details on each tool live in",
+      "href": ""
+    },
+    {
+      "scope": "expert-pricing",
+      "key": "matrix_footnote_link",
+      "text": "Professional tools →",
+      "href": "/for-experts/tools"
+    },
+    {
+      "scope": "expert-pricing",
+      "key": "why_kicker",
+      "text": "THE PRICING DECISION",
+      "href": ""
+    },
+    {
+      "scope": "expert-pricing",
+      "key": "why_heading",
+      "text": "Why a subscription, not commission",
+      "href": ""
+    },
+    {
+      "scope": "expert-pricing",
+      "key": "why_body",
+      "text": "On commission, the platform loses the moment you meet a client off-platform — so it has to police you. On subscription, you’ve already paid, so an off-platform meeting costs us nothing. Your contact details can go straight on your public profile. Hire directly, invoice directly, keep 100%.",
+      "href": ""
+    },
+    {
+      "scope": "expert-pricing",
+      "key": "faq_heading",
+      "text": "Questions professionals ask",
+      "href": ""
+    },
+    {
+      "scope": "expert-pricing",
+      "key": "final_cta_heading",
+      "text": "Bring your skill. We’ll bring the clients.",
+      "href": ""
+    },
+    {
+      "scope": "expert-pricing",
+      "key": "final_cta_sub",
+      "text": "Apply free. Subscribe once you’re live. Keep every dollar you invoice.",
+      "href": ""
+    },
+    {
+      "scope": "expert-pricing",
+      "key": "final_cta_button",
+      "text": "Apply to join →",
+      "href": "/pro/expert"
+    },
+    {
+      "scope": "expert-pricing",
+      "key": "final_cta_secondary",
+      "text": "Explore the tools",
+      "href": "/for-experts/tools"
+    }
+  ],
+  "blocks": {
+    "value_props": [
+      {
+        "scope": "expert-pricing",
+        "group": "why",
+        "sort": 0,
+        "icon": "",
+        "title": "We take $0 of your project fee",
+        "description": "Your rate, your invoice, your client relationship. The subscription is the whole deal."
+      },
+      {
+        "scope": "expert-pricing",
+        "group": "why",
+        "sort": 1,
+        "icon": "",
+        "title": "Contact details on your public profile",
+        "description": "The first dividend of the subscription model — off-platform meetings cost us nothing."
+      },
+      {
+        "scope": "expert-pricing",
+        "group": "why",
+        "sort": 2,
+        "icon": "",
+        "title": "Set your own rates, take only what you want",
+        "description": "Fixed or hourly, you decide. Decline any match with no penalty."
+      }
+    ],
+    "faqs": [
+      {
+        "scope": "expert-pricing",
+        "sort": 0,
+        "question": "Do you take a percentage of what I charge?",
+        "answer": "No. You pay a flat monthly subscription and keep 100% of every project fee you invoice. We never touch the money."
+      },
+      {
+        "scope": "expert-pricing",
+        "sort": 1,
+        "question": "What if I get no matches one month?",
+        "answer": "The tools are the point — your profile, jurisdiction lookup and pipeline keep working whether or not a match lands. That’s the retention floor."
+      },
+      {
+        "scope": "expert-pricing",
+        "sort": 2,
+        "question": "Do I need a license?",
+        "answer": "Architects do, and we verify it before you go live. Most other disciplines — drafting, 3D, scanning, rendering — need no license at all."
+      },
+      {
+        "scope": "expert-pricing",
+        "sort": 3,
+        "question": "Can I cancel anytime?",
+        "answer": "Yes. Monthly plans cancel at the end of the cycle; annual plans run to term. Applying is always free — you only subscribe once you’re approved."
+      },
+      {
+        "scope": "expert-pricing",
+        "sort": 4,
+        "question": "What does \"rolling out\" mean?",
+        "answer": "Proposal generation and client updates are being released market by market as density justifies them. We won’t pretend a tool exists before it does."
+      },
+      {
+        "scope": "expert-pricing",
+        "sort": 5,
+        "question": "What’s the difference between Studio and Practice?",
+        "answer": "Studio covers matches and the day-one tools. Practice adds the full jurisdiction database, AI intake, scope templates and proposals — the toolkit for running real project work."
+      }
+    ],
+    "feature_matrix": [
+      {
+        "scope": "expert-pricing",
+        "sort": 0,
+        "label": "Profile / mini-site",
+        "is_flagship": false,
+        "tier1": "yes",
+        "tier2": "yes",
+        "tier3": "yes"
+      },
+      {
+        "scope": "expert-pricing",
+        "sort": 1,
+        "label": "Instant reply",
+        "is_flagship": false,
+        "tier1": "yes",
+        "tier2": "yes",
+        "tier3": "yes"
+      },
+      {
+        "scope": "expert-pricing",
+        "sort": 2,
+        "label": "Booking",
+        "is_flagship": false,
+        "tier1": "yes",
+        "tier2": "yes",
+        "tier3": "yes"
+      },
+      {
+        "scope": "expert-pricing",
+        "sort": 3,
+        "label": "Pipeline view",
+        "is_flagship": false,
+        "tier1": "yes",
+        "tier2": "yes",
+        "tier3": "yes"
+      },
+      {
+        "scope": "expert-pricing",
+        "sort": 4,
+        "label": "Fee schedule builder",
+        "is_flagship": false,
+        "tier1": "no",
+        "tier2": "yes",
+        "tier3": "yes"
+      },
+      {
+        "scope": "expert-pricing",
+        "sort": 5,
+        "label": "Jurisdiction lookup",
+        "is_flagship": true,
+        "tier1": "limited",
+        "tier2": "yes",
+        "tier3": "yes"
+      },
+      {
+        "scope": "expert-pricing",
+        "sort": 6,
+        "label": "AI intake assistant",
+        "is_flagship": false,
+        "tier1": "no",
+        "tier2": "yes",
+        "tier3": "yes"
+      },
+      {
+        "scope": "expert-pricing",
+        "sort": 7,
+        "label": "Scope templates",
+        "is_flagship": false,
+        "tier1": "no",
+        "tier2": "yes",
+        "tier3": "yes"
+      },
+      {
+        "scope": "expert-pricing",
+        "sort": 8,
+        "label": "Proposal generation",
+        "is_flagship": false,
+        "tier1": "no",
+        "tier2": "yes",
+        "tier3": "yes"
+      },
+      {
+        "scope": "expert-pricing",
+        "sort": 9,
+        "label": "Client updates",
+        "is_flagship": false,
+        "tier1": "no",
+        "tier2": "no",
+        "tier3": "yes"
+      }
+    ]
+  }
+}

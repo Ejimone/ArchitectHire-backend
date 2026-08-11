@@ -1,0 +1,119 @@
+{
+  "_note": "Gaps found while porting design/marketing/Projects.dc.html to /projects and design/marketing/Project Landing.dc.html to /projects/[slug]. Rows 1-2 are the hub breadcrumb. The detail_* rows are the Project Landing chrome that repeats across all nine per-project-type pages; {name} and {short} are filled from the ProjectType record (name / short_name) at render time, exactly as the design template does. The price kicker and related-types subhead are restored here too: the design moved from an escrow marketplace to an introductions platform, so a project's range is a typical price range rather than a platform-generated fixed quote (design/marketing/Project Landing.dc.html).",
+  "copy": [
+    {
+      "scope": "projects",
+      "key": "breadcrumb_home",
+      "text": "Home",
+      "href": "/"
+    },
+    {
+      "scope": "projects",
+      "key": "breadcrumb_current",
+      "text": "Project types",
+      "href": ""
+    },
+    {
+      "scope": "projects",
+      "key": "detail_breadcrumb_parent",
+      "text": "Project types",
+      "href": "/projects"
+    },
+    {
+      "scope": "projects",
+      "key": "detail_hero_cta",
+      "text": "Get my {short} estimate →",
+      "href": "/get-started"
+    },
+    {
+      "scope": "projects",
+      "key": "detail_includes_heading",
+      "text": "What a {short} drawing set includes",
+      "href": ""
+    },
+    {
+      "scope": "projects",
+      "key": "detail_price_kicker",
+      "text": "TYPICAL PRICE RANGE",
+      "href": ""
+    },
+    {
+      "scope": "projects",
+      "key": "detail_price_scale_low",
+      "text": "Affordable",
+      "href": ""
+    },
+    {
+      "scope": "projects",
+      "key": "detail_price_scale_mid",
+      "text": "Typical",
+      "href": ""
+    },
+    {
+      "scope": "projects",
+      "key": "detail_price_scale_high",
+      "text": "Premium",
+      "href": ""
+    },
+    {
+      "scope": "projects",
+      "key": "detail_price_cta",
+      "text": "Get my estimate →",
+      "href": "/get-started"
+    },
+    {
+      "scope": "projects",
+      "key": "detail_process_heading",
+      "text": "How your {short} gets built",
+      "href": ""
+    },
+    {
+      "scope": "projects",
+      "key": "detail_gallery_heading",
+      "text": "{name} projects from the network",
+      "href": ""
+    },
+    {
+      "scope": "projects",
+      "key": "detail_gallery_sub",
+      "text": "Recent stamped sets delivered by architects on the platform.",
+      "href": ""
+    },
+    {
+      "scope": "projects",
+      "key": "detail_faq_heading",
+      "text": "{name} FAQs",
+      "href": ""
+    },
+    {
+      "scope": "projects",
+      "key": "detail_related_heading",
+      "text": "Related project types",
+      "href": ""
+    },
+    {
+      "scope": "projects",
+      "key": "detail_related_sub",
+      "text": "Explore typical price ranges for other kinds of projects.",
+      "href": ""
+    },
+    {
+      "scope": "projects",
+      "key": "detail_final_cta_heading",
+      "text": "Ready to price your {short}?",
+      "href": ""
+    },
+    {
+      "scope": "projects",
+      "key": "detail_final_cta_sub",
+      "text": "Free instant estimate. Matched with licensed architects in 48 hours.",
+      "href": ""
+    },
+    {
+      "scope": "projects",
+      "key": "detail_final_cta_button",
+      "text": "Start my {short} →",
+      "href": "/get-started"
+    }
+  ]
+}

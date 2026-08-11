@@ -1,0 +1,2032 @@
+{
+  "_note": "Provider surfaces - /pro (architect) and /pro/expert - from design/app/'Architect Account.dc.html' and 'Expert Account.dc.html'. One scope covers both because the two designs are the same shell: the architect keys are prefixed arch_, the expert keys exp_, and everything shared (plan picker, billing, profile strength) is unprefixed. Both onboardings gained a plan picker at step 7 and 'Earnings' became 'Billing & performance', so the tiles here read Your plan / Renews / Booked this year and the list is 'Recent contracts'. Plan names, prices, ceilings, coverage and pursuit limits come live from GET /api/v1/payments/plans/; only each tier's differentiator bullet and its billed-annually line live here, because the plans API has no field for either. Chip lists that map to real records (project types, cities, states, disciplines) are fetched from their own endpoints rather than seeded.",
+  "copy": [
+    {
+      "scope": "pro",
+      "key": "seo_title",
+      "text": "Your practice",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "seo_description",
+      "text": "Leads, projects, billing and your profile on ArchitectHire.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "role_badge_architect",
+      "text": "FOR ARCHITECTS",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "role_badge_expert",
+      "text": "FOR EXPERTS",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "nav_dashboard",
+      "text": "Dashboard",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_nav_leads",
+      "text": "Leads",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_nav_projects",
+      "text": "Projects",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_nav_leads",
+      "text": "Orders",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_nav_projects",
+      "text": "Active",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "nav_messages",
+      "text": "Messages",
+      "href": "/account?view=messages"
+    },
+    {
+      "scope": "pro",
+      "key": "nav_billing",
+      "text": "Billing",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "switch_architect",
+      "text": "Architect",
+      "href": "/pro"
+    },
+    {
+      "scope": "pro",
+      "key": "switch_expert",
+      "text": "Expert",
+      "href": "/pro/expert"
+    },
+    {
+      "scope": "pro",
+      "key": "onboarding_back",
+      "text": "← Back",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "onboarding_next",
+      "text": "Continue →",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "onboarding_submit",
+      "text": "Submit application →",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "rail_heading",
+      "text": "Your application",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "rail_complete",
+      "text": "complete",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_rail_kicker",
+      "text": "WHY IT MATTERS",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_rail_body",
+      "text": "Complete profiles get matched 3× more often. Everything here is verified once — clients trust your stamp from day one.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_rail_kicker_licensed",
+      "text": "VERIFICATION",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_rail_body_licensed",
+      "text": "Licensed disciplines are verified once with the issuing board — clients trust your stamp from day one, and you never re-prove it per order.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_rail_kicker_open",
+      "text": "GOOD TO KNOW",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_rail_body_open",
+      "text": "No license needed for your services, so approval is fast — most drafting and 3D experts go live within about two days.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "submitted_h1",
+      "text": "Application submitted",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_submitted_body",
+      "text": "Thanks. Our team is verifying your license, portfolio and insurance. Most architects are approved within three business days.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_submitted_body_licensed",
+      "text": "Thanks! We're reviewing your portfolio and verifying your license and insurance. Licensed disciplines are usually approved within three business days.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_submitted_body_open",
+      "text": "Thanks! We're reviewing your portfolio and profile. Most non-licensed experts are approved within about two business days.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "next_steps_heading",
+      "text": "What happens next",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "submitted_cta",
+      "text": "Preview my dashboard →",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "submitted_secondary",
+      "text": "Explore the marketplace",
+      "href": "/services-landing"
+    },
+    {
+      "scope": "pro",
+      "key": "arch_s1_kicker",
+      "text": "STEP 1 · ABOUT YOU",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_s1_title",
+      "text": "Your firm & profile",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_s1_sub",
+      "text": "The basics clients see first. You can polish all of this later.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_s2_kicker",
+      "text": "STEP 2 · CREDENTIALS",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_s2_title",
+      "text": "Verify your license",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_s2_sub",
+      "text": "We confirm your license with the state board — this is what lets you stamp drawings on the platform.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_s3_kicker",
+      "text": "STEP 3 · PORTFOLIO",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_s3_title",
+      "text": "Show your best work",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_s3_sub",
+      "text": "Add a few past projects. Strong portfolios get matched far more often.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_s4_kicker",
+      "text": "STEP 4 · WHAT YOU DO",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_s4_title",
+      "text": "Specialties & project types",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_s4_sub",
+      "text": "Pick what you take on so we only match you with relevant, in-scope leads.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_s5_kicker",
+      "text": "STEP 5 · WHERE YOU WORK",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_s5_title",
+      "text": "Service area & jurisdictions",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_s5_sub",
+      "text": "We only surface leads inside the areas you're licensed and willing to work.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_s6_kicker",
+      "text": "STEP 6 · RATES",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_s6_title",
+      "text": "Rates & availability",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_s6_sub",
+      "text": "Set your own pricing and how much work you want. You're always in control.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_s7_kicker",
+      "text": "STEP 7 · COMPLIANCE",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_s7_title",
+      "text": "Insurance & agreements",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_s7_sub",
+      "text": "The last step — proof of coverage and your subscription plan.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_upload_headshot",
+      "text": "Upload headshot",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_headshot_hint",
+      "text": "Shown on your profile to clients",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "field_firm_name",
+      "text": "Firm / practice name",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "field_full_name",
+      "text": "Your full name",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "field_title",
+      "text": "Title",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "field_years_licensed",
+      "text": "Years licensed",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "field_email",
+      "text": "Email",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "field_phone",
+      "text": "Phone",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "field_website",
+      "text": "Website",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "field_website_ph",
+      "text": "Optional",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "field_bio",
+      "text": "Short bio",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "field_bio_ph",
+      "text": "A sentence or two about your practice and what you're known for.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "field_license_state",
+      "text": "License state",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "field_license_number",
+      "text": "License number",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "field_ncarb",
+      "text": "NCARB record #",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "field_ncarb_ph",
+      "text": "Optional",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "field_expiration",
+      "text": "Expiration date",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_license_upload_title",
+      "text": "Upload your license certificate",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_license_upload_hint",
+      "text": "PDF or image, max 10MB · we verify with the state board",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "uploaded_suffix",
+      "text": "uploaded — ready to verify",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "portfolio_title_ph",
+      "text": "Project title",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "portfolio_meta_ph",
+      "text": "Type · location · year",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_portfolio_add",
+      "text": "+ Add another project",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_portfolio_slot_hint",
+      "text": "Drop project photo",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_types_heading",
+      "text": "Project types you take on",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_specs_heading",
+      "text": "Specialties clients search for",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "field_based_in",
+      "text": "Based in",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "field_travel_radius",
+      "text": "Travel radius",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "unit_miles",
+      "text": "mi",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_juris_heading",
+      "text": "Jurisdictions you're cleared to stamp in",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_remote_label",
+      "text": "Take fully-remote projects",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_remote_sub",
+      "text": "Match with clients anywhere in your licensed states",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_engage_heading",
+      "text": "How you like to engage",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "field_hourly_rate",
+      "text": "Your hourly rate",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "unit_per_hour",
+      "text": "/ hr",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "field_turnaround",
+      "text": "Typical turnaround",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_capacity_label",
+      "text": "Projects you can take at once",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_capacity_unit",
+      "text": "projects",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_avail_label",
+      "text": "Accepting new leads right now",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_avail_sub",
+      "text": "You can pause this anytime from your dashboard",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_eo_upload_title",
+      "text": "Upload your E&O insurance certificate",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_eo_upload_hint",
+      "text": "Errors & omissions coverage · PDF, max 10MB",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "field_coverage_amount",
+      "text": "Coverage amount",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "field_business_entity",
+      "text": "Business entity",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_terms_pre",
+      "text": "I agree to the",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_terms_1",
+      "text": "Architect Terms",
+      "href": "/privacy#terms"
+    },
+    {
+      "scope": "pro",
+      "key": "terms_2",
+      "text": "Subscription Agreement",
+      "href": "/privacy#terms"
+    },
+    {
+      "scope": "pro",
+      "key": "terms_3",
+      "text": "Code of Conduct",
+      "href": "/privacy#terms"
+    },
+    {
+      "scope": "pro",
+      "key": "exp_s1_kicker",
+      "text": "STEP 1 · YOUR SERVICES",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_s1_title",
+      "text": "What you offer & who you are",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_s1_sub",
+      "text": "Choose your disciplines — the rest of onboarding adapts to what you do.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_s2_kicker",
+      "text": "STEP 2 · PORTFOLIO",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_s2_title",
+      "text": "Show your best work",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_s2_sub",
+      "text": "A few samples in your disciplines. Strong portfolios get matched far more often.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_s3_kicker",
+      "text": "STEP 3 · CREDENTIALS",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_s3_title_licensed",
+      "text": "Verify your license",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_s3_title_open",
+      "text": "Credentials & certifications",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_s3_sub_licensed",
+      "text": "Some of your services require a license or stamp — we verify those with the issuing board.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_s3_sub_open",
+      "text": "Your services need no license. Add certifications to stand out (all optional).",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_s4_kicker",
+      "text": "STEP 4 · SKILLS",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_s4_title",
+      "text": "Software & deliverables",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_s4_sub",
+      "text": "Tell us what you work in and what you produce, so orders match your toolset.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_s5_kicker",
+      "text": "STEP 5 · COVERAGE",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_s5_title",
+      "text": "Where you work",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_s5_sub",
+      "text": "Most work is remote. Licensed work is matched only where you're cleared.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_s6_kicker",
+      "text": "STEP 6 · RATES",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_s6_title",
+      "text": "Rates & availability",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_s6_sub",
+      "text": "Set your own pricing and how much work you want. You're always in control.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_s7_kicker",
+      "text": "STEP 7 · BILLING",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_s7_title",
+      "text": "Billing & agreements",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_s7_sub",
+      "text": "Your subscription details, plus the agreements that keep everyone protected.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_disciplines_heading",
+      "text": "What do you offer?",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_disciplines_sub",
+      "text": "Pick every discipline you deliver — we match orders to these.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_field_full_name",
+      "text": "Your full name",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_field_studio",
+      "text": "Studio / business (optional)",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_field_years",
+      "text": "Years of experience",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_portfolio_slot_hint",
+      "text": "Drop a work sample",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_portfolio_title_ph",
+      "text": "Sample title",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_portfolio_meta_ph",
+      "text": "Type · tool · year",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_portfolio_add",
+      "text": "+ Add another sample",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_licensed_notice_pre",
+      "text": "You selected work that requires a license or stamp",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_licensed_notice_post",
+      "text": "We verify these before those order types go live.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_open_notice",
+      "text": "No license required for your services — you can take orders nationwide. Add any certifications to stand out (optional).",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_field_license_state",
+      "text": "License / PE state",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_field_license_number",
+      "text": "License / PE number",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_field_license_number_ph",
+      "text": "e.g. PE-84021",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_license_upload_title",
+      "text": "Upload your license / stamp certificate",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_license_upload_hint",
+      "text": "PDF or image, max 10MB · verified with the state board",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_certs_heading",
+      "text": "Certifications",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "optional_tag",
+      "text": "(optional)",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_business_reg_label",
+      "text": "Business registration",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_business_reg_ph",
+      "text": "EIN or business number, if you have one",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_software_heading",
+      "text": "Software you work in",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_deliverables_heading",
+      "text": "Deliverables you offer",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_remote_label",
+      "text": "Work fully remote",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_remote_sub",
+      "text": "Most drafting, 3D and consult work is delivered online, anywhere.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_field_based_in_ph",
+      "text": "City, State",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_onsite_label",
+      "text": "On-site radius (for scanning / site visits)",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_states_heading",
+      "text": "States you're licensed to stamp in",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_open_coverage_note",
+      "text": "Your services need no license, so you'll be matched with clients in all 52 US jurisdictions.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_engage_heading",
+      "text": "How you like to price",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_capacity_label",
+      "text": "Orders you can take at once",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_capacity_unit",
+      "text": "orders",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_avail_label",
+      "text": "Accepting new orders right now",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_avail_sub",
+      "text": "You can pause this anytime",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_billing_heading",
+      "text": "Subscription & billing",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_card_label",
+      "text": "Card on file (for your plan)",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_card_ph",
+      "text": "Add card via Stripe",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_eo_upload_title",
+      "text": "Upload your E&O insurance certificate",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_eo_upload_hint",
+      "text": "Required for stamped / licensed work · PDF, max 10MB",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_terms_1",
+      "text": "Provider Terms",
+      "href": "/privacy#terms"
+    },
+    {
+      "scope": "pro",
+      "key": "plan_heading",
+      "text": "Choose your plan",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "plan_sub",
+      "text": "A flat monthly subscription is our only charge — we never take a cut of your projects. Switch tiers or cancel anytime.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "plan_recommended_badge",
+      "text": "MOST POPULAR",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "plan_per_month",
+      "text": "/mo",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "plan_annual_prefix",
+      "text": "or",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "plan_annual_suffix",
+      "text": "billed annually",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "plan_studio_perk",
+      "text": "Verified profile & reviews",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "plan_practice_perk",
+      "text": "Priority match placement",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "plan_firm_perk",
+      "text": "Dedicated success manager",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "verified_badge",
+      "text": "VERIFIED",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "banner_title",
+      "text": "You're verified and live.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_banner_sub",
+      "text": "License, insurance and portfolio all confirmed — owners can find and hire you directly.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_banner_sub",
+      "text": "Portfolio and profile confirmed — owners can find and hire you directly.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "greeting",
+      "text": "Good morning,",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_avail_line_on",
+      "text": "You're accepting new leads —",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_avail_line_on",
+      "text": "You're accepting new orders —",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "avail_line_on_suffix",
+      "text": "fresh matches waiting.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_avail_line_off",
+      "text": "New leads are paused. Turn on availability to start matching again.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_avail_line_off",
+      "text": "New orders are paused. Turn on availability to start matching again.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_dash_avail_label",
+      "text": "Accepting new leads",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_dash_avail_label",
+      "text": "Accepting new orders",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "avail_sub_on",
+      "text": "On · matching",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "avail_sub_off",
+      "text": "Off · paused",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "stat_booked_month",
+      "text": "Booked this month",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_stat_active",
+      "text": "Active projects",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_stat_active",
+      "text": "Active orders",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_stat_match_rate",
+      "text": "Lead match rate",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_stat_match_rate",
+      "text": "Order match rate",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "stat_rating",
+      "text": "Client rating",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "stat_reviews_suffix",
+      "text": "reviews",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "stat_awaiting_suffix",
+      "text": "awaiting your approval",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "stat_match_rate_delta_suffix",
+      "text": "accepted",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "stat_delta_vs_last",
+      "text": "vs last",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "agenda_call_suffix",
+      "text": "video",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "agenda_due_label",
+      "text": "All day · deadline",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_profile_item_license",
+      "text": "License verified",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_profile_item_eo",
+      "text": "E&O insurance on file",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "profile_item_portfolio_prefix",
+      "text": "Portfolio",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_profile_item_portfolio_unit",
+      "text": "projects",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_profile_item_portfolio_unit",
+      "text": "samples",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_profile_item_more",
+      "text": "Add 2 more portfolio pieces",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_profile_item_more",
+      "text": "Add 2 more samples",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_profile_item_software",
+      "text": "Software & deliverables set",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_profile_item_billing",
+      "text": "Billing & subscription set up",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_tab_leads",
+      "text": "New leads",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_tab_leads",
+      "text": "New orders",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_tab_projects",
+      "text": "Active projects",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_tab_projects",
+      "text": "Active orders",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_leads_heading",
+      "text": "New matched leads",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_leads_heading",
+      "text": "New matched orders",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_leads_sub",
+      "text": "Scoped introductions matched to you. Accept to reach out, or decline — no penalty.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_leads_sub",
+      "text": "Scoped introductions matched to you. Accept to connect, or decline — no penalty.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "leads_pending_badge_suffix",
+      "text": "PENDING",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "lead_match_suffix",
+      "text": "MATCH",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "lead_accept",
+      "text": "Accept lead",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "lead_decline",
+      "text": "Decline",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "lead_view_scope",
+      "text": "View scope",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "lead_accepted_note",
+      "text": "Accepted — added to your active projects.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "lead_declined_note",
+      "text": "Declined. We'll match this to another architect.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "undo",
+      "text": "Undo",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "projects_count_suffix",
+      "text": "in progress",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "project_client_prefix",
+      "text": "for",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "project_next_label",
+      "text": "Next:",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "project_open",
+      "text": "Open →",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "messages_heading",
+      "text": "Messages",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "messages_open",
+      "text": "Open →",
+      "href": "/account?view=messages"
+    },
+    {
+      "scope": "pro",
+      "key": "agenda_heading",
+      "text": "This week",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "agenda_link",
+      "text": "Calendar →",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "billing_h1",
+      "text": "Billing & performance",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "billing_sub",
+      "text": "Your plan, the work you've booked, and your profile — all in one place.",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "booked_kicker",
+      "text": "BOOKED · THIS MONTH",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "statements_link",
+      "text": "Download statements",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_booked_delta_suffix",
+      "text": "active projects, invoiced directly",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_booked_delta_suffix",
+      "text": "active orders, invoiced directly",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "booked_delta_prefix",
+      "text": "across",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "billing_your_plan",
+      "text": "Your plan",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "billing_renews",
+      "text": "Renews",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "billing_year",
+      "text": "Booked this year",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "contracts_heading",
+      "text": "Recent contracts",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "contract_paid_note",
+      "text": "Delivered · paid directly",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "contract_active_note",
+      "text": "In progress · you invoice on approval",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "contract_active_date",
+      "text": "Active",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "profile_strength_heading",
+      "text": "Profile strength",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "profile_add_link",
+      "text": "Add",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "rating_heading",
+      "text": "Client rating",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_rating_count_prefix",
+      "text": "From",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "arch_rating_count_suffix",
+      "text": "completed projects",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "exp_rating_count_suffix",
+      "text": "delivered orders",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "subscription_heading",
+      "text": "Subscription",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "subscription_next_charge",
+      "text": "next charge",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "subscription_manage",
+      "text": "Manage",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "no_plan",
+      "text": "No plan yet",
+      "href": ""
+    },
+    {
+      "scope": "pro",
+      "key": "choose_plan_cta",
+      "text": "Choose a plan",
+      "href": ""
+    }
+  ],
+  "blocks": {
+    "credential_badges": [
+      {
+        "scope": "pro",
+        "group": "arch-stepper",
+        "label": "Firm",
+        "sort": 0
+      },
+      {
+        "scope": "pro",
+        "group": "arch-stepper",
+        "label": "License",
+        "sort": 1
+      },
+      {
+        "scope": "pro",
+        "group": "arch-stepper",
+        "label": "Portfolio",
+        "sort": 2
+      },
+      {
+        "scope": "pro",
+        "group": "arch-stepper",
+        "label": "Specialties",
+        "sort": 3
+      },
+      {
+        "scope": "pro",
+        "group": "arch-stepper",
+        "label": "Area",
+        "sort": 4
+      },
+      {
+        "scope": "pro",
+        "group": "arch-stepper",
+        "label": "Rates",
+        "sort": 5
+      },
+      {
+        "scope": "pro",
+        "group": "arch-stepper",
+        "label": "Insurance",
+        "sort": 6
+      },
+      {
+        "scope": "pro",
+        "group": "exp-stepper",
+        "label": "Services",
+        "sort": 0
+      },
+      {
+        "scope": "pro",
+        "group": "exp-stepper",
+        "label": "Portfolio",
+        "sort": 1
+      },
+      {
+        "scope": "pro",
+        "group": "exp-stepper",
+        "label": "Credentials",
+        "sort": 2
+      },
+      {
+        "scope": "pro",
+        "group": "exp-stepper",
+        "label": "Skills",
+        "sort": 3
+      },
+      {
+        "scope": "pro",
+        "group": "exp-stepper",
+        "label": "Coverage",
+        "sort": 4
+      },
+      {
+        "scope": "pro",
+        "group": "exp-stepper",
+        "label": "Rates",
+        "sort": 5
+      },
+      {
+        "scope": "pro",
+        "group": "exp-stepper",
+        "label": "Billing",
+        "sort": 6
+      },
+      {
+        "scope": "pro",
+        "group": "arch-specialties",
+        "label": "Seismic / structural",
+        "sort": 0
+      },
+      {
+        "scope": "pro",
+        "group": "arch-specialties",
+        "label": "Historic overlay",
+        "sort": 1
+      },
+      {
+        "scope": "pro",
+        "group": "arch-specialties",
+        "label": "Passive house",
+        "sort": 2
+      },
+      {
+        "scope": "pro",
+        "group": "arch-specialties",
+        "label": "Accessibility / ADA",
+        "sort": 3
+      },
+      {
+        "scope": "pro",
+        "group": "arch-specialties",
+        "label": "Multifamily",
+        "sort": 4
+      },
+      {
+        "scope": "pro",
+        "group": "arch-specialties",
+        "label": "Title-24 energy",
+        "sort": 5
+      },
+      {
+        "scope": "pro",
+        "group": "arch-specialties",
+        "label": "Coastal / flood",
+        "sort": 6
+      },
+      {
+        "scope": "pro",
+        "group": "arch-specialties",
+        "label": "3D visualization",
+        "sort": 7
+      },
+      {
+        "scope": "pro",
+        "group": "exp-certs",
+        "label": "Autodesk Certified",
+        "sort": 0
+      },
+      {
+        "scope": "pro",
+        "group": "exp-certs",
+        "label": "Revit Certified",
+        "sort": 1
+      },
+      {
+        "scope": "pro",
+        "group": "exp-certs",
+        "label": "Matterport Pro",
+        "sort": 2
+      },
+      {
+        "scope": "pro",
+        "group": "exp-certs",
+        "label": "LEED Green Assoc.",
+        "sort": 3
+      },
+      {
+        "scope": "pro",
+        "group": "exp-certs",
+        "label": "OSHA-10",
+        "sort": 4
+      },
+      {
+        "scope": "pro",
+        "group": "exp-software",
+        "label": "AutoCAD",
+        "sort": 0
+      },
+      {
+        "scope": "pro",
+        "group": "exp-software",
+        "label": "Revit",
+        "sort": 1
+      },
+      {
+        "scope": "pro",
+        "group": "exp-software",
+        "label": "SketchUp",
+        "sort": 2
+      },
+      {
+        "scope": "pro",
+        "group": "exp-software",
+        "label": "ArchiCAD",
+        "sort": 3
+      },
+      {
+        "scope": "pro",
+        "group": "exp-software",
+        "label": "Lumion",
+        "sort": 4
+      },
+      {
+        "scope": "pro",
+        "group": "exp-software",
+        "label": "Enscape",
+        "sort": 5
+      },
+      {
+        "scope": "pro",
+        "group": "exp-software",
+        "label": "3ds Max",
+        "sort": 6
+      },
+      {
+        "scope": "pro",
+        "group": "exp-software",
+        "label": "Blender",
+        "sort": 7
+      },
+      {
+        "scope": "pro",
+        "group": "exp-software",
+        "label": "Rhino",
+        "sort": 8
+      },
+      {
+        "scope": "pro",
+        "group": "exp-software",
+        "label": "Bluebeam",
+        "sort": 9
+      },
+      {
+        "scope": "pro",
+        "group": "exp-deliverables",
+        "label": "2D drawing sets",
+        "sort": 0
+      },
+      {
+        "scope": "pro",
+        "group": "exp-deliverables",
+        "label": "As-builts",
+        "sort": 1
+      },
+      {
+        "scope": "pro",
+        "group": "exp-deliverables",
+        "label": "Permit sets",
+        "sort": 2
+      },
+      {
+        "scope": "pro",
+        "group": "exp-deliverables",
+        "label": "Interior renders",
+        "sort": 3
+      },
+      {
+        "scope": "pro",
+        "group": "exp-deliverables",
+        "label": "Exterior renders",
+        "sort": 4
+      },
+      {
+        "scope": "pro",
+        "group": "exp-deliverables",
+        "label": "3D floor plans",
+        "sort": 5
+      },
+      {
+        "scope": "pro",
+        "group": "exp-deliverables",
+        "label": "Walkthroughs",
+        "sort": 6
+      },
+      {
+        "scope": "pro",
+        "group": "exp-deliverables",
+        "label": "Point clouds",
+        "sort": 7
+      },
+      {
+        "scope": "pro",
+        "group": "exp-deliverables",
+        "label": "BIM models",
+        "sort": 8
+      },
+      {
+        "scope": "pro",
+        "group": "exp-deliverables",
+        "label": "Energy calcs",
+        "sort": 9
+      },
+      {
+        "scope": "pro",
+        "group": "coverage-amounts",
+        "label": "$1,000,000",
+        "sort": 0
+      },
+      {
+        "scope": "pro",
+        "group": "coverage-amounts",
+        "label": "$2,000,000",
+        "sort": 1
+      },
+      {
+        "scope": "pro",
+        "group": "coverage-amounts",
+        "label": "$5,000,000",
+        "sort": 2
+      },
+      {
+        "scope": "pro",
+        "group": "arch-entities",
+        "label": "Sole proprietor",
+        "sort": 0
+      },
+      {
+        "scope": "pro",
+        "group": "arch-entities",
+        "label": "LLC",
+        "sort": 1
+      },
+      {
+        "scope": "pro",
+        "group": "arch-entities",
+        "label": "Corporation",
+        "sort": 2
+      },
+      {
+        "scope": "pro",
+        "group": "exp-entities",
+        "label": "Sole proprietor / freelancer",
+        "sort": 0
+      },
+      {
+        "scope": "pro",
+        "group": "exp-entities",
+        "label": "LLC",
+        "sort": 1
+      },
+      {
+        "scope": "pro",
+        "group": "exp-entities",
+        "label": "Corporation",
+        "sort": 2
+      },
+      {
+        "scope": "pro",
+        "group": "arch-turnarounds",
+        "label": "2–3 weeks",
+        "sort": 0
+      },
+      {
+        "scope": "pro",
+        "group": "arch-turnarounds",
+        "label": "3–5 weeks",
+        "sort": 1
+      },
+      {
+        "scope": "pro",
+        "group": "arch-turnarounds",
+        "label": "6–8 weeks",
+        "sort": 2
+      },
+      {
+        "scope": "pro",
+        "group": "exp-turnarounds",
+        "label": "1–3 days",
+        "sort": 0
+      },
+      {
+        "scope": "pro",
+        "group": "exp-turnarounds",
+        "label": "3–7 days",
+        "sort": 1
+      },
+      {
+        "scope": "pro",
+        "group": "exp-turnarounds",
+        "label": "1–2 weeks",
+        "sort": 2
+      }
+    ],
+    "value_props": [
+      {
+        "scope": "pro",
+        "group": "arch-engage",
+        "icon": "dynamic_fixed_quote",
+        "title": "Fixed quote",
+        "description": "One price for the whole set",
+        "sort": 0
+      },
+      {
+        "scope": "pro",
+        "group": "arch-engage",
+        "icon": "hourly",
+        "title": "Hourly",
+        "description": "Bill time as you go",
+        "sort": 1
+      },
+      {
+        "scope": "pro",
+        "group": "arch-engage",
+        "icon": "both",
+        "title": "Both",
+        "description": "Decide per project",
+        "sort": 2
+      },
+      {
+        "scope": "pro",
+        "group": "exp-engage",
+        "icon": "hourly",
+        "title": "Hourly",
+        "description": "Bill tracked time",
+        "sort": 0
+      },
+      {
+        "scope": "pro",
+        "group": "exp-engage",
+        "icon": "flat",
+        "title": "Per deliverable",
+        "description": "Flat price per item",
+        "sort": 1
+      },
+      {
+        "scope": "pro",
+        "group": "exp-engage",
+        "icon": "both",
+        "title": "Both",
+        "description": "Decide per order",
+        "sort": 2
+      }
+    ],
+    "steps": [
+      {
+        "scope": "pro",
+        "group": "arch-next-steps",
+        "title": "Credential review",
+        "description": "We verify your license with the state board and confirm your insurance.",
+        "sort": 0
+      },
+      {
+        "scope": "pro",
+        "group": "arch-next-steps",
+        "title": "Portfolio & profile check",
+        "description": "A quick quality pass so your profile represents you well.",
+        "sort": 1
+      },
+      {
+        "scope": "pro",
+        "group": "arch-next-steps",
+        "title": "You go live",
+        "description": "Your first matched leads arrive within 48 hours of approval.",
+        "sort": 2
+      },
+      {
+        "scope": "pro",
+        "group": "exp-next-steps-licensed",
+        "title": "Credential review",
+        "description": "We verify your license and insurance with the issuing board.",
+        "sort": 0
+      },
+      {
+        "scope": "pro",
+        "group": "exp-next-steps-licensed",
+        "title": "Portfolio check",
+        "description": "A quick quality pass on your samples and profile.",
+        "sort": 1
+      },
+      {
+        "scope": "pro",
+        "group": "exp-next-steps-licensed",
+        "title": "You go live",
+        "description": "Your first matched orders arrive within 48 hours of approval.",
+        "sort": 2
+      },
+      {
+        "scope": "pro",
+        "group": "exp-next-steps-open",
+        "title": "Portfolio review",
+        "description": "A quick quality pass on your samples and profile.",
+        "sort": 0
+      },
+      {
+        "scope": "pro",
+        "group": "exp-next-steps-open",
+        "title": "Profile approved",
+        "description": "Usually within two business days — no board checks needed.",
+        "sort": 1
+      },
+      {
+        "scope": "pro",
+        "group": "exp-next-steps-open",
+        "title": "You go live",
+        "description": "Your first matched orders arrive within 48 hours of approval.",
+        "sort": 2
+      }
+    ]
+  }
+}

@@ -1,0 +1,313 @@
+{
+  "_note": "Business-model rewrite of design/marketing/Architect Landing.dc.html at /for-architects. The design replaced the escrow payout-math card (client funds escrow → 10% platform fee → you keep) with a three-tier subscription section: architects are hired and paid directly and keep 100% of their rate, and the platform's only revenue is their flat monthly plan. The tier rows themselves are already in the DB as payments.SubscriptionPlan (group 'standard': Studio $79 / Practice $299 / Firm $699) — this file supplies the surrounding copy: `plans_label` is the card header ('Choose your plan') and `plans_footnote` the billing line under it. The two keys of the retired payout card, `earnings_example_label` and `earnings_release_label`, are blanked rather than left holding 'On a $14,000 project' / 'Released as you deliver'. `delete` removes the escrow/payout personas that fed that card, plus every stat, step, value prop and FAQ whose natural key the design renamed — seeds/content_copy.json and seeds/content_blocks.json were extracted from the superseded revision and re-seed all of them on every run. Vocabulary throughout: leads → introductions/intros. `tools_link` and `pricing_link` are the entry points to the two dedicated expert pages (design/marketing/Professional Tools.dc.html and Expert Pricing.dc.html): the design ships them as orphans, so this page's tools grid and plan column each link out to the deep dive, the same way the landing page's categories_sub pairs with categories_link.",
+  "copy": [
+    {
+      "scope": "architect-landing",
+      "key": "hero_sub",
+      "text": "A steady stream of vetted, scoped project introductions delivered to you. You set your own rates, pick the work you want, and get hired directly by the owners we match you with — no cold pitching.",
+      "href": ""
+    },
+    {
+      "scope": "architect-landing",
+      "key": "hero_micro",
+      "text": "Apply free · Plans from $79/mo once you're live · Verified in ~3 days",
+      "href": ""
+    },
+    {
+      "scope": "architect-landing",
+      "key": "hero_payout_label",
+      "text": "Hired directly",
+      "href": ""
+    },
+    {
+      "scope": "architect-landing",
+      "key": "hero_payout_amount",
+      "text": "$14,000.00",
+      "href": ""
+    },
+    {
+      "scope": "architect-landing",
+      "key": "hero_payout_sub",
+      "text": "Your rate, your invoice — we take $0",
+      "href": ""
+    },
+    {
+      "scope": "architect-landing",
+      "key": "how_heading",
+      "text": "From application to your first project",
+      "href": ""
+    },
+    {
+      "scope": "architect-landing",
+      "key": "control_sub",
+      "text": "Every introduction is pre-scoped, with the owner's brief and a typical budget range. Accept the ones that match your specialty, capacity, and jurisdiction — decline the rest with one tap. No obligations, ever.",
+      "href": ""
+    },
+    {
+      "scope": "architect-landing",
+      "key": "earnings_kicker",
+      "text": "SIMPLE, FLAT PRICING",
+      "href": ""
+    },
+    {
+      "scope": "architect-landing",
+      "key": "earnings_heading",
+      "text": "Keep 100% of your rate",
+      "href": ""
+    },
+    {
+      "scope": "architect-landing",
+      "key": "earnings_sub",
+      "text": "One flat monthly subscription — that's the whole deal. Clients hire and pay you directly, at your own rate. We never touch the money and never take a cut of your project fees.",
+      "href": ""
+    },
+    {
+      "scope": "architect-landing",
+      "key": "earnings_example_label",
+      "text": "",
+      "href": ""
+    },
+    {
+      "scope": "architect-landing",
+      "key": "earnings_release_label",
+      "text": "",
+      "href": ""
+    },
+    {
+      "scope": "architect-landing",
+      "key": "plans_label",
+      "text": "Choose your plan",
+      "href": ""
+    },
+    {
+      "scope": "architect-landing",
+      "key": "plans_footnote",
+      "text": "Billed monthly, or save ~2 months on annual. Cancel anytime — you keep every client you've met.",
+      "href": ""
+    },
+    {
+      "scope": "architect-landing",
+      "key": "tools_sub",
+      "text": "The platform runs the busywork — proposals, contracts, messaging and your pipeline.",
+      "href": ""
+    },
+    {
+      "scope": "architect-landing",
+      "key": "final_cta_sub",
+      "text": "Apply free. Verified in about three days. Your first matched introductions within 48 hours.",
+      "href": ""
+    },
+    {
+      "scope": "architect-landing",
+      "key": "tools_link",
+      "text": "See every tool you get →",
+      "href": "/for-experts/tools"
+    },
+    {
+      "scope": "architect-landing",
+      "key": "pricing_link",
+      "text": "Compare plans in full →",
+      "href": "/for-experts/pricing"
+    }
+  ],
+  "delete": {
+    "stats": [
+      {
+        "scope": "architect-landing",
+        "group": "hero",
+        "value": "2 days",
+        "label": "avg. payout time"
+      },
+      {
+        "scope": "architect-landing",
+        "group": "earnings",
+        "value": "10%",
+        "label": "flat service fee"
+      },
+      {
+        "scope": "architect-landing",
+        "group": "earnings",
+        "value": "$0",
+        "label": "to receive leads"
+      },
+      {
+        "scope": "architect-landing",
+        "group": "earnings",
+        "value": "2 days",
+        "label": "to your bank"
+      }
+    ],
+    "steps": [
+      {
+        "scope": "architect-landing",
+        "title": "Receive matched leads"
+      },
+      {
+        "scope": "architect-landing",
+        "title": "Deliver & get paid"
+      }
+    ],
+    "value_props": [
+      {
+        "scope": "architect-landing",
+        "title": "A steady stream of vetted leads"
+      },
+      {
+        "scope": "architect-landing",
+        "title": "Fast, protected payouts"
+      },
+      {
+        "scope": "architect-landing",
+        "title": "Escrow protects you too"
+      },
+      {
+        "scope": "architect-landing",
+        "title": "Invoicing & payouts"
+      }
+    ],
+    "personas": [
+      {
+        "scope": "architect-landing",
+        "group": "escrow"
+      },
+      {
+        "scope": "architect-landing",
+        "group": "payout"
+      }
+    ],
+    "faqs": [
+      {
+        "scope": "architect-landing",
+        "question": "Does it cost anything to join or receive leads?"
+      },
+      {
+        "scope": "architect-landing",
+        "question": "When do I get paid?"
+      }
+    ]
+  },
+  "blocks": {
+    "stats": [
+      {
+        "scope": "architect-landing",
+        "group": "hero",
+        "sort": 2,
+        "value": "100%",
+        "label": "of your rate is yours"
+      },
+      {
+        "scope": "architect-landing",
+        "group": "earnings",
+        "sort": 0,
+        "value": "0%",
+        "label": "taken per project"
+      },
+      {
+        "scope": "architect-landing",
+        "group": "earnings",
+        "sort": 1,
+        "value": "100%",
+        "label": "of your rate is yours"
+      },
+      {
+        "scope": "architect-landing",
+        "group": "earnings",
+        "sort": 2,
+        "value": "$79+",
+        "label": "flat, per month"
+      }
+    ],
+    "steps": [
+      {
+        "scope": "architect-landing",
+        "sort": 1,
+        "title": "Receive matched intros",
+        "description": "Scoped project introductions in your area arrive in your dashboard. Accept the ones you want, decline the rest, and scope on a call."
+      },
+      {
+        "scope": "architect-landing",
+        "sort": 2,
+        "title": "Get hired directly",
+        "description": "The owner hires you and pays your rate directly. We take nothing from the project — you deliver, and earn reviews as you go."
+      }
+    ],
+    "value_props": [
+      {
+        "scope": "architect-landing",
+        "group": "values",
+        "sort": 0,
+        "icon": "leads",
+        "title": "A steady stream of matched intros",
+        "description": "Pre-scoped project introductions from serious owners land in your dashboard — matched to your license, jurisdiction and specialty."
+      },
+      {
+        "scope": "architect-landing",
+        "group": "values",
+        "sort": 2,
+        "icon": "payouts",
+        "title": "You’re paid directly",
+        "description": "Clients hire and pay you at your own rate. We’re never in the transaction and take nothing from your project fees."
+      },
+      {
+        "scope": "architect-landing",
+        "group": "verify",
+        "sort": 7,
+        "icon": "",
+        "title": "You set the price",
+        "description": "You name your own rate and contract directly — no platform pricing, no race to the bottom."
+      },
+      {
+        "scope": "architect-landing",
+        "group": "tools",
+        "sort": 14,
+        "icon": "contract",
+        "title": "Contracts & e-sign",
+        "description": "Reusable contract templates you send and sign in-app."
+      },
+      {
+        "scope": "architect-landing",
+        "group": "tools",
+        "sort": 16,
+        "icon": "invoice",
+        "title": "Client pipeline",
+        "description": "Every intro, conversation and won project tracked in one place."
+      }
+    ],
+    "testimonials": [
+      {
+        "scope": "architect-landing",
+        "sort": 1,
+        "name": "Daniel C., AIA",
+        "quote": "Clients hire and pay me directly, at my rate — no cut taken. The steady, in-jurisdiction leads pay for the subscription many times over.",
+        "role": "ADUs & small commercial · Berkeley",
+        "audience": "architect"
+      }
+    ],
+    "faqs": [
+      {
+        "scope": "architect-landing",
+        "sort": 0,
+        "question": "What does it cost to join?",
+        "answer": "Applying is free. Once you’re approved and live, you pay a flat monthly subscription — plans start at $79/mo — and nothing else. We never take a cut of your project fees."
+      },
+      {
+        "scope": "architect-landing",
+        "sort": 1,
+        "question": "How are leads matched to me?",
+        "answer": "The engine matches on your verified license and jurisdiction, your chosen specialties and project types, and your current capacity. You see the pre-scoped introduction and accept or decline — nothing is ever assigned."
+      },
+      {
+        "scope": "architect-landing",
+        "sort": 3,
+        "question": "How do I get paid?",
+        "answer": "You contract and invoice the client directly, at your own rate. Payment happens between you and the owner — we’re not in the transaction and take nothing from it."
+      }
+    ]
+  },
+  "page_seo": [
+    {
+      "page_key": "architect-landing",
+      "description": "A steady stream of vetted, scoped project introductions delivered to you. You set your own rates, pick the work you want, and get hired directly by the owners we match you with — no cold pitching."
+    }
+  ]
+}

@@ -1,0 +1,286 @@
+{
+  "_note": "Fills the gaps between design/marketing/Case Studies.dc.html + design/marketing/Case Study.dc.html and the case-studies payload. Copy: the list page's \"All\" filter chip and the featured pill's \"Featured\" prefix, plus the entire detail template's chrome, which had no CMS row at all — breadcrumb labels, the THE BRIEF eyebrow, the three body section headings, the THE ARCHITECT eyebrow, the lime sidebar card, the \"More case studies\" heading and the detail page's own final CTA (the list page's final CTA already exists as final_cta_*). Editorial: six of the seven case studies were seeded as a card headline with no story at all — dek, brief, challenge1/2, match_narrative, match_points, quote, quote_by, outcome1/2, glance, architect_name/role/bio and architect_tags are authored here so their detail pages are not an empty shell; every one describes the client hiring and paying the architect directly, which is the current business model (the platform takes 0% and earns from architect subscriptions). The ADU story is left alone except for its category, because seeds/patches/editorial.json applies after this file alphabetically and owns its match narrative, match points, quote and glance. That featured ADU had an EMPTY category, so the design's \"Featured · {category}\" pill and the detail breadcrumb rendered blank and no filter chip could reach it; it is set to \"ADUs\" — the design's own sample label \"Backyard ADU\" is not one of the design's six filter chips (All/ADUs/Additions/New home/Remodel/Commercial), so ADUs is the only value that keeps the chip set and the pill consistent. Galleries: all seven case studies had an empty gallery, so the design's 2x2 photo grid rendered nothing — four caption-only rows each, carrying no image file, so ImgSlot shows the caption as its placeholder hint until the owner uploads photos.",
+  "copy": [
+    {"scope": "case-studies", "key": "filter_all", "text": "All", "href": ""},
+    {"scope": "case-studies", "key": "featured_prefix", "text": "Featured", "href": ""},
+    {"scope": "case-studies", "key": "detail_breadcrumb_home", "text": "Home", "href": "/"},
+    {"scope": "case-studies", "key": "detail_breadcrumb_parent", "text": "Case studies", "href": "/case-studies"},
+    {"scope": "case-studies", "key": "detail_brief_eyebrow", "text": "THE BRIEF", "href": ""},
+    {"scope": "case-studies", "key": "detail_challenge_heading", "text": "The challenge", "href": ""},
+    {"scope": "case-studies", "key": "detail_match_heading", "text": "How we matched", "href": ""},
+    {"scope": "case-studies", "key": "detail_outcome_heading", "text": "The outcome", "href": ""},
+    {"scope": "case-studies", "key": "detail_architect_eyebrow", "text": "THE ARCHITECT", "href": ""},
+    {"scope": "case-studies", "key": "detail_sidebar_heading", "text": "Want a project like this?", "href": ""},
+    {"scope": "case-studies", "key": "detail_sidebar_sub", "text": "Get an instant estimate and meet architects licensed in your jurisdiction.", "href": ""},
+    {"scope": "case-studies", "key": "detail_sidebar_cta", "text": "Get my estimate →", "href": "/get-started"},
+    {"scope": "case-studies", "key": "detail_related_heading", "text": "More case studies", "href": ""},
+    {"scope": "case-studies", "key": "detail_final_cta_heading", "text": "Ready to start your own?", "href": ""},
+    {"scope": "case-studies", "key": "detail_final_cta_sub", "text": "Free estimate. Matched with licensed architects in 48 hours.", "href": ""},
+    {"scope": "case-studies", "key": "detail_final_cta_button", "text": "Start your project →", "href": "/get-started"}
+  ],
+  "editorial": {
+    "case_studies": [
+      {
+        "slug": "a-640-sq-ft-adu-that-cleared-plan-check-first-try",
+        "category": "ADUs"
+      },
+      {
+        "slug": "second-story-addition-on-a-1920s-bungalow",
+        "dek": "How a Berkeley couple added a full second floor to a 1920s bungalow on a tight historic lot — design review, structural coordination and permit set delivered remotely.",
+        "brief": "Add two bedrooms and a bath above an 1,100 sq ft bungalow without altering the street-facing façade, and clear Berkeley's design review and structural plan check inside a budget the owners had already committed to their contractor.",
+        "challenge1": "The bungalow sits on a narrow lot in a neighborhood that scrutinises anything changing the street elevation. A second story meant new shear walls, a reworked foundation connection, and a roofline that still reads as period-correct from the sidewalk.",
+        "challenge2": "The owners had a fixed construction budget and a contractor already holding a start date nine weeks out. They needed a firm price for the drawing set before committing, and no schedule risk from a drawn-out design phase.",
+        "match_narrative": "The instant estimate returned a typical range for a 580 sq ft second-story addition in Berkeley, built from square footage, structural add-ons and the city's jurisdiction complexity score. Two CA-licensed architects with East Bay design-review experience responded within 48 hours, and the owners hired one of them directly at $14,200 for the full set.",
+        "match_points": [
+          "Both architects verified as actively licensed in California",
+          "Filtered for historic-district and design-review experience",
+          "Structural engineer coordinated by the architect inside the same set",
+          "Hired and paid the architect directly — ArchitectHire took nothing from the project"
+        ],
+        "quote": "We had a contractor holding a start date, so a firm number and a firm date mattered more than anything else. Both showed up exactly as promised.",
+        "quote_by": "Daniel & Priya M., homeowners · Berkeley, CA",
+        "outcome1": "The architect delivered as-builts, proposed plans, elevations, a roof plan and full structural sheets with shear-wall schedules nine weeks after the scoping call — including a revised dormer profile that satisfied design review without shrinking the bedrooms.",
+        "outcome2": "Berkeley issued the permit on the second review, with only a lighting note to clear. The contractor kept his original start date, and the owners paid the architect directly on the milestone schedule they had agreed up front.",
+        "glance": [
+          {"k": "Project", "v": "580 sq ft second story"},
+          {"k": "Drawing set", "v": "$14,200"},
+          {"k": "To permit", "v": "9 weeks"},
+          {"k": "Design review", "v": "Approved"}
+        ],
+        "architect_name": "Nathan O., AIA",
+        "architect_role": "Licensed architect · California",
+        "architect_bio": "Nathan has worked on East Bay additions for fifteen years and knows Berkeley's design-review board well enough to draw for it the first time.",
+        "architect_tags": [
+          "15+ years licensed in CA",
+          "Historic-district specialist",
+          "90+ additions permitted"
+        ]
+      },
+      {
+        "slug": "retail-to-restaurant-change-of-use",
+        "dek": "How a first-time restaurateur turned a vacant San Jose storefront into a 48-seat dining room — accessibility, MEP and change-of-use scope billed hourly and paid directly.",
+        "brief": "Convert a 2,400 sq ft retail tenant space into a full-service restaurant with a commercial kitchen, bring the suite up to current accessibility and occupancy requirements, and clear San Jose's change-of-use review.",
+        "challenge1": "A change of use from retail to assembly triggers everything at once: a recalculated occupant load, two accessible restrooms, a path-of-travel upgrade from the parking stall to the front door, a grease interceptor, make-up air and a Type I hood. None of it was in the tenant's original budget guess.",
+        "challenge2": "The lease clock had already started, so every week of drawings was a week of rent on an empty room. The tenant wanted the work billed by the hour rather than wrapped in a padded fixed fee, and wanted to see where the hours went.",
+        "match_narrative": "The estimate returned an hourly range for commercial tenant improvements in Santa Clara County rather than a fixed number, which is the honest answer for a change of use. The tenant met three CA-licensed architects with assembly-occupancy experience and hired one directly on an hourly agreement, at the rate that architect set.",
+        "match_points": [
+          "Architect verified as actively licensed in California",
+          "Filtered for change-of-use and commercial kitchen experience",
+          "Hourly rate set by the architect, with time logged against each phase",
+          "Invoiced and paid the architect directly — ArchitectHire took nothing from the project"
+        ],
+        "quote": "Hourly made me nervous until I saw the log. Every entry was a drawing I could open. 118 hours, first-pass approval, and no invoice I couldn't explain to my partner.",
+        "quote_by": "Marco T., owner · San Jose, CA",
+        "outcome1": "118 tracked hours produced a demolition plan, a proposed floor plan at 48 seats, an accessibility compliance sheet, restroom enlargement details, kitchen equipment and hood layouts, and coordinated mechanical, plumbing and electrical drawings.",
+        "outcome2": "San Jose approved the change of use on the first plan-check pass. The tenant opened eleven weeks after permit, and the hours never exceeded the range quoted on the scoping call.",
+        "glance": [
+          {"k": "Project", "v": "2,400 sq ft change of use"},
+          {"k": "Billing", "v": "Hourly, paid direct"},
+          {"k": "Tracked time", "v": "118 hours"},
+          {"k": "Plan check", "v": "First pass"}
+        ],
+        "architect_name": "Alina R., AIA",
+        "architect_role": "Licensed architect · California",
+        "architect_bio": "Alina has permitted restaurant and retail tenant improvements across the South Bay for a decade, and treats accessibility upgrades as routine rather than an afterthought.",
+        "architect_tags": [
+          "10+ years licensed in CA",
+          "Commercial TI & change of use",
+          "60+ restaurants permitted"
+        ]
+      },
+      {
+        "slug": "a-full-gut-kitchen-bath-in-a-victorian-flat",
+        "dek": "How the owners of a San Francisco Victorian flat gutted a kitchen and bath around 100-year-old framing — as-builts, proposed plans and a finish schedule in four weeks.",
+        "brief": "Replace a cramped galley kitchen and a single bath in a 1904 upper flat with an open kitchen and a relocated bath, working inside the existing footprint and leaving the building's protected front rooms untouched.",
+        "challenge1": "Nothing in a 1904 flat is where the drawings say it is. The party wall carried an unvented waste stack, the floor framing ran the wrong direction for the plumbing move, and two prior remodels had left undocumented headers over the very openings the owners wanted to widen.",
+        "challenge2": "San Francisco permits a remodel like this over the counter only when the scope is documented cleanly and no exterior work is proposed. A single ambiguous sheet would have pushed it into full plan check and added months.",
+        "match_narrative": "The estimate priced an as-built plus proposed set for a 900 sq ft flat and flagged San Francisco's higher jurisdiction complexity. The owners met two CA-licensed architects who work on pre-1920 housing stock and hired one directly for a fixed $3,200.",
+        "match_points": [
+          "Architect verified as actively licensed in California",
+          "Filtered for pre-1920 San Francisco housing stock",
+          "Fixed price agreed directly with the architect on the scoping call",
+          "Paid the architect directly — ArchitectHire took nothing from the project"
+        ],
+        "quote": "She measured every wall before she drew a line, and it showed. Our contractor said it was the cleanest as-built set he had been handed all year.",
+        "quote_by": "Elena V., homeowner · San Francisco, CA",
+        "outcome1": "Four weeks after the site measure the owners had a stamped set: as-built and proposed floor plans, a reflected ceiling plan, elevations for both rooms, a plumbing riser that resolved the stack, and a finish and fixture schedule the contractor could bid line by line.",
+        "outcome2": "The permit issued over the counter with no revision cycle. Because the openings were drawn with real headers instead of assumptions, demolition produced no change orders.",
+        "glance": [
+          {"k": "Project", "v": "Kitchen & bath gut"},
+          {"k": "Architect’s price", "v": "$3,200"},
+          {"k": "To stamped set", "v": "4 weeks"},
+          {"k": "Permit", "v": "Over the counter"}
+        ],
+        "architect_name": "Grace H., AIA",
+        "architect_role": "Licensed architect · California",
+        "architect_bio": "Grace documents and remodels San Francisco's Victorian and Edwardian flats, and has drawn more undocumented headers than she can count.",
+        "architect_tags": [
+          "12+ years licensed in CA",
+          "Pre-1920 housing specialist",
+          "150+ interior remodels"
+        ]
+      },
+      {
+        "slug": "a-ground-up-custom-home-on-a-wooded-slope",
+        "dek": "How a Marin County family built on a wooded slope — full construction documents, structural and MEP coordination and a visualization package, all delivered remotely.",
+        "brief": "Design a 3,100 sq ft, four-bedroom house on a steep, tree-covered Marin lot and produce a complete construction document set the family could take to competitive bid — with renderings good enough to settle design decisions before the drawings went final.",
+        "challenge1": "The buildable area was pinched between a 28% slope, a creek setback and a stand of protected oaks that could not be removed. The house had to step down the hill on three levels, which put the structure, the drainage and the driveway grade all on the critical path at once.",
+        "challenge2": "Marin's review includes wildland-urban interface requirements and a tree-protection plan, and the family lived two hours away. Every site decision had to be resolved on drawings and renderings rather than a walk-through.",
+        "match_narrative": "The estimate priced a full construction document set for a 3,100 sq ft custom home, with the visualization package as an add-on and Marin's jurisdiction complexity folded in. The family reviewed three CA-licensed architects with hillside residential portfolios and hired one directly at $38,500 for the full set.",
+        "match_points": [
+          "Architect verified as actively licensed in California",
+          "Filtered for hillside residential and wildland-interface experience",
+          "Structural and MEP consultants coordinated under the architect's set",
+          "Fixed fee paid directly to the architect against milestones they agreed"
+        ],
+        "quote": "We approved the massing off a rendering from two hours away and never once felt like we were guessing. The bids came back within four percent of each other, which tells you how clear the set was.",
+        "quote_by": "The Okonjo family · Marin County, CA",
+        "outcome1": "Sixteen weeks produced a full set — site and grading plans, three floor levels, elevations and sections, framing and foundation sheets stepped to the slope, Title-24 compliance and full mechanical, plumbing and electrical coordination — plus a photoreal visualization package used for both the family's decisions and the county submittal.",
+        "outcome2": "Marin issued the permit after one round of comments, all of them on the tree-protection plan. Four contractors bid the set and the spread between them was under four percent.",
+        "glance": [
+          {"k": "Project", "v": "3,100 sq ft custom home"},
+          {"k": "Full set", "v": "$38,500"},
+          {"k": "To permit", "v": "16 weeks"},
+          {"k": "Bid spread", "v": "Under 4%"}
+        ],
+        "architect_name": "Theo M., AIA",
+        "architect_role": "Licensed architect · California",
+        "architect_bio": "Theo has designed hillside houses across Marin and Sonoma for twenty years, and runs every project's structural and MEP coordination in-house.",
+        "architect_tags": [
+          "20+ years licensed in CA",
+          "Hillside & wildland-interface homes",
+          "40+ custom homes delivered"
+        ]
+      },
+      {
+        "slug": "garage-conversion-into-a-one-bedroom-adu",
+        "dek": "How a Sacramento owner turned a detached two-car garage into a one-bedroom rental unit inside the existing footprint — approved under California's statewide ADU exemptions.",
+        "brief": "Convert a 440 sq ft detached garage into a code-compliant one-bedroom accessory dwelling unit without expanding the footprint, and get a stamped set fast enough to have a tenant in before the end of the year.",
+        "challenge1": "The garage had a slab poured below the required finished-floor height, uninsulated single-wythe walls and no plumbing within thirty feet. Converting it meant proving the existing structure could carry a habitable occupancy rather than starting over.",
+        "challenge2": "Sacramento's ADU review is fast when the submittal is right and slow when it is not. The owner had already lost a month with a drafter who did not know which state exemptions apply to a conversion inside an existing footprint.",
+        "match_narrative": "The estimate priced a conversion rather than new construction, which is where most of the saving lives, and flagged the state ADU exemptions that apply to an existing accessory structure. The owner met two CA-licensed architects with Sacramento ADU history and hired one directly for $3,900.",
+        "match_points": [
+          "Architect verified as actively licensed in California",
+          "Filtered for garage conversions under the statewide ADU exemptions",
+          "Fixed price agreed directly with the architect before drawings began",
+          "Paid the architect directly — ArchitectHire took nothing from the project"
+        ],
+        "quote": "The state rules are the whole game on a conversion, and he knew them cold. Five weeks from the first call to a stamped set I could hand a builder.",
+        "quote_by": "Curtis B., homeowner · Sacramento, CA",
+        "outcome1": "The stamped set covered existing and proposed floor plans, a new floor assembly bringing the slab up to height, insulation and Title-24 energy compliance, a plumbing route to the main house lateral, and the egress window and door schedule.",
+        "outcome2": "Sacramento approved it under the statewide ADU provisions with no replacement parking required. The unit was rented five months later, and the owner paid the architect directly at the two milestones they had agreed.",
+        "glance": [
+          {"k": "Project", "v": "440 sq ft garage ADU"},
+          {"k": "Architect’s price", "v": "$3,900"},
+          {"k": "To stamped set", "v": "5 weeks"},
+          {"k": "Review", "v": "State ADU exemption"}
+        ],
+        "architect_name": "Devin S., AIA",
+        "architect_role": "Licensed architect · California",
+        "architect_bio": "Devin has drawn accessory dwelling units across the Central Valley since the statewide exemptions took effect, and handles conversions more often than new builds.",
+        "architect_tags": [
+          "9+ years licensed in CA",
+          "ADU conversion specialist",
+          "120+ ADUs permitted"
+        ]
+      },
+      {
+        "slug": "rear-extension-to-open-up-a-hillside-kitchen",
+        "dek": "How a Los Angeles hillside house gained a single-story rear extension and a 16-foot kitchen opening — drawn with the contractor on the call from day one.",
+        "brief": "Push the rear wall of a hillside house out 14 feet to create an open kitchen and dining room, remove a bearing wall for a 16-foot opening to the yard, and permit it in Los Angeles without triggering a hillside grading review.",
+        "challenge1": "The existing rear wall carried the roof and sat on a downhill caisson foundation. Opening it 16 feet meant a steel moment frame tied back into new footings, and every inch the extension moved downhill brought the project closer to a grading permit the owners could not afford.",
+        "challenge2": "The contractor was already under contract and had strong opinions about buildability. Drawings that ignored him would have produced change orders; drawings that waited for him would have blown the seven-week schedule.",
+        "match_narrative": "The estimate priced a 14-foot single-story extension with a structural opening in Los Angeles, where the jurisdiction complexity score runs high. Two CA-licensed architects with hillside experience responded inside 48 hours, and the owners hired the one who agreed to run weekly calls with the contractor.",
+        "match_points": [
+          "Architect verified as actively licensed in California",
+          "Filtered for Los Angeles hillside ordinance experience",
+          "Contractor included in weekly coordination from the first sketch",
+          "Fixed fee paid directly to the architect — ArchitectHire took nothing from the project"
+        ],
+        "quote": "Our builder was on every call from week one. By the time the set was stamped he had already priced it, and there was not a single RFI during framing.",
+        "quote_by": "Sam & Jordan K., homeowners · Los Angeles, CA",
+        "outcome1": "The drawing set held the extension inside the existing pad to avoid a grading permit, and carried the 16-foot opening on a steel moment frame with new caisson-tied footings, detailed alongside Title-24 and a new glazing schedule.",
+        "outcome2": "Los Angeles issued the permit seven weeks after the scoping call. Framing ran without a single request for information, and the final cost landed inside the contractor's original estimate.",
+        "glance": [
+          {"k": "Project", "v": "14 ft rear extension"},
+          {"k": "Drawing set", "v": "$9,600"},
+          {"k": "To permit", "v": "7 weeks"},
+          {"k": "Change orders", "v": "None"}
+        ],
+        "architect_name": "Priya N., AIA",
+        "architect_role": "Licensed architect · California",
+        "architect_bio": "Priya works almost entirely on Los Angeles hillside lots and draws structural openings with the builder on the call, not after the set is stamped.",
+        "architect_tags": [
+          "14+ years licensed in CA",
+          "LA hillside ordinance",
+          "Builder-coordinated drawing sets"
+        ]
+      }
+    ],
+    "case_study_galleries": [
+      {
+        "case_study": "a-640-sq-ft-adu-that-cleared-plan-check-first-try",
+        "images": [
+          {"caption": "Floor plan drawing"},
+          {"caption": "Construction progress"},
+          {"caption": "Interior finished"},
+          {"caption": "Exterior finished"}
+        ]
+      },
+      {
+        "case_study": "second-story-addition-on-a-1920s-bungalow",
+        "images": [
+          {"caption": "Second-floor plan drawing"},
+          {"caption": "Shear walls going up"},
+          {"caption": "New bedroom finished"},
+          {"caption": "Street elevation finished"}
+        ]
+      },
+      {
+        "case_study": "retail-to-restaurant-change-of-use",
+        "images": [
+          {"caption": "Seating plan drawing"},
+          {"caption": "Kitchen rough-in progress"},
+          {"caption": "Dining room finished"},
+          {"caption": "Storefront finished"}
+        ]
+      },
+      {
+        "case_study": "a-full-gut-kitchen-bath-in-a-victorian-flat",
+        "images": [
+          {"caption": "As-built floor plan drawing"},
+          {"caption": "Demolition progress"},
+          {"caption": "Kitchen finished"},
+          {"caption": "Bathroom finished"}
+        ]
+      },
+      {
+        "case_study": "a-ground-up-custom-home-on-a-wooded-slope",
+        "images": [
+          {"caption": "Site and grading plan drawing"},
+          {"caption": "Stepped foundation progress"},
+          {"caption": "Living level finished"},
+          {"caption": "Hillside exterior finished"}
+        ]
+      },
+      {
+        "case_study": "garage-conversion-into-a-one-bedroom-adu",
+        "images": [
+          {"caption": "Conversion floor plan drawing"},
+          {"caption": "New floor assembly progress"},
+          {"caption": "Studio interior finished"},
+          {"caption": "Converted garage exterior finished"}
+        ]
+      },
+      {
+        "case_study": "rear-extension-to-open-up-a-hillside-kitchen",
+        "images": [
+          {"caption": "Extension floor plan drawing"},
+          {"caption": "Moment frame progress"},
+          {"caption": "Open kitchen finished"},
+          {"caption": "Rear elevation finished"}
+        ]
+      }
+    ]
+  }
+}

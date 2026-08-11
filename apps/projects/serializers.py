@@ -6,15 +6,109 @@ from apps.providers.models import ArchitectProfile
 
 from .matching import find_matches
 from .models import COMMERCIAL_SCOPES, RESIDENTIAL_SCOPES, TIMELINES, Estimate, Match, Project
-from .pricing import compute_estimate
+from .pricing import (
+    BATHS_OPTIONS,
+    BEDS_OPTIONS,
+    BUDGET_OPTIONS,
+    CONSULT_TYPES,
+    DRAFTING_HAVE_OPTIONS,
+    DRAFTING_SERVICES,
+    ENGINEERING_TYPES,
+    GOALS,
+    ROOM_KEYS,
+    SCAN_TYPES,
+    SITE_OPTIONS,
+    STORIES_OPTIONS,
+    STYLE_OPTIONS,
+    VIZ_HAVE_OPTIONS,
+    VIZ_TYPES,
+    compute_quote,
+)
+
+PROJECT_KINDS = ["Residential", "Commercial"]
+
+
+class DesignAnswersSerializer(serializers.Serializer):
+    """Design-branch answers that shape the brief but never the price."""
+
+    beds = serializers.ChoiceField(choices=BEDS_OPTIONS, default="3")
+    baths = serializers.ChoiceField(choices=BATHS_OPTIONS, default="2")
+    stories = serializers.ChoiceField(choices=STORIES_OPTIONS, default="2 stories")
+    style = serializers.ChoiceField(choices=STYLE_OPTIONS, default="Modern")
+    rooms = serializers.DictField(child=serializers.BooleanField(), required=False)
+    budget = serializers.ChoiceField(choices=BUDGET_OPTIONS, default="$500k – $1M")
+    site = serializers.ChoiceField(choices=SITE_OPTIONS, default="Yes, I own it")
+
+    def validate_rooms(self, value):
+        unknown = set(value) - set(ROOM_KEYS)
+        if unknown:
+            raise serializers.ValidationError(f"Unknown areas: {', '.join(sorted(unknown))}")
+        return value
+
+
+class DraftingAnswersSerializer(serializers.Serializer):
+    ptype = serializers.ChoiceField(choices=PROJECT_KINDS, default="Residential")
+    service = serializers.ChoiceField(choices=DRAFTING_SERVICES, default="CAD drafting")
+    hours = serializers.IntegerField(min_value=2, max_value=40, default=8)
+    dsqft = serializers.IntegerField(min_value=400, max_value=6000, default=1500)
+    sheets = serializers.IntegerField(min_value=1, max_value=40, default=6)
+    stamp = serializers.BooleanField(default=False)
+    have = serializers.ChoiceField(choices=DRAFTING_HAVE_OPTIONS, default="Sketch or dims")
+    rush = serializers.BooleanField(default=False)
+
+
+class ConsultAnswersSerializer(serializers.Serializer):
+    ptype = serializers.ChoiceField(choices=PROJECT_KINDS, default="Residential")
+    consultType = serializers.ChoiceField(choices=CONSULT_TYPES, default="Video consult")
+
+
+class VizAnswersSerializer(serializers.Serializer):
+    ptype = serializers.ChoiceField(choices=PROJECT_KINDS, default="Residential")
+    vizType = serializers.ChoiceField(choices=VIZ_TYPES, default="Single render")
+    vizQty = serializers.IntegerField(min_value=1, max_value=10, default=1)
+    vizSecs = serializers.IntegerField(min_value=10, max_value=120, default=30)
+    vizHave = serializers.ChoiceField(choices=VIZ_HAVE_OPTIONS, default="CAD / model")
+
+
+class ScanAnswersSerializer(serializers.Serializer):
+    ptype = serializers.ChoiceField(choices=PROJECT_KINDS, default="Residential")
+    scanType = serializers.ChoiceField(choices=SCAN_TYPES, default="3D laser scanning")
+    scanArea = serializers.IntegerField(min_value=500, max_value=50000, default=2500)
+
+
+class EngineeringAnswersSerializer(serializers.Serializer):
+    ptype = serializers.ChoiceField(choices=PROJECT_KINDS, default="Residential")
+    engType = serializers.ChoiceField(choices=ENGINEERING_TYPES, default="Structural stamp")
+    engHours = serializers.IntegerField(min_value=1, max_value=20, default=4)
+
+
+ANSWER_SERIALIZERS = {
+    "design": DesignAnswersSerializer,
+    "drafting": DraftingAnswersSerializer,
+    "consult": ConsultAnswersSerializer,
+    "viz": VizAnswersSerializer,
+    "scan": ScanAnswersSerializer,
+    "engineering": EngineeringAnswersSerializer,
+}
 
 
 class EstimateCreateSerializer(serializers.Serializer):
-    project_type = serializers.ChoiceField(choices=["Residential", "Commercial"])
-    scope = serializers.CharField(max_length=40)
-    sqft = serializers.IntegerField(min_value=200, max_value=8000)
+    """One endpoint, six branches (design/app/Get Started.dc.html).
+
+    ``goal`` selects the pricing branch and therefore which ``answers`` schema
+    applies. The design branch keeps the original flat contract (project_type,
+    scope, sqft, timeline, addons) because those five answers *are* its price
+    inputs; every branch's remaining answers travel in ``answers``.
+    """
+
+    goal = serializers.ChoiceField(choices=GOALS, default="design")
     state = serializers.CharField(max_length=2)
-    timeline = serializers.ChoiceField(choices=TIMELINES)
+    answers = serializers.DictField(required=False, default=dict)
+
+    project_type = serializers.ChoiceField(choices=PROJECT_KINDS, required=False)
+    scope = serializers.CharField(max_length=40, required=False)
+    sqft = serializers.IntegerField(min_value=200, max_value=8000, required=False)
+    timeline = serializers.ChoiceField(choices=TIMELINES, required=False)
     addons = serializers.ListField(
         child=serializers.CharField(max_length=40), allow_empty=True, default=list
     )
@@ -33,39 +127,62 @@ class EstimateCreateSerializer(serializers.Serializer):
         return value
 
     def validate(self, attrs):
-        valid_scopes = (
-            COMMERCIAL_SCOPES if attrs["project_type"] == "Commercial" else RESIDENTIAL_SCOPES
-        )
-        if attrs["scope"] not in valid_scopes:
-            raise serializers.ValidationError(
-                {"scope": f"Must be one of: {', '.join(valid_scopes)}"}
+        goal = attrs["goal"]
+        branch = ANSWER_SERIALIZERS[goal](data=attrs.get("answers") or {})
+        if not branch.is_valid():
+            raise serializers.ValidationError({"answers": branch.errors})
+        answers = dict(branch.validated_data)
+
+        if goal == "design":
+            missing = {
+                name: "This field is required."
+                for name in ("project_type", "scope", "sqft", "timeline")
+                if attrs.get(name) is None
+            }
+            if missing:
+                raise serializers.ValidationError(missing)
+            valid_scopes = (
+                COMMERCIAL_SCOPES if attrs["project_type"] == "Commercial" else RESIDENTIAL_SCOPES
             )
+            if attrs["scope"] not in valid_scopes:
+                raise serializers.ValidationError(
+                    {"scope": f"Must be one of: {', '.join(valid_scopes)}"}
+                )
+            answers.update(
+                ptype=attrs["project_type"],
+                scope=attrs["scope"],
+                sqft=attrs["sqft"],
+                timeline=attrs["timeline"],
+                addons=attrs["addons"],
+            )
+        attrs["answers"] = answers
         return attrs
 
     def create(self, validated_data):
         state = validated_data["state"]
-        result = compute_estimate(
-            sqft=validated_data["sqft"],
-            state=state,
-            addon_keys=validated_data["addons"],
-        )
+        goal = validated_data["goal"]
+        answers = validated_data["answers"]
+        quote = compute_quote(goal=goal, answers=answers, state=state)
         request = self.context.get("request")
         user = getattr(request, "user", None)
         return Estimate.objects.create(
             user=user if (user and user.is_authenticated) else None,
-            project_type=validated_data["project_type"],
-            scope=validated_data["scope"],
-            sqft=validated_data["sqft"],
+            goal=goal,
+            answers=answers,
+            quote=quote.view,
+            project_type=quote.project_type,
+            scope=quote.scope,
+            sqft=quote.sqft,
             state=state,
-            timeline=validated_data["timeline"],
-            addons=result.addons,
-            rate=round(result.rate, 2),
-            base=round(result.base, 2),
-            addon_total=round(result.addon_total, 2),
-            multiplier=round(result.multiplier, 3),
-            total=round(result.total, 2),
-            low=round(result.low, 2),
-            high=round(result.high, 2),
+            timeline=quote.timeline,
+            addons=quote.addons,
+            rate=round(quote.rate, 2),
+            base=round(quote.base, 2),
+            addon_total=round(quote.addon_total, 2),
+            multiplier=round(quote.multiplier, 3),
+            total=round(quote.total, 2),
+            low=round(quote.low, 2),
+            high=round(quote.high, 2),
         )
 
 
@@ -77,12 +194,15 @@ class EstimateSerializer(serializers.ModelSerializer):
         model = Estimate
         fields = [
             "id",
+            "goal",
             "project_type",
             "scope",
             "sqft",
             "state",
             "timeline",
             "addons",
+            "answers",
+            "quote",
             "rate",
             "base",
             "addon_total",

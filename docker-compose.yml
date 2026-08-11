@@ -21,7 +21,10 @@ services:
   redis:
     image: redis:7-alpine
     ports:
-      - "6379:6379"
+      # Host port 6380: a native Redis commonly owns 6379 on dev machines, and
+      # host-side tooling must share this instance with the containers or cache
+      # invalidation silently splits in two. (Same reason Postgres is on 5433.)
+      - "6380:6379"
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 5s
@@ -30,7 +33,7 @@ services:
 
   web:
     build: .
-    command: uv run --frozen uvicorn architecture_backend.asgi:application --host 0.0.0.0 --port 8000 --reload
+    command: uv run --frozen --no-dev uvicorn architecture_backend.asgi:application --host 0.0.0.0 --port 8000 --reload
     volumes:
       - .:/app
       - /app/.venv
@@ -49,7 +52,7 @@ services:
 
   worker:
     build: .
-    command: uv run --frozen celery -A architecture_backend worker -l info -Q default,notifications
+    command: uv run --frozen --no-dev celery -A architecture_backend worker -l info -Q default,notifications
     volumes:
       - .:/app
       - /app/.venv
@@ -66,7 +69,7 @@ services:
 
   beat:
     build: .
-    command: uv run --frozen celery -A architecture_backend beat -l info
+    command: uv run --frozen --no-dev celery -A architecture_backend beat -l info
     volumes:
       - .:/app
       - /app/.venv

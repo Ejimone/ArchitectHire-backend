@@ -1,11 +1,12 @@
 """The working contract between client and provider.
 
-Design (Engagement.dc.html): two contract types — dynamic fixed quote (flagship,
-25% escrow deposit) and hourly (initial escrow of 20 hours). Milestones release
-escrow on client approval; change requests and re-quote flags need the client;
-time entries keep hourly work transparent; deliverables live on private storage.
-The platform fee percent is SNAPSHOTTED at creation (design shows conflicting
-rates precisely because it must be config, not code).
+Design (Engagement.dc.html): two contract types — fixed price (flagship, 25%
+deposit paid to the architect) and hourly (initial payment covering 20 hours).
+The client pays the architect directly; ArchitectHire takes nothing from a
+project, so `fee_percent` snapshots at 0 unless an owner deliberately sets a
+FeePolicy. Milestones record payment as the client approves work; change
+requests and re-quote flags need the client; time entries keep hourly work
+transparent; deliverables live on private storage.
 """
 
 from decimal import Decimal
@@ -19,13 +20,13 @@ from apps.core.models import OrderableModel, TimeStampedModel
 from apps.core.storages import private_storage
 from apps.projects.models import Project
 
-INITIAL_ESCROW_HOURS = 20  # design: "Initial escrow (20 hrs)"
-FIXED_DEPOSIT_PCT = Decimal("0.25")  # design: "Deposit into escrow (25%)"
+INITIAL_PAYMENT_HOURS = 20  # design: "Initial payment (20 hrs)"
+FIXED_DEPOSIT_PCT = Decimal("0.25")  # design: "Deposit to <architect> (25%)"
 
 
 class Engagement(TimeStampedModel):
     class Kind(models.TextChoices):
-        FIXED = "dynamic_fixed_quote", "Dynamic fixed quote"
+        FIXED = "dynamic_fixed_quote", "Fixed price"
         HOURLY = "hourly", "Hourly"
 
     class Status(models.TextChoices):
@@ -45,7 +46,7 @@ class Engagement(TimeStampedModel):
     kind = models.CharField(max_length=24, choices=Kind.choices)
     total = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
     hourly_rate = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
-    fee_percent = models.DecimalField(max_digits=5, decimal_places=2, default=Decimal("10"))
+    fee_percent = models.DecimalField(max_digits=5, decimal_places=2, default=Decimal("0"))
     status = models.CharField(max_length=12, choices=Status.choices, default=Status.SCOPING)
 
     class Meta:
@@ -64,7 +65,7 @@ class Engagement(TimeStampedModel):
     def deposit_amount(self) -> Decimal:
         if self.kind == self.Kind.FIXED:
             return (self.total * FIXED_DEPOSIT_PCT).quantize(Decimal("0.01"))
-        return (self.hourly_rate * INITIAL_ESCROW_HOURS).quantize(Decimal("0.01"))
+        return (self.hourly_rate * INITIAL_PAYMENT_HOURS).quantize(Decimal("0.01"))
 
     @property
     def platform_fee(self) -> Decimal:
@@ -97,6 +98,9 @@ class Milestone(OrderableModel, TimeStampedModel):
     due_date = models.DateField(null=True, blank=True)
     status = models.CharField(max_length=12, choices=Status.choices, default=Status.UPCOMING)
     approved_at = models.DateTimeField(null=True, blank=True)
+    # The client pays the architect directly; approving a milestone records that
+    # the amount is now due/paid to them. The platform never holds these funds.
+    paid_at = models.DateTimeField(null=True, blank=True)
 
     class Meta(OrderableModel.Meta):
         pass

@@ -63,7 +63,7 @@
         <button onClick="{{ goLeads }}" style="{{ navLeadsStyle }}">{{ leadsNavLabel }}</button>
         <button onClick="{{ goProjects }}" style="{{ navProjectsStyle }}">{{ projectsNavLabel }}</button>
         <a href="Account.dc.html#messages" style="padding: 8px 14px; border-radius: 9px; font-size: 14px; font-weight: 600; color: #5b6493;" style-hover="background: #eef2fb; color: #0a1440;">Messages</a>
-        <button onClick="{{ showEarnings }}" style="{{ navEarnStyle }}">Earnings</button>
+        <button onClick="{{ showEarnings }}" style="{{ navEarnStyle }}">Billing</button>
       </nav>
       </sc-if>
 
@@ -247,6 +247,33 @@
 
       <!-- STEP 7 — INSURANCE -->
       <sc-if value="{{ isS7 }}" hint-placeholder-val="{{ false }}">
+
+      <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 26px; margin-bottom: 16px;">
+        <div style="font-size: 14px; font-weight: 700; margin-bottom: 4px;">Choose your plan</div>
+        <div style="font-size: 13px; color: #5b6493; margin-bottom: 20px;">A flat monthly subscription is our only charge — we never take a cut of your projects. Switch tiers or cancel anytime.</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;">
+          <sc-for list="{{ planCards }}" as="p" hint-placeholder-count="3">
+            <button onClick="{{ p.select }}" style="{{ p.cardStyle }}">
+              <sc-if value="{{ p.recommended }}" hint-placeholder-val="{{ false }}">
+              <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: #135bff; color: #fff; font-size: 10.5px; font-weight: 700; letter-spacing: .04em; padding: 3px 10px; border-radius: 100px; white-space: nowrap;">MOST POPULAR</div>
+              </sc-if>
+              <div style="display: flex; align-items: center; justify-content: space-between;">
+                <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 700;">{{ p.name }}</span>
+                <span style="{{ p.checkStyle }}">✓</span>
+              </div>
+              <div style="margin-top: 8px;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 26px; font-weight: 500; color: #232c57;">{{ p.price }}</span><span style="font-size: 13px; color: #5b6493;">/mo</span></div>
+              <div style="font-size: 12px; color: #8b93b5; margin-top: 1px;">{{ p.annual }}</div>
+              <div style="font-size: 12.5px; color: #3f4770; margin-top: 12px; line-height: 1.5; min-height: 38px;">{{ p.fits }}</div>
+              <div style="height: 1px; background: #eef2fb; margin: 12px 0 14px;"></div>
+              <div style="display: flex; flex-direction: column; gap: 9px;">
+                <sc-for list="{{ p.features }}" as="f" hint-placeholder-count="4">
+                  <div style="display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; color: #3f4770; line-height: 1.4;"><span style="color: #16924e; flex-shrink: 0;">✓</span><span>{{ f }}</span></div>
+                </sc-for>
+              </div>
+            </button>
+          </sc-for>
+        </div>
+      </div>
       <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 26px;">
         <div style="border: 1.5px dashed #c3cfe8; border-radius: 12px; padding: 26px; text-align: center; background: #fafcff;">
           <div style="width: 44px; height: 44px; border-radius: 11px; background: #e7efff; color: #135bff; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;">{{ uploadIcon }}</div>
@@ -260,7 +287,7 @@
           <label style="display: block;"><span style="font-size: 13px; color: #5b6493; font-weight: 600;">Business entity</span>
             <select style="width: 100%; margin-top: 6px; background: #fbfcfe; border: 1px solid #dbe2f2; border-radius: 9px; padding: 12px 14px; font-size: 14px; color: #232c57;"><option>Sole proprietor</option><option>LLC</option><option>Corporation</option></select></label>
         </div>
-        <label style="display: flex; align-items: flex-start; gap: 12px; margin-top: 20px; cursor: pointer;"><span style="width: 20px; height: 20px; border-radius: 6px; background: #135bff; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; margin-top: 1px;">✓</span><span style="font-size: 13.5px; color: #3f4770; line-height: 1.5;">I've completed my W-9 for payouts and agree to the <a href="#">Architect Terms</a>, <a href="#">Escrow Agreement</a> and <a href="#">Code of Conduct</a>.</span></label>
+        <label style="display: flex; align-items: flex-start; gap: 12px; margin-top: 20px; cursor: pointer;"><span style="width: 20px; height: 20px; border-radius: 6px; background: #135bff; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; margin-top: 1px;">✓</span><span style="font-size: 13.5px; color: #3f4770; line-height: 1.5;">I agree to the <a href="#">Architect Terms</a>, <a href="#">Subscription Agreement</a> and <a href="#">Code of Conduct</a>.</span></label>
       </div>
       </sc-if>
 
@@ -393,7 +420,7 @@
                 <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 14px;">
                   <div style="width: 44px; height: 44px; border-radius: 10px; overflow: hidden; flex-shrink: 0;"><image-slot id="{{ p.slotId }}" shape="rect" fit="cover" placeholder="P"></image-slot></div>
                   <div style="flex: 1;"><div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 16px; font-weight: 700;">{{ p.title }}</div><div style="font-size: 12.5px; color: #5b6493;">{{ p.client }}</div></div>
-                  <div style="text-align: right;"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500; color: #0a1440;">{{ p.value }}</div><div style="font-size: 11.5px; color: #16924e;">{{ p.released }} released</div></div>
+                  <div style="text-align: right;"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500; color: #0a1440;">{{ p.value }}</div><div style="font-size: 11.5px; color: #16924e;">{{ p.released }}</div></div>
                 </div>
                 <div style="display: flex; gap: 6px;">
                   <sc-for list="{{ p.milestones }}" as="m" hint-placeholder-count="4">
@@ -442,14 +469,14 @@
   <!-- ============================= EARNINGS & PROFILE PAGE ============================= -->
   <sc-if value="{{ isEarnings }}" hint-placeholder-val="{{ false }}">
   <main style="max-width: 1160px; margin: 0 auto; padding: 34px 32px 90px; animation: fadeUp .4s ease both;">
-    <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 32px; font-weight: 700; letter-spacing: -.02em;">Earnings & profile</h1>
-    <p style="font-size: 15.5px; color: #3f4770; margin: 4px 0 24px;">Your payouts, escrow balance and profile completeness — all in one place.</p>
+    <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 32px; font-weight: 700; letter-spacing: -.02em;">Billing & performance</h1>
+    <p style="font-size: 15.5px; color: #3f4770; margin: 4px 0 24px;">Your plan, the work you've booked, and your profile — all in one place.</p>
 
     <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 24px; align-items: start;">
       <!-- LEFT: financials -->
       <div style="display: flex; flex-direction: column; gap: 24px;">
         <section style="background: #0a1440; border-radius: 16px; padding: 26px; color: #fff;">
-          <div style="display: flex; align-items: center; justify-content: space-between;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #ceff65; letter-spacing: .04em;">EARNINGS · THIS MONTH</span><a href="#" style="font-size: 12.5px; color: #9fb4ff;">Download statements</a></div>
+          <div style="display: flex; align-items: center; justify-content: space-between;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #ceff65; letter-spacing: .04em;">BOOKED · THIS MONTH</span><a href="#" style="font-size: 12.5px; color: #9fb4ff;">Download statements</a></div>
           <div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 46px; font-weight: 700; margin: 8px 0 2px;">{{ earn.month }}</div>
           <div style="font-size: 13.5px; color: #9fb4ff;">{{ earn.delta }}</div>
           <div style="height: 90px; display: flex; align-items: flex-end; gap: 10px; margin: 24px 0 6px;">
@@ -458,14 +485,14 @@
             </sc-for>
           </div>
           <div style="display: flex; gap: 14px; margin-top: 16px; padding-top: 18px; border-top: 1px solid #1d2f6e;">
-            <div style="flex: 1;"><div style="font-size: 12px; color: #9fb4ff;">In escrow</div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 20px; color: #fff; margin-top: 2px;">{{ earn.escrow }}</div></div>
-            <div style="flex: 1;"><div style="font-size: 12px; color: #9fb4ff;">Next payout</div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 20px; color: #ceff65; margin-top: 2px;">{{ earn.next }}</div><div style="font-size: 11.5px; color: #9fb4ff;">{{ earn.nextDate }}</div></div>
-            <div style="flex: 1;"><div style="font-size: 12px; color: #9fb4ff;">Earned this year</div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 20px; color: #fff; margin-top: 2px;">{{ earn.year }}</div></div>
+            <div style="flex: 1;"><div style="font-size: 12px; color: #9fb4ff;">Your plan</div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 20px; color: #ceff65; margin-top: 2px;">{{ earn.plan }}</div><div style="font-size: 11.5px; color: #9fb4ff;">{{ earn.planPrice }}</div></div>
+            <div style="flex: 1;"><div style="font-size: 12px; color: #9fb4ff;">Renews</div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 20px; color: #fff; margin-top: 2px;">{{ earn.renews }}</div></div>
+            <div style="flex: 1;"><div style="font-size: 12px; color: #9fb4ff;">Booked this year</div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 20px; color: #fff; margin-top: 2px;">{{ earn.year }}</div></div>
           </div>
         </section>
 
         <section style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 24px;">
-          <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 16px;">Recent payouts</h2>
+          <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 16px;">Recent contracts</h2>
           <div style="display: flex; flex-direction: column;">
             <sc-for list="{{ payouts }}" as="p" hint-placeholder-count="4">
               <div style="display: flex; align-items: center; gap: 14px; padding: 13px 0; border-bottom: 1px solid #f2f5fb;">
@@ -497,10 +524,10 @@
         </section>
 
         <section style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 22px;">
-          <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 6px;">Payout account</h2>
+          <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 6px;">Subscription</h2>
           <div style="display: flex; align-items: center; gap: 12px; margin-top: 10px;">
             <div style="width: 40px; height: 40px; border-radius: 9px; background: #e7efff; color: #0b3fcc; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 13px;">••</div>
-            <div style="flex: 1;"><div style="font-weight: 700; font-size: 14px;">Chase Business ••4021</div><div style="font-size: 12.5px; color: #16924e;">Verified · deposits in ~2 days</div></div>
+            <div style="flex: 1;"><div style="font-weight: 700; font-size: 14px;">{{ earn.plan }} · {{ earn.planPrice }}</div><div style="font-size: 12.5px; color: #5b6493;">Visa ••4021 · next charge {{ earn.renews }}</div></div>
             <a href="#" style="font-size: 13px; font-weight: 700;">Manage</a>
           </div>
         </section>
@@ -515,7 +542,7 @@
 class Component extends DCLogic {
   state = {
     view: 'apply', step: 1, submitted: false, roleOverride: null,
-    remote: true, avail: true, radius: 35, capacity: 4, engage: 'both',
+    remote: true, avail: true, radius: 35, capacity: 4, engage: 'both', plan: 'practice',
     types: ['Addition','ADU','New home'], specs: ['Seismic / structural','Historic overlay'],
     juris: ['Oakland','Berkeley','Alameda County'],
     leads: { l1: 'pending', l2: 'pending', l3: 'pending' },
@@ -555,9 +582,20 @@ class Component extends DCLogic {
       4:{k:'STEP 4 · WHAT YOU DO',t:'Specialties & project types',sub:'Pick what you take on so we only match you with relevant, in-scope leads.'},
       5:{k:'STEP 5 · WHERE YOU WORK',t:'Service area & jurisdictions',sub:'We only surface leads inside the areas you\u2019re licensed and willing to work.'},
       6:{k:'STEP 6 · RATES',t:'Rates & availability',sub:'Set your own pricing and how much work you want. You\u2019re always in control.'},
-      7:{k:'STEP 7 · COMPLIANCE',t:'Insurance & agreements',sub:'The last step — proof of coverage and your payout details.'},
+      7:{k:'STEP 7 · COMPLIANCE',t:'Insurance & agreements',sub:'The last step — proof of coverage and your subscription plan.'},
     };
     const m = stepMeta[s.step];
+
+    const planDefs = [
+      { id:'studio', name:'Studio', price:'$79', annual:'or $790 billed annually', fits:'Drafting, staging, consults, small jobs', features:['Projects up to $1,500','1 metro area','5 active pursuits','Verified profile & reviews'] },
+      { id:'practice', name:'Practice', price:'$299', annual:'or $2,990 billed annually', fits:'ADUs, additions, permit sets — the core', features:['Projects up to $15,000','3 metro areas','15 active pursuits','Priority match placement'], recommended:true },
+      { id:'firm', name:'Firm', price:'$699', annual:'or $6,990 billed annually', fits:'Custom homes, commercial TI, restaurants', features:['No project ceiling','Statewide coverage','Unlimited active pursuits','Dedicated success manager'] },
+    ];
+    const planCards = planDefs.map(p=>{ const on = s.plan===p.id; return { ...p, recommended: !!p.recommended,
+      select: ()=>this.setState({plan:p.id}),
+      cardStyle:`position:relative;text-align:left;font-family:inherit;cursor:pointer;background:${on?'#f5f8ff':'#fff'};border:2px solid ${on?'#135bff':'#e2e8f5'};border-radius:14px;padding:18px 16px 20px;transition:border-color .15s;`,
+      checkStyle:`width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;${on?'background:#135bff;color:#fff;':'background:#eef2fb;color:transparent;'}`,
+    };});
 
     const stDefs = [['Firm',1],['License',2],['Portfolio',3],['Specialties',4],['Area',5],['Rates',6],['Insurance',7]];
     const stepper = stDefs.map(([label,n],i)=>{ const done=s.step>n, active=s.step===n; return {
@@ -615,12 +653,12 @@ class Component extends DCLogic {
 
     // ================= DASHBOARD =================
     const stats = expert ? [
-      {label:'Earned this month', value:'$4,120', delta:'▲ 18% vs last', deltaColor:'#16924e'},
+      {label:'Booked this month', value:'$4,120', delta:'▲ 18% vs last', deltaColor:'#16924e'},
       {label:'Active orders', value:'2', delta:'1 awaiting delivery', deltaColor:'#5b6493'},
       {label:'Order match rate', value:'95%', delta:'▲ 4 pts', deltaColor:'#16924e'},
       {label:'Client rating', value:'4.9★', delta:'32 reviews', deltaColor:'#5b6493'},
     ] : [
-      {label:'Earned this month', value:'$18,240', delta:'▲ 22% vs last', deltaColor:'#16924e'},
+      {label:'Booked this month', value:'$18,240', delta:'▲ 22% vs last', deltaColor:'#16924e'},
       {label:'Active projects', value:'3', delta:'1 awaiting your approval', deltaColor:'#5b6493'},
       {label:'Lead match rate', value:'92%', delta:'▲ 6 pts', deltaColor:'#16924e'},
       {label:'Client rating', value:'4.9★', delta:'47 reviews', deltaColor:'#5b6493'},
@@ -649,11 +687,11 @@ class Component extends DCLogic {
     const msLabel = (state)=>`font-size:10.5px;color:${state==='done'?'#16924e':state==='active'?'#135bff':'#9aa2c4'};font-weight:${state==='active'?700:500};`;
     const mkMs = (arr)=>arr.map(([label,st])=>({label, barStyle:msBar(st), labelStyle:msLabel(st)}));
     const projects = expert ? [
-      {slotId:'exp-pr1', title:'As-built · Rockridge', client:'for Jordan Avery', value:'$2,500', released:'$1,250', next:'Deliver measured set', milestones:mkMs([['Scope','done'],['Draft','active'],['Review','todo'],['Deliver','todo']])},
-      {slotId:'exp-pr2', title:'PDF-to-CAD · Elmwood', client:'for Priya & Sam', value:'$480', released:'$0', next:'First sheets', milestones:mkMs([['Scope','done'],['Draft','active'],['Review','todo'],['Deliver','todo']])},
+      {slotId:'exp-pr1', title:'As-built · Rockridge', client:'for Jordan Avery', value:'$2,500', released:'In progress', next:'Deliver measured set', milestones:mkMs([['Scope','done'],['Draft','active'],['Review','todo'],['Deliver','todo']])},
+      {slotId:'exp-pr2', title:'PDF-to-CAD · Elmwood', client:'for Priya & Sam', value:'$480', released:'Just started', next:'First sheets', milestones:mkMs([['Scope','done'],['Draft','active'],['Review','todo'],['Deliver','todo']])},
     ] : [
-      {slotId:'arc-pr1', title:'Addition · Rockridge', client:'for Jordan Avery', value:'$14,000', released:'$3,780', next:'Approve schematic set', milestones:mkMs([['Scope','done'],['Schematic','active'],['Dev','todo'],['Permit','todo']])},
-      {slotId:'arc-pr2', title:'Garage ADU · Elmwood', client:'for Priya & Sam', value:'$5,200', released:'$2,600', next:'Design development', milestones:mkMs([['Scope','done'],['Schematic','done'],['Dev','active'],['Permit','todo']])},
+      {slotId:'arc-pr1', title:'Addition · Rockridge', client:'for Jordan Avery', value:'$14,000', released:'In progress', next:'Approve schematic set', milestones:mkMs([['Scope','done'],['Schematic','active'],['Dev','todo'],['Permit','todo']])},
+      {slotId:'arc-pr2', title:'Garage ADU · Elmwood', client:'for Priya & Sam', value:'$5,200', released:'Design dev', next:'Design development', milestones:mkMs([['Scope','done'],['Schematic','done'],['Dev','active'],['Permit','todo']])},
     ];
     const activeCount = projects.length + acceptedCount;
 
@@ -670,7 +708,7 @@ class Component extends DCLogic {
     const profileItems = (expert ? [
       {label:'Portfolio (4 samples)', done:true, action:false},
       {label:'Software & deliverables set', done:true, action:false},
-      {label:'Payout account connected', done:true, action:false},
+      {label:'Billing & subscription set up', done:true, action:false},
       {label:'Add 2 more samples', done:false, action:true},
     ] : [
       {label:'License verified', done:true, action:false},
@@ -681,15 +719,15 @@ class Component extends DCLogic {
       dotStyle:`width:20px;height:20px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;${p.done?'background:#16924e;color:#fff;':'background:#eef2fb;border:1px solid #dbe2f2;'}`}));
 
     const payouts = (expert ? [
-      {badge:'✓', title:'As-built delivered · Rockridge', sub:'Released to your bank ••4021', amt:'+$1,250', date:'Aug 6', ok:true},
-      {badge:'✓', title:'PDF-to-CAD · Elmwood', sub:'Released to your bank ••4021', amt:'+$360', date:'Jul 31', ok:true},
-      {badge:'●', title:'Render bundle · Temescal', sub:'In escrow · releases on approval', amt:'$540', date:'Pending', ok:false},
-      {badge:'✓', title:'Drafting hours · Alameda', sub:'Released to your bank ••4021', amt:'+$620', date:'Jul 22', ok:true},
+      {badge:'✓', title:'As-built · Rockridge', sub:'Delivered · Jordan Avery paid you directly', amt:'$1,250', date:'Aug 6', ok:true},
+      {badge:'✓', title:'PDF-to-CAD · Elmwood', sub:'Delivered · paid directly', amt:'$360', date:'Jul 31', ok:true},
+      {badge:'●', title:'Render bundle · Temescal', sub:'In progress · you invoice on delivery', amt:'$540', date:'Active', ok:false},
+      {badge:'✓', title:'Drafting hours · Alameda', sub:'Delivered · paid directly', amt:'$620', date:'Jul 22', ok:true},
     ] : [
-      {badge:'✓', title:'Schematic milestone · Rockridge addition', sub:'Released to Chase ••4021', amt:'+$3,780', date:'Aug 6', ok:true},
-      {badge:'✓', title:'Design development · Elmwood ADU', sub:'Released to Chase ••4021', amt:'+$2,600', date:'Jul 29', ok:true},
-      {badge:'●', title:'Permit set · Rockridge addition', sub:'In escrow · releases on client approval', amt:'$4,410', date:'Pending', ok:false},
-      {badge:'✓', title:'Scope deposit · Alameda kitchen', sub:'Released to Chase ••4021', amt:'+$1,200', date:'Jul 18', ok:true},
+      {badge:'✓', title:'Schematic set · Rockridge addition', sub:'Milestone approved · invoiced Jordan Avery', amt:'$3,780', date:'Aug 6', ok:true},
+      {badge:'✓', title:'Design development · Elmwood ADU', sub:'Delivered · paid directly', amt:'$2,600', date:'Jul 29', ok:true},
+      {badge:'●', title:'Permit set · Rockridge addition', sub:'In progress · you invoice on approval', amt:'$4,410', date:'Active', ok:false},
+      {badge:'✓', title:'Scope & schematic · Alameda kitchen', sub:'Delivered · paid directly', amt:'$1,200', date:'Jul 18', ok:true},
     ]).map(p=>({...p,
       amtColor: p.ok?'#16924e':'#9aa2c4',
       badgeStyle:`width:30px;height:30px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;${p.ok?'background:#e7f6ec;color:#16924e;':'background:#fff5e0;color:#e0a800;'}`,
@@ -714,16 +752,16 @@ class Component extends DCLogic {
       memberName: expert ? 'Sam T.' : 'Maya E., AIA',
       greet: expert ? 'Good morning, Sam' : 'Good morning, Maya',
       bannerTitle: expert ? 'You\u2019re verified and live.' : 'You\u2019re verified and live.',
-      bannerSub: expert ? 'Portfolio and profile confirmed — clients can find and order from you.' : 'License, insurance and portfolio all confirmed — clients can find and hire you.',
+      bannerSub: expert ? 'Portfolio and profile confirmed — owners can find and hire you directly.' : 'License, insurance and portfolio all confirmed — owners can find and hire you directly.',
       leadsTabLabel: expert ? 'New orders' : 'New leads',
       projectsTabLabel: expert ? 'Active orders' : 'Active projects',
       projectsHeading: expert ? 'Active orders' : 'Active projects',
       leadsNavLabel: expert ? 'Orders' : 'Leads',
       projectsNavLabel: expert ? 'Active' : 'Projects',
       leadsHeading: expert ? 'New matched orders' : 'New matched leads',
-      leadsSub: expert ? 'Pre-scoped and priced. Accept to start, or decline — no penalty.' : 'Pre-scoped and priced. Accept to add to your projects, or decline — no penalty.',
+      leadsSub: expert ? 'Scoped introductions matched to you. Accept to connect, or decline — no penalty.' : 'Scoped introductions matched to you. Accept to reach out, or decline — no penalty.',
       dashAvailLabel: expert ? 'Accepting new orders' : 'Accepting new leads',
-      earn: expert ? {month:'$4,120', delta:'+$1,080 released in the last 7 days', escrow:'$1,750', next:'$1,250', nextDate:'Aug 16 · to your bank', year:'$38,400'} : {month:'$18,240', delta:'+$3,210 released in the last 7 days', escrow:'$8,820', next:'$4,410', nextDate:'Aug 16 · to your bank', year:'$142,600'},
+      earn: expert ? {month:'$4,120', delta:'across 2 active orders, invoiced directly', plan:'Studio', planPrice:'$79/mo', renews:'Aug 16', year:'$38,400'} : {month:'$18,240', delta:'across 3 active projects, invoiced directly', plan:'Practice', planPrice:'$299/mo', renews:'Aug 16', year:'$142,600'},
       reviewQuote: expert ? 'Fast, clean CAD from a rough sketch — turned around in two days.' : 'Cleanest permit set our contractor had seen. Cleared first try.',
       reviewBy: expert ? '— Marcus R. · Drafting, Oakland' : '— Rebecca L. · Addition, Berkeley',
       ratingCount: expert ? 'From 32 delivered orders' : 'From 47 completed projects',
@@ -734,7 +772,7 @@ class Component extends DCLogic {
       // onboarding
       submitted: s.submitted, notSubmitted: !s.submitted,
       stepper, stepKicker:m.k, stepTitle:m.t, stepSub:m.sub, uploadIcon,
-      isS1:s.step===1, isS2:s.step===2, isS3:s.step===3, isS4:s.step===4, isS5:s.step===5, isS6:s.step===6, isS7:s.step===7,
+      isS1:s.step===1, isS2:s.step===2, isS3:s.step===3, isS4:s.step===4, isS5:s.step===5, isS6:s.step===6, isS7:s.step===7, planCards,
       firmFields, portfolio, typeChips, specChips, jurisChips, engageOpts,
       radius:s.radius, onRadius:(e)=>this.setState({radius:+e.target.value}),
       capacity:s.capacity, onCapacity:(e)=>this.setState({capacity:+e.target.value}),

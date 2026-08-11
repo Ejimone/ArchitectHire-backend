@@ -1,0 +1,22 @@
+{
+  "_note": "Chrome for design/marketing/About.dc.html at /about: the hero's floating credential card (two lines over the hero image). The mission stats, the two hero personas (THE CLIENT / THE ARCHITECT) and the four principles are already seeded as scoped blocks — but principles 02 and 03 and the architect persona's second bullet were rewritten when the design moved from an escrow marketplace to an introductions platform, and seeds/content_blocks.json still re-seeds the old wording, so they are restored here. Principle 03 keeps the design's exact words, which include the phrase 'no escrow' — that is the new copy disclaiming escrow, not leftover marketplace language.",
+  "copy": [
+    {"scope": "about", "key": "hero_card_title", "text": "A licensed architect, matched to your jurisdiction", "href": ""},
+    {"scope": "about", "key": "hero_card_sub", "text": "Stamped, permit-ready — entirely remote", "href": ""}
+  ],
+  "delete": {
+    "principles": [
+      {"scope": "about", "title": "We price in the open"},
+      {"scope": "about", "title": "We hold the money safely"}
+    ]
+  },
+  "blocks": {
+    "principles": [
+      {"scope": "about", "sort": 1, "title": "We set expectations in the open", "body": "An itemized typical range from real inputs — size, scope, and jurisdiction complexity — before the first conversation. Architects set their own price from there."},
+      {"scope": "about", "sort": 2, "title": "We take nothing from the build", "body": "You hire and pay your architect directly, at their rate — no escrow, no cut of the project. Our revenue is the architect’s flat subscription."}
+    ],
+    "personas": [
+      {"scope": "about", "sort": 1, "title": "You, free to do the work you trained for", "points": "Receive pre-scoped clients — no cold bidding\nSet your rate; clients hire and pay you directly\nPractice anywhere you’re licensed, entirely remotely"}
+    ]
+  }
+}

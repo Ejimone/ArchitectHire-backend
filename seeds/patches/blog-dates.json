@@ -1,0 +1,35 @@
+{
+  "_note": "Publication dates for the seven guides, taken verbatim from design/marketing/Blog.dc.html. content_editorial.json carries no date, so every card rendered the seed run's own date and the index showed all seven as the same day.",
+  "editorial": {
+    "blog_posts": [
+      {
+        "slug": "how-to-hire-an-architect-remotely-and-get-a-permit-ready-set",
+        "published_at": "2026-08-04T09:00:00Z"
+      },
+      {
+        "slug": "what-does-an-architect-actually-cost-in-2026",
+        "published_at": "2026-08-01T09:00:00Z"
+      },
+      {
+        "slug": "the-complete-backyard-adu-planning-guide",
+        "published_at": "2026-07-28T09:00:00Z"
+      },
+      {
+        "slug": "reading-your-jurisdiction-a-permit-primer",
+        "published_at": "2026-07-22T09:00:00Z"
+      },
+      {
+        "slug": "8-questions-to-ask-before-you-hire-an-architect",
+        "published_at": "2026-07-15T09:00:00Z"
+      },
+      {
+        "slug": "building-in-oakland-seismic-rules-you-should-know",
+        "published_at": "2026-07-09T09:00:00Z"
+      },
+      {
+        "slug": "home-additions-where-the-money-really-goes",
+        "published_at": "2026-07-02T09:00:00Z"
+      }
+    ]
+  }
+}

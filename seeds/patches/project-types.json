@@ -1,0 +1,205 @@
+{
+  "_note": "Per-project-type FAQs for the /projects/[slug] template. The landing content itself (h1/intro/body/price/range/bar/stats/includes/price_notes/steps) is NO LONGER patched here: the 2026-08-11 design update authored real content for all nine types, which `seed_catalog` now loads from seeds/project_landing.json. The placeholder copy this file used to carry was overwriting that, because patches run after the catalog domain.",
+  "blocks": {
+    "faqs": [
+      {
+        "scope": "project-type:backyard-adu",
+        "sort": 0,
+        "question": "How much does it cost to design a ADU?",
+        "answer": "A Backyard ADU drawing set typically runs $2,400 – $6,500 as a typical range, scaling with square footage and complexity. You see an itemized instant estimate before talking to anyone, and each architect sets their own price — confirmed on your scoping call."
+      },
+      {
+        "scope": "project-type:home-addition",
+        "sort": 0,
+        "question": "How much does it cost to design a addition?",
+        "answer": "A Home addition drawing set typically runs $11,000 – $24,000 as a typical range, scaling with square footage and complexity. You see an itemized instant estimate before talking to anyone, and each architect sets their own price — confirmed on your scoping call."
+      },
+      {
+        "scope": "project-type:home-addition",
+        "sort": 1,
+        "question": "How long does the design take?",
+        "answer": "Most Home addition sets reach a stamped, permit-ready state in about 4–6 weeks of active design, depending on revision cycles and how quickly site info is provided."
+      },
+      {
+        "scope": "project-type:home-addition",
+        "sort": 2,
+        "question": "Is the architect licensed for my area?",
+        "answer": "Yes. Every match is verified as licensed in your state, and pre-cleared for Home addition work in your jurisdiction, before it reaches you."
+      },
+      {
+        "scope": "project-type:home-addition",
+        "sort": 3,
+        "question": "What do I need to provide?",
+        "answer": "Basic site information, measurements or a recent survey, and photos. Your architect guides you through exactly what’s needed — no in-person visit required."
+      },
+      {
+        "scope": "project-type:whole-home-renovation",
+        "sort": 0,
+        "question": "How much does it cost to design a renovation?",
+        "answer": "A Whole-home renovation drawing set typically runs $8,500 – $19,000 as a typical range, scaling with square footage and complexity. You see an itemized instant estimate before talking to anyone, and each architect sets their own price — confirmed on your scoping call."
+      },
+      {
+        "scope": "project-type:whole-home-renovation",
+        "sort": 1,
+        "question": "How long does the design take?",
+        "answer": "Most Whole-home renovation sets reach a stamped, permit-ready state in about 3–5 weeks of active design, depending on revision cycles and how quickly site info is provided."
+      },
+      {
+        "scope": "project-type:whole-home-renovation",
+        "sort": 2,
+        "question": "Is the architect licensed for my area?",
+        "answer": "Yes. Every match is verified as licensed in your state, and pre-cleared for Whole-home renovation work in your jurisdiction, before it reaches you."
+      },
+      {
+        "scope": "project-type:whole-home-renovation",
+        "sort": 3,
+        "question": "What do I need to provide?",
+        "answer": "Basic site information, measurements or a recent survey, and photos. Your architect guides you through exactly what’s needed — no in-person visit required."
+      },
+      {
+        "scope": "project-type:kitchen-and-bath",
+        "sort": 0,
+        "question": "How much does it cost to design a remodel?",
+        "answer": "A Kitchen & bath drawing set typically runs $2,400 – $6,000 as a typical range, scaling with square footage and complexity. You see an itemized instant estimate before talking to anyone, and each architect sets their own price — confirmed on your scoping call."
+      },
+      {
+        "scope": "project-type:kitchen-and-bath",
+        "sort": 1,
+        "question": "How long does the design take?",
+        "answer": "Most Kitchen & bath sets reach a stamped, permit-ready state in about 1–3 weeks of active design, depending on revision cycles and how quickly site info is provided."
+      },
+      {
+        "scope": "project-type:kitchen-and-bath",
+        "sort": 2,
+        "question": "Is the architect licensed for my area?",
+        "answer": "Yes. Every match is verified as licensed in your state, and pre-cleared for Kitchen & bath work in your jurisdiction, before it reaches you."
+      },
+      {
+        "scope": "project-type:kitchen-and-bath",
+        "sort": 3,
+        "question": "What do I need to provide?",
+        "answer": "Basic site information, measurements or a recent survey, and photos. Your architect guides you through exactly what’s needed — no in-person visit required."
+      },
+      {
+        "scope": "project-type:new-custom-home",
+        "sort": 0,
+        "question": "How much does it cost to design a custom home?",
+        "answer": "A New custom home drawing set typically runs $26,000 – $65,000 as a typical range, scaling with square footage and complexity. You see an itemized instant estimate before talking to anyone, and each architect sets their own price — confirmed on your scoping call."
+      },
+      {
+        "scope": "project-type:new-custom-home",
+        "sort": 1,
+        "question": "How long does the design take?",
+        "answer": "Most New custom home sets reach a stamped, permit-ready state in about 8–14 weeks of active design, depending on revision cycles and how quickly site info is provided."
+      },
+      {
+        "scope": "project-type:new-custom-home",
+        "sort": 2,
+        "question": "Is the architect licensed for my area?",
+        "answer": "Yes. Every match is verified as licensed in your state, and pre-cleared for New custom home work in your jurisdiction, before it reaches you."
+      },
+      {
+        "scope": "project-type:new-custom-home",
+        "sort": 3,
+        "question": "What do I need to provide?",
+        "answer": "Basic site information, measurements or a recent survey, and photos. Your architect guides you through exactly what’s needed — no in-person visit required."
+      },
+      {
+        "scope": "project-type:garage-conversion",
+        "sort": 0,
+        "question": "How much does it cost to design a conversion?",
+        "answer": "A Garage conversion drawing set typically runs $4,500 – $9,500 as a typical range, scaling with square footage and complexity. You see an itemized instant estimate before talking to anyone, and each architect sets their own price — confirmed on your scoping call."
+      },
+      {
+        "scope": "project-type:garage-conversion",
+        "sort": 1,
+        "question": "How long does the design take?",
+        "answer": "Most Garage conversion sets reach a stamped, permit-ready state in about 2–4 weeks of active design, depending on revision cycles and how quickly site info is provided."
+      },
+      {
+        "scope": "project-type:garage-conversion",
+        "sort": 2,
+        "question": "Is the architect licensed for my area?",
+        "answer": "Yes. Every match is verified as licensed in your state, and pre-cleared for Garage conversion work in your jurisdiction, before it reaches you."
+      },
+      {
+        "scope": "project-type:garage-conversion",
+        "sort": 3,
+        "question": "What do I need to provide?",
+        "answer": "Basic site information, measurements or a recent survey, and photos. Your architect guides you through exactly what’s needed — no in-person visit required."
+      },
+      {
+        "scope": "project-type:commercial-ti",
+        "sort": 0,
+        "question": "How much does it cost to design a TI?",
+        "answer": "A Commercial TI drawing set typically runs $8,000 – $22,000 as a typical range, scaling with square footage and complexity. You see an itemized instant estimate before talking to anyone, and each architect sets their own price — confirmed on your scoping call."
+      },
+      {
+        "scope": "project-type:commercial-ti",
+        "sort": 1,
+        "question": "How long does the design take?",
+        "answer": "Most Commercial TI sets reach a stamped, permit-ready state in about 3–5 weeks of active design, depending on revision cycles and how quickly site info is provided."
+      },
+      {
+        "scope": "project-type:commercial-ti",
+        "sort": 2,
+        "question": "Is the architect licensed for my area?",
+        "answer": "Yes. Every match is verified as licensed in your state, and pre-cleared for Commercial TI work in your jurisdiction, before it reaches you."
+      },
+      {
+        "scope": "project-type:commercial-ti",
+        "sort": 3,
+        "question": "What do I need to provide?",
+        "answer": "Basic site information, measurements or a recent survey, and photos. Your architect guides you through exactly what’s needed — no in-person visit required."
+      },
+      {
+        "scope": "project-type:restaurant-build-out",
+        "sort": 0,
+        "question": "How much does it cost to design a build-out?",
+        "answer": "A Restaurant build-out drawing set typically runs $9,000 – $26,000 as a typical range, scaling with square footage and complexity. You see an itemized instant estimate before talking to anyone, and each architect sets their own price — confirmed on your scoping call."
+      },
+      {
+        "scope": "project-type:restaurant-build-out",
+        "sort": 1,
+        "question": "How long does the design take?",
+        "answer": "Most Restaurant build-out sets reach a stamped, permit-ready state in about 4–7 weeks of active design, depending on revision cycles and how quickly site info is provided."
+      },
+      {
+        "scope": "project-type:restaurant-build-out",
+        "sort": 2,
+        "question": "Is the architect licensed for my area?",
+        "answer": "Yes. Every match is verified as licensed in your state, and pre-cleared for Restaurant build-out work in your jurisdiction, before it reaches you."
+      },
+      {
+        "scope": "project-type:restaurant-build-out",
+        "sort": 3,
+        "question": "What do I need to provide?",
+        "answer": "Basic site information, measurements or a recent survey, and photos. Your architect guides you through exactly what’s needed — no in-person visit required."
+      },
+      {
+        "scope": "project-type:change-of-use",
+        "sort": 0,
+        "question": "How much does it cost to design a change of use?",
+        "answer": "A Change of use drawing set typically runs $6,000 – $16,000 as a typical range, scaling with square footage and complexity. You see an itemized instant estimate before talking to anyone, and each architect sets their own price — confirmed on your scoping call."
+      },
+      {
+        "scope": "project-type:change-of-use",
+        "sort": 1,
+        "question": "How long does the design take?",
+        "answer": "Most Change of use sets reach a stamped, permit-ready state in about 3–6 weeks of active design, depending on revision cycles and how quickly site info is provided."
+      },
+      {
+        "scope": "project-type:change-of-use",
+        "sort": 2,
+        "question": "Is the architect licensed for my area?",
+        "answer": "Yes. Every match is verified as licensed in your state, and pre-cleared for Change of use work in your jurisdiction, before it reaches you."
+      },
+      {
+        "scope": "project-type:change-of-use",
+        "sort": 3,
+        "question": "What do I need to provide?",
+        "answer": "Basic site information, measurements or a recent survey, and photos. Your architect guides you through exactly what’s needed — no in-person visit required."
+      }
+    ]
+  }
+}

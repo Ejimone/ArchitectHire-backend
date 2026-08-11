@@ -1,0 +1,377 @@
+{
+  "_note": "Port of design/marketing/Professional Tools.dc.html at /for-experts/tools — a page the extracted seeds never covered because the design file is new (nothing in the site linked to it). Prices are NOT here: the three dark tier cards in the #join section read payments.SubscriptionPlan group 'pricing-page', the same rows the /for-experts/pricing table uses, so the two pages can never disagree. Block choices: the before/after panels are value_props groups 'chasing' and 'doing' — title-only rows, since the design renders each line as a single bullet with no body. The seven alternating feature rows are personas group 'features': Persona is the only block with a points[] list, which is exactly the three 'what you get' bullets, and kicker/title/body land 1:1. Two Persona fields are repurposed and named in the design's terms: cta_label carries the row's payoff line (the green THE PAYOFF chip) and cta_href carries the image caption pill — the same documented repurposing project-gallery.json uses for CaseCard.location. Each row's image comes from MediaAsset slot 'professional-tools:ft-*' (the design's own image-slot ids, in row order) and its icon from the page's inline icon set, both keyed by position like the landing page's StepArt. The platform takes 0% and clients pay the professional directly — no funds ever pass through us.",
+  "copy": [
+    {
+      "scope": "professional-tools",
+      "key": "hero_eyebrow",
+      "text": "For architects & service experts",
+      "href": ""
+    },
+    {
+      "scope": "professional-tools",
+      "key": "hero_h1",
+      "text": "One platform to run your whole practice.",
+      "href": ""
+    },
+    {
+      "scope": "professional-tools",
+      "key": "hero_sub",
+      "text": "Clients, your profile, scheduling, proposals and the answers you need for any city — all in one place. Spend your time designing, not chasing work.",
+      "href": ""
+    },
+    {
+      "scope": "professional-tools",
+      "key": "hero_cta",
+      "text": "See plans & join →",
+      "href": "#join"
+    },
+    {
+      "scope": "professional-tools",
+      "key": "hero_link",
+      "text": "Apply free →",
+      "href": "/pro/expert"
+    },
+    {
+      "scope": "professional-tools",
+      "key": "hero_card_kicker",
+      "text": "NEW CLIENT MATCHED",
+      "href": ""
+    },
+    {
+      "scope": "professional-tools",
+      "key": "hero_card_time",
+      "text": "2 min ago",
+      "href": ""
+    },
+    {
+      "scope": "professional-tools",
+      "key": "hero_card_title",
+      "text": "Backyard ADU · Oakland, CA",
+      "href": ""
+    },
+    {
+      "scope": "professional-tools",
+      "key": "hero_card_sub",
+      "text": "Briefed & pre-qualified · ready to book a call",
+      "href": ""
+    },
+    {
+      "scope": "professional-tools",
+      "key": "hero_card_rate",
+      "text": "Your rate applies",
+      "href": ""
+    },
+    {
+      "scope": "professional-tools",
+      "key": "hero_card_match",
+      "text": "96% match",
+      "href": ""
+    },
+    {
+      "scope": "professional-tools",
+      "key": "hero_month_label",
+      "text": "This month, one login",
+      "href": ""
+    },
+    {
+      "scope": "professional-tools",
+      "key": "hero_month_value",
+      "text": "4 clients · 2 proposals · 1 booking",
+      "href": ""
+    },
+    {
+      "scope": "professional-tools",
+      "key": "week_heading",
+      "text": "Your week, before and after",
+      "href": ""
+    },
+    {
+      "scope": "professional-tools",
+      "key": "week_sub",
+      "text": "Same skills. Completely different day.",
+      "href": ""
+    },
+    {
+      "scope": "professional-tools",
+      "key": "week_before_kicker",
+      "text": "ON YOUR OWN",
+      "href": ""
+    },
+    {
+      "scope": "professional-tools",
+      "key": "week_before_heading",
+      "text": "Chasing the work",
+      "href": ""
+    },
+    {
+      "scope": "professional-tools",
+      "key": "week_after_kicker",
+      "text": "WITH ARCHITECTHIRE",
+      "href": ""
+    },
+    {
+      "scope": "professional-tools",
+      "key": "week_after_heading",
+      "text": "Doing the work",
+      "href": ""
+    },
+    {
+      "scope": "professional-tools",
+      "key": "features_kicker",
+      "text": "WHAT YOU GET",
+      "href": ""
+    },
+    {
+      "scope": "professional-tools",
+      "key": "features_heading",
+      "text": "Everything the business side needs",
+      "href": ""
+    },
+    {
+      "scope": "professional-tools",
+      "key": "features_sub",
+      "text": "One subscription. Each piece earns its place.",
+      "href": ""
+    },
+    {
+      "scope": "professional-tools",
+      "key": "features_payoff_label",
+      "text": "THE PAYOFF",
+      "href": ""
+    },
+    {
+      "scope": "professional-tools",
+      "key": "join_badge",
+      "text": "Join us",
+      "href": ""
+    },
+    {
+      "scope": "professional-tools",
+      "key": "join_heading",
+      "text": "Pick a plan and bring your skill",
+      "href": ""
+    },
+    {
+      "scope": "professional-tools",
+      "key": "join_sub",
+      "text": "A flat monthly fee — never a cut of your work. Apply free; subscribe once you're live. Cancel anytime.",
+      "href": ""
+    },
+    {
+      "scope": "professional-tools",
+      "key": "join_tier_badge",
+      "text": "MOST POPULAR",
+      "href": ""
+    },
+    {
+      "scope": "professional-tools",
+      "key": "join_price_unit",
+      "text": "/mo",
+      "href": ""
+    },
+    {
+      "scope": "professional-tools",
+      "key": "join_cta",
+      "text": "",
+      "href": "/pro/expert"
+    },
+    {
+      "scope": "professional-tools",
+      "key": "join_footnote_text",
+      "text": "Full plan comparison on the",
+      "href": ""
+    },
+    {
+      "scope": "professional-tools",
+      "key": "join_footnote_link",
+      "text": "pricing page →",
+      "href": "/for-experts/pricing"
+    }
+  ],
+  "blocks": {
+    "stats": [
+      {
+        "scope": "professional-tools",
+        "group": "hero",
+        "sort": 0,
+        "value": "$0",
+        "label": "taken from your fees"
+      },
+      {
+        "scope": "professional-tools",
+        "group": "hero",
+        "sort": 1,
+        "value": "3,200+",
+        "label": "cities in the database"
+      },
+      {
+        "scope": "professional-tools",
+        "group": "hero",
+        "sort": 2,
+        "value": "1",
+        "label": "login for everything"
+      }
+    ],
+    "value_props": [
+      {
+        "scope": "professional-tools",
+        "group": "chasing",
+        "sort": 0,
+        "icon": "",
+        "title": "Cold-pitching and hunting for the next job between projects",
+        "description": ""
+      },
+      {
+        "scope": "professional-tools",
+        "group": "chasing",
+        "sort": 1,
+        "icon": "",
+        "title": "Guessing at the rules when a client is in a city you don’t know",
+        "description": ""
+      },
+      {
+        "scope": "professional-tools",
+        "group": "chasing",
+        "sort": 2,
+        "icon": "",
+        "title": "Losing leads because you replied a day too late",
+        "description": ""
+      },
+      {
+        "scope": "professional-tools",
+        "group": "chasing",
+        "sort": 3,
+        "icon": "",
+        "title": "Starting every proposal from a blank page",
+        "description": ""
+      },
+      {
+        "scope": "professional-tools",
+        "group": "chasing",
+        "sort": 4,
+        "icon": "",
+        "title": "Your work scattered across email, a website you never update, and sticky notes",
+        "description": ""
+      },
+      {
+        "scope": "professional-tools",
+        "group": "doing",
+        "sort": 0,
+        "icon": "",
+        "title": "Briefed, pre-qualified clients arrive in your dashboard",
+        "description": ""
+      },
+      {
+        "scope": "professional-tools",
+        "group": "doing",
+        "sort": 1,
+        "icon": "",
+        "title": "Instant answers on submittal rules and timelines for any city",
+        "description": ""
+      },
+      {
+        "scope": "professional-tools",
+        "group": "doing",
+        "sort": 2,
+        "icon": "",
+        "title": "Every new match gets an instant reply in your voice",
+        "description": ""
+      },
+      {
+        "scope": "professional-tools",
+        "group": "doing",
+        "sort": 3,
+        "icon": "",
+        "title": "Proposals that start pre-filled from the client’s brief",
+        "description": ""
+      },
+      {
+        "scope": "professional-tools",
+        "group": "doing",
+        "sort": 4,
+        "icon": "",
+        "title": "One clean profile, one pipeline, one login for all of it",
+        "description": ""
+      }
+    ],
+    "personas": [
+      {
+        "scope": "professional-tools",
+        "group": "features",
+        "sort": 0,
+        "kicker": "CLIENTS",
+        "title": "A steady flow of clients who want you",
+        "body": "We match you with owners whose projects fit your disciplines, licensure and capacity — and hand them over already briefed. No cold outreach, no bidding wars.",
+        "points": "Scoped project matches in your specialties\nOnly clients you’re actually a fit for\nYou set your rate — hire and invoice them directly",
+        "cta_label": "Fill your calendar without pitching",
+        "cta_href": "New matches, briefed and ready"
+      },
+      {
+        "scope": "professional-tools",
+        "group": "features",
+        "sort": 1,
+        "kicker": "YOUR PROFILE",
+        "title": "A profile that sells while you sleep",
+        "body": "A clean, public page with your portfolio, disciplines, licensure and rates. Put the link in your email signature and social bio — it works as your website and gets you found.",
+        "points": "Portfolio, credentials and rates in one page\nA shareable link you’re proud to send\nFound by the owners searching in your area",
+        "cta_label": "Look established from day one",
+        "cta_href": "architecthire.com/your-name"
+      },
+      {
+        "scope": "professional-tools",
+        "group": "features",
+        "sort": 2,
+        "kicker": "INSTANT REPLY",
+        "title": "Never lose a client to a slow reply",
+        "body": "The moment a match lands, an on-brand reply goes out in your voice — acknowledging the project and offering times. You look responsive even when you’re heads-down on a deadline.",
+        "points": "Automatic first response, every time\nWritten in your own tone\nOffers times and opens the conversation",
+        "cta_label": "Win the clients who go with whoever answers first",
+        "cta_href": "Replied in seconds"
+      },
+      {
+        "scope": "professional-tools",
+        "group": "features",
+        "sort": 3,
+        "kicker": "JURISDICTION DATABASE",
+        "title": "Take work in any city with confidence",
+        "body": "Look up exactly what a jurisdiction requires — submittal checklist, typical plan-check timeline, local amendments and the mistakes that get projects rejected. 3,200 cities, kept current.",
+        "points": "Submittal requirements by project type\nRealistic plan-check timelines\nCommon rejection reasons, flagged upfront",
+        "cta_label": "Say yes to projects outside your home turf",
+        "cta_href": "3,200+ cities, always current"
+      },
+      {
+        "scope": "professional-tools",
+        "group": "features",
+        "sort": 4,
+        "kicker": "BOOKING",
+        "title": "Let clients book you in one click",
+        "body": "Share your availability for consults, plan reviews and scoping calls. Clients pick a slot themselves — the back-and-forth disappears and the first conversation happens sooner.",
+        "points": "Self-serve scheduling for calls\nNo email tag to find a time\nConsults, reviews and scoping in one place",
+        "cta_label": "Go from “saw your profile” to “on a call” faster",
+        "cta_href": "Pick a time, done"
+      },
+      {
+        "scope": "professional-tools",
+        "group": "features",
+        "sort": 5,
+        "kicker": "PROPOSALS",
+        "title": "Send proposals in minutes, not evenings",
+        "body": "Because the client already answered the questionnaire, your proposal starts pre-filled with scope, a fair price range and the likely permit path. You review, adjust and send — it’s always yours.",
+        "points": "Pre-filled scope, pricing and permit path\nEdit and brand it as your own\nSend a polished proposal same day",
+        "cta_label": "Win more work with less admin",
+        "cta_href": "Draft ready to review"
+      },
+      {
+        "scope": "professional-tools",
+        "group": "features",
+        "sort": 6,
+        "kicker": "PIPELINE",
+        "title": "See every opportunity in one board",
+        "body": "All your active pursuits and projects on one simple board, plus a shared timeline your clients can follow. Fewer “where are we?” emails, and nothing slips through the cracks.",
+        "points": "Every pursuit and project at a glance\nShared client-update timelines\nKnow what needs your attention next",
+        "cta_label": "Run more work without dropping a ball",
+        "cta_href": "Your whole practice, one view"
+      }
+    ]
+  }
+}

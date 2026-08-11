@@ -54,7 +54,7 @@
     <sc-if value="{{ showBanner }}" hint-placeholder-val="{{ true }}">
     <div style="margin: 20px 0 0; background: #ceff65; border-radius: 12px; padding: 14px 22px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
       <span style="font-weight: 700; color: #0a1440; font-size: 15px;">Get matched with a licensed architect in 48 hours.</span>
-      <span style="font-size: 14px; color: #16305c;">Instant estimate · escrow-backed · 100% remote.</span>
+      <span style="font-size: 14px; color: #16305c;">Instant estimate · hire directly · 100% remote.</span>
       <a href="../app/Get Started.dc.html" style="margin-left: auto; background: #0a1440; color: #fff; padding: 9px 18px; border-radius: 8px; font-size: 14px; font-weight: 700;">Start free →</a>
     </div>
     </sc-if>
@@ -72,7 +72,7 @@
         <div style="display: flex; gap: 40px; margin-top: 36px;">
           <div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 28px; color: #ceff65;">3,200+</div><div style="font-size: 13px; color: #9fb4ff;">jurisdictions scored</div></div>
           <div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 28px; color: #ceff65;">48 hrs</div><div style="font-size: 13px; color: #9fb4ff;">to matched architects</div></div>
-          <div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 28px; color: #ceff65;">100%</div><div style="font-size: 13px; color: #9fb4ff;">escrow-backed</div></div>
+          <div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 28px; color: #ceff65;">$0</div><div style="font-size: 13px; color: #9fb4ff;">taken from your project</div></div>
         </div>
       </div>
       <div style="position: relative; min-width: 0; min-height: 500px; overflow: hidden;">
@@ -178,7 +178,7 @@
       <div>
         <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #ceff65; letter-spacing: .05em;">INSTANT ESTIMATE</div>
         <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 34px; font-weight: 700; color: #fff; letter-spacing: -.02em; margin: 12px 0 12px;">Know the price before you talk to anyone</h2>
-        <p style="font-size: 16px; line-height: 1.55; color: #b9c3e8; max-width: 32em;">Our engine prices everything from a quick consult to a full stamped set — using scope, add-ons, and a jurisdiction complexity score — so you get a real number up front, not a vague "it depends."</p>
+        <p style="font-size: 16px; line-height: 1.55; color: #b9c3e8; max-width: 32em;">Our engine estimates a typical range for everything from a quick consult to a full stamped set — using scope, add-ons, and a jurisdiction complexity score — so you get a real number up front, not a vague "it depends." Each architect sets their own price from there.</p>
         <a href="../app/Get Started.dc.html" style="display: inline-block; margin-top: 24px; background: #135bff; color: #fff; padding: 15px 26px; border-radius: 10px; font-size: 16px; font-weight: 700; box-shadow: 0 3px 0 #0b3fcc;">Get my estimate →</a>
       </div>
       <div style="background: #0c1a4a; border: 1px solid #1d2f6e; border-radius: 16px; padding: 24px 24px 26px;">
@@ -207,7 +207,7 @@
     <section style="margin-top: 80px;">
       <div style="text-align: center;">
         <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 34px; font-weight: 700; letter-spacing: -.02em;">Choose how you engage</h2>
-        <p style="font-size: 16px; color: #3f4770; margin-top: 8px;">Both bill through the platform with escrow. Pick what fits how defined your project is.</p>
+        <p style="font-size: 16px; color: #3f4770; margin-top: 8px;">Two ways architects price their work — you hire and pay them directly. Pick what fits how defined your project is.</p>
       </div>
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 30px; max-width: 900px; margin-left: auto; margin-right: auto;">
         <sc-for list="{{ plans }}" as="p" hint-placeholder-count="2">
@@ -376,13 +376,13 @@ class Component extends DCLogic {
     const steps = [
       { n:'1', t:'Answer & price', d:'A short questionnaire feeds the pricing engine and returns an instant, itemized estimate — before you talk to anyone.', slotId:'lp-step1', ph:'How it works — step 1' },
       { n:'2', t:'Meet 2–3 matches', d:'We surface only architects pre-cleared on licensure, jurisdiction experience and capacity. Review profiles, then chat or video to scope.', slotId:'lp-step2', ph:'How it works — step 2' },
-      { n:'3', t:'Pick, pay, build', d:'Choose a fixed quote or hourly, pay into escrow, and receive stamped, permit-ready drawings on a tracked timeline.', slotId:'lp-step3', ph:'How it works — step 3' },
+      { n:'3', t:'Hire & build', d:'Agree a fixed price or hourly rate, hire your architect directly, and receive stamped, permit-ready drawings on a tracked timeline.', slotId:'lp-step3', ph:'How it works — step 3' },
     ];
 
     const plans = [
-      { key:'fixed', tag:'FLAGSHIP', title:'Dynamic fixed quote', blurb:'One engine-generated price for your whole drawing set, confirmed on your call — so you have cost certainty before work begins.',
-        points:['Scales to your project — small jobs stay affordable','Locked price from size, add-ons & jurisdiction','Re-quote only with your approval','Milestone-based escrow releases'], cta:'Start with fixed →', best:true },
-      { key:'hourly', tag:'FLEXIBLE', title:'Hourly', blurb:'Transparent time tracking through escrow milestones. Each architect sets their own rate — you see it before you commit.',
+      { key:'fixed', tag:'FLAGSHIP', title:'Fixed price', blurb:'One agreed price for your whole drawing set, set by your architect and confirmed on your call — cost certainty before work begins.',
+        points:['Scales to your project — small jobs stay affordable','One agreed price for the full scope','Re-quote only with your approval','Pay by milestone as you approve work'], cta:'Start with fixed →', best:true },
+      { key:'hourly', tag:'FLEXIBLE', title:'Hourly', blurb:'Transparent time tracking as the work progresses. Each architect sets their own rate — you see it before you commit.',
         points:['Rates vary by architect — many well below big-firm pricing','Pay for exactly the work done','Ideal when scope is still evolving','Common for commercial & exploratory work'], cta:'Start hourly →', best:false },
     ];
     const planCta = (best)=>`display:block;text-align:center;margin-top:18px;padding:14px;border-radius:10px;font-size:15px;font-weight:700;${best?'background:#135bff;color:#fff;box-shadow:0 3px 0 #0b3fcc;':'background:#0a1440;color:#fff;'}`;
@@ -395,24 +395,24 @@ class Component extends DCLogic {
 
     const testimonials = [
       { quote:'The instant estimate matched the final quote almost exactly. Our architect was licensed right here in Oakland and the permit set cleared first try.', name:'Rebecca Lin', role:'Homeowner · Berkeley, CA', slotId:'tst-0', src:'../brand/photos/p-priya.png' },
-      { quote:'We compared three vetted architects in an afternoon. Escrow made paying feel safe, and the drawings were the cleanest our contractor had seen.', name:'Marcus Reed', role:'Homeowner · Oakland, CA', slotId:'tst-1', src:'../brand/photos/p-marcus.png' },
+      { quote:'We compared three vetted architects in an afternoon. Hiring directly kept it simple, and the drawings were the cleanest our contractor had seen.', name:'Marcus Reed', role:'Homeowner · Oakland, CA', slotId:'tst-1', src:'../brand/photos/p-marcus.png' },
       { quote:'For our restaurant change-of-use, hourly was the right call. Transparent time tracking, no surprises, and it moved fast.', name:'Grace Okafor', role:'Business owner · San Jose, CA', slotId:'tst-2', src:'../brand/photos/p-maya.png' },
     ];
     const cases = [
       { slotId:'lp-case1', ph:'Finished ADU exterior', cat:'Backyard ADU', location:'Oakland, CA', title:'A 640 sq ft ADU that cleared plan check first try',
         excerpt:'A rental-income unit in a seismic hillside lot — stamped, submitted, and approved without a single revision cycle.',
-        stats:[{v:'$3,900',k:'Fixed quote'},{v:'6 wks',k:'To stamped set'}] },
+        stats:[{v:'$3,900',k:'Architect\u2019s price'},{v:'6 wks',k:'To stamped set'}] },
       { slotId:'lp-case2', ph:'Home addition interior', cat:'Addition', location:'Berkeley, CA', title:'Second-story addition on a 1920s bungalow',
         excerpt:'Structural coordination and design review handled remotely, keeping a tight budget on a complex historic lot.',
         stats:[{v:'$7,400',k:'Drawing set'},{v:'9 wks',k:'To permit'}] },
       { slotId:'lp-case3', ph:'Restaurant dining room', cat:'Change of use', location:'San Jose, CA', title:'Retail-to-restaurant change of use, hourly',
-        excerpt:'A tenant improvement with accessibility and MEP scope — billed hourly through escrow with zero surprises.',
+        excerpt:'A tenant improvement with accessibility and MEP scope — billed hourly, paid directly, with zero surprises.',
         stats:[{v:'118 hrs',k:'Tracked time'},{v:'First',k:'Plan-check pass'}] },
     ];
     const trustLogos = ['NORTHVIEW','Beacon Build','Oak & Iron','Meridian','Harbor Co.','LATTICE'];
     const safety = [
       { k:'01', t:'Verified licensure', d:'Every architect\u2019s state license is verified before a single match reaches you — the stamp has to be legally valid.' },
-      { k:'02', t:'Escrow-backed pay', d:'Funds are held by the platform and released only as you approve milestones — never before.' },
+      { k:'02', t:'Pay directly, by milestone', d:'You contract and pay your architect directly — a deposit, then payments as you approve each milestone. We never touch the funds.' },
       { k:'03', t:'Insurance on file', d:'Errors & omissions coverage is confirmed and on file for every architect you can hire.' },
     ];
     const footerCols = [

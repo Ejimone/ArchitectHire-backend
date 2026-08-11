@@ -1,0 +1,8 @@
+{
+  "_note": "Chrome for design/marketing/Careers.dc.html at /careers. The perks, departments and job listings come from the Careers models (seeds/content_editorial.json); these rows are the 'All' department chip label and the Apply link text the design hardcodes. Job apply links fall back to apply_fallback_href when a JobPosting has no apply_href of its own.",
+  "copy": [
+    {"scope": "careers", "key": "dept_all", "text": "All", "href": ""},
+    {"scope": "careers", "key": "apply_label", "text": "Apply →", "href": ""},
+    {"scope": "careers", "key": "apply_fallback_href", "text": "", "href": "/contact"}
+  ]
+}

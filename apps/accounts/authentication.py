@@ -78,7 +78,7 @@ class ClerkAuthentication(authentication.BaseAuthentication):
         # JIT provisioning. Session tokens may omit email unless the Clerk JWT template
         # includes it; the user.created webhook backfills real values shortly after.
         email = claims.get("email") or f"{clerk_id}@pending.clerk.local"
-        user, _created = User.objects.get_or_create(
+        user, created = User.objects.get_or_create(
             email=email,
             defaults={
                 "clerk_id": clerk_id,
@@ -89,4 +89,10 @@ class ClerkAuthentication(authentication.BaseAuthentication):
         if user.clerk_id is None:
             user.clerk_id = clerk_id
             user.save(update_fields=["clerk_id"])
+        if created and user.has_placeholder_email:
+            # Fetch the real profile now rather than leaving a synthetic address
+            # for the UI (and, on machines without a webhook tunnel, forever).
+            from .clerk_sync import backfill_user
+
+            backfill_user(user)
         return user

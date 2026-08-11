@@ -124,6 +124,14 @@
           "href": "/for-experts"
         },
         {
+          "label": "Professional tools",
+          "href": "/for-experts/tools"
+        },
+        {
+          "label": "Expert pricing",
+          "href": "/for-experts/pricing"
+        },
+        {
           "label": "Log in",
           "href": "/account"
         },

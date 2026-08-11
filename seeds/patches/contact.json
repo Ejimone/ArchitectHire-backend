@@ -1,0 +1,22 @@
+{
+  "_note": "Chrome for design/marketing/Contact.dc.html at /contact: form field labels and placeholders, the support/press email labels, the QUICK LINKS card, and the error line shown when a submission fails. Contact methods and topics come from the Contact models; support/press addresses and the HQ block are already seeded as copy rows.",
+  "copy": [
+    {"scope": "contact", "key": "form_label_name", "text": "Name", "href": ""},
+    {"scope": "contact", "key": "form_placeholder_name", "text": "Jordan Rivera", "href": ""},
+    {"scope": "contact", "key": "form_label_email", "text": "Email", "href": ""},
+    {"scope": "contact", "key": "form_placeholder_email", "text": "you@email.com", "href": ""},
+    {"scope": "contact", "key": "form_label_topic", "text": "Topic", "href": ""},
+    {"scope": "contact", "key": "form_label_message", "text": "Message", "href": ""},
+    {"scope": "contact", "key": "form_placeholder_message", "text": "How can we help?", "href": ""},
+    {"scope": "contact", "key": "form_sending", "text": "Sending…", "href": ""},
+    {"scope": "contact", "key": "form_error", "text": "Something went wrong. Please try again, or email us directly.", "href": ""},
+    {"scope": "contact", "key": "form_error_throttled", "text": "You've sent several messages recently. Please try again later, or email us directly.", "href": ""},
+    {"scope": "contact", "key": "support_prefix", "text": "Support:", "href": ""},
+    {"scope": "contact", "key": "press_prefix", "text": "Press:", "href": ""},
+    {"scope": "contact", "key": "links_kicker", "text": "QUICK LINKS", "href": ""},
+    {"scope": "contact", "key": "link_project", "text": "Start a project →", "href": "/get-started"},
+    {"scope": "contact", "key": "link_architect", "text": "Join as an architect →", "href": "/for-architects"},
+    {"scope": "contact", "key": "link_careers", "text": "See open roles →", "href": "/careers"},
+    {"scope": "contact", "key": "link_guides", "text": "Read the guides →", "href": "/guides"}
+  ]
+}

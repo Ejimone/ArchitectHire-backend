@@ -1,0 +1,232 @@
+{
+  "_note": "Gaps found while porting design/marketing/3D Visualization.dc.html to /services/3d-visualization. Copy rows: breadcrumb + the quality-tier card text the design hardcodes (tier labels/prices themselves come from catalog/pricing/render-matrix/). Blocks: the 'What you can order' deliverable cards (case_cards), the recent-work gallery tiles (carousel) and the specialist cards (personas). The route change is here too: design/app/Order Render.dc.html and Order Drafting.dc.html are now redirects into the unified quiz, so every CTA and use-case card on this page points at /get-started?intent=viz instead of /order/render. The steps and FAQ that described escrow releases are restored to the current design, which has the client paying the specialist directly.",
+  "copy": [
+    {
+      "scope": "3d-visualization",
+      "key": "breadcrumb_parent",
+      "text": "Services",
+      "href": "/services"
+    },
+    {
+      "scope": "3d-visualization",
+      "key": "breadcrumb_current",
+      "text": "3D & visualization",
+      "href": ""
+    },
+    {
+      "scope": "3d-visualization",
+      "key": "deliverables_price_prefix",
+      "text": "from",
+      "href": ""
+    },
+    {
+      "scope": "3d-visualization",
+      "key": "pricing_price_sub",
+      "text": "per still",
+      "href": ""
+    },
+    {
+      "scope": "3d-visualization",
+      "key": "pricing_popular_tier",
+      "text": "Professional",
+      "href": ""
+    },
+    {
+      "scope": "3d-visualization",
+      "key": "pricing_popular_badge",
+      "text": "MOST POPULAR",
+      "href": ""
+    },
+    {
+      "scope": "3d-visualization",
+      "key": "pricing_body_conceptual",
+      "text": "Fast, clean renders to communicate an idea or check a layout. Great for early decisions and permit exhibits.",
+      "href": ""
+    },
+    {
+      "scope": "3d-visualization",
+      "key": "pricing_body_professional",
+      "text": "Refined lighting, real materials, and styled scenes — the everyday standard for client approvals.",
+      "href": ""
+    },
+    {
+      "scope": "3d-visualization",
+      "key": "pricing_body_photoreal",
+      "text": "Gallery-grade imagery for listings, investor decks, and sales centers, indistinguishable from a photo.",
+      "href": ""
+    },
+    {
+      "scope": "3d-visualization",
+      "key": "hero_cta",
+      "text": "Order a render →",
+      "href": "/get-started?intent=viz"
+    },
+    {
+      "scope": "3d-visualization",
+      "key": "final_cta_button",
+      "text": "Start a render order →",
+      "href": "/get-started?intent=viz"
+    }
+  ],
+  "blocks": {
+    "case_cards": [
+      {
+        "scope": "3d-visualization",
+        "title": "Interior still",
+        "excerpt": "One furnished, lit interior view — kitchens, living spaces, or a hero room.",
+        "stat1_value": "from $99",
+        "stat1_label": "starting price",
+        "sort": 0
+      },
+      {
+        "scope": "3d-visualization",
+        "title": "Exterior still",
+        "excerpt": "A full building exterior in context, with landscaping and real-world lighting.",
+        "stat1_value": "from $150",
+        "stat1_label": "starting price",
+        "sort": 1
+      },
+      {
+        "scope": "3d-visualization",
+        "title": "3D floor plan",
+        "excerpt": "A furnished, top-down 3D plan that reads instantly for listings and reviews.",
+        "stat1_value": "from $100",
+        "stat1_label": "starting price",
+        "sort": 2
+      },
+      {
+        "scope": "3d-visualization",
+        "title": "Aerial view",
+        "excerpt": "A birds-eye of the whole site — ideal for multi-unit and site-plan approvals.",
+        "stat1_value": "from $450",
+        "stat1_label": "starting price",
+        "sort": 3
+      },
+      {
+        "scope": "3d-visualization",
+        "title": "Animated walkthrough",
+        "excerpt": "A cinematic fly-through of the finished design, rendered to video.",
+        "stat1_value": "$50–$300 / sec",
+        "stat1_label": "starting price",
+        "sort": 4
+      },
+      {
+        "scope": "3d-visualization",
+        "title": "360° / VR tour",
+        "excerpt": "An immersive, navigable tour clients can explore from any device.",
+        "stat1_value": "from $750",
+        "stat1_label": "starting price",
+        "sort": 5
+      }
+    ],
+    "carousel": [
+      {
+        "scope": "3d-visualization",
+        "caption": "Interior",
+        "name": "Feature render — modern kitchen",
+        "sort": 0
+      },
+      {
+        "scope": "3d-visualization",
+        "caption": "Exterior",
+        "name": "Exterior render",
+        "sort": 1
+      },
+      {
+        "scope": "3d-visualization",
+        "caption": "3D plan",
+        "name": "3D floor plan",
+        "sort": 2
+      },
+      {
+        "scope": "3d-visualization",
+        "caption": "Aerial",
+        "name": "Aerial render",
+        "sort": 3
+      },
+      {
+        "scope": "3d-visualization",
+        "caption": "Walkthrough",
+        "name": "Walkthrough still",
+        "sort": 4
+      }
+    ],
+    "personas": [
+      {
+        "scope": "3d-visualization",
+        "title": "Leah K.",
+        "kicker": "Visualization artist · photoreal",
+        "body": "Marketing-grade interiors and exteriors for developers and listing agents. Fast turnarounds, styled scenes.",
+        "points": [
+          "4.9",
+          "Photoreal"
+        ],
+        "sort": 0
+      },
+      {
+        "scope": "3d-visualization",
+        "title": "Marco V.",
+        "kicker": "3D artist · plans & aerials",
+        "body": "Dollhouse 3D plans and site aerials that read clearly for HOA and design-review submittals.",
+        "points": [
+          "4.8",
+          "Approvals"
+        ],
+        "sort": 1
+      },
+      {
+        "scope": "3d-visualization",
+        "title": "Priya N.",
+        "kicker": "Licensed architect · CA",
+        "body": "Pairs conceptual renders with buildable design intent, so your images match what will actually get permitted.",
+        "points": [
+          "4.9",
+          "Architect"
+        ],
+        "sort": 2
+      }
+    ],
+    "use_cases": [
+      {
+        "scope": "3d-visualization",
+        "sort": 0,
+        "title": "Sell a listing or unit",
+        "href": "/get-started?intent=viz"
+      },
+      {
+        "scope": "3d-visualization",
+        "sort": 1,
+        "title": "Get an approval or exhibit",
+        "href": "/get-started?intent=viz"
+      },
+      {
+        "scope": "3d-visualization",
+        "sort": 2,
+        "title": "Decide before you spend",
+        "href": "/get-started?intent=viz"
+      }
+    ],
+    "steps": [
+      {
+        "scope": "3d-visualization",
+        "sort": 1,
+        "title": "Get a price",
+        "description": "Pick your quality tier and see the artist’s price up front."
+      },
+      {
+        "scope": "3d-visualization",
+        "sort": 3,
+        "title": "Receive final files",
+        "description": "Download print-ready images on approval — you pay the artist directly."
+      }
+    ]
+  },
+  "delete": {
+    "steps": [
+      {
+        "scope": "3d-visualization",
+        "title": "Get a fixed quote"
+      }
+    ]
+  }
+}

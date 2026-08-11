@@ -1,0 +1,27 @@
+{
+  "_note": "Business-model rewrite of design/marketing/Services Landing.dc.html at /services-landing. The design moved from an escrow marketplace to an introductions platform (you hire and pay your specialist directly; we never touch the money), so the hero subcopy, the how-it-works lead and steps, the categories heading, the third benefit card and the payments FAQ all changed. seeds/content_copy.json / content_blocks.json were extracted from the superseded revision and still re-seed the escrow wording. `delete` drops the two blocks the design renamed — the 'Delivered via escrow' step and the 'Escrow-backed & vetted' benefit — so the stale extracted rows can't linger beside their replacements.",
+  "copy": [
+    {"scope": "services-landing", "key": "hero_sub", "text": "Book a one-hour consult, a set of renders, or drafting by the hour. Every service shows clear typical pricing, is delivered remotely, and you hire your specialist directly — from $145.", "href": ""},
+    {"scope": "services-landing", "key": "how_sub", "text": "Pick what you need, see a typical range, and hire your specialist directly.", "href": ""},
+    {"scope": "services-landing", "key": "categories_heading", "text": "Everything, in one place", "href": ""}
+  ],
+  "delete": {
+    "steps": [{"scope": "services-landing", "title": "Delivered via escrow"}],
+    "value_props": [{"scope": "services-landing", "title": "Escrow-backed & vetted"}]
+  },
+  "blocks": {
+    "steps": [
+      {"scope": "services-landing", "sort": 0, "title": "Pick a service", "description": "Choose what you need and get an instant, itemized range — no forms, no \"it depends.\""},
+      {"scope": "services-landing", "sort": 2, "title": "Hire directly", "description": "Contract your specialist directly, at their own rate. We make the introduction — you hire, and we never touch the money."}
+    ],
+    "value_props": [
+      {"scope": "services-landing", "sort": 2, "title": "Verified & licensed", "description": "Every specialist is vetted, and stamped work only ever comes from a pro licensed in your exact jurisdiction."}
+    ],
+    "faqs": [
+      {"scope": "services-landing", "sort": 3, "question": "How do payments work?", "answer": "You hire and pay your specialist directly, at their own rate. ArchitectHire is free for owners — we make the introduction and never take a cut of the work."}
+    ]
+  },
+  "page_seo": [
+    {"page_key": "services-landing", "description": "Book a one-hour consult, a set of renders, or drafting by the hour. Every service shows clear typical pricing, is delivered remotely, and you hire your specialist directly — from $145."}
+  ]
+}

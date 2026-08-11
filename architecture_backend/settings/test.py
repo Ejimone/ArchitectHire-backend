@@ -14,3 +14,13 @@ REST_FRAMEWORK = {
 }
 
 PASSWORD_HASHERS = ["django.contrib.auth.hashers.MD5PasswordHasher"]  # speed
+
+# In-memory channels + eager celery for tests
+CHANNEL_LAYERS = {"default": {"BACKEND": "channels.layers.InMemoryChannelLayer"}}
+CELERY_TASK_ALWAYS_EAGER = True
+CELERY_TASK_EAGER_PROPAGATES = True
+
+# Own cache namespace. The tests use a dedicated database but the same Redis, so
+# without this a running dev server shares the content-version key and cached
+# page payloads with the suite and makes cache assertions flaky.
+CACHES = {"default": {**CACHES["default"], "KEY_PREFIX": "ah-test"}}

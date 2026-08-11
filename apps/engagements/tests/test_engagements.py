@@ -69,15 +69,17 @@ def create_engagement(api_client, project, kind="dynamic_fixed_quote"):
 
 @pytest.mark.django_db
 class TestEngagementCreation:
-    def test_fixed_quote_snapshot(self, api_client, hired_project):
+    def test_fixed_price_snapshot(self, api_client, hired_project):
         body = create_engagement(api_client, hired_project)
         assert body["total"] == "21400.00"
-        assert body["fee_percent"] == "10.00"
         assert body["deposit_amount"] == "5350.00"  # 25% of 21,400 (design figure)
-        assert body["platform_fee"] == "2140.00"  # 10% flat (locked decision)
+        # The client pays the architect directly — the design's engagement page
+        # shows "ArchitectHire fee $0".
+        assert body["fee_percent"] == "0.00"
+        assert body["platform_fee"] == "0.00"
         assert body["status"] == "contracted"
 
-    def test_hourly_initial_escrow(self, api_client, hired_project):
+    def test_hourly_initial_payment(self, api_client, hired_project):
         body = create_engagement(api_client, hired_project, kind="hourly")
         assert body["hourly_rate"] == "135.00"
         assert body["deposit_amount"] == "2700.00"  # 135 × 20 hrs (design figure)
@@ -159,7 +161,9 @@ class TestMilestones:
         )
         assert response.json()["status"] == "revising"
 
-        # Provider resubmits; client approves; approval is terminal
+        # Provider resubmits; client approves; approval is terminal. Approval
+        # records the milestone as paid directly to the architect — no platform
+        # funds are involved, so nothing has to be pre-funded.
         api_client.force_authenticate(user=engagement.provider)
         api_client.post(f"/api/v1/milestones/{milestone_id}/submit/")
         api_client.force_authenticate(user=engagement.client)

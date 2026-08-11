@@ -36,9 +36,9 @@ Signed-in experience. The funnel starts at Get Started and hands off to Matches.
 
 | File | Purpose |
 |------|---------|
-| `Get Started.dc.html` | Project questionnaire → instant estimate → account creation (hire a licensed architect) |
-| `Order Render.dc.html` | 3D visualization order flow — deliverable, tier, qty → instant price → checkout |
-| `Order Drafting.dc.html` | CAD drafting order flow — service, size, optional stamp → price → checkout |
+| `Get Started.dc.html` | Unified adaptive quiz — one "what do you need?" fork branches into design/permitting, drafting, consult, 3D, or engineering; asks only relevant questions → instant estimate → specialist match → account. Reads `?intent=`, `?svc=`, `?state=` so service/city landing pages niche it down. |
+| `Order Render.dc.html` | Redirect → `Get Started.dc.html?intent=viz` (retired standalone flow, unified into the quiz) |
+| `Order Drafting.dc.html` | Redirect → `Get Started.dc.html?intent=drafting` (retired standalone flow, unified into the quiz) |
 | `Matches.dc.html` | Curated architect matches + profile |
 | `Engagement.dc.html` | Project dashboard, messages, review/approve flows |
 | `Account.dc.html` | Homeowner portal — all projects |

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f3f6fd; }
+  ::selection { background: #135bff; color: #fff; }
+  a { color: #135bff; text-decoration: none; }
+  a:hover { color: #0b3fcc; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  @media (max-width: 960px){
+    main{ padding-left:18px !important; padding-right:18px !important; }
+    [style*="repeat(3"]{ grid-template-columns:1fr !important; }
+    [style*="grid-template-columns: 1fr 1fr"]{ grid-template-columns:1fr !important; }
+    [style*="padding: 52px 44px"],[style*="padding: 56px"],[style*="padding: 48px"],[style*="padding: 44px"]{ padding:32px 22px !important; }
+    h1{ font-size:clamp(30px,7vw,42px) !important; }
+    .tier-featured{ transform:none !important; }
+    .price-table-wrap{ overflow-x:auto !important; }
+  }
+</style>
+<script src="../image-slot.js"></script>
+</helmet>
+<div style="background: #f3f6fd; color: #0a1440; font-family: 'Hanken Grotesk', sans-serif; -webkit-font-smoothing: antialiased;">
+
+  <x-import component-from-global-scope="site-nav" from="./site-nav.js" active="architects" style="display:contents" hint-size="100%,64px"></x-import>
+
+  <main style="max-width: 1200px; margin: 0 auto; padding: 0 32px 100px;">
+
+    <!-- HERO -->
+    <section style="margin-top: 32px; text-align: center; animation: fadeUp .5s ease both;">
+      <div style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 13px; border-radius: 100px; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: #16305c; background: #ceff65; font-weight: 700;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #0a1440;"></span>For architects &amp; service experts</div>
+      <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(38px, 3.6vw, 54px); line-height: 1.02; letter-spacing: -.02em; font-weight: 800; margin: 20px auto 0; max-width: 16em; text-wrap: balance;">A subscription, not a cut of your work</h1>
+      <p style="font-size: 19px; line-height: 1.55; color: #3f4770; margin: 18px auto 0; max-width: 34em; text-wrap: pretty;">You pay a flat monthly fee for matches, tools and the jurisdiction database. Whatever you charge the client is yours — we take <strong style="color:#0a1440;">$0</strong> of your project fee.</p>
+      <div style="display: inline-flex; align-items: center; gap: 4px; margin-top: 26px; background: #fff; border: 1px solid #e2e8f5; border-radius: 100px; padding: 5px;">
+        <button onClick="{{ setMonthly }}" style="{{ monthlyBtn }}">Monthly</button>
+        <button onClick="{{ setYearly }}" style="{{ yearlyBtn }}">Yearly <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:#16924e;">−2 months</span></button>
+      </div>
+    </section>
+
+    <!-- TIER CARDS -->
+    <section style="margin-top: 34px; display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; align-items: stretch;">
+      <sc-for list="{{ tiers }}" as="t" hint-placeholder-count="3">
+        <div class="{{ t.cls }}" style="{{ t.cardStyle }}">
+          <sc-if value="{{ t.featured }}" hint-placeholder-val="{{ false }}"><div style="position: absolute; top: -13px; left: 50%; transform: translateX(-50%); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .06em; color: #0a1440; background: #ceff65; padding: 5px 14px; border-radius: 100px; font-weight: 700; white-space: nowrap;">MOST POPULAR</div></sc-if>
+          <div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 24px; font-weight: 700; letter-spacing: -.01em; color: {{ t.nameColor }};">{{ t.name }}</div>
+          <p style="font-size: 14px; color: {{ t.subColor }}; margin-top: 6px; min-height: 40px; line-height: 1.45;">{{ t.tagline }}</p>
+          <div style="display: flex; align-items: baseline; gap: 6px; margin-top: 18px;">
+            <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 46px; font-weight: 800; letter-spacing: -.02em; color: {{ t.nameColor }};">{{ t.price }}</span>
+            <span style="font-size: 15px; color: {{ t.subColor }};">/mo{{ t.per }}</span>
+          </div>
+          <div style="font-size: 12.5px; color: {{ t.subColor }}; margin-top: 4px; min-height: 18px;">{{ t.billNote }}</div>
+          <a href="../app/Expert Account.dc.html" style="{{ t.ctaStyle }}">{{ t.cta }}</a>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .05em; color: {{ t.subColor }}; margin: 22px 0 12px;">{{ t.featuresLabel }}</div>
+          <div style="display: flex; flex-direction: column; gap: 11px;">
+            <sc-for list="{{ t.points }}" as="p" hint-placeholder-count="5">
+              <div style="display: flex; gap: 10px; align-items: flex-start; font-size: 14px; line-height: 1.45; color: {{ t.pointColor }};"><span style="color: {{ t.checkColor }}; margin-top: 1px; flex-shrink: 0;">✓</span><span>{{ p }}</span></div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </section>
+    <p style="text-align: center; font-size: 13.5px; color: #5b6493; margin-top: 20px;">Apply free — you only subscribe once you\u2019re approved and live. Cancel anytime. Most disciplines need no license.</p>
+
+    <!-- TIER MAPPING TABLE -->
+    <section style="margin-top: 72px;">
+      <div style="text-align: center; max-width: 40em; margin: 0 auto;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #135bff; letter-spacing: .06em;">WHAT'S INCLUDED</div>
+        <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 34px; font-weight: 700; letter-spacing: -.02em; margin-top: 8px;">Every tool, every tier</h2>
+        <p style="font-size: 16px; color: #3f4770; margin-top: 8px; line-height: 1.55;">Profile, booking and instant reply stay universal — they\u2019re worth more to us as full coverage. Proposals and intake gate at Practice, where they map to people running real project work.</p>
+      </div>
+      <div class="price-table-wrap" style="margin-top: 30px; background: #fff; border: 1px solid #e2e8f5; border-radius: 18px; overflow: hidden;">
+        <div style="display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; min-width: 640px;">
+          <!-- header row -->
+          <div style="padding: 20px 24px; background: #0a1440;"></div>
+          <sc-for list="{{ tierHeads }}" as="h" hint-placeholder-count="3">
+            <div style="padding: 20px 16px; background: {{ h.bg }}; text-align: center; border-left: 1px solid rgba(255,255,255,.08);">
+              <div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 17px; font-weight: 700; color: #fff;">{{ h.name }}</div>
+              <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: {{ h.priceColor }}; margin-top: 2px;">{{ h.price }}</div>
+            </div>
+          </sc-for>
+          <!-- rows -->
+          <sc-for list="{{ matrix }}" as="row" hint-placeholder-count="10">
+            <div style="{{ row.labelStyle }}">
+              <span style="font-size: 14.5px; font-weight: 600; color: #232c57;">{{ row.tool }}</span>
+              <sc-if value="{{ row.star }}" hint-placeholder-val="{{ false }}"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #0b3fcc; background: #e7efff; padding: 2px 7px; border-radius: 5px; margin-left: 8px;">★ FLAGSHIP</span></sc-if>
+            </div>
+            <sc-for list="{{ row.cells }}" as="c" hint-placeholder-count="3">
+              <div style="{{ c.cellStyle }}">{{ c.mark }}</div>
+            </sc-for>
+          </sc-for>
+        </div>
+      </div>
+      <p style="text-align: center; font-size: 13px; color: #5b6493; margin-top: 16px;"><span style="font-family:'IBM Plex Mono',monospace; color:#c98a1a;">Limited</span> = capped queries or reduced access. Full details on each tool live in <a href="Professional Tools.dc.html" style="font-weight:700;">Professional tools →</a></p>
+    </section>
+
+    <!-- WHY SUBSCRIPTION -->
+    <section style="margin-top: 72px; background: #0a1440; border-radius: 22px; padding: 48px 44px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
+      <div>
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #ceff65; letter-spacing: .05em;">THE PRICING DECISION</div>
+        <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 32px; font-weight: 700; color: #fff; letter-spacing: -.02em; margin: 12px 0 12px;">Why a subscription, not commission</h2>
+        <p style="font-size: 16px; line-height: 1.6; color: #b9c3e8; max-width: 32em;">On commission, the platform loses the moment you meet a client off-platform — so it has to police you. On subscription, you\u2019ve already paid, so an off-platform meeting costs us nothing. Your contact details can go straight on your public profile. Hire directly, invoice directly, keep 100%.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <sc-for list="{{ whyRows }}" as="wr" hint-placeholder-count="3">
+          <div style="background: #0c1a4a; border: 1px solid #1d2f6e; border-radius: 12px; padding: 18px 20px; display: flex; gap: 14px; align-items: flex-start;">
+            <span style="color: #ceff65; font-size: 16px; margin-top: 1px;">✓</span>
+            <div><div style="font-weight: 700; font-size: 15px; color: #fff;">{{ wr.t }}</div><div style="font-size: 13.5px; color: #9fb4ff; margin-top: 3px; line-height: 1.45;">{{ wr.d }}</div></div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section style="margin-top: 72px;">
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 32px; font-weight: 700; letter-spacing: -.02em; text-align: center;">Questions professionals ask</h2>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 28px;">
+        <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="6">
+          <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 14px; padding: 24px;">
+            <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 17px; font-weight: 700; margin-bottom: 8px;">{{ f.q }}</h3>
+            <p style="font-size: 14.5px; line-height: 1.55; color: #3f4770;">{{ f.a }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section style="margin-top: 40px; background: #135bff; border-radius: 22px; padding: 56px; text-align: center;">
+      <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 40px; font-weight: 800; color: #fff; letter-spacing: -.02em; text-wrap: balance;">Bring your skill. We\u2019ll bring the clients.</h2>
+      <p style="font-size: 17px; color: #dbe6ff; margin: 12px 0 26px;">Apply free. Subscribe once you\u2019re live. Keep every dollar you invoice.</p>
+      <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+        <a href="../app/Expert Account.dc.html" style="display: inline-block; background: #ceff65; color: #0a1440; padding: 17px 34px; border-radius: 12px; font-size: 17px; font-weight: 800; box-shadow: 0 4px 0 #a9d94a;">Apply to join →</a>
+        <a href="Professional Tools.dc.html" style="display: inline-block; background: rgba(255,255,255,.14); color: #fff; padding: 17px 34px; border-radius: 12px; font-size: 17px; font-weight: 700; border: 1px solid rgba(255,255,255,.4);">Explore the tools</a>
+      </div>
+    </section>
+  </main>
+
+  <x-import component-from-global-scope="site-footer" from="./site-footer.js" hint-size="100%,460px"></x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { billing: 'monthly' };
+
+  renderVals(){
+    const yearly = this.state.billing === 'yearly';
+    const segBtn = (active) => `border:none;cursor:pointer;font-family:inherit;font-size:14px;font-weight:700;padding:9px 20px;border-radius:100px;transition:all .18s ease;display:inline-flex;align-items:center;gap:6px;background:${active?'#0a1440':'transparent'};color:${active?'#fff':'#5b6493'};`;
+
+    // prices: monthly base; yearly = ~10x/12 (2 months free)
+    const priceData = [
+      { key:'studio', m:79,  y:66 },
+      { key:'practice', m:149, y:124 },
+      { key:'firm', m:299, y:249 },
+    ];
+    const p = (k) => { const d = priceData.find(x=>x.key===k); return '$' + (yearly ? d.y : d.m); };
+
+    const tierDefs = [
+      { key:'studio', name:'Studio', featured:false, tagline:'Solo practitioners and freelancers getting started with a steady flow of leads.',
+        cta:'Start with Studio', per:'',
+        points:['Scoped project matches in your disciplines','Public profile / mini-site — indexed & shareable','Instant reply to every new match','Self-serve booking','Pipeline board','Jurisdiction lookup — limited queries'] },
+      { key:'practice', name:'Practice', featured:true, tagline:'For professionals running real project work who want the full toolset.',
+        cta:'Start with Practice', per:'',
+        points:['Everything in Studio, plus:','Full jurisdiction database access','AI intake assistant — pre-qualified conversations','Scope templates by project type','Fee schedule builder','Proposal generation (rolling out)'] },
+      { key:'firm', name:'Firm', featured:false, tagline:'Multi-seat teams that need shared visibility and client-facing updates.',
+        cta:'Talk to us', per:' / seat',
+        points:['Everything in Practice, plus:','Shared client-update timelines','Team seats & shared pipeline','Priority match placement','Dedicated onboarding','Consolidated billing'] },
+    ];
+
+    const tiers = tierDefs.map(t=>{
+      const feat = t.featured;
+      return {
+        ...t,
+        price: p(t.key),
+        billNote: yearly ? 'billed annually · 2 months free' : 'billed monthly',
+        cls: feat ? 'tier-featured' : '',
+        nameColor: feat ? '#fff' : '#0a1440',
+        subColor: feat ? '#9fb4ff' : '#5b6493',
+        pointColor: feat ? '#dbe6ff' : '#333c66',
+        checkColor: feat ? '#ceff65' : '#16924e',
+        featuresLabel: (t.key==='studio' ? 'INCLUDED' : 'EVERYTHING BEFORE, PLUS'),
+        cardStyle: feat
+          ? 'position:relative;background:#0a1440;border:1.5px solid #135bff;border-radius:20px;padding:32px 28px;box-shadow:0 20px 50px rgba(19,91,255,.22);transform:translateY(-10px);display:flex;flex-direction:column;'
+          : 'position:relative;background:#fff;border:1.5px solid #e2e8f5;border-radius:20px;padding:32px 28px;display:flex;flex-direction:column;',
+        ctaStyle: feat
+          ? 'display:block;text-align:center;margin-top:22px;padding:15px;border-radius:11px;background:#ceff65;color:#0a1440;font-size:15px;font-weight:800;box-shadow:0 3px 0 #a9d94a;'
+          : 'display:block;text-align:center;margin-top:22px;padding:15px;border-radius:11px;background:#135bff;color:#fff;font-size:15px;font-weight:700;box-shadow:0 3px 0 #0b3fcc;',
+      };
+    });
+
+    const tierHeads = [
+      { name:'Studio', price:p('studio')+'/mo', bg:'#14235a', priceColor:'#9fb4ff' },
+      { name:'Practice', price:p('practice')+'/mo', bg:'#135bff', priceColor:'#ceff65' },
+      { name:'Firm', price:p('firm')+'/mo', bg:'#14235a', priceColor:'#9fb4ff' },
+    ];
+
+    // matrix: tool -> [studio, practice, firm] where value is 'yes' | 'no' | 'limited'
+    const rows = [
+      { tool:'Profile / mini-site', v:['yes','yes','yes'] },
+      { tool:'Instant reply', v:['yes','yes','yes'] },
+      { tool:'Booking', v:['yes','yes','yes'] },
+      { tool:'Pipeline view', v:['yes','yes','yes'] },
+      { tool:'Fee schedule builder', v:['no','yes','yes'] },
+      { tool:'Jurisdiction lookup', star:true, v:['limited','yes','yes'] },
+      { tool:'AI intake assistant', v:['no','yes','yes'] },
+      { tool:'Scope templates', v:['no','yes','yes'] },
+      { tool:'Proposal generation', v:['no','yes','yes'] },
+      { tool:'Client updates', v:['no','no','yes'] },
+    ];
+    const cellFor = (val, i, last) => {
+      const border = i===0 ? 'border-top:1px solid #eef2fb;' : 'border-top:1px solid #eef2fb;';
+      const base = `${border}border-left:1px solid #eef2fb;padding:16px 12px;text-align:center;display:flex;align-items:center;justify-content:center;font-size:15px;`;
+      if (val==='yes') return { mark:'✓', cellStyle: base + 'color:#16924e;font-weight:700;font-size:18px;' };
+      if (val==='limited') return { mark:'Limited', cellStyle: base + "color:#c98a1a;font-weight:700;font-family:'IBM Plex Mono',monospace;font-size:12px;" };
+      return { mark:'—', cellStyle: base + 'color:#c1cbe6;' };
+    };
+    const matrix = rows.map((r,ri)=>({
+      tool:r.tool, star:r.star,
+      labelStyle:`padding:16px 24px;display:flex;align-items:center;${ri===0?'border-top:1px solid #eef2fb;':'border-top:1px solid #eef2fb;'}background:${ri%2?'#fbfcfe':'#fff'};`,
+      cells: r.v.map((val,i)=>{
+        const c = cellFor(val,ri);
+        return { ...c, cellStyle: c.cellStyle + `background:${ri%2?'#fbfcfe':'#fff'};` };
+      }),
+    }));
+
+    const whyRows = [
+      { t:'We take $0 of your project fee', d:'Your rate, your invoice, your client relationship. The subscription is the whole deal.' },
+      { t:'Contact details on your public profile', d:'The first dividend of the subscription model — off-platform meetings cost us nothing.' },
+      { t:'Set your own rates, take only what you want', d:'Fixed or hourly, you decide. Decline any match with no penalty.' },
+    ];
+
+    const faqs = [
+      { q:'Do you take a percentage of what I charge?', a:'No. You pay a flat monthly subscription and keep 100% of every project fee you invoice. We never touch the money.' },
+      { q:'What if I get no matches one month?', a:'The tools are the point — your profile, jurisdiction lookup and pipeline keep working whether or not a match lands. That\u2019s the retention floor.' },
+      { q:'Do I need a license?', a:'Architects do, and we verify it before you go live. Most other disciplines — drafting, 3D, scanning, rendering — need no license at all.' },
+      { q:'Can I cancel anytime?', a:'Yes. Monthly plans cancel at the end of the cycle; annual plans run to term. Applying is always free — you only subscribe once you\u2019re approved.' },
+      { q:'What does "rolling out" mean?', a:'Proposal generation and client updates are being released market by market as density justifies them. We won\u2019t pretend a tool exists before it does.' },
+      { q:'What\u2019s the difference between Studio and Practice?', a:'Studio covers matches and the day-one tools. Practice adds the full jurisdiction database, AI intake, scope templates and proposals — the toolkit for running real project work.' },
+    ];
+
+    return {
+      setMonthly: ()=>this.setState({billing:'monthly'}),
+      setYearly: ()=>this.setState({billing:'yearly'}),
+      monthlyBtn: segBtn(!yearly),
+      yearlyBtn: segBtn(yearly),
+      tiers, tierHeads, matrix, whyRows, faqs,
+    };
+  }
+}
+</script>
+</body>
+</html>

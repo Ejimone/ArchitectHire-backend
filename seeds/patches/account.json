@@ -1,0 +1,437 @@
+{
+  "_note": "Client dashboard (design/app/Account.dc.html). Every string the page renders, keyed per section. Strings the design embeds demo data in are split around the interpolated value (e.g. welcome_h1 + the signed-in user's first name, arch_line_prefix + the hired architect's name) so the page reads exactly as designed for real accounts. The design's saved-card row on the Payment methods tab has no backend counterpart - the platform never holds project funds, so there is no client payment-method API - and renders only its heading, note and add-method button.",
+  "copy": [
+    {
+      "scope": "account",
+      "key": "seo_title",
+      "text": "Your projects",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "seo_description",
+      "text": "Your ArchitectHire projects, messages and settings in one place.",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "nav_projects",
+      "text": "Projects",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "nav_messages",
+      "text": "Messages",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "nav_settings",
+      "text": "Settings",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "new_project_cta",
+      "text": "+ New project",
+      "href": "/get-started"
+    },
+    {
+      "scope": "account",
+      "key": "welcome_h1",
+      "text": "Welcome back",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "welcome_sub",
+      "text": "Your projects and everything happening on them, in one place.",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "active_heading",
+      "text": "Active projects",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "active_count_suffix",
+      "text": "in progress",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "status_underway",
+      "text": "Underway",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "status_choosing",
+      "text": "Choosing architect",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "status_complete",
+      "text": "Complete",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "next_label",
+      "text": "Next:",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "arch_line_prefix",
+      "text": "with",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "arch_line_matched_suffix",
+      "text": "architects matched",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "cta_open_project",
+      "text": "Open project",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "cta_view_matches",
+      "text": "View matches",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "new_project_title",
+      "text": "Start a new project",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "new_project_sub",
+      "text": "Get an estimate and matches in minutes",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "completed_heading",
+      "text": "Completed",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "completed_prefix",
+      "text": "Completed",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "completed_badge",
+      "text": "COMPLETE",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "completed_link",
+      "text": "View files →",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "settings_h1",
+      "text": "Settings",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "tab_profile",
+      "text": "Profile",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "tab_notifications",
+      "text": "Notifications",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "tab_payments",
+      "text": "Payment methods",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "tab_security",
+      "text": "Security",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "profile_heading",
+      "text": "Profile",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "profile_sub",
+      "text": "This is shared with architects you engage.",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "profile_change_photo",
+      "text": "Change photo",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "profile_photo_hint",
+      "text": "JPG or PNG, max 4MB",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "field_full_name",
+      "text": "Full name",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "field_phone",
+      "text": "Phone",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "field_email",
+      "text": "Email",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "field_project_address",
+      "text": "Project address",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "save_changes",
+      "text": "Save changes",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "cancel",
+      "text": "Cancel",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "notif_heading",
+      "text": "Notifications",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "notif_sub",
+      "text": "Choose what we ping you about.",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "notif_milestone_updates_label",
+      "text": "Milestone updates",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "notif_milestone_updates_sub",
+      "text": "When drawings are ready or a payment releases",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "notif_new_messages_label",
+      "text": "New messages",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "notif_new_messages_sub",
+      "text": "When your architect messages you",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "notif_requote_flags_label",
+      "text": "Re-quote flags",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "notif_requote_flags_sub",
+      "text": "When scope or price may change",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "notif_tips_marketing_label",
+      "text": "Tips & product news",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "notif_tips_marketing_sub",
+      "text": "Occasional updates from ArchitectHire",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "pay_heading",
+      "text": "Payment methods",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "pay_sub",
+      "text": "Optional — pay your architect directly through the platform. ArchitectHire never takes a cut of your project.",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "pay_expires",
+      "text": "Expires",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "pay_default_badge",
+      "text": "DEFAULT",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "pay_remove",
+      "text": "Remove",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "pay_add",
+      "text": "+ Add payment method",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "pay_note",
+      "text": "You contract and pay your architect directly, at their rate. ArchitectHire doesn't hold project funds or take a cut — our only charge is to professionals, for their subscription.",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "security_heading",
+      "text": "Security",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "field_current_password",
+      "text": "Current password",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "field_new_password",
+      "text": "New password",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "update_password",
+      "text": "Update password",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "twofa_label",
+      "text": "Two-factor authentication",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "twofa_sub",
+      "text": "Add a verification code at sign-in.",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "messages_heading",
+      "text": "Messages",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "messages_search",
+      "text": "Search conversations",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "messages_schedule_call",
+      "text": "Schedule call",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "messages_files",
+      "text": "Files",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "messages_send",
+      "text": "Send",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "messages_composer_prefix",
+      "text": "Message",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "messages_status_online",
+      "text": "Online now · replies in ~4h",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "messages_status_archived",
+      "text": "Project completed · archived",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "messages_join_call",
+      "text": "Join",
+      "href": ""
+    },
+    {
+      "scope": "account",
+      "key": "messages_call_title",
+      "text": "Video call scheduled",
+      "href": ""
+    }
+  ]
+}

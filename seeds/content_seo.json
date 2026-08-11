@@ -36,6 +36,16 @@
       "description": "Scoped, pre-priced orders for drafting, 3D, scanning, engineering and permits — delivered to your dashboard. Set your rates, take only the work you want, and get paid fast through escrow."
     },
     {
+      "page_key": "expert-pricing",
+      "title": "A subscription, not a cut of your work",
+      "description": "Flat monthly plans for architects and service experts — Studio, Practice and Firm. We take $0 of your project fee: you set your rate, invoice the client directly and keep 100%."
+    },
+    {
+      "page_key": "professional-tools",
+      "title": "One platform to run your whole practice",
+      "description": "Client matches, a public profile, instant reply, booking, proposals, the 3,200-city jurisdiction database and a pipeline board — one login, one flat subscription, none of your project fee."
+    },
+    {
       "page_key": "projects",
       "title": "Architecture for every kind of project",
       "description": "From a backyard ADU to a ground-up custom home or a commercial tenant improvement — match with architects who specialize in exactly your project type, and get a stamped, permit-ready set."

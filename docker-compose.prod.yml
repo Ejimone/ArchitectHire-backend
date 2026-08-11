@@ -1,0 +1,42 @@
+# Production compose — for a DigitalOcean droplet deployment.
+# Managed Postgres/Redis are recommended instead of containers; if using managed
+# services, remove db/redis here and point DATABASE_URL/REDIS_URL at them.
+#
+#   docker compose -f docker-compose.prod.yml build
+#   docker compose -f docker-compose.prod.yml run --rm web python manage.py migrate
+#   docker compose -f docker-compose.prod.yml run --rm web python manage.py seed --all
+#   docker compose -f docker-compose.prod.yml run --rm web python manage.py collectstatic --noinput
+#   docker compose -f docker-compose.prod.yml up -d
+
+name: architecthire-prod
+
+services:
+  web:
+    build: .
+    restart: unless-stopped
+    env_file: .env.prod
+    environment:
+      DJANGO_SETTINGS_MODULE: architecture_backend.settings.prod
+    ports:
+      - "8000:8000"
+    volumes:
+      - staticfiles:/app/staticfiles
+
+  worker:
+    build: .
+    restart: unless-stopped
+    command: celery -A architecture_backend worker -l info -Q default,notifications --concurrency 4
+    env_file: .env.prod
+    environment:
+      DJANGO_SETTINGS_MODULE: architecture_backend.settings.prod
+
+  beat:
+    build: .
+    restart: unless-stopped
+    command: celery -A architecture_backend beat -l info
+    env_file: .env.prod
+    environment:
+      DJANGO_SETTINGS_MODULE: architecture_backend.settings.prod
+
+volumes:
+  staticfiles:

@@ -288,37 +288,43 @@
       "scope": "architect-landing",
       "value": "$150–$25k",
       "label": "project range",
-      "sort": 0
+      "sort": 0,
+      "group": "hero"
     },
     {
       "scope": "architect-landing",
       "value": "48 hrs",
       "label": "to first matched lead",
-      "sort": 1
+      "sort": 1,
+      "group": "hero"
     },
     {
       "scope": "architect-landing",
       "value": "2 days",
       "label": "avg. payout time",
-      "sort": 2
+      "sort": 2,
+      "group": "hero"
     },
     {
       "scope": "for-experts",
       "value": "6",
       "label": "disciplines in demand",
-      "sort": 0
+      "sort": 0,
+      "group": "hero"
     },
     {
       "scope": "for-experts",
       "value": "48 hrs",
       "label": "to your first order",
-      "sort": 1
+      "sort": 1,
+      "group": "hero"
     },
     {
       "scope": "for-experts",
       "value": "2 days",
       "label": "avg. payout time",
-      "sort": 2
+      "sort": 2,
+      "group": "hero"
     },
     {
       "scope": "about",
@@ -391,6 +397,48 @@
       "value": "0–100",
       "label": "score drives pricing",
       "sort": 3
+    },
+    {
+      "scope": "for-experts",
+      "group": "earnings",
+      "value": "10%",
+      "label": "flat service fee",
+      "sort": 0
+    },
+    {
+      "scope": "for-experts",
+      "group": "earnings",
+      "value": "$0",
+      "label": "to receive orders",
+      "sort": 1
+    },
+    {
+      "scope": "for-experts",
+      "group": "earnings",
+      "value": "2 days",
+      "label": "to your bank",
+      "sort": 2
+    },
+    {
+      "scope": "architect-landing",
+      "group": "earnings",
+      "value": "10%",
+      "label": "flat service fee",
+      "sort": 0
+    },
+    {
+      "scope": "architect-landing",
+      "group": "earnings",
+      "value": "$0",
+      "label": "to receive leads",
+      "sort": 1
+    },
+    {
+      "scope": "architect-landing",
+      "group": "earnings",
+      "value": "2 days",
+      "label": "to your bank",
+      "sort": 2
     }
   ],
   "steps": [
@@ -658,220 +706,251 @@
     },
     {
       "scope": "architect-landing",
-      "icon": "",
+      "icon": "leads",
       "title": "A steady stream of vetted leads",
       "description": "Pre-scoped, pre-priced projects from serious clients land in your dashboard — matched to your license, jurisdiction and specialty.",
-      "sort": 0
+      "sort": 0,
+      "group": "values"
     },
     {
       "scope": "architect-landing",
-      "icon": "",
+      "icon": "control",
       "title": "You keep control",
       "description": "Set your own rates, define your service area, and accept only the work you want. Nothing is ever assigned to you.",
-      "sort": 1
+      "sort": 1,
+      "group": "values"
     },
     {
       "scope": "architect-landing",
-      "icon": "",
+      "icon": "payouts",
       "title": "Fast, protected payouts",
       "description": "Clients fund escrow up front. You get paid within two days of each approved milestone — no chasing invoices.",
-      "sort": 2
+      "sort": 2,
+      "group": "values"
     },
     {
       "scope": "architect-landing",
-      "icon": "",
+      "icon": "admin",
       "title": "Tools that save admin time",
       "description": "Proposals, contracts, messaging and invoicing are built in — so you spend your hours designing, not doing paperwork.",
-      "sort": 3
+      "sort": 3,
+      "group": "values"
     },
     {
       "scope": "architect-landing",
-      "icon": "",
+      "icon": "reputation",
       "title": "Build a reputation",
       "description": "Every completed project earns verified reviews that raise your match rate and win repeat, higher-value clients.",
-      "sort": 4
+      "sort": 4,
+      "group": "values"
     },
     {
       "scope": "architect-landing",
-      "icon": "",
+      "icon": "nopitch",
       "title": "No cold pitching",
       "description": "Skip the RFPs and referral hustle. Clients arrive already educated on price and process, ready to hire.",
-      "sort": 5
+      "sort": 5,
+      "group": "values"
     },
     {
       "scope": "architect-landing",
       "icon": "",
       "title": "License verified once",
       "description": "We confirm your state license up front so clients trust the stamp — you don't re-prove it on every job.",
-      "sort": 6
+      "sort": 6,
+      "group": "verify"
     },
     {
       "scope": "architect-landing",
       "icon": "",
       "title": "Escrow protects you too",
       "description": "Funds are secured before you start. You never work on the promise of payment.",
-      "sort": 7
+      "sort": 7,
+      "group": "verify"
     },
     {
       "scope": "architect-landing",
       "icon": "",
       "title": "Reviews you own",
       "description": "Verified client reviews travel with your profile and lift your match rate over time.",
-      "sort": 8
+      "sort": 8,
+      "group": "verify"
     },
     {
       "scope": "architect-landing",
       "icon": "",
       "title": "Set your own rates",
       "description": "Fixed quote or hourly — your number, shown to clients before they commit.",
-      "sort": 9
+      "sort": 9,
+      "group": "control"
     },
     {
       "scope": "architect-landing",
       "icon": "",
       "title": "Pick your projects",
       "description": "Accept or decline each matched lead with one tap. No penalties.",
-      "sort": 10
+      "sort": 10,
+      "group": "control"
     },
     {
       "scope": "architect-landing",
       "icon": "",
       "title": "Define your capacity",
       "description": "Pause new leads when you're full, resume when you're ready.",
-      "sort": 11
+      "sort": 11,
+      "group": "control"
     },
     {
       "scope": "architect-landing",
       "icon": "",
       "title": "Choose your radius",
       "description": "Only see work inside the jurisdictions you're licensed for.",
-      "sort": 12
+      "sort": 12,
+      "group": "control"
     },
     {
       "scope": "architect-landing",
-      "icon": "",
+      "icon": "proposal",
       "title": "Proposals",
       "description": "Generate a branded proposal from the lead scope in one click.",
-      "sort": 13
+      "sort": 13,
+      "group": "tools"
     },
     {
       "scope": "architect-landing",
-      "icon": "",
+      "icon": "contract",
       "title": "Contracts & e-sign",
       "description": "Platform contracts with escrow terms, signed in-app.",
-      "sort": 14
+      "sort": 14,
+      "group": "tools"
     },
     {
       "scope": "architect-landing",
-      "icon": "",
+      "icon": "messaging",
       "title": "Messaging & files",
       "description": "Chat, share drawings and schedule calls in one thread.",
-      "sort": 15
+      "sort": 15,
+      "group": "tools"
     },
     {
       "scope": "architect-landing",
-      "icon": "",
+      "icon": "invoice",
       "title": "Invoicing & payouts",
       "description": "Milestone invoices and payouts handled automatically.",
-      "sort": 16
+      "sort": 16,
+      "group": "tools"
     },
     {
       "scope": "for-experts",
-      "icon": "",
+      "icon": "orders",
       "title": "A steady stream of scoped orders",
       "description": "Pre-scoped, pre-priced orders from real clients land in your dashboard — matched to your discipline and capacity.",
-      "sort": 0
+      "sort": 0,
+      "group": "values"
     },
     {
       "scope": "for-experts",
-      "icon": "",
+      "icon": "nolicense",
       "title": "Most work needs no license",
       "description": "Drafting, renders, scans and consults cross state lines freely — so you can take orders from anywhere, fast.",
-      "sort": 1
+      "sort": 1,
+      "group": "values"
     },
     {
       "scope": "for-experts",
-      "icon": "",
+      "icon": "rates",
       "title": "You set your rates",
       "description": "Hourly or flat, your number — shown to clients before they order. Decline anything that doesn't fit.",
-      "sort": 2
+      "sort": 2,
+      "group": "values"
     },
     {
       "scope": "for-experts",
-      "icon": "",
+      "icon": "payouts",
       "title": "Fast, protected payouts",
       "description": "Clients fund escrow up front. You get paid within two days of each approved delivery — no chasing invoices.",
-      "sort": 3
+      "sort": 3,
+      "group": "values"
     },
     {
       "scope": "for-experts",
-      "icon": "",
+      "icon": "reputation",
       "title": "Build a reputation",
       "description": "Every delivered order earns verified reviews that raise your match rate and win repeat, higher-value work.",
-      "sort": 4
+      "sort": 4,
+      "group": "values"
     },
     {
       "scope": "for-experts",
-      "icon": "",
+      "icon": "nopitch",
       "title": "No cold pitching",
       "description": "Skip the gig-site bidding wars. Clients arrive already priced and ready to buy — you just deliver.",
-      "sort": 5
+      "sort": 5,
+      "group": "values"
     },
     {
       "scope": "for-experts",
       "icon": "",
       "title": "Set your own rates",
       "description": "Hourly or per-deliverable — your number, shown before a client orders.",
-      "sort": 6
+      "sort": 6,
+      "group": "control"
     },
     {
       "scope": "for-experts",
       "icon": "",
       "title": "Pick your orders",
       "description": "Accept or decline each matched order with one tap. No penalties.",
-      "sort": 7
+      "sort": 7,
+      "group": "control"
     },
     {
       "scope": "for-experts",
       "icon": "",
       "title": "Define your capacity",
       "description": "Pause new orders when you're full, resume when you're ready.",
-      "sort": 8
+      "sort": 8,
+      "group": "control"
     },
     {
       "scope": "for-experts",
       "icon": "",
       "title": "Work solo or as a studio",
       "description": "Freelancers and small studios are both welcome on the network.",
-      "sort": 9
+      "sort": 9,
+      "group": "control"
     },
     {
       "scope": "for-experts",
-      "icon": "",
+      "icon": "scoped",
       "title": "Auto-scoped orders",
       "description": "Each order arrives with scope, references and price already set.",
-      "sort": 10
+      "sort": 10,
+      "group": "tools"
     },
     {
       "scope": "for-experts",
-      "icon": "",
+      "icon": "contract",
       "title": "Contracts & e-sign",
       "description": "Platform terms with escrow, signed in-app — no paperwork.",
-      "sort": 11
+      "sort": 11,
+      "group": "tools"
     },
     {
       "scope": "for-experts",
-      "icon": "",
+      "icon": "messaging",
       "title": "Messaging & files",
       "description": "Chat, share deliverables and manage revisions in one thread.",
-      "sort": 12
+      "sort": 12,
+      "group": "tools"
     },
     {
       "scope": "for-experts",
-      "icon": "",
+      "icon": "invoice",
       "title": "Invoicing & payouts",
       "description": "Milestone invoices and payouts handled automatically.",
-      "sort": 13
+      "sort": 13,
+      "group": "tools"
     }
   ],
   "trust_logos": [
@@ -987,6 +1066,210 @@
       "cta_label": "Convert PDFs",
       "href": "/order/drafting",
       "sort": 2
+    },
+    {
+      "scope": "landing",
+      "icon": "renovation",
+      "title": "Renovation",
+      "description": "Whole-home & interior",
+      "cta_label": "",
+      "href": "/get-started",
+      "sort": 0
+    },
+    {
+      "scope": "landing",
+      "icon": "addition",
+      "title": "Addition",
+      "description": "Extend your footprint",
+      "cta_label": "",
+      "href": "/get-started",
+      "sort": 1
+    },
+    {
+      "scope": "landing",
+      "icon": "newhome",
+      "title": "New home",
+      "description": "Custom ground-up",
+      "cta_label": "",
+      "href": "/get-started",
+      "sort": 2
+    },
+    {
+      "scope": "landing",
+      "icon": "adu",
+      "title": "ADU",
+      "description": "Backyard & garage units",
+      "cta_label": "",
+      "href": "/get-started",
+      "sort": 3
+    },
+    {
+      "scope": "landing",
+      "icon": "kitchenbath",
+      "title": "Kitchen & bath",
+      "description": "Focused remodels",
+      "cta_label": "",
+      "href": "/get-started",
+      "sort": 4
+    },
+    {
+      "scope": "landing",
+      "icon": "commercial",
+      "title": "Commercial TI",
+      "description": "Tenant improvements",
+      "cta_label": "",
+      "href": "/get-started",
+      "sort": 5
+    },
+    {
+      "scope": "landing",
+      "icon": "restaurant",
+      "title": "Restaurant",
+      "description": "Food & beverage builds",
+      "cta_label": "",
+      "href": "/get-started",
+      "sort": 6
+    },
+    {
+      "scope": "landing",
+      "icon": "changeofuse",
+      "title": "Change of use",
+      "description": "Re-permit & convert",
+      "cta_label": "",
+      "href": "/get-started",
+      "sort": 7
+    },
+    {
+      "scope": "services-landing",
+      "icon": "consult",
+      "title": "Consults & reviews",
+      "description": "Talk to a pro first",
+      "cta_label": "from $145",
+      "href": "/services#catalog",
+      "sort": 0
+    },
+    {
+      "scope": "services-landing",
+      "icon": "draft",
+      "title": "Drafting & docs",
+      "description": "CAD, as-builts, PDF→CAD",
+      "cta_label": "from $65/hr",
+      "href": "/services/cad-drafting",
+      "sort": 1
+    },
+    {
+      "scope": "services-landing",
+      "icon": "viz",
+      "title": "3D & visualization",
+      "description": "Renders & floor plans",
+      "cta_label": "from $99",
+      "href": "/services/3d-visualization",
+      "sort": 2
+    },
+    {
+      "scope": "services-landing",
+      "icon": "scan",
+      "title": "Scanning & BIM",
+      "description": "Capture what exists",
+      "cta_label": "from $0.20/sf",
+      "href": "/services#catalog",
+      "sort": 3
+    },
+    {
+      "scope": "services-landing",
+      "icon": "eng",
+      "title": "Engineering",
+      "description": "Stamps, calcs, code",
+      "cta_label": "from $150",
+      "href": "/services#catalog",
+      "sort": 4
+    },
+    {
+      "scope": "services-landing",
+      "icon": "permit",
+      "title": "Permits & entitlements",
+      "description": "Approved, faster",
+      "cta_label": "from $500",
+      "href": "/services#catalog",
+      "sort": 5
+    },
+    {
+      "scope": "services-landing",
+      "icon": "full",
+      "title": "Full architecture",
+      "description": "Stamped design sets",
+      "cta_label": "from $2,000",
+      "href": "/projects/backyard-adu",
+      "sort": 6
+    },
+    {
+      "scope": "services-landing",
+      "icon": "notsure",
+      "title": "Not sure?",
+      "description": "Start with a consult",
+      "cta_label": "from $145",
+      "href": "/services#catalog",
+      "sort": 7
+    },
+    {
+      "scope": "for-experts",
+      "group": "disciplines",
+      "icon": "draft",
+      "title": "CAD drafters",
+      "description": "Turn sketches, redlines and PDFs into clean, coordinated drawing sets.",
+      "cta_label": "$65–90/hr",
+      "href": "NO LICENSE",
+      "sort": 0
+    },
+    {
+      "scope": "for-experts",
+      "group": "disciplines",
+      "icon": "viz",
+      "title": "3D & visualization artists",
+      "description": "Photoreal stills, 3D floor plans, and walkthroughs from plans or references.",
+      "cta_label": "$99–4,000",
+      "href": "NO LICENSE",
+      "sort": 1
+    },
+    {
+      "scope": "for-experts",
+      "group": "disciplines",
+      "icon": "scan",
+      "title": "3D scanning & BIM",
+      "description": "On-site point-cloud capture and scan-to-BIM / Revit modeling.",
+      "cta_label": "$0.20–10/sf",
+      "href": "NO LICENSE",
+      "sort": 2
+    },
+    {
+      "scope": "for-experts",
+      "group": "disciplines",
+      "icon": "eng",
+      "title": "Structural & MEP engineers",
+      "description": "Calcs, coordination and licensed stamps for residential and light commercial.",
+      "cta_label": "from $1,500",
+      "href": "LICENSE REQ",
+      "sort": 3
+    },
+    {
+      "scope": "for-experts",
+      "group": "disciplines",
+      "icon": "energy",
+      "title": "Energy & Title-24",
+      "description": "Residential energy-compliance modeling and documentation for permit sets.",
+      "cta_label": "from $300",
+      "href": "CERTIFIED",
+      "sort": 4
+    },
+    {
+      "scope": "for-experts",
+      "group": "disciplines",
+      "icon": "permit",
+      "title": "Permit & zoning consultants",
+      "description": "Expediting, feasibility, and entitlement work through local building departments.",
+      "cta_label": "$500–20k+",
+      "href": "SPECIALIST",
+      "sort": 5
     }
   ],
   "personas": [
@@ -1017,6 +1300,147 @@
       "cta_label": "Join the network →",
       "cta_href": "/for-architects",
       "sort": 1
+    },
+    {
+      "scope": "services-landing",
+      "sort": 0,
+      "kicker": "NO STAMP NEEDED · TRAVELS ANYWHERE",
+      "title": "No Stamp Needed",
+      "body": "Renders, drafting, as-builts, 3D scans, feasibility, consults — done by anyone on the platform, in any state.",
+      "points": [],
+      "cta_label": "",
+      "cta_href": ""
+    },
+    {
+      "scope": "services-landing",
+      "sort": 1,
+      "kicker": "STAMP REQUIRED · JURISDICTION-MATCHED",
+      "title": "Stamp Required",
+      "body": "Permit sets, structural stamps, entitlements — matched to a pro licensed in your exact city or county.",
+      "points": [],
+      "cta_label": "",
+      "cta_href": ""
+    },
+    {
+      "scope": "for-experts",
+      "group": "escrow",
+      "sort": 0,
+      "kicker": "",
+      "title": "Client pays into escrow",
+      "body": "$1,200",
+      "points": [],
+      "cta_label": "",
+      "cta_href": ""
+    },
+    {
+      "scope": "for-experts",
+      "group": "escrow",
+      "sort": 1,
+      "kicker": "negative",
+      "title": "Platform service fee (10%)",
+      "body": "−$120",
+      "points": [],
+      "cta_label": "",
+      "cta_href": ""
+    },
+    {
+      "scope": "for-experts",
+      "group": "escrow",
+      "sort": 2,
+      "kicker": "total",
+      "title": "You keep",
+      "body": "$1,080",
+      "points": [],
+      "cta_label": "",
+      "cta_href": ""
+    },
+    {
+      "scope": "for-experts",
+      "group": "payout",
+      "sort": 3,
+      "kicker": "",
+      "title": "On accepted first draft",
+      "body": "$540",
+      "points": [],
+      "cta_label": "",
+      "cta_href": ""
+    },
+    {
+      "scope": "for-experts",
+      "group": "payout",
+      "sort": 4,
+      "kicker": "",
+      "title": "On approved final files",
+      "body": "$540",
+      "points": [],
+      "cta_label": "",
+      "cta_href": ""
+    },
+    {
+      "scope": "architect-landing",
+      "group": "escrow",
+      "sort": 0,
+      "kicker": "",
+      "title": "Client pays into escrow",
+      "body": "$14,000",
+      "points": [],
+      "cta_label": "",
+      "cta_href": ""
+    },
+    {
+      "scope": "architect-landing",
+      "group": "escrow",
+      "sort": 1,
+      "kicker": "negative",
+      "title": "Platform service fee (10%)",
+      "body": "−$1,400",
+      "points": [],
+      "cta_label": "",
+      "cta_href": ""
+    },
+    {
+      "scope": "architect-landing",
+      "group": "escrow",
+      "sort": 2,
+      "kicker": "total",
+      "title": "You keep",
+      "body": "$12,600",
+      "points": [],
+      "cta_label": "",
+      "cta_href": ""
+    },
+    {
+      "scope": "architect-landing",
+      "group": "payout",
+      "sort": 3,
+      "kicker": "",
+      "title": "Schematic milestone",
+      "body": "$3,780",
+      "points": [],
+      "cta_label": "",
+      "cta_href": ""
+    },
+    {
+      "scope": "architect-landing",
+      "group": "payout",
+      "sort": 4,
+      "kicker": "",
+      "title": "Design development",
+      "body": "$4,410",
+      "points": [],
+      "cta_label": "",
+      "cta_href": ""
+    },
+    {
+      "scope": "architect-landing",
+      "group": "payout",
+      "sort": 5,
+      "kicker": "pending",
+      "title": "Permit set (final)",
+      "body": "$4,410",
+      "points": [],
+      "cta_label": "",
+      "cta_href": ""
     }
   ],
   "principles": [
@@ -1117,6 +1541,231 @@
       "caption": "Architect reviewing local plans",
       "name": "",
       "sort": 2
+    }
+  ],
+  "case_cards": [
+    {
+      "scope": "landing",
+      "sort": 0,
+      "category_tag": "Backyard ADU",
+      "location": "Oakland, CA",
+      "title": "A 640 sq ft ADU that cleared plan check first try",
+      "excerpt": "A rental-income unit in a seismic hillside lot — stamped, submitted, and approved without a single revision cycle.",
+      "href": "/case-studies/a-640-sq-ft-adu-that-cleared-plan-check-first-try",
+      "stat1_value": "$3,900",
+      "stat1_label": "Fixed quote",
+      "stat2_value": "6 wks",
+      "stat2_label": "To stamped set"
+    },
+    {
+      "scope": "landing",
+      "sort": 1,
+      "category_tag": "Addition",
+      "location": "Berkeley, CA",
+      "title": "Second-story addition on a 1920s bungalow",
+      "excerpt": "Structural coordination and design review handled remotely, keeping a tight budget on a complex historic lot.",
+      "href": "/case-studies/second-story-addition-on-a-1920s-bungalow",
+      "stat1_value": "$7,400",
+      "stat1_label": "Drawing set",
+      "stat2_value": "9 wks",
+      "stat2_label": "To permit"
+    },
+    {
+      "scope": "landing",
+      "sort": 2,
+      "category_tag": "Change of use",
+      "location": "San Jose, CA",
+      "title": "Retail-to-restaurant change of use, hourly",
+      "excerpt": "A tenant improvement with accessibility and MEP scope — billed hourly through escrow with zero surprises.",
+      "href": "/case-studies/retail-to-restaurant-change-of-use",
+      "stat1_value": "118 hrs",
+      "stat1_label": "Tracked time",
+      "stat2_value": "First",
+      "stat2_label": "Plan-check pass"
+    },
+    {
+      "scope": "services-landing",
+      "sort": 0,
+      "category_tag": "Volume",
+      "location": "",
+      "title": "1-hour video consult",
+      "excerpt": "A licensed architect walks your project and points you to the right next step.",
+      "href": "/get-started",
+      "stat1_value": "from $145",
+      "stat1_label": "",
+      "stat2_value": "",
+      "stat2_label": ""
+    },
+    {
+      "scope": "services-landing",
+      "sort": 1,
+      "category_tag": "Volume",
+      "location": "",
+      "title": "Single 3D render",
+      "excerpt": "One photoreal interior or exterior still to see your space before you build.",
+      "href": "/services/3d-visualization",
+      "stat1_value": "from $99",
+      "stat1_label": "",
+      "stat2_value": "",
+      "stat2_label": ""
+    },
+    {
+      "scope": "services-landing",
+      "sort": 2,
+      "category_tag": "Volume",
+      "location": "",
+      "title": "CAD drafting",
+      "excerpt": "Clean, coordinated drawings from your sketches or redlines, billed by the hour.",
+      "href": "/services/cad-drafting",
+      "stat1_value": "$65–$90/hr",
+      "stat1_label": "",
+      "stat2_value": "",
+      "stat2_label": ""
+    },
+    {
+      "scope": "services-landing",
+      "sort": 3,
+      "category_tag": "Core",
+      "location": "",
+      "title": "As-built package",
+      "excerpt": "Measured drawings of an existing home, ready for design or permitting.",
+      "href": "/services/cad-drafting",
+      "stat1_value": "from $2,500",
+      "stat1_label": "",
+      "stat2_value": "",
+      "stat2_label": ""
+    },
+    {
+      "scope": "services-landing",
+      "sort": 4,
+      "category_tag": "Core",
+      "location": "",
+      "title": "Zoning & feasibility study",
+      "excerpt": "A written study of what your zoning allows before you commit to design.",
+      "href": "/services#catalog",
+      "stat1_value": "from $1,500",
+      "stat1_label": "",
+      "stat2_value": "",
+      "stat2_label": ""
+    },
+    {
+      "scope": "services-landing",
+      "sort": 5,
+      "category_tag": "Core",
+      "location": "",
+      "title": "Permit set — small residential",
+      "excerpt": "A stamped, permit-ready drawing set for ADUs, additions, and remodels.",
+      "href": "/services#catalog",
+      "stat1_value": "from $2,000",
+      "stat1_label": "",
+      "stat2_value": "",
+      "stat2_label": ""
+    }
+  ],
+  "estimate_teaser": [
+    {
+      "scope": "landing",
+      "sort": 0,
+      "label": "Consult or plan review",
+      "price_range": "$145 – $500",
+      "bar_pct": 6,
+      "includes": [
+        "1-hour consult with a licensed architect",
+        "Written notes & clear next steps",
+        "Optional redline of existing plans",
+        "No full engagement required"
+      ]
+    },
+    {
+      "scope": "landing",
+      "sort": 1,
+      "label": "Renders & 3D floor plan",
+      "price_range": "$99 – $800",
+      "bar_pct": 14,
+      "includes": [
+        "Photoreal interior or exterior stills",
+        "Furnished 3D floor plan",
+        "Revisions included",
+        "Print-ready files"
+      ]
+    },
+    {
+      "scope": "landing",
+      "sort": 2,
+      "label": "CAD drafting / as-built",
+      "price_range": "$65/hr – $2,500",
+      "bar_pct": 22,
+      "includes": [
+        "Drafting billed by the hour",
+        "Or a flat as-built package",
+        "No stamp needed for most jobs",
+        "Editable CAD + PDF delivery"
+      ]
+    },
+    {
+      "scope": "landing",
+      "sort": 3,
+      "label": "Backyard ADU (permit set)",
+      "price_range": "$2,400 – $6,500",
+      "bar_pct": 40,
+      "includes": [
+        "Floor plans, elevations & site plan",
+        "Structural coordination",
+        "Title-24 energy compliance",
+        "Permit-ready stamped set"
+      ]
+    },
+    {
+      "scope": "landing",
+      "sort": 4,
+      "label": "Kitchen / bath remodel",
+      "price_range": "$900 – $2,400",
+      "bar_pct": 22,
+      "includes": [
+        "As-built + proposed plans",
+        "Electrical & plumbing layout",
+        "Finish & fixture schedule",
+        "Permit-ready stamped set"
+      ]
+    },
+    {
+      "scope": "landing",
+      "sort": 5,
+      "label": "Home addition",
+      "price_range": "$3,500 – $9,000",
+      "bar_pct": 56,
+      "includes": [
+        "Full architectural drawing set",
+        "Structural coordination",
+        "Seismic / jurisdiction detailing",
+        "Permit-ready stamped set"
+      ]
+    },
+    {
+      "scope": "landing",
+      "sort": 6,
+      "label": "New custom home",
+      "price_range": "$12,000 – $28,000",
+      "bar_pct": 85,
+      "includes": [
+        "Complete design + construction docs",
+        "Structural & MEP coordination",
+        "3D visualization option",
+        "Permit-ready stamped set"
+      ]
+    },
+    {
+      "scope": "landing",
+      "sort": 7,
+      "label": "Commercial TI",
+      "price_range": "$4,000 – $12,000",
+      "bar_pct": 60,
+      "includes": [
+        "Tenant-improvement drawing set",
+        "Code & accessibility compliance",
+        "MEP coordination",
+        "Permit-ready stamped set"
+      ]
     }
   ]
 }

@@ -53,10 +53,36 @@ class User(AbstractUser):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
+    # Clerk session tokens omit email unless the JWT template adds it, so a
+    # just-provisioned user carries a synthetic address. It must never reach a
+    # screen — see `display_name` and `has_placeholder_email`.
+    PLACEHOLDER_EMAIL_DOMAIN = "@pending.clerk.local"
+
     objects = UserManager()
 
     def __str__(self):
-        return self.email
+        return self.display_name
+
+    @property
+    def has_placeholder_email(self) -> bool:
+        return self.email.endswith(self.PLACEHOLDER_EMAIL_DOMAIN)
+
+    @property
+    def display_name(self) -> str:
+        """What the UI shows for this person, best available and never an id.
+
+        Falls back through: full name → first name → the email's local part →
+        a generic label. The placeholder address is skipped entirely, because
+        "user_3Hkd8PK…@pending.clerk.local" is worse than showing nothing.
+        """
+        full = f"{self.first_name} {self.last_name}".strip()
+        if full:
+            return full
+        if not self.has_placeholder_email:
+            local = self.email.split("@")[0]
+            if local:
+                return local
+        return "Your account"
 
 
 class NotificationPreference(TimeStampedModel):

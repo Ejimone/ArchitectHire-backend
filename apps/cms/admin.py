@@ -5,8 +5,11 @@ from solo.admin import SingletonModelAdmin
 from . import admin_editorial  # noqa: F401
 from .models import (
     FAQ,
+    CaseCard,
     CopyBlock,
     CredentialBadge,
+    EstimateTeaserOption,
+    FeatureMatrixRow,
     FooterColumn,
     FooterLink,
     HeroCarouselSlide,
@@ -51,9 +54,9 @@ class SiteSettingsAdmin(SingletonModelAdmin):
 
 
 class ScopedBlockAdmin(admin.ModelAdmin):
-    list_filter = ["scope", "status"]
+    list_filter = ["scope", "group", "status"]
     list_editable = ["sort_order", "status"]
-    ordering = ["scope", "sort_order"]
+    ordering = ["scope", "group", "sort_order"]
     actions = ["publish_selected", "unpublish_selected"]
 
     @admin.action(description="Publish selected")
@@ -68,64 +71,90 @@ class ScopedBlockAdmin(admin.ModelAdmin):
 
 @admin.register(FAQ)
 class FAQAdmin(ScopedBlockAdmin):
-    list_display = ["question", "scope", "sort_order", "status"]
+    list_display = ["question", "scope", "group", "sort_order", "status"]
     search_fields = ["question", "answer"]
 
 
 @admin.register(Stat)
 class StatAdmin(ScopedBlockAdmin):
-    list_display = ["value", "label", "scope", "sort_order", "status"]
+    list_display = ["value", "label", "scope", "group", "sort_order", "status"]
     search_fields = ["value", "label"]
 
 
 @admin.register(Step)
 class StepAdmin(ScopedBlockAdmin):
-    list_display = ["title", "scope", "sort_order", "status"]
+    list_display = ["title", "scope", "group", "sort_order", "status"]
     search_fields = ["title"]
 
 
 @admin.register(Testimonial)
 class TestimonialAdmin(ScopedBlockAdmin):
-    list_display = ["name", "role", "audience", "scope", "sort_order", "status"]
-    list_filter = ["scope", "status", "audience"]
+    list_display = ["name", "role", "audience", "scope", "group", "sort_order", "status"]
+    list_filter = ["scope", "group", "status", "audience"]
     search_fields = ["name", "quote"]
 
 
 @admin.register(ValueProp)
 class ValuePropAdmin(ScopedBlockAdmin):
-    list_display = ["title", "scope", "sort_order", "status"]
+    list_display = ["title", "scope", "group", "sort_order", "status"]
     search_fields = ["title"]
 
 
 @admin.register(TrustLogo)
 class TrustLogoAdmin(ScopedBlockAdmin):
-    list_display = ["name", "scope", "sort_order", "status"]
+    list_display = ["name", "scope", "group", "sort_order", "status"]
 
 
 @admin.register(CredentialBadge)
 class CredentialBadgeAdmin(ScopedBlockAdmin):
-    list_display = ["label", "scope", "sort_order", "status"]
+    list_display = ["label", "scope", "group", "sort_order", "status"]
 
 
 @admin.register(UseCase)
 class UseCaseAdmin(ScopedBlockAdmin):
-    list_display = ["title", "scope", "sort_order", "status"]
+    list_display = ["title", "scope", "group", "sort_order", "status"]
     search_fields = ["title"]
 
 
 @admin.register(Persona)
 class PersonaAdmin(ScopedBlockAdmin):
-    list_display = ["kicker", "title", "scope", "sort_order", "status"]
+    list_display = ["kicker", "title", "scope", "group", "sort_order", "status"]
 
 
 @admin.register(Principle)
 class PrincipleAdmin(ScopedBlockAdmin):
-    list_display = ["title", "scope", "sort_order", "status"]
+    list_display = ["title", "scope", "group", "sort_order", "status"]
+
+
+@admin.register(CaseCard)
+class CaseCardAdmin(ScopedBlockAdmin):
+    list_display = ["title", "category_tag", "location", "scope", "group", "sort_order", "status"]
+    search_fields = ["title"]
+
+
+@admin.register(EstimateTeaserOption)
+class EstimateTeaserOptionAdmin(ScopedBlockAdmin):
+    list_display = ["label", "price_range", "bar_pct", "scope", "group", "sort_order", "status"]
+
+
+@admin.register(FeatureMatrixRow)
+class FeatureMatrixRowAdmin(ScopedBlockAdmin):
+    list_display = [
+        "label",
+        "tier1",
+        "tier2",
+        "tier3",
+        "is_flagship",
+        "scope",
+        "sort_order",
+        "status",
+    ]
+    search_fields = ["label"]
 
 
 @admin.register(HeroCarouselSlide)
 class HeroCarouselSlideAdmin(ScopedBlockAdmin):
-    list_display = ["__str__", "scope", "sort_order", "status", "thumbnail"]
+    list_display = ["__str__", "scope", "group", "sort_order", "status", "thumbnail"]
 
     @admin.display(description="Preview")
     def thumbnail(self, obj):

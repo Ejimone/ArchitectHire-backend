@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="../support.js"></script>
+<script src="./support.js"></script>
 </head>
 <body>
 <x-dc>
@@ -23,176 +23,230 @@
   input[type=text], input[type=email], input[type=password] { font-family: inherit; }
   input::placeholder { color: #9aa2c4; }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
-
-  /* __resp__ responsive overrides (media queries can't be inline) */
   @media (max-width: 900px){
     main{ padding-left:18px !important; padding-right:18px !important; }
-    header nav{ display:none !important; }
-    [style*="repeat(4"]{ grid-template-columns:1fr 1fr !important; }
-    [style*="repeat(3"]{ grid-template-columns:1fr !important; }
+    [style*="grid-template-columns: 1fr 360px"],[style*="grid-template-columns: 1fr 380px"],[style*="grid-template-columns: 1fr 300px"]{ grid-template-columns:1fr !important; }
     [style*="repeat(2"]{ grid-template-columns:1fr !important; }
-    [style*="grid-template-columns: 1."]{ grid-template-columns:1fr !important; }
-    [style*="grid-template-columns: 1fr 1fr"]{ grid-template-columns:1fr !important; }
     [style*="position: sticky"]{ position:static !important; top:auto !important; }
-    [style*="padding: 15px 32px"]{ padding:12px 18px !important; }
-    [style*="padding: 18px 32px"]{ padding-left:18px !important; padding-right:18px !important; }
-    [style*="padding: 52px 44px"],[style*="padding: 48px 44px"],[style*="padding: 44px 42px"],[style*="padding: 44px 44px"]{ padding:30px 22px !important; }
-    [style*="padding: 56px"],[style*="padding: 52px;"],[style*="padding: 48px"],[style*="padding: 44px;"],[style*="padding: 40px"],[style*="padding: 34px"]{ padding:32px 22px !important; }
-    h1{ font-size:clamp(30px,7vw,42px) !important; }
-  }
-  @media (max-width: 520px){
-    [style*="repeat(4"]{ grid-template-columns:1fr !important; }
-    [style*="gap: 38px"],[style*="gap: 40px"]{ gap:22px !important; }
+    h1{ font-size:clamp(28px,7vw,38px) !important; }
   }
 </style>
+<script src="../image-slot.js"></script>
 </helmet>
 <div style="min-height: 100vh; background: #f3f6fd; color: #0a1440; font-family: 'Hanken Grotesk', sans-serif; -webkit-font-smoothing: antialiased;">
 
-  <!-- HEADER + STEPPER -->
   <header style="position: sticky; top: 0; z-index: 30; background: rgba(243,246,253,.94); backdrop-filter: blur(10px); border-bottom: 1px solid #dbe2f2;">
     <div style="max-width: 1080px; margin: 0 auto; padding: 15px 32px; display: flex; align-items: center; gap: 28px;">
       <a href="../marketing/Landing.dc.html" style="display: flex; align-items: center; gap: 10px; flex-shrink: 0;">
         <div style="width: 26px; height: 26px; display: grid; grid-template-columns: repeat(3,1fr); grid-template-rows: repeat(3,1fr); gap: 2.5px; flex-shrink: 0;"><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#ceff65;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div><div style="background:#0a1440;"></div></div>
         <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 700; letter-spacing: -.01em; color: #0a1440;">ArchitectHire</span>
       </a>
-      <div style="display: flex; align-items: center; gap: 8px; margin: 0 auto;">
-        <sc-for list="{{ stepper }}" as="st" hint-placeholder-count="3">
-          <div style="display: flex; align-items: center; gap: 8px;">
-            <span style="{{ st.numStyle }}">{{ st.mark }}</span>
-            <span style="{{ st.labelStyle }}">{{ st.label }}</span>
-            <span style="{{ st.barStyle }}"></span>
-          </div>
-        </sc-for>
-      </div>
-      <a href="#" class="lk" style="font-size: 14px; color: #5b6493; font-weight: 600; flex-shrink: 0;">Save & exit</a>
+      <div style="margin: 0 auto; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; letter-spacing: .04em; color: #5b6493;">{{ progress.label }}</div>
+      <a href="../marketing/Landing.dc.html" style="font-size: 14px; color: #5b6493; font-weight: 600; flex-shrink: 0;">Save &amp; exit</a>
+    </div>
+    <div style="max-width: 1080px; margin: 0 auto; padding: 0 32px 12px;">
+      <div style="height: 5px; border-radius: 100px; background: #e2e8f5; overflow: hidden;"><div style="{{ progress.barStyle }}"></div></div>
     </div>
   </header>
 
-  <main style="max-width: 1080px; margin: 0 auto; padding: 40px 32px 90px;">
+  <main style="max-width: 1080px; margin: 0 auto; padding: 48px 32px 96px;">
 
-    <!-- ===== STEP 1 — PROJECT ===== -->
-    <sc-if value="{{ isStep1 }}" hint-placeholder-val="{{ true }}">
-    <section style="animation: fadeUp .4s ease both; display: grid; grid-template-columns: 1fr 320px; gap: 36px; align-items: start;">
-      <div>
-        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #135bff; letter-spacing: .05em;">STEP 1 · YOUR PROJECT</div>
-        <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 36px; font-weight: 700; letter-spacing: -.02em; margin: 8px 0 6px;">Tell us what you're building</h1>
-        <p style="font-size: 16px; color: #3f4770; margin-bottom: 30px;">This feeds the pricing engine and your jurisdiction score. About two minutes.</p>
+    <!-- ===== QUIZ ===== -->
+    <sc-if value="{{ isQuiz }}" hint-placeholder-val="{{ true }}">
+    <section style="max-width: 720px; margin: 0 auto; animation: fadeUp .4s ease both;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #135bff; letter-spacing: .05em;">{{ q.kicker }}</div>
+      <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 34px; font-weight: 700; letter-spacing: -.02em; margin: 8px 0 6px; text-wrap: balance;">{{ q.title }}</h1>
+      <p style="font-size: 16px; color: #3f4770; margin-bottom: 28px; text-wrap: pretty;">{{ q.subtitle }}</p>
 
-        <div style="margin-bottom: 28px;">
-          <label style="display: block; font-weight: 700; font-size: 15px; margin-bottom: 12px;">Project type</label>
-          <div style="display: flex; gap: 12px;">
-            <sc-for list="{{ typeOpts }}" as="o" hint-placeholder-count="2">
-              <button onClick="{{ o.onClick }}" style="{{ o.style }}"><div style="font-weight: 700; font-size: 15px;">{{ o.label }}</div><div style="font-size: 12.5px; color: #5b6493; margin-top: 2px;">{{ o.sub }}</div></button>
+      <div style="{{ qBodyStyle }}">
+      <div style="min-width: 0;">
+
+      <!-- CARDS -->
+      <sc-if value="{{ qIsCards }}" hint-placeholder-val="{{ true }}">
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <sc-for list="{{ cardOptions }}" as="o" hint-placeholder-count="4">
+            <button onClick="{{ o.onClick }}" style="{{ o.style }}" style-hover="border-color: #135bff;">
+              <span style="{{ o.iconWrap }}">{{ o.icon }}</span>
+              <span style="flex: 1; min-width: 0;">
+                <span style="display: block; font-weight: 700; font-size: 16px; color: #0a1440;">{{ o.label }}</span>
+                <span style="display: block; font-size: 13.5px; color: #5b6493; margin-top: 2px;">{{ o.sub }}</span>
+              </span>
+              <span style="{{ o.chevron }}">→</span>
+            </button>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <!-- VISUAL CARDS -->
+      <sc-if value="{{ qIsVcards }}" hint-placeholder-val="{{ false }}">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px;">
+          <sc-for list="{{ vcardOptions }}" as="o" hint-placeholder-count="6">
+            <button onClick="{{ o.onClick }}" style="{{ o.style }}" style-hover="border-color: #135bff;">
+              <span style="display: block; height: 118px; border-radius: 10px; overflow: hidden; position: relative; background: #f3f6fd;">
+                <image-slot id="{{ o.imgId }}" shape="rect" fit="cover" placeholder="{{ o.ph }}"></image-slot>
+              </span>
+              <span style="display: block; font-weight: 700; font-size: 15px; color: #0a1440; margin-top: 10px;">{{ o.label }}</span>
+              <span style="display: block; font-size: 12.5px; color: #5b6493; margin-top: 2px;">{{ o.sub }}</span>
+              <span style="{{ o.checkFloat }}">✓</span>
+            </button>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <!-- CHIPS / TILES -->
+      <sc-if value="{{ qIsChips }}" hint-placeholder-val="{{ false }}">
+        <div style="{{ chipWrap }}">
+          <sc-for list="{{ chipOptions }}" as="o" hint-placeholder-count="5">
+            <button onClick="{{ o.onClick }}" style="{{ o.style }}" style-hover="border-color: #135bff; color: #0b3fcc;">
+              <span style="{{ o.check }}">✓</span>{{ o.label }}
+            </button>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <!-- MULTI -->
+      <sc-if value="{{ qIsMulti }}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <sc-for list="{{ multiOptions }}" as="o" hint-placeholder-count="4">
+            <button onClick="{{ o.onClick }}" style="{{ o.style }}" style-hover="border-color: #135bff;">
+              <span style="{{ o.box }}">{{ o.checkMark }}</span>
+              <span style="flex: 1; min-width: 0; text-align: left;">
+                <span style="display: block; font-weight: 700; font-size: 15px; color: #232c57;">{{ o.label }}</span>
+                <span style="display: block; font-size: 12.5px; color: #5b6493;">{{ o.sub }}</span>
+              </span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #232c57;">{{ o.price }}</span>
+            </button>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <!-- SLIDER -->
+      <sc-if value="{{ qIsSlider }}" hint-placeholder-val="{{ false }}">
+        <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 28px;">
+          <div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 40px; font-weight: 700; color: #135bff; text-align: center; margin-bottom: 20px;">{{ slider.valueLabel }}</div>
+          <input type="range" min="{{ slider.min }}" max="{{ slider.max }}" step="{{ slider.step }}" value="{{ slider.raw }}" onInput="{{ slider.onInput }}" style="width: 100%;">
+          <div style="display: flex; justify-content: space-between; font-size: 12px; color: #9aa2c4; margin-top: 8px; font-family: 'IBM Plex Mono', monospace;"><span>{{ slider.minLabel }}</span><span>{{ slider.maxLabel }}</span></div>
+        </div>
+      </sc-if>
+
+      <!-- STATE -->
+      <sc-if value="{{ qIsState }}" hint-placeholder-val="{{ false }}">
+        <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 24px;">
+          <select value="{{ stateView.val }}" onChange="{{ stateView.onChange }}" style="width: 100%; background: #f8faff; border: 1.5px solid #dbe2f2; border-radius: 10px; padding: 15px 16px; font-family: inherit; font-size: 16px; font-weight: 600; color: #0a1440; cursor: pointer;">
+            <sc-for list="{{ stateView.options }}" as="o" hint-placeholder-count="10">
+              <option value="{{ o }}">{{ o }}</option>
             </sc-for>
-          </div>
+          </select>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 14px; padding: 12px 14px; background: #f3f6fd; border: 1px solid #e2e8f5; border-radius: 10px;"><span style="font-size: 13px; color: #5b6493;">Jurisdiction complexity</span><span style="{{ stateView.tagStyle }}">{{ stateView.tag }}</span></div>
         </div>
+      </sc-if>
 
-        <div style="margin-bottom: 28px;">
-          <label style="display: block; font-weight: 700; font-size: 15px; margin-bottom: 12px;">Scope of work</label>
-          <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-            <sc-for list="{{ scopeOpts }}" as="o" hint-placeholder-count="5">
-              <button onClick="{{ o.onClick }}" style="{{ o.style }}">{{ o.label }}</button>
-            </sc-for>
-          </div>
-        </div>
-
-        <div style="margin-bottom: 28px;">
-          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px;"><label style="font-weight: 700; font-size: 15px;">Approximate square footage</label><span style="font-family: 'IBM Plex Mono', monospace; font-size: 20px; color: #135bff;">{{ sqftLabel }} sf</span></div>
-          <input type="range" min="200" max="8000" step="100" value="{{ sqft }}" onInput="{{ onSqft }}" style="width: 100%;">
-          <div style="display: flex; justify-content: space-between; font-size: 12px; color: #9aa2c4; margin-top: 6px; font-family: 'IBM Plex Mono', monospace;"><span>200</span><span>8,000</span></div>
-        </div>
-
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 34px;">
-          <div>
-            <label style="display: block; font-weight: 700; font-size: 15px; margin-bottom: 12px;">Location (state)</label>
-            <select value="{{ city }}" onChange="{{ onCity }}" style="width: 100%; background: #fff; border: 1.5px solid #dbe2f2; border-radius: 10px; padding: 13px 14px; font-family: inherit; font-size: 15px; font-weight: 600; color: #0a1440; cursor: pointer;">
-              <sc-for list="{{ stateOpts }}" as="o" hint-placeholder-count="8">
-                <option value="{{ o }}">{{ o }}</option>
-              </sc-for>
-            </select>
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px; padding: 9px 12px; background: #f3f6fd; border: 1px solid #e2e8f5; border-radius: 9px;"><span style="font-size: 12.5px; color: #5b6493;">Jurisdiction complexity</span><span style="{{ cityTagStyle }}">{{ cityTag }}</span></div>
-          </div>
-          <div>
-            <label style="display: block; font-weight: 700; font-size: 15px; margin-bottom: 12px;">Timeline</label>
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-              <sc-for list="{{ timeOpts }}" as="o" hint-placeholder-count="3">
-                <button onClick="{{ o.onClick }}" style="{{ o.style }}">{{ o.label }}</button>
-              </sc-for>
-            </div>
-          </div>
-        </div>
-
-        <button onClick="{{ goStep2 }}" style="background: #135bff; color: #fff; border: none; padding: 16px 30px; border-radius: 11px; font-family: inherit; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 3px 0 #0b3fcc;">See my estimate →</button>
       </div>
-
-      <aside style="position: sticky; top: 92px; background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 22px;">
-        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5b6493; letter-spacing: .05em;">LIVE SUMMARY</div>
-        <div style="margin-top: 16px; display: flex; flex-direction: column; gap: 13px;">
-          <div style="display: flex; justify-content: space-between; padding-bottom: 12px; border-bottom: 1px solid #eaeef8;"><span style="color: #5b6493; font-size: 14px;">Type</span><span style="font-weight: 700; font-size: 14px;">{{ projectType }}</span></div>
-          <div style="display: flex; justify-content: space-between; padding-bottom: 12px; border-bottom: 1px solid #eaeef8;"><span style="color: #5b6493; font-size: 14px;">Scope</span><span style="font-weight: 700; font-size: 14px;">{{ scope }}</span></div>
-          <div style="display: flex; justify-content: space-between; padding-bottom: 12px; border-bottom: 1px solid #eaeef8;"><span style="color: #5b6493; font-size: 14px;">Size</span><span style="font-weight: 700; font-size: 14px; font-family: 'IBM Plex Mono', monospace;">{{ sqftLabel }} sf</span></div>
-          <div style="display: flex; justify-content: space-between; padding-bottom: 12px; border-bottom: 1px solid #eaeef8;"><span style="color: #5b6493; font-size: 14px;">Location</span><span style="font-weight: 700; font-size: 14px;">{{ city }}</span></div>
-          <div style="display: flex; justify-content: space-between;"><span style="color: #5b6493; font-size: 14px;">Timeline</span><span style="font-weight: 700; font-size: 14px;">{{ timeline }}</span></div>
-        </div>
-        <div style="margin-top: 18px; background: #e7f6ec; border: 1px solid #c2e6cf; border-radius: 10px; padding: 13px;">
-          <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #16924e; font-weight: 700;"><span style="width: 7px; height: 7px; border-radius: 50%; background: #16924e;"></span>Jurisdiction on file</div>
-          <p style="font-size: 12.5px; color: #2f6b45; margin-top: 6px; line-height: 1.45;">{{ city }} is scored in our database — complexity factors apply automatically.</p>
+      <sc-if value="{{ qHasAside }}" hint-placeholder-val="{{ false }}">
+      <aside>
+        <div style="border: 1px solid #e2e8f5; border-radius: 16px; overflow: hidden; background: #fff;">
+          <div style="height: 210px; position: relative; background: #f3f6fd;"><image-slot id="{{ aside.slotId }}" shape="rect" fit="cover" placeholder="{{ aside.placeholder }}"></image-slot></div>
+          <p style="font-size: 13px; color: #5b6493; line-height: 1.5; padding: 14px 16px;">{{ aside.caption }}</p>
         </div>
       </aside>
+      </sc-if>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 16px; margin-top: 34px;">
+        <sc-if value="{{ showBack }}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ back }}" style="background: transparent; border: none; color: #5b6493; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer; padding: 8px 0;">← Back</button>
+        </sc-if>
+        <sc-if value="{{ showNext }}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ next }}" style="margin-left: auto; background: #135bff; color: #fff; border: none; padding: 15px 30px; border-radius: 11px; font-family: inherit; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 3px 0 #0b3fcc;">{{ nextLabel }} →</button>
+        </sc-if>
+      </div>
     </section>
     </sc-if>
 
-    <!-- ===== STEP 2 — ESTIMATE ===== -->
-    <sc-if value="{{ isStep2 }}" hint-placeholder-val="{{ false }}">
+    <!-- ===== SUMMARY / BRIEF ===== -->
+    <sc-if value="{{ isSummary }}" hint-placeholder-val="{{ false }}">
+    <section style="max-width: 760px; margin: 0 auto; animation: fadeUp .4s ease both;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #135bff; letter-spacing: .05em;">YOUR BRIEF</div>
+      <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 34px; font-weight: 700; letter-spacing: -.02em; margin: 8px 0 6px; text-wrap: balance;">Here's what we understand</h1>
+      <p style="font-size: 16px; color: #3f4770; margin-bottom: 22px;">Read it over — if anything's off, edit it before we price and match. Getting this right is how we find the perfect pro.</p>
+      <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 18px; padding: 28px 30px;">
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <sc-for list="{{ summary.paras }}" as="p" hint-placeholder-count="3">
+            <p style="font-size: 16.5px; line-height: 1.6; color: #232c57; text-wrap: pretty;">{{ p }}</p>
+          </sc-for>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(2,1fr); gap: 0 24px; margin-top: 22px; padding-top: 18px; border-top: 1px solid #eaeef8;">
+          <sc-for list="{{ summary.facts }}" as="f" hint-placeholder-count="6">
+            <div style="display: flex; justify-content: space-between; gap: 12px; padding: 9px 0; border-bottom: 1px solid #f2f5fb;">
+              <span style="font-size: 13.5px; color: #8b93b5;">{{ f.k }}</span>
+              <span style="font-size: 13.5px; font-weight: 700; color: #0a1440; text-align: right;">{{ f.v }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 16px; margin-top: 28px;">
+        <button onClick="{{ back }}" style="background: transparent; border: none; color: #5b6493; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer; padding: 8px 0;">← Edit answers</button>
+        <button onClick="{{ goEstimate }}" style="margin-left: auto; background: #135bff; color: #fff; border: none; padding: 15px 30px; border-radius: 11px; font-family: inherit; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 3px 0 #0b3fcc;">Looks right — see my estimate →</button>
+      </div>
+    </section>
+    </sc-if>
+
+    <!-- ===== ESTIMATE ===== -->
+    <sc-if value="{{ isEstimate }}" hint-placeholder-val="{{ false }}">
     <section style="animation: fadeUp .4s ease both;">
-      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #135bff; letter-spacing: .05em;">STEP 2 · YOUR INSTANT ESTIMATE</div>
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #135bff; letter-spacing: .05em;">YOUR INSTANT ESTIMATE</div>
       <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px; margin: 8px 0 28px;">
-        <div><h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 36px; font-weight: 700; letter-spacing: -.02em;">Your {{ scope }} in {{ city }}</h1><p style="font-size: 16px; color: #3f4770; margin-top: 4px;">A dynamic fixed-quote range, itemized. Confirmed on your scoping call.</p></div>
-        <div style="text-align: right;"><div style="font-size: 13px; color: #5b6493; font-family: 'IBM Plex Mono', monospace;">EST. FIXED QUOTE RANGE</div><div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 40px; font-weight: 700; line-height: 1;">{{ est.low }} – {{ est.high }}</div></div>
+        <div><h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 34px; font-weight: 700; letter-spacing: -.02em;">{{ est.headline }}</h1><p style="font-size: 16px; color: #3f4770; margin-top: 4px; max-width: 40em;">{{ est.sub }}</p></div>
+        <div style="text-align: right;"><div style="font-size: 13px; color: #5b6493; font-family: 'IBM Plex Mono', monospace;">{{ est.totalLabel }}</div><div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 40px; font-weight: 700; line-height: 1;">{{ est.headlineTotal }}</div></div>
       </div>
 
       <div style="display: grid; grid-template-columns: 1fr 360px; gap: 26px; align-items: start;">
         <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 26px;">
-          <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 700; margin-bottom: 4px;">Price breakdown</h3>
-          <p style="font-size: 13px; color: #5b6493; margin-bottom: 18px;">Base scales on a declining rate curve — bigger projects, lower per-square-foot rate.</p>
-          <div style="display: flex; justify-content: space-between; padding: 13px 0; border-bottom: 1px solid #eaeef8;"><div><div style="font-weight: 700; font-size: 15px;">Base drawing set</div><div style="font-size: 13px; color: #5b6493; font-family: 'IBM Plex Mono', monospace;">{{ sqftLabel }} sf · {{ est.rate }}/sf</div></div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 16px;">{{ est.base }}</div></div>
-          <div style="padding: 16px 0 6px; font-size: 12px; color: #5b6493; text-transform: uppercase; letter-spacing: .04em;">Modular add-ons</div>
-          <sc-for list="{{ addonOpts }}" as="a" hint-placeholder-count="4">
-            <div onClick="{{ a.onClick }}" style="{{ a.style }}">
-              <div style="display: flex; align-items: center; gap: 12px;"><span style="{{ a.boxStyle }}">{{ a.check }}</span><div><div style="font-weight: 700; font-size: 15px; color: #232c57;">{{ a.label }}</div><div style="font-size: 12.5px; color: #5b6493;">{{ a.sub }}</div></div></div>
-              <div style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: #232c57;">{{ a.price }}</div>
+          <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 700; margin-bottom: 18px;">Price breakdown</h3>
+          <sc-for list="{{ est.rows }}" as="r" hint-placeholder-count="3">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 13px 0; border-bottom: 1px solid #eaeef8;">
+              <div style="min-width: 0;"><div style="font-weight: 700; font-size: 15px;">{{ r.label }}</div><div style="font-size: 13px; color: #5b6493; font-family: 'IBM Plex Mono', monospace;">{{ r.sub }}</div></div>
+              <div style="font-family: 'IBM Plex Mono', monospace; font-size: 16px; color: {{ r.color }}; white-space: nowrap;">{{ r.val }}</div>
             </div>
           </sc-for>
-          <div style="display: flex; justify-content: space-between; padding: 15px 0; border-top: 1px solid #eaeef8; margin-top: 8px;"><div><div style="font-weight: 700; font-size: 15px;">Jurisdiction multiplier</div><div style="font-size: 13px; color: #5b6493;">{{ city }} complexity</div></div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 16px; color: #135bff;">×{{ est.mult }}</div></div>
-          <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px 18px; background: #0a1440; color: #fff; border-radius: 12px; margin-top: 8px;"><div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 700;">Fixed quote estimate</div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 22px;">{{ est.total }}</div></div>
-          <p style="font-size: 12.5px; color: #8b93b5; margin-top: 12px; line-height: 1.5;">Final quote confirmed after scoping. Architects can flag a re-quote for hidden complexity — you approve any change before work begins.</p>
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px 18px; background: #0a1440; color: #fff; border-radius: 12px; margin-top: 14px;"><div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 700;">{{ est.totalRowLabel }}</div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 22px;">{{ est.total }}</div></div>
+          <p style="font-size: 12.5px; color: #8b93b5; margin-top: 12px; line-height: 1.5;">{{ est.footnote }}</p>
         </div>
 
         <aside style="display: flex; flex-direction: column; gap: 16px;">
+          <sc-if value="{{ est.showJuris }}" hint-placeholder-val="{{ false }}">
           <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 22px;">
             <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #135bff; letter-spacing: .05em;">JURISDICTION SCORE</div>
-            <div style="display: flex; align-items: baseline; gap: 10px; margin: 8px 0 4px;"><span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 46px; font-weight: 700;">{{ juris.score }}</span><span style="font-size: 14px; color: #5b6493;">/ 100 · {{ juris.band }}</span></div>
-            <div style="height: 8px; border-radius: 6px; background: #d8e1f3; overflow: hidden; margin-bottom: 16px;"><div style="{{ juris.barStyle }}"></div></div>
+            <div style="display: flex; align-items: baseline; gap: 10px; margin: 8px 0 4px;"><span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 42px; font-weight: 700;">{{ juris.score }}</span><span style="font-size: 13px; color: #5b6493;">/ 100 · {{ juris.band }}</span></div>
+            <div style="height: 8px; border-radius: 6px; background: #d8e1f3; overflow: hidden; margin-bottom: 14px;"><div style="{{ juris.barStyle }}"></div></div>
             <sc-for list="{{ juris.factors }}" as="f" hint-placeholder-count="5">
-              <div style="display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid #eaeef8;"><span style="font-size: 14px; color: #232c57;">{{ f.name }}</span><span style="{{ f.tagStyle }}">{{ f.level }}</span></div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eaeef8;"><span style="font-size: 13.5px; color: #232c57;">{{ f.name }}</span><span style="{{ f.tagStyle }}">{{ f.level }}</span></div>
             </sc-for>
           </div>
+          </sc-if>
+
+          <div style="background: #eef2fb; border: 1px solid #dbe2f2; border-radius: 16px; padding: 20px;">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #0b3fcc; letter-spacing: .05em;">WE'LL MATCH YOU WITH</div>
+            <div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 700; margin: 6px 0 4px;">{{ est.match.role }}</div>
+            <p style="font-size: 13px; color: #3f4770; line-height: 1.5;">{{ est.match.blurb }}</p>
+          </div>
+
           <div>
-            <button onClick="{{ goNextFromEstimate }}" style="width: 100%; background: #135bff; color: #fff; border: none; padding: 17px 16px; border-radius: 11px; font-family: inherit; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 3px 0 #0b3fcc; text-wrap: balance; line-height: 1.25;">{{ estimateCta }}</button>
-            <button onClick="{{ goStep1 }}" style="display: block; margin: 14px auto 0; background: transparent; border: none; color: #5b6493; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">← Edit project details</button>
+            <button onClick="{{ goMatch }}" style="width: 100%; background: #135bff; color: #fff; border: none; padding: 17px 16px; border-radius: 11px; font-family: inherit; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 3px 0 #0b3fcc; text-wrap: balance; line-height: 1.25;">{{ est.cta }}</button>
+            <button onClick="{{ back }}" style="display: block; margin: 14px auto 0; background: transparent; border: none; color: #5b6493; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">← Edit my answers</button>
           </div>
         </aside>
       </div>
     </section>
     </sc-if>
 
-    <!-- ===== STEP 3 — CREATE ACCOUNT ===== -->
-    <sc-if value="{{ isStep3 }}" hint-placeholder-val="{{ false }}">
+    <!-- ===== MATCH + ACCOUNT ===== -->
+    <sc-if value="{{ isMatch }}" hint-placeholder-val="{{ false }}">
     <section style="animation: fadeUp .4s ease both; display: grid; grid-template-columns: 1fr 380px; gap: 40px; align-items: start; max-width: 940px; margin: 0 auto;">
       <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 18px; padding: 32px;">
-        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #135bff; letter-spacing: .05em;">STEP 3 · CREATE YOUR ACCOUNT</div>
-        <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 700; letter-spacing: -.02em; margin: 8px 0 6px;">Create an account to view your matches</h1>
-        <p style="font-size: 15px; color: #3f4770; margin-bottom: 24px;">Your project and estimate are saved. An account lets us hold your matches, keep messaging on-platform, and protect payments in escrow.</p>
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #135bff; letter-spacing: .05em;">LAST STEP · CREATE YOUR ACCOUNT</div>
+        <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; font-weight: 700; letter-spacing: -.02em; margin: 8px 0 6px;">{{ matchHeadline }}</h1>
+        <p style="font-size: 15px; color: #3f4770; margin-bottom: 24px;">Your answers and estimate are saved. An account holds your matches and keeps messaging and files in one place.</p>
 
         <div style="display: flex; gap: 12px; margin-bottom: 20px;">
           <button style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 10px; background: #fff; border: 1px solid #dbe2f2; border-radius: 10px; padding: 13px; font-family: inherit; font-size: 15px; font-weight: 600; color: #232c57; cursor: pointer;"><span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800;">G</span> Continue with Google</button>
@@ -206,22 +260,25 @@
           <div><label style="display: block; font-size: 13px; color: #5b6493; font-weight: 600; margin-bottom: 6px;">Password</label><input type="password" value="{{ acctPass }}" onInput="{{ onAcctPass }}" placeholder="At least 8 characters" style="width: 100%; border: 1px solid #dbe2f2; border-radius: 10px; padding: 13px 14px; font-size: 15px; color: #0a1440; outline: none;"></div>
         </div>
 
-        <a href="Matches.dc.html" style="display: block; text-align: center; margin-top: 24px; background: #135bff; color: #fff; padding: 16px; border-radius: 11px; font-size: 16px; font-weight: 700; box-shadow: 0 3px 0 #0b3fcc;">Create account & view matches →</a>
-        <p style="font-size: 12px; color: #8b93b5; text-align: center; margin-top: 12px; line-height: 1.5;">By continuing you agree to our Terms and Privacy Policy. No charges until you hire and fund escrow.</p>
-        <button onClick="{{ goStep2 }}" style="display: block; margin: 14px auto 0; background: transparent; border: none; color: #5b6493; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">← Back to estimate</button>
+        <a href="Matches.dc.html" style="display: block; text-align: center; margin-top: 24px; background: #135bff; color: #fff; padding: 16px; border-radius: 11px; font-size: 16px; font-weight: 700; box-shadow: 0 3px 0 #0b3fcc;">Create account &amp; view matches →</a>
+        <p style="font-size: 12px; color: #8b93b5; text-align: center; margin-top: 12px; line-height: 1.5;">By continuing you agree to our Terms and Privacy Policy. Free to get matched — you hire and pay your pro directly.</p>
+        <button onClick="{{ back }}" style="display: block; margin: 14px auto 0; background: transparent; border: none; color: #5b6493; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;">← Back to estimate</button>
       </div>
 
-      <aside style="position: sticky; top: 92px; display: flex; flex-direction: column; gap: 16px;">
+      <aside style="position: sticky; top: 108px; display: flex; flex-direction: column; gap: 16px;">
         <div style="background: #0a1440; color: #fff; border-radius: 16px; padding: 24px;">
           <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #ceff65; letter-spacing: .05em;">YOUR SAVED ESTIMATE</div>
-          <div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 700; margin: 8px 0 2px;">{{ est.low }} – {{ est.high }}</div>
-          <div style="font-size: 13.5px; color: #b9c3e8;">{{ scope }} · {{ sqftLabel }} sf · {{ city }}</div>
+          <div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 700; margin: 8px 0 2px;">{{ est.total }}</div>
+          <div style="font-size: 13.5px; color: #b9c3e8;">{{ est.savedLine }}</div>
         </div>
         <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 22px;">
-          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #16924e; letter-spacing: .05em; margin-bottom: 14px;">WHAT AN ACCOUNT UNLOCKS</div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #16924e; letter-spacing: .05em; margin-bottom: 14px;">YOUR MATCH</div>
           <div style="display: flex; flex-direction: column; gap: 12px;">
-            <sc-for list="{{ acctBenefits }}" as="b" hint-placeholder-count="4">
-              <div style="display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; color: #333c66; line-height: 1.4;"><span style="color: #16924e; margin-top: 1px;">✓</span><span>{{ b }}</span></div>
+            <sc-for list="{{ matches }}" as="m" hint-placeholder-count="1">
+              <div style="display: flex; gap: 12px; align-items: flex-start;">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .04em; color: #0b3fcc; background: #e7efff; padding: 4px 8px; border-radius: 6px; white-space: nowrap; flex-shrink: 0;">{{ m.tag }}</span>
+                <div style="min-width: 0;"><div style="font-weight: 700; font-size: 14.5px; color: #0a1440;">{{ m.role }}</div><div style="font-size: 12.5px; color: #5b6493; line-height: 1.45;">{{ m.blurb }}</div></div>
+              </div>
             </sc-for>
           </div>
         </div>
@@ -232,84 +289,470 @@
   </main>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;accountGate&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Flow&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1080, &quot;height&quot;: 900}}">
 class Component extends DCLogic {
-  state = { step: 1, projectType: 'Residential', scope: 'Addition', sqft: 2400, city: 'California', timeline: 'Standard (10–12 wks)', addons: { structural: true, mep: false, viz: true, energy: false }, acctName: '', acctEmail: '', acctPass: '' };
-  go(n){ this.setState({ step: n }); if (typeof window !== 'undefined') window.scrollTo({ top: 0 }); }
-  fmt(n){ return '$' + Math.round(n).toLocaleString(); }
+  state = (() => {
+    const a = {
+      goal: null,
+      ptype: 'Residential', scope: 'New custom home', sqft: 2400, jstate: 'California', timeline: 'Standard (10–12 wks)',
+      beds: '3', baths: '2', stories: '2 stories', style: 'Modern',
+      rooms: { kitchen: true, primaryBath: true, living: true, guestBath: false, bedrooms: false, basement: false, garage: false, outdoor: false },
+      budget: '$500k – $1M', site: 'Yes, I own it',
+      addons: { structural: true, mep: false, viz: true, energy: false },
+      service: 'CAD drafting', hours: 8, dsqft: 1500, sheets: 6, stamp: false, have: 'Sketch or dims', rush: false,
+      consultType: 'Video consult',
+      vizType: 'Single render', vizQty: 1, vizSecs: 30, vizHave: 'CAD / model',
+      engType: 'Structural stamp', engHours: 4,
+      scanType: '3D laser scanning', scanArea: 2500,
+    };
+    let qi = 0;
+    try {
+      const p = new URLSearchParams(window.location.search);
+      const SVC = {
+        'video-consult': { goal: 'consult', consultType: 'Video consult' },
+        'plan-review': { goal: 'consult', consultType: 'Plan review & markup' },
+        'feasibility': { goal: 'consult', consultType: 'Feasibility check' },
+        'as-built': { goal: 'drafting', service: '2D as-built package' },
+        'pdf-to-cad': { goal: 'drafting', service: 'PDF-to-CAD' },
+        'laser-scanning': { goal: 'scan', scanType: '3D laser scanning' },
+        'scan-to-bim': { goal: 'scan', scanType: 'Scan-to-BIM' },
+        'title-24': { goal: 'engineering', engType: 'Title-24 / energy' },
+        'structural-stamp': { goal: 'engineering', engType: 'Structural stamp' },
+        'code-consulting': { goal: 'engineering', engType: 'Code consulting' },
+        'permit-set': { goal: 'design' },
+        'zoning-study': { goal: 'design' },
+        'interior-design': { goal: 'design' },
+        'virtual-staging': { goal: 'viz', vizType: 'Single render' },
+        'ffe-plan': { goal: 'design' },
+      };
+      const goals = ['design', 'drafting', 'consult', 'viz', 'engineering', 'scan'];
+      const intent = (p.get('intent') || '').toLowerCase();
+      const svc = (p.get('svc') || '').toLowerCase();
+      if (goals.includes(intent)) { a.goal = intent; qi = 1; }
+      else if (SVC[svc]) { Object.assign(a, SVC[svc]); qi = 1; }
+      const st = p.get('state');
+      if (st) a.jstate = st;
+    } catch (e) {}
+    return { phase: 'quiz', qi, a, acctName: '', acctEmail: '', acctPass: '' };
+  })();
 
-  renderVals(){
-    const s = this.state;
-    const accountGate = this.props.accountGate ?? true;
-    const lastStep = accountGate ? 3 : 2;
+  US_STATES = [['Alabama',44],['Alaska',58],['Arizona',48],['Arkansas',40],['California',82],['Colorado',52],['Connecticut',60],['Delaware',46],['District of Columbia',74],['Florida',72],['Georgia',47],['Hawaii',70],['Idaho',45],['Illinois',58],['Indiana',43],['Iowa',39],['Kansas',38],['Kentucky',42],['Louisiana',66],['Maine',54],['Maryland',59],['Massachusetts',68],['Michigan',50],['Minnesota',52],['Mississippi',43],['Missouri',44],['Montana',47],['Nebraska',38],['Nevada',55],['New Hampshire',53],['New Jersey',64],['New Mexico',46],['New York',76],['North Carolina',49],['North Dakota',37],['Ohio',48],['Oklahoma',45],['Oregon',63],['Pennsylvania',57],['Puerto Rico',69],['Rhode Island',58],['South Carolina',55],['South Dakota',37],['Tennessee',44],['Texas',54],['Utah',56],['Vermont',52],['Virginia',56],['Washington',65],['West Virginia',41],['Wisconsin',48],['Wyoming',42]];
 
-    // stepper
-    const stDefs = accountGate ? [['Project',1],['Estimate',2],['Create account',3],['View matches',4]] : [['Project',1],['Estimate',2],['View matches',3]];
-    const stepper = stDefs.map(([label,n],i)=>{ const done=s.step>n, active=s.step===n; return {
-      label, mark: done?'✓':String(n),
-      numStyle:`display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;${done?'background:#16924e;color:#fff;':active?'background:#135bff;color:#fff;':'background:#e2e8f5;color:#8b93b5;'}`,
-      labelStyle:`font-size:14px;font-weight:${active?700:600};color:${active?'#0a1440':done?'#16924e':'#8b93b5'};`,
-      barStyle:`width:${i<stDefs.length-1?28:0}px;height:2px;background:#dbe2f2;margin:0 4px;display:${i<stDefs.length-1?'inline-block':'none'};`,
-    }; });
+  fmt(n) { return '$' + Math.round(n).toLocaleString(); }
+  scrollTop() { if (typeof window !== 'undefined') window.scrollTo({ top: 0 }); }
 
-    // step 1 controls
-    const bigOpt=(a)=>`flex:1;text-align:left;padding:16px;border-radius:12px;border:1.5px solid ${a?'#135bff':'#e2e8f5'};background:${a?'#e7efff':'#fff'};cursor:pointer;font-family:inherit;`;
-    const chip=(a)=>`padding:9px 15px;border-radius:100px;border:1px solid ${a?'#135bff':'#dbe2f2'};background:${a?'#e7efff':'#fff'};color:${a?'#0b3fcc':'#3f4770'};font-family:inherit;font-size:14px;font-weight:${a?700:500};cursor:pointer;`;
-    const rowOpt=(a)=>`display:flex;justify-content:space-between;align-items:center;padding:11px 13px;border-radius:10px;border:1.5px solid ${a?'#135bff':'#e2e8f5'};background:${a?'#e7efff':'#fff'};cursor:pointer;font-family:inherit;font-size:14px;font-weight:${a?700:500};color:#232c57;`;
+  buildFlow(a) {
+    const F = [];
+    F.push({ id: 'goal', type: 'cards', field: 'goal', kicker: 'GET STARTED',
+      title: 'What do you need help with?',
+      subtitle: 'One question decides the rest — we only ask what your kind of job actually needs.',
+      options: [
+        { v: 'design', label: 'Design & permitting', sub: 'Plans and a permit-ready set for a real project', ic: 'home' },
+        { v: 'drafting', label: 'Drafting & documentation', sub: 'CAD, as-builts, PDF-to-CAD — no stamp for most jobs', ic: 'pencil' },
+        { v: 'consult', label: 'Advice or a plan review', sub: 'A video consult, feasibility check, or markup', ic: 'chat' },
+        { v: 'viz', label: '3D visualization', sub: 'Photoreal renders, 3D floor plans, walkthroughs', ic: 'cube' },
+        { v: 'scan', label: 'Scanning & BIM', sub: '3D laser scanning and scan-to-BIM models', ic: 'scan' },
+        { v: 'engineering', label: 'Engineering & compliance', sub: 'Structural stamp, Title-24 energy, or code consulting', ic: 'bolt' },
+      ] });
+    if (!a.goal) return F;
+    const K = { design: 'DESIGN & PERMITTING', drafting: 'DRAFTING & DOCS', consult: 'ADVICE & REVIEW', viz: '3D VISUALIZATION', scan: 'SCANNING & BIM', engineering: 'ENGINEERING' };
+    const k = K[a.goal];
 
-    const typeOpts=[{label:'Residential',sub:'Renovations, additions, new homes',v:'Residential'},{label:'Commercial',sub:'TIs, retail, office, restaurant',v:'Commercial'}].map(o=>({...o,style:bigOpt(s.projectType===o.v),onClick:()=>this.setState({projectType:o.v})}));
-    const scopeList = s.projectType==='Commercial' ? ['Tenant improvement','Office fit-out','Retail build-out','Restaurant','Change of use'] : ['Renovation','Addition','New custom home','ADU','Kitchen / bath'];
-    const scopeOpts = scopeList.map(label=>({label,style:chip(s.scope===label),onClick:()=>this.setState({scope:label})}));
-    const US_STATES=[['Alabama',44],['Alaska',58],['Arizona',48],['Arkansas',40],['California',82],['Colorado',52],['Connecticut',60],['Delaware',46],['District of Columbia',74],['Florida',72],['Georgia',47],['Hawaii',70],['Idaho',45],['Illinois',58],['Indiana',43],['Iowa',39],['Kansas',38],['Kentucky',42],['Louisiana',66],['Maine',54],['Maryland',59],['Massachusetts',68],['Michigan',50],['Minnesota',52],['Mississippi',43],['Missouri',44],['Montana',47],['Nebraska',38],['Nevada',55],['New Hampshire',53],['New Jersey',64],['New Mexico',46],['New York',76],['North Carolina',49],['North Dakota',37],['Ohio',48],['Oklahoma',45],['Oregon',63],['Pennsylvania',57],['Puerto Rico',69],['Rhode Island',58],['South Carolina',55],['South Dakota',37],['Tennessee',44],['Texas',54],['Utah',56],['Vermont',52],['Virginia',56],['Washington',65],['West Virginia',41],['Wisconsin',48],['Wyoming',42]].map(([name,score])=>({name,score}));
-    const stateOpts=US_STATES.map(x=>x.name);
-    const stCx=US_STATES.find(x=>x.name===s.city)||US_STATES[0];
-    const cityBand=stCx.score>65?['HIGH','#b0613d','#f3e6df']:stCx.score>48?['MEDIUM','#8a6d2f','#f2ecd9']:['LOW','#16924e','#e7f6ec'];
-    const cityTag=cityBand[0];
-    const cityTagStyle=`font-family:'IBM Plex Mono',monospace;font-size:11px;padding:3px 8px;border-radius:5px;font-weight:600;color:${cityBand[1]};background:${cityBand[2]};`;
-    const onCity=(e)=>this.setState({city:e.target.value});
-    const times=['Rush (6–8 wks)','Standard (10–12 wks)','Flexible (14+ wks)'];
-    const timeOpts=times.map(label=>({label,style:rowOpt(s.timeline===label),onClick:()=>this.setState({timeline:label})}));
-    const sqftLabel=s.sqft.toLocaleString();
+    if (a.goal === 'design') {
+      F.push({ id: 'ptype', type: 'cards', field: 'ptype', kicker: k, title: 'Residential or commercial?', subtitle: 'This sets the questions and the pricing curve.',
+        options: [ { v: 'Residential', label: 'Residential', sub: 'Renovations, additions, new homes, ADUs', ic: 'home' }, { v: 'Commercial', label: 'Commercial', sub: 'TIs, retail, office, restaurant', ic: 'building' } ] });
+      const scopes = a.ptype === 'Commercial' ? ['Tenant improvement','Office fit-out','Retail build-out','Restaurant','Change of use'] : ['Renovation','Addition','New custom home','ADU','Kitchen / bath'];
+      F.push({ id: 'scope', type: 'chips', field: 'scope', kicker: k, title: "What are you building?", subtitle: 'Pick the closest — you can refine it with your architect.', options: scopes.map(x => ({ v: x, label: x })) });
 
-    // estimate engine
-    const rate = 3.2 + 5.3 * Math.exp(-s.sqft / 2600);
-    const base = Math.round((s.sqft * rate) / 50) * 50;
-    const addonDefs=[{key:'structural',label:'Structural coordination',sub:'Engineer stamp & framing plans',price:2400},{key:'mep',label:'MEP drawings',sub:'Mechanical, electrical, plumbing',price:3200},{key:'viz',label:'3D visualization',sub:'Renderings & walkthrough',price:1800},{key:'energy',label:'Energy calcs',sub:'Title-24 / code compliance',price:1200}];
-    const addonBox=(on)=>`display:flex;justify-content:space-between;align-items:center;padding:13px 14px;border-radius:10px;border:1.5px solid ${on?'#135bff':'#eaeef8'};background:${on?'#e7efff':'#fbfcfe'};cursor:pointer;margin-bottom:10px;`;
-    const addonOpts=addonDefs.map(a=>({label:a.label,sub:a.sub,price:this.fmt(a.price),check:s.addons[a.key]?'✓':'',boxStyle:`display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;font-size:13px;color:#fff;background:${s.addons[a.key]?'#135bff':'#c9d4ec'};`,style:addonBox(s.addons[a.key]),onClick:()=>this.setState({addons:{...s.addons,[a.key]:!s.addons[a.key]}})}));
-    const addonSum=addonDefs.reduce((t,a)=>t+(s.addons[a.key]?a.price:0),0);
-    const jScore=stCx.score;
-    const jBand=jScore>65?'High complexity':jScore>48?'Moderate complexity':'Low complexity';
-    const jMult=1.05+(jScore/100)*0.35;
-    let _h=0; for(const ch of s.city) _h=(_h*31+ch.charCodeAt(0))>>>0;
-    const fNames=['Seismic zone','Historic overlay','Climate load','Coastal / flood','Drawing set'];
-    const jFactors=fNames.map((name,i)=>{
-      let lv=Math.max(0,Math.min(2,Math.round(jScore/40)-1+((_h>>>(i*2))&1)+(i===4&&jScore>70?1:0)));
-      let level=['LOW','MODERATE','HIGH'][lv];
-      if(name==='Drawing set') level=['STANDARD','STANDARD','EXTENSIVE'][lv];
-      if(name==='Historic overlay'&&lv===0) level='N/A';
-      if(name==='Coastal / flood'&&lv===0) level='N/A';
-      return {name,level,lv};
+      const residential = a.ptype !== 'Commercial';
+      const roomsy = residential && ['New custom home', 'Addition', 'ADU'].includes(a.scope);
+      const reno = residential && ['Renovation', 'Kitchen / bath'].includes(a.scope);
+
+      if (roomsy) {
+        F.push({ id: 'beds', type: 'chips', compact: true, field: 'beds', kicker: k, title: 'How many bedrooms?', subtitle: 'The program is what makes a match — roughly how many.', aside: { slotId: 'quiz-beds-ref', placeholder: 'Reference: bedroom count / floor plan', caption: 'Not sure? A rough count is plenty — your architect refines the program with you.' }, options: ['Studio','1','2','3','4','5+'].map(x => ({ v: x, label: x })) });
+        F.push({ id: 'baths', type: 'chips', compact: true, field: 'baths', kicker: k, title: 'How many bathrooms?', subtitle: 'Count half-baths too.', aside: { slotId: 'quiz-baths-ref', placeholder: 'Reference: full bath vs. half-bath', caption: 'A full bath has a tub/shower; a half-bath (just toilet + sink) counts as 0.5.' }, options: ['1','1.5','2','2.5','3','4+'].map(x => ({ v: x, label: x })) });
+        F.push({ id: 'stories', type: 'chips', compact: true, field: 'stories', kicker: k, title: 'How many stories?', subtitle: 'Multi-story affects structure and cost.', aside: { slotId: 'quiz-stories-ref', placeholder: 'Reference: 1 vs. 2-story massing', caption: 'Stories = floors of living space. It drives stairs, structure, and cost.' }, options: ['1 story','2 stories','3+'].map(x => ({ v: x, label: x })) });
+      }
+      if (reno) {
+        F.push({ id: 'rooms', type: 'multi', field: 'rooms', kicker: k, title: 'Which areas are involved?', subtitle: 'Select every space in scope.',
+          options: [ { key: 'kitchen', label: 'Kitchen' }, { key: 'primaryBath', label: 'Primary bath' }, { key: 'guestBath', label: 'Guest / hall bath' }, { key: 'living', label: 'Living / dining' }, { key: 'bedrooms', label: 'Bedrooms' }, { key: 'basement', label: 'Basement' }, { key: 'garage', label: 'Garage' }, { key: 'outdoor', label: 'Outdoor / deck' } ] });
+      }
+      if (residential) {
+        F.push({ id: 'style', type: 'vcards', field: 'style', kicker: k, title: 'What style are you drawn to?', subtitle: "Pick the look that pulls at you — the pictures matter more than the label. It helps us match an architect whose portfolio fits your taste.",
+          options: [
+            { v: 'Modern', label: 'Modern', sub: 'Clean lines, glass, flat roofs', imgId: 'style-modern', ph: 'Modern home' },
+            { v: 'Contemporary', label: 'Contemporary', sub: 'Current, mixed materials', imgId: 'style-contemporary', ph: 'Contemporary home' },
+            { v: 'Farmhouse', label: 'Modern farmhouse', sub: 'Gabled, warm, rustic-modern', imgId: 'style-farmhouse', ph: 'Modern farmhouse' },
+            { v: 'Craftsman', label: 'Craftsman', sub: 'Natural wood, porches', imgId: 'style-craftsman', ph: 'Craftsman home' },
+            { v: 'Mediterranean', label: 'Mediterranean', sub: 'Stucco, tile roofs, arches', imgId: 'style-mediterranean', ph: 'Mediterranean home' },
+            { v: 'Traditional', label: 'Traditional', sub: 'Classic, symmetrical', imgId: 'style-traditional', ph: 'Traditional home' },
+            { v: 'Not sure yet', label: 'Not sure yet', sub: "Open to the architect's ideas", imgId: 'style-open', ph: 'A mix of styles' },
+          ] });
+      }
+      F.push({ id: 'sqft', type: 'slider', kicker: k, title: 'Roughly how big?', subtitle: 'A ballpark is fine — it drives your per-square-foot rate.', slider: { field: 'sqft', min: 200, max: 8000, step: 100, unit: 'sf' } });
+      if (roomsy && a.scope === 'New custom home') {
+        F.push({ id: 'site', type: 'cards', field: 'site', kicker: k, title: 'Do you have the lot?', subtitle: 'Site status changes what we scope first.',
+          options: [ { v: 'Yes, I own it', label: 'Yes — I own the lot', sub: 'Ready to design to the site', ic: 'check' }, { v: 'In escrow / closing', label: 'In escrow / closing', sub: 'Under contract now', ic: 'file' }, { v: 'Still shopping', label: 'Still shopping', sub: 'Want feasibility before I buy', ic: 'chat' } ] });
+      }
+      F.push({ id: 'budget', type: 'chips', field: 'budget', kicker: k, title: "What's your construction budget?", subtitle: 'For the build itself — this helps us match the right architect fee tier. Rough is fine.', options: ['Under $250k','$250k – $500k','$500k – $1M','$1M – $2M','$2M+','Not sure yet'].map(x => ({ v: x, label: x })) });
+      F.push({ id: 'state', type: 'state', kicker: k, title: 'Where are you building?', subtitle: 'We match to architects licensed in your state and score its permit complexity.' });
+      F.push({ id: 'timeline', type: 'chips', field: 'timeline', kicker: k, title: "What's your timeline?", subtitle: 'Rough is fine — it helps us match on capacity.', options: ['Rush (6–8 wks)','Standard (10–12 wks)','Flexible (14+ wks)'].map(x => ({ v: x, label: x })) });
+      F.push({ id: 'addons', type: 'multi', field: 'addons', kicker: k, title: 'Anything else in the set?', subtitle: 'Add only what you need — each is optional and priced separately.',
+        options: [ { key: 'structural', label: 'Structural coordination', sub: 'Engineer stamp & framing plans', price: 2400 }, { key: 'mep', label: 'MEP drawings', sub: 'Mechanical, electrical, plumbing', price: 3200 }, { key: 'viz', label: '3D visualization', sub: 'Renderings & walkthrough', price: 1800 }, { key: 'energy', label: 'Energy calcs', sub: 'Title-24 / code compliance', price: 1200 } ] });
+    } else if (a.goal === 'drafting') {
+      F.push({ id: 'service', type: 'cards', field: 'service', kicker: k, title: 'What do you need drafted?', subtitle: 'Drafting is unstamped work — no licensed architect required for most jobs.',
+        options: [ { v: 'CAD drafting', label: 'CAD drafting', sub: 'Hourly, from your sketches or redlines', ic: 'pencil' }, { v: '2D as-built package', label: '2D as-built package', sub: 'Measured drawings of an existing space', ic: 'ruler' }, { v: 'PDF-to-CAD', label: 'PDF-to-CAD', sub: 'Convert PDFs or scans to editable CAD', ic: 'file' }, { v: 'Redline cleanup', label: 'Redline cleanup', sub: 'Incorporate reviewer markups', ic: 'edit' } ] });
+      const svc = a.service;
+      let slider;
+      if (svc === '2D as-built package') slider = { field: 'dsqft', min: 400, max: 6000, step: 100, unit: 'sf', label: 'Approximate square footage' };
+      else if (svc === 'PDF-to-CAD') slider = { field: 'sheets', min: 1, max: 40, step: 1, unit: 'sheets', label: 'How many sheets?' };
+      else slider = { field: 'hours', min: 2, max: 40, step: 1, unit: 'hrs', label: 'Estimated hours' };
+      F.push({ id: 'size', type: 'slider', kicker: k, title: slider.label, subtitle: 'Just an estimate — the drafter confirms before starting.', slider });
+      F.push({ id: 'stamp', type: 'cards', field: 'stamp', kicker: k, title: 'Does your submittal need a licensed stamp?', subtitle: "If it does, we add a licensed pro as a separate step — so you only pay for a stamp when you need one.",
+        options: [ { v: false, label: 'No — unstamped drafting', sub: 'Most single-family & ADU jobs', ic: 'check' }, { v: true, label: 'Yes — it needs a stamp', sub: 'We match a licensed pro for that step', ic: 'stamp' } ] });
+      F.push({ id: 'have', type: 'chips', field: 'have', kicker: k, title: 'What do you have to start?', subtitle: 'Any starting point works.', options: ['Sketch or dims','PDFs / scans','Existing CAD'].map(x => ({ v: x, label: x })) });
+      F.push({ id: 'rush', type: 'chips', field: 'rush', kicker: k, title: 'How fast do you need it?', subtitle: 'Rush adds 25% for 24–48h turnaround.', options: [ { v: false, label: 'Standard (2–5 days)' }, { v: true, label: 'Rush · 24–48h (+25%)' } ] });
+    } else if (a.goal === 'consult') {
+      F.push({ id: 'consultType', type: 'cards', field: 'consultType', kicker: k, title: 'What kind of help do you want?', subtitle: 'Flat rates — book, meet, and get clear next steps.',
+        options: [ { v: 'Video consult', label: '1-hour video consult', sub: 'Walk your project with a licensed architect · $145', ic: 'chat' }, { v: 'Plan review & markup', label: 'Plan review & markup', sub: 'A marked-up, prioritized review of your drawings · $150', ic: 'edit' }, { v: 'Feasibility check', label: 'Feasibility check', sub: 'Zoning, setbacks & code before you commit · $250', ic: 'check' } ] });
+      F.push({ id: 'ptype', type: 'cards', field: 'ptype', kicker: k, title: 'Residential or commercial?', subtitle: 'So we match the right kind of expertise.',
+        options: [ { v: 'Residential', label: 'Residential', sub: 'Homes, additions, ADUs', ic: 'home' }, { v: 'Commercial', label: 'Commercial', sub: 'Retail, office, restaurant, TI', ic: 'building' } ] });
+      F.push({ id: 'state', type: 'state', kicker: k, title: "Where's the project?", subtitle: 'We match to a pro licensed in your state.' });
+    } else if (a.goal === 'viz') {
+      F.push({ id: 'vizType', type: 'cards', field: 'vizType', kicker: k, title: 'What do you want visualized?', subtitle: 'Turn plans or a model into images that sell.',
+        options: [ { v: 'Single render', label: 'Photoreal render', sub: 'One interior or exterior still · from $99', ic: 'cube' }, { v: '3D floor plan', label: '3D floor plan', sub: 'A dollhouse view of the layout · from $100', ic: 'home' }, { v: 'Walkthrough', label: 'Animated walkthrough', sub: 'A moving video tour · from $50/sec', ic: 'play' } ] });
+      const walk = a.vizType === 'Walkthrough';
+      const slider = walk ? { field: 'vizSecs', min: 10, max: 120, step: 5, unit: 'sec', label: 'How long a walkthrough?' } : { field: 'vizQty', min: 1, max: 10, step: 1, unit: a.vizType === '3D floor plan' ? 'plans' : 'images', label: 'How many do you need?' };
+      F.push({ id: 'vizQty', type: 'slider', kicker: k, title: slider.label, subtitle: 'You can adjust the exact list with your artist.', slider });
+      F.push({ id: 'vizHave', type: 'chips', field: 'vizHave', kicker: k, title: 'What do you have to work from?', subtitle: 'The more we start with, the faster it goes.', options: ['CAD / model','2D plans','Sketch or photos'].map(x => ({ v: x, label: x })) });
+    } else if (a.goal === 'scan') {
+      F.push({ id: 'scanType', type: 'cards', field: 'scanType', kicker: k, title: 'What do you need captured?', subtitle: 'On-site reality capture of an existing building or space.',
+        options: [ { v: '3D laser scanning', label: '3D laser scanning', sub: 'A precise point cloud of existing conditions · from $0.20/sf', ic: 'scan' }, { v: 'Scan-to-BIM', label: 'Scan-to-BIM model', sub: 'Point cloud converted to a working BIM model · from $0.50/sf', ic: 'cube' } ] });
+      F.push({ id: 'scanArea', type: 'slider', kicker: k, title: 'How large is the space?', subtitle: 'Gross floor area to be captured.', slider: { field: 'scanArea', min: 500, max: 50000, step: 500, unit: 'sf' } });
+      F.push({ id: 'state', type: 'state', kicker: k, title: "Where's the site?", subtitle: 'We dispatch a capture crew near you.' });
+    } else if (a.goal === 'engineering') {
+      F.push({ id: 'engType', type: 'cards', field: 'engType', kicker: k, title: 'Which service do you need?', subtitle: 'Matched to a licensed engineer or code specialist.',
+        options: [ { v: 'Structural stamp', label: 'Structural stamp', sub: 'Review & stamp of your framing / lateral design · from $1,500', ic: 'stamp' }, { v: 'Title-24 / energy', label: 'Title-24 / energy calcs', sub: 'Energy compliance documentation · from $300', ic: 'bolt' }, { v: 'Code consulting', label: 'Code consulting', sub: 'Untangle occupancy, egress & accessibility · $150/hr', ic: 'chat' } ] });
+      if (a.engType === 'Code consulting') F.push({ id: 'engHours', type: 'slider', kicker: k, title: 'About how many hours?', subtitle: 'An estimate — you only pay for tracked time.', slider: { field: 'engHours', min: 1, max: 20, step: 1, unit: 'hrs' } });
+      F.push({ id: 'state', type: 'state', kicker: k, title: "Where's the project?", subtitle: 'Compliance is jurisdiction-specific — we match accordingly.' });
+    }
+    return F;
+  }
+
+  icon(name) {
+    const _H = React.createElement;
+    const mk = (...ds) => _H('svg', { width: 22, height: 22, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinecap: 'round', strokeLinejoin: 'round' }, ds.map((d, i) => _H('path', { key: i, d })));
+    const M = {
+      home: ['M5 12l7-6 7 6', 'M7 11v8h10v-8', 'M10 19v-5h4v5'],
+      pencil: ['M12 20h9', 'M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z'],
+      chat: ['M21 15a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2z'],
+      cube: ['M12 2l9 5v10l-9 5-9-5V7z', 'M12 12l9-5', 'M12 12v10', 'M12 12L3 7'],
+      bolt: ['M13 2L4 14h7l-1 8 9-12h-7z'],
+      building: ['M4 21V4h9v17', 'M13 9h7v12', 'M7 8h1M7 12h1M7 16h1'],
+      ruler: ['M4 4h16v16H4z', 'M4 10h16', 'M10 10v10'],
+      file: ['M8 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8l-5-5z', 'M14 3v5h5'],
+      edit: ['M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7', 'M18.5 2.5a2.1 2.1 0 0 1 3 3L12 15l-4 1 1-4z'],
+      check: ['M20 6L9 17l-5-5'],
+      stamp: ['M5 21h14', 'M9 15h6l-1-4a3 3 0 1 0-4 0z'],
+      play: ['M5 3l14 9-14 9z'],
+      scan: ['M4 8V6a2 2 0 0 1 2-2h2', 'M16 4h2a2 2 0 0 1 2 2v2', 'M20 16v2a2 2 0 0 1-2 2h-2', 'M8 20H6a2 2 0 0 1-2-2v-2', 'M4 12h16'],
+    };
+    return mk(...(M[name] || M.home));
+  }
+
+  jurisData(stateName) {
+    const row = this.US_STATES.find(x => x[0] === stateName) || this.US_STATES[0];
+    const score = row[1];
+    const band = score > 65 ? 'High complexity' : score > 48 ? 'Moderate complexity' : 'Low complexity';
+    const mult = 1.05 + (score / 100) * 0.35;
+    let h = 0; for (const ch of stateName) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+    const names = ['Seismic zone', 'Historic overlay', 'Climate load', 'Coastal / flood', 'Drawing set'];
+    const factors = names.map((name, i) => {
+      let lv = Math.max(0, Math.min(2, Math.round(score / 40) - 1 + ((h >>> (i * 2)) & 1) + (i === 4 && score > 70 ? 1 : 0)));
+      let level = ['LOW', 'MODERATE', 'HIGH'][lv];
+      if (name === 'Drawing set') level = ['STANDARD', 'STANDARD', 'EXTENSIVE'][lv];
+      if ((name === 'Historic overlay' || name === 'Coastal / flood') && lv === 0) level = 'N/A';
+      return { name, level, lv };
     });
-    const jd={score:jScore,band:jBand,mult:jMult,factors:jFactors};
-    const levelTag=(lv)=>{const c=lv>=2?['#b0613d','#f3e6df']:lv===1?['#8a6d2f','#f2ecd9']:['#16924e','#e7f6ec'];return `font-family:'IBM Plex Mono',monospace;font-size:11px;padding:3px 8px;border-radius:5px;color:${c[0]};background:${c[1]};`;};
-    const juris={score:jd.score,band:jd.band,barStyle:`height:100%;width:${jd.score}%;background:${jd.score>70?'#135bff':jd.score>45?'#8a6d2f':'#16924e'};border-radius:6px;`,factors:jd.factors.map(f=>({name:f.name,level:f.level,tagStyle:levelTag(f.lv)}))};
-    const total=(base+addonSum)*jd.mult;
-    const est={total:this.fmt(total),low:this.fmt(total*0.92),high:this.fmt(total*1.08),base:this.fmt(base),rate:'$'+rate.toFixed(2),mult:jd.mult.toFixed(2)};
+    return { score, band, mult, factors };
+  }
 
-    const acctBenefits=['See your 2–3 curated architect matches','Message and video-scope on-platform','Escrow-protected milestone payments','Track drawings, files and your quote in one place'];
+  computeEstimate(a) {
+    const f = (n) => this.fmt(n);
+    const bandTag = (lv) => { const c = lv >= 2 ? ['#b0613d', '#f3e6df'] : lv === 1 ? ['#8a6d2f', '#f2ecd9'] : ['#16924e', '#e7f6ec']; return `font-family:'IBM Plex Mono',monospace;font-size:11px;padding:3px 8px;border-radius:5px;color:${c[0]};background:${c[1]};`; };
+
+    if (a.goal === 'design') {
+      const rate = 3.2 + 5.3 * Math.exp(-a.sqft / 2600);
+      const base = Math.round((a.sqft * rate) / 50) * 50;
+      const addonDefs = [ { key: 'structural', label: 'Structural coordination', sub: 'Engineer stamp & framing plans', price: 2400 }, { key: 'mep', label: 'MEP drawings', sub: 'Mechanical, electrical, plumbing', price: 3200 }, { key: 'viz', label: '3D visualization', sub: 'Renderings & walkthrough', price: 1800 }, { key: 'energy', label: 'Energy calcs', sub: 'Title-24 / code compliance', price: 1200 } ];
+      const jd = this.jurisData(a.jstate);
+      const addonSum = addonDefs.reduce((t, d) => t + (a.addons[d.key] ? d.price : 0), 0);
+      const total = (base + addonSum) * jd.mult;
+      const rows = [ { label: 'Base drawing set', sub: `${a.sqft.toLocaleString()} sf · $${rate.toFixed(2)}/sf`, val: f(base), color: '#232c57' } ];
+      addonDefs.forEach(d => { if (a.addons[d.key]) rows.push({ label: d.label, sub: d.sub, val: f(d.price), color: '#232c57' }); });
+      rows.push({ label: 'Jurisdiction multiplier', sub: `${a.jstate} complexity`, val: '×' + jd.mult.toFixed(2), color: '#135bff' });
+      const juris = { score: jd.score, band: jd.band, barStyle: `height:100%;width:${jd.score}%;background:${jd.score > 70 ? '#135bff' : jd.score > 45 ? '#8a6d2f' : '#16924e'};border-radius:6px;`, factors: jd.factors.map(x => ({ name: x.name, level: x.level, tagStyle: bandTag(x.lv) })) };
+      const residential = a.ptype !== 'Commercial';
+      const roomsy = residential && ['New custom home', 'Addition', 'ADU'].includes(a.scope);
+      const styleWord = residential && a.style && a.style !== 'Not sure yet' ? a.style + ' ' : '';
+      const bedWord = a.beds === 'Studio' ? 'studio' : `${a.beds}-bed`;
+      const prog = roomsy ? `${bedWord} / ${a.baths}-bath ${styleWord}${a.scope.toLowerCase()}` : `${styleWord}${a.scope.toLowerCase()}`;
+      const budgetWord = a.budget && a.budget !== 'Not sure yet' ? ` Build budget ${a.budget}.` : '';
+      return {
+        headline: `Your ${styleWord}${a.scope.toLowerCase()} in ${a.jstate}`, sub: 'A typical price range for a project like yours, itemized. Your architect sets their own final price.',
+        totalLabel: 'TYPICAL PRICE RANGE', headlineTotal: `${f(total * 0.92)} – ${f(total * 1.08)}`,
+        total: f(total), totalRowLabel: 'Typical range',
+        rows, footnote: 'A guide, not a quote. Architects set their own rates — you agree the final price with them directly.',
+        showJuris: true, juris, cta: 'See my architect matches →',
+        savedLine: roomsy ? `${prog} · ${a.sqft.toLocaleString()} sf · ${a.jstate}` : `${a.scope} · ${a.sqft.toLocaleString()} sf · ${a.jstate}`,
+        match: { tag: 'ARCHITECT', role: 'A licensed architect', blurb: `Licensed in ${a.jstate}, experienced with a ${prog}.${budgetWord}` },
+        matches: [ { tag: 'ARCHITECT', role: `Licensed architect · ${a.jstate}`, blurb: `Pre-cleared on ${a.jstate} jurisdiction experience and matched to a ${prog}.` } ],
+        matchRoleShort: '2–3 licensed architects',
+      };
+    }
+
+    if (a.goal === 'drafting') {
+      const RATE = 78, PSF = 0.25, ASBUILT_MIN = 2500, SHEET = 30, STAMP = 1500;
+      let base, baseSub, sizeLine, approx = false;
+      if (a.service === '2D as-built package') { base = Math.max(ASBUILT_MIN, Math.round(a.dsqft * PSF / 50) * 50); baseSub = `${a.dsqft.toLocaleString()} sf · $0.25/sf (min $2,500)`; sizeLine = `${a.dsqft.toLocaleString()} sf`; }
+      else if (a.service === 'PDF-to-CAD') { base = a.sheets * SHEET; baseSub = `${a.sheets} sheets · $30/sheet`; sizeLine = `${a.sheets} sheets`; }
+      else { base = a.hours * RATE; baseSub = `${a.hours} hrs · $78/hr (US)`; sizeLine = `${a.hours} hrs`; approx = true; }
+      const stampAmt = a.stamp ? STAMP : 0;
+      const rushAmt = a.rush ? (base + stampAmt) * 0.25 : 0;
+      const total = base + stampAmt + rushAmt;
+      const speedShort = a.rush ? 'Rush · 24–48h' : 'Standard · 2–5 days';
+      const rows = [ { label: a.service, sub: baseSub, val: f(base), color: '#232c57' } ];
+      if (a.stamp) rows.push({ label: 'Licensed stamp', sub: 'Pro licensed in your jurisdiction (matched separately)', val: 'from ' + f(STAMP), color: '#232c57' });
+      rows.push({ label: 'Turnaround', sub: speedShort, val: a.rush ? '+' + f(rushAmt) : '—', color: a.rush ? '#232c57' : '#8b93b5' });
+      const totalStr = approx ? '~' + f(total) : f(total);
+      const matches = [ { tag: 'DRAFTER', role: 'A vetted CAD drafter', blurb: `Matched to your ${a.service.toLowerCase()} — you approve scope and pay them directly.` } ];
+      if (a.stamp) matches.push({ tag: 'ARCHITECT', role: 'A licensed architect', blurb: 'Reviews and stamps the finished set in your jurisdiction.' });
+      return {
+        headline: a.service, sub: 'Your instant price, itemized. Hourly work is tracked on-platform; flat jobs are locked before work starts.',
+        totalLabel: 'ESTIMATED TOTAL', headlineTotal: totalStr, total: totalStr, totalRowLabel: 'Estimated total',
+        rows, footnote: 'You pay your drafter directly at their rate — we don\u2019t take a cut of the work.',
+        showJuris: false, cta: a.stamp ? 'See my drafter + architect →' : 'See my drafter match →', savedLine: `${a.service} · ${sizeLine} · ${speedShort}`,
+        match: { tag: a.stamp ? 'DRAFTER + PRO' : 'DRAFTER', role: a.stamp ? 'A drafter + a licensed pro' : 'A vetted CAD drafter', blurb: a.stamp ? 'A drafter builds the set; a licensed architect stamps it as a separate step.' : `Matched to your ${a.service.toLowerCase()}, ready to confirm scope within a day.` },
+        matches, matchRoleShort: a.stamp ? 'a drafter and a licensed pro' : 'a CAD drafter',
+      };
+    }
+
+    if (a.goal === 'consult') {
+      const P = { 'Video consult': 145, 'Plan review & markup': 150, 'Feasibility check': 250 };
+      const base = P[a.consultType] || 145;
+      return {
+        headline: a.consultType, sub: 'A flat, upfront rate — book it and meet your pro.',
+        totalLabel: 'FLAT RATE', headlineTotal: f(base), total: f(base), totalRowLabel: 'Total',
+        rows: [ { label: a.consultType, sub: `${a.ptype} · ${a.jstate}`, val: f(base), color: '#232c57' } ],
+        footnote: 'A flat rate agreed before you meet — no surprises.', showJuris: false,
+        cta: 'See my match →', savedLine: `${a.consultType} · ${a.ptype} · ${a.jstate}`,
+        match: { tag: 'CONSULT', role: `A licensed architect · ${a.jstate}`, blurb: `Available for a ${a.consultType.toLowerCase()} on your ${a.ptype.toLowerCase()} project.` },
+        matches: [ { tag: 'CONSULT', role: `Licensed architect · ${a.jstate}`, blurb: `Set up for your ${a.consultType.toLowerCase()}.` } ], matchRoleShort: 'a licensed architect',
+      };
+    }
+
+    if (a.goal === 'viz') {
+      let base, baseSub, sizeLine;
+      if (a.vizType === 'Walkthrough') { base = a.vizSecs * 50; baseSub = `${a.vizSecs} sec · $50/sec`; sizeLine = `${a.vizSecs} sec`; }
+      else if (a.vizType === '3D floor plan') { base = a.vizQty * 100; baseSub = `${a.vizQty} plan${a.vizQty > 1 ? 's' : ''} · $100 each`; sizeLine = `${a.vizQty} plan${a.vizQty > 1 ? 's' : ''}`; }
+      else { base = a.vizQty * 99; baseSub = `${a.vizQty} render${a.vizQty > 1 ? 's' : ''} · $99 each`; sizeLine = `${a.vizQty} render${a.vizQty > 1 ? 's' : ''}`; }
+      return {
+        headline: a.vizType, sub: 'Your instant price. Adjust the exact deliverable list with your artist.',
+        totalLabel: 'ESTIMATED TOTAL', headlineTotal: f(base), total: f(base), totalRowLabel: 'Estimated total',
+        rows: [ { label: a.vizType, sub: baseSub, val: f(base), color: '#232c57' }, { label: 'Starting from', sub: a.vizHave, val: '—', color: '#8b93b5' } ],
+        footnote: 'Typical turnaround 3–7 days. You pay your visualization artist directly.', showJuris: false,
+        cta: 'See my 3D artist →', savedLine: `${a.vizType} · ${sizeLine} · from ${a.vizHave}`,
+        match: { tag: '3D', role: 'A 3D visualization artist', blurb: `Matched to your ${a.vizType.toLowerCase()}, working from your ${a.vizHave.toLowerCase()}.` },
+        matches: [ { tag: '3D', role: '3D visualization artist', blurb: `Set up for your ${a.vizType.toLowerCase()}.` } ], matchRoleShort: 'a 3D artist',
+      };
+    }
+
+    if (a.goal === 'scan') {
+      const psf = a.scanType === 'Scan-to-BIM' ? 0.5 : 0.2;
+      const base = Math.max(500, Math.round(a.scanArea * psf / 10) * 10);
+      const role = a.scanType === 'Scan-to-BIM' ? 'A scan-to-BIM modeler' : 'A reality-capture specialist';
+      return {
+        headline: a.scanType, sub: 'Your instant price, based on area captured. Crew confirms access and scope before scheduling.',
+        totalLabel: 'ESTIMATED TOTAL', headlineTotal: f(base), total: f(base), totalRowLabel: 'Estimated total',
+        rows: [ { label: a.scanType, sub: `${a.scanArea.toLocaleString()} sf · $${psf.toFixed(2)}/sf`, val: f(base), color: '#232c57' }, { label: 'Location', sub: a.jstate, val: '—', color: '#8b93b5' } ],
+        footnote: 'A guide, not a quote — access, detail level, and travel can adjust the final price.', showJuris: false,
+        cta: 'See my scanning match →', savedLine: `${a.scanType} · ${a.scanArea.toLocaleString()} sf · ${a.jstate}`,
+        match: { tag: 'SCAN / BIM', role, blurb: `Set up to capture ${a.scanArea.toLocaleString()} sf in ${a.jstate}.` },
+        matches: [ { tag: 'SCAN / BIM', role: `${role.replace('A ', '')} · ${a.jstate}`, blurb: `Matched for your ${a.scanType.toLowerCase()}.` } ], matchRoleShort: 'a reality-capture specialist',
+      };
+    }
+
+    // engineering
+    const jd = this.jurisData(a.jstate);
+    let base, baseSub, sizeLine, roleName, matchTag;
+    if (a.engType === 'Structural stamp') { base = 1500; baseSub = 'Review & stamp · flat, from'; sizeLine = 'structural stamp'; roleName = 'A licensed structural engineer'; matchTag = 'ENGINEER'; }
+    else if (a.engType === 'Title-24 / energy') { base = 300; baseSub = 'Energy compliance · flat, from'; sizeLine = 'Title-24 calcs'; roleName = 'A Title-24 energy consultant'; matchTag = 'ENERGY'; }
+    else { base = a.engHours * 150; baseSub = `${a.engHours} hrs · $150/hr`; sizeLine = `${a.engHours} hrs`; roleName = 'A code consultant'; matchTag = 'CODE'; }
+    return {
+      headline: a.engType, sub: 'Your instant price. Compliance work is matched to a pro licensed for your jurisdiction.',
+      totalLabel: 'ESTIMATED TOTAL', headlineTotal: f(base), total: f(base), totalRowLabel: 'Estimated total',
+      rows: [ { label: a.engType, sub: baseSub, val: f(base), color: '#232c57' }, { label: 'Jurisdiction', sub: a.jstate + ' · ' + jd.band.toLowerCase(), val: '—', color: '#8b93b5' } ],
+      footnote: 'A guide, not a quote — the engineer confirms scope and their rate before starting.', showJuris: false,
+      cta: 'See my engineer →', savedLine: `${a.engType} · ${sizeLine} · ${a.jstate}`,
+      match: { tag: matchTag, role: roleName, blurb: `Licensed for work in ${a.jstate} and set up for your ${a.engType.toLowerCase()}.` },
+      matches: [ { tag: matchTag, role: `${roleName.replace('A ', '')} · ${a.jstate}`, blurb: `Matched for your ${a.engType.toLowerCase()}.` } ], matchRoleShort: 'a licensed engineer',
+    };
+  }
+
+  summaryFor(a, est) {
+    const paras = [], facts = [];
+    const F = (k, v) => { if (v) facts.push({ k, v }); };
+    if (a.goal === 'design') {
+      const residential = a.ptype !== 'Commercial';
+      const roomsy = residential && ['New custom home', 'Addition', 'ADU'].includes(a.scope);
+      const reno = residential && ['Renovation', 'Kitchen / bath'].includes(a.scope);
+      const styleWord = residential && a.style && a.style !== 'Not sure yet' ? a.style + ' ' : '';
+      const bedWord = a.beds === 'Studio' ? 'a studio' : `a ${a.beds}-bedroom`;
+      let p1 = `You're planning a ${styleWord}${a.scope.toLowerCase()} in ${a.jstate}`;
+      if (roomsy) p1 += ` — ${bedWord}, ${a.baths}-bath home${a.stories === '1 story' ? ', single story' : a.stories === '2 stories' ? ' over two stories' : ' over three-plus stories'}`;
+      p1 += `, roughly ${a.sqft.toLocaleString()} sf.`;
+      paras.push(p1);
+      const ctx = [];
+      if (a.budget && a.budget !== 'Not sure yet') ctx.push(`a construction budget around ${a.budget}`);
+      if (roomsy && a.scope === 'New custom home') ctx.push(a.site === 'Yes, I own it' ? 'and you already own the lot' : a.site === 'In escrow / closing' ? 'and the lot is under contract' : "and you're still choosing a lot");
+      let p2 = '';
+      if (reno) { const picked = Object.keys(a.rooms).filter(kk => a.rooms[kk]); if (picked.length) p2 += `The remodel covers ${picked.length} area${picked.length > 1 ? 's' : ''} of the home. `; }
+      p2 += `You're targeting a ${a.timeline.toLowerCase()} timeline`;
+      if (ctx.length) p2 += ` with ${ctx.join(', ')}`;
+      p2 += '.';
+      paras.push(p2);
+      const addOn = [['structural', 'structural coordination'], ['mep', 'MEP drawings'], ['viz', '3D visualization'], ['energy', 'energy calcs']].filter(x => a.addons[x[0]]).map(x => x[1]);
+      let p3 = "We'll assemble a permit-ready drawing set";
+      if (addOn.length) p3 += ` including ${addOn.join(', ')}`;
+      p3 += `, matched to an architect licensed in ${a.jstate}. Here's your estimate and who we'd pair you with.`;
+      paras.push(p3);
+      F('Project', `${a.ptype} · ${a.scope}`);
+      if (roomsy) F('Program', `${a.beds === 'Studio' ? 'Studio' : a.beds + ' BR'} · ${a.baths} BA · ${a.stories}`);
+      if (residential) F('Style', a.style);
+      F('Size', `${a.sqft.toLocaleString()} sf`);
+      F('Budget', a.budget);
+      if (roomsy && a.scope === 'New custom home') F('Lot', a.site);
+      F('Timeline', a.timeline);
+      F('Location', a.jstate);
+    } else if (a.goal === 'drafting') {
+      paras.push(`You need ${a.service.toLowerCase()}${a.stamp ? ', with a licensed stamp added as a separate step' : ''}.`);
+      paras.push(`We'll match you with ${est.matchRoleShort}; you'll approve scope and see the number before any work starts.`);
+      est.savedLine.split(' · ').forEach((v, i) => F(['Service', 'Size', 'Turnaround'][i] || 'Detail', v));
+    } else if (a.goal === 'consult') {
+      paras.push(`You'd like a ${a.consultType.toLowerCase()} for your ${a.ptype.toLowerCase()} project in ${a.jstate}.`);
+      paras.push(`We'll set you up with a licensed architect for that session at a flat, upfront rate.`);
+      F('Service', a.consultType); F('Project', a.ptype); F('Location', a.jstate);
+    } else if (a.goal === 'viz') {
+      paras.push(`You want ${a.vizType.toLowerCase()} built from your ${a.vizHave.toLowerCase()}.`);
+      paras.push(`We'll match you with a 3D visualization artist and lock the deliverable list up front.`);
+      est.savedLine.split(' · ').forEach((v, i) => F(['Deliverable', 'Quantity', 'From'][i] || 'Detail', v));
+    } else if (a.goal === 'scan') {
+      paras.push(`You need ${a.scanType.toLowerCase()} for about ${a.scanArea.toLocaleString()} sf in ${a.jstate}.`);
+      paras.push(`We'll dispatch a reality-capture crew near you and confirm access before scheduling.`);
+      F('Service', a.scanType); F('Area', `${a.scanArea.toLocaleString()} sf`); F('Location', a.jstate);
+    } else {
+      paras.push(`You need ${a.engType.toLowerCase()}${a.engType === 'Code consulting' ? ` (about ${a.engHours} hrs)` : ''} for a project in ${a.jstate}.`);
+      paras.push(`We'll match you with a pro licensed for your jurisdiction and confirm scope before starting.`);
+      F('Service', a.engType); F('Location', a.jstate);
+    }
+    return { paras, facts };
+  }
+
+  pick(field, val) {
+    const a = { ...this.state.a, [field]: val };
+    const flow = this.buildFlow(a);
+    const nqi = this.state.qi + 1;
+    if (nqi >= flow.length) this.setState({ a, phase: 'summary' });
+    else this.setState({ a, qi: nqi });
+    this.scrollTop();
+  }
+  toggleMulti(field, key) { this.setState(s => ({ a: { ...s.a, [field]: { ...s.a[field], [key]: !s.a[field][key] } } })); }
+  setField(field, val) { this.setState(s => ({ a: { ...s.a, [field]: val } })); }
+  next() {
+    const flow = this.buildFlow(this.state.a);
+    const nqi = this.state.qi + 1;
+    if (nqi >= flow.length) this.setState({ phase: 'summary' });
+    else this.setState({ qi: nqi });
+    this.scrollTop();
+  }
+  back() {
+    const s = this.state;
+    if (s.phase === 'match') this.setState({ phase: 'estimate' });
+    else if (s.phase === 'estimate') this.setState({ phase: 'summary' });
+    else if (s.phase === 'summary') { const flow = this.buildFlow(s.a); this.setState({ phase: 'quiz', qi: Math.max(0, flow.length - 1) }); }
+    else if (s.qi > 0) this.setState({ qi: s.qi - 1 });
+    this.scrollTop();
+  }
+
+  renderVals() {
+    const s = this.state, a = s.a;
+    const flow = this.buildFlow(a);
+    const qi = Math.min(s.qi, flow.length - 1);
+    const q = flow[qi] || flow[0];
+
+    let pct, label;
+    if (s.phase === 'quiz') { pct = 6 + (qi / Math.max(1, flow.length)) * 66; label = `Question ${qi + 1} of ${flow.length}`; }
+    else if (s.phase === 'summary') { pct = 80; label = 'Your brief'; }
+    else if (s.phase === 'estimate') { pct = 90; label = 'Your instant estimate'; }
+    else { pct = 100; label = 'Create your account'; }
+    const progress = { label, barStyle: `height:100%;width:${pct}%;background:#135bff;border-radius:100px;transition:width .35s ease;` };
+
+    const cardStyle = (sel) => `display:flex;align-items:center;gap:16px;width:100%;text-align:left;padding:18px 20px;border-radius:14px;border:1.5px solid ${sel ? '#135bff' : '#e2e8f5'};background:${sel ? '#eef2fb' : '#fff'};cursor:pointer;font-family:inherit;transition:border-color .15s ease,background .15s ease;`;
+    const iconWrap = (sel) => `display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:12px;flex-shrink:0;color:${sel ? '#135bff' : '#5b6493'};background:${sel ? '#dbe6ff' : '#f3f6fd'};`;
+    const chevron = (sel) => `font-size:20px;color:${sel ? '#135bff' : '#c2cbe6'};flex-shrink:0;`;
+    const chipStyle = (sel, compact) => `display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:13px 20px;${compact ? 'min-width:74px;' : ''}border-radius:13px;border:1.5px solid ${sel ? '#135bff' : '#dbe2f2'};background:${sel ? '#eef2fb' : '#fff'};color:${sel ? '#0b3fcc' : '#3f4770'};font-family:inherit;font-size:15px;font-weight:${sel ? 700 : 600};cursor:pointer;transition:border-color .15s ease,background .15s ease,color .15s ease;`;
+    const chipCheck = (sel) => `display:${sel ? 'inline' : 'none'};font-size:12px;color:#135bff;`;
+    const multiStyle = (on) => `display:flex;align-items:center;gap:14px;width:100%;padding:15px 16px;border-radius:12px;border:1.5px solid ${on ? '#135bff' : '#e2e8f5'};background:${on ? '#eef2fb' : '#fff'};cursor:pointer;font-family:inherit;transition:border-color .15s ease,background .15s ease;`;
+    const boxStyle = (on) => `display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:7px;font-size:14px;color:#fff;background:${on ? '#135bff' : '#c9d4ec'};flex-shrink:0;`;
+
+    const vcardStyle = (sel) => `position:relative;text-align:left;padding:10px;border-radius:14px;border:1.5px solid ${sel ? '#135bff' : '#e2e8f5'};background:#fff;cursor:pointer;font-family:inherit;transition:border-color .15s ease;`;
+    const vcardCheck = (sel) => `position:absolute;top:16px;right:16px;display:${sel ? 'flex' : 'none'};align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#135bff;color:#fff;font-size:13px;box-shadow:0 2px 6px rgba(10,20,64,.35);`;
+
+    const view = {
+      qIsCards: q.type === 'cards', qIsVcards: q.type === 'vcards', qIsChips: q.type === 'chips', qIsMulti: q.type === 'multi', qIsSlider: q.type === 'slider', qIsState: q.type === 'state',
+      cardOptions: [], vcardOptions: [], chipOptions: [], multiOptions: [], slider: null, stateView: null,
+      chipWrap: 'display:flex;flex-wrap:wrap;gap:10px;',
+      qHasAside: !!q.aside, qBodyStyle: q.aside ? 'display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:start;' : '', aside: q.aside || { slotId: '', placeholder: '', caption: '' },
+    };
+
+    if (q.type === 'cards') {
+      view.cardOptions = q.options.map(o => { const sel = a[q.field] === o.v; return { label: o.label, sub: o.sub, icon: this.icon(o.ic), iconWrap: iconWrap(sel), chevron: chevron(sel), style: cardStyle(sel), onClick: () => this.pick(q.field, o.v) }; });
+    } else if (q.type === 'vcards') {
+      view.vcardOptions = q.options.map(o => { const sel = a[q.field] === o.v; return { label: o.label, sub: o.sub, imgId: o.imgId, ph: o.ph, style: vcardStyle(sel), checkFloat: vcardCheck(sel), onClick: () => this.pick(q.field, o.v) }; });
+    } else if (q.type === 'chips') {
+      view.chipOptions = q.options.map(o => { const sel = a[q.field] === o.v; return { label: o.label, check: chipCheck(sel), style: chipStyle(sel, q.compact), onClick: () => this.pick(q.field, o.v) }; });
+    } else if (q.type === 'multi') {
+      view.multiOptions = q.options.map(o => { const on = !!a[q.field][o.key]; return { label: o.label, sub: o.sub || '', price: o.price != null ? this.fmt(o.price) : '', checkMark: on ? '✓' : '', box: boxStyle(on), style: multiStyle(on), onClick: () => this.toggleMulti(q.field, o.key) }; });
+    } else if (q.type === 'slider') {
+      const c = q.slider; const raw = a[c.field];
+      const valueLabel = c.unit === 'sf' ? raw.toLocaleString() + ' sf' : c.unit === 'sec' ? raw + ' sec' : raw + ' ' + c.unit;
+      view.slider = { valueLabel, min: c.min, max: c.max, step: c.step, raw, minLabel: c.min.toLocaleString(), maxLabel: c.max.toLocaleString(), onInput: (e) => this.setField(c.field, +e.target.value) };
+    } else if (q.type === 'state') {
+      const jd = this.jurisData(a.jstate);
+      const band = jd.score > 65 ? ['HIGH', '#b0613d', '#f3e6df'] : jd.score > 48 ? ['MEDIUM', '#8a6d2f', '#f2ecd9'] : ['LOW', '#16924e', '#e7f6ec'];
+      view.stateView = { val: a.jstate, options: this.US_STATES.map(x => x[0]), onChange: (e) => this.setField('jstate', e.target.value), tag: band[0], tagStyle: `font-family:'IBM Plex Mono',monospace;font-size:11px;padding:4px 9px;border-radius:5px;font-weight:600;color:${band[1]};background:${band[2]};` };
+    }
+
+    const isLast = qi >= flow.length - 1;
+    const showNext = q.type === 'slider' || q.type === 'state' || q.type === 'multi';
+    const nextLabel = isLast ? 'Review my answers' : 'Continue';
+
+    const est = this.computeEstimate(a);
+    const juris = est.juris || { score: 0, band: '', barStyle: '', factors: [] };
+    const summary = this.summaryFor(a, est);
 
     return {
-      stepper, isStep1: s.step===1, isStep2: s.step===2, isStep3: s.step===3,
-      goStep1: ()=>this.go(1), goStep2: ()=>this.go(2),
-      goNextFromEstimate: ()=>this.go(accountGate?3:2),
-      estimateCta: accountGate ? 'Create account to view matches →' : 'View my matches →',
-      typeOpts, scopeOpts, stateOpts, onCity, cityTag, cityTagStyle, timeOpts, sqft: s.sqft, sqftLabel, onSqft:(e)=>this.setState({sqft:+e.target.value}),
-      projectType: s.projectType, scope: s.scope, city: s.city, timeline: s.timeline,
-      addonOpts, juris, est,
+      progress,
+      isQuiz: s.phase === 'quiz', isSummary: s.phase === 'summary', isEstimate: s.phase === 'estimate', isMatch: s.phase === 'match',
+      q: { kicker: q.kicker, title: q.title, subtitle: q.subtitle },
+      ...view, summary,
+      showBack: !(s.phase === 'quiz' && qi === 0), showNext, nextLabel,
+      back: () => this.back(), next: () => this.next(),
+      goEstimate: () => { this.setState({ phase: 'estimate' }); this.scrollTop(); },
+      est, juris, goMatch: () => { this.setState({ phase: 'match' }); this.scrollTop(); },
+      matches: est.matches, matchHeadline: `We\u2019ll match you with ${est.matchRoleShort}`,
       acctName: s.acctName, acctEmail: s.acctEmail, acctPass: s.acctPass,
-      onAcctName:(e)=>this.setState({acctName:e.target.value}), onAcctEmail:(e)=>this.setState({acctEmail:e.target.value}), onAcctPass:(e)=>this.setState({acctPass:e.target.value}),
-      acctBenefits,
+      onAcctName: (e) => this.setState({ acctName: e.target.value }), onAcctEmail: (e) => this.setState({ acctEmail: e.target.value }), onAcctPass: (e) => this.setState({ acctPass: e.target.value }),
     };
   }
 }

@@ -1,0 +1,233 @@
+{
+  "_note": "Match list + architect profile (design/app/Matches.dc.html). The design's headline, sub-paragraph and profile headings interpolate the project's city, project type and the architect's first name, so those sentences are seeded as the fragments either side of the interpolated value. The 'Matched in 41 hours' pill is real turnaround - project created_at to the newest match - so only the prefix and unit words are copy.",
+  "copy": [
+    {
+      "scope": "matches",
+      "key": "seo_title",
+      "text": "Your matched architects",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "seo_description",
+      "text": "Two to three licensed architects cleared for your project - credentials, reviews and rates.",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "matched_badge_prefix",
+      "text": "Matched in",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "matched_unit_minute",
+      "text": "minute",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "matched_unit_minutes",
+      "text": "minutes",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "matched_unit_hour",
+      "text": "hour",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "matched_unit_hours",
+      "text": "hours",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "h1_suffix",
+      "text": "architects cleared for your project",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "saved_estimate_label",
+      "text": "SAVED ESTIMATE",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "sub_lead",
+      "text": "Each is pre-filtered on the things you can't check yourself —",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "sub_strong_pre",
+      "text": "state licensure,",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "sub_strong_mid",
+      "text": "jurisdiction experience,",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "sub_strong_post",
+      "text": "specialization, and current capacity",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "sub_tail",
+      "text": "We cap it at three so you're not paralyzed. Contact details stay on-platform until you hire.",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "view_profile_cta",
+      "text": "View profile →",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "back_to_matches",
+      "text": "← Back to matches",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "specialties_heading",
+      "text": "Specialties",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "about_heading_prefix",
+      "text": "About",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "why_matched_kicker_pre",
+      "text": "WHY MATCHED TO YOUR",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "why_matched_kicker_post",
+      "text": "PROJECT",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "selected_work_heading",
+      "text": "Selected work",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "selected_work_sub_pre",
+      "text": "Recent projects",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "selected_work_sub_post",
+      "text": "has designed and permitted.",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "reviews_heading",
+      "text": "Client reviews",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "message_scope_cta",
+      "text": "Message & scope →",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "hire_cta_prefix",
+      "text": "Hire",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "hire_cta_suffix",
+      "text": "now",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "contact_note",
+      "text": "Contact details stay on-platform until you hire. You pay your architect directly.",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "credentials_kicker",
+      "text": "✓ VERIFIED CREDENTIALS",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "licensed_prefix",
+      "text": "✓ Licensed",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "licensed_suffix",
+      "text": "· verified",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "reviews_count_suffix",
+      "text": "reviews",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "stat_experience",
+      "text": "experience",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "stat_projects",
+      "text": "projects delivered",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "stat_ontime",
+      "text": "on-time rate",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "stat_response",
+      "text": "avg response",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "yrs_suffix",
+      "text": "yrs",
+      "href": ""
+    },
+    {
+      "scope": "matches",
+      "key": "hire_confirm",
+      "text": "Hire",
+      "href": ""
+    }
+  ]
+}

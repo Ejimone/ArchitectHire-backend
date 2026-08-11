@@ -1,0 +1,53 @@
+{
+  "_note": "Chrome-scope additions for app states the design never drew: the 404 page (nf_*) and the notifications bell (notif_*). Error boundaries are deliberately NOT CMS-driven - they render exactly when the API is unreachable.",
+  "copy": [
+    {
+      "scope": "chrome",
+      "key": "nf_kicker",
+      "text": "404 — PAGE NOT FOUND",
+      "href": ""
+    },
+    {
+      "scope": "chrome",
+      "key": "nf_title",
+      "text": "We couldn’t find that page.",
+      "href": ""
+    },
+    {
+      "scope": "chrome",
+      "key": "nf_sub",
+      "text": "The link may be out of date, or the page may have moved. Everything we offer is one step from the homepage.",
+      "href": ""
+    },
+    {
+      "scope": "chrome",
+      "key": "nf_cta",
+      "text": "Back to home",
+      "href": "/"
+    },
+    {
+      "scope": "chrome",
+      "key": "nf_secondary",
+      "text": "Browse services →",
+      "href": "/services"
+    },
+    {
+      "scope": "chrome",
+      "key": "notif_heading",
+      "text": "Notifications",
+      "href": ""
+    },
+    {
+      "scope": "chrome",
+      "key": "notif_empty",
+      "text": "Nothing yet — updates about your projects land here.",
+      "href": ""
+    },
+    {
+      "scope": "chrome",
+      "key": "notif_bell_aria",
+      "text": "Notifications",
+      "href": ""
+    }
+  ]
+}

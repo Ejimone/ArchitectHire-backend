@@ -1,0 +1,15 @@
+{
+  "_note": "Chrome for design/marketing/Search.dc.html at /search. The search page already had search_placeholder, idle_summary, popular_heading and empty_sub; the design's three remaining literals had no CMS home. These rows add the results-summary line the design composes in JS (`${total} result${s} for \"${q}\"` — seeded as a plural and a singular row with {n}/{q} tokens the page substitutes at render time, the same way the project-type detail chrome substitutes {name}/{short}), the empty-state heading `No results for \"{q}\"` (same {q} token), and the three empty-state browse chips (All services / Project types / By city), which the design points at Services.dc.html, Projects.dc.html and Cities.dc.html and which map to the real /services, /projects and /cities routes in the Next app. Popular search terms and the result groups themselves come from the search endpoint, not from copy.",
+  "copy": [
+    {"scope": "search", "key": "results_summary", "text": "{n} results for \"{q}\"", "href": ""},
+    {"scope": "search", "key": "results_summary_one", "text": "{n} result for \"{q}\"", "href": ""},
+    {"scope": "search", "key": "empty_heading", "text": "No results for \"{q}\"", "href": ""}
+  ],
+  "blocks": {
+    "use_cases": [
+      {"scope": "search", "group": "empty-links", "sort": 0, "title": "All services", "href": "/services"},
+      {"scope": "search", "group": "empty-links", "sort": 1, "title": "Project types", "href": "/projects"},
+      {"scope": "search", "group": "empty-links", "sort": 2, "title": "By city", "href": "/cities"}
+    ]
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "_note": "Gaps found while porting design/marketing/Inspiration.dc.html to /inspiration. The extracted seeds gave the page its hero, collections heading and final-CTA copy, but every string the design's DCLogic held in JavaScript literals had no CMS home: the three filter control labels (Room / Style / Sort), the two 'show everything' option labels ('All' and 'All styles'), the three sort option labels (Most popular / Newest / A–Z — the labels are copy, the ordering itself is behaviour keyed off sort_option_* and stays in the component), the like button's accessible name, and the two words the mono count line assembles around live numbers ('ideas' and the ' · N liked' suffix). Blocks: the three curated collection cards land in `personas` group 'collections' (kicker = the mono lime count line, title = the card title, body = the description, cta_href = the matching project-type landing page, since the design's own href was a '#' placeholder), and the three final-CTA steps land in `steps` group 'cta-steps' (the 01/02/03 numerals are rendered from sort order like the landing page does, so they are not stored). The style filter's option labels are NOT seeded: the design's short styleOpts list (Modern/Scandinavian/…) has no counterpart on InspirationItem, which stores a longer per-item style ('Modern organic', 'Industrial warm'), so the select derives its options from the distinct style values the inspiration endpoint returns rather than from a literal array in the page. Room options likewise come from the endpoint's distinct tag values.",
+  "copy": [
+    {
+      "scope": "inspiration",
+      "key": "filter_room_label",
+      "text": "Room",
+      "href": ""
+    },
+    {
+      "scope": "inspiration",
+      "key": "filter_style_label",
+      "text": "Style",
+      "href": ""
+    },
+    {
+      "scope": "inspiration",
+      "key": "filter_sort_label",
+      "text": "Sort",
+      "href": ""
+    },
+    {
+      "scope": "inspiration",
+      "key": "filter_room_all",
+      "text": "All",
+      "href": ""
+    },
+    {
+      "scope": "inspiration",
+      "key": "filter_style_all",
+      "text": "All styles",
+      "href": ""
+    },
+    {
+      "scope": "inspiration",
+      "key": "sort_option_popular",
+      "text": "Most popular",
+      "href": ""
+    },
+    {
+      "scope": "inspiration",
+      "key": "sort_option_newest",
+      "text": "Newest",
+      "href": ""
+    },
+    {
+      "scope": "inspiration",
+      "key": "sort_option_az",
+      "text": "A–Z",
+      "href": ""
+    },
+    {
+      "scope": "inspiration",
+      "key": "count_unit",
+      "text": "ideas",
+      "href": ""
+    },
+    {
+      "scope": "inspiration",
+      "key": "count_liked_suffix",
+      "text": "liked",
+      "href": ""
+    },
+    {
+      "scope": "inspiration",
+      "key": "like_label",
+      "text": "Like",
+      "href": ""
+    }
+  ],
+  "blocks": {
+    "personas": [
+      {
+        "scope": "inspiration",
+        "group": "collections",
+        "sort": 0,
+        "kicker": "24 ideas",
+        "title": "Backyard ADUs under 700 sq ft",
+        "body": "Rental-ready studios and one-bedrooms that fit tight lots.",
+        "cta_label": "",
+        "cta_href": "/projects/backyard-adu"
+      },
+      {
+        "scope": "inspiration",
+        "group": "collections",
+        "sort": 1,
+        "kicker": "31 ideas",
+        "title": "Kitchens that open up",
+        "body": "Wall removals, islands, and light-first layouts.",
+        "cta_label": "",
+        "cta_href": "/projects/kitchen-and-bath"
+      },
+      {
+        "scope": "inspiration",
+        "group": "collections",
+        "sort": 2,
+        "kicker": "18 ideas",
+        "title": "Additions that match the original",
+        "body": "Second stories and rear extensions done seamlessly.",
+        "cta_label": "",
+        "cta_href": "/projects/home-addition"
+      }
+    ],
+    "steps": [
+      {
+        "scope": "inspiration",
+        "group": "cta-steps",
+        "sort": 0,
+        "title": "Save what you love",
+        "description": "Build a board of spaces, materials, and layouts."
+      },
+      {
+        "scope": "inspiration",
+        "group": "cta-steps",
+        "sort": 1,
+        "title": "Get an instant estimate",
+        "description": "Answer a few questions and see a real price range."
+      },
+      {
+        "scope": "inspiration",
+        "group": "cta-steps",
+        "sort": 2,
+        "title": "Match with an architect",
+        "description": "They design your version, permit-ready and stamped."
+      }
+    ]
+  }
+}

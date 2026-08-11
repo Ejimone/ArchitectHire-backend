@@ -46,6 +46,9 @@ INSTALLED_APPS = [
     "apps.providers",
     "apps.orders",
     "apps.engagements",
+    "apps.payments",
+    "apps.messaging",
+    "apps.notifications",
 ]
 
 MIDDLEWARE = [
@@ -88,8 +91,14 @@ DATABASES = {
             "DATABASE_URL",
             default="postgres://architecthire:architecthire@localhost:5432/architecthire",
         ),
-        "CONN_MAX_AGE": 60,
-        "CONN_HEALTH_CHECKS": True,
+        # Native psycopg pool instead of per-thread persistent connections.
+        # Under ASGI every request's ORM work runs on its own thread, so
+        # CONN_MAX_AGE=60 held one Postgres connection per thread and a
+        # parallel `next build` prerender (110+ routes) blew straight through
+        # Postgres's 100-connection cap ("sorry, too many clients already").
+        # Pooling requires CONN_MAX_AGE=0 (Django refuses the combination).
+        "CONN_MAX_AGE": 0,
+        "OPTIONS": {"pool": {"min_size": 2, "max_size": 20, "timeout": 10}},
     }
 }
 

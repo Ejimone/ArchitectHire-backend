@@ -1,0 +1,303 @@
+{
+  "_note": "Business-model rewrite of design/marketing/For Experts.dc.html at /for-experts — the same change as architect-landing.json, applied to the expert recruiting page. The design replaced the escrow payout-math card (client funds escrow → 10% platform fee → you keep) with the three-tier subscription section; the tiers live in payments.SubscriptionPlan (group 'standard'), and `plans_label` / `plans_footnote` here are the card header and billing line around them. `earnings_example_label` and `earnings_release_label` belonged to the retired card and are blanked. `delete` removes the escrow/payout personas and every stat, step, value prop and FAQ whose natural key the design renamed, because seeds/content_copy.json and seeds/content_blocks.json were extracted from the superseded revision and re-seed them on every run. Vocabulary throughout: orders → introductions/intros. `tools_link` and `pricing_link` are the entry points to the two dedicated expert pages (design/marketing/Professional Tools.dc.html and Expert Pricing.dc.html): the design ships them as orphans, so this page's tools grid and plan column each link out to the deep dive, the same way the landing page's categories_sub pairs with categories_link.",
+  "copy": [
+    {
+      "scope": "for-experts",
+      "key": "hero_sub",
+      "text": "Scoped project introductions for drafting, 3D, scanning, engineering and permits — delivered to your dashboard. Set your own rates, take only the work you want, and get hired directly by the owners we match you with.",
+      "href": ""
+    },
+    {
+      "scope": "for-experts",
+      "key": "hero_micro",
+      "text": "Apply free · Plans from $79/mo once you're live · Most work needs no license",
+      "href": ""
+    },
+    {
+      "scope": "for-experts",
+      "key": "hero_payout_label",
+      "text": "Hired directly",
+      "href": ""
+    },
+    {
+      "scope": "for-experts",
+      "key": "hero_payout_amount",
+      "text": "$1,200.00",
+      "href": ""
+    },
+    {
+      "scope": "for-experts",
+      "key": "hero_payout_sub",
+      "text": "Your rate, your invoice — we take $0",
+      "href": ""
+    },
+    {
+      "scope": "for-experts",
+      "key": "control_sub",
+      "text": "Every introduction arrives scoped, with the owner's brief and a typical budget range. Accept the ones that match your skills and schedule, decline the rest with one tap. Work solo or as a studio — your call.",
+      "href": ""
+    },
+    {
+      "scope": "for-experts",
+      "key": "earnings_kicker",
+      "text": "SIMPLE, FLAT PRICING",
+      "href": ""
+    },
+    {
+      "scope": "for-experts",
+      "key": "earnings_heading",
+      "text": "Keep 100% of your rate",
+      "href": ""
+    },
+    {
+      "scope": "for-experts",
+      "key": "earnings_sub",
+      "text": "One flat monthly subscription — that's the whole deal. Clients hire and pay you directly, at your own price. We never touch the money and never take a cut of your project fees.",
+      "href": ""
+    },
+    {
+      "scope": "for-experts",
+      "key": "earnings_example_label",
+      "text": "",
+      "href": ""
+    },
+    {
+      "scope": "for-experts",
+      "key": "earnings_release_label",
+      "text": "",
+      "href": ""
+    },
+    {
+      "scope": "for-experts",
+      "key": "plans_label",
+      "text": "Choose your plan",
+      "href": ""
+    },
+    {
+      "scope": "for-experts",
+      "key": "plans_footnote",
+      "text": "Billed monthly, or save ~2 months on annual. Cancel anytime — you keep every client you've met.",
+      "href": ""
+    },
+    {
+      "scope": "for-experts",
+      "key": "tools_sub",
+      "text": "The platform runs the busywork — scoping, contracts, messaging and your pipeline.",
+      "href": ""
+    },
+    {
+      "scope": "for-experts",
+      "key": "final_cta_sub",
+      "text": "Apply free. Most disciplines are approved in about three days. First matched introductions within 48 hours.",
+      "href": ""
+    },
+    {
+      "scope": "for-experts",
+      "key": "tools_link",
+      "text": "See every tool you get →",
+      "href": "/for-experts/tools"
+    },
+    {
+      "scope": "for-experts",
+      "key": "pricing_link",
+      "text": "Compare plans in full →",
+      "href": "/for-experts/pricing"
+    }
+  ],
+  "delete": {
+    "stats": [
+      {
+        "scope": "for-experts",
+        "group": "hero",
+        "value": "2 days",
+        "label": "avg. payout time"
+      },
+      {
+        "scope": "for-experts",
+        "group": "earnings",
+        "value": "10%",
+        "label": "flat service fee"
+      },
+      {
+        "scope": "for-experts",
+        "group": "earnings",
+        "value": "$0",
+        "label": "to receive orders"
+      },
+      {
+        "scope": "for-experts",
+        "group": "earnings",
+        "value": "2 days",
+        "label": "to your bank"
+      }
+    ],
+    "steps": [
+      {
+        "scope": "for-experts",
+        "title": "Receive matched orders"
+      },
+      {
+        "scope": "for-experts",
+        "title": "Deliver & get paid"
+      }
+    ],
+    "value_props": [
+      {
+        "scope": "for-experts",
+        "title": "A steady stream of scoped orders"
+      },
+      {
+        "scope": "for-experts",
+        "title": "Fast, protected payouts"
+      },
+      {
+        "scope": "for-experts",
+        "title": "Invoicing & payouts"
+      }
+    ],
+    "personas": [
+      {
+        "scope": "for-experts",
+        "group": "escrow"
+      },
+      {
+        "scope": "for-experts",
+        "group": "payout"
+      }
+    ],
+    "faqs": [
+      {
+        "scope": "for-experts",
+        "question": "What does it cost to join or receive orders?"
+      },
+      {
+        "scope": "for-experts",
+        "question": "When and how do I get paid?"
+      }
+    ]
+  },
+  "blocks": {
+    "stats": [
+      {
+        "scope": "for-experts",
+        "group": "hero",
+        "sort": 2,
+        "value": "100%",
+        "label": "of your rate is yours"
+      },
+      {
+        "scope": "for-experts",
+        "group": "earnings",
+        "sort": 0,
+        "value": "0%",
+        "label": "taken per project"
+      },
+      {
+        "scope": "for-experts",
+        "group": "earnings",
+        "sort": 1,
+        "value": "100%",
+        "label": "of your rate is yours"
+      },
+      {
+        "scope": "for-experts",
+        "group": "earnings",
+        "sort": 2,
+        "value": "$79+",
+        "label": "flat, per month"
+      }
+    ],
+    "steps": [
+      {
+        "scope": "for-experts",
+        "sort": 1,
+        "title": "Receive matched intros",
+        "description": "Scoped project introductions in your discipline arrive in your dashboard. Accept the ones you want, decline the rest."
+      },
+      {
+        "scope": "for-experts",
+        "sort": 2,
+        "title": "Get hired directly",
+        "description": "The owner hires you and pays your rate directly. We take nothing from the project — the introduction is all we do."
+      }
+    ],
+    "value_props": [
+      {
+        "scope": "for-experts",
+        "group": "values",
+        "sort": 0,
+        "icon": "orders",
+        "title": "A steady stream of matched intros",
+        "description": "Pre-scoped project introductions from real owners land in your dashboard — matched to your discipline and capacity."
+      },
+      {
+        "scope": "for-experts",
+        "group": "values",
+        "sort": 3,
+        "icon": "payouts",
+        "title": "You’re paid directly",
+        "description": "Clients hire and pay you at your own rate. We’re never in the transaction and take nothing from your project fees."
+      },
+      {
+        "scope": "for-experts",
+        "group": "values",
+        "sort": 5,
+        "icon": "nopitch",
+        "title": "No cold pitching",
+        "description": "Skip the gig-site bidding wars. Clients arrive already scoped and ready to hire — you just reach out."
+      },
+      {
+        "scope": "for-experts",
+        "group": "tools",
+        "sort": 11,
+        "icon": "contract",
+        "title": "Contracts & e-sign",
+        "description": "Reusable agreement templates you send and sign in-app — no paperwork."
+      },
+      {
+        "scope": "for-experts",
+        "group": "tools",
+        "sort": 13,
+        "icon": "invoice",
+        "title": "Client pipeline",
+        "description": "Every intro, conversation and won project tracked in one place."
+      }
+    ],
+    "testimonials": [
+      {
+        "scope": "for-experts",
+        "sort": 1,
+        "name": "Sam T.",
+        "quote": "Steady drafting work without the sales grind. Clients hire me directly and pay my rate — no cut taken, no chasing a platform for my money.",
+        "role": "CAD drafter · Phoenix, AZ",
+        "audience": "expert"
+      }
+    ],
+    "faqs": [
+      {
+        "scope": "for-experts",
+        "sort": 1,
+        "question": "What does it cost to join?",
+        "answer": "Applying is free. Once you’re approved and live, you pay a flat monthly subscription — plans start at $79/mo — and nothing else. We never take a cut of your project fees."
+      },
+      {
+        "scope": "for-experts",
+        "sort": 2,
+        "question": "How are orders matched to me?",
+        "answer": "The engine matches on your discipline and specialties, your capacity, your rates, and — for stamped work — your verified license and jurisdiction. You see the scoped introduction and accept or decline; nothing is ever assigned."
+      },
+      {
+        "scope": "for-experts",
+        "sort": 3,
+        "question": "How do I get paid?",
+        "answer": "You contract and invoice the client directly, at your own rate. Payment happens between you and the owner — we’re not in the transaction and take nothing from it."
+      }
+    ]
+  },
+  "page_seo": [
+    {
+      "page_key": "for-experts",
+      "description": "Scoped project introductions for drafting, 3D, scanning, engineering and permits — delivered to your dashboard. Set your own rates, take only the work you want, and get hired directly by the owners we match you with."
+    }
+  ]
+}

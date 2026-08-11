@@ -9,6 +9,7 @@ import pytest
 
 from apps.cms.models import (
     FAQ,
+    FeatureMatrixRow,
     FooterColumn,
     FooterLink,
     NavGroup,
@@ -81,6 +82,23 @@ class TestPageContent:
         assert response.headers["Cache-Control"].startswith("public")
         cached = api_client.get(PAGE_URL, HTTP_IF_NONE_MATCH=etag)
         assert cached.status_code == 304
+
+    def test_feature_matrix_rows_serialise_one_mark_per_plan(self, api_client):
+        """The pricing table's tri-state cells reach the frontend as a list."""
+        FeatureMatrixRow.objects.create(
+            scope="expert-pricing",
+            label="QA-Jurisdiction lookup",
+            is_flagship=True,
+            tier1=FeatureMatrixRow.Mark.LIMITED,
+            tier2=FeatureMatrixRow.Mark.YES,
+            tier3=FeatureMatrixRow.Mark.YES,
+        )
+        body = api_client.get("/api/v1/content/pages/expert-pricing/").json()
+        row = next(
+            r for r in body["blocks"]["feature_matrix"] if r["label"] == "QA-Jurisdiction lookup"
+        )
+        assert row["marks"] == ["limited", "yes", "yes"]
+        assert row["is_flagship"] is True
 
     def test_etag_changes_after_edit(self, api_client):
         etag_before = api_client.get(PAGE_URL).headers["ETag"]

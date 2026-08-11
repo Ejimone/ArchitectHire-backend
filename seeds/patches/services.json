@@ -1,0 +1,71 @@
+{
+  "_note": "Chrome for design/marketing/Services.dc.html at /services (breadcrumb, the 'Learn more' link on each catalog group, and the two stamp-vs-no-stamp personas the design hardcodes), plus the business-model rewrite: the design moved from an escrow marketplace to an introductions platform, so the hero subcopy, hero CTA, catalog heading and the 3D category tagline all changed. seeds/content_copy.json was extracted from the superseded revision and still re-seeds the escrow wording, so these rows restore the current design verbatim.",
+  "copy": [
+    {
+      "scope": "services",
+      "key": "breadcrumb_home",
+      "text": "Home",
+      "href": "/"
+    },
+    {
+      "scope": "services",
+      "key": "breadcrumb_current",
+      "text": "Services",
+      "href": ""
+    },
+    {
+      "scope": "services",
+      "key": "catalog_group_link",
+      "text": "Learn more →",
+      "href": ""
+    },
+    {
+      "scope": "services",
+      "key": "hero_sub",
+      "text": "Book a one-hour consult, a set of renders, interior design, or drafting by the hour — and step up to a full stamped set only when the project calls for it. Clear typical pricing, remote, and you hire your specialist directly.",
+      "href": ""
+    },
+    {
+      "scope": "services",
+      "key": "hero_cta",
+      "text": "Get an instant estimate →",
+      "href": "/get-started"
+    },
+    {
+      "scope": "services",
+      "key": "catalog_heading",
+      "text": "Every service, one place",
+      "href": ""
+    }
+  ],
+  "blocks": {
+    "personas": [
+      {
+        "scope": "services",
+        "sort": 0,
+        "kicker": "NO STAMP NEEDED · TRAVELS ANYWHERE",
+        "title": "No Stamp Needed",
+        "body": "Renders, drafting, interior design, as-builts, 3D scans, feasibility, consults — done by anyone on the platform, in any state.",
+        "points": [],
+        "cta_label": "",
+        "cta_href": ""
+      },
+      {
+        "scope": "services",
+        "sort": 1,
+        "kicker": "STAMP REQUIRED · JURISDICTION-MATCHED",
+        "title": "Stamp Required",
+        "body": "Permit sets, structural stamps, entitlements — matched to a pro licensed in your exact city or county.",
+        "points": [],
+        "cta_label": "",
+        "cta_href": ""
+      }
+    ]
+  },
+  "service_categories": [
+    {"slug": "3d-and-visualization", "tagline": "Our most popular category"}
+  ],
+  "page_seo": [
+    {"page_key": "services", "description": "Book a one-hour consult, a set of renders, interior design, or drafting by the hour — and step up to a full stamped set only when the project calls for it. Clear typical pricing, remote, and you hire your specialist directly."}
+  ]
+}

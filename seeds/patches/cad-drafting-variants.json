@@ -1,0 +1,191 @@
+{
+  "_note": "The ?svc= hero variants for design/marketing/CAD Drafting.dc.html's `svcMap` (L208-233). The site nav deep-links every service in the mega-menu to /services/cad-drafting?svc=<slug>, and the param swaps exactly four hero strings — breadcrumb label, badge pill, h1 and subhead — while every section below the hero stays the shared drafting content. Each state is one Persona row on the cad-drafting scope in group 'service-variant', the only block with five independent text fields to hold them: kicker = the svc slug the URL matches on, title = the h1, body = the subhead, cta_label = the badge pill, cta_href = the breadcrumb label. The design's `heroDefault` is not repeated here — it is already the page's own breadcrumb_current / hero_eyebrow / hero_h1 / hero_sub copy rows, which the route falls back to when svc is absent or unrecognised, so the default hero keeps a single home the owner edits. The `delete` block removes three orphaned pricing personas: an earlier revision of seeds/patches/cad-drafting.json seeded them ungrouped and with no price, and re-seeding them into group 'pricing' left the ungrouped copies behind, doubling the pricing section.",
+  "delete": {
+    "personas": [
+      {
+        "scope": "cad-drafting",
+        "group": "",
+        "title": "per hour (US)"
+      },
+      {
+        "scope": "cad-drafting",
+        "group": "",
+        "title": "per residence"
+      },
+      {
+        "scope": "cad-drafting",
+        "group": "",
+        "title": "per sheet"
+      }
+    ]
+  },
+  "blocks": {
+    "personas": [
+      {
+        "scope": "cad-drafting",
+        "group": "service-variant",
+        "sort": 0,
+        "kicker": "video-consult",
+        "title": "Talk it through with a pro, on video",
+        "body": "Book a live video consult with a licensed architect or drafter to pressure-test your idea, scope, and budget before any drawings begin.",
+        "points": "",
+        "cta_label": "Consults & reviews",
+        "cta_href": "Video consult"
+      },
+      {
+        "scope": "cad-drafting",
+        "group": "service-variant",
+        "sort": 1,
+        "kicker": "plan-review",
+        "title": "A second set of eyes on your plans",
+        "body": "Send us your existing drawings and get a marked-up, prioritized review — catch problems before they reach a plan checker.",
+        "points": "",
+        "cta_label": "Consults & reviews",
+        "cta_href": "Plan review & markup"
+      },
+      {
+        "scope": "cad-drafting",
+        "group": "service-variant",
+        "sort": 2,
+        "kicker": "feasibility",
+        "title": "Find out if it can be built",
+        "body": "A focused feasibility check against zoning, setbacks, and code so you know what your site allows before you invest in a full set.",
+        "points": "",
+        "cta_label": "Consults & reviews",
+        "cta_href": "Feasibility check"
+      },
+      {
+        "scope": "cad-drafting",
+        "group": "service-variant",
+        "sort": 3,
+        "kicker": "as-built",
+        "title": "Document what already exists",
+        "body": "Measured, coordinated as-built drawings of an existing home or space — the standard starting point for any remodel or addition.",
+        "points": "",
+        "cta_label": "Drafting & documentation",
+        "cta_href": "As-built package"
+      },
+      {
+        "scope": "cad-drafting",
+        "group": "service-variant",
+        "sort": 4,
+        "kicker": "pdf-to-cad",
+        "title": "Turn flat PDFs into editable CAD",
+        "body": "Legacy PDFs and scans rebuilt as clean, layered, editable CAD you can keep working in — priced per sheet.",
+        "points": "",
+        "cta_label": "Drafting & documentation",
+        "cta_href": "PDF-to-CAD"
+      },
+      {
+        "scope": "cad-drafting",
+        "group": "service-variant",
+        "sort": 5,
+        "kicker": "laser-scanning",
+        "title": "Capture a space to the millimeter",
+        "body": "On-site 3D laser scanning produces a precise point cloud of existing conditions — the reliable base for as-builts and renovations.",
+        "points": "",
+        "cta_label": "Scanning & BIM",
+        "cta_href": "3D laser scanning"
+      },
+      {
+        "scope": "cad-drafting",
+        "group": "service-variant",
+        "sort": 6,
+        "kicker": "scan-to-bim",
+        "title": "From point cloud to a working model",
+        "body": "We convert laser-scan point clouds into an accurate, parametric BIM model your whole team can build on.",
+        "points": "",
+        "cta_label": "Scanning & BIM",
+        "cta_href": "Scan-to-BIM"
+      },
+      {
+        "scope": "cad-drafting",
+        "group": "service-variant",
+        "sort": 7,
+        "kicker": "title-24",
+        "title": "Title-24 & energy compliance, done right",
+        "body": "Energy calculations and compliance documentation prepared correctly the first time, so your submittal clears plan check without correction cycles.",
+        "points": "",
+        "cta_label": "Engineering",
+        "cta_href": "Title-24 / energy"
+      },
+      {
+        "scope": "cad-drafting",
+        "group": "service-variant",
+        "sort": 8,
+        "kicker": "structural-stamp",
+        "title": "Get your structure stamped",
+        "body": "A licensed structural engineer reviews and stamps your framing and lateral design so it is permit-ready in your jurisdiction.",
+        "points": "",
+        "cta_label": "Engineering",
+        "cta_href": "Structural stamp"
+      },
+      {
+        "scope": "cad-drafting",
+        "group": "service-variant",
+        "sort": 9,
+        "kicker": "code-consulting",
+        "title": "Navigate the code with an expert",
+        "body": "Hourly code consulting to untangle occupancy, egress, fire, and accessibility requirements before they become correction notices.",
+        "points": "",
+        "cta_label": "Engineering",
+        "cta_href": "Code consulting"
+      },
+      {
+        "scope": "cad-drafting",
+        "group": "service-variant",
+        "sort": 10,
+        "kicker": "permit-set",
+        "title": "A complete, permit-ready drawing set",
+        "body": "Everything a plan checker expects — coordinated plans, sections, and details assembled into a submittal-ready permit set.",
+        "points": "",
+        "cta_label": "Permits & full design",
+        "cta_href": "Permit set"
+      },
+      {
+        "scope": "cad-drafting",
+        "group": "service-variant",
+        "sort": 11,
+        "kicker": "zoning-study",
+        "title": "Know exactly what your site allows",
+        "body": "A zoning study of setbacks, height, coverage, and use so you design within the envelope from day one.",
+        "points": "",
+        "cta_label": "Permits & full design",
+        "cta_href": "Zoning study"
+      },
+      {
+        "scope": "cad-drafting",
+        "group": "service-variant",
+        "sort": 12,
+        "kicker": "interior-design",
+        "title": "A designed interior, drawn to build",
+        "body": "Finishes, layouts, and specifications pulled together into a coordinated interior package your contractor can price and build.",
+        "points": "",
+        "cta_label": "Interior design",
+        "cta_href": "Interior design package"
+      },
+      {
+        "scope": "cad-drafting",
+        "group": "service-variant",
+        "sort": 13,
+        "kicker": "virtual-staging",
+        "title": "Stage a space before it exists",
+        "body": "Photoreal virtual staging that furnishes empty or in-progress rooms — perfect for listings, approvals, and buy-in.",
+        "points": "",
+        "cta_label": "Interior design",
+        "cta_href": "Virtual staging"
+      },
+      {
+        "scope": "cad-drafting",
+        "group": "service-variant",
+        "sort": 14,
+        "kicker": "ffe-plan",
+        "title": "Plan every piece that fills the space",
+        "body": "A complete furniture and FF&E plan with layouts, schedules, and specifications ready for procurement.",
+        "points": "",
+        "cta_label": "Interior design",
+        "cta_href": "Furniture & FF&E plan"
+      }
+    ]
+  }
+}

@@ -1,0 +1,527 @@
+{
+  "_note": "Gaps found while porting design/marketing/Jurisdiction Database.dc.html to /jurisdictions and design/marketing/State Permit Guide.dc.html to /jurisdictions/[code]. Copy rows: breadcrumbs, the search/region/sort control chrome, the directory table headings, and every label the 52 state guides repeat (all `state_*` keys) — the per-state pages have no scope of their own for shared chrome, so they read it from this hub scope. Strings containing {token} are filled per state from the jurisdictions API: {state} {code} {score} {band} {band_lower} {timeline} {multiplier} {city} {region}; the hub's count label uses {shown}/{total}. `state_intro_fallback` / `state_body1_fallback` / `state_body2_fallback`, the `state-steps` personas and the `state-faq` FAQs are the generic versions rendered for the 51 states whose State.intro/body1/body2/permit_steps and `state:<CODE>` FAQ rows are still empty (only CA is authored); a state's own rows always win. Blocks: `score-legend` value_props = the six 'How the score is built' cards on the hub, `state-factors` value_props = the descriptions for the five factor names the jurisdictions API returns, `regions` credential_badges = the design's region-filter order. The remote-hiring FAQ (shared template and the extracted state:CA row) and California's four permit steps are also restored here: the design moved from an escrow marketplace to an introductions platform, so the process no longer runs on \"escrow-protected milestones\" and the scoping call ends with a price agreed directly with the architect rather than a platform-generated fixed quote (design/marketing/State Permit Guide.dc.html).",
+  "copy": [
+    {
+      "scope": "jurisdiction-database",
+      "key": "breadcrumb_home",
+      "text": "Home",
+      "href": "/"
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "breadcrumb_current",
+      "text": "Jurisdiction database",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "filter_search_label",
+      "text": "Search state",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "filter_search_placeholder",
+      "text": "State name or abbreviation…",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "filter_region_label",
+      "text": "Region",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "filter_region_all",
+      "text": "All regions",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "filter_sort_label",
+      "text": "Sort by",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "filter_band_all",
+      "text": "All bands",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "sort_score_desc",
+      "text": "Complexity: high → low",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "sort_score_asc",
+      "text": "Complexity: low → high",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "sort_name_asc",
+      "text": "A–Z",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "count_label",
+      "text": "{shown} of {total} states",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "table_col_state",
+      "text": "State",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "table_col_score",
+      "text": "Complexity score",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "table_col_band",
+      "text": "Band",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "table_col_timeline",
+      "text": "Typical permit",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "row_cta",
+      "text": "Permit guide →",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "empty_text",
+      "text": "No states match your filters. Try a broader search — we cover all 52.",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "band_label_low",
+      "text": "Low complexity",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "band_label_medium",
+      "text": "Moderate complexity",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "band_label_high",
+      "text": "High complexity",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "state_breadcrumb_parent",
+      "text": "Jurisdiction database",
+      "href": "/jurisdictions"
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "state_eyebrow",
+      "text": "Permitting guide",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "state_h1",
+      "text": "Hiring an architect & getting permits in {state}",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "state_cta",
+      "text": "Get a {state} estimate →",
+      "href": "/get-started"
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "state_score_label",
+      "text": "COMPLEXITY SCORE",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "state_score_suffix",
+      "text": "/ 100 · {band}",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "state_stat_timeline",
+      "text": "Typical time to permit",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "state_stat_multiplier",
+      "text": "Pricing multiplier",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "state_stat_architects",
+      "text": "Licensed architects",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "state_multiplier_format",
+      "text": "{multiplier}×",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "state_overview_heading",
+      "text": "Permitting in {state}, explained",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "state_factors_heading",
+      "text": "What drives complexity here",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "state_timeline_heading",
+      "text": "Typical path to a stamped permit",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "state_faq_heading",
+      "text": "Frequently asked questions",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "state_cities_heading",
+      "text": "CITIES WE COVER",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "state_projects_heading",
+      "text": "POPULAR PROJECTS",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "state_sidebar_cta_heading",
+      "text": "Price a {state} project",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "state_sidebar_cta_sub",
+      "text": "Instant estimate with the {state} complexity multiplier applied automatically.",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "state_sidebar_cta_button",
+      "text": "Get my estimate →",
+      "href": "/get-started"
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "state_related_heading",
+      "text": "Explore other state guides",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "state_related_link",
+      "text": "Browse all 52 jurisdictions →",
+      "href": "/jurisdictions"
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "state_seo_title",
+      "text": "Hiring an architect & getting permits in {state}",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "state_seo_description",
+      "text": "Permitting guide for {state}: complexity score {score}/100, a typical {timeline} permit window, the factors that drive cost, and architects licensed to stamp your set.",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "state_intro_fallback",
+      "text": "{state} scores {score}/100 on our complexity index — {band_lower} — and a typical permit takes {timeline}. Here's what shapes the drawing set, and how we match you to an architect licensed to stamp it.",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "state_body1_fallback",
+      "text": "Every permit set submitted in {state} must be stamped by an architect licensed in the state. We verify that license before a match ever reaches you, so the drawings you pay for are drawings your building department will accept. What moves the price is scope, drawing depth and the reviews your project triggers — not the state line itself.",
+      "href": ""
+    },
+    {
+      "scope": "jurisdiction-database",
+      "key": "state_body2_fallback",
+      "text": "On top of state rules, every city and county layers on its own review. Our jurisdiction database scores the factors below — seismic zone, historic overlay, climate load, coastal and flood exposure, and required drawing-set depth — for {state} and for the local jurisdiction, so your estimate reflects the real complexity of your specific address rather than a statewide average. Today that puts {state} at a {multiplier}× pricing multiplier.",
+      "href": ""
+    }
+  ],
+  "blocks": {
+    "value_props": [
+      {
+        "scope": "jurisdiction-database",
+        "group": "score-legend",
+        "sort": 0,
+        "icon": "",
+        "title": "Seismic zone",
+        "description": "Ground-motion risk requiring lateral and foundation detailing — highest across the West Coast."
+      },
+      {
+        "scope": "jurisdiction-database",
+        "group": "score-legend",
+        "sort": 1,
+        "icon": "",
+        "title": "Coastal & flood",
+        "description": "Flood-plain, coastal-construction and drainage rules that add scope and review steps."
+      },
+      {
+        "scope": "jurisdiction-database",
+        "group": "score-legend",
+        "sort": 2,
+        "icon": "",
+        "title": "Wildfire (WUI)",
+        "description": "Wildland-urban interface ignition-resistant construction requirements."
+      },
+      {
+        "scope": "jurisdiction-database",
+        "group": "score-legend",
+        "sort": 3,
+        "icon": "",
+        "title": "Historic overlay",
+        "description": "Landmark and historic-district design review that lengthens approval."
+      },
+      {
+        "scope": "jurisdiction-database",
+        "group": "score-legend",
+        "sort": 4,
+        "icon": "",
+        "title": "Snow & climate load",
+        "description": "Structural sizing for snow, wind and hurricane loads by climate zone."
+      },
+      {
+        "scope": "jurisdiction-database",
+        "group": "score-legend",
+        "sort": 5,
+        "icon": "",
+        "title": "Drawing-set depth",
+        "description": "How extensive a permit set the jurisdiction requires at submission."
+      },
+      {
+        "scope": "jurisdiction-database",
+        "group": "state-factors",
+        "sort": 0,
+        "icon": "",
+        "title": "Seismic zone",
+        "description": "Lateral and foundation detailing tied to the local seismic hazard zone — the single biggest structural driver."
+      },
+      {
+        "scope": "jurisdiction-database",
+        "group": "state-factors",
+        "sort": 1,
+        "icon": "",
+        "title": "Historic overlay",
+        "description": "Landmark and historic-district design review that adds submittals and lengthens approval."
+      },
+      {
+        "scope": "jurisdiction-database",
+        "group": "state-factors",
+        "sort": 2,
+        "icon": "",
+        "title": "Climate load",
+        "description": "Structural sizing for snow, wind and hurricane loads set by the local climate zone."
+      },
+      {
+        "scope": "jurisdiction-database",
+        "group": "state-factors",
+        "sort": 3,
+        "icon": "",
+        "title": "Coastal / flood",
+        "description": "Flood-plain, coastal-construction and drainage rules that add scope and extra review steps."
+      },
+      {
+        "scope": "jurisdiction-database",
+        "group": "state-factors",
+        "sort": 4,
+        "icon": "",
+        "title": "Drawing set",
+        "description": "How extensive a permit set this jurisdiction expects at submission."
+      }
+    ],
+    "personas": [
+      {
+        "scope": "jurisdiction-database",
+        "group": "state-steps",
+        "sort": 0,
+        "kicker": "2–3 days",
+        "title": "Scope & estimate",
+        "body": "Your questionnaire feeds the pricing engine; you review 2–3 {state}-licensed architects and confirm a fixed quote or an hourly rate on a scoping call.",
+        "points": [],
+        "cta_label": "",
+        "cta_href": ""
+      },
+      {
+        "scope": "jurisdiction-database",
+        "group": "state-steps",
+        "sort": 1,
+        "kicker": "3–8 wks",
+        "title": "Design & drawings",
+        "body": "Your architect produces the full set — plans, elevations and structural coordination — with milestone reviews as each stage lands.",
+        "points": [],
+        "cta_label": "",
+        "cta_href": ""
+      },
+      {
+        "scope": "jurisdiction-database",
+        "group": "state-steps",
+        "sort": 2,
+        "kicker": "2–6 wks",
+        "title": "Plan check submission",
+        "body": "The stamped set is submitted to your city or county. Complexity and backlog set the review time; corrections cycle back if the reviewer asks for them.",
+        "points": [],
+        "cta_label": "",
+        "cta_href": ""
+      },
+      {
+        "scope": "jurisdiction-database",
+        "group": "state-steps",
+        "sort": 3,
+        "kicker": "—",
+        "title": "Permit issued",
+        "body": "Once approved, you receive the permit and can break ground. Revision tooling keeps any change orders on-platform.",
+        "points": [],
+        "cta_label": "",
+        "cta_href": ""
+      }
+    ],
+    "faqs": [
+      {
+        "scope": "jurisdiction-database",
+        "group": "state-faq",
+        "sort": 0,
+        "question": "Does my architect need to be licensed in {state}?",
+        "answer": "Yes. A permit set must be stamped by an architect holding an active {state} license. Every match we surface for a {state} project is verified as actively licensed in the state before it reaches you."
+      },
+      {
+        "scope": "jurisdiction-database",
+        "group": "state-faq",
+        "sort": 1,
+        "question": "How long does it take to get a permit in {state}?",
+        "answer": "Plan for roughly {timeline} from scoping to an issued permit on a typical residential project — a few weeks of design plus plan-check review, which varies by city and current backlog."
+      },
+      {
+        "scope": "jurisdiction-database",
+        "group": "state-faq",
+        "sort": 2,
+        "question": "What does the {state} complexity score change?",
+        "answer": "{state} scores {score}/100 — {band_lower}. That score sets the {multiplier}× multiplier applied automatically in your estimate, and the {timeline} permit window shown above."
+      },
+      {
+        "scope": "jurisdiction-database",
+        "group": "state-faq",
+        "sort": 3,
+        "question": "What drives permit complexity in {state}?",
+        "answer": "We weight seismic zone, historic overlay, climate load, coastal and flood exposure, and the drawing-set depth the jurisdiction requires at submission. The breakdown for {state} is in “What drives complexity here” above."
+      },
+      {
+        "scope": "jurisdiction-database",
+        "group": "state-faq",
+        "sort": 4,
+        "question": "Can I hire an architect remotely for a {state} project?",
+        "answer": "Yes. The entire process — scoping, drawings, revisions and submission — runs on-platform, and you contract and pay your architect directly. You never need an in-person meeting to reach a stamped, permit-ready set."
+      },
+      {
+        "scope": "state:CA",
+        "sort": 4,
+        "question": "Can I hire an architect remotely for a California project?",
+        "answer": "Yes. The entire process — scoping, drawings, revisions and submission — runs on-platform, and you contract and pay your architect directly. You never need an in-person meeting to reach a stamped, permit-ready set."
+      }
+    ],
+    "credential_badges": [
+      {
+        "scope": "jurisdiction-database",
+        "group": "regions",
+        "sort": 0,
+        "label": "West"
+      },
+      {
+        "scope": "jurisdiction-database",
+        "group": "regions",
+        "sort": 1,
+        "label": "Southwest"
+      },
+      {
+        "scope": "jurisdiction-database",
+        "group": "regions",
+        "sort": 2,
+        "label": "Midwest"
+      },
+      {
+        "scope": "jurisdiction-database",
+        "group": "regions",
+        "sort": 3,
+        "label": "South"
+      },
+      {
+        "scope": "jurisdiction-database",
+        "group": "regions",
+        "sort": 4,
+        "label": "Northeast"
+      }
+    ]
+  },
+  "states": [
+    {
+      "code": "CA",
+      "permit_steps": [
+        {
+          "title": "Scope & estimate",
+          "duration": "2–3 days",
+          "description": "The questionnaire returns a typical price range; you review 2–3 California-licensed architects and agree a price directly with one — fixed or hourly, their rate — on a scoping call."
+        },
+        {
+          "title": "Design & drawings",
+          "duration": "3–8 wks",
+          "description": "Your architect produces the full set — plans, elevations, structural coordination, and Title-24 compliance — with milestone reviews you sign off."
+        },
+        {
+          "title": "Plan check submission",
+          "duration": "2–6 wks",
+          "description": "The stamped set is submitted to your city or county. Complexity and backlog set the review time; corrections cycle back if needed."
+        },
+        {
+          "title": "Permit issued",
+          "duration": "—",
+          "description": "Once approved, you receive the permit and can break ground. Revision tooling keeps any change orders on-platform."
+        }
+      ]
+    }
+  ]
+}

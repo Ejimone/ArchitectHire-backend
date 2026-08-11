@@ -5,7 +5,7 @@ from django.db.models import Q
 from .models import SearchIndexEntry
 
 STATIC_PAGES = [
-    ("How it works", "See pricing, matching and escrow end to end", "/#how"),
+    ("How it works", "The client journey, end to end", "/#how"),
     ("Services", "The full three-tier services catalog", "/services"),
     ("For architects", "Apply to join the network", "/for-architects"),
     ("For service experts", "Drafters, 3D artists, engineers, permit pros", "/for-experts"),

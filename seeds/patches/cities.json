@@ -1,0 +1,302 @@
+{
+  "_note": "Cities hub (/cities) + the strings every per-city page (/cities/[slug]) shares. Rows whose text contains {city} {state} {state_name} {county} {count} are filled per city by the frontend from GET /api/v1/jurisdictions/cities/{slug}/, so the owner edits one row instead of twelve. Design sources: design/marketing/Cities.dc.html and design/marketing/City Landing.dc.html. The remote-work FAQ is restored here for the shared template and for city:oakland (the one city with its own extracted FAQ set): the design moved from an escrow marketplace to an introductions platform, so the answer no longer says work \"bills through escrow milestones\". City Landing.dc.html still carries that sentence in its FAQ array while its own hero now reads \"hired directly\" — the design contradicts itself there, and this follows the new model, which is the one the rest of the site states.",
+  "copy": [
+    {
+      "scope": "cities",
+      "key": "breadcrumb_home",
+      "text": "Home",
+      "href": "/"
+    },
+    {
+      "scope": "cities",
+      "key": "breadcrumb_current",
+      "text": "Architects by city",
+      "href": "/cities"
+    },
+    {
+      "scope": "cities",
+      "key": "card_count_suffix",
+      "text": "architects",
+      "href": ""
+    },
+    {
+      "scope": "cities",
+      "key": "card_image_hint",
+      "text": "Drop image — {city} skyline / homes",
+      "href": ""
+    },
+    {
+      "scope": "cities",
+      "key": "city_seo_title",
+      "text": "Hire a licensed architect in {city}, {state_name}",
+      "href": ""
+    },
+    {
+      "scope": "cities",
+      "key": "city_breadcrumb_current",
+      "text": "{city}, {state}",
+      "href": ""
+    },
+    {
+      "scope": "cities",
+      "key": "city_hero_eyebrow",
+      "text": "{county} · {state}",
+      "href": ""
+    },
+    {
+      "scope": "cities",
+      "key": "city_hero_h1",
+      "text": "Hire a licensed architect in {city}, {state}",
+      "href": ""
+    },
+    {
+      "scope": "cities",
+      "key": "city_hero_cta",
+      "text": "Get matched in {city} →",
+      "href": "/get-started"
+    },
+    {
+      "scope": "cities",
+      "key": "city_hero_micro",
+      "text": "Free estimate · 48-hour match",
+      "href": ""
+    },
+    {
+      "scope": "cities",
+      "key": "city_hero_image_hint",
+      "text": "Drop image — {city} home / project photo",
+      "href": ""
+    },
+    {
+      "scope": "cities",
+      "key": "city_portrait_hint",
+      "text": "Portrait",
+      "href": ""
+    },
+    {
+      "scope": "cities",
+      "key": "city_hero_card_prefix",
+      "text": "Licensed {state}",
+      "href": ""
+    },
+    {
+      "scope": "cities",
+      "key": "city_stamp_badge",
+      "text": "STAMP ✓",
+      "href": ""
+    },
+    {
+      "scope": "cities",
+      "key": "city_context_heading",
+      "text": "Building in {city}? Local licensure matters.",
+      "href": ""
+    },
+    {
+      "scope": "cities",
+      "key": "city_permit_label",
+      "text": "{city} PERMIT SNAPSHOT",
+      "href": ""
+    },
+    {
+      "scope": "cities",
+      "key": "city_projects_heading",
+      "text": "Popular projects in {city}",
+      "href": ""
+    },
+    {
+      "scope": "cities",
+      "key": "city_projects_sub",
+      "text": "Typical fixed-quote ranges for {city} homeowners and businesses.",
+      "href": ""
+    },
+    {
+      "scope": "cities",
+      "key": "city_network_heading",
+      "text": "Architects licensed in {state}",
+      "href": ""
+    },
+    {
+      "scope": "cities",
+      "key": "city_network_sub",
+      "text": "A sample of the vetted network serving {city}. See your real matches after a free estimate.",
+      "href": ""
+    },
+    {
+      "scope": "cities",
+      "key": "city_work_hint",
+      "text": "Portfolio work",
+      "href": ""
+    },
+    {
+      "scope": "cities",
+      "key": "city_face_hint",
+      "text": "Face",
+      "href": ""
+    },
+    {
+      "scope": "cities",
+      "key": "city_verified_badge",
+      "text": "✓",
+      "href": ""
+    },
+    {
+      "scope": "cities",
+      "key": "city_states_heading",
+      "text": "Licensed architects in all 50 states",
+      "href": ""
+    },
+    {
+      "scope": "cities",
+      "key": "city_states_sub",
+      "text": "We match to your jurisdiction anywhere in the country — every state, every city. Find architects licensed where you're building.",
+      "href": ""
+    },
+    {
+      "scope": "cities",
+      "key": "city_faq_heading",
+      "text": "{city} architect FAQs",
+      "href": ""
+    },
+    {
+      "scope": "cities",
+      "key": "city_final_cta_heading",
+      "text": "Start your {city} project today",
+      "href": ""
+    },
+    {
+      "scope": "cities",
+      "key": "city_final_cta_sub",
+      "text": "Free estimate. Matched with {state}-licensed architects in 48 hours.",
+      "href": ""
+    },
+    {
+      "scope": "cities",
+      "key": "city_final_cta_button",
+      "text": "Get matched in {city} →",
+      "href": "/get-started"
+    }
+  ],
+  "blocks": {
+    "stats": [
+      {
+        "scope": "cities",
+        "group": "city-hero",
+        "sort": 0,
+        "value": "{count}",
+        "label": "{state}-licensed architects"
+      },
+      {
+        "scope": "cities",
+        "group": "city-hero",
+        "sort": 1,
+        "value": "48 hrs",
+        "label": "to matched"
+      },
+      {
+        "scope": "cities",
+        "group": "city-hero",
+        "sort": 2,
+        "value": "4.9★",
+        "label": "avg client rating"
+      }
+    ],
+    "use_cases": [
+      {
+        "scope": "cities",
+        "group": "city-projects",
+        "sort": 0,
+        "icon": "adu",
+        "title": "Backyard ADU",
+        "description": "Detached & garage conversions",
+        "cta_label": "From $3,900",
+        "href": "/projects/backyard-adu"
+      },
+      {
+        "scope": "cities",
+        "group": "city-projects",
+        "sort": 1,
+        "icon": "addition",
+        "title": "Home addition",
+        "description": "Second-story & footprint",
+        "cta_label": "From $11,000",
+        "href": "/projects/home-addition"
+      },
+      {
+        "scope": "cities",
+        "group": "city-projects",
+        "sort": 2,
+        "icon": "renovation",
+        "title": "Whole-home renovation",
+        "description": "Interior & structural",
+        "cta_label": "From $8,500",
+        "href": "/projects/whole-home-renovation"
+      },
+      {
+        "scope": "cities",
+        "group": "city-projects",
+        "sort": 3,
+        "icon": "kitchenbath",
+        "title": "Kitchen & bath",
+        "description": "Focused remodels",
+        "cta_label": "From $2,400",
+        "href": "/projects/kitchen-and-bath"
+      },
+      {
+        "scope": "cities",
+        "group": "city-projects",
+        "sort": 4,
+        "icon": "newhome",
+        "title": "New custom home",
+        "description": "Ground-up hillside builds",
+        "cta_label": "From $26,000",
+        "href": "/projects/new-custom-home"
+      },
+      {
+        "scope": "cities",
+        "group": "city-projects",
+        "sort": 5,
+        "icon": "commercial",
+        "title": "Restaurant / TI",
+        "description": "Change-of-use & commercial",
+        "cta_label": "From $8,000",
+        "href": "/projects/commercial-ti"
+      }
+    ],
+    "faqs": [
+      {
+        "scope": "cities",
+        "group": "city",
+        "sort": 0,
+        "question": "Do I need an architect licensed specifically in {state}?",
+        "answer": "Yes. A permit-ready drawing set must be stamped by an architect licensed in the state where the project is built. Every match you receive is verified as licensed in {state} before it reaches you."
+      },
+      {
+        "scope": "cities",
+        "group": "city",
+        "sort": 1,
+        "question": "How much does an architect cost in {city}?",
+        "answer": "It depends on scope. A backyard ADU set typically starts around $3,900, a home addition around $11,000, and a new custom home from $26,000. You get an itemized instant estimate before talking to anyone, and each architect confirms a fixed quote or hourly rate on your scoping call."
+      },
+      {
+        "scope": "cities",
+        "group": "city",
+        "sort": 2,
+        "question": "Can this really be done remotely?",
+        "answer": "Yes. Site information, measurements, and photos are collected digitally, and {city} plan-check submittals are handled electronically. You work with your architect over chat and video, and you hire and pay them directly, by milestone."
+      },
+      {
+        "scope": "cities",
+        "group": "city",
+        "sort": 3,
+        "question": "How fast will I be matched?",
+        "answer": "Within 48 hours of completing your free estimate you'll see 2–3 {state}-licensed architects pre-cleared on jurisdiction experience and capacity for your project type."
+      },
+      {
+        "scope": "city:oakland",
+        "sort": 2,
+        "question": "Can this really be done remotely?",
+        "answer": "Yes. Site information, measurements, and photos are collected digitally, and Oakland plan-check submittals are handled electronically. You work with your architect over chat and video, and you hire and pay them directly, by milestone."
+      }
+    ]
+  }
+}

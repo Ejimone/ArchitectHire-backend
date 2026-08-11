@@ -1,0 +1,28 @@
+{
+  "_note": "Provider subscription tiers — the platform's only revenue. Two groups because the design presents two different tables: 'standard' (Architect Landing, For Experts, both account onboardings) and 'pricing-page' (Expert Pricing, Professional Tools, with a monthly/yearly toggle). They disagree on price by design; the owner reconciles in admin.",
+  "standard": [
+    {"key": "studio", "name": "Studio", "price_monthly": "79.00", "price_yearly": "65.83",
+     "project_ceiling": "Projects up to $1,500", "metro_coverage": "1 metro", "pursuit_limit": "5 pursuits",
+     "fits": "Drafting, staging, consults, small jobs", "is_recommended": false, "sort": 0},
+    {"key": "practice", "name": "Practice", "price_monthly": "299.00", "price_yearly": "249.17",
+     "project_ceiling": "Projects up to $15,000", "metro_coverage": "3 metros", "pursuit_limit": "15 pursuits",
+     "fits": "ADUs, additions, permit sets — the core", "is_recommended": true, "sort": 1},
+    {"key": "firm", "name": "Firm", "price_monthly": "699.00", "price_yearly": "582.50",
+     "project_ceiling": "No project ceiling", "metro_coverage": "Statewide", "pursuit_limit": "Unlimited pursuits",
+     "fits": "Custom homes, commercial TI, restaurants", "is_recommended": false, "sort": 2}
+  ],
+  "pricing-page": [
+    {"key": "studio", "name": "Studio", "price_monthly": "79.00", "price_yearly": "66.00", "per_unit": "",
+     "tagline": "Solo practitioners and freelancers getting started with a steady flow of leads.",
+     "cta_label": "Start with Studio", "is_recommended": false, "sort": 0,
+     "points": ["Scoped project matches in your disciplines", "Public profile / mini-site — indexed & shareable", "Instant reply to every new match", "Self-serve booking", "Pipeline board", "Jurisdiction lookup — limited queries"]},
+    {"key": "practice", "name": "Practice", "price_monthly": "149.00", "price_yearly": "124.00", "per_unit": "",
+     "tagline": "For professionals running real project work who want the full toolset.",
+     "cta_label": "Start with Practice", "is_recommended": true, "sort": 1,
+     "points": ["Everything in Studio, plus:", "Full jurisdiction database access", "AI intake assistant — pre-qualified conversations", "Scope templates by project type", "Fee schedule builder", "Proposal generation (rolling out)"]},
+    {"key": "firm", "name": "Firm", "price_monthly": "299.00", "price_yearly": "249.00", "per_unit": " / seat",
+     "tagline": "Multi-seat teams that need shared visibility and client-facing updates.",
+     "cta_label": "Talk to us", "is_recommended": false, "sort": 2,
+     "points": ["Everything in Practice, plus:", "Shared client-update timelines", "Team seats & shared pipeline", "Priority match placement", "Dedicated onboarding", "Consolidated billing"]}
+  ]
+}

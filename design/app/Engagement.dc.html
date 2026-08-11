@@ -81,7 +81,7 @@
     <section style="animation: fadeUp .4s ease both;">
       <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #135bff; letter-spacing: .05em;">STEP 1 · SCOPING CALL</div>
       <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 36px; font-weight: 700; letter-spacing: -.02em; margin: 8px 0 6px;">Scope it out with Maya</h1>
-      <p style="font-size: 16px; color: #3f4770; margin-bottom: 26px;">On-platform chat and video double as your scoping call — this is where the fixed quote gets confirmed. Everything stays here until you hire.</p>
+      <p style="font-size: 16px; color: #3f4770; margin-bottom: 26px;">On-platform chat and video double as your scoping call — this is where you agree scope and a price with Maya directly. Everything stays here until you hire.</p>
 
       <div style="display: grid; grid-template-columns: 1fr 340px; gap: 24px; align-items: start;">
         <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; height: 580px;">
@@ -123,7 +123,7 @@
     <section style="animation: fadeUp .4s ease both;">
       <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #135bff; letter-spacing: .05em;">STEP 2 · CHOOSE HOW YOU ENGAGE</div>
       <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 36px; font-weight: 700; letter-spacing: -.02em; margin: 8px 0 6px;">One project, two ways to contract</h1>
-      <p style="font-size: 16px; color: #3f4770; max-width: 46em; margin-bottom: 28px;">Both bill through the platform with escrow. Pick the one that fits how defined your project is — you and Maya agree before anything is charged.</p>
+      <p style="font-size: 16px; color: #3f4770; max-width: 46em; margin-bottom: 28px;">These are the terms Maya offers. Pick the one that fits how defined your project is — you'll contract and pay her directly, and agree everything before any money changes hands.</p>
 
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 22px;">
         <sc-for list="{{ contracts }}" as="c" hint-placeholder-count="2">
@@ -142,7 +142,7 @@
       </div>
       <div style="display: flex; gap: 14px; align-items: center; margin-top: 26px;">
         <button onClick="{{ goPayment }}" style="background: #135bff; color: #fff; border: none; padding: 16px 30px; border-radius: 11px; font-family: inherit; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 3px 0 #0b3fcc;">Continue with {{ contractName }} →</button>
-        <span style="font-size: 14px; color: #5b6493;">You can review everything before paying.</span>
+        <span style="font-size: 14px; color: #5b6493;">You can review everything before you hire.</span>
       </div>
     </section>
     </sc-if>
@@ -150,19 +150,15 @@
     <!-- ===== PAYMENT ===== -->
     <sc-if value="{{ isPayment }}" hint-placeholder-val="{{ false }}">
     <section style="animation: fadeUp .4s ease both;">
-      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #135bff; letter-spacing: .05em;">STEP 3 · FUND ESCROW</div>
-      <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 36px; font-weight: 700; letter-spacing: -.02em; margin: 8px 0 6px;">Fund escrow to begin</h1>
-      <p style="font-size: 16px; color: #3f4770; margin-bottom: 28px; max-width: 48em;">Your funds are held by the platform and released to Maya as milestones are approved — never before. This is what keeps the engagement protected and on-platform.</p>
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #135bff; letter-spacing: .05em;">STEP 3 · HIRE & AGREE TERMS</div>
+      <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 36px; font-weight: 700; letter-spacing: -.02em; margin: 8px 0 6px;">Hire Maya to begin</h1>
+      <p style="font-size: 16px; color: #3f4770; margin-bottom: 28px; max-width: 48em;">You contract and pay Maya directly, at her rate. ArchitectHire takes nothing from the project — we've made the introduction, and keep your records, messaging and files on-platform.</p>
 
       <div style="display: grid; grid-template-columns: 1fr 400px; gap: 26px; align-items: start;">
         <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 16px; padding: 26px;">
-          <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 700; margin-bottom: 18px;">Payment method</h3>
-          <div style="display: flex; flex-direction: column; gap: 14px;">
-            <div><label style="font-size: 13px; color: #5b6493; display: block; margin-bottom: 6px; font-weight: 600;">Card number</label><div style="background: #fbfcfe; border: 1px solid #dbe2f2; border-radius: 9px; padding: 13px 14px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #232c57;">4242&nbsp;&nbsp;4242&nbsp;&nbsp;4242&nbsp;&nbsp;4242</div></div>
-            <div style="display: flex; gap: 14px;">
-              <div style="flex: 1;"><label style="font-size: 13px; color: #5b6493; display: block; margin-bottom: 6px; font-weight: 600;">Expiry</label><div style="background: #fbfcfe; border: 1px solid #dbe2f2; border-radius: 9px; padding: 13px 14px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #232c57;">09 / 28</div></div>
-              <div style="flex: 1;"><label style="font-size: 13px; color: #5b6493; display: block; margin-bottom: 6px; font-weight: 600;">CVC</label><div style="background: #fbfcfe; border: 1px solid #dbe2f2; border-radius: 9px; padding: 13px 14px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #232c57;">•••</div></div>
-            </div>
+          <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 700; margin-bottom: 18px;">How you pay Maya</h3>
+          <div style="background: #f3f6fd; border: 1px solid #e2e8f5; border-radius: 12px; padding: 16px 18px; font-size: 14px; color: #3f4770; line-height: 1.55;">
+            You pay Maya directly, on the schedule you agreed — typically a deposit to start, then a payment as you approve each milestone. ArchitectHire never handles the funds and takes no cut of your project. Hiring here unlocks contact details and starts your tracked timeline.
           </div>
           <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 22px;">
             <sc-for list="{{ protections }}" as="p" hint-placeholder-count="3"><div style="background: #e7f6ec; border: 1px solid #c2e6cf; border-radius: 10px; padding: 14px;"><div style="color: #16924e; margin-bottom: 8px;">{{ p.icon }}</div><div style="font-weight: 700; font-size: 13px; color: #16924e;">{{ p.title }}</div><div style="font-size: 12px; color: #2f6b45; line-height: 1.4; margin-top: 3px;">{{ p.sub }}</div></div></sc-for>
@@ -179,11 +175,11 @@
             <div style="display: flex; justify-content: space-between;"><span style="color: #b9c3e8;">Contract type</span><span style="font-weight: 700;">{{ contractName }}</span></div>
             <div style="display: flex; justify-content: space-between;"><span style="color: #b9c3e8;">Project total</span><span style="font-family: 'IBM Plex Mono', monospace;">{{ pay.total }}</span></div>
             <div style="display: flex; justify-content: space-between;"><span style="color: #b9c3e8;">{{ pay.depLabel }}</span><span style="font-family: 'IBM Plex Mono', monospace;">{{ pay.deposit }}</span></div>
-            <div style="display: flex; justify-content: space-between; color: #b9c3e8; font-size: 13px;"><span>Platform fee (incl.)</span><span style="font-family: 'IBM Plex Mono', monospace;">{{ pay.fee }}</span></div>
+            <div style="display: flex; justify-content: space-between; color: #b9c3e8; font-size: 13px;"><span>ArchitectHire fee</span><span style="font-family: 'IBM Plex Mono', monospace;">{{ pay.fee }}</span></div>
           </div>
-          <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0; padding-top: 18px; border-top: 1px solid #1d2f6e;"><span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 19px; font-weight: 700;">Due now</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 23px; color: #ceff65;">{{ pay.deposit }}</span></div>
-          <button onClick="{{ goDashboard }}" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 9px; background: #135bff; color: #fff; border: none; padding: 16px; border-radius: 11px; font-family: inherit; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 3px 0 #0b3fcc;">{{ lockIcon }}Fund escrow & start</button>
-          <p style="font-size: 11.5px; color: #8b93b5; margin-top: 12px; line-height: 1.5; text-align: center;">Held in escrow. Released only as you approve milestones. Contact details unlock now that you've hired.</p>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0; padding-top: 18px; border-top: 1px solid #1d2f6e;"><span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 19px; font-weight: 700;">Deposit to Maya</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 23px; color: #ceff65;">{{ pay.deposit }}</span></div>
+          <button onClick="{{ goDashboard }}" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 9px; background: #135bff; color: #fff; border: none; padding: 16px; border-radius: 11px; font-family: inherit; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 3px 0 #0b3fcc;">{{ lockIcon }}Confirm & hire Maya</button>
+          <p style="font-size: 11.5px; color: #8b93b5; margin-top: 12px; line-height: 1.5; text-align: center;">Paid directly to Maya on your agreed schedule. Contact details unlock now that you've hired.</p>
         </aside>
       </div>
     </section>
@@ -192,12 +188,12 @@
     <!-- ===== DASHBOARD ===== -->
     <sc-if value="{{ isDashboard }}" hint-placeholder-val="{{ false }}">
     <section style="animation: fadeUp .4s ease both;">
-      <div style="display: inline-flex; align-items: center; gap: 8px; background: #e7f6ec; border: 1px solid #c2e6cf; color: #16924e; padding: 7px 14px; border-radius: 100px; font-size: 13px; font-weight: 700;"><span style="width: 7px; height: 7px; border-radius: 50%; background: #16924e; animation: pulseDot 1.6s infinite;"></span>Escrow funded · Project underway</div>
+      <div style="display: inline-flex; align-items: center; gap: 8px; background: #e7f6ec; border: 1px solid #c2e6cf; color: #16924e; padding: 7px 14px; border-radius: 100px; font-size: 13px; font-weight: 700;"><span style="width: 7px; height: 7px; border-radius: 50%; background: #16924e; animation: pulseDot 1.6s infinite;"></span>Hired · Project underway</div>
       <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; margin: 14px 0 28px;">
         <div><h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 36px; font-weight: 700; letter-spacing: -.02em;">Addition · Oakland, CA</h1><p style="font-size: 15px; color: #5b6493; margin-top: 4px;">with Maya E. · {{ contractName }} · Standard (10–12 wks)</p></div>
         <div style="display: flex; gap: 12px;">
-          <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 10px; padding: 12px 18px; text-align: center;"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5b6493;">IN ESCROW</div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 20px;">{{ inEscrow }}</div></div>
-          <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 10px; padding: 12px 18px; text-align: center;"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5b6493;">RELEASED</div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 20px; color: #16924e;">{{ released }}</div></div>
+          <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 10px; padding: 12px 18px; text-align: center;"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5b6493;">REMAINING</div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 20px;">{{ inEscrow }}</div></div>
+          <div style="background: #fff; border: 1px solid #e2e8f5; border-radius: 10px; padding: 12px 18px; text-align: center;"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5b6493;">PAID TO MAYA</div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 20px; color: #16924e;">{{ released }}</div></div>
         </div>
       </div>
 
@@ -207,7 +203,7 @@
         <div>
           <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: #ceff65; letter-spacing: .06em;">UP NEXT · NEEDS YOU</div>
           <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 23px; font-weight: 700; margin: 7px 0 5px;">Approve the schematic set</h3>
-          <p style="font-size: 14px; color: #c3cdec; line-height: 1.5; max-width: 44em;">Maya uploaded the first drawing set for your addition. Approving releases <strong style="color:#fff;">$2,140</strong> from escrow and unlocks design development.</p>
+          <p style="font-size: 14px; color: #c3cdec; line-height: 1.5; max-width: 44em;">Maya uploaded the first drawing set for your addition. Approving signs off this milestone, clears your $2,140 payment to Maya, and unlocks design development.</p>
         </div>
         <div style="display: flex; flex-direction: column; gap: 10px; align-items: stretch;">
           <button onClick="{{ openApprove }}" style="background: #ceff65; color: #0a1440; border: none; padding: 13px 22px; border-radius: 11px; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer; white-space: nowrap; box-shadow: 0 3px 0 #a9d43f;">Review &amp; approve →</button>
@@ -222,7 +218,7 @@
         <div style="flex: 1;">
           <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: #16924e; letter-spacing: .06em;">APPROVED · JUST NOW</div>
           <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px; font-weight: 700; color: #14532d; margin: 4px 0 3px;">Schematic set approved</h3>
-          <p style="font-size: 14px; color: #2f6b45; line-height: 1.5;"><strong>$2,140</strong> released to Maya. Design development is now underway — next drawings expected Sep 5.</p>
+          <p style="font-size: 14px; color: #2f6b45; line-height: 1.5;">Milestone approved — your $2,140 payment to Maya is cleared. Design development is now underway — next drawings expected Sep 5.</p>
         </div>
         <button onClick="{{ undoAction }}" style="background: transparent; color: #2f6b45; border: 1px solid #bfe4cd; padding: 10px 18px; border-radius: 10px; font-family: inherit; font-size: 13.5px; font-weight: 700; cursor: pointer; white-space: nowrap;">Undo</button>
       </div>
@@ -234,7 +230,7 @@
         <div style="flex: 1;">
           <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: #b7791f; letter-spacing: .06em;">CHANGES REQUESTED · SENT TO MAYA</div>
           <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px; font-weight: 700; color: #7a4f10; margin: 4px 0 3px;">Waiting on a revised set</h3>
-          <p style="font-size: 14px; color: #8a6224; line-height: 1.5;">Maya has your notes and will re-upload the schematic set. No funds are released until you approve.</p>
+          <p style="font-size: 14px; color: #8a6224; line-height: 1.5;">Maya has your notes and will re-upload the schematic set. Nothing is due until you approve.</p>
         </div>
         <button onClick="{{ undoAction }}" style="background: transparent; color: #8a6224; border: 1px solid #f0d9a8; padding: 10px 18px; border-radius: 10px; font-family: inherit; font-size: 13.5px; font-weight: 700; cursor: pointer; white-space: nowrap;">Undo</button>
       </div>
@@ -287,11 +283,11 @@
           <p style="font-size: 14.5px; color: #3f4770; line-height: 1.55; margin-bottom: 20px;">You've reviewed the drawings and they're good to build on. Approving marks this milestone complete and moves the project into design development.</p>
           <div style="background: #f3f6fd; border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 10px; font-size: 14px; margin-bottom: 24px;">
             <div style="display: flex; justify-content: space-between;"><span style="color: #5b6493;">Released to Maya</span><span style="font-family: 'IBM Plex Mono', monospace; font-weight: 700;">$2,140</span></div>
-            <div style="display: flex; justify-content: space-between;"><span style="color: #5b6493;">Remaining in escrow</span><span style="font-family: 'IBM Plex Mono', monospace;">$3,210</span></div>
+            <div style="display: flex; justify-content: space-between;"><span style="color: #5b6493;">Remaining on contract</span><span style="font-family: 'IBM Plex Mono', monospace;">$3,210</span></div>
           </div>
           <div style="display: flex; gap: 12px;">
             <button onClick="{{ closeModal }}" style="flex: 1; background: transparent; color: #5b6493; border: 1px solid #dbe2f2; padding: 13px; border-radius: 11px; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer;">Cancel</button>
-            <button onClick="{{ confirmApprove }}" style="flex: 2; display: flex; align-items: center; justify-content: center; gap: 9px; background: #16924e; color: #fff; border: none; padding: 13px; border-radius: 11px; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer; box-shadow: 0 3px 0 #0f7a3f;">{{ lockIcon }}Confirm & release $2,140</button>
+            <button onClick="{{ confirmApprove }}" style="flex: 2; display: flex; align-items: center; justify-content: center; gap: 9px; background: #16924e; color: #fff; border: none; padding: 13px; border-radius: 11px; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer; box-shadow: 0 3px 0 #0f7a3f;">{{ lockIcon }}Confirm approval</button>
           </div>
         </div>
       </div>
@@ -301,7 +297,7 @@
       <div style="position: fixed; inset: 0; background: rgba(4,10,40,.55); backdrop-filter: blur(3px); display: flex; align-items: center; justify-content: center; z-index: 60; padding: 24px; animation: fadeUp .2s ease both;">
         <div style="background: #fff; border-radius: 18px; padding: 30px; max-width: 500px; width: 100%; box-shadow: 0 30px 80px rgba(4,10,40,.4);">
           <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px; font-weight: 700; margin-bottom: 6px;">Request changes</h3>
-          <p style="font-size: 14.5px; color: #3f4770; line-height: 1.55; margin-bottom: 18px;">Tell Maya what to revise. She'll update the schematic set and re-upload it for your approval — no funds move until then.</p>
+          <p style="font-size: 14.5px; color: #3f4770; line-height: 1.55; margin-bottom: 18px;">Tell Maya what to revise. She'll update the schematic set and re-upload it for your approval — nothing is due until then.</p>
           <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px;">
             <sc-for list="{{ changeChips }}" as="c" hint-placeholder-count="3"><span style="font-size: 13px; color: #0b3fcc; background: #e7efff; border: 1px solid #cfe0ff; padding: 7px 13px; border-radius: 100px; cursor: pointer;">{{ c }}</span></sc-for>
           </div>
@@ -347,20 +343,20 @@ class Component extends DCLogic {
       { who:'me', text:'It borders it but isn\u2019t inside. I can share the plat.' },
       { who:'them', text:'Perfect — then the fixed quote holds. I\u2019ve added structural coordination since you\u2019re opening a load-bearing wall.' },
       { who:'me', text:'Great. Timeline still 10–12 weeks?' },
-      { who:'them', text:'Yes. I\u2019ll confirm the quote and you can hire me right here to kick off escrow.' },
+      { who:'them', text:'Yes. I\u2019ll confirm the price and you can hire me right here to get started.' },
     ];
     const chat = chatDefs.map(m=>{ const mine=m.who==='me'; return { text:m.text,
       rowStyle:`display:flex;justify-content:${mine?'flex-end':'flex-start'};`,
       bubbleStyle:`max-width:78%;padding:11px 15px;border-radius:14px;font-size:14px;line-height:1.45;${mine?'background:#135bff;color:#fff;border-bottom-right-radius:4px;':'background:#f3f6fd;color:#232c57;border:1px solid #e2e8f5;border-bottom-left-radius:4px;'}`,
     }; });
-    const clItems=[['Scope confirmed',1],['Jurisdiction requirements reviewed',1],['Add-ons agreed',1],['Fixed quote confirmed',1],['Timeline & revisions set',0]];
+    const clItems=[['Scope confirmed',1],['Jurisdiction requirements reviewed',1],['Add-ons agreed',1],['Price agreed with Maya',1],['Timeline & revisions set',0]];
     const checklist=clItems.map(([label,done])=>({ label, mark: done?'✓':'', color: done?'#232c57':'#9aa2c4',
       dot:`display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;font-size:12px;flex-shrink:0;color:#fff;background:${done?'#16924e':'#c9d4ec'};` }));
 
     const cDefs = [
-      { key:'fixed', tag:'FLAGSHIP', title:'Dynamic fixed quote', blurb:'One price generated by the engine and confirmed on your call. No surprises unless scope changes and you approve it.',
-        points:['Locked price from square footage, add-ons & jurisdiction','Cost certainty before work begins','Architect can flag a re-quote — you approve any change','Milestone-based escrow releases'], bestFor:'well-defined projects and clients who want cost certainty.' },
-      { key:'hourly', tag:'FLEXIBLE', title:'Hourly', blurb:'Platform-standardized rates tiered by experience and market, billed with time tracking through escrow milestones.',
+      { key:'fixed', tag:'FLAGSHIP', title:'Fixed price', blurb:'One price Maya sets for the whole set, agreed on your call. No surprises unless scope changes and you approve it.',
+        points:['One agreed price for the full scope','Cost certainty before work begins','Maya can flag a re-quote — you approve any change','Pay by milestone as you approve work'], bestFor:'well-defined projects and clients who want cost certainty.' },
+      { key:'hourly', tag:'FLEXIBLE', title:'Hourly', blurb:'Maya\u2019s hourly rate with transparent time tracking, billed as the work progresses.',
         points:['Transparent time tracking on every entry','Pay for exactly the work done','Ideal when scope is still evolving','Common for commercial & exploratory work'], bestFor:'open-ended, exploratory, or unusually complex work.' },
     ];
     const total = 21400;
@@ -368,16 +364,16 @@ class Component extends DCLogic {
     const fmt=(n)=>'$'+Math.round(n).toLocaleString();
     const contracts = cDefs.map(c=>{ const on=s.contract===c.key; return { ...c,
       price: c.key==='fixed' ? fmt(total) : '$135/hr',
-      priceSub: c.key==='fixed' ? 'confirmed fixed quote' : 'platform rate · billed hourly',
+      priceSub: c.key==='fixed' ? 'agreed fixed price' : 'Maya\u2019s rate · billed hourly',
       cardStyle:`background:#fff;border:1.5px solid ${on?'#135bff':'#e2e8f5'};border-radius:16px;padding:26px;cursor:pointer;box-shadow:${on?'0 12px 34px rgba(19,91,255,.14)':'none'};`,
       tagStyle:`display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.05em;padding:4px 9px;border-radius:6px;color:${on?'#fff':'#0b3fcc'};background:${on?'#135bff':'#e7efff'};`,
       radio: on?'✓':'', radioStyle:`display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-size:14px;color:#fff;background:${on?'#135bff':'#c9d4ec'};flex-shrink:0;`,
       bestForStyle:`margin-top:16px;padding:12px 14px;border-radius:9px;background:${on?'#e7efff':'#f3f6fd'};font-size:13px;color:#3f4770;line-height:1.4;`,
       onClick: ()=>this.setState({ contract:c.key }),
     }; });
-    const contractName = s.contract==='fixed' ? 'Dynamic fixed quote' : 'Hourly';
-    const pay = { total: s.contract==='fixed' ? fmt(total) : '$135/hr', fee: fmt(total*0.20),
-      depLabel: s.contract==='fixed' ? 'Deposit into escrow (25%)' : 'Initial escrow (20 hrs)', deposit: fmt(depNum) };
+    const contractName = s.contract==='fixed' ? 'Fixed price' : 'Hourly';
+    const pay = { total: s.contract==='fixed' ? fmt(total) : '$135/hr', fee: '$0',
+      depLabel: s.contract==='fixed' ? 'Deposit to Maya (25%)' : 'Initial payment (20 hrs)', deposit: fmt(depNum) };
     const el = React.createElement;
     const icon = (paths, size=22, sw=1.8) => el('svg', {width:size, height:size, viewBox:'0 0 24 24', fill:'none', stroke:'currentColor', strokeWidth:sw, strokeLinecap:'round', strokeLinejoin:'round'}, paths.map((p,i)=>el(p[0],{key:i,...p[1]})));
     const lockP = [['rect',{x:5,y:11,width:14,height:9,rx:2}],['path',{d:'M8 11V8a4 4 0 0 1 8 0v3'}]];
@@ -386,7 +382,7 @@ class Component extends DCLogic {
     const flagP = [['path',{d:'M5 21V4'}],['path',{d:'M5 4h11l-2 3 2 3H5'}]];
     const checkP = [['path',{d:'M5 13l4 4L19 7'}]];
     const clipP = [['path',{d:'M21 11.5l-8.5 8.5a5 5 0 0 1-7-7l8.5-8.5a3.3 3.3 0 0 1 4.7 4.7l-8.5 8.5a1.7 1.7 0 0 1-2.4-2.4l7.8-7.8'}]];
-    const protections = [ { icon: icon(lockP), title:'Escrow-held', sub:'Released only on your approval' }, { icon: icon(shieldP), title:'Stamped work', sub:'Licensed, permit-ready drawings' }, { icon: icon(reviseP), title:'Revision tooling', sub:'Tracked rounds, on-platform' } ];
+    const protections = [ { icon: icon(lockP), title:'Pay by milestone', sub:'You pay Maya as you approve work' }, { icon: icon(shieldP), title:'Stamped work', sub:'Licensed, permit-ready drawings' }, { icon: icon(reviseP), title:'Revision tooling', sub:'Tracked rounds, on-platform' } ];
     const lockIcon = icon(lockP, 18, 2);
     const flagIcon = icon(flagP, 20, 1.8);
     const checkIcon = icon(checkP, 24, 2.2);
@@ -397,7 +393,7 @@ class Component extends DCLogic {
     const inEscrow = approved ? fmt(5350-2140) : fmt(5350);
 
     const msDefs = [
-      { title:'Kickoff & site info', status:'DONE', st:2, desc:'Escrow funded, project brief and existing plans shared.', amount:'—', date:'Aug 7' },
+      { title:'Kickoff & site info', status:'DONE', st:2, desc:'Hired, project brief and existing plans shared.', amount:'—', date:'Aug 7' },
       { title:'Schematic design', status: approved?'DONE':(s.ms==='requested'?'REVISING':'IN REVIEW'), st: approved?2:1, desc: s.ms==='requested'?'Change notes sent — Maya is revising the set.':'First drawing set uploaded for your review and approval.', amount:fmt(depNum*0.4), date:'Aug 19' },
       { title:'Design development', status: approved?'IN REVIEW':'UPCOMING', st: approved?1:0, desc:'Refined plans with structural coordination integrated.', amount:fmt(total*0.35), date:'Sep 5' },
       { title:'Permit set & stamp', status:'UPCOMING', st:0, desc:'Final stamped, permit-ready drawings for submission.', amount:fmt(total*0.4), date:'Sep 26' },
