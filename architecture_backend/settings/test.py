@@ -24,3 +24,8 @@ CELERY_TASK_EAGER_PROPAGATES = True
 # without this a running dev server shares the content-version key and cached
 # page payloads with the suite and makes cache assertions flaky.
 CACHES = {"default": {**CACHES["default"], "KEY_PREFIX": "ah-test"}}
+
+# Tests must never talk to real Stripe, regardless of what's in .env —
+# get_gateway() selects the mock when no key is set.
+STRIPE_SECRET_KEY = ""
+STRIPE_WEBHOOK_SECRET = ""

@@ -1024,6 +1024,7 @@ class Command(BaseCommand):
                         "points": row.get("points", []),
                         "cta_label": row.get("cta_label", ""),
                         "is_recommended": row.get("is_recommended", False),
+                        "gateway_price_id": row.get("gateway_price_id", ""),
                         "sort_order": row.get("sort", 0),
                     },
                 )

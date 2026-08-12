@@ -103,9 +103,7 @@ class TestPatchFiles:
         command()._seed_patches()
         assert State.objects.get(code="CA").intro == "QA patched intro"
 
-    def test_project_type_and_city_rows_patch_existing_records(
-        self, monkeypatch, tmp_path, seeded
-    ):
+    def test_project_type_and_city_rows_patch_existing_records(self, monkeypatch, tmp_path, seeded):
         from apps.catalog.models import ProjectType
         from apps.jurisdictions.models import City
 
@@ -253,7 +251,6 @@ class TestMissingContentFiles:
 
 @pytest.mark.django_db
 class TestPolicyPagePatches(TestPatchFiles):
-
     def test_policy_pages_are_created_whole(self, monkeypatch, tmp_path):
         from apps.cms.models import PolicyPage
 
@@ -268,8 +265,18 @@ class TestPolicyPagePatches(TestPatchFiles):
                             "title": "Terms of Service",
                             "effective_date": "2026-08-11",
                             "sections": [
-                                {"anchor": "scope", "heading": "1. Scope", "body": "QA body", "sort": 0},
-                                {"anchor": "fees", "heading": "2. Fees", "body": "QA fees", "sort": 1},
+                                {
+                                    "anchor": "scope",
+                                    "heading": "1. Scope",
+                                    "body": "QA body",
+                                    "sort": 0,
+                                },
+                                {
+                                    "anchor": "fees",
+                                    "heading": "2. Fees",
+                                    "body": "QA fees",
+                                    "sort": 1,
+                                },
                             ],
                         }
                     ]
