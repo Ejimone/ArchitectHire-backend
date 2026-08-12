@@ -20,6 +20,9 @@ DEBUG = env("DEBUG")
 ALLOWED_HOSTS = env("ALLOWED_HOSTS")
 
 FRONTEND_URL = env("FRONTEND_URL", default="http://localhost:3000")
+# Instant cache purge on the frontend after admin content edits (blank = disabled).
+FRONTEND_REVALIDATE_URL = env("FRONTEND_REVALIDATE_URL", default="")
+REVALIDATE_SECRET = env("REVALIDATE_SECRET", default="")
 
 INSTALLED_APPS = [
     "django.contrib.admin",

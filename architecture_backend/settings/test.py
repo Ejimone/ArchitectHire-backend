@@ -28,4 +28,5 @@ CACHES = {"default": {**CACHES["default"], "KEY_PREFIX": "ah-test"}}
 # Tests must never talk to real Stripe, regardless of what's in .env —
 # get_gateway() selects the mock when no key is set.
 STRIPE_SECRET_KEY = ""
+FRONTEND_REVALIDATE_URL = ""  # tests must never ping a real frontend
 STRIPE_WEBHOOK_SECRET = ""
