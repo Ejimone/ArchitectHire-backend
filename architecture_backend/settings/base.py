@@ -25,15 +25,20 @@ FRONTEND_REVALIDATE_URL = env("FRONTEND_REVALIDATE_URL", default="")
 REVALIDATE_SECRET = env("REVALIDATE_SECRET", default="")
 
 INSTALLED_APPS = [
-    # Unfold powers the admin UI and must precede django.contrib.admin so its
-    # template overrides win. BasicAppConfig (rather than plain "unfold") leaves
-    # admin.site alone so StudioAdminConfig can install our own site below.
+    # Ordering here is load-bearing twice over, because TEMPLATES["DIRS"] is empty
+    # and APP_DIRS=True makes template lookup follow this list:
+    #   1. apps.studio first, so apps/studio/templates/admin/index.html shadows
+    #      Unfold's — that override IS the Command Center dashboard.
+    #   2. unfold before the admin config, so Unfold's remaining template overrides
+    #      still beat django.contrib.admin's.
+    "apps.studio",
+    # BasicAppConfig (rather than plain "unfold") leaves admin.site alone so
+    # StudioAdminConfig can install our own site below.
     "unfold.apps.BasicAppConfig",
     "unfold.contrib.filters",
     "unfold.contrib.forms",
     "unfold.contrib.inlines",
     "unfold.contrib.import_export",
-    "apps.studio",
     # Replaces "django.contrib.admin"; installs apps.studio.sites.StudioAdminSite.
     "apps.studio.admin_apps.StudioAdminConfig",
     "django.contrib.auth",

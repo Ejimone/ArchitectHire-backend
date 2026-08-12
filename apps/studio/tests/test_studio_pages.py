@@ -34,11 +34,37 @@ def landing_faq():
 # --- Command Center ----------------------------------------------------------
 
 
-def test_command_center_renders_health_and_metrics(clean_content, owner_client, landing_faq):
+def test_the_admin_index_uses_the_studio_template_not_unfolds(owner_client):
+    """`TEMPLATES["DIRS"]` is empty and `APP_DIRS` is on, so `admin/index.html`
+    resolves by INSTALLED_APPS order. If `apps.studio` ever falls behind `unfold`,
+    Unfold's stock app list silently wins and the Command Center disappears —
+    with every other Studio page still working, so nothing else would fail.
+
+    Asserted on the template's origin rather than on page text: "Command Center" also
+    appears in the sidebar nav, so a content check passes even when the dashboard is
+    gone. That false positive is exactly how this shipped broken the first time.
+    """
     response = owner_client.get(reverse("admin:index"))
 
+    origins = [t.origin.name for t in response.templates if t.name == "admin/index.html"]
+
+    assert origins, "admin/index.html was not rendered"
+    assert origins[0].endswith("apps/studio/templates/admin/index.html"), (
+        f"Unfold shadowed the Command Center; admin/index.html came from {origins[0]}"
+    )
+
+
+def test_command_center_renders_health_and_metrics(clean_content, owner_client, landing_faq):
+    response = owner_client.get(reverse("admin:index"))
+    body = response.content.decode()
+
     assert response.status_code == 200
-    assert "Command Center" in response.content.decode()
+    # Markup unique to the Command Center template — absent from Unfold's app list.
+    assert "studio-kicker" in body
+    assert "Content health" in body
+    assert "Marketplace" in body
+    assert "Recent activity" in body
+
     assert {card["label"] for card in response.context["studio_health"]} == {
         "Empty image slots",
         "Pages missing SEO",

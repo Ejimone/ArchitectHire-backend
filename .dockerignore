@@ -1,17 +1,21 @@
 .git
 venv
 .venv
-__pycache__
-*.pyc
+# Patterns match per path segment, so a bare `__pycache__` only catches the repo
+# root. Without the `**/` these let ~250 host-built .pyc files into the image.
+**/__pycache__
+**/*.pyc
+**/.DS_Store
 db.sqlite3
 .env
 .env.example
+.env.prod
+celerybeat-schedule*
 staticfiles
 media
 .pytest_cache
 .coverage
 htmlcov
 .ruff_cache
-.DS_Store
 design
 .github
