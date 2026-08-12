@@ -25,8 +25,19 @@ USER app
 RUN SECRET_KEY=build-only ALLOWED_HOSTS=build \
     python manage.py collectstatic --noinput
 EXPOSE 8000
+# Worker count is memory-bound, not CPU-bound: each worker loads its own copy of
+# Django + DRF + channels + celery + stripe and costs ~110MB resident. Measured
+# anonymous memory under load on the 512MB App Platform instance:
+#   4 workers -> 435MB (85% — this is what was pinning the box)
+#   2 workers -> 230MB (45%)
+# These are uvicorn ASGI workers, so each already serves many requests
+# concurrently; 2 is ample here and halving them costs almost no throughput.
+# --max-requests recycles a worker periodically so gradual heap growth is
+# returned to the OS instead of accumulating until the instance thrashes.
 CMD ["gunicorn", "architecture_backend.asgi:application", \
      "-k", "uvicorn_worker.UvicornWorker", \
      "-b", "0.0.0.0:8000", \
-     "--workers", "4", \
+     "--workers", "2", \
+     "--max-requests", "800", \
+     "--max-requests-jitter", "80", \
      "--access-logfile", "-"]
