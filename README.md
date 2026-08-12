@@ -39,12 +39,14 @@ uv run uvicorn architecture_backend.asgi:application --reload   # HTTP + WebSock
 | Stripe (money) | `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET` | MockGateway: escrow settles instantly, payouts verify instantly |
 | Web Push | `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY` (generate: `uv run python -c "from apps.notifications.vapid import generate; generate()"`) | Falls back to email (console backend in dev) |
 | DO Spaces (media) | `AWS_*` vars | Local filesystem storage |
+| Instant frontend sync | `FRONTEND_REVALIDATE_URL`, `REVALIDATE_SECRET` (same secret in the frontend env) | Site refreshes on the 60s ISR cycle instead of instantly |
 
 ## Editing site images (owner workflow)
 
 Every image placeholder on the site is a pre-created row in **admin → Site content →
 Media assets**, labeled with where it appears (e.g. "About — hero image"). Open the row,
-upload, save — the live site picks it up within ~60 seconds. Rows are created and pruned
+upload, save — the live site updates immediately (every content save pings the frontend's
+`/api/revalidate` hook; the 60-second ISR cycle remains as a fallback). Rows are created and pruned
 automatically (`apps/cms/slots.py`) when cities, project types or gallery cards change;
 never type a slot key by hand. Images uploaded to a row are never auto-deleted.
 

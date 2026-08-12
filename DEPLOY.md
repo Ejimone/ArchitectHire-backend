@@ -15,6 +15,12 @@ dashboard or `doctl apps update`), frontend env in **Vercel project settings**
 (`NEXT_PUBLIC_*` are baked at build — redeploy after changing them). Every
 test-mode key to swap at launch is marked [LIVE-SWAP] below.
 
+**Instant admin→site sync (added 2026-08-12):** every backend content save POSTs to
+`https://architecthire.com/api/revalidate` (shared `REVALIDATE_SECRET`, set in both the
+app spec and Vercel), which purges the frontend's cached pages immediately; the 60s ISR
+cycle stays as a fallback. If edits ever stop appearing instantly, check that both env
+values still match.
+
 ---
 
 # Alternative: single-droplet runbook (kept for reference)
