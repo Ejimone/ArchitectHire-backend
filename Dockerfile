@@ -16,11 +16,12 @@ COPY --from=builder /opt/venv /opt/venv
 COPY --chown=app:app . .
 ENV PATH="/opt/venv/bin:$PATH" \
     DJANGO_SETTINGS_MODULE=architecture_backend.settings.prod
+USER app
 # Bake the static manifest into the image (whitenoise Manifest storage 500s
-# without it). Dummy env — collectstatic never touches the DB or real secrets.
+# without it). Runs as the app user so a later runtime collectstatic can still
+# rewrite these files. Dummy env — never touches the DB or real secrets.
 RUN SECRET_KEY=build-only ALLOWED_HOSTS=build \
     python manage.py collectstatic --noinput
-USER app
 EXPOSE 8000
 CMD ["gunicorn", "architecture_backend.asgi:application", \
      "-k", "uvicorn_worker.UvicornWorker", \
