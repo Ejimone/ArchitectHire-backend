@@ -237,4 +237,4 @@ class Review(TimeStampedModel):
         ordering = ["-created_at"]
 
     def __str__(self):
-        return f"{self.rating}★ for {self.provider.email} by {self.reviewer_name}"
+        return f"{self.rating}/5 for {self.provider.email} by {self.reviewer_name}"

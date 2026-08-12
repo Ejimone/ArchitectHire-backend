@@ -1,0 +1,75 @@
+{% extends "studio/base.html" %}
+
+{% block page_kicker %}<p class="studio-kicker">Publishing</p>{% endblock %}
+
+{% block page_subtitle %}
+    <p class="mt-1 text-sm text-font-subtle-light dark:text-font-subtle-dark">
+        {% if total %}
+            {{ total }} item{{ total|pluralize }} across {{ groups|length }} content type{{ groups|length|pluralize }} {{ total|pluralize:"is,are" }} still in draft.
+        {% else %}
+            Everything is published.
+        {% endif %}
+    </p>
+{% endblock %}
+
+{% block page_actions %}
+    {% if total %}
+        <form method="post" action="{{ publish_url }}">
+            {% csrf_token %}
+            <button type="submit"
+                    class="inline-flex items-center gap-1.5 rounded-default bg-primary-600 px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-primary-700">
+                <span class="material-symbols-outlined md-18">publish</span>
+                Publish everything
+            </button>
+        </form>
+    {% endif %}
+{% endblock %}
+
+{% block page_body %}
+    {% if groups %}
+        <div class="flex flex-col gap-3">
+            {% for group in groups %}
+                <section class="studio-card">
+                    <header class="flex flex-wrap items-center justify-between gap-3 border-b border-base-200 px-4 py-3 dark:border-base-800">
+                        <div class="flex items-center gap-2 min-w-0">
+                            <h2 class="studio-section__title truncate">{{ group.label }}</h2>
+                            {% include "studio/components/pill.html" with variant="draft" icon="edit_note" label=group.count %}
+                        </div>
+
+                        <div class="flex items-center gap-2">
+                            <a href="{{ group.changelist_url }}?status__exact=draft"
+                               class="rounded-default border border-base-200 px-2.5 py-1.5 text-xs font-medium transition-colors hover:border-base-300 dark:border-base-700 dark:hover:border-base-600">
+                                Review
+                            </a>
+                            <form method="post" action="{{ publish_url }}">
+                                {% csrf_token %}
+                                <input type="hidden" name="model" value="{{ group.model_label }}">
+                                <button type="submit"
+                                        class="rounded-default border border-base-200 px-2.5 py-1.5 text-xs font-medium transition-colors hover:border-primary-500 hover:text-primary-600 dark:border-base-700 dark:hover:text-primary-400">
+                                    Publish all
+                                </button>
+                            </form>
+                        </div>
+                    </header>
+
+                    <ul class="divide-y divide-base-200 dark:divide-base-800">
+                        {% for object in group.objects|slice:":8" %}
+                            <li class="flex items-center justify-between gap-3 px-4 py-2.5 text-sm">
+                                <span class="truncate">{{ object }}</span>
+                                {% if object.scope %}<code class="studio-mono shrink-0 text-xs text-font-subtle-light dark:text-font-subtle-dark">{{ object.scope }}</code>{% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                    {% if group.count > 8 %}
+                        <p class="border-t border-base-200 px-4 py-2 text-xs text-font-subtle-light dark:border-base-800 dark:text-font-subtle-dark">
+                            and {{ group.count|add:"-8" }} more
+                        </p>
+                    {% endif %}
+                </section>
+            {% endfor %}
+        </div>
+    {% else %}
+        {% include "studio/components/empty.html" with icon="task_alt" title="Nothing waiting" body="Every piece of content on the site is published." %}
+    {% endif %}
+{% endblock %}

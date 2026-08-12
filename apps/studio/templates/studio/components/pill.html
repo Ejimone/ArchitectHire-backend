@@ -1,0 +1,11 @@
+{% comment %}
+Status pill. Colour is never the only signal — an icon and a label always ship
+with it, because the brass accent sits in the same hue band as "warn".
+
+Usage: include this with `variant` (published|draft|warn|danger|info), `icon`
+(a Material Symbols name) and `label`.
+{% endcomment %}
+<span class="studio-pill studio-pill--{{ variant|default:'draft' }}">
+    <span class="material-symbols-outlined">{{ icon|default:'circle' }}</span>
+    {{ label }}
+</span>

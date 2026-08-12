@@ -25,7 +25,17 @@ FRONTEND_REVALIDATE_URL = env("FRONTEND_REVALIDATE_URL", default="")
 REVALIDATE_SECRET = env("REVALIDATE_SECRET", default="")
 
 INSTALLED_APPS = [
-    "django.contrib.admin",
+    # Unfold powers the admin UI and must precede django.contrib.admin so its
+    # template overrides win. BasicAppConfig (rather than plain "unfold") leaves
+    # admin.site alone so StudioAdminConfig can install our own site below.
+    "unfold.apps.BasicAppConfig",
+    "unfold.contrib.filters",
+    "unfold.contrib.forms",
+    "unfold.contrib.inlines",
+    "unfold.contrib.import_export",
+    "apps.studio",
+    # Replaces "django.contrib.admin"; installs apps.studio.sites.StudioAdminSite.
+    "apps.studio.admin_apps.StudioAdminConfig",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -225,6 +235,15 @@ STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
+# --- Admin UI (Studio) ------------------------------------------------------
+
+# The design system lives in apps/studio/config.py so settings stays configuration
+# and the palette stays next to the CSS that consumes it. Bound via attribute access
+# rather than `from ... import UNFOLD`, which ruff's F401 strips as an unused import.
+from apps.studio import config as _studio_config  # noqa: E402
+
+UNFOLD = _studio_config.UNFOLD
 
 STORAGES = {
     "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},

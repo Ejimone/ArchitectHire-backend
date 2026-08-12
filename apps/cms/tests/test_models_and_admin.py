@@ -129,18 +129,25 @@ class TestScopedBlockAdminActions:
 
 
 class TestAdminDisplayHelpers:
-    def test_carousel_thumbnail_with_and_without_image(self):
+    def test_carousel_preview_with_and_without_image(self):
         model_admin = HeroCarouselSlideAdmin(cms.HeroCarouselSlide, site)
         with_image = cms.HeroCarouselSlide(scope="landing", image="cms/carousel/slide.jpg")
-        assert "<img" in model_admin.thumbnail(with_image)
-        assert "cms/carousel/slide.jpg" in model_admin.thumbnail(with_image)
-        assert model_admin.thumbnail(cms.HeroCarouselSlide(scope="landing")) == "—"
+        assert "<img" in model_admin.preview(with_image)
+        assert "cms/carousel/slide.jpg" in model_admin.preview(with_image)
+        assert model_admin.preview(cms.HeroCarouselSlide(scope="landing")) == "—"
 
-    def test_media_asset_thumbnail_with_and_without_image(self):
+    def test_media_asset_preview_with_and_without_image(self):
         model_admin = MediaAssetAdmin(cms.MediaAsset, site)
         with_image = cms.MediaAsset(slot_key="landing-hero", image="cms/slots/hero.jpg")
-        assert "<img" in model_admin.thumbnail(with_image)
-        assert model_admin.thumbnail(cms.MediaAsset(slot_key="landing-hero")) == "—"
+        assert "<img" in model_admin.preview(with_image)
+        assert model_admin.preview(cms.MediaAsset(slot_key="landing-hero")) == "—"
+
+    def test_status_pill_carries_colour_and_human_label(self):
+        model_admin = HeroCarouselSlideAdmin(cms.HeroCarouselSlide, site)
+        draft = cms.HeroCarouselSlide(scope="landing", status="draft")
+
+        assert model_admin.status_pill(draft) == ("draft", "Draft")
+        assert model_admin.status_pill.label == {"published": "success", "draft": None}
 
     def test_copy_block_short_text(self):
         model_admin = CopyBlockAdmin(cms.CopyBlock, site)

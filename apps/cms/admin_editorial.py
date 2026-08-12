@@ -1,4 +1,16 @@
 from django.contrib import admin
+from unfold.contrib.filters.admin import (
+    AllValuesCheckboxFilter,
+    ChoicesDropdownFilter,
+    RelatedDropdownFilter,
+)
+
+from apps.studio.admin_base import (
+    StudioModelAdmin,
+    StudioStackedInline,
+    StudioTabularInline,
+)
+from apps.studio.display import status_display, thumbnail_display, truncated_display
 
 from .models_editorial import (
     Author,
@@ -21,22 +33,44 @@ from .models_editorial import (
 )
 
 
-class BlogContentBlockInline(admin.StackedInline):
+class BlogContentBlockInline(StudioStackedInline):
     model = BlogContentBlock
     extra = 0
     fields = ["kind", "text", "attribution", "cta_label", "cta_href", "image", "sort_order"]
 
 
 @admin.register(BlogPost)
-class BlogPostAdmin(admin.ModelAdmin):
-    list_display = ["title", "category", "author", "status", "is_featured", "published_at"]
-    list_filter = ["status", "category", "is_featured"]
+class BlogPostAdmin(StudioModelAdmin):
+    list_display = [
+        "hero",
+        "title",
+        "category",
+        "author",
+        "status_pill",
+        "is_featured",
+        "published_at",
+    ]
+    list_filter = [
+        ("status", ChoicesDropdownFilter),
+        ("category", RelatedDropdownFilter),
+        "is_featured",
+    ]
     list_editable = ["is_featured"]
-    search_fields = ["title", "excerpt"]
+    search_fields = ["title", "excerpt", "dek"]
     prepopulated_fields = {"slug": ["title"]}
+    autocomplete_fields = ["category", "author"]
     inlines = [BlogContentBlockInline]
     date_hierarchy = "published_at"
     actions = ["publish_selected"]
+
+    hero = thumbnail_display("hero_image")
+    status_pill = status_display()
+
+    fieldsets = (
+        (None, {"fields": ("title", "slug", "category", "author")}),
+        ("Summary", {"fields": ("dek", "excerpt", "hero_image", "read_time")}),
+        ("Publishing", {"fields": ("status", "published_at", "is_featured")}),
+    )
 
     @admin.action(description="Publish selected")
     def publish_selected(self, request, queryset):
@@ -45,32 +79,43 @@ class BlogPostAdmin(admin.ModelAdmin):
 
 
 @admin.register(BlogCategory)
-class BlogCategoryAdmin(admin.ModelAdmin):
+class BlogCategoryAdmin(StudioModelAdmin):
     list_display = ["name", "slug", "sort_order"]
     list_editable = ["sort_order"]
+    search_fields = ["name", "slug"]  # required by BlogPostAdmin.autocomplete_fields
     prepopulated_fields = {"slug": ["name"]}
 
 
 @admin.register(Author)
-class AuthorAdmin(admin.ModelAdmin):
-    list_display = ["name", "role"]
-    search_fields = ["name"]
+class AuthorAdmin(StudioModelAdmin):
+    list_display = ["portrait", "name", "role"]
+    search_fields = ["name", "role"]
+
+    portrait = thumbnail_display("photo")
 
 
-class CaseStudyImageInline(admin.TabularInline):
+class CaseStudyImageInline(StudioTabularInline):
     model = CaseStudyImage
     extra = 0
     fields = ["image", "caption", "sort_order"]
 
 
 @admin.register(CaseStudy)
-class CaseStudyAdmin(admin.ModelAdmin):
-    list_display = ["title", "category", "location", "status", "is_featured"]
-    list_filter = ["status", "category", "is_featured"]
+class CaseStudyAdmin(StudioModelAdmin):
+    list_display = ["hero", "title", "category", "location", "status_pill", "is_featured"]
+    list_filter = [
+        ("status", ChoicesDropdownFilter),
+        ("category", RelatedDropdownFilter),
+        "is_featured",
+    ]
     list_editable = ["is_featured"]
     search_fields = ["title", "excerpt", "location"]
     prepopulated_fields = {"slug": ["title"]}
+    autocomplete_fields = ["category"]
     inlines = [CaseStudyImageInline]
+
+    hero = thumbnail_display("hero_image")
+    status_pill = status_display()
     fieldsets = (
         (
             None,
@@ -97,64 +142,98 @@ class CaseStudyAdmin(admin.ModelAdmin):
 
 
 @admin.register(CaseStudyCategory)
-class CaseStudyCategoryAdmin(admin.ModelAdmin):
+class CaseStudyCategoryAdmin(StudioModelAdmin):
     list_display = ["name", "slug", "sort_order"]
     list_editable = ["sort_order"]
+    search_fields = ["name", "slug"]  # required by CaseStudyAdmin.autocomplete_fields
     prepopulated_fields = {"slug": ["name"]}
 
 
 @admin.register(JobPosting)
-class JobPostingAdmin(admin.ModelAdmin):
-    list_display = ["title", "department", "location", "employment_type", "status", "sort_order"]
-    list_filter = ["status", "department"]
+class JobPostingAdmin(StudioModelAdmin):
+    list_display = [
+        "title",
+        "department",
+        "location",
+        "employment_type",
+        "status_pill",
+        "sort_order",
+    ]
+    list_filter = [("status", ChoicesDropdownFilter), ("department", RelatedDropdownFilter)]
     list_editable = ["sort_order"]
+    search_fields = ["title", "location"]
+
+    status_pill = status_display()
 
 
-admin.site.register(Department)
-admin.site.register(Perk)
+@admin.register(Department)
+class DepartmentAdmin(StudioModelAdmin):
+    list_display = ["name", "sort_order"]
+    list_editable = ["sort_order"]
+    search_fields = ["name"]
+
+
+@admin.register(Perk)
+class PerkAdmin(StudioModelAdmin):
+    list_display = ["title", "description", "sort_order"]
+    list_editable = ["sort_order"]
+    search_fields = ["title"]
 
 
 @admin.register(ContactMethod)
-class ContactMethodAdmin(admin.ModelAdmin):
+class ContactMethodAdmin(StudioModelAdmin):
     list_display = ["kind", "title", "href", "sort_order"]
     list_editable = ["sort_order"]
 
 
-admin.site.register(ContactTopic)
+@admin.register(ContactTopic)
+class ContactTopicAdmin(StudioModelAdmin):
+    list_display = ["label", "sort_order"]
+    list_editable = ["sort_order"]
 
 
 @admin.register(ContactSubmission)
-class ContactSubmissionAdmin(admin.ModelAdmin):
-    list_display = ["name", "email", "topic", "created_at"]
-    list_filter = ["topic"]
+class ContactSubmissionAdmin(StudioModelAdmin):
+    list_display = ["name", "email", "topic", "preview", "created_at"]
+    # `topic` is a free-text CharField here (it mirrors ContactTopic.label rather
+    # than pointing at it), so it needs a value filter, not a related one.
+    list_filter = [("topic", AllValuesCheckboxFilter)]
+    search_fields = ["name", "email", "message"]
     readonly_fields = ["name", "email", "topic", "message", "created_at"]
+    date_hierarchy = "created_at"
+
+    preview = truncated_display("message", 70, description="Message")
 
     def has_add_permission(self, request):
         return False
 
 
-class PolicySectionInline(admin.StackedInline):
+class PolicySectionInline(StudioStackedInline):
     model = PolicySection
     extra = 0
     fields = ["anchor", "heading", "body", "sort_order"]
 
 
 @admin.register(PolicyPage)
-class PolicyPageAdmin(admin.ModelAdmin):
+class PolicyPageAdmin(StudioModelAdmin):
     list_display = ["title", "slug", "effective_date"]
     inlines = [PolicySectionInline]
 
 
 @admin.register(InspirationItem)
-class InspirationItemAdmin(admin.ModelAdmin):
-    list_display = ["title", "tag", "style", "likes_count", "status", "sort_order"]
-    list_filter = ["tag", "style", "status"]
+class InspirationItemAdmin(StudioModelAdmin):
+    list_display = ["preview", "title", "tag", "style", "likes_count", "status_pill", "sort_order"]
+    list_filter = ["tag", "style", ("status", ChoicesDropdownFilter)]
     list_editable = ["sort_order"]
+    search_fields = ["title", "tag", "style"]
     readonly_fields = ["likes_count"]
+
+    preview = thumbnail_display()
+    status_pill = status_display()
 
 
 @admin.register(NewsletterSubscriber)
-class NewsletterSubscriberAdmin(admin.ModelAdmin):
+class NewsletterSubscriberAdmin(StudioModelAdmin):
     list_display = ["email", "source", "created_at"]
     search_fields = ["email"]
 

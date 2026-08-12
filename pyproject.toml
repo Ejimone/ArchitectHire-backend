@@ -29,6 +29,7 @@ dependencies = [
     "sentry-sdk[django]>=2.30",
     "Pillow>=11.0",
     "svix>=1.99.1",
+    "django-unfold>=0.104,<0.105",
 ]
 
 [dependency-groups]

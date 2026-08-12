@@ -1,22 +1,27 @@
 from django.contrib import admin
 
+from apps.studio.admin_base import (
+    StudioModelAdmin,
+    StudioTabularInline,
+)
+
 from .models import Message, Thread, ThreadParticipant
 
 
-class ThreadParticipantInline(admin.TabularInline):
+class ThreadParticipantInline(StudioTabularInline):
     model = ThreadParticipant
     extra = 0
 
 
 @admin.register(Thread)
-class ThreadAdmin(admin.ModelAdmin):
+class ThreadAdmin(StudioModelAdmin):
     list_display = ["id", "project", "order", "archived", "updated_at"]
     list_filter = ["archived"]
     inlines = [ThreadParticipantInline]
 
 
 @admin.register(Message)
-class MessageAdmin(admin.ModelAdmin):
+class MessageAdmin(StudioModelAdmin):
     list_display = ["thread", "sender", "kind", "short_body", "created_at"]
     list_filter = ["kind"]
     search_fields = ["body", "sender__email"]

@@ -1,0 +1,20 @@
+{# Shared shell for every Studio custom page. #}
+{% extends "unfold/layouts/base_simple.html" %}
+
+{% block content %}
+    <div class="pb-10">
+        <header class="flex flex-wrap items-end justify-between gap-4 pt-2 pb-6">
+            <div class="min-w-0">
+                {% block page_kicker %}{% endblock %}
+                <h1 class="studio-display text-2xl font-semibold">{% block page_title %}{{ title }}{% endblock %}</h1>
+                {% block page_subtitle %}{% endblock %}
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2">
+                {% block page_actions %}{% endblock %}
+            </div>
+        </header>
+
+        {% block page_body %}{% endblock %}
+    </div>
+{% endblock %}

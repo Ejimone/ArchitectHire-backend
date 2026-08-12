@@ -1,11 +1,12 @@
 from django.contrib import admin
-from import_export.admin import ImportExportModelAdmin
+
+from apps.studio.admin_base import StudioImportExportAdmin
 
 from .models import City, State
 
 
 @admin.register(State)
-class StateAdmin(ImportExportModelAdmin):
+class StateAdmin(StudioImportExportAdmin):
     list_display = ["name", "code", "complexity_score", "band", "region", "largest_city"]
     list_editable = ["complexity_score"]
     list_filter = ["region"]
@@ -14,7 +15,7 @@ class StateAdmin(ImportExportModelAdmin):
 
 
 @admin.register(City)
-class CityAdmin(ImportExportModelAdmin):
+class CityAdmin(StudioImportExportAdmin):
     list_display = ["name", "state", "county", "architect_count"]
     list_filter = ["state"]
     search_fields = ["name"]

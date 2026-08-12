@@ -1,0 +1,47 @@
+{% extends "studio/base.html" %}
+
+{% block page_kicker %}<p class="studio-kicker">Site content</p>{% endblock %}
+
+{% block page_subtitle %}
+    <p class="mt-1 text-sm text-font-subtle-light dark:text-font-subtle-dark">
+        {{ total_pages }} page{{ total_pages|pluralize }}. Open one to edit everything on it in a single screen.
+    </p>
+{% endblock %}
+
+{% block page_body %}
+    <form method="get" class="mb-6">
+        <div class="relative max-w-md">
+            <span class="material-symbols-outlined md-18 pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-font-subtle-light dark:text-font-subtle-dark">search</span>
+            <input type="search" name="q" value="{{ query }}" placeholder="Find a page"
+                   class="w-full rounded-default border border-base-200 bg-white py-2 pl-9 pr-3 text-sm dark:border-base-700 dark:bg-base-900">
+        </div>
+    </form>
+
+    {% if sections %}
+        {% for section, refs in sections.items %}
+            <section class="studio-section">
+                <div class="studio-section__header">
+                    <h2 class="studio-section__title">{{ section }}</h2>
+                    <span class="text-xs text-font-subtle-light dark:text-font-subtle-dark">{{ refs|length }}</span>
+                </div>
+
+                <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                    {% for ref in refs %}
+                        <a href="{{ ref.composer_url }}"
+                           class="studio-card flex items-start gap-3 p-4 transition-colors hover:border-primary-500">
+                            <span class="material-symbols-outlined md-18 mt-0.5 text-font-subtle-light dark:text-font-subtle-dark">
+                                {% if ref.is_dynamic %}dynamic_feed{% else %}web_asset{% endif %}
+                            </span>
+                            <span class="min-w-0">
+                                <span class="block truncate text-sm font-medium">{{ ref.label }}</span>
+                                <code class="studio-mono block truncate text-xs text-font-subtle-light dark:text-font-subtle-dark">{{ ref.key }}</code>
+                            </span>
+                        </a>
+                    {% endfor %}
+                </div>
+            </section>
+        {% endfor %}
+    {% else %}
+        {% include "studio/components/empty.html" with icon="search_off" title="No pages match" body="Try a different search term." %}
+    {% endif %}
+{% endblock %}

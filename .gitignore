@@ -15,3 +15,6 @@ htmlcov/
 
 # Production secrets — never commit
 .env.prod
+
+# Celery beat's local scheduler state (SQLite); regenerated on every start
+celerybeat-schedule*

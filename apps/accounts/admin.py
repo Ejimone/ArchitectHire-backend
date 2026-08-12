@@ -1,16 +1,28 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
+from django.contrib.auth.admin import GroupAdmin as DjangoGroupAdmin
+from django.contrib.auth.models import Group
+
+from apps.studio.admin_base import StudioModelAdmin, StudioStackedInline, StudioUserAdmin
 
 from .models import NotificationPreference, User
 
+# django.contrib.auth registers Group against the plain ModelAdmin at import time,
+# which renders unstyled. Re-register it on the Studio base.
+admin.site.unregister(Group)
 
-class NotificationPreferenceInline(admin.StackedInline):
+
+@admin.register(Group)
+class GroupAdmin(DjangoGroupAdmin, StudioModelAdmin):
+    pass
+
+
+class NotificationPreferenceInline(StudioStackedInline):
     model = NotificationPreference
     can_delete = False
 
 
 @admin.register(User)
-class UserAdmin(DjangoUserAdmin):
+class UserAdmin(StudioUserAdmin):
     ordering = ["email"]
     list_display = ["email", "first_name", "last_name", "role", "is_active", "date_joined"]
     list_filter = ["role", "is_active", "is_staff"]

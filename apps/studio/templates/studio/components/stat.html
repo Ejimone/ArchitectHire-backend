@@ -1,0 +1,15 @@
+{# A single metric. `tone` drives the value colour for health figures. #}
+<div class="studio-card p-4 flex flex-col gap-1">
+    <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined md-18 text-font-subtle-light dark:text-font-subtle-dark">{{ icon|default:'analytics' }}</span>
+        <span class="studio-kicker">{{ label }}</span>
+    </div>
+    <p class="text-2xl font-semibold studio-display{% if tone %} text-{{ tone }}{% endif %}"
+       {% if tone == 'warn' %}style="color:var(--studio-warn)"{% elif tone == 'danger' %}style="color:var(--studio-danger)"{% elif tone == 'success' %}style="color:var(--studio-success)"{% endif %}>
+        {{ value }}
+    </p>
+    {% if hint %}<p class="text-xs text-font-subtle-light dark:text-font-subtle-dark">{{ hint }}</p>{% endif %}
+    {% if link %}
+        <a href="{{ link }}" class="mt-1 text-xs font-medium text-primary-600 hover:underline dark:text-primary-400">{{ link_label|default:'View' }}</a>
+    {% endif %}
+</div>

@@ -47,7 +47,7 @@ PROVIDER = User(email="maya@example.com")
         (PortfolioItem(title="Backyard ADU"), "Backyard ADU"),
         (
             Review(provider=PROVIDER, reviewer_name="Dana", rating=5),
-            "5★ for maya@example.com by Dana",
+            "5/5 for maya@example.com by Dana",
         ),
     ],
 )
@@ -111,6 +111,26 @@ class TestPortfolio:
 class TestAdminQueues:
     def test_credentials_cannot_be_added_from_the_profile_inline(self):
         assert CredentialInline(ArchitectProfile, site).has_add_permission(None) is False
+
+    def test_profile_inline_shows_that_users_credentials(self):
+        """`Credential.user` points at User, not at the profile, so the inline has to
+        bridge that hop itself — this is what makes it a nonrelated inline."""
+        architect = ArchitectProfile.objects.create(user=UserFactory(role="architect"))
+        other = ArchitectProfile.objects.create(user=UserFactory(role="architect"))
+        mine = Credential.objects.create(user=architect.user, kind="license", number="A-1")
+        Credential.objects.create(user=other.user, kind="license", number="B-2")
+
+        queryset = CredentialInline(ArchitectProfile, site).get_form_queryset(architect)
+
+        assert list(queryset) == [mine]
+
+    def test_profile_inline_attaches_new_rows_to_the_profiles_user(self):
+        architect = ArchitectProfile.objects.create(user=UserFactory(role="architect"))
+        credential = Credential(kind="license", number="C-3")
+
+        CredentialInline(ArchitectProfile, site).save_new_instance(architect, credential)
+
+        assert credential.user == architect.user
 
     def test_approving_profiles_goes_live(self):
         architect = ArchitectProfile.objects.create(user=UserFactory(role="architect"))

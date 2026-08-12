@@ -1,6 +1,6 @@
 # Deploying ArchitectHire — runbooks
 
-## ✅ As deployed (2026-08-11)
+## As deployed (2026-08-11)
 
 | Piece | Where | Notes |
 |---|---|---|

@@ -1,0 +1,175 @@
+{% extends "studio/base.html" %}
+
+{% block page_kicker %}
+    <p class="studio-kicker">
+        <a href="{% url 'admin:studio_pages' %}" class="hover:underline">Pages</a>
+        &middot; {{ page_ref.section }}
+    </p>
+{% endblock %}
+
+{% block page_subtitle %}
+    <p class="mt-1 flex flex-wrap items-center gap-2 text-sm text-font-subtle-light dark:text-font-subtle-dark">
+        <code class="studio-mono">{{ page_ref.key }}</code>
+        {% if draft_count %}
+            {% include "studio/components/pill.html" with variant="draft" icon="edit_note" label=draft_count %}
+        {% endif %}
+    </p>
+{% endblock %}
+
+{% block page_actions %}
+    {% if preview_url %}
+        <a href="{{ preview_url }}" target="_blank" rel="noopener"
+           class="inline-flex items-center gap-1.5 rounded-default border border-base-200 px-3 py-2 text-sm font-medium transition-colors hover:border-base-300 dark:border-base-700 dark:hover:border-base-600">
+            <span class="material-symbols-outlined md-18">open_in_new</span>
+            Preview
+        </a>
+    {% endif %}
+    {% if draft_count %}
+        <form method="post" action="{% url 'admin:studio_queue_publish' %}">
+            {% csrf_token %}
+            <input type="hidden" name="scope" value="{{ page_ref.key }}">
+            <button type="submit"
+                    class="inline-flex items-center gap-1.5 rounded-default bg-primary-600 px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-primary-700">
+                <span class="material-symbols-outlined md-18">publish</span>
+                Publish page
+            </button>
+        </form>
+    {% endif %}
+{% endblock %}
+
+{% block page_body %}
+    <div class="grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1fr)_320px]">
+        <div class="min-w-0">
+            {# ---- Content blocks -------------------------------------------------- #}
+            {% if block_stacks %}
+                {% for stack in block_stacks %}
+                    <section class="studio-card studio-section">
+                        <header class="flex flex-wrap items-center justify-between gap-3 border-b border-base-200 px-4 py-3 dark:border-base-800">
+                            <div class="flex items-center gap-2">
+                                <h2 class="studio-section__title">{{ stack.label }}</h2>
+                                <span class="text-xs text-font-subtle-light dark:text-font-subtle-dark">{{ stack.count }}</span>
+                                {% if stack.draft_count %}
+                                    {% include "studio/components/pill.html" with variant="draft" icon="edit_note" label=stack.draft_count %}
+                                {% endif %}
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <a href="{{ stack.changelist_url }}" class="text-xs font-medium text-primary-600 hover:underline dark:text-primary-400">Reorder</a>
+                                <a href="{{ stack.add_url }}" class="inline-flex items-center gap-1 rounded-default border border-base-200 px-2.5 py-1.5 text-xs font-medium transition-colors hover:border-base-300 dark:border-base-700 dark:hover:border-base-600">
+                                    <span class="material-symbols-outlined md-18">add</span>Add
+                                </a>
+                            </div>
+                        </header>
+
+                        <ol class="divide-y divide-base-200 dark:divide-base-800">
+                            {% for row in stack.rows %}
+                                <li class="flex items-center gap-3 px-4 py-2.5">
+                                    <span class="studio-mono w-6 shrink-0 text-xs text-font-subtle-light dark:text-font-subtle-dark">{{ row.sort_order }}</span>
+                                    <a href="{{ row.change_url }}"
+                                       class="min-w-0 grow truncate text-sm hover:text-primary-600 dark:hover:text-primary-400">{{ row.label }}</a>
+                                    {% if row.group %}<code class="studio-mono shrink-0 text-xs text-font-subtle-light dark:text-font-subtle-dark">{{ row.group }}</code>{% endif %}
+                                    {% if row.is_published %}
+                                        {% include "studio/components/pill.html" with variant="published" icon="check_circle" label="Live" %}
+                                    {% else %}
+                                        {% include "studio/components/pill.html" with variant="draft" icon="edit_note" label="Draft" %}
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ol>
+                    </section>
+                {% endfor %}
+            {% else %}
+                {% include "studio/components/empty.html" with icon="layers_clear" title="No content blocks yet" body="Blocks scoped to this page will appear here as soon as you add them." %}
+            {% endif %}
+
+            {# ---- Copy ------------------------------------------------------------ #}
+            <section class="studio-card studio-section">
+                <header class="flex items-center justify-between gap-3 border-b border-base-200 px-4 py-3 dark:border-base-800">
+                    <div class="flex items-center gap-2">
+                        <h2 class="studio-section__title">Copy</h2>
+                        <span class="text-xs text-font-subtle-light dark:text-font-subtle-dark">{{ copy_blocks|length }}</span>
+                    </div>
+                    <a href="{% url 'admin:cms_copyblock_changelist' %}?scope={{ page_ref.key|urlencode }}"
+                       class="text-xs font-medium text-primary-600 hover:underline dark:text-primary-400">Open list</a>
+                </header>
+
+                {% if copy_blocks %}
+                    <ul class="divide-y divide-base-200 dark:divide-base-800">
+                        {% for block in copy_blocks|slice:":12" %}
+                            <li class="flex items-baseline gap-3 px-4 py-2.5">
+                                <code class="studio-mono w-40 shrink-0 truncate text-xs text-font-subtle-light dark:text-font-subtle-dark">{{ block.key }}</code>
+                                <a href="{% url 'admin:cms_copyblock_change' block.pk %}" class="min-w-0 grow truncate text-sm hover:text-primary-600 dark:hover:text-primary-400">{{ block.text|default:"(empty)" }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    {% if copy_blocks|length > 12 %}
+                        <p class="border-t border-base-200 px-4 py-2 text-xs text-font-subtle-light dark:border-base-800 dark:text-font-subtle-dark">
+                            and {{ copy_blocks|length|add:"-12" }} more
+                        </p>
+                    {% endif %}
+                {% else %}
+                    <p class="px-4 py-6 text-center text-sm text-font-subtle-light dark:text-font-subtle-dark">No copy blocks on this page.</p>
+                {% endif %}
+            </section>
+        </div>
+
+        {# ---- Sidebar: SEO + media ------------------------------------------------ #}
+        <aside class="flex flex-col gap-6">
+            <section class="studio-card">
+                <header class="flex items-center justify-between gap-2 border-b border-base-200 px-4 py-3 dark:border-base-800">
+                    <h2 class="studio-section__title">SEO</h2>
+                    {% if seo %}
+                        <a href="{% url 'admin:cms_pageseo_change' seo.pk %}" class="text-xs font-medium text-primary-600 hover:underline dark:text-primary-400">Edit</a>
+                    {% endif %}
+                </header>
+
+                {% if seo %}
+                    <dl class="flex flex-col gap-3 px-4 py-3 text-sm">
+                        <div>
+                            <dt class="studio-kicker">Title</dt>
+                            <dd class="mt-0.5">{{ seo.title|default:"—" }}</dd>
+                        </div>
+                        <div>
+                            <dt class="studio-kicker">Description</dt>
+                            <dd class="mt-0.5 text-font-subtle-light dark:text-font-subtle-dark">{{ seo.description|default:"—" }}</dd>
+                        </div>
+                    </dl>
+                {% else %}
+                    <div class="px-4 py-5 text-center">
+                        <p class="text-sm text-font-subtle-light dark:text-font-subtle-dark">No SEO record.</p>
+                        <a href="{{ seo_add_url }}" class="mt-1 inline-block text-xs font-medium text-primary-600 hover:underline dark:text-primary-400">Add one</a>
+                    </div>
+                {% endif %}
+            </section>
+
+            <section class="studio-card">
+                <header class="flex items-center justify-between gap-2 border-b border-base-200 px-4 py-3 dark:border-base-800">
+                    <h2 class="studio-section__title">Images</h2>
+                    <a href="{% url 'admin:studio_media' %}?page_key={{ page_ref.key|urlencode }}"
+                       class="text-xs font-medium text-primary-600 hover:underline dark:text-primary-400">Open library</a>
+                </header>
+
+                {% if media %}
+                    <ul class="grid grid-cols-2 gap-2 p-3">
+                        {% for asset in media %}
+                            <li>
+                                <a href="{% url 'admin:cms_mediaasset_change' asset.pk %}"
+                                   class="studio-tile{% if not asset.image %} studio-tile--empty{% endif %} block"
+                                   title="{{ asset.notes }}">
+                                    <span class="studio-tile__frame">
+                                        {% if asset.image %}
+                                            <img src="{{ asset.image.url }}" alt="{{ asset.alt_text }}">
+                                        {% else %}
+                                            <span class="material-symbols-outlined text-font-subtle-light dark:text-font-subtle-dark">image_not_supported</span>
+                                        {% endif %}
+                                    </span>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="px-4 py-5 text-center text-sm text-font-subtle-light dark:text-font-subtle-dark">No image slots on this page.</p>
+                {% endif %}
+            </section>
+        </aside>
+    </div>
+{% endblock %}

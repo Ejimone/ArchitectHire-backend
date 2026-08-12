@@ -24,9 +24,10 @@ def bump_content_version() -> None:
     except ValueError:
         cache.add(CONTENT_VERSION_KEY, 2, timeout=None)
     # Tell the frontend to drop its cached pages so admin edits show instantly.
-    from apps.core.revalidate import ping_frontend
+    # Queued, not called inline: this runs inside a post_save signal.
+    from apps.core.revalidate import schedule_ping
 
-    ping_frontend()
+    schedule_ping()
 
 
 def page_cache_key(page_key: str) -> str:

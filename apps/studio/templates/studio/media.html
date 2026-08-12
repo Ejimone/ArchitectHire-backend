@@ -1,0 +1,107 @@
+{% extends "studio/base.html" %}
+
+{% block page_kicker %}<p class="studio-kicker">Media</p>{% endblock %}
+
+{% block page_subtitle %}
+    <p class="mt-1 text-sm text-font-subtle-light dark:text-font-subtle-dark">
+        {{ filled_slots }} of {{ total_slots }} slot{{ total_slots|pluralize }} filled
+        {% if empty_slots %}&middot; {{ empty_slots }} still empty{% endif %}
+    </p>
+{% endblock %}
+
+{% block page_actions %}
+    <form method="post" action="{{ sync_url }}">
+        {% csrf_token %}
+        <button type="submit"
+                class="inline-flex items-center gap-1.5 rounded-default border border-base-200 px-3 py-2 text-sm font-medium transition-colors hover:border-base-300 dark:border-base-700 dark:hover:border-base-600">
+            <span class="material-symbols-outlined md-18">sync</span>
+            Sync slots
+        </button>
+    </form>
+{% endblock %}
+
+{% block page_body %}
+    <form method="get" class="mb-6 flex flex-wrap items-center gap-2">
+        <div class="relative">
+            <span class="material-symbols-outlined md-18 pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-font-subtle-light dark:text-font-subtle-dark">search</span>
+            <input type="search" name="q" value="{{ query }}" placeholder="Search notes, slot keys, alt text"
+                   class="w-72 rounded-default border border-base-200 bg-white py-2 pl-9 pr-3 text-sm dark:border-base-700 dark:bg-base-900">
+        </div>
+
+        <select name="state" class="rounded-default border border-base-200 bg-white px-3 py-2 text-sm dark:border-base-700 dark:bg-base-900">
+            <option value="all" {% if state == 'all' %}selected{% endif %}>All slots</option>
+            <option value="empty" {% if state == 'empty' %}selected{% endif %}>Empty only</option>
+            <option value="filled" {% if state == 'filled' %}selected{% endif %}>Filled only</option>
+        </select>
+
+        <select name="page_key" class="rounded-default border border-base-200 bg-white px-3 py-2 text-sm dark:border-base-700 dark:bg-base-900">
+            <option value="">Every page</option>
+            {% for choice in page_choices %}
+                <option value="{{ choice }}" {% if choice == page_filter %}selected{% endif %}>{{ choice }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit" class="rounded-default bg-primary-600 px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-primary-700">
+            Filter
+        </button>
+
+        {% if query or state != 'all' or page_filter %}
+            <a href="?" class="px-2 py-2 text-sm text-font-subtle-light hover:underline dark:text-font-subtle-dark">Clear</a>
+        {% endif %}
+    </form>
+
+    {% if groups %}
+        <div data-media-grid data-upload-url="{{ upload_url }}">
+            {% for scope, assets in groups.items %}
+                <section class="studio-section">
+                    <div class="studio-section__header">
+                        <h2 class="studio-section__title">
+                            <code class="studio-mono">{{ scope }}</code>
+                        </h2>
+                        <span class="text-xs text-font-subtle-light dark:text-font-subtle-dark">{{ assets|length }} slot{{ assets|length|pluralize }}</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                        {% for asset in assets %}
+                            <article class="studio-tile{% if not asset.image %} studio-tile--empty{% endif %}"
+                                     data-media-tile
+                                     data-slot-key="{{ asset.slot_key }}">
+                                <label class="studio-tile__frame cursor-pointer">
+                                    <img {% if asset.image %}src="{{ asset.image.url }}"{% endif %}
+                                         alt="{{ asset.alt_text }}"
+                                         data-media-preview
+                                         {% if not asset.image %}hidden{% endif %}>
+
+                                    <span data-media-placeholder {% if asset.image %}hidden{% endif %}
+                                          class="flex flex-col items-center gap-1 p-4 text-center text-font-subtle-light dark:text-font-subtle-dark">
+                                        <span class="material-symbols-outlined">add_photo_alternate</span>
+                                        <span class="text-xs">Drop an image or click to upload</span>
+                                    </span>
+
+                                    <span data-media-progress hidden
+                                          class="absolute inset-0 grid place-items-center bg-base-950/50 text-xs font-medium text-white">
+                                        Uploading&hellip;
+                                    </span>
+
+                                    <input type="file" accept="image/*" class="sr-only" data-media-input>
+                                </label>
+
+                                <div class="studio-tile__body">
+                                    <p class="studio-tile__note" title="{{ asset.notes }}">{{ asset.notes|default:"Untitled slot" }}</p>
+                                    <p class="studio-tile__key" title="{{ asset.slot_key }}">{{ asset.slot_key }}</p>
+                                    <p data-media-error hidden class="text-xs" style="color:var(--studio-danger)"></p>
+                                    <a href="{% url 'admin:cms_mediaasset_change' asset.pk %}"
+                                       class="mt-0.5 text-xs font-medium text-primary-600 hover:underline dark:text-primary-400">
+                                        Edit alt text
+                                    </a>
+                                </div>
+                            </article>
+                        {% endfor %}
+                    </div>
+                </section>
+            {% endfor %}
+        </div>
+    {% else %}
+        {% include "studio/components/empty.html" with icon="image_search" title="No slots match" body="Adjust the filters, or run Sync slots if the site has new cities or project types." %}
+    {% endif %}
+{% endblock %}

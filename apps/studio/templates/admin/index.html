@@ -1,0 +1,87 @@
+{% extends "unfold/layouts/base_simple.html" %}
+{% comment %}
+The Command Center. Replaces Django's app index, which lists 73 model names in
+alphabetical order and says nothing about the state of the site. Every figure
+here links to the screen where it gets acted on.
+{% endcomment %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+    <div class="pb-10">
+        <header class="flex flex-wrap items-end justify-between gap-4 pt-2 pb-6">
+            <div>
+                <p class="studio-kicker">Command Center</p>
+                <h1 class="studio-display text-2xl font-semibold">
+                    {% if request.user.first_name %}Welcome back, {{ request.user.first_name }}{% else %}Welcome back{% endif %}
+                </h1>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2">
+                {% for action in studio_actions %}
+                    <a href="{{ action.url }}"
+                       class="inline-flex items-center gap-1.5 rounded-default border border-base-200 px-3 py-2 text-sm font-medium transition-colors hover:border-primary-500 hover:text-primary-600 dark:border-base-700 dark:hover:text-primary-400">
+                        <span class="material-symbols-outlined md-18">{{ action.icon }}</span>
+                        {{ action.label }}
+                    </a>
+                {% endfor %}
+            </div>
+        </header>
+
+        {# ---- Content health ------------------------------------------------- #}
+        <section class="studio-section">
+            <div class="studio-section__header">
+                <h2 class="studio-section__title">Content health</h2>
+                <span class="text-xs text-font-subtle-light dark:text-font-subtle-dark">What still needs doing</span>
+            </div>
+
+            <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
+                {% for card in studio_health %}
+                    {% include "studio/components/stat.html" with label=card.label value=card.value icon=card.icon tone=card.tone hint=card.hint link=card.link link_label=card.link_label %}
+                {% endfor %}
+            </div>
+        </section>
+
+        {# ---- Marketplace ---------------------------------------------------- #}
+        <section class="studio-section">
+            <div class="studio-section__header">
+                <h2 class="studio-section__title">Marketplace</h2>
+            </div>
+
+            <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                {% for card in studio_metrics %}
+                    {% include "studio/components/stat.html" with label=card.label value=card.value icon=card.icon tone=card.tone hint=card.hint link=card.link link_label="Open" %}
+                {% endfor %}
+            </div>
+        </section>
+
+        {# ---- Activity ------------------------------------------------------- #}
+        <section class="studio-section">
+            <div class="studio-section__header">
+                <h2 class="studio-section__title">Recent activity</h2>
+            </div>
+
+            {% if studio_activity %}
+                <div class="studio-card">
+                    <ul class="divide-y divide-base-200 dark:divide-base-800">
+                        {% for row in studio_activity %}
+                            <li class="flex items-center gap-3 px-4 py-2.5 text-sm">
+                                <span class="material-symbols-outlined md-18 shrink-0 text-font-subtle-light dark:text-font-subtle-dark">{{ row.icon }}</span>
+                                <span class="min-w-0 grow truncate">
+                                    {{ row.verb }}
+                                    {% if row.url %}<a href="{{ row.url }}" class="font-medium hover:text-primary-600 dark:hover:text-primary-400">{{ row.object }}</a>
+                                    {% else %}<span class="font-medium line-through opacity-60">{{ row.object }}</span>{% endif %}
+                                </span>
+                                <span class="shrink-0 text-xs text-font-subtle-light dark:text-font-subtle-dark">{{ row.model }}</span>
+                                <span class="hidden shrink-0 text-xs text-font-subtle-light sm:inline dark:text-font-subtle-dark">{{ row.user }}</span>
+                                <time class="shrink-0 text-xs text-font-subtle-light dark:text-font-subtle-dark" datetime="{{ row.when|date:'c' }}">{{ row.when|timesince }} ago</time>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% else %}
+                {% include "studio/components/empty.html" with icon="history" title="No activity yet" body="Edits made through Studio show up here." %}
+            {% endif %}
+        </section>
+    </div>
+{% endblock %}

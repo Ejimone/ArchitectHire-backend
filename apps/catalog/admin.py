@@ -1,6 +1,11 @@
 from django.contrib import admin
-from import_export.admin import ImportExportModelAdmin
-from solo.admin import SingletonModelAdmin
+
+from apps.studio.admin_base import (
+    StudioImportExportAdmin,
+    StudioModelAdmin,
+    StudioSingletonAdmin,
+    StudioTabularInline,
+)
 
 from .models import (
     Addon,
@@ -14,7 +19,7 @@ from .models import (
 )
 
 
-class ServiceInline(admin.TabularInline):
+class ServiceInline(StudioTabularInline):
     model = Service
     extra = 0
     fields = ["name", "price_display", "price_unit", "tier", "is_popular", "sort_order"]
@@ -22,7 +27,7 @@ class ServiceInline(admin.TabularInline):
 
 
 @admin.register(ServiceCategory)
-class ServiceCategoryAdmin(admin.ModelAdmin):
+class ServiceCategoryAdmin(StudioModelAdmin):
     list_display = ["name", "tagline", "from_price", "has_detail", "sort_order"]
     list_editable = ["sort_order"]
     prepopulated_fields = {"slug": ["name"]}
@@ -30,7 +35,7 @@ class ServiceCategoryAdmin(admin.ModelAdmin):
 
 
 @admin.register(Service)
-class ServiceAdmin(ImportExportModelAdmin):
+class ServiceAdmin(StudioImportExportAdmin):
     list_display = [
         "name",
         "category",
@@ -47,30 +52,31 @@ class ServiceAdmin(ImportExportModelAdmin):
 
 
 @admin.register(Addon)
-class AddonAdmin(admin.ModelAdmin):
+class AddonAdmin(StudioModelAdmin):
     list_display = ["label", "key", "price", "sort_order"]
     list_editable = ["price", "sort_order"]
 
 
 @admin.register(Plan)
-class PlanAdmin(admin.ModelAdmin):
+class PlanAdmin(StudioModelAdmin):
     list_display = ["title", "tag", "is_recommended", "sort_order"]
     list_editable = ["sort_order"]
 
 
 @admin.register(ProjectType)
-class ProjectTypeAdmin(admin.ModelAdmin):
+class ProjectTypeAdmin(StudioModelAdmin):
     list_display = ["name", "group", "price_display", "sort_order"]
     list_editable = ["price_display", "sort_order"]
     list_filter = ["group"]
+    search_fields = ["name", "slug"]  # required by autocomplete_fields elsewhere
     prepopulated_fields = {"slug": ["name"]}
 
 
 @admin.register(RenderDeliverable)
-class RenderDeliverableAdmin(admin.ModelAdmin):
+class RenderDeliverableAdmin(StudioModelAdmin):
     list_display = ["name", "unit", "conceptual", "professional", "photoreal", "sort_order"]
     list_editable = ["conceptual", "professional", "photoreal", "sort_order"]
 
 
-admin.site.register(DraftingConfig, SingletonModelAdmin)
-admin.site.register(EstimateConfig, SingletonModelAdmin)
+admin.site.register(DraftingConfig, StudioSingletonAdmin)
+admin.site.register(EstimateConfig, StudioSingletonAdmin)
