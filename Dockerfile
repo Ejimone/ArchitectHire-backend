@@ -16,6 +16,8 @@ COPY --from=builder /opt/venv /opt/venv
 COPY --chown=app:app . .
 ENV PATH="/opt/venv/bin:$PATH" \
     DJANGO_SETTINGS_MODULE=architecture_backend.settings.prod
+# /app itself is root-owned; the app user needs these two writable.
+RUN mkdir -p /app/staticfiles /app/media && chown app:app /app/staticfiles /app/media
 USER app
 # Bake the static manifest into the image (whitenoise Manifest storage 500s
 # without it). Runs as the app user so a later runtime collectstatic can still
