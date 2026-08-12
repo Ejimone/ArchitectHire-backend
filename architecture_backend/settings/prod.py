@@ -15,6 +15,10 @@ CSRF_TRUSTED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS", default=[])
 # --- Security hardening -----------------------------------------------------
 
 SECURE_SSL_REDIRECT = True
+# Platform health probes hit the container over plain HTTP with no forwarded
+# proto; without this exemption every probe gets a 301 and the deploy is
+# marked unhealthy.
+SECURE_REDIRECT_EXEMPT = [r"^api/health/$"]
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SECURE_HSTS_SECONDS = 31536000
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True

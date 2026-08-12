@@ -82,6 +82,11 @@ The owner updated `design/` — and the update changed the **business model**, n
 
 **Known design inconsistencies** (flagged, implemented as authored): two conflicting subscription tables ($79/$299/$699 on the recruiting pages vs $79/$149/$299-per-seat on the pricing page — both seeded as separate plan groups); `site-footer.js` still says "Sign up" where the nav now says "Get matched"; `CAD Drafting.dc.html`'s in-page menu still uses pre-update hrefs.
 
+## Deployed (2026-08-11)
+
+- **Backend**: DigitalOcean App Platform — https://architecthire-wkqzm.ondigitalocean.app (auto-deploys from GitHub `main`; migrations + seed run before every deploy; shared Postgres + Valkey; admin at `/admin/`).
+- **Frontend**: Vercel — https://architecthire.vercel.app (GitHub-connected, push = deploy). Test-mode Clerk/Stripe keys throughout; swap list in `DEPLOY.md` [LIVE-SWAP].
+
 ## Frontend phases (built in `Architecture-hire`, one per backend capability)
 
 - [x] **F1 — Foundation** *(2026-08-10)*: brand tokens in `app/globals.css` (navy `#0a1440`, blue `#135bff`, lime `#ceff65` + full ink/line/status scale), fonts via `next/font/google` (Bricolage Grotesque / Hanken Grotesk / IBM Plex Mono), typed API client `lib/api.ts` (composed page endpoint + catalog/jurisdictions/editorial fetchers, 60s ISR), `ClerkProvider` wired but key-optional so marketing renders without credentials, CMS-driven `SiteNav` (three hover mega-dropdowns + mobile drawer) and `SiteFooter`, shared `ImgSlot` / `FaqAccordion` / `LogoMark`.
@@ -95,16 +100,16 @@ The owner updated `design/` — and the update changed the **business model**, n
   - [x] `/services/cad-drafting` — hero, use cases, 4 deliverables, work gallery, specialists, 3 pricing cards, 4 steps, FAQ, CTA.
   - [x] `/for-architects` (scope `architect-landing`) — hero with live matched-lead + payout cards, credential trust bar, 6 value props, 3 steps with SVG art, control split, escrow/fee breakdown, 4 tools, stories, verification, FAQ, CTA.
   - [x] `/for-experts` — hero with matched-order + payout cards, 6 disciplines with licence tags, 6 value props, 3 steps, control split, $1,200 escrow breakdown, 4 tools, stories, FAQ, CTA.
-  - [ ] SEO templates (projects/cities/jurisdictions), editorial, utility pages
+  - [x] SEO templates (projects/cities/jurisdictions with `generateStaticParams`), editorial (`/guides`, `/case-studies` + details), utility pages (`/about`, `/careers`, `/contact`, `/privacy`, `/inspiration`, `/search`), `/for-experts/pricing`, `/for-experts/tools`. *(status reconciled 2026-08-11 — these were built but never ticked here; see BUILD-UPDATES.md)*
 
   Conventions established (see `FRONTEND-CONVENTIONS.md`): marketing pages render the design's advertised **ranges** from CMS rows the owner can edit; order/quote flows use the live pricing config and backend math. Substituting one for the other silently changes the design.
-- [ ] **F3 — Funnel**: Get Started questionnaire + instant estimate + Clerk signup handoff.
-- [ ] **F4 — Orders**: render + drafting configurators with live pricing.
-- [ ] **F5 — Matches & profiles**.
-- [ ] **F6 — Engagement dashboard**: milestones, approvals, escrow, files.
-- [ ] **F7 — Accounts**: homeowner + architect + expert portals, onboarding wizards.
-- [ ] **F8 — Messaging**: real-time threads, presence, service worker + Web Push.
-- [ ] **F9 — SEO & performance pass**: metadata, sitemaps, structured data, ISR, image optimization.
+- [x] **F3 — Funnel**: Get Started adaptive quiz (6 goals) + instant estimate + Clerk signup handoff + `/get-started/claim` → `/matches`. *(built; reconciled 2026-08-11)*
+- [x] **F4 — Orders**: retired by the design resync — `/order/render` and `/order/drafting` permanently redirect into the quiz (`?intent=viz|drafting`), matching the design's retired `Order *.dc.html` pages.
+- [x] **F5 — Matches & profiles**: `/matches` list + architect profile view + hire action. *(built; reconciled 2026-08-11)*
+- [x] **F6 — Engagement dashboard**: `/engagements/[id]` scoping → contract → hire → dashboard (milestones, approve/request-changes, files, requotes). *(built; live updates land in F8)*
+- [x] **F7 — Accounts**: `/account` (projects/messages/settings) + `/pro` & `/pro/expert` (onboarding wizards + dashboards). *(built; settings save + live data land in F8)*
+- [x] **F8 — Real-time completion** *(2026-08-11 — full log in BUILD-UPDATES.md)*: working message composer + optimistic send, WebSocket client (`lib/realtime/`), presence, typing, notifications bell, live dashboard refresh, settings save, service worker + Web Push, loading/error boundaries, `/terms`. Backend: `uvicorn[standard]` (real-server WS was silently broken), psycopg pool (build-time connection exhaustion), notification fanout + per-action notify calls, fee fallback → 0%, presence counter, `is_mine` fanout fix. Verified: two-user live E2E, 490 tests @ 100% coverage, 116-page clean build.
+- [ ] **F9 — SEO & performance pass**: sitemaps, structured data, image optimization audit.
 
 ## How to run (backend)
 

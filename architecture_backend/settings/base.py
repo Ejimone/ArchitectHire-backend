@@ -108,10 +108,20 @@ AUTH_USER_MODEL = "accounts.User"
 
 REDIS_URL = env("REDIS_URL", default="redis://localhost:6379")
 
+# Managed Redis/Valkey (DigitalOcean et al) speaks TLS via rediss://; Celery
+# refuses a rediss:// broker unless ssl_cert_reqs is explicit, and the db
+# number must come before the query string.
+_REDIS_IS_TLS = REDIS_URL.startswith("rediss://")
+_REDIS_QS = "?ssl_cert_reqs=required" if _REDIS_IS_TLS else ""
+
+
+def _redis_db(number: int) -> str:
+    return f"{REDIS_URL}/{number}{_REDIS_QS}"
+
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": f"{REDIS_URL}/0",
+        "LOCATION": _redis_db(0),
         "KEY_PREFIX": "ah",
     }
 }
@@ -119,14 +129,14 @@ CACHES = {
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {"hosts": [f"{REDIS_URL}/2"]},
+        "CONFIG": {"hosts": [_redis_db(2)]},
     }
 }
 
 # --- Celery -----------------------------------------------------------------
 
-CELERY_BROKER_URL = f"{REDIS_URL}/1"
-CELERY_RESULT_BACKEND = f"{REDIS_URL}/1"
+CELERY_BROKER_URL = _redis_db(1)
+CELERY_RESULT_BACKEND = _redis_db(1)
 CELERY_TASK_DEFAULT_QUEUE = "default"
 CELERY_TASK_ROUTES = {
     "apps.notifications.tasks.*": {"queue": "notifications"},
@@ -252,7 +262,6 @@ DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="ArchitectHire <no-reply@
 STRIPE_SECRET_KEY = env("STRIPE_SECRET_KEY", default="")
 STRIPE_PUBLISHABLE_KEY = env("STRIPE_PUBLISHABLE_KEY", default="")
 STRIPE_WEBHOOK_SECRET = env("STRIPE_WEBHOOK_SECRET", default="")
-STRIPE_CONNECT_WEBHOOK_SECRET = env("STRIPE_CONNECT_WEBHOOK_SECRET", default="")
 
 # --- Web push ---------------------------------------------------------------
 

@@ -1,4 +1,23 @@
-# Deploying ArchitectHire to DigitalOcean — self-serve runbook
+# Deploying ArchitectHire — runbooks
+
+## ✅ As deployed (2026-08-11)
+
+| Piece | Where | Notes |
+|---|---|---|
+| Backend API + admin | DigitalOcean **App Platform** — https://architecthire-wkqzm.ondigitalocean.app | Docker build from `Ejimone/ArchitectHire-backend` `main`, auto-deploys on push. 512MB / 2 gunicorn workers; `collectstatic` runs at boot; a `migrate-seed` pre-deploy job migrates + seeds on every deploy. |
+| Frontend | **Vercel** — **https://architecthire.com** (canonical; `www` 308-redirects to it, `architecthire.vercel.app` still works) | Project `architecthire`, GitHub-connected to `Ejimone/Architecture-hire` `main` (push = deploy). Deployment protection disabled (public site). |
+| Postgres | Shared DO cluster `db-pgsql-blr1-19643`, database `architecthire` | App-only firewall; DB owned by its own user (PG15+ requirement). |
+| Redis | Shared DO Valkey `alsermon` over TLS | Cache/queues/presence; shared with other hobby projects. |
+| Media | Shared Spaces bucket `allsermon-media` (sfo3) | Uploads under `cms/`; consider a dedicated bucket at launch. |
+
+Config changes: backend env lives in the **App Platform app spec** (edit in the DO
+dashboard or `doctl apps update`), frontend env in **Vercel project settings**
+(`NEXT_PUBLIC_*` are baked at build — redeploy after changing them). Every
+test-mode key to swap at launch is marked [LIVE-SWAP] below.
+
+---
+
+# Alternative: single-droplet runbook (kept for reference)
 
 One droplet runs everything: Django (web + Celery worker + beat), Next.js,
 Redis, and Caddy for automatic HTTPS. **Postgres is your existing shared

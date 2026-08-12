@@ -1,33 +1,136 @@
 {
-  "_note": "Terms of Service page (/terms) - owner decision 2026-08-11: the design's footer pointed 'Terms of Service' at the dead anchor /privacy#terms, so a real page was created on the reserved `terms` scope using the privacy-page layout. Sections are a product-design draft (not legal advice) for the owner to edit in admin. Also repoints chrome.footer_terms to /terms.",
-  "copy": [
-    { "scope": "terms", "key": "seo_title", "text": "Terms of Service — ArchitectHire", "href": "" },
-    { "scope": "terms", "key": "seo_description", "text": "The terms that govern using ArchitectHire to get matched with licensed architects and independent building experts.", "href": "" },
-    { "scope": "terms", "key": "eyebrow", "text": "LEGAL", "href": "" },
-    { "scope": "terms", "key": "updated_prefix", "text": "Last updated:", "href": "" },
-    { "scope": "terms", "key": "intro", "text": "These terms govern your use of ArchitectHire, Inc. (\"ArchitectHire\", \"we\") — the website, the matching platform, and the professional tools. By creating an account or using the site you agree to them. This summary is provided for product design and is not legal advice.", "href": "" },
-    { "scope": "terms", "key": "toc_heading", "text": "CONTENTS", "href": "" },
-    { "scope": "terms", "key": "help_lead", "text": "Questions about these terms? Email", "href": "" },
-    { "scope": "terms", "key": "help_middle", "text": "or reach us through the", "href": "" },
-    { "scope": "terms", "key": "help_link", "text": "contact page", "href": "/contact" },
-    { "scope": "terms", "key": "help_tail", "text": ".", "href": "" },
-    { "scope": "chrome", "key": "footer_terms", "text": "Terms of Service", "href": "/terms" }
-  ],
-  "policy": {
-    "slug": "terms",
-    "title": "Terms of Service",
-    "effective_date": "2026-08-08",
-    "sections": [
-      { "anchor": "acceptance", "heading": "1. Accepting these terms", "body": "By creating an account, requesting an estimate, or using any part of ArchitectHire, you agree to these Terms of Service and our Privacy Policy. If you use the platform on behalf of a company, you confirm you can bind that company to these terms." },
-      { "anchor": "service", "heading": "2. What ArchitectHire is", "body": "ArchitectHire is a matching platform. We connect clients with independent, licensed architects and building experts, score jurisdictions for permit complexity, and provide estimates and project tools.\n\nWe are not an architecture firm, we do not produce or stamp drawings, and professionals on the platform are independent businesses — not our employees or agents." },
-      { "anchor": "accounts", "heading": "3. Your account", "body": "Keep your account credentials secure and your profile information accurate. You are responsible for activity under your account. We may suspend accounts that violate these terms, misuse the platform, or put other users at risk." },
-      { "anchor": "engagements", "heading": "4. Working with professionals", "body": "When you hire a professional you met through ArchitectHire, your contract is directly with that professional. You pay them directly at the rate you agree together; ArchitectHire takes no percentage of your project and is never a party to the payment.\n\nEstimates shown on the platform are informed ranges, not quotes. The professional you hire sets the actual price and owns the professional obligations attached to their license, including the decision to stamp." },
-      { "anchor": "subscriptions", "heading": "5. Professional subscriptions", "body": "Architects and experts pay a flat monthly subscription for access to matching and practice tools. Subscription fees are billed in advance, and plan limits are described on the pricing page. You can cancel any time; access continues until the end of the paid period." },
-      { "anchor": "content", "heading": "6. Content and intellectual property", "body": "You keep the rights to content you upload (briefs, photos, documents). You give us the limited license needed to operate the platform — to store, display, and transmit that content to the people you work with.\n\nThe platform itself, including the jurisdiction database and its scores, is ours. Don't scrape, resell, or republish it." },
-      { "anchor": "disclaimers", "heading": "7. Disclaimers", "body": "The platform is provided as-is. We verify professional licenses at onboarding, but we do not guarantee any project outcome, permit approval, timeline, or price. Jurisdiction data is maintained carefully but can change as codes and local rules change — always confirm requirements with your professional and your local authority." },
-      { "anchor": "liability", "heading": "8. Limits of liability", "body": "To the fullest extent the law allows, ArchitectHire is not liable for disputes between clients and professionals, for the work products professionals deliver, or for indirect or consequential damages. Our total liability for any claim is limited to the greater of $100 or the subscription fees you paid us in the twelve months before the claim." },
-      { "anchor": "termination", "heading": "9. Ending your use", "body": "You can close your account at any time. We can suspend or end access for violations of these terms. Sections that by their nature should survive — content licenses, disclaimers, liability limits — survive termination." },
-      { "anchor": "changes", "heading": "10. Changes to these terms", "body": "We may update these terms as the product evolves. When we make material changes we will update the date at the top of this page and, for significant changes, notify account holders. Continuing to use the platform after a change means you accept the new terms." }
+  "_note": "Terms of Service page (owner decision 2026-08-11: footer Terms link points at /terms). Exported from the working DB so production seeding reproduces it.",
+  "editorial": {
+    "policy_pages": [
+      {
+        "slug": "terms",
+        "title": "Terms of Service",
+        "effective_date": "2026-08-08",
+        "sections": [
+          {
+            "anchor": "acceptance",
+            "heading": "1. Accepting these terms",
+            "body": "By creating an account, requesting an estimate, or using any part of ArchitectHire, you agree to these Terms of Service and our Privacy Policy. If you use the platform on behalf of a company, you confirm you can bind that company to these terms.",
+            "sort": 0
+          },
+          {
+            "anchor": "service",
+            "heading": "2. What ArchitectHire is",
+            "body": "ArchitectHire is a matching platform. We connect clients with independent, licensed architects and building experts, score jurisdictions for permit complexity, and provide estimates and project tools.\n\nWe are not an architecture firm, we do not produce or stamp drawings, and professionals on the platform are independent businesses — not our employees or agents.",
+            "sort": 1
+          },
+          {
+            "anchor": "accounts",
+            "heading": "3. Your account",
+            "body": "Keep your account credentials secure and your profile information accurate. You are responsible for activity under your account. We may suspend accounts that violate these terms, misuse the platform, or put other users at risk.",
+            "sort": 2
+          },
+          {
+            "anchor": "engagements",
+            "heading": "4. Working with professionals",
+            "body": "When you hire a professional you met through ArchitectHire, your contract is directly with that professional. You pay them directly at the rate you agree together; ArchitectHire takes no percentage of your project and is never a party to the payment.\n\nEstimates shown on the platform are informed ranges, not quotes. The professional you hire sets the actual price and owns the professional obligations attached to their license, including the decision to stamp.",
+            "sort": 3
+          },
+          {
+            "anchor": "subscriptions",
+            "heading": "5. Professional subscriptions",
+            "body": "Architects and experts pay a flat monthly subscription for access to matching and practice tools. Subscription fees are billed in advance, and plan limits are described on the pricing page. You can cancel any time; access continues until the end of the paid period.",
+            "sort": 4
+          },
+          {
+            "anchor": "content",
+            "heading": "6. Content and intellectual property",
+            "body": "You keep the rights to content you upload (briefs, photos, documents). You give us the limited license needed to operate the platform — to store, display, and transmit that content to the people you work with.\n\nThe platform itself, including the jurisdiction database and its scores, is ours. Don't scrape, resell, or republish it.",
+            "sort": 5
+          },
+          {
+            "anchor": "disclaimers",
+            "heading": "7. Disclaimers",
+            "body": "The platform is provided as-is. We verify professional licenses at onboarding, but we do not guarantee any project outcome, permit approval, timeline, or price. Jurisdiction data is maintained carefully but can change as codes and local rules change — always confirm requirements with your professional and your local authority.",
+            "sort": 6
+          },
+          {
+            "anchor": "liability",
+            "heading": "8. Limits of liability",
+            "body": "To the fullest extent the law allows, ArchitectHire is not liable for disputes between clients and professionals, for the work products professionals deliver, or for indirect or consequential damages. Our total liability for any claim is limited to the greater of $100 or the subscription fees you paid us in the twelve months before the claim.",
+            "sort": 7
+          },
+          {
+            "anchor": "termination",
+            "heading": "9. Ending your use",
+            "body": "You can close your account at any time. We can suspend or end access for violations of these terms. Sections that by their nature should survive — content licenses, disclaimers, liability limits — survive termination.",
+            "sort": 8
+          },
+          {
+            "anchor": "changes",
+            "heading": "10. Changes to these terms",
+            "body": "We may update these terms as the product evolves. When we make material changes we will update the date at the top of this page and, for significant changes, notify account holders. Continuing to use the platform after a change means you accept the new terms.",
+            "sort": 9
+          }
+        ]
+      }
     ]
-  }
+  },
+  "copy": [
+    {
+      "scope": "terms",
+      "key": "eyebrow",
+      "text": "LEGAL",
+      "href": ""
+    },
+    {
+      "scope": "terms",
+      "key": "help_lead",
+      "text": "Questions about these terms? Email",
+      "href": ""
+    },
+    {
+      "scope": "terms",
+      "key": "help_link",
+      "text": "contact page",
+      "href": "/contact"
+    },
+    {
+      "scope": "terms",
+      "key": "help_middle",
+      "text": "or reach us through the",
+      "href": ""
+    },
+    {
+      "scope": "terms",
+      "key": "help_tail",
+      "text": ".",
+      "href": ""
+    },
+    {
+      "scope": "terms",
+      "key": "intro",
+      "text": "These terms govern your use of ArchitectHire, Inc. (\"ArchitectHire\", \"we\") — the website, the matching platform, and the professional tools. By creating an account or using the site you agree to them. This summary is provided for product design and is not legal advice.",
+      "href": ""
+    },
+    {
+      "scope": "terms",
+      "key": "seo_description",
+      "text": "The terms that govern using ArchitectHire to get matched with licensed architects and independent building experts.",
+      "href": ""
+    },
+    {
+      "scope": "terms",
+      "key": "seo_title",
+      "text": "Terms of Service — ArchitectHire",
+      "href": ""
+    },
+    {
+      "scope": "terms",
+      "key": "toc_heading",
+      "text": "CONTENTS",
+      "href": ""
+    },
+    {
+      "scope": "terms",
+      "key": "updated_prefix",
+      "text": "Last updated:",
+      "href": ""
+    }
+  ]
 }

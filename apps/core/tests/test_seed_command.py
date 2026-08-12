@@ -249,3 +249,38 @@ class TestMissingContentFiles:
     def test_missing_file_warns_and_skips(self, method, expected, capsys):
         getattr(command(), method)()
         assert expected in capsys.readouterr().out
+
+
+@pytest.mark.django_db
+class TestPolicyPagePatches(TestPatchFiles):
+
+    def test_policy_pages_are_created_whole(self, monkeypatch, tmp_path):
+        from apps.cms.models import PolicyPage
+
+        self._patches(
+            monkeypatch,
+            tmp_path,
+            {
+                "editorial": {
+                    "policy_pages": [
+                        {
+                            "slug": "qa-terms",
+                            "title": "Terms of Service",
+                            "effective_date": "2026-08-11",
+                            "sections": [
+                                {"anchor": "scope", "heading": "1. Scope", "body": "QA body", "sort": 0},
+                                {"anchor": "fees", "heading": "2. Fees", "body": "QA fees", "sort": 1},
+                            ],
+                        }
+                    ]
+                }
+            },
+        )
+        command()._seed_patches()
+        page = PolicyPage.objects.get(slug="qa-terms")
+        assert page.title == "Terms of Service"
+        assert list(page.sections.values_list("anchor", flat=True)) == ["scope", "fees"]
+
+        # Re-running converges instead of duplicating sections.
+        command()._seed_patches()
+        assert PolicyPage.objects.get(slug="qa-terms").sections.count() == 2

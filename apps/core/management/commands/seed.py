@@ -453,6 +453,7 @@ class Command(BaseCommand):
             CaseStudy,
             CaseStudyCategory,
             CaseStudyImage,
+            PolicyPage,
             PolicySection,
         )
 
@@ -526,6 +527,26 @@ class Command(BaseCommand):
             updated += PolicySection.objects.filter(
                 page__slug=row["page"], anchor=row["anchor"]
             ).update(**fields)
+
+        for row in data.get("policy_pages", []):
+            page, _created = PolicyPage.objects.update_or_create(
+                slug=row["slug"],
+                defaults={
+                    "title": row.get("title", ""),
+                    "effective_date": row.get("effective_date"),
+                },
+            )
+            for section in row.get("sections", []):
+                PolicySection.objects.update_or_create(
+                    page=page,
+                    anchor=section["anchor"],
+                    defaults={
+                        "heading": section.get("heading", ""),
+                        "body": section.get("body", ""),
+                        "sort_order": section.get("sort", 0),
+                    },
+                )
+            updated += 1
 
         return updated
 
