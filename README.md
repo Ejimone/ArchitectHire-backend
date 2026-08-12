@@ -40,6 +40,21 @@ uv run uvicorn architecture_backend.asgi:application --reload   # HTTP + WebSock
 | Web Push | `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY` (generate: `uv run python -c "from apps.notifications.vapid import generate; generate()"`) | Falls back to email (console backend in dev) |
 | DO Spaces (media) | `AWS_*` vars | Local filesystem storage |
 
+## Editing site images (owner workflow)
+
+Every image placeholder on the site is a pre-created row in **admin → Site content →
+Media assets**, labeled with where it appears (e.g. "About — hero image"). Open the row,
+upload, save — the live site picks it up within ~60 seconds. Rows are created and pruned
+automatically (`apps/cms/slots.py`) when cities, project types or gallery cards change;
+never type a slot key by hand. Images uploaded to a row are never auto-deleted.
+
+The **homepage hero** is separate: **admin → Site content → Site settings → "Homepage
+hero"** toggles between a single image (uploaded right there) and a carousel; carousel
+slides (image + caption each) live under **Hero carousel slides**, scope `landing`.
+Card-style images that belong to a content row (testimonials, gallery/carousel tiles on
+the service pages, blog posts, case studies, inspiration) are uploaded on that row itself
+and take precedence over the matching Media-assets slot.
+
 ## Deployment (DigitalOcean)
 
 1. **Provision**: managed Postgres + managed Redis (or the containers in `docker-compose.prod.yml`), a Spaces bucket (+ CDN) for media, and a droplet or App Platform app.

@@ -200,8 +200,16 @@ class SocialLinkAdmin(admin.ModelAdmin):
 
 @admin.register(MediaAsset)
 class MediaAssetAdmin(admin.ModelAdmin):
-    list_display = ["slot_key", "thumbnail", "alt_text", "notes"]
+    """Rows are auto-created (one per image slot on the site) — the owner just
+    opens a row and uploads. `notes` says where the image appears."""
+
+    list_display = ["notes", "thumbnail", "slot_key", "alt_text"]
     search_fields = ["slot_key", "alt_text", "notes"]
+    fields = ["notes", "slot_key", "image", "alt_text"]
+
+    def get_readonly_fields(self, request, obj=None):
+        # Keys are system-generated; lock them once the row exists.
+        return ["slot_key", "notes"] if obj else []
 
     @admin.display(description="Preview")
     def thumbnail(self, obj):

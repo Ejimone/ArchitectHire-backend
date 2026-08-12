@@ -106,7 +106,13 @@ class TestWsFanout:
         layer = MagicMock()
         layer.group_send = AsyncMock()
         with patch("apps.notifications.tasks.get_channel_layer", return_value=layer):
-            notify(user.pk, "milestone", "Schematic set submitted", "Ready for review", {"engagement_id": 7})
+            notify(
+                user.pk,
+                "milestone",
+                "Schematic set submitted",
+                "Ready for review",
+                {"engagement_id": 7},
+            )
 
         group, message = layer.group_send.call_args.args
         assert group == f"user_{user.pk}"

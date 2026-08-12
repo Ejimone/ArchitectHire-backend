@@ -71,7 +71,16 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         domains = (
-            ["jurisdictions", "catalog", "cms", "providers", "payments", "content", "searchindex"]
+            [
+                "jurisdictions",
+                "catalog",
+                "cms",
+                "providers",
+                "payments",
+                "content",
+                "media",
+                "searchindex",
+            ]
             if options["all"]
             else [d.strip() for d in options["domain"].split(",") if d.strip()]
         )
@@ -995,6 +1004,20 @@ class Command(BaseCommand):
                 },
             )
         self.stdout.write(f"  providers: {Discipline.objects.count()} disciplines")
+
+    def seed_media(self):
+        """One MediaAsset row per image slot on the site, so the owner uploads
+        into a labeled row instead of typing slot keys. Never touches images."""
+        from apps.cms.models import MediaAsset
+        from apps.cms.slots import expected_media_slots, sync_media_slots
+
+        created, pruned = sync_media_slots()
+        # Refresh the where-this-appears notes on rows that predate a wording change.
+        for slot_key, notes in expected_media_slots():
+            MediaAsset.objects.filter(slot_key=slot_key).exclude(notes=notes).update(notes=notes)
+        self.stdout.write(
+            f"  media: {MediaAsset.objects.count()} slots ({created} new, {pruned} pruned)"
+        )
 
     def seed_payments(self):
         """Subscription tiers (the platform's revenue) + the legacy zero fee policy."""

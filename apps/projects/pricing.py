@@ -280,9 +280,7 @@ def _design_quote(a: dict, state: State) -> Quote:
         )
     )
 
-    budget_word = (
-        f" Build budget {a['budget']}." if a["budget"] not in ("", "Not sure yet") else ""
-    )
+    budget_word = f" Build budget {a['budget']}." if a["budget"] not in ("", "Not sure yet") else ""
     saved_line = (
         f"{prog} · {a['sqft']:,} sf · {state.name}"
         if roomsy
@@ -317,8 +315,7 @@ def _design_quote(a: dict, state: State) -> Quote:
                 "tag": "ARCHITECT",
                 "role": f"Licensed architect · {state.name}",
                 "blurb": (
-                    f"Pre-cleared on {state.name} jurisdiction experience "
-                    f"and matched to a {prog}."
+                    f"Pre-cleared on {state.name} jurisdiction experience and matched to a {prog}."
                 ),
             }
         ],
@@ -399,8 +396,7 @@ def _drafting_quote(a: dict, state: State) -> Quote:
             "tag": "DRAFTER",
             "role": "A vetted CAD drafter",
             "blurb": (
-                f"Matched to your {service.lower()} — "
-                "you approve scope and pay them directly."
+                f"Matched to your {service.lower()} — you approve scope and pay them directly."
             ),
         }
     ]
@@ -481,8 +477,7 @@ def _consult_quote(a: dict, state: State) -> Quote:
             "tag": "CONSULT",
             "role": f"A licensed architect · {state.name}",
             "blurb": (
-                f"Available for a {consult_type.lower()} "
-                f"on your {a['ptype'].lower()} project."
+                f"Available for a {consult_type.lower()} on your {a['ptype'].lower()} project."
             ),
         },
         "matches": [
@@ -552,8 +547,7 @@ def _viz_quote(a: dict, state: State) -> Quote:
             "tag": "3D",
             "role": "A 3D visualization artist",
             "blurb": (
-                f"Matched to your {viz_type.lower()}, "
-                f"working from your {a['vizHave'].lower()}."
+                f"Matched to your {viz_type.lower()}, working from your {a['vizHave'].lower()}."
             ),
         },
         "matches": [
@@ -589,9 +583,7 @@ def _scan_quote(a: dict, state: State) -> Quote:
     base = float(
         max(SCAN_MINIMUM, round_half_up(a["scanArea"] * psf / SCAN_ROUND_TO) * SCAN_ROUND_TO)
     )
-    role = (
-        "A scan-to-BIM modeler" if scan_type == "Scan-to-BIM" else "A reality-capture specialist"
-    )
+    role = "A scan-to-BIM modeler" if scan_type == "Scan-to-BIM" else "A reality-capture specialist"
     view = {
         "headline": scan_type,
         "sub": (
@@ -607,8 +599,7 @@ def _scan_quote(a: dict, state: State) -> Quote:
             _row("Location", state.name, "—", TONE_MUTED),
         ],
         "footnote": (
-            "A guide, not a quote — access, detail level, and travel "
-            "can adjust the final price."
+            "A guide, not a quote — access, detail level, and travel can adjust the final price."
         ),
         "showJuris": False,
         "juris": None,
@@ -685,8 +676,7 @@ def _engineering_quote(a: dict, state: State) -> Quote:
             _row("Jurisdiction", f"{state.name} · {state.band_label.lower()}", "—", TONE_MUTED),
         ],
         "footnote": (
-            "A guide, not a quote — the engineer confirms scope "
-            "and their rate before starting."
+            "A guide, not a quote — the engineer confirms scope and their rate before starting."
         ),
         "showJuris": False,
         "juris": None,
@@ -695,9 +685,7 @@ def _engineering_quote(a: dict, state: State) -> Quote:
         "match": {
             "tag": tag,
             "role": role,
-            "blurb": (
-                f"Licensed for work in {state.name} and set up for your {eng_type.lower()}."
-            ),
+            "blurb": (f"Licensed for work in {state.name} and set up for your {eng_type.lower()}."),
         },
         "matches": [
             {
@@ -836,8 +824,7 @@ def build_brief(*, goal: str, answers: dict, state: State, view: dict) -> dict:
             f"{a['ptype'].lower()} project in {state.name}."
         )
         paras.append(
-            "We'll set you up with a licensed architect for that session "
-            "at a flat, upfront rate."
+            "We'll set you up with a licensed architect for that session at a flat, upfront rate."
         )
         facts += [
             ("Service", a["consultType"]),
@@ -847,14 +834,12 @@ def build_brief(*, goal: str, answers: dict, state: State, view: dict) -> dict:
     elif goal == "viz":
         paras.append(f"You want {a['vizType'].lower()} built from your {a['vizHave'].lower()}.")
         paras.append(
-            "We'll match you with a 3D visualization artist and lock "
-            "the deliverable list up front."
+            "We'll match you with a 3D visualization artist and lock the deliverable list up front."
         )
         _split_facts(view["savedLine"], ["Deliverable", "Quantity", "From"], facts)
     elif goal == "scan":
         paras.append(
-            f"You need {a['scanType'].lower()} for about "
-            f"{a['scanArea']:,} sf in {state.name}."
+            f"You need {a['scanType'].lower()} for about {a['scanArea']:,} sf in {state.name}."
         )
         paras.append(
             "We'll dispatch a reality-capture crew near you and confirm access before scheduling."
@@ -880,7 +865,5 @@ def compute_quote(*, goal: str, answers: dict, state: State) -> Quote:
     """Price one branch and build its view — the single entry point for the API."""
     merged = {**DEFAULT_ANSWERS, **answers}
     quote = BRANCH_QUOTES[goal](merged, state)
-    quote.view["summary"] = build_brief(
-        goal=goal, answers=merged, state=state, view=quote.view
-    )
+    quote.view["summary"] = build_brief(goal=goal, answers=merged, state=state, view=quote.view)
     return quote

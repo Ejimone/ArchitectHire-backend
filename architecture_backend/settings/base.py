@@ -118,6 +118,7 @@ _REDIS_QS = "?ssl_cert_reqs=required" if _REDIS_IS_TLS else ""
 def _redis_db(number: int) -> str:
     return f"{REDIS_URL}/{number}{_REDIS_QS}"
 
+
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",

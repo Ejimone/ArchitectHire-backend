@@ -47,9 +47,7 @@ class TestFetchClerkProfile:
 
     def test_api_failure_is_soft(self, settings):
         settings.CLERK_SECRET_KEY = "sk_test_x"
-        with mock.patch.object(
-            clerk_sync.urllib.request, "urlopen", side_effect=OSError("down")
-        ):
+        with mock.patch.object(clerk_sync.urllib.request, "urlopen", side_effect=OSError("down")):
             assert clerk_sync.fetch_clerk_profile("user_abc") is None
 
 
@@ -98,9 +96,7 @@ class TestBackfillUser:
         fetch.assert_not_called()
 
     def test_noop_when_profile_unavailable(self):
-        user = UserFactory(
-            email="user_abc@pending.clerk.local", first_name="", clerk_id="user_abc"
-        )
+        user = UserFactory(email="user_abc@pending.clerk.local", first_name="", clerk_id="user_abc")
         with mock.patch.object(clerk_sync, "fetch_clerk_profile", return_value=None):
             assert clerk_sync.backfill_user(user) == []
 

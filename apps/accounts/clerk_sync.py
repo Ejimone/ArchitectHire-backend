@@ -48,9 +48,7 @@ def apply_clerk_profile(user, profile: dict) -> list[str]:
 
     User = get_user_model()
     emails = {e["id"]: e["email_address"] for e in profile.get("email_addresses", [])}
-    primary = emails.get(profile.get("primary_email_address_id")) or next(
-        iter(emails.values()), ""
-    )
+    primary = emails.get(profile.get("primary_email_address_id")) or next(iter(emails.values()), "")
 
     changed: list[str] = []
     if (

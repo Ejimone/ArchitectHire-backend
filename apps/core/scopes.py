@@ -76,3 +76,14 @@ def validate_scope(value: str) -> None:
 
 def static_scope_choices():
     return [(key, key) for key in STATIC_PAGE_KEYS]
+
+
+def validate_slot_key(value: str) -> None:
+    """A media slot key is ``<scope>:<slot-name>`` — e.g. ``landing:hero-arch``
+    or ``city:oakland:work-1`` (the scope itself may contain a colon)."""
+    scope, sep, slot = value.rpartition(":")
+    if not (sep and re.fullmatch(r"[a-z0-9_-]+", slot) and is_valid_scope(scope)):
+        raise ValidationError(
+            f"'{value}' is not a valid slot key. Use '<page>:<slot>' like "
+            f"'landing:hero-arch' or 'city:oakland:work-1'."
+        )

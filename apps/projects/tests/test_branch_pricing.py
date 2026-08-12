@@ -247,9 +247,10 @@ class TestEngineeringBranch:
         assert q.view["summary"]["paras"][0] == (
             "You need code consulting (about 6 hrs) for a project in California."
         )
-        assert quote("engineering", ca, engType="Title-24 / energy").view["summary"]["paras"][
-            0
-        ] == "You need title-24 / energy for a project in California."
+        assert (
+            quote("engineering", ca, engType="Title-24 / energy").view["summary"]["paras"][0]
+            == "You need title-24 / energy for a project in California."
+        )
 
 
 @pytest.mark.django_db

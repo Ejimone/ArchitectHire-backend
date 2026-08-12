@@ -8,7 +8,7 @@ from django.db import models
 from solo.models import SingletonModel
 
 from apps.core.models import OrderableModel, PublishableModel, TimeStampedModel
-from apps.core.scopes import validate_scope
+from apps.core.scopes import validate_scope, validate_slot_key
 
 from .models_editorial import (  # noqa: F401  (re-exported for admin/serializers/migrations)
     Author,
@@ -79,7 +79,7 @@ class MediaAsset(TimeStampedModel):
     """Named image slot. The design references ~150 slots (see design/image-slot.js);
     each becomes a row here so the owner can swap any image on the site."""
 
-    slot_key = models.SlugField(max_length=120, unique=True)
+    slot_key = models.CharField(max_length=120, unique=True, validators=[validate_slot_key])
     image = models.ImageField(upload_to="cms/slots/", blank=True)
     alt_text = models.CharField(max_length=255, blank=True)
     notes = models.CharField(max_length=255, blank=True, help_text="Where this image appears")
