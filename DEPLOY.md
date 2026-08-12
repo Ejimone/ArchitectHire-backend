@@ -4,7 +4,7 @@
 
 | Piece | Where | Notes |
 |---|---|---|
-| Backend API + admin | DigitalOcean **App Platform** — https://architecthire-wkqzm.ondigitalocean.app | Docker build from `Ejimone/ArchitectHire-backend` `main`, auto-deploys on push. 512MB / 2 gunicorn workers; `collectstatic` runs at boot; a `migrate-seed` pre-deploy job migrates + seeds on every deploy. |
+| Backend API + admin | DigitalOcean **App Platform** — https://architecthire-wkqzm.ondigitalocean.app | Docker build from `Ejimone/ArchitectHire-backend` `main`, auto-deploys on push. 512MB / 2 gunicorn workers; static manifest baked into the image. **No pre-deploy job** (removed 2026-08-12 to cut cost) — after pushing a change that adds migrations or new seed content, run once from the app console (DO dashboard → app → Console tab, or `doctl apps console 1e7b145c-d082-4355-95f5-b7981a587f38 architecthire-backend`): `python manage.py migrate && python manage.py seed --all`. |
 | Frontend | **Vercel** — **https://architecthire.com** (canonical; `www` 308-redirects to it, `architecthire.vercel.app` still works) | Project `architecthire`, GitHub-connected to `Ejimone/Architecture-hire` `main` (push = deploy). Deployment protection disabled (public site). |
 | Postgres | Shared DO cluster `db-pgsql-blr1-19643`, database `architecthire` | App-only firewall; DB owned by its own user (PG15+ requirement). |
 | Redis | Shared DO Valkey `alsermon` over TLS | Cache/queues/presence; shared with other hobby projects. |
