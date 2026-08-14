@@ -1,0 +1,574 @@
+"""The JSON API the visual Studio talks to.
+
+Every view here is staff-only and uncached. The public content API next door
+(`apps.cms.views`) stays exactly as it was: this app reads through `compose_page` and
+writes through `apps.cms` models, so there is no second definition of what a page is.
+"""
+
+from django.contrib.auth import authenticate
+from django.core.exceptions import FieldDoesNotExist
+from django.db import models, transaction
+from rest_framework import status
+from rest_framework.parsers import FormParser, JSONParser, MultiPartParser
+from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+from apps.cms.compose import BLOCK_KEY_BY_LABEL, BLOCK_MODELS, compose_page
+from apps.cms.models import CopyBlock, MediaAsset, PageSEO
+from apps.cms.slots import sync_media_slots
+from apps.core.scopes import is_valid_scope, validate_slot_key
+from apps.studio.pages import all_pages, route_for
+
+from . import drafts as engine
+from .authentication import StudioTokenAuthentication
+from .drafts import CHROME_MODELS, DraftError
+from .fields import field_schema
+from .models import ContentDraft, ContentRevision, StudioSession
+from .permissions import IsStudioStaff
+
+DRAFT = "draft"
+LIVE = "live"
+
+
+class StudioView(APIView):
+    """Base: studio token only, staff only, no cache."""
+
+    authentication_classes = [StudioTokenAuthentication]
+    permission_classes = [IsStudioStaff]
+    parser_classes = [JSONParser, FormParser, MultiPartParser]
+
+    def handle_exception(self, exc):
+        if isinstance(exc, DraftError):
+            return Response({"detail": str(exc)}, status=status.HTTP_400_BAD_REQUEST)
+        return super().handle_exception(exc)
+
+    @property
+    def mode(self) -> str:
+        """`draft` stages the edit; `live` writes it straight to the site. Chosen by the
+        editor in the toolbar and sent per request, so the two never get out of step."""
+        return LIVE if self.request.query_params.get("mode") == LIVE else DRAFT
+
+    def body(self) -> dict:
+        """The request body as a plain dict. `request.data` is a QueryDict for multipart
+        and form posts, where `dict()` would wrap every value in a list."""
+        data = self.request.data
+        return {key: data[key] for key in data}
+
+    def write(self, *, model_label, op, object_id=None, payload=None):
+        """Apply an edit in whichever mode this request asked for."""
+        if self.mode == LIVE:
+            change, revision = engine.apply_now(
+                model_label=model_label,
+                op=op,
+                object_id=object_id,
+                payload=payload,
+                user=self.request.user,
+            )
+            return Response(
+                {"mode": LIVE, "object_id": change["object_id"], "revision": revision.pk}
+            )
+
+        # A pending create is addressed by the negative of its draft id; editing one has
+        # to reach the draft, not a row that does not exist.
+        if object_id is not None and object_id < 0:
+            draft = engine.draft_for_canvas_id(model_label, object_id)
+            if draft is None:
+                raise DraftError(f"No pending row {model_label}:{object_id}.")
+            if op == ContentDraft.Op.DELETE:
+                draft.delete()
+                return Response({"mode": DRAFT, "object_id": object_id, "op": "discarded"})
+            draft = engine.stage_create_edit(draft, payload or {})
+        else:
+            draft = engine.stage(
+                model_label=model_label,
+                op=op,
+                object_id=object_id,
+                payload=payload,
+                user=self.request.user,
+            )
+        return Response({"mode": DRAFT, "object_id": draft.canvas_id, "op": draft.op})
+
+
+# ------------------------------------------------------------------------------- auth
+
+
+class LoginView(APIView):
+    """Studio sign-in. Staff password, not Clerk — see `authentication.py`."""
+
+    authentication_classes = []
+    permission_classes = [AllowAny]
+    throttle_scope = "studio-login"
+
+    def post(self, request):
+        email = (request.data.get("email") or "").strip()
+        password = request.data.get("password") or ""
+        user = authenticate(request, username=email, password=password)
+        # Same response for a bad password and for a valid non-staff account: the studio
+        # login must not tell a marketplace user whether their address is a staff one.
+        if user is None or not (user.is_active and user.is_staff):
+            return Response({"detail": "Invalid credentials."}, status=status.HTTP_401_UNAUTHORIZED)
+        session, token = StudioSession.issue(user)
+        return Response(
+            {
+                "token": token,
+                "expires_at": session.expires_at,
+                "user": {"id": user.pk, "email": user.email, "name": user.display_name},
+            }
+        )
+
+
+class LogoutView(StudioView):
+    def post(self, request):
+        request.auth.revoke()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class MeView(StudioView):
+    def get(self, request):
+        return Response(
+            {
+                "id": request.user.pk,
+                "email": request.user.email,
+                "name": request.user.display_name,
+                "expires_at": request.auth.expires_at,
+            }
+        )
+
+
+# ------------------------------------------------------------------------------ pages
+
+
+class PageListView(StudioView):
+    """The page tree, grouped the way the owner thinks about the site.
+
+    Sections, labels and routes come from `apps.studio.pages`, which derives them from
+    `apps.core.scopes` — so the Studio can never offer a page the content API would 404.
+    """
+
+    def get(self, request):
+        pending = {}
+        for scope in ContentDraft.objects.values_list("scope", flat=True):
+            pending[scope] = pending.get(scope, 0) + 1
+
+        sections = {}
+        for ref in all_pages():
+            sections.setdefault(ref.section, []).append(
+                {
+                    "key": ref.key,
+                    "label": ref.label,
+                    "route": ref.route,
+                    "subtitle": ref.subtitle,
+                    "editable": ref.route is not None,
+                    "pending": pending.get(ref.key, 0),
+                }
+            )
+        return Response(
+            {
+                "sections": [{"section": name, "pages": pages} for name, pages in sections.items()],
+                "pending_total": ContentDraft.objects.count(),
+            }
+        )
+
+
+class PageDetailView(StudioView):
+    """The payload the canvas renders.
+
+    Identical in shape to `GET /api/v1/content/pages/<key>/` — that identity is the whole
+    point, because the Studio feeds it to the site's own components. In draft mode it
+    additionally carries `pending` (rows with unpublished edits) and `_edit` (how to
+    address each field), both of which the site simply ignores.
+    """
+
+    def get(self, request, page_key=None):
+        if not is_valid_scope(page_key):
+            return Response({"detail": "Unknown page."}, status=status.HTTP_404_NOT_FOUND)
+
+        include_unpublished = self.mode == DRAFT
+        payload = compose_page(page_key, request, include_unpublished=include_unpublished)
+        if include_unpublished:
+            payload = engine.overlay(payload, page_key, request)
+        else:
+            payload["pending"] = {}
+        payload["_edit"] = self._edit_map(page_key, payload)
+        payload["route"] = route_for(page_key)
+        return Response(payload)
+
+    def _edit_map(self, page_key, payload):
+        """Where each part of the payload came from, so a click on the canvas resolves to
+        a row without the client hard-coding the content model."""
+        copy_ids = dict(CopyBlock.objects.filter(scope=page_key).values_list("key", "id"))
+        media_ids = dict(
+            MediaAsset.objects.filter(slot_key__startswith=f"{page_key}:").values_list(
+                "slot_key", "id"
+            )
+        )
+        seo = PageSEO.objects.filter(page_key=page_key).values_list("id", flat=True).first()
+        return {
+            "scope": page_key,
+            "copy": {
+                key: {"model": "cms.copyblock", "id": copy_ids.get(key)} for key in payload["copy"]
+            },
+            "blocks": {
+                BLOCK_KEY_BY_LABEL[label]: {"model": label}
+                for label in BLOCK_MODELS
+                if BLOCK_KEY_BY_LABEL[label] in payload["blocks"]
+            },
+            "media": {
+                slot: {"model": "cms.mediaasset", "id": media_ids.get(slot)}
+                for slot in payload["media"]
+            },
+            "seo": {"model": "cms.pageseo", "id": seo},
+        }
+
+
+class SchemaView(StudioView):
+    """Per-model field descriptions, so the inspector renders a correct form for a block
+    type nobody wrote a form for. A new block on the backend is editable immediately."""
+
+    def get(self, request):
+        labels = list(BLOCK_MODELS) + CHROME_MODELS
+        return Response(
+            {
+                "models": {
+                    label: {
+                        "collection": BLOCK_KEY_BY_LABEL.get(label),
+                        "verbose_name": str(
+                            engine.resolve_model(label)._meta.verbose_name
+                        ).capitalize(),
+                        "fields": field_schema(engine.resolve_model(label)),
+                    }
+                    for label in labels
+                }
+            }
+        )
+
+
+# ------------------------------------------------------------------------------ edits
+
+
+class CopyView(StudioView):
+    """Upsert one copy row by its natural key.
+
+    Copy is addressed by `(scope, key)` rather than by id because the row for a string
+    the design shows may simply not exist yet — the site renders `""` for a missing key,
+    and the editor should be able to fill it in without first creating anything.
+    """
+
+    def put(self, request, scope=None, key=None):
+        if not is_valid_scope(scope):
+            return Response({"detail": "Unknown page."}, status=status.HTTP_404_NOT_FOUND)
+        payload = {
+            "scope": scope,
+            "key": key,
+            "text": request.data.get("text", ""),
+            "href": request.data.get("href", ""),
+        }
+        existing = CopyBlock.objects.filter(scope=scope, key=key).first()
+        if existing is None:
+            return self.write(
+                model_label="cms.copyblock", op=ContentDraft.Op.CREATE, payload=payload
+            )
+        return self.write(
+            model_label="cms.copyblock",
+            op=ContentDraft.Op.UPDATE,
+            object_id=existing.pk,
+            payload={"text": payload["text"], "href": payload["href"]},
+        )
+
+
+class RowCreateView(StudioView):
+    """Create any editable row — a new FAQ, stat, case card, nav item."""
+
+    def post(self, request, model_label=None):
+        engine.resolve_model(model_label)
+        return self.write(model_label=model_label, op=ContentDraft.Op.CREATE, payload=self.body())
+
+
+class RowDetailView(StudioView):
+    def patch(self, request, model_label=None, pk=None):
+        engine.resolve_model(model_label)
+        return self.write(
+            model_label=model_label,
+            op=ContentDraft.Op.UPDATE,
+            object_id=int(pk),
+            payload=self.body(),
+        )
+
+    def delete(self, request, model_label=None, pk=None):
+        engine.resolve_model(model_label)
+        return self.write(model_label=model_label, op=ContentDraft.Op.DELETE, object_id=int(pk))
+
+
+class ReorderView(StudioView):
+    """Drag-to-reorder a block list.
+
+    Expressed as ordinary per-row `sort_order` edits rather than a bulk `.update()`:
+    a queryset update fires no `post_save`, so the content version would not bump and
+    the site would keep serving the old order until some unrelated write moved it.
+    """
+
+    def post(self, request, model_label=None):
+        engine.resolve_model(model_label)
+        ids = request.data.get("ids")
+        if not isinstance(ids, list) or not ids:
+            return Response(
+                {"detail": "ids must be a non-empty list."}, status=status.HTTP_400_BAD_REQUEST
+            )
+        items = [
+            {"model_label": model_label, "object_id": int(row_id), "payload": {"sort_order": index}}
+            for index, row_id in enumerate(ids)
+        ]
+        if self.mode == LIVE:
+            engine.apply_now_many(items, user=request.user, summary="Reorder")
+        else:
+            for item in items:
+                self.write(op=ContentDraft.Op.UPDATE, **item)
+        return Response({"mode": self.mode, "ordered": len(ids)})
+
+
+class SeoView(StudioView):
+    def put(self, request, page_key=None):
+        if not is_valid_scope(page_key):
+            return Response({"detail": "Unknown page."}, status=status.HTTP_404_NOT_FOUND)
+        fields = {
+            name: request.data[name]
+            for name in ("title", "description", "canonical")
+            if name in request.data
+        }
+        existing = PageSEO.objects.filter(page_key=page_key).first()
+        if existing is None:
+            return self.write(
+                model_label="cms.pageseo",
+                op=ContentDraft.Op.CREATE,
+                payload={"page_key": page_key, **fields},
+            )
+        return self.write(
+            model_label="cms.pageseo",
+            op=ContentDraft.Op.UPDATE,
+            object_id=existing.pk,
+            payload=fields,
+        )
+
+
+# ------------------------------------------------------------------------------ media
+
+
+class MediaView(StudioView):
+    """The media library, and the upload that fills a slot.
+
+    Unlike the admin's `MediaUploadView`, this creates the slot when it is missing —
+    the canvas can hand back a slot key the inventory has not caught up with yet. The
+    key is still validated, so it cannot escape the `<scope>:<slot>` namespace.
+    """
+
+    def get(self, request):
+        queryset = MediaAsset.objects.all()
+        if scope := request.query_params.get("scope"):
+            queryset = queryset.filter(slot_key__startswith=f"{scope}:")
+        if term := request.query_params.get("q"):
+            queryset = queryset.filter(slot_key__icontains=term)
+        state = request.query_params.get("state")
+        if state == "filled":
+            queryset = queryset.exclude(image="")
+        elif state == "empty":
+            queryset = queryset.filter(image="")
+        assets = list(queryset[:500])
+        return Response(
+            {
+                "count": len(assets),
+                "slots": [
+                    {
+                        "id": asset.pk,
+                        "slot_key": asset.slot_key,
+                        "image": request.build_absolute_uri(asset.image.url)
+                        if asset.image
+                        else None,
+                        "alt_text": asset.alt_text,
+                        "notes": asset.notes,
+                    }
+                    for asset in assets
+                ],
+            }
+        )
+
+    def post(self, request):
+        slot_key = (request.data.get("slot_key") or "").strip()
+        upload = request.FILES.get("image")
+        if not upload:
+            return Response(
+                {"detail": "An image file is required."}, status=status.HTTP_400_BAD_REQUEST
+            )
+        try:
+            validate_slot_key(slot_key)
+        except Exception as exc:  # ValidationError — the message is the useful part
+            return Response({"detail": str(exc)}, status=status.HTTP_400_BAD_REQUEST)
+
+        # An empty slot row renders nothing (`compose_page` skips assets with no image),
+        # so creating it here is the same no-op `sync_media_slots` performs — it gives
+        # the draft a stable id to hang the new image off.
+        asset, _created = MediaAsset.objects.get_or_create(slot_key=slot_key)
+
+        # The file lands in storage now regardless of mode; the draft only decides when
+        # the *slot* starts pointing at it. `save=False` keeps the live row untouched.
+        # An unpublished upload leaves an orphaned file, which is cheap — a published
+        # slot pointing at a file nobody wrote would be a broken image on the live site.
+        field = MediaAsset._meta.get_field("image")
+        name = field.storage.save(field.generate_filename(asset, upload.name), upload)
+
+        payload = {"image": name}
+        if "alt_text" in request.data:
+            payload["alt_text"] = request.data["alt_text"]
+        response = self.write(
+            model_label="cms.mediaasset",
+            op=ContentDraft.Op.UPDATE,
+            object_id=asset.pk,
+            payload=payload,
+        )
+        response.data["slot_key"] = slot_key
+        response.data["image"] = request.build_absolute_uri(field.storage.url(name))
+        return response
+
+
+class UploadView(StudioView):
+    """Upload a file for an image field that belongs to a row rather than to a named slot.
+
+    A step illustration, a testimonial portrait and a case-card photo are columns on the
+    block row itself, not `MediaAsset` slots — so they cannot go through the media
+    library. This stores the file and hands back the storage name; the caller then writes
+    that name onto the field like any other value, which keeps the upload and the edit on
+    the same draft/live rails as everything else.
+    """
+
+    def post(self, request):
+        model_label = (request.data.get("model_label") or "").lower()
+        field_name = request.data.get("field") or ""
+        upload = request.FILES.get("file")
+        if not upload:
+            return Response({"detail": "A file is required."}, status=status.HTTP_400_BAD_REQUEST)
+
+        model = engine.resolve_model(model_label)
+        try:
+            field = model._meta.get_field(field_name)
+        except FieldDoesNotExist:
+            return Response(
+                {"detail": f"{model_label} has no field {field_name}."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        if not isinstance(field, models.FileField):
+            return Response(
+                {"detail": f"{field_name} does not hold a file."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        # `generate_filename` needs an instance for `upload_to` callables; a bare one is
+        # enough because every `upload_to` in the CMS is a static path.
+        name = field.storage.save(field.generate_filename(model(), upload.name), upload)
+        return Response({"name": name, "url": request.build_absolute_uri(field.storage.url(name))})
+
+
+class MediaSyncView(StudioView):
+    """Re-derive the slot inventory from the content that exists (new city, new project
+    type, new gallery card). Wraps `apps.cms.slots.sync_media_slots`."""
+
+    def post(self, request):
+        created, pruned = sync_media_slots()
+        return Response({"created": created, "pruned": pruned})
+
+
+# ---------------------------------------------------------------------------- publish
+
+
+class QueueView(StudioView):
+    def get(self, request):
+        rows = []
+        for draft in ContentDraft.objects.select_related("created_by"):
+            rows.append(
+                {
+                    "id": draft.pk,
+                    "scope": draft.scope,
+                    "model_label": draft.model_label,
+                    "object_id": draft.canvas_id,
+                    "op": draft.op,
+                    "payload": draft.payload,
+                    "by": draft.created_by.display_name if draft.created_by else "",
+                    "at": draft.updated_at,
+                }
+            )
+        by_scope = {}
+        for row in rows:
+            by_scope.setdefault(row["scope"], []).append(row)
+        return Response(
+            {
+                "total": len(rows),
+                "scopes": [
+                    {"scope": scope, "route": route_for(scope), "changes": changes}
+                    for scope, changes in by_scope.items()
+                ],
+            }
+        )
+
+
+def _selected_drafts(request):
+    """The drafts a publish/discard call targets: a page, a set of ids, or everything."""
+    queryset = ContentDraft.objects.all()
+    if scope := request.data.get("scope"):
+        queryset = queryset.filter(scope=scope)
+    if ids := request.data.get("ids"):
+        queryset = queryset.filter(pk__in=ids)
+    return queryset
+
+
+class PublishView(StudioView):
+    def post(self, request):
+        selected = list(_selected_drafts(request))
+        revision = engine.publish(selected, user=request.user, scope=request.data.get("scope", ""))
+        if revision is None:
+            return Response({"published": 0, "revision": None})
+        return Response(
+            {
+                "published": len(selected),
+                "revision": revision.pk,
+                "summary": revision.summary,
+            }
+        )
+
+
+class DiscardView(StudioView):
+    def post(self, request):
+        return Response({"discarded": engine.discard(_selected_drafts(request))})
+
+
+class RevisionListView(StudioView):
+    def get(self, request):
+        queryset = ContentRevision.objects.select_related("applied_by")
+        if scope := request.query_params.get("scope"):
+            queryset = queryset.filter(scope=scope)
+        return Response(
+            {
+                "revisions": [
+                    {
+                        "id": revision.pk,
+                        "scope": revision.scope,
+                        "summary": revision.summary,
+                        "by": revision.applied_by.display_name if revision.applied_by else "",
+                        "at": revision.created_at,
+                        "reverted_at": revision.reverted_at,
+                        "rows": len(revision.changes),
+                    }
+                    for revision in queryset[:100]
+                ]
+            }
+        )
+
+
+class RevisionRevertView(StudioView):
+    def post(self, request, pk=None):
+        revision = ContentRevision.objects.filter(pk=pk).first()
+        if revision is None:
+            return Response({"detail": "Unknown revision."}, status=status.HTTP_404_NOT_FOUND)
+        if revision.reverted_at is not None:
+            return Response({"detail": "Already reverted."}, status=status.HTTP_400_BAD_REQUEST)
+        with transaction.atomic():
+            undo = engine.revert(revision, user=request.user)
+        return Response({"revision": undo.pk, "summary": undo.summary})

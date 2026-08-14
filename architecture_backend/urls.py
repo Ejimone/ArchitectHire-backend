@@ -27,6 +27,7 @@ urlpatterns = [
     path("api/v1/catalog/", include("apps.catalog.urls")),
     path("api/v1/providers/", include("apps.providers.urls")),
     path("api/v1/jurisdictions/", include("apps.jurisdictions.urls")),
+    path("api/v1/studio/", include("apps.studio_api.urls")),
 ]
 
 # Serve uploaded media locally. In production DigitalOcean Spaces serves it

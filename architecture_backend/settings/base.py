@@ -80,6 +80,7 @@ INSTALLED_APPS = [
     "apps.payments",
     "apps.messaging",
     "apps.notifications",
+    "apps.studio_api",
 ]
 
 MIDDLEWARE = [
@@ -215,6 +216,8 @@ REST_FRAMEWORK = {
         "contact": "5/hour",
         "newsletter": "5/hour",
         "estimates": "30/hour",
+        # Studio sign-in is a password endpoint on a staff-only surface.
+        "studio-login": "10/hour",
     },
     "EXCEPTION_HANDLER": "rest_framework.views.exception_handler",
 }
@@ -246,6 +249,15 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
+
+# --- django-solo ------------------------------------------------------------
+# SOLO_CACHE is deliberately NOT set. Caching the singletons would save one query per
+# composed page, but django-solo caches the instance object, and `DraftingConfig` and
+# `EstimateConfig` declare float defaults on DecimalFields (`default=0.25`). A
+# `get_or_create` that creates the row returns an instance holding those floats
+# uncoerced; caching it makes that permanent, and `apps.orders.calculators._round50`
+# then raises `AttributeError: 'float' object has no attribute 'quantize'` on every
+# drafting quote. Fix the defaults to `Decimal("0.25")` first, then this is safe.
 
 # --- CORS -------------------------------------------------------------------
 
