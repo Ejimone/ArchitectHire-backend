@@ -6,8 +6,8 @@
 |---|---|---|
 | Backend API + admin | DigitalOcean **App Platform** — https://architecthire-wkqzm.ondigitalocean.app | Docker build from `Ejimone/ArchitectHire-backend` `main`, auto-deploys on push. 512MB / 2 gunicorn workers (--workers 2 in the Dockerfile; 4 workers measured 435MB = 85% of the instance under load, 2 measures 230MB = 45%); static manifest baked into the image. **No pre-deploy job** (removed 2026-08-12 to cut cost) — after pushing a change that adds migrations or new seed content, run once from the app console (DO dashboard → app → Console tab, or `doctl apps console 1e7b145c-d082-4355-95f5-b7981a587f38 architecthire-backend`): `python manage.py migrate && python manage.py seed --all`. |
 | Frontend | **Vercel** — **https://architecthire.com** (canonical; `www` 308-redirects to it, `architecthire.vercel.app` still works) | Project `architecthire`, GitHub-connected to `Ejimone/Architecture-hire` `main` (push = deploy). Deployment protection disabled (public site). |
-| Postgres | Shared DO cluster `db-pgsql-blr1-19643`, database `architecthire` | App-only firewall; DB owned by its own user (PG15+ requirement). |
-| Redis | Shared DO Valkey `alsermon` over TLS | Cache/queues/presence; shared with other hobby projects. |
+| Postgres | Dedicated DO cluster `architecthire-db` (blr1, PG 18, `db-s-1vcpu-1gb`), database `architecthire`, direct port 25060 | App-only firewall. **Must stay in blr1 with the app**: an interim move to Neon (AWS us-east-2) put ~300ms on every query — admin clicks took 5–10s and cold page composes 4.5s. Migrated back 2026-08-14 (99 tables / 2,911 rows verified against the Neon copy, which is left untouched as a fallback). |
+| Redis | Dedicated DO Valkey `db-vk-blr1-99253` over TLS (blr1) | Cache/queues/presence. Switched 2026-08-14 from the shared `alsermon` cluster — do not delete `alsermon`; other hobby projects may still use it. |
 | Media | Shared Spaces bucket `allsermon-media` (sfo3) | Uploads under `cms/`; consider a dedicated bucket at launch. |
 
 Config changes: backend env lives in the **App Platform app spec** (edit in the DO
