@@ -76,7 +76,16 @@ BLOCK_REGISTRY = [
     ("feature_matrix", FeatureMatrixRow, FeatureMatrixRowSerializer),
 ]
 
-PUBLIC_CACHE_CONTROL = "public, s-maxage=300, stale-while-revalidate=600"
+# No shared-cache lifetime, deliberately. App Platform is fronted by Cloudflare, which
+# honoured the old `s-maxage=300` — so a content save purged the frontend's tag, the
+# frontend re-fetched, and Cloudflare served it a copy up to five minutes old. The purge
+# has no way to reach that cache, which made instant sync unachievable in production
+# however fast everything else was.
+#
+# Next owns content caching now: it holds the payload in its own tagged data cache and
+# is told exactly what to drop, so the origin is hit once per purge rather than per
+# visitor. The ETag below still makes the revalidation itself cheap.
+PUBLIC_CACHE_CONTROL = "public, no-cache, must-revalidate"
 
 
 class CachedContentView(APIView):

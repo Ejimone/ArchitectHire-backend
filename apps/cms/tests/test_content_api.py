@@ -84,7 +84,12 @@ class TestPageContent:
 
         response = api_client.get(PAGE_URL)
         etag = response.headers["ETag"]
-        assert response.headers["Cache-Control"].startswith("public")
+        cache_control = response.headers["Cache-Control"]
+        assert cache_control.startswith("public")
+        # No shared-cache lifetime: the CDN in front of this app cannot be reached by a
+        # revalidation ping, so anything it holds outlives the purge and defeats it.
+        assert "s-maxage" not in cache_control
+        assert "no-cache" in cache_control
         cached = api_client.get(PAGE_URL, HTTP_IF_NONE_MATCH=etag)
         assert cached.status_code == 304
 
