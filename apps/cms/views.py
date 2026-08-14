@@ -13,68 +13,25 @@ from rest_framework.views import APIView
 from apps.core.cache import CONTENT_TTL, content_etag, get_content_version, page_cache_key
 from apps.core.scopes import is_valid_scope
 
+# Re-exported: `BLOCK_REGISTRY` moved to `compose` when the Studio needed it without
+# dragging the view layer along, but `apps.cms.views` is still its established import
+# site (studio views, the seed command, the tag tests).
+from .compose import BLOCK_REGISTRY, compose_page  # noqa: F401
 from .models import (
-    FAQ,
-    CaseCard,
     CopyBlock,
-    CredentialBadge,
-    EstimateTeaserOption,
-    FeatureMatrixRow,
     FooterColumn,
-    HeroCarouselSlide,
     MediaAsset,
     NavGroup,
-    PageSEO,
-    Persona,
-    Principle,
     SiteSettings,
     SocialLink,
-    Stat,
-    Step,
-    Testimonial,
-    TrustLogo,
-    UseCase,
-    ValueProp,
 )
 from .serializers import (
-    CaseCardSerializer,
-    CredentialBadgeSerializer,
-    EstimateTeaserOptionSerializer,
-    FAQSerializer,
-    FeatureMatrixRowSerializer,
     FooterColumnSerializer,
-    HeroCarouselSlideSerializer,
     MediaAssetSerializer,
     NavGroupSerializer,
-    PageSEOSerializer,
-    PersonaSerializer,
-    PrincipleSerializer,
     SiteSettingsSerializer,
     SocialLinkSerializer,
-    StatSerializer,
-    StepSerializer,
-    TestimonialSerializer,
-    TrustLogoSerializer,
-    UseCaseSerializer,
-    ValuePropSerializer,
 )
-
-BLOCK_REGISTRY = [
-    ("faqs", FAQ, FAQSerializer),
-    ("stats", Stat, StatSerializer),
-    ("steps", Step, StepSerializer),
-    ("testimonials", Testimonial, TestimonialSerializer),
-    ("value_props", ValueProp, ValuePropSerializer),
-    ("trust_logos", TrustLogo, TrustLogoSerializer),
-    ("credential_badges", CredentialBadge, CredentialBadgeSerializer),
-    ("use_cases", UseCase, UseCaseSerializer),
-    ("personas", Persona, PersonaSerializer),
-    ("principles", Principle, PrincipleSerializer),
-    ("carousel", HeroCarouselSlide, HeroCarouselSlideSerializer),
-    ("case_cards", CaseCard, CaseCardSerializer),
-    ("estimate_teaser", EstimateTeaserOption, EstimateTeaserOptionSerializer),
-    ("feature_matrix", FeatureMatrixRow, FeatureMatrixRowSerializer),
-]
 
 # No shared-cache lifetime, deliberately. App Platform is fronted by Cloudflare, which
 # honoured the old `s-maxage=300` — so a content save purged the frontend's tag, the
@@ -97,7 +54,9 @@ class CachedContentView(APIView):
 
     def get(self, request, *args, **kwargs):
         slug = self.get_cache_slug(**kwargs)
-        version = get_content_version()
+        # `(epoch, slug version)`. The slug half is what makes an edit to one page leave
+        # every other page's payload warm.
+        version = get_content_version(slug)
         payload = cache.get(page_cache_key(slug, version))
         if payload is None:
             payload = self.build_payload(request, **kwargs)
@@ -107,7 +66,7 @@ class CachedContentView(APIView):
             # building it. A bump in that window means a write may have committed
             # after our snapshot was read, and storing it would serve the pre-write
             # page for the full TTL. Serving it once is fine; keeping it is not.
-            if get_content_version() == version:
+            if get_content_version(slug) == version:
                 cache.set(page_cache_key(slug, version), payload, CONTENT_TTL)
 
         # Stamped with the version this body was built at, not with whatever the version
@@ -139,36 +98,7 @@ class PageContentView(CachedContentView):
     def build_payload(self, request, page_key=None):
         if not is_valid_scope(page_key):
             return None
-
-        settings_obj = SiteSettings.get_solo()
-        seo = PageSEO.objects.filter(page_key=page_key).first()
-
-        blocks = {}
-        for name, model, serializer_class in BLOCK_REGISTRY:
-            queryset = model.objects.published().filter(scope=page_key)
-            data = serializer_class(queryset, many=True, context={"request": request}).data
-            if data:
-                blocks[name] = data
-
-        media = MediaAsset.objects.filter(slot_key__startswith=f"{page_key}:").exclude(image="")
-        media_map = {
-            asset.slot_key: MediaAssetSerializer(asset, context={"request": request}).data
-            for asset in media
-        }
-
-        copy = {
-            block.key: {"text": block.text, "href": block.href}
-            for block in CopyBlock.objects.filter(scope=page_key)
-        }
-
-        return {
-            "page": page_key,
-            "seo": PageSEOSerializer(seo, context={"request": request}).data if seo else None,
-            "settings": SiteSettingsSerializer(settings_obj, context={"request": request}).data,
-            "copy": copy,
-            "blocks": blocks,
-            "media": media_map,
-        }
+        return compose_page(page_key, request)
 
 
 def _chrome_copy():

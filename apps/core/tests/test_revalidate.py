@@ -297,7 +297,7 @@ def test_a_payload_built_across_a_version_bump_is_served_but_not_stored(api_clie
     pre-write page for the full TTL — the exact staleness the bump exists to end."""
     SiteSettings.get_solo()  # the composer creates this on demand; do it up front
     bump_content_version()  # force the next request to rebuild
-    version = get_content_version()
+    version = get_content_version("landing")
 
     compose = PageContentView.build_payload
 
@@ -316,7 +316,7 @@ def test_a_payload_built_across_a_version_bump_is_served_but_not_stored(api_clie
 def test_an_uncontended_build_is_stored(api_client, isolated_cache):
     SiteSettings.get_solo()
     bump_content_version()
-    version = get_content_version()
+    version = get_content_version("landing")
 
     assert api_client.get(PAGE_URL).status_code == 200
     assert cache.get(page_cache_key("landing", version)) is not None
