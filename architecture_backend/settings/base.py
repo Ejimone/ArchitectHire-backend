@@ -129,7 +129,19 @@ DATABASES = {
         # Postgres's 100-connection cap ("sorry, too many clients already").
         # Pooling requires CONN_MAX_AGE=0 (Django refuses the combination).
         "CONN_MAX_AGE": 0,
-        "OPTIONS": {"pool": {"min_size": 2, "max_size": 20, "timeout": 10}},
+        # max_size is per worker, so the ceiling is max_size × gunicorn workers. At 20 × 2
+        # that is 40 against a db-s-1vcpu-1gb cluster which allows 22 — the app never hit
+        # it under normal traffic, but it left nothing for anyone else: `manage.py migrate`
+        # and psql were both refused with "remaining connection slots are reserved for
+        # roles with the SUPERUSER attribute" while the site itself stayed healthy.
+        # 8 × 2 = 16 keeps real headroom for migrations and the console.
+        "OPTIONS": {
+            "pool": {
+                "min_size": env.int("DB_POOL_MIN", default=2),
+                "max_size": env.int("DB_POOL_MAX", default=8),
+                "timeout": 10,
+            }
+        },
     }
 }
 
