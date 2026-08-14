@@ -7,7 +7,8 @@ from rest_framework.parsers import FormParser, JSONParser, MultiPartParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from apps.notifications.tasks import notify
+from apps.notifications.dispatch import notify_soon
+from apps.projects.models import Project
 
 from .models import Engagement, Milestone, RequoteFlag
 from .serializers import (
@@ -44,10 +45,33 @@ class EngagementListCreateView(generics.ListCreateAPIView):
         )
 
     def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        engagement = serializer.save()
+        with transaction.atomic():
+            existing = self._existing_contract(request)
+            if existing is not None:
+                return Response(EngagementSerializer(existing).data)
+            serializer = self.get_serializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            engagement = serializer.save()
         return Response(EngagementSerializer(engagement).data, status=status.HTTP_201_CREATED)
+
+    @staticmethod
+    def _existing_contract(request):
+        """Lock the project row, then report the contract it already carries.
+
+        Two tabs, a retry or a resubmit over a slow network otherwise each create
+        their own engagement. The lock — not the lookup — is what serializes them:
+        the second request waits here, so it sees what the first one committed.
+        """
+        try:
+            project_id = int(request.data.get("project_id"))
+        except (TypeError, ValueError):
+            return None
+        project = (
+            Project.objects.select_for_update().filter(pk=project_id, owner=request.user).first()
+        )
+        if project is None:
+            return None
+        return Engagement.objects.filter(project=project, provider=project.architect_id).first()
 
 
 class EngagementDetailView(generics.RetrieveAPIView):
@@ -156,7 +180,7 @@ class MilestoneActionView(APIView):
                 "milestone",
                 f"Changes requested on {milestone.title}",
             )
-        transaction.on_commit(lambda: notify.delay(recipient, kind, title, "", data))
+        notify_soon(recipient, kind, title, "", data)
 
     @staticmethod
     def _on_approved(milestone):
@@ -185,14 +209,12 @@ class RequoteListCreateView(APIView):
         requote = serializer.save(
             engagement=engagement, raised_by=request.user, old_total=engagement.total or 0
         )
-        transaction.on_commit(
-            lambda: notify.delay(
-                engagement.client_id,
-                "requote",
-                "Your architect flagged a re-quote",
-                requote.reason[:120],
-                {"engagement_id": engagement.pk, "project_id": engagement.project_id},
-            )
+        notify_soon(
+            engagement.client_id,
+            "requote",
+            "Your architect flagged a re-quote",
+            requote.reason[:120],
+            {"engagement_id": engagement.pk, "project_id": engagement.project_id},
         )
         return Response(RequoteFlagSerializer(requote).data, status=status.HTTP_201_CREATED)
 
@@ -208,14 +230,12 @@ class RequoteResolveView(APIView):
             return Response({"detail": exc.messages[0]}, status=status.HTTP_409_CONFLICT)
         engagement = requote.engagement
         outcome = "approved" if action == "approve" else "declined"
-        transaction.on_commit(
-            lambda: notify.delay(
-                engagement.provider_id,
-                "requote",
-                f"Re-quote {outcome}",
-                "",
-                {"engagement_id": engagement.pk, "project_id": engagement.project_id},
-            )
+        notify_soon(
+            engagement.provider_id,
+            "requote",
+            f"Re-quote {outcome}",
+            "",
+            {"engagement_id": engagement.pk, "project_id": engagement.project_id},
         )
         return Response(RequoteFlagSerializer(requote).data)
 
@@ -271,13 +291,11 @@ class DeliverableListCreateView(APIView):
             size_bytes=upload.size if upload else 0,
             name=serializer.validated_data.get("name") or (upload.name if upload else "file"),
         )
-        transaction.on_commit(
-            lambda: notify.delay(
-                engagement.client_id,
-                "milestone",
-                f"New file: {deliverable.name}",
-                "",
-                {"engagement_id": engagement.pk, "project_id": engagement.project_id},
-            )
+        notify_soon(
+            engagement.client_id,
+            "milestone",
+            f"New file: {deliverable.name}",
+            "",
+            {"engagement_id": engagement.pk, "project_id": engagement.project_id},
         )
         return Response(serializer.data, status=status.HTTP_201_CREATED)

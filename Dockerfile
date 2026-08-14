@@ -32,12 +32,16 @@ EXPOSE 8000
 #   2 workers -> 230MB (45%)
 # These are uvicorn ASGI workers, so each already serves many requests
 # concurrently; 2 is ample here and halving them costs almost no throughput.
-# --max-requests recycles a worker periodically so gradual heap growth is
-# returned to the OS instead of accumulating until the instance thrashes.
+# Deliberately no --max-requests: gunicorn's counter only sees HTTP requests, but
+# these workers also hold every live WebSocket, so a recycle force-drops half the
+# connected users, each of whom reconnects and triggers a full router.refresh().
+# That amplification costs far more than the speculative heap growth the recycling
+# guarded against, which the 45% headroom above already absorbs.
+# --graceful-timeout gives uvicorn time to send real close frames on shutdown, so
+# clients see a clean close instead of an opaque 1006.
 CMD ["gunicorn", "architecture_backend.asgi:application", \
      "-k", "uvicorn_worker.UvicornWorker", \
      "-b", "0.0.0.0:8000", \
      "--workers", "2", \
-     "--max-requests", "800", \
-     "--max-requests-jitter", "80", \
+     "--graceful-timeout", "30", \
      "--access-logfile", "-"]

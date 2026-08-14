@@ -51,6 +51,15 @@ class Engagement(TimeStampedModel):
 
     class Meta:
         ordering = ["-created_at"]
+        constraints = [
+            # A double submit must never contract the same provider twice for one
+            # project. `project` being one-to-one already forbids it; naming the
+            # pair states the invariant the idempotent create relies on, so it
+            # survives `project` ever loosening to a plain foreign key.
+            models.UniqueConstraint(
+                fields=["project", "provider"], name="unique_engagement_per_project_provider"
+            ),
+        ]
 
     def __str__(self):
         return f"{self.project} · {self.get_kind_display()}"

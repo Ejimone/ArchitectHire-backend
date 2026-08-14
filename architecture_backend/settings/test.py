@@ -19,6 +19,9 @@ PASSWORD_HASHERS = ["django.contrib.auth.hashers.MD5PasswordHasher"]  # speed
 CHANNEL_LAYERS = {"default": {"BACKEND": "channels.layers.InMemoryChannelLayer"}}
 CELERY_TASK_ALWAYS_EAGER = True
 CELERY_TASK_EAGER_PROPAGATES = True
+# Same intent for the thread pool that replaced Celery: run inline, so a test can assert
+# on a notification's effects immediately after the request that triggered it.
+BACKGROUND_TASKS_EAGER = True
 
 # Own cache namespace. The tests use a dedicated database but the same Redis, so
 # without this a running dev server shares the content-version key and cached

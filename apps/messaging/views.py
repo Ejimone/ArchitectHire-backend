@@ -8,7 +8,7 @@ from rest_framework.parsers import FormParser, JSONParser, MultiPartParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from apps.notifications.tasks import notify
+from apps.notifications.dispatch import notify_soon
 from apps.projects.models import Match, Project
 
 from .models import Message, Thread, ThreadParticipant
@@ -136,7 +136,7 @@ class MessageListCreateView(APIView):
         for other in thread.other_participants(sender):
             if channel_layer is not None:
                 push(other.pk, False)
-            notify.delay(
+            notify_soon(
                 other.pk,
                 "new_message",
                 f"New message from {sender.display_name}",

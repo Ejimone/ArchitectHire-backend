@@ -77,11 +77,28 @@ class TestPageContent:
         assert "QA-Fresh?" in [f["question"] for f in second["blocks"]["faqs"]]
 
     def test_etag_304(self, api_client):
+        # Primed first: the very first build creates the SiteSettings singleton, which
+        # bumps the content version, so that response's ETag is legitimately stale the
+        # moment it is issued. What matters is that an *unchanged* page revalidates.
+        api_client.get(PAGE_URL)
+
         response = api_client.get(PAGE_URL)
         etag = response.headers["ETag"]
         assert response.headers["Cache-Control"].startswith("public")
         cached = api_client.get(PAGE_URL, HTTP_IF_NONE_MATCH=etag)
         assert cached.status_code == 304
+
+    def test_etag_names_the_version_the_body_was_built_at(self, api_client):
+        """A write landing mid-request must not stamp the pre-write body with the
+        post-write ETag — the client would be told 304 against content it never got."""
+        primed = api_client.get(PAGE_URL)
+        etag = primed.headers["ETag"]
+
+        FAQ.objects.create(scope="landing", question="QA-Mid-flight?", answer="Yes")
+
+        after = api_client.get(PAGE_URL, HTTP_IF_NONE_MATCH=etag)
+        assert after.status_code == 200
+        assert after.headers["ETag"] != etag
 
     def test_feature_matrix_rows_serialise_one_mark_per_plan(self, api_client):
         """The pricing table's tri-state cells reach the frontend as a list."""

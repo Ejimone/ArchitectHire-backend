@@ -25,6 +25,29 @@ def _get_jwks_client():
     return _jwks_client
 
 
+def verify_clerk_token(token):
+    """Verify a Clerk session JWT against the JWKS and return its claims.
+
+    The single definition of "is this token acceptable", shared by DRF and the
+    WebSocket middleware so the two transports cannot drift into accepting
+    different tokens. Raises `jwt.PyJWTError` on every rejection, including an
+    unauthorized `azp` — callers map that to their own transport's failure mode.
+    """
+    signing_key = _get_jwks_client().get_signing_key_from_jwt(token)
+    claims = jwt.decode(
+        token,
+        signing_key.key,
+        algorithms=["RS256"],
+        issuer=settings.CLERK_ISSUER or None,
+        options={"require": ["exp", "sub"], "verify_aud": False},
+        leeway=5,
+    )
+    azp = claims.get("azp")
+    if azp and settings.CLERK_AUTHORIZED_PARTIES and azp not in settings.CLERK_AUTHORIZED_PARTIES:
+        raise jwt.InvalidTokenError("Token azp not in authorized parties.")
+    return claims
+
+
 class ClerkAuthentication(authentication.BaseAuthentication):
     def authenticate(self, request):
         header = authentication.get_authorization_header(request).split()
@@ -38,25 +61,9 @@ class ClerkAuthentication(authentication.BaseAuthentication):
 
         token = header[1].decode()
         try:
-            signing_key = _get_jwks_client().get_signing_key_from_jwt(token)
-            claims = jwt.decode(
-                token,
-                signing_key.key,
-                algorithms=["RS256"],
-                issuer=settings.CLERK_ISSUER or None,
-                options={"require": ["exp", "sub"], "verify_aud": False},
-                leeway=5,
-            )
+            claims = verify_clerk_token(token)
         except jwt.PyJWTError as exc:
             raise exceptions.AuthenticationFailed(f"Invalid Clerk token: {exc}") from exc
-
-        azp = claims.get("azp")
-        if (
-            azp
-            and settings.CLERK_AUTHORIZED_PARTIES
-            and azp not in settings.CLERK_AUTHORIZED_PARTIES
-        ):
-            raise exceptions.AuthenticationFailed("Token azp not in authorized parties.")
 
         user = self._get_or_provision_user(claims)
         if not user.is_active:

@@ -52,6 +52,25 @@ def clerk_configured(settings, monkeypatch):
     )
 
 
+class TestSharedVerifier:
+    """`verify_clerk_token` is the single gate both HTTP and WebSocket auth use."""
+
+    def test_valid_token_returns_its_claims(self):
+        claims = auth_module.verify_clerk_token(
+            make_token(sub="user_verifier", azp="http://localhost:3000")
+        )
+        assert claims["sub"] == "user_verifier"
+
+    def test_unauthorized_party_raises_a_jwt_error(self):
+        with pytest.raises(jwt.PyJWTError, match="azp not in authorized parties"):
+            auth_module.verify_clerk_token(make_token(azp="https://evil.example.com"))
+
+    def test_azp_is_unchecked_when_no_parties_are_configured(self, settings):
+        settings.CLERK_AUTHORIZED_PARTIES = []
+        claims = auth_module.verify_clerk_token(make_token(azp="https://anything.example.com"))
+        assert claims["azp"] == "https://anything.example.com"
+
+
 class TestJWKSClient:
     def test_client_is_built_once_and_cached(self, monkeypatch):
         monkeypatch.setattr(auth_module, "_jwks_client", None)

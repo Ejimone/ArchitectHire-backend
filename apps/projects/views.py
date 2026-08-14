@@ -1,4 +1,3 @@
-from django.db import transaction
 from django.shortcuts import get_object_or_404
 from rest_framework import generics, status
 from rest_framework.permissions import AllowAny
@@ -6,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.throttling import ScopedRateThrottle
 from rest_framework.views import APIView
 
-from apps.notifications.tasks import notify
+from apps.notifications.dispatch import notify_soon
 
 from .models import Estimate, Match, Project
 from .serializers import (
@@ -97,14 +96,12 @@ class HireView(APIView):
         project.hire(match.architect)
         project.matches.exclude(pk=match.pk).update(status=Match.Status.WITHDRAWN)
         client_name = request.user.display_name
-        transaction.on_commit(
-            lambda: notify.delay(
-                match.architect_id,
-                "lead",
-                f"You've been hired — {project.title}",
-                f"{client_name} picked you. Time to scope the work.",
-                {"project_id": project.pk},
-            )
+        notify_soon(
+            match.architect_id,
+            "lead",
+            f"You've been hired — {project.title}",
+            f"{client_name} picked you. Time to scope the work.",
+            {"project_id": project.pk},
         )
         return Response(ProjectSerializer(project).data)
 
@@ -136,13 +133,11 @@ class LeadRespondView(APIView):
             return Response({"detail": str(exc)}, status=status.HTTP_409_CONFLICT)
         architect_name = request.user.display_name
         verb = "accepted" if action == "accept" else "declined"
-        transaction.on_commit(
-            lambda: notify.delay(
-                match.project.owner_id,
-                "system",
-                f"{architect_name} {verb} your project",
-                "",
-                {"project_id": match.project_id},
-            )
+        notify_soon(
+            match.project.owner_id,
+            "system",
+            f"{architect_name} {verb} your project",
+            "",
+            {"project_id": match.project_id},
         )
         return Response(LeadSerializer(match).data)

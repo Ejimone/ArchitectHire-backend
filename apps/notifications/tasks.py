@@ -1,6 +1,12 @@
 """Notification fanout: in-app row (always) + Web Push (site closed) + email fallback.
 
 Honors each user's NotificationPreference toggles.
+
+`deliver()` holds the work; `notify` is a thin Celery wrapper kept so the task name and
+any existing worker routing still resolve. Callers should use
+`apps.notifications.dispatch.notify_soon()`, which runs `deliver` post-commit on the
+in-process pool — the deployment has no Celery worker, so `notify.delay()` on its own
+queues a task nothing will ever consume.
 """
 
 import json
@@ -25,6 +31,11 @@ PREFERENCE_FIELD = {
 
 @shared_task(name="apps.notifications.tasks.notify")
 def notify(user_id: int, kind: str, title: str, body: str = "", data: dict | None = None):
+    """Celery entry point. Kept for an optional worker; `deliver` does the work."""
+    return deliver(user_id, kind, title, body, data)
+
+
+def deliver(user_id: int, kind: str, title: str, body: str = "", data: dict | None = None):
     from django.contrib.auth import get_user_model
 
     from apps.accounts.models import NotificationPreference
@@ -99,6 +110,9 @@ def _send_web_push(user, title, body, data) -> bool:
                 data=payload,
                 vapid_private_key=settings.VAPID_PRIVATE_KEY,
                 vapid_claims={"sub": f"mailto:{settings.VAPID_ADMIN_EMAIL}"},
+                # This runs on a background thread that the pool must be able to join at
+                # worker shutdown; an unbounded push endpoint would park it forever.
+                timeout=5,
             )
             delivered = True
         except WebPushException as exc:

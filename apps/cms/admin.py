@@ -1,6 +1,7 @@
 from django.contrib import admin
 from unfold.contrib.filters.admin import AllValuesCheckboxFilter, ChoicesDropdownFilter
 
+from apps.core.cache import bump_content_version
 from apps.studio.admin_base import (
     StudioModelAdmin,
     StudioSingletonAdmin,
@@ -94,8 +95,12 @@ class ScopedBlockAdmin(StudioModelAdmin):
     @admin.action(description="Move to draft")
     def unpublish_selected(self, request, queryset):
         # Bulk update rather than per-object save: unpublishing is a single
-        # intent, and the post_save cache bump would fire once per row.
+        # intent, and the post_save cache bump would fire once per row. `update()`
+        # emits no signal at all, though, so the pages these rows were on have to be
+        # purged by hand — and their scopes read before the rows change under us.
+        scopes = set(queryset.values_list("scope", flat=True))
         queryset.update(status="draft")
+        bump_content_version({f"cms:page:{scope}" for scope in scopes})
 
 
 @admin.register(FAQ)

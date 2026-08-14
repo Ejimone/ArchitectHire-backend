@@ -6,6 +6,7 @@ from decimal import Decimal
 import pytest
 from django.core.exceptions import ValidationError as DjangoValidationError
 from django.core.management import call_command
+from django.db import IntegrityError, transaction
 
 from apps.accounts.factories import UserFactory
 from apps.engagements.models import Deliverable, Engagement, Milestone
@@ -124,15 +125,48 @@ class TestEngagementCreationGuards:
         assert response.status_code == 400
         assert "Unknown project" in str(response.json())
 
-    def test_a_project_can_only_have_one_engagement(self, api_client, engagement):
+    def test_a_non_numeric_project_id_is_rejected(self, api_client, seeded):
+        api_client.force_authenticate(user=UserFactory(role="client"))
+        response = api_client.post(
+            "/api/v1/engagements/", {"project_id": "seven", "kind": "hourly"}, format="json"
+        )
+        assert response.status_code == 400
+
+    def test_a_resubmit_returns_the_engagement_that_already_exists(self, api_client, engagement):
+        """Two tabs, a retry or a slow network must land on the one contract."""
         api_client.force_authenticate(user=engagement.client)
         response = api_client.post(
             "/api/v1/engagements/",
             {"project_id": engagement.project_id, "kind": "hourly"},
             format="json",
         )
+        assert response.status_code == 200
+        assert response.json()["id"] == engagement.pk
+        assert Engagement.objects.filter(project_id=engagement.project_id).count() == 1
+
+    def test_re_hiring_a_different_architect_does_not_contract_twice(self, api_client, engagement):
+        """A different provider is no longer the same request, but the project is
+        already under contract — that needs saying, not a silent second one."""
+        project = engagement.project
+        project.architect = UserFactory(role="architect")
+        project.save(update_fields=["architect"])
+
+        api_client.force_authenticate(user=engagement.client)
+        response = api_client.post(
+            "/api/v1/engagements/", {"project_id": project.pk, "kind": "hourly"}, format="json"
+        )
         assert response.status_code == 400
         assert "already exists" in str(response.json())
+
+    def test_the_database_refuses_a_second_contract_for_the_pair(self, engagement):
+        with pytest.raises(IntegrityError), transaction.atomic():
+            Engagement.objects.create(
+                project=engagement.project,
+                client=engagement.client,
+                provider=engagement.provider,
+                kind=Engagement.Kind.HOURLY,
+                hourly_rate=Decimal("135"),
+            )
 
     def test_fixed_quote_without_an_estimate_is_rejected(self, api_client, hired_project):
         hired_project.estimate = None

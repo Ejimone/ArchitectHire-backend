@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from rest_framework import serializers
 
 from apps.jurisdictions.models import State
@@ -10,6 +12,36 @@ from .models import (
     PortfolioItem,
     Review,
 )
+
+MAX_UPLOAD_BYTES = 10 * 1024 * 1024
+IMAGE_EXTENSIONS = frozenset({"png", "jpg", "jpeg", "webp"})
+IMAGE_CONTENT_TYPES = frozenset({"image/png", "image/jpeg", "image/webp"})
+DOCUMENT_EXTENSIONS = IMAGE_EXTENSIONS | {"pdf"}
+DOCUMENT_CONTENT_TYPES = IMAGE_CONTENT_TYPES | {"application/pdf"}
+
+
+def _validate_upload(upload, extensions, content_types):
+    """Gate what a provider may put on our storage.
+
+    The wizard checks size and type client-side too, but that is UX: this is the
+    boundary an attacker actually meets, so name and declared type both have to
+    land inside the allowlist.
+    """
+    if upload.size > MAX_UPLOAD_BYTES:
+        raise serializers.ValidationError(
+            f"File is too large (max {MAX_UPLOAD_BYTES // (1024 * 1024)} MB)."
+        )
+    extension = Path(upload.name).suffix.lower().lstrip(".")
+    if extension not in extensions or getattr(upload, "content_type", "") not in content_types:
+        raise serializers.ValidationError(
+            f"Unsupported file type — {', '.join(sorted(extensions))} only."
+        )
+    return upload
+
+
+class HeadshotUploadMixin:
+    def validate_headshot(self, value):
+        return _validate_upload(value, IMAGE_EXTENSIONS, IMAGE_CONTENT_TYPES)
 
 
 class DisciplineSerializer(serializers.ModelSerializer):
@@ -34,7 +66,7 @@ class StateCodesField(serializers.SlugRelatedField):
         )
 
 
-class ArchitectProfileSerializer(serializers.ModelSerializer):
+class ArchitectProfileSerializer(HeadshotUploadMixin, serializers.ModelSerializer):
     licensed_states = serializers.SlugRelatedField(
         slug_field="code", queryset=State.objects.all(), many=True, required=False
     )
@@ -88,7 +120,7 @@ class ArchitectProfileSerializer(serializers.ModelSerializer):
         ]
 
 
-class ExpertProfileSerializer(serializers.ModelSerializer):
+class ExpertProfileSerializer(HeadshotUploadMixin, serializers.ModelSerializer):
     licensed_states = serializers.SlugRelatedField(
         slug_field="code", queryset=State.objects.all(), many=True, required=False
     )
@@ -151,6 +183,9 @@ class CredentialSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = ["status", "verified_at", "review_notes"]
 
+    def validate_document(self, value):
+        return _validate_upload(value, DOCUMENT_EXTENSIONS, DOCUMENT_CONTENT_TYPES)
+
 
 class PortfolioItemSerializer(serializers.ModelSerializer):
     image = serializers.ImageField(required=False, use_url=True)
@@ -158,6 +193,9 @@ class PortfolioItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = PortfolioItem
         fields = ["id", "image", "title", "meta", "sort_order"]
+
+    def validate_image(self, value):
+        return _validate_upload(value, IMAGE_EXTENSIONS, IMAGE_CONTENT_TYPES)
 
 
 class ReviewSerializer(serializers.ModelSerializer):

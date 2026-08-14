@@ -10,7 +10,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from apps.core.cache import CONTENT_TTL, content_etag, page_cache_key
+from apps.core.cache import CONTENT_TTL, content_etag, get_content_version, page_cache_key
 from apps.core.scopes import is_valid_scope
 
 from .models import (
@@ -88,16 +88,24 @@ class CachedContentView(APIView):
 
     def get(self, request, *args, **kwargs):
         slug = self.get_cache_slug(**kwargs)
-        payload = cache.get(page_cache_key(slug))
+        version = get_content_version()
+        payload = cache.get(page_cache_key(slug, version))
         if payload is None:
             payload = self.build_payload(request, **kwargs)
             if payload is None:
                 return Response(status=status.HTTP_404_NOT_FOUND)
-            # Key is recomputed after the build: a first-time build can create rows
-            # (e.g. the SiteSettings singleton) which bump the content version.
-            cache.set(page_cache_key(slug), payload, CONTENT_TTL)
+            # Only keep the payload if nothing bumped the version while we were
+            # building it. A bump in that window means a write may have committed
+            # after our snapshot was read, and storing it would serve the pre-write
+            # page for the full TTL. Serving it once is fine; keeping it is not.
+            if get_content_version() == version:
+                cache.set(page_cache_key(slug, version), payload, CONTENT_TTL)
 
-        etag = content_etag(slug)
+        # Stamped with the version this body was built at, not with whatever the version
+        # has since become. Re-reading here would let a write that landed mid-request
+        # label the pre-write body with the post-write ETag, and the client would then
+        # be told 304 against it until some unrelated write moved the version again.
+        etag = content_etag(slug, version)
         if request.headers.get("If-None-Match") == etag:
             response = Response(status=status.HTTP_304_NOT_MODIFIED)
         else:

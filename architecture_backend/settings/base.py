@@ -23,6 +23,19 @@ FRONTEND_URL = env("FRONTEND_URL", default="http://localhost:3000")
 # Instant cache purge on the frontend after admin content edits (blank = disabled).
 FRONTEND_REVALIDATE_URL = env("FRONTEND_REVALIDATE_URL", default="")
 REVALIDATE_SECRET = env("REVALIDATE_SECRET", default="")
+# How long writes accumulate before one purge is sent. A bulk publish saves hundreds of
+# rows; this coalesces them into a single ping carrying the union of their tags.
+REVALIDATE_DEBOUNCE_SECONDS = env.float("REVALIDATE_DEBOUNCE_SECONDS", default=0.5)
+
+# --- Background work ---------------------------------------------------------
+# Notifications and revalidation pings run on an in-process thread pool
+# (apps/core/background.py) rather than Celery, because the deployment has no worker
+# component and queued tasks were silently never executed.
+# Eager = run inline in the calling thread; tests set this so assertions stay
+# synchronous, matching what CELERY_TASK_ALWAYS_EAGER used to give them.
+BACKGROUND_TASKS_EAGER = env.bool("BACKGROUND_TASKS_EAGER", default=False)
+# Opt back in to Celery for notification fanout, but only where a worker really runs.
+NOTIFY_VIA_CELERY = env.bool("NOTIFY_VIA_CELERY", default=False)
 
 INSTALLED_APPS = [
     # Ordering here is load-bearing twice over, because TEMPLATES["DIRS"] is empty
@@ -227,6 +240,24 @@ AUTH_PASSWORD_VALIDATORS = [
 CORS_ALLOWED_ORIGINS = env("CORS_ALLOWED_ORIGINS")
 CORS_ALLOW_CREDENTIALS = True
 
+# Origins permitted to open a WebSocket. Deliberately NOT ALLOWED_HOSTS-based:
+# AllowedHostsOriginValidator compares the browser Origin (https://architecthire.com)
+# against ALLOWED_HOSTS (the *.ondigitalocean.app service hostname), which would reject
+# every legitimate handshake in production.
+WS_ALLOWED_ORIGINS = env(
+    "WS_ALLOWED_ORIGINS",
+    # dict.fromkeys dedupes while keeping order — in dev FRONTEND_URL is already in
+    # CORS_ALLOWED_ORIGINS, and a duplicated origin makes the validator's config
+    # confusing to read in logs.
+    default=",".join(dict.fromkeys([*CORS_ALLOWED_ORIGINS, FRONTEND_URL])),
+).split(",")
+
+# --- Scheduled jobs -----------------------------------------------------------
+# There is no Celery beat process, so periodic work is driven by an external caller
+# (Vercel Cron) hitting /api/v1/internal/cron/<job>/ with this shared secret.
+# Blank disables the endpoint entirely.
+CRON_SECRET = env("CRON_SECRET", default="")
+
 # --- I18N -------------------------------------------------------------------
 
 LANGUAGE_CODE = "en-us"
@@ -280,6 +311,11 @@ MAILERS = {
             "USERNAME": env("EMAIL_HOST_USER", default=""),
             "PASSWORD": env("EMAIL_HOST_PASSWORD", default=""),
             "USE_TLS": True,
+            # Notification email goes out on a background thread that the pool must be
+            # able to join at worker shutdown; an unbounded SMTP connect parks it
+            # forever. (Belongs here, not in a top-level EMAIL_TIMEOUT — Django refuses
+            # the deprecated setting once MAILERS is defined.)
+            "TIMEOUT": env.int("EMAIL_TIMEOUT", default=10),
         },
     },
 }

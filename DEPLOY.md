@@ -19,7 +19,36 @@ test-mode key to swap at launch is marked [LIVE-SWAP] below.
 `https://architecthire.com/api/revalidate` (shared `REVALIDATE_SECRET`, set in both the
 app spec and Vercel), which purges the frontend's cached pages immediately; the 60s ISR
 cycle stays as a fallback. If edits ever stop appearing instantly, check that both env
-values still match.
+values still match — a rejected ping is now logged at ERROR instead of being swallowed,
+so look for `Frontend rejected revalidation: HTTP 401` in the backend logs first.
+
+**No Celery worker, by design (2026-08-14).** Notifications and revalidation pings run on
+an in-process thread pool (`apps/core/background.py`), dispatched once the transaction
+commits. App Platform has no worker component, so anything handed to `.delay()` is queued
+into Redis and never consumed — which is precisely how every notification and every cache
+purge silently went missing before this change. Set `NOTIFY_VIA_CELERY=1` only in an
+environment that genuinely runs a worker.
+
+**Scheduled jobs run off Vercel Cron**, since there is no beat process either. Vercel
+calls `https://architecthire.com/api/cron/<job>`, which re-signs the request as
+`x-cron-secret` and forwards it to `POST /api/v1/internal/cron/<job>/`.
+
+| Env var | Where | Notes |
+|---|---|---|
+| `CRON_SECRET` | DO app spec **and** Vercel | One random ≥16-char value, identical in both. Blank on the backend = 503, and nothing is ever swept. |
+| `REVALIDATE_DEBOUNCE_SECONDS` | DO app spec (optional) | Defaults to 0.5. How long writes accumulate before one purge is sent. |
+
+The Vercel project is on the **Hobby** plan, which permits two cron jobs firing at most
+once a day — so `vercel.json` schedules a single `daily` invocation that dispatches all
+three jobs (`rebuild-search-index`, `sweep-pending-payouts`, `cleanup-stale-data`) as
+independent background jobs. On Pro, point `vercel.json` at the individual job names and
+give the payout sweep back its hourly cadence; the endpoint already accepts them. Any job
+can be triggered by hand:
+
+```
+curl -X POST -H "x-cron-secret: $CRON_SECRET" \
+  https://architecthire-wkqzm.ondigitalocean.app/api/v1/internal/cron/sweep-pending-payouts/
+```
 
 ---
 

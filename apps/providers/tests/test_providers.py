@@ -1,8 +1,19 @@
+import io
+
 import pytest
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.management import call_command
+from PIL import Image
 
 from apps.accounts.factories import UserFactory
 from apps.providers.models import ArchitectProfile, Credential, OnboardingStatus, Review
+from apps.providers.serializers import MAX_UPLOAD_BYTES
+
+
+def png_bytes():
+    buffer = io.BytesIO()
+    Image.new("RGB", (4, 4), (120, 90, 40)).save(buffer, format="PNG")
+    return buffer.getvalue()
 
 
 @pytest.fixture(scope="module")
@@ -93,6 +104,61 @@ class TestCredentials:
         assert credential.status == "verified"
         assert credential.verified_by == staff
 
+    def test_an_oversize_document_is_refused(self, seeded, api_client):
+        api_client.force_authenticate(user=UserFactory(role="architect"))
+        response = api_client.post(
+            "/api/v1/providers/me/credentials/",
+            {
+                "kind": "architect_license",
+                "document": SimpleUploadedFile(
+                    "license.pdf", b"%PDF-1.4" + b"0" * MAX_UPLOAD_BYTES, "application/pdf"
+                ),
+            },
+            format="multipart",
+        )
+        assert response.status_code == 400
+        assert "too large" in str(response.json()["document"])
+
+    @pytest.mark.parametrize(
+        ("name", "content_type"),
+        [
+            ("payload.exe", "application/x-msdownload"),
+            ("payload.svg", "image/svg+xml"),
+            # A real PDF wearing a name the storage layer would serve inline.
+            ("payload.html", "application/pdf"),
+            ("payload.pdf", "text/html"),
+        ],
+    )
+    def test_only_allowlisted_document_types_are_accepted(
+        self, seeded, api_client, name, content_type
+    ):
+        """The wizard checks this client-side too, but that is UX — this is the
+        boundary that has to hold."""
+        api_client.force_authenticate(user=UserFactory(role="architect"))
+        response = api_client.post(
+            "/api/v1/providers/me/credentials/",
+            {
+                "kind": "architect_license",
+                "document": SimpleUploadedFile(name, b"%PDF-1.4 test", content_type),
+            },
+            format="multipart",
+        )
+        assert response.status_code == 400
+        assert "Unsupported file type" in str(response.json()["document"])
+
+    def test_a_pdf_licence_uploads(self, seeded, api_client):
+        api_client.force_authenticate(user=UserFactory(role="architect"))
+        response = api_client.post(
+            "/api/v1/providers/me/credentials/",
+            {
+                "kind": "architect_license",
+                "document": SimpleUploadedFile("license.PDF", b"%PDF-1.4 test", "application/pdf"),
+            },
+            format="multipart",
+        )
+        assert response.status_code == 201
+        assert response.json()["document"].endswith(".PDF")
+
     def test_credentials_are_private_to_owner(self, seeded, api_client):
         owner = UserFactory(role="architect")
         Credential.objects.create(user=owner, kind="architect_license", number="C-1")
@@ -100,6 +166,46 @@ class TestCredentials:
         api_client.force_authenticate(user=other)
         body = api_client.get("/api/v1/providers/me/credentials/").json()
         assert body == []
+
+
+@pytest.mark.django_db
+class TestImageUploads:
+    def test_portfolio_images_must_be_an_allowed_image(self, seeded, api_client):
+        """Pillow proves the bytes are an image; the name still has to be one we
+        are willing to hand back."""
+        api_client.force_authenticate(user=UserFactory(role="architect"))
+        response = api_client.post(
+            "/api/v1/providers/me/portfolio/",
+            {
+                "title": "Backyard ADU",
+                "image": SimpleUploadedFile("shot.gif", png_bytes(), "image/png"),
+            },
+            format="multipart",
+        )
+        assert response.status_code == 400
+        assert "Unsupported file type" in str(response.json()["image"])
+
+    def test_a_png_portfolio_image_uploads(self, seeded, api_client):
+        api_client.force_authenticate(user=UserFactory(role="architect"))
+        response = api_client.post(
+            "/api/v1/providers/me/portfolio/",
+            {
+                "title": "Backyard ADU",
+                "image": SimpleUploadedFile("shot.png", png_bytes(), "image/png"),
+            },
+            format="multipart",
+        )
+        assert response.status_code == 201
+
+    def test_headshots_go_through_the_same_gate(self, seeded, api_client):
+        api_client.force_authenticate(user=UserFactory(role="expert"))
+        response = api_client.patch(
+            "/api/v1/providers/me/profile/",
+            {"headshot": SimpleUploadedFile("me.gif", png_bytes(), "image/png")},
+            format="multipart",
+        )
+        assert response.status_code == 400
+        assert "Unsupported file type" in str(response.json()["headshot"])
 
 
 @pytest.mark.django_db

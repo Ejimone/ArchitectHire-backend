@@ -7,18 +7,9 @@ class CmsConfig(AppConfig):
     verbose_name = "Site content"
 
     def ready(self):
-        from apps.core.cache import bump_content_version
+        from apps.core.signals import register_content_version_bump
 
-        def _bump(sender, **kwargs):
-            bump_content_version()
-
-        for model in self.get_models():
-            post_save.connect(
-                _bump, sender=model, weak=False, dispatch_uid=f"cms-bump-{model.__name__}"
-            )
-            post_delete.connect(
-                _bump, sender=model, weak=False, dispatch_uid=f"cms-bumpd-{model.__name__}"
-            )
+        register_content_version_bump(self)
 
         # Keep the Media assets list mirroring the site: saving/deleting a city,
         # project type, gallery card or city testimonial creates/prunes its
