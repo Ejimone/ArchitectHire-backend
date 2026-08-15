@@ -30,8 +30,11 @@ EXPOSE 8000
 # anonymous memory under load on the 512MB App Platform instance:
 #   4 workers -> 435MB (85% — this is what was pinning the box)
 #   2 workers -> 230MB (45%)
-# These are uvicorn ASGI workers, so each already serves many requests
-# concurrently; 2 is ample here and halving them costs almost no throughput.
+# These are uvicorn ASGI workers — but Django runs every sync view on ONE
+# shared thread per worker (asgiref thread_sensitive), so each worker really
+# handles one HTTP request at a time; websockets are what the async loop
+# buys us. 3 workers (~330MB) is the most sync concurrency this instance
+# affords while keeping headroom.
 # Deliberately no --max-requests: gunicorn's counter only sees HTTP requests, but
 # these workers also hold every live WebSocket, so a recycle force-drops half the
 # connected users, each of whom reconnects and triggers a full router.refresh().
@@ -42,6 +45,6 @@ EXPOSE 8000
 CMD ["gunicorn", "architecture_backend.asgi:application", \
      "-k", "uvicorn_worker.UvicornWorker", \
      "-b", "0.0.0.0:8000", \
-     "--workers", "2", \
+     "--workers", "3", \
      "--graceful-timeout", "30", \
      "--access-logfile", "-"]
