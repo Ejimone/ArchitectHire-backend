@@ -1,0 +1,41 @@
+{
+  "_note": "Copy for the 2026-08 nav refresh: the locations mega-menu became data-driven (popular states | popular cities columns ranked by architect count) and the header search grew live suggestions. These keys are new — the design extractor never saw them.",
+  "copy": [
+    {
+      "scope": "chrome",
+      "key": "nav_popular_states",
+      "text": "Popular states",
+      "href": ""
+    },
+    {
+      "scope": "chrome",
+      "key": "nav_popular_cities",
+      "text": "Popular cities",
+      "href": ""
+    },
+    {
+      "scope": "chrome",
+      "key": "nav_states_more",
+      "text": "See all 50 states →",
+      "href": "/jurisdictions"
+    },
+    {
+      "scope": "chrome",
+      "key": "nav_cities_more",
+      "text": "See all cities →",
+      "href": "/cities"
+    },
+    {
+      "scope": "chrome",
+      "key": "nav_search_see_all",
+      "text": "See all results for “{q}”",
+      "href": ""
+    },
+    {
+      "scope": "chrome",
+      "key": "nav_search_empty",
+      "text": "No matches for “{q}” yet — press Enter to search everything.",
+      "href": ""
+    }
+  ]
+}

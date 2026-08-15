@@ -3,6 +3,7 @@
 from pathlib import Path
 
 import environ
+from psycopg_pool import ConnectionPool
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
@@ -141,6 +142,12 @@ DATABASES = {
                 "min_size": env.int("DB_POOL_MIN", default=2),
                 "max_size": env.int("DB_POOL_MAX", default=8),
                 "timeout": 10,
+                # Ping on checkout, and never keep one connection forever. Without the
+                # check, a burst that kills the pool's connections (2026-08-15: a
+                # 119-page prerender) leaves it handing out corpses — every request
+                # then dies with PoolTimeout until someone restarts the app.
+                "check": ConnectionPool.check_connection,
+                "max_lifetime": 60 * 10,
             }
         },
     }
