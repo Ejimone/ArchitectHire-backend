@@ -33,8 +33,9 @@ EXPOSE 8000
 # These are uvicorn ASGI workers — but Django runs every sync view on ONE
 # shared thread per worker (asgiref thread_sensitive), so each worker really
 # handles one HTTP request at a time; websockets are what the async loop
-# buys us. 3 workers (~330MB) is the most sync concurrency this instance
-# affords while keeping headroom.
+# buys us. 6 workers (~650MB) on the 1GB instance = 6 concurrent sync
+# requests with headroom; DB_POOL_MAX=3 in the app spec keeps 6 workers
+# within the Postgres cluster's 22-connection cap (6 x 3 = 18).
 # Deliberately no --max-requests: gunicorn's counter only sees HTTP requests, but
 # these workers also hold every live WebSocket, so a recycle force-drops half the
 # connected users, each of whom reconnects and triggers a full router.refresh().
@@ -45,6 +46,6 @@ EXPOSE 8000
 CMD ["gunicorn", "architecture_backend.asgi:application", \
      "-k", "uvicorn_worker.UvicornWorker", \
      "-b", "0.0.0.0:8000", \
-     "--workers", "3", \
+     "--workers", "6", \
      "--graceful-timeout", "30", \
      "--access-logfile", "-"]

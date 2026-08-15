@@ -29,9 +29,32 @@ def websocket_application():
     )
 
 
+async def http_application(scope, receive, send):
+    """Django, behind an instant liveness endpoint.
+
+    `/healthz` answers on the event loop itself — before ALLOWED_HOSTS validation and
+    before Django's single sync thread, both of which have taken the app down when a
+    platform health prober met them: the prober's Host header is the container IP
+    (DisallowedHost → 400), and under a request burst the sync queue starved the probe
+    until the platform killed a perfectly healthy container. Point HTTP health checks
+    here; `/api/health/` remains the deep check (database round trip) for humans.
+    """
+    if scope["type"] == "http" and scope["path"] in ("/healthz", "/healthz/"):
+        await send(
+            {
+                "type": "http.response.start",
+                "status": 200,
+                "headers": [(b"content-type", b"text/plain"), (b"cache-control", b"no-store")],
+            }
+        )
+        await send({"type": "http.response.body", "body": b"ok"})
+        return
+    await django_asgi_app(scope, receive, send)
+
+
 application = ProtocolTypeRouter(
     {
-        "http": django_asgi_app,
+        "http": http_application,
         "websocket": websocket_application(),
     }
 )
