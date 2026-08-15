@@ -23,7 +23,7 @@ from apps.studio.pages import all_pages, route_for
 from . import drafts as engine
 from .authentication import StudioTokenAuthentication
 from .drafts import CHROME_MODELS, DraftError
-from .fields import field_schema
+from .fields import field_schema, snapshot
 from .models import ContentDraft, ContentRevision, StudioSession
 from .permissions import IsStudioStaff
 
@@ -242,6 +242,41 @@ class SchemaView(StudioView):
                 }
             }
         )
+
+
+#: The chrome models with structure of their own. Copy, media and SEO are chrome too,
+#: but each already has a dedicated path; these six are what the chrome editor lists.
+CHROME_STRUCTURAL = [
+    "cms.navgroup",
+    "cms.navitem",
+    "cms.footercolumn",
+    "cms.footerlink",
+    "cms.sociallink",
+    "cms.sitesettings",
+]
+
+
+class ChromeView(StudioView):
+    """Current site-wide rows (nav menus, footer, social links, settings) with their ids.
+
+    The public nav/footer endpoints deliberately omit primary keys, and an editor cannot
+    PATCH what it cannot address — so the studio reads the same rows here. Values are
+    the *live* rows on purpose: the pending map lets the UI badge staged edits, and the
+    queue page is where a draft's contents are reviewed.
+    """
+
+    def get(self, request):
+        rows = {}
+        for label in CHROME_STRUCTURAL:
+            model = engine.resolve_model(label)
+            instances = [model.get_solo()] if label == "cms.sitesettings" else model.objects.all()
+            rows[label] = [{"id": obj.pk, **snapshot(obj)} for obj in instances]
+        pending = {
+            f"{draft.model_label}:{draft.canvas_id}": draft.op
+            # Chrome rows are site-wide, which the draft engine records as scope "".
+            for draft in ContentDraft.objects.filter(scope="")
+        }
+        return Response({"rows": rows, "pending": pending})
 
 
 # ------------------------------------------------------------------------------ edits

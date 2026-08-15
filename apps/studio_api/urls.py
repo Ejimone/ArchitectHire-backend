@@ -17,6 +17,7 @@ urlpatterns = [
     path("auth/logout/", views.LogoutView.as_view(), name="logout"),
     path("auth/me/", views.MeView.as_view(), name="me"),
     path("schema/", views.SchemaView.as_view(), name="schema"),
+    path("chrome/", views.ChromeView.as_view(), name="chrome"),
     path("pages/", views.PageListView.as_view(), name="pages"),
     path("pages/<path:page_key>/", views.PageDetailView.as_view(), name="page-detail"),
     path("copy/<str:scope>/<str:key>/", views.CopyView.as_view(), name="copy"),
