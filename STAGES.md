@@ -53,7 +53,8 @@ Full diagnosis and rationale: `~/.claude/plans/i-want-to-build-magical-kitten.md
 | 1 | Backend — media pipeline | DONE 2026-08-17 |
 | 2a | Backend — health probe, pooling, throttles, root URL | DONE 2026-08-17 |
 | 2b | Backend — CMS write gaps, og_image, missing admin models | TODO |
-| 3 | Content — fill the image inventory | TODO |
+| 3a | Content — fill the 194 media slots | DONE 2026-08-17 |
+| 3b | Content — fill *record* images (testimonials, guides, case studies…) | TODO |
 | 4a | Deploy the image fix — **live and verified** | DONE 2026-08-17 |
 | 4b | Prod content drift, worker count, pre-deploy job | TODO |
 | 5 | Frontend — images, sharing, speed | TODO |
@@ -219,30 +220,40 @@ uv run python manage.py check --deploy         # clean
 
 ---
 
-## Stage 3 — Content: fill the image inventory
+## Stage 3a — Content: the 194 media slots
+
+**Status: DONE 2026-08-17** — 183 seeded locally, 180 live in production Spaces.
+
+- [x] `scripts/fetch_seed_images.py` — a laptop tool, deliberately not a runtime
+      dependency. Groups slots by search so a gallery costs one request and each slot
+      takes a *different* photo (otherwise six "specialist portrait" slots become the
+      same face); per-city and per-project-type queries so a Restaurant build-out gallery
+      is restaurants. `--pick`/`--query` re-roll one slot without disturbing the rest —
+      the top hit is often wrong ("modern minimalist house exterior" returned a house
+      with a FOR SALE sign).
+- [x] Images **committed** to `seeds/media/` (183 files, 34 MB, avg 188 KB), not fetched
+      at deploy time: imagery that depends on a third-party API and an API key can go
+      back to being a wireframe, which is the one outcome this exists to prevent.
+- [x] `seed --domain media` fills as well as creates, and **never** overwrites a slot that
+      already has an image — `seed --all` runs on every deploy, so it would otherwise undo
+      the agency's own photography each time.
+- [x] `MediaAsset.credit` + an admin **Source** column, answering "which slots are still
+      placeholders?" at a glance. These are a floor, not an answer.
+- [x] `.gitignore`'s `media/` was unanchored and swallowed `seeds/media/`; now `/media/`.
+- [ ] 11 slots deliberately empty — the Professional Tools rows render product UI, where a
+      stock "dashboard" photo is worse than a placeholder because it looks like a claim
+      about the product that is not true. They need real screenshots.
+
+## Stage 3b — Content: record images
 
 **Status: TODO**
-Goal: the site is never a wireframe again, on any deploy.
+Roughly 70 empty placeholders remain, and they are **record** images rather than slots:
+`InspirationItem.image` (15 on `/inspiration`), `BlogPost.hero_image` + `Author.photo`
+(7 on `/guides`), `CaseStudy.hero_image` (7 on `/case-studies`), and on the homepage
+`Step.image`, `Testimonial.photo`, `TrustLogo.image`, `CaseCard.image` (6).
 
-Demand: 46 static slots + 12 cities + 9 project types (with galleries) + 7 blog posts +
-7 case studies + 12 inspiration items + testimonials, trust logos, steps, case cards
-≈ **200+ images** (169 `MediaAsset` slots seeded locally, plus record-level images).
-
-- [ ] Seeded stock floor — curated, correctly-licensed architectural photography committed
-      as seed data, attribution stored on the record
-- [ ] AI-generated set for slots where stock reads generic (quiz style tiles, product
-      screenshots, step art)
-- [ ] Every image carries meaningful alt text
-
-**Verification**
-
-```bash
-# zero img-slot placeholder elements across every sitemap URL
-# (today: 7 on /, 10 on /services/3d-visualization, 15 on /inspiration,
-#  8 on /cities/austin, 4-8 elsewhere)
-```
-
----
+The same fetcher extends to these; the work is keying them on something stable across
+environments (slug, or scope + sort order) rather than on a primary key.
 
 ## Stage 4a — Deploy the image fix
 
