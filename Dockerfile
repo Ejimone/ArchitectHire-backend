@@ -45,19 +45,23 @@ EXPOSE 8000
 #
 # WORKER COUNT IS A BUDGET DECISION HERE, not a performance one.
 #
-# This runs on the smallest App Platform instance the budget allows ($5/mo =
-# 512MB). MEASURED on live DO metrics, 2026-08-17:
-#   4 workers -> 85% of 1GB at idle, restart loop  (broke a `next build` with 504)
-#   2 workers -> ~424MB
-#   1 worker  -> see STAGES.md; the target is comfortably under 512MB
+# This runs on apps-s-1vcpu-0.5gb -- 512MB, $5/mo, the budget for this project.
+# All MEASURED on live DO metrics, 2026-08-17, not estimated:
 #
-# A worker costs ~155MB: each loads its own Django + DRF + channels + celery +
-# stripe + unfold. Django also serves every sync view on ONE shared thread per
-# worker, so workers are the HTTP concurrency limit and 1 worker means one
-# request at a time. That is an accepted trade: cached content responses are
-# ~120ms, so a single worker still serves ~8 req/s, which is ample here.
+#   4 workers / 1GB    85% at idle, restart loop   (this broke `next build`: 504)
+#   2 workers / 1GB    ~424MB
+#   2 workers / 512MB  OOM cycle: healthy ~100s, down ~80s, repeatedly
+#   1 worker  / 512MB  203-226MB steady, 0 restarts, 450/450 requests OK  <-- this
 #
-# Before raising this, raise the instance size -- 4 workers on 1GB does not fit.
+# A loaded worker is ~122MB (Django + DRF + channels + celery + stripe + unfold +
+# boto3 + Pillow), growing to ~350MB peak under heavy serialisation and falling
+# back afterwards.
+#
+# Django serves every sync view on ONE shared thread per worker, so workers ARE
+# the HTTP concurrency limit: this is one request at a time. Accepted knowingly --
+# cached content responses are ~120ms, so one worker still serves ~8 req/s.
+#
+# Raising this REQUIRES raising the instance size first. It does not fit otherwise.
 #
 # NOTE: this CMD is only in force while the App Platform spec has no
 # `run_command`. The spec used to set one pinning `--workers 2`, which silently
