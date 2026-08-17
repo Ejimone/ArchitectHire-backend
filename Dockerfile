@@ -43,11 +43,18 @@ EXPOSE 8000
 # handles one HTTP request at a time; websockets are what the async loop
 # buys us. Workers therefore *are* the concurrency limit for HTTP.
 #
-# 4 workers (~440MB) on the 1GB instance: double the concurrency of the 2 this
-# deployment was actually running, with real headroom left rather than the 65%
-# occupancy 6 would take. DB_POOL_MAX defaults to 3 (settings/base.py), so
-# 4 x 3 = 12 sits well inside the Postgres cluster's 22-connection cap and
-# leaves room for migrations and the console.
+# MEASURED on the live 1GB instance (DO metrics, 2026-08-17), not estimated:
+#   2 workers -> 52-61% memory at rest
+#   4 workers -> 85% memory AT IDLE, 90% under load, container restarting
+# So a worker costs ~155MB here, not the ~110MB the older note above claimed --
+# the app has grown (Unfold admin, 17 apps). 4 workers left ~15% headroom, which
+# any real request load consumed, and the box entered a restart loop; that is what
+# broke a frontend `next build` mid-prerender with a 504.
+#
+# 2 is therefore the honest ceiling for a 1GB instance. Concurrency is genuinely
+# constrained by it -- Django serves sync views on one shared thread per worker,
+# so this really is 2 concurrent HTTP requests -- and the fix for that is a bigger
+# instance (apps-s-1vcpu-2gb comfortably holds 4-6), not more workers here.
 #
 # NOTE: this CMD is only in force while the App Platform spec has no
 # `run_command`. The spec used to set one pinning `--workers 2`, which silently
@@ -63,6 +70,6 @@ EXPOSE 8000
 CMD ["gunicorn", "architecture_backend.asgi:application", \
      "-k", "uvicorn_worker.UvicornWorker", \
      "-b", "0.0.0.0:8000", \
-     "--workers", "4", \
+     "--workers", "2", \
      "--graceful-timeout", "30", \
      "--access-logfile", "-"]
