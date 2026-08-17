@@ -43,18 +43,21 @@ EXPOSE 8000
 # handles one HTTP request at a time; websockets are what the async loop
 # buys us. Workers therefore *are* the concurrency limit for HTTP.
 #
-# MEASURED on the live 1GB instance (DO metrics, 2026-08-17), not estimated:
-#   2 workers -> 52-61% memory at rest
-#   4 workers -> 85% memory AT IDLE, 90% under load, container restarting
-# So a worker costs ~155MB here, not the ~110MB the older note above claimed --
-# the app has grown (Unfold admin, 17 apps). 4 workers left ~15% headroom, which
-# any real request load consumed, and the box entered a restart loop; that is what
-# broke a frontend `next build` mid-prerender with a 504.
+# WORKER COUNT IS A BUDGET DECISION HERE, not a performance one.
 #
-# 2 is therefore the honest ceiling for a 1GB instance. Concurrency is genuinely
-# constrained by it -- Django serves sync views on one shared thread per worker,
-# so this really is 2 concurrent HTTP requests -- and the fix for that is a bigger
-# instance (apps-s-1vcpu-2gb comfortably holds 4-6), not more workers here.
+# This runs on the smallest App Platform instance the budget allows ($5/mo =
+# 512MB). MEASURED on live DO metrics, 2026-08-17:
+#   4 workers -> 85% of 1GB at idle, restart loop  (broke a `next build` with 504)
+#   2 workers -> ~424MB
+#   1 worker  -> see STAGES.md; the target is comfortably under 512MB
+#
+# A worker costs ~155MB: each loads its own Django + DRF + channels + celery +
+# stripe + unfold. Django also serves every sync view on ONE shared thread per
+# worker, so workers are the HTTP concurrency limit and 1 worker means one
+# request at a time. That is an accepted trade: cached content responses are
+# ~120ms, so a single worker still serves ~8 req/s, which is ample here.
+#
+# Before raising this, raise the instance size -- 4 workers on 1GB does not fit.
 #
 # NOTE: this CMD is only in force while the App Platform spec has no
 # `run_command`. The spec used to set one pinning `--workers 2`, which silently
@@ -70,6 +73,6 @@ EXPOSE 8000
 CMD ["gunicorn", "architecture_backend.asgi:application", \
      "-k", "uvicorn_worker.UvicornWorker", \
      "-b", "0.0.0.0:8000", \
-     "--workers", "2", \
+     "--workers", "1", \
      "--graceful-timeout", "30", \
      "--access-logfile", "-"]
