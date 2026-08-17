@@ -41,12 +41,18 @@ EXPOSE 8000
 # These are uvicorn ASGI workers — but Django runs every sync view on ONE
 # shared thread per worker (asgiref thread_sensitive), so each worker really
 # handles one HTTP request at a time; websockets are what the async loop
-# buys us. 6 workers (~650MB) on the 1GB instance = 6 concurrent sync
-# requests with headroom; DB_POOL_MAX now *defaults* to 3 (settings/base.py)
-# so 6 workers stay within the Postgres cluster's 22-connection cap
-# (6 x 3 = 18, leaving 4 for migrations and the console). That default used to
-# be 8 — sized for the 2 workers this line had before — which is 48 against a
-# cap of 22 unless the app spec happened to override it.
+# buys us. Workers therefore *are* the concurrency limit for HTTP.
+#
+# 4 workers (~440MB) on the 1GB instance: double the concurrency of the 2 this
+# deployment was actually running, with real headroom left rather than the 65%
+# occupancy 6 would take. DB_POOL_MAX defaults to 3 (settings/base.py), so
+# 4 x 3 = 12 sits well inside the Postgres cluster's 22-connection cap and
+# leaves room for migrations and the console.
+#
+# NOTE: this CMD is only in force while the App Platform spec has no
+# `run_command`. The spec used to set one pinning `--workers 2`, which silently
+# overrode this line — so the app ran 2 workers no matter what the Dockerfile
+# said. If concurrency ever looks wrong again, check the spec before this file.
 # Deliberately no --max-requests: gunicorn's counter only sees HTTP requests, but
 # these workers also hold every live WebSocket, so a recycle force-drops half the
 # connected users, each of whom reconnects and triggers a full router.refresh().
@@ -57,6 +63,6 @@ EXPOSE 8000
 CMD ["gunicorn", "architecture_backend.asgi:application", \
      "-k", "uvicorn_worker.UvicornWorker", \
      "-b", "0.0.0.0:8000", \
-     "--workers", "6", \
+     "--workers", "4", \
      "--graceful-timeout", "30", \
      "--access-logfile", "-"]
