@@ -55,9 +55,7 @@ class TestChrome:
         row = next(r for r in body["rows"]["cms.navgroup"] if r["id"] == group.pk)
         assert row["heading"] == "Old heading"
 
-    def test_page_scoped_drafts_stay_out_of_the_chrome_pending_map(
-        self, studio_client, staff_user
-    ):
+    def test_page_scoped_drafts_stay_out_of_the_chrome_pending_map(self, studio_client, staff_user):
         draft = engine.stage(
             model_label="cms.copyblock",
             op="create",

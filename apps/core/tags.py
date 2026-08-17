@@ -57,7 +57,9 @@ _TAGS_BY_MODEL = {
     # Page-scoped content that is not a ScopedBlock.
     "cms.copyblock": lambda obj: _scoped(obj.scope),
     "cms.pageseo": lambda obj: _scoped(obj.page_key),
-    "cms.mediaasset": lambda obj: _scoped(_media_scope(obj.slot_key)),
+    # Two surfaces: the slot renders inside its own page payload, and the whole
+    # inventory is served by `/content/media/` (which the Studio's media library reads).
+    "cms.mediaasset": lambda obj: _scoped(_media_scope(obj.slot_key)) | {"cms:media"},
     # Editorial.
     "cms.author": lambda obj: {"cms:blog"},
     "cms.blogcategory": lambda obj: {"cms:blog"},

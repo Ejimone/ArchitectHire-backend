@@ -56,7 +56,12 @@ class CachedContentView(APIView):
         slug = self.get_cache_slug(**kwargs)
         # `(epoch, slug version)`. The slug half is what makes an edit to one page leave
         # every other page's payload warm.
-        version = get_content_version(slug)
+        #
+        # The *version* slug is usually the same as the cache slug, but a view whose
+        # payload varies by query parameter needs them apart: it must key one cache entry
+        # per variant while sharing a single counter, because a tag can only name a
+        # counter it knows in advance — not one per arbitrary `?prefix=` a caller invents.
+        version = get_content_version(self.get_version_slug(**kwargs))
         payload = cache.get(page_cache_key(slug, version))
         if payload is None:
             payload = self.build_payload(request, **kwargs)
@@ -66,7 +71,7 @@ class CachedContentView(APIView):
             # building it. A bump in that window means a write may have committed
             # after our snapshot was read, and storing it would serve the pre-write
             # page for the full TTL. Serving it once is fine; keeping it is not.
-            if get_content_version(slug) == version:
+            if get_content_version(self.get_version_slug(**kwargs)) == version:
                 cache.set(page_cache_key(slug, version), payload, CONTENT_TTL)
 
         # Stamped with the version this body was built at, not with whatever the version
@@ -84,6 +89,11 @@ class CachedContentView(APIView):
 
     def get_cache_slug(self, **kwargs):
         return self.cache_slug
+
+    def get_version_slug(self, **kwargs):
+        """The slug whose counter versions this payload. Override only when one counter
+        has to cover several cache keys."""
+        return self.get_cache_slug(**kwargs)
 
     def build_payload(self, request, **kwargs):
         raise NotImplementedError
@@ -152,18 +162,33 @@ class SettingsView(CachedContentView):
 class MediaSlotsView(CachedContentView):
     """GET /api/v1/content/media/?prefix=landing — named image slots."""
 
+    #: Ceiling on one response. The inventory is ~170 slots today and grows with every
+    #: city and project type, so this is a real bound, not a formality — `truncated` in
+    #: the payload tells the caller when it bit rather than letting the tail vanish.
+    PAGE_SIZE = 500
+
     def get_cache_slug(self, **kwargs):
         prefix = self.request.query_params.get("prefix", "")
         return f"_media:{prefix}"
+
+    def get_version_slug(self, **kwargs):
+        # One counter for every prefix: a save cannot know which `?prefix=` values
+        # callers have cached, and `cms:media` is the tag that moves this counter.
+        return "_media"
 
     def build_payload(self, request):
         queryset = MediaAsset.objects.exclude(image="")
         prefix = request.query_params.get("prefix")
         if prefix:
             queryset = queryset.filter(slot_key__startswith=prefix)
+        # Explicit ordering: MediaAsset has no Meta.ordering, so without this *which*
+        # rows survive the slice is whatever the planner happens to return.
+        assets = list(queryset.order_by("slot_key")[: self.PAGE_SIZE + 1])
+        truncated = len(assets) > self.PAGE_SIZE
         return {
             "slots": {
                 asset.slot_key: MediaAssetSerializer(asset, context={"request": request}).data
-                for asset in queryset[:500]
-            }
+                for asset in assets[: self.PAGE_SIZE]
+            },
+            "truncated": truncated,
         }

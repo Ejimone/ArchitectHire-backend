@@ -1,12 +1,14 @@
 """Image-slot inventory: auto-created rows, signal sync, key validation."""
 
+from types import SimpleNamespace
+
 import pytest
 from django.core.exceptions import ValidationError
 from django.core.management import call_command
 
 from apps.catalog.models import ProjectType
 from apps.cms.admin import MediaAssetAdmin
-from apps.cms.models import CaseCard, MediaAsset, Testimonial
+from apps.cms.models import CaseCard, HeroCarouselSlide, MediaAsset, Persona, Testimonial
 from apps.cms.slots import STATIC_SLOTS, expected_media_slots, sync_media_slots
 from apps.core.scopes import validate_slot_key
 from apps.jurisdictions.models import City, State
@@ -82,6 +84,69 @@ class TestInventoryAndSync:
         created, pruned = sync_media_slots()
         assert (created, pruned) == (0, 0)
 
+    def test_service_gallery_slots_follow_their_rows(self, db):
+        """The service-detail galleries render `media[f"{scope}:{prefix}{i+1}"]` per row.
+
+        These were missing from the inventory entirely, so they never appeared in the
+        media library — and because pruning is driven by the same inventory, anything
+        that did create them got deleted again on the next sync.
+        """
+        # The studio suite runs with `transaction=True`, so rows from other tests can be
+        # committed and still visible here — start from a known count for these scopes.
+        HeroCarouselSlide.objects.filter(scope="cad-drafting").delete()
+        CaseCard.objects.filter(scope="cad-drafting").delete()
+        Persona.objects.filter(scope="3d-visualization").delete()
+
+        HeroCarouselSlide.objects.create(scope="cad-drafting", caption="one")
+        HeroCarouselSlide.objects.create(scope="cad-drafting", caption="two")
+        CaseCard.objects.create(scope="cad-drafting", title="Specialist")
+        Persona.objects.create(scope="3d-visualization", kicker="THE ARTIST", title="Viz lead")
+
+        keys = dict(expected_media_slots())
+        assert keys["cad-drafting:cad-g1"] == "CAD Drafting — work gallery tile 1"
+        assert "cad-drafting:cad-g2" in keys
+        assert "cad-drafting:cad-g3" not in keys  # only two slides exist
+        assert "cad-drafting:cad-s1" in keys
+        assert "3d-visualization:viz-s1" in keys
+
+        # And the rows really are created, then pruned when the content goes away.
+        assert MediaAsset.objects.filter(slot_key="cad-drafting:cad-g2").exists()
+        HeroCarouselSlide.objects.filter(scope="cad-drafting", caption="two").delete()
+        assert not MediaAsset.objects.filter(slot_key="cad-drafting:cad-g2").exists()
+
+
+@pytest.mark.django_db
+class TestSyncMediaSlotsCommand:
+    def test_dry_run_reports_without_writing(self, city, capsys):
+        MediaAsset.objects.filter(slot_key="landing:hero-arch").delete()
+        MediaAsset.objects.create(slot_key="landing:qa-orphan", notes="gone")
+        before = MediaAsset.objects.count()
+
+        call_command("sync_media_slots", "--dry-run")
+
+        assert MediaAsset.objects.count() == before  # nothing written
+        out = capsys.readouterr().out
+        assert "+ landing:hero-arch" in out
+        assert "- landing:qa-orphan" in out
+        assert "1 to create, 1 to prune" in out
+
+    def test_apply_creates_and_prunes(self, city, capsys):
+        MediaAsset.objects.filter(slot_key="landing:hero-arch").delete()
+        MediaAsset.objects.create(slot_key="landing:qa-orphan", notes="gone")
+
+        call_command("sync_media_slots")
+
+        assert MediaAsset.objects.filter(slot_key="landing:hero-arch").exists()
+        assert not MediaAsset.objects.filter(slot_key="landing:qa-orphan").exists()
+        assert "1 new, 1 pruned" in capsys.readouterr().out
+
+    def test_reports_how_many_slots_still_need_an_upload(self, city, capsys):
+        MediaAsset.objects.filter(slot_key="landing:hero-arch").update(image="cms/slots/x.jpg")
+        call_command("sync_media_slots")
+        out = capsys.readouterr().out
+        assert "1 filled" in out
+        assert "awaiting an upload" in out
+
     def test_seed_media_reports_and_refreshes_notes(self, city, capsys):
         MediaAsset.objects.filter(slot_key="landing:hero-arch").update(notes="stale")
         call_command("seed", "--domain", "media")
@@ -92,8 +157,19 @@ class TestInventoryAndSync:
 
 @pytest.mark.django_db
 class TestAdmin:
-    def test_slot_key_locked_after_creation(self):
+    def test_slot_key_locked_for_staff_but_repairable_by_a_superuser(self):
+        """Staff must not invent slot keys; superusers must be able to repair one.
+
+        `sync_media_slots` only prunes rows with no image, so a *filled* row saved under
+        a wrong key renders nowhere and cannot be cleaned up automatically. Locking the
+        field for everyone left that row permanently stuck.
+        """
         admin = MediaAssetAdmin(MediaAsset, None)
         asset = MediaAsset.objects.create(slot_key="landing:qa-readonly-probe", notes="x")
-        assert admin.get_readonly_fields(None, asset) == ["slot_key", "notes"]
-        assert admin.get_readonly_fields(None, None) == []
+        staff = SimpleNamespace(is_superuser=False)
+        owner = SimpleNamespace(is_superuser=True)
+
+        assert admin.get_readonly_fields(SimpleNamespace(user=staff), asset) == ["slot_key"]
+        assert admin.get_readonly_fields(SimpleNamespace(user=owner), asset) == []
+        # Adding a row: nothing is locked, for either.
+        assert admin.get_readonly_fields(SimpleNamespace(user=staff), None) == []

@@ -31,10 +31,14 @@ from apps.payments import models as payments
         # Page-scoped content.
         (cms.CopyBlock(scope="landing", key="hero-cta"), {"cms:page:landing"}),
         (cms.PageSEO(page_key="about"), {"cms:page:about"}),
-        (cms.MediaAsset(slot_key="landing:hero-arch"), {"cms:page:landing"}),
+        # Two surfaces: the page the slot renders on, and the media inventory endpoint.
+        (cms.MediaAsset(slot_key="landing:hero-arch"), {"cms:page:landing", "cms:media"}),
         # The scope in a slot key carries its own colon; splitting from the left would
         # purge a page called "city".
-        (cms.MediaAsset(slot_key="city:oakland:work-1"), {"cms:page:city:oakland"}),
+        (
+            cms.MediaAsset(slot_key="city:oakland:work-1"),
+            {"cms:page:city:oakland", "cms:media"},
+        ),
         # Editorial.
         (editorial.Author(name="Maya Ellison, AIA"), {"cms:blog"}),
         (editorial.BlogCategory(name="Permits"), {"cms:blog"}),

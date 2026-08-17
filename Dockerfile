@@ -22,7 +22,15 @@ USER app
 # Bake the static manifest into the image (whitenoise Manifest storage 500s
 # without it). Runs as the app user so a later runtime collectstatic can still
 # rewrite these files. Dummy env — never touches the DB or real secrets.
+# The AWS_* values are dummies for the same reason SECRET_KEY is: prod settings now
+# refuse to start without object storage (a silent FileSystemStorage fallback served 404
+# for every uploaded image on this platform), and collectstatic only touches the
+# whitenoise staticfiles backend, never the Spaces one. Real credentials come from the
+# app spec at runtime.
 RUN SECRET_KEY=build-only ALLOWED_HOSTS=build \
+    AWS_ACCESS_KEY_ID=build-only AWS_SECRET_ACCESS_KEY=build-only \
+    AWS_STORAGE_BUCKET_NAME=build-only \
+    AWS_S3_ENDPOINT_URL=https://build-only.invalid \
     python manage.py collectstatic --noinput
 EXPOSE 8000
 # Worker count is memory-bound, not CPU-bound: each worker loads its own copy of

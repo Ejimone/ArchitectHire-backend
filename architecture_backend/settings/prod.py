@@ -1,6 +1,7 @@
 """Production settings — hardened, DigitalOcean Spaces media, Sentry."""
 
 import sentry_sdk
+from django.core.exceptions import ImproperlyConfigured
 from sentry_sdk.integrations.celery import CeleryIntegration
 from sentry_sdk.integrations.django import DjangoIntegration
 
@@ -30,21 +31,41 @@ SESSION_COOKIE_HTTPONLY = True
 X_FRAME_OPTIONS = "DENY"
 
 # --- Media -------------------------------------------------------------------
-# DigitalOcean Spaces when configured; droplet-local files otherwise (test-mode
-# deploys without a Spaces bucket — Caddy serves /media from a shared volume).
+# DigitalOcean Spaces, and only Spaces.
+#
+# There used to be a FileSystemStorage fallback here for "test-mode deploys without a
+# bucket", justified by a droplet where Caddy served /media from a shared volume. On App
+# Platform — the deployment we actually run — that fallback is worse than useless:
+# `urls.py` mounts MEDIA_URL only when DEBUG, and whitenoise is never given
+# WHITENOISE_ROOT, so *every* media URL 404s. Worse, the container filesystem is
+# ephemeral, so each upload also vanished on the next deploy. It failed silently: the
+# admin reported a successful save and the site showed a broken image.
+#
+# So: refuse to boot instead. A missing credential is a deployment mistake, and a
+# container that will not start is a mistake you find in 30 seconds rather than in a
+# demo. The droplet runbook in DEPLOY.md sets these too.
+_missing_media_env = [
+    name
+    for name, value in (
+        ("AWS_ACCESS_KEY_ID", AWS_ACCESS_KEY_ID),
+        ("AWS_SECRET_ACCESS_KEY", AWS_SECRET_ACCESS_KEY),
+        ("AWS_STORAGE_BUCKET_NAME", AWS_STORAGE_BUCKET_NAME),
+        ("AWS_S3_ENDPOINT_URL", AWS_S3_ENDPOINT_URL),
+    )
+    if not value
+]
+if _missing_media_env:
+    raise ImproperlyConfigured(
+        "Object storage is required in production; these are unset: "
+        f"{', '.join(_missing_media_env)}. Without them Django would accept uploads and "
+        "serve 404 for every one of them. Set them in the App Platform app spec."
+    )
 
-if AWS_ACCESS_KEY_ID:
-    STORAGES = {
-        "default": {"BACKEND": "apps.core.storages.PublicMediaStorage"},
-        "private": {"BACKEND": "apps.core.storages.PrivateMediaStorage"},
-        "staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"},
-    }
-else:
-    STORAGES = {
-        "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
-        "private": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
-        "staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"},
-    }
+STORAGES = {
+    "default": {"BACKEND": "apps.core.storages.PublicMediaStorage"},
+    "private": {"BACKEND": "apps.core.storages.PrivateMediaStorage"},
+    "staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"},
+}
 
 # --- Email ------------------------------------------------------------------
 

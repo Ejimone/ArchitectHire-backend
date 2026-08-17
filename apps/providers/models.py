@@ -11,6 +11,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils import timezone
 
+from apps.core.images import ProcessedImageField
 from apps.core.models import OrderableModel, TimeStampedModel
 from apps.core.storages import private_storage
 from apps.jurisdictions.models import State
@@ -55,7 +56,7 @@ class ProviderProfileBase(TimeStampedModel):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="%(class)s"
     )
     bio = models.TextField(blank=True)
-    headshot = models.ImageField(upload_to="providers/headshots/", blank=True)
+    headshot = ProcessedImageField(upload_to="providers/headshots/", blank=True)
     based_in = models.CharField(max_length=80, blank=True)
     remote_ok = models.BooleanField(default=True)
     hourly_rate = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
@@ -208,7 +209,7 @@ class PortfolioItem(OrderableModel, TimeStampedModel):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="portfolio_items"
     )
-    image = models.ImageField(upload_to="providers/portfolio/", blank=True)
+    image = ProcessedImageField(upload_to="providers/portfolio/", blank=True)
     title = models.CharField(max_length=120)
     meta = models.CharField(max_length=120, blank=True)  # "Type · location · year"
 

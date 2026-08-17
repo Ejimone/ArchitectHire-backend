@@ -327,7 +327,19 @@ AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY", default="")
 AWS_STORAGE_BUCKET_NAME = env("AWS_STORAGE_BUCKET_NAME", default="")
 AWS_S3_ENDPOINT_URL = env("AWS_S3_ENDPOINT_URL", default="")
 AWS_S3_CUSTOM_DOMAIN = env("AWS_S3_CUSTOM_DOMAIN", default="")
-AWS_S3_REGION_NAME = env("AWS_S3_REGION_NAME", default="nyc3")
+# The bucket's own region. Wrong value = SigV4 signs for the wrong region and Spaces
+# rejects every upload with SignatureDoesNotMatch, while unsigned reads keep working —
+# so the failure shows up only as "saving an image in admin silently does nothing".
+AWS_S3_REGION_NAME = env("AWS_S3_REGION_NAME", default="sfo3")
+# Virtual-hosted, not path-style. With no custom domain, botocore's default against a
+# custom `endpoint_url` is path-style, which emits
+#   https://sfo3.digitaloceanspaces.com/<bucket>/media/...
+# whose *hostname* is the shared regional endpoint. Next.js allowlists image hosts by
+# hostname, so every such URL was rejected by /_next/image with a 400 and not one CMS
+# image rendered on the site. Virtual-hosted puts the bucket in the hostname
+#   https://<bucket>.sfo3.digitaloceanspaces.com/media/...
+# which is the form both frontends already allow.
+AWS_S3_ADDRESSING_STYLE = env("AWS_S3_ADDRESSING_STYLE", default="virtual")
 AWS_DEFAULT_ACL = None
 AWS_S3_OBJECT_PARAMETERS = {"CacheControl": "max-age=86400"}
 

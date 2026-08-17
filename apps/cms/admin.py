@@ -257,8 +257,20 @@ class MediaAssetAdmin(StudioModelAdmin):
     preview = thumbnail_display()
 
     def get_readonly_fields(self, request, obj=None):
-        # Keys are system-generated; lock them once the row exists.
-        return ["slot_key", "notes"] if obj else []
+        """Lock the slot key for ordinary staff; leave `notes` open to everyone.
+
+        Slot keys are system-generated and typing one by hand is how you get a row that
+        renders nowhere, so they stay locked in day-to-day use. But locking them
+        *permanently* left no way to repair a row whose key was wrong: `sync_media_slots`
+        only prunes rows with no image, so a filled row under a stale key was
+        unreachable from the site and undeletable from here. Superusers can fix it.
+
+        `notes` is just the human label ("About — hero image") the owner reads to find
+        the right row; there is no reason it was ever readonly.
+        """
+        if obj and not request.user.is_superuser:
+            return ["slot_key"]
+        return []
 
 
 @admin.register(PageSEO)

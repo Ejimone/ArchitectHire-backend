@@ -40,6 +40,60 @@ class TestMediaSlots:
         filtered = api_client.get("/api/v1/content/media/?prefix=qa-landing").json()["slots"]
         assert list(filtered) == ["qa-landing-hero"]
 
+    def test_an_upload_is_visible_immediately(self, api_client):
+        """The regression that hid every image the owner ever uploaded.
+
+        This endpoint caches one payload per `?prefix=`, keyed on slug
+        `_media:<prefix>`. No tag mapped to that slug, so its version counter never moved
+        past 1 — a new upload stayed invisible for the full 15-minute TTL, and because
+        the ETag is built from the same frozen version, a client sending If-None-Match
+        was told 304 against the empty body indefinitely.
+        """
+        first = api_client.get("/api/v1/content/media/?prefix=qa-fresh")
+        assert "qa-fresh:hero" not in first.json()["slots"]
+
+        MediaAsset.objects.create(slot_key="qa-fresh:hero", image="cms/slots/hero.jpg")
+
+        second = api_client.get("/api/v1/content/media/?prefix=qa-fresh")
+        assert "qa-fresh:hero" in second.json()["slots"]
+        # A moved version means a new ETag, so conditional requests refetch too.
+        assert second["ETag"] != first["ETag"]
+
+    def test_prefixes_share_one_counter_but_keep_separate_payloads(self, api_client):
+        """One counter covers every prefix — a save cannot know which variants are
+        cached — while each prefix still gets its own cache entry."""
+        MediaAsset.objects.create(slot_key="qa-one:hero", image="cms/slots/a.jpg")
+        MediaAsset.objects.create(slot_key="qa-two:hero", image="cms/slots/b.jpg")
+
+        one = api_client.get("/api/v1/content/media/?prefix=qa-one")
+        two = api_client.get("/api/v1/content/media/?prefix=qa-two")
+        assert list(one.json()["slots"]) == ["qa-one:hero"]
+        assert list(two.json()["slots"]) == ["qa-two:hero"]
+        # Same version, different cache slug -> different ETag, no cross-serving.
+        assert one["ETag"] != two["ETag"]
+
+        # A write under one prefix invalidates the other's cached payload as well.
+        MediaAsset.objects.create(slot_key="qa-two:extra", image="cms/slots/c.jpg")
+        assert api_client.get("/api/v1/content/media/?prefix=qa-one")["ETag"] != one["ETag"]
+
+    def test_results_are_ordered_and_report_truncation(self, api_client, monkeypatch):
+        """Without an explicit order_by, *which* rows survive the slice is whatever the
+        query planner returns — so a truncated response silently dropped a random tail."""
+        from apps.cms.views import MediaSlotsView
+
+        monkeypatch.setattr(MediaSlotsView, "PAGE_SIZE", 2)
+        for key in ("qa-order:c", "qa-order:a", "qa-order:b"):
+            MediaAsset.objects.create(slot_key=key, image=f"cms/slots/{key[-1]}.jpg")
+
+        body = api_client.get("/api/v1/content/media/?prefix=qa-order").json()
+        assert list(body["slots"]) == ["qa-order:a", "qa-order:b"]
+        assert body["truncated"] is True
+
+    def test_untruncated_responses_say_so(self, api_client):
+        MediaAsset.objects.create(slot_key="qa-small:hero", image="cms/slots/a.jpg")
+        body = api_client.get("/api/v1/content/media/?prefix=qa-small").json()
+        assert body["truncated"] is False
+
 
 @pytest.mark.django_db
 class TestCaseStudyIndex:

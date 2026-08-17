@@ -23,11 +23,16 @@ class CmsConfig(AppConfig):
 
             sync_media_slots()
 
+        # Must list every model `expected_media_slots` counts rows of, or the inventory
+        # drifts in one direction only: a sibling model's save happens to refresh it,
+        # while removing the row that owned a slot leaves the orphan behind.
         for label in (
             "jurisdictions.City",
             "catalog.ProjectType",
             "cms.CaseCard",
             "cms.Testimonial",
+            "cms.HeroCarouselSlide",
+            "cms.Persona",
         ):
             model = global_apps.get_model(label)
             post_save.connect(

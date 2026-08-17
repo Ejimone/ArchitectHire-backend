@@ -12,8 +12,22 @@ intentionally absent: they render from live account data, not admin uploads.
 """
 
 from apps.catalog.models import ProjectType
-from apps.cms.models import CaseCard, MediaAsset, Testimonial
+from apps.cms.models import CaseCard, HeroCarouselSlide, MediaAsset, Persona, Testimonial
 from apps.jurisdictions.models import City
+
+# Service-detail pages whose galleries are keyed off DB rows rather than a fixed list.
+# Each entry is (scope, slot-prefix, model, label) — the page renders
+# ``media[f"{scope}:{prefix}{i + 1}"]`` for each row, so the inventory has to count the
+# rows to know how many slots exist. Without these the slots were unreachable twice
+# over: they never appeared in the media library, and `sync_media_slots` pruned any that
+# something else created, because pruning is driven by this very inventory.
+_DERIVED_GALLERIES = [
+    ("cad-drafting", "cad-g", HeroCarouselSlide, "CAD Drafting — work gallery tile"),
+    ("cad-drafting", "cad-s", CaseCard, "CAD Drafting — specialist portrait"),
+    ("3d-visualization", "viz-d", CaseCard, "3D Visualization — deliverable card"),
+    ("3d-visualization", "viz-g", HeroCarouselSlide, "3D Visualization — work gallery tile"),
+    ("3d-visualization", "viz-s", Persona, "3D Visualization — specialist portrait"),
+]
 
 STATIC_SLOTS = [
     # Marketing pages
@@ -79,6 +93,10 @@ def expected_media_slots() -> list[tuple[str, str]]:
             slots.append(
                 (f"city:{city.slug}:work-{i + 1}", f"{city.name} city page — work photo {i + 1}")
             )
+
+    for scope, prefix, model, label in _DERIVED_GALLERIES:
+        for i in range(model.objects.filter(scope=scope).count()):
+            slots.append((f"{scope}:{prefix}{i + 1}", f"{label} {i + 1}"))
 
     for project in ProjectType.objects.all():
         if project.slot_id:

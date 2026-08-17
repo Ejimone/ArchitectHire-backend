@@ -3,6 +3,7 @@
 from django.conf import settings
 from django.db import models
 
+from apps.core.images import ProcessedImageField
 from apps.core.models import OrderableModel, PublishableModel, TimeStampedModel
 
 
@@ -10,7 +11,7 @@ class Author(TimeStampedModel):
     name = models.CharField(max_length=80)  # may carry credentials: "Maya Ellison, AIA"
     role = models.CharField(max_length=120, blank=True)
     bio = models.TextField(blank=True)
-    photo = models.ImageField(upload_to="cms/authors/", blank=True)
+    photo = ProcessedImageField(upload_to="cms/authors/", blank=True)
 
     def __str__(self):
         return self.name
@@ -35,7 +36,7 @@ class BlogPost(TimeStampedModel, PublishableModel):
     title = models.CharField(max_length=160)
     dek = models.CharField(max_length=320, blank=True, help_text="Subtitle under the headline")
     excerpt = models.TextField(blank=True)
-    hero_image = models.ImageField(upload_to="cms/blog/", blank=True)
+    hero_image = ProcessedImageField(upload_to="cms/blog/", blank=True)
     author = models.ForeignKey(Author, on_delete=models.SET_NULL, null=True, related_name="posts")
     read_time = models.CharField(max_length=20, blank=True)  # "7 min read"
     is_featured = models.BooleanField(default=False)
@@ -64,7 +65,7 @@ class BlogContentBlock(OrderableModel):
     attribution = models.CharField(max_length=120, blank=True, help_text="Pull quote attribution")
     cta_label = models.CharField(max_length=64, blank=True)
     cta_href = models.CharField(max_length=255, blank=True)
-    image = models.ImageField(upload_to="cms/blog/blocks/", blank=True)
+    image = ProcessedImageField(upload_to="cms/blog/blocks/", blank=True)
 
     class Meta(OrderableModel.Meta):
         pass
@@ -95,7 +96,7 @@ class CaseStudy(TimeStampedModel, PublishableModel):
     dek = models.CharField(max_length=320, blank=True)
     location = models.CharField(max_length=80, blank=True)
     excerpt = models.TextField(blank=True)
-    hero_image = models.ImageField(upload_to="cms/case-studies/", blank=True)
+    hero_image = ProcessedImageField(upload_to="cms/case-studies/", blank=True)
 
     brief = models.TextField(blank=True)
     challenge1 = models.TextField(blank=True)
@@ -128,7 +129,7 @@ class CaseStudy(TimeStampedModel, PublishableModel):
 
 class CaseStudyImage(OrderableModel):
     case_study = models.ForeignKey(CaseStudy, on_delete=models.CASCADE, related_name="gallery")
-    image = models.ImageField(upload_to="cms/case-studies/gallery/")
+    image = ProcessedImageField(upload_to="cms/case-studies/gallery/")
     caption = models.CharField(max_length=160, blank=True)
 
     class Meta(OrderableModel.Meta):
@@ -236,7 +237,7 @@ class InspirationItem(TimeStampedModel, PublishableModel, OrderableModel):
     title = models.CharField(max_length=120)
     tag = models.CharField(max_length=40, blank=True)  # category chip
     style = models.CharField(max_length=40, blank=True)  # design style
-    image = models.ImageField(upload_to="cms/inspiration/", blank=True)
+    image = ProcessedImageField(upload_to="cms/inspiration/", blank=True)
     palette = models.JSONField(default=list, blank=True, help_text="4 hex colors")
     masonry_height = models.PositiveSmallIntegerField(default=280)
     likes_count = models.PositiveIntegerField(default=0)

@@ -31,6 +31,13 @@ _SLUG_BY_TAG = {
     "cms:catalog": "_catalog",
     "cms:catalog:plans": "_plans",
     "cms:jurisdictions": "_states",
+    # The media endpoint caches one payload per `?prefix=`, but versions them all off
+    # this single slug — see `MediaSlotsView.get_version_slug`. Without it the slug
+    # `_media:<prefix>` matched no tag, so its counter never moved past 1: an uploaded
+    # image stayed invisible for the full TTL, and because the ETag is built from the
+    # same frozen version, any client sending If-None-Match was told 304 against the
+    # empty body indefinitely.
+    "cms:media": "_media",
 }
 _PAGE_TAG_PREFIX = "cms:page:"
 
