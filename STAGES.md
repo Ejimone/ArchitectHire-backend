@@ -54,7 +54,8 @@ Full diagnosis and rationale: `~/.claude/plans/i-want-to-build-magical-kitten.md
 | 2a | Backend — health probe, pooling, throttles, root URL | DONE 2026-08-17 |
 | 2b | Backend — CMS write gaps, og_image, missing admin models | TODO |
 | 3 | Content — fill the image inventory | TODO |
-| 4 | Redeploy backend to DigitalOcean | TODO |
+| 4a | Deploy the image fix — **live and verified** | DONE 2026-08-17 |
+| 4b | Prod content drift, worker count, pre-deploy job | TODO |
 | 5 | Frontend — images, sharing, speed | TODO |
 | 6 | Studio — make it genuinely good | TODO |
 | 7 | Final pass | TODO |
@@ -243,7 +244,50 @@ Demand: 46 static slots + 12 cities + 9 project types (with galleries) + 7 blog 
 
 ---
 
-## Stage 4 — Redeploy the backend to DigitalOcean
+## Stage 4a — Deploy the image fix
+
+**Status: DONE 2026-08-17** — merged to `main`, deployed, verified against production.
+
+What the live app spec actually said (worth recording, because two of my earlier
+suspicions were wrong):
+
+- `AWS_S3_REGION_NAME=sfo3` and `DB_POOL_MIN/MAX=1/3` were **already correct** in the app
+  spec. The code defaults were wrong (`nyc3`, `8`), which matters for any environment that
+  does not override them — but these were never live bugs.
+- `AWS_S3_CUSTOM_DOMAIN` and `AWS_S3_ADDRESSING_STYLE` were both unset, which is the
+  entire cause. The new code default (`virtual`) fixes it **with no env var change at all**.
+- The spec's `run_command` **overrides the Dockerfile CMD** and pins `--workers 2`. The
+  6-worker change in `1ca5bd6` therefore never took effect in production. Carried to 4b.
+
+**Verification** *(against production, 2026-08-17)*
+
+```
+GET /healthz                          -> db=ok cache=ok        (was: unconditional "ok")
+GET /                                 -> 302 -> /admin/        (was: bare "Not Found")
+GET /api/v1/content/pages/landing/    -> hero_image now
+     https://allsermon-media.sfo3.digitaloceanspaces.com/media/cms/hero/...
+     (was: https://sfo3.digitaloceanspaces.com/allsermon-media/...)
+
+/_next/image with the NEW url  -> 200  image/jpeg  164 KB   <- the fix
+/_next/image with the OLD url  -> 400                       <- what every image did
+```
+
+Frontend data cache purged via `POST /api/revalidate` (tags: `cms`); the live homepage now
+serves the new URL and the image loads.
+
+**Remaining zeros are content, not code** — 194 slots with nothing uploaded:
+
+```
+/                          images=1  empty-slots=7
+/about                     images=0  empty-slots=5
+/services/3d-visualization images=0  empty-slots=10
+/cities/austin             images=0  empty-slots=8
+/inspiration               images=0  empty-slots=15
+```
+
+That is Stage 3.
+
+## Stage 4b — Prod content drift, worker count, release process
 
 **Status: TODO**
 
