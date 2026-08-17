@@ -56,7 +56,7 @@ Full diagnosis and rationale: `~/.claude/plans/i-want-to-build-magical-kitten.md
 | 3a | Content — fill the 194 media slots | DONE 2026-08-17 |
 | 3b | Content — fill *record* images (testimonials, guides, case studies…) | TODO |
 | 4a | Deploy the image fix — **live and verified** | DONE 2026-08-17 |
-| 4b | Prod content drift, worker count, pre-deploy job | TODO |
+| 4b | Prod content drift, worker count, pre-deploy job | PARTLY DONE 2026-08-17 |
 | 5 | Frontend — images, sharing, speed | TODO |
 | 6 | Studio — make it genuinely good | TODO |
 | 7 | Final pass | TODO |
@@ -300,7 +300,55 @@ That is Stage 3.
 
 ## Stage 4b — Prod content drift, worker count, release process
 
-**Status: TODO**
+**Status: PARTLY DONE 2026-08-17**
+
+- [x] **Pre-deploy job reinstated** (`migrate-and-seed`, `kind: PRE_DEPLOY`). This is what
+      was causing production content to drift from the code: without it, `migrate` had to
+      be remembered by hand, and it had not been — `cms_mediaasset.credit does not exist`
+      took the media endpoint to a 500 immediately after deploy. First attempt failed
+      because App Platform did not run the command through a shell and passed `&&` on to
+      `manage.py` as arguments; wrapped in `sh -c`, it now migrates and seeds every deploy.
+- [x] **Worker count: 4 → 2, reverted after measuring.** I raised it to 4 on the strength
+      of a Dockerfile comment estimating ~110MB per worker. The live metrics disagree:
+
+      | workers | memory (1GB instance) | restarts |
+      |---|---|---|
+      | 2 | 39-61% | 0 |
+      | 4 | **85% at idle**, 90% under load | climbing |
+
+      A worker really costs ~155MB here — the app has grown since that comment. 4 left
+      ~15% headroom, any real load consumed it, and the container entered a restart loop.
+      **That is what broke the frontend build** (see below). 2 is the honest ceiling for
+      1GB; real concurrency needs a bigger instance, not more workers.
+- [x] **Studio origin added to `CORS_ALLOWED_ORIGINS`.** The studio's canvas fetches search
+      suggestions from the browser, and its origin was not allowed — every keystroke was a
+      CORS failure. Verified: `access-control-allow-origin: https://architecthire-studio.vercel.app`.
+- [ ] Seed-patch drift audit (`seeds/patches/*.json`) — the footer still links
+      "Terms of Service" to the dead `/privacy#terms` anchor
+- [ ] Instance sizing decision (see "Known constraint" below)
+
+### The frontend could not build at all
+
+`vercel --prod` failed partway through prerendering 119 pages:
+
+```
+Error occurred prerendering page "/jurisdictions/ak"
+Error: /api/v1/jurisdictions/states/AK/ → 504
+```
+
+Not a frontend bug — the backend was at 85% memory and restarting under the 4-worker
+config, so it stopped answering mid-build. After reverting to 2 workers the build
+succeeded and both apps redeployed cleanly.
+
+### Known constraint: 2 concurrent HTTP requests
+
+Django serves sync views on one shared thread per uvicorn worker, so **workers are the
+HTTP concurrency limit** and 2 workers means 2 concurrent requests. Cold page composes
+take ~2s, so a `next build` (119 pages, sequential) is genuinely close to the edge, and a
+burst of 185 requests at concurrency 4 took the box down.
+
+The fix is `apps-s-1vcpu-2gb`, which comfortably holds 4-6 workers. Deferred pending the
+owner's call on cost.
 
 - [ ] **[owner]** CDN enabled on the `allsermon-media` Space — the `.cdn.` host currently
       refuses connections
