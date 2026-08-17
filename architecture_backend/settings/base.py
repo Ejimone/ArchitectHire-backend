@@ -131,16 +131,23 @@ DATABASES = {
         # Postgres's 100-connection cap ("sorry, too many clients already").
         # Pooling requires CONN_MAX_AGE=0 (Django refuses the combination).
         "CONN_MAX_AGE": 0,
-        # max_size is per worker, so the ceiling is max_size × gunicorn workers. At 20 × 2
-        # that is 40 against a db-s-1vcpu-1gb cluster which allows 22 — the app never hit
-        # it under normal traffic, but it left nothing for anyone else: `manage.py migrate`
-        # and psql were both refused with "remaining connection slots are reserved for
-        # roles with the SUPERUSER attribute" while the site itself stayed healthy.
-        # 8 × 2 = 16 keeps real headroom for migrations and the console.
+        # max_size is per *worker*, so the real ceiling is max_size × gunicorn workers,
+        # and the cluster (db-s-1vcpu-1gb) allows 22 connections in total.
+        #
+        # These defaults have to track the worker count in the Dockerfile, and they had
+        # fallen out of step with it: the defaults below were chosen for 2 workers
+        # (8 × 2 = 16, fine) and the Dockerfile then went to 6 (8 × 6 = 48 against a cap
+        # of 22). Nothing failed at rest, because min_size is what is held idle — it
+        # failed under load, as "sorry, too many clients already", and it locked out
+        # `manage.py migrate` and psql at exactly the moment someone needed them.
+        #
+        # 3 × 6 = 18 leaves 4 connections for migrations and the console, which is what
+        # DEPLOY.md and the Dockerfile comment both already assumed. min_size 1 keeps
+        # 6 idle connections across the fleet instead of 12.
         "OPTIONS": {
             "pool": {
-                "min_size": env.int("DB_POOL_MIN", default=2),
-                "max_size": env.int("DB_POOL_MAX", default=8),
+                "min_size": env.int("DB_POOL_MIN", default=1),
+                "max_size": env.int("DB_POOL_MAX", default=3),
                 "timeout": 10,
                 # Ping on checkout, and never keep one connection forever. Without the
                 # check, a burst that kills the pool's connections (2026-08-15: a
@@ -223,8 +230,14 @@ REST_FRAMEWORK = {
         "contact": "5/hour",
         "newsletter": "5/hour",
         "estimates": "30/hour",
-        # Studio sign-in is a password endpoint on a staff-only surface.
-        "studio-login": "10/hour",
+        # Studio sign-in is a password endpoint on a staff-only surface. 10/hour was
+        # strict enough that ten mistyped passwords locked the owner out of their own CMS
+        # for an hour; 30 still caps credential stuffing at a rate that gets nowhere.
+        "studio-login": "30/hour",
+        # Authenticated editing. Deliberately generous: the studio issues ~4 calls per
+        # canvas render and refreshes after every save, so the default `user` rate of
+        # 120/min is reachable within minutes of normal work.
+        "studio": "600/min",
     },
     "EXCEPTION_HANDLER": "rest_framework.views.exception_handler",
 }

@@ -51,7 +51,8 @@ Full diagnosis and rationale: `~/.claude/plans/i-want-to-build-magical-kitten.md
 |---|---|---|
 | 0 | Groundwork | DONE 2026-08-17 |
 | 1 | Backend — media pipeline | DONE 2026-08-17 |
-| 2 | Backend — CMS completeness, admin, health | TODO |
+| 2a | Backend — health probe, pooling, throttles, root URL | DONE 2026-08-17 |
+| 2b | Backend — CMS write gaps, og_image, missing admin models | TODO |
 | 3 | Content — fill the image inventory | TODO |
 | 4 | Redeploy backend to DigitalOcean | TODO |
 | 5 | Frontend — images, sharing, speed | TODO |
@@ -147,10 +148,58 @@ PublicMediaStorage().url("cms/hero/example.webp")
 
 ---
 
-## Stage 2 — Backend: CMS completeness and correctness
+## Stage 2a — Backend: the heartbeat, pooling and the front door
+
+**Status: DONE 2026-08-17**
+
+- [x] **`/healthz` is a real readiness probe** (`apps/core/health.py`). It returned a
+      literal `200` without touching anything, so a container whose psycopg pool had died
+      — handing out dead connections, every request failing with `PoolTimeout` — still
+      reported itself healthy and kept taking traffic until someone restarted it by hand.
+      Three constraints shaped the replacement: it runs on its **own dedicated thread**
+      (never Django's shared sync thread, which a request burst saturates — that is what
+      got healthy containers killed before), its result is **memoised for 5s** so probe
+      frequency is irrelevant, and it is **deliberately asymmetric** — a dead database
+      fails the probe (a per-container fault only a restart clears) while a dead Redis is
+      reported but does not, because failing the fleet on a shared dependency turns a blip
+      into a total outage.
+- [x] **`DB_POOL_MAX` default 8 → 3, `DB_POOL_MIN` 2 → 1.** The defaults were chosen for
+      2 gunicorn workers; the Dockerfile then went to 6, making the real ceiling 48 against
+      a 22-connection cluster. It held at rest and failed under load, as
+      "sorry, too many clients already" — locking out `migrate` and psql at exactly the
+      moment they were needed. 3 × 6 = 18 leaves 4 spare. Dockerfile comment reconciled.
+- [x] **`NOTIFY_POOL` derived from `DB_POOL_MAX`** instead of a flat 4 justified by a
+      comment claiming `max_size=20`. Four background threads against a pool of three can
+      hold every connection a worker has, leaving the request thread to wait out the 10s
+      pool timeout — which presents as an unexplained stall.
+- [x] **Studio throttles.** `studio-login` 10/hour → 30/hour (ten mistyped passwords locked
+      the owner out of their own CMS for an hour); new `studio` scope at 600/min, because
+      the canvas issues ~4 authenticated calls per render and refreshes after every save,
+      so the default `user: 120/min` was reachable within minutes of normal editing.
+- [x] **The deployment URL no longer 404s.** Opening the bare API host landed on Django's
+      unstyled "Not Found" — the server had routes for `/admin/` and `/api/` and nothing at
+      the root. `/` now 302s to `/admin/` (302, not 301: a permanent redirect is cached by
+      browsers effectively forever). Unknown paths still 404, so genuine routing mistakes
+      stay visible.
+
+**Verification** *(run 2026-08-17, against a live local server)*
+
+```
+uv run pytest              -> 1035 passed, 12 skipped, 100.00% coverage
+ruff check + format --check -> clean
+
+GET /healthz  (Host: 10.0.0.7, as a platform prober sends)  -> 200  db=ok cache=ok  (70ms)
+  repeated x5                                               -> ~0.3ms each (memoised)
+docker compose stop db; GET /healthz                        -> 503  db=timeout cache=unknown
+docker compose start db; GET /healthz                       -> 200  db=ok cache=ok
+GET /                                                       -> 302 -> /admin/ -> 200
+GET /nope, /api/v1/bogus/                                   -> 404 (unchanged)
+```
+
+## Stage 2b — Backend: CMS completeness
 
 **Status: TODO**
-Goal: everything the site renders is owner-editable, and the heartbeat tells the truth.
+Goal: everything the site renders is owner-editable.
 
 - [ ] Studio write allowlist extended to catalog (`Service`, `ProjectType`, plans, pricing),
       jurisdictions (`City`/`State` prose), editorial detail (`BlogPost`, `CaseStudy`,
@@ -158,15 +207,6 @@ Goal: everything the site renders is owner-editable, and the heartbeat tells the
 - [ ] `SeoView` stops silently dropping `og_image`; site-wide default OG image added
 - [ ] `apps/studio_api/admin.py` added (`ContentDraft`, `ContentRevision`, `StudioSession`);
       `cms.InspirationLike` registered
-- [ ] `/healthz` becomes a real readiness probe (DB + Redis, bounded, still bypassing
-      `ALLOWED_HOSTS`)
-- [ ] `DB_POOL_MAX` reconciled across `base.py` (currently 8), the Dockerfile comment and the
-      app spec (both assume 3) — 6 workers × 8 = 48 against a 22-connection cluster
-- [ ] `apps/core/background.py` pools sized so notify/revalidate cannot starve the request
-      thread
-- [ ] Studio throttles raised (`user: 120/min` is reachable while editing; `studio-login:
-      10/hour` locks out after ten typos)
-- [ ] Media endpoint paginated and ordered (currently an unordered `[:500]` over 169+ rows)
 
 **Verification**
 

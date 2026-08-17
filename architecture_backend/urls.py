@@ -2,6 +2,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
+from django.views.generic import RedirectView
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 from apps.accounts.webhooks import ClerkWebhookView
@@ -9,6 +10,14 @@ from apps.core.views import health
 from apps.payments.views import StripeWebhookView
 
 urlpatterns = [
+    # Opening the deployment URL used to land on a bare "Not Found" page, because this
+    # server has routes for /admin/ and /api/ and nothing at the root. The only person
+    # who ever types the bare API host is the owner, and what they want is the admin.
+    #
+    # 302 rather than 301: a permanent redirect is cached by browsers effectively
+    # forever, so if the root is ever given a real page, everyone who visited it before
+    # would keep being bounced to /admin/ with no way to clear it but their own cache.
+    path("", RedirectView.as_view(url="/admin/", permanent=False), name="root"),
     path("admin/", admin.site.urls),
     path("api/health/", health, name="health"),
     path("api/webhooks/clerk/", ClerkWebhookView.as_view(), name="clerk-webhook"),

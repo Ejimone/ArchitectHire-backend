@@ -37,6 +37,12 @@ class StudioView(APIView):
     authentication_classes = [StudioTokenAuthentication]
     permission_classes = [IsStudioStaff]
     parser_classes = [JSONParser, FormParser, MultiPartParser]
+    # Its own bucket, well above the default `user` rate. One canvas render is 4
+    # authenticated calls and every save triggers a full refresh, so ordinary editing —
+    # a few edits a minute — runs into 120/min in a couple of minutes and starts
+    # returning 429s to the one person the tool exists for. The limit still exists;
+    # it is set for an editor at a keyboard rather than for a public API client.
+    throttle_scope = "studio"
 
     def handle_exception(self, exc):
         if isinstance(exc, DraftError):

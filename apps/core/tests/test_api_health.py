@@ -1,3 +1,6 @@
+"""The deep `/api/health/` check, which humans read. `/healthz` — the platform probe —
+is tested in test_healthz_probe.py."""
+
 import pytest
 
 from apps.core import views as core_views

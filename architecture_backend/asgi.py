@@ -30,24 +30,34 @@ def websocket_application():
 
 
 async def http_application(scope, receive, send):
-    """Django, behind an instant liveness endpoint.
+    """Django, behind a health endpoint that cannot be starved by request traffic.
 
-    `/healthz` answers on the event loop itself — before ALLOWED_HOSTS validation and
-    before Django's single sync thread, both of which have taken the app down when a
-    platform health prober met them: the prober's Host header is the container IP
-    (DisallowedHost → 400), and under a request burst the sync queue starved the probe
-    until the platform killed a perfectly healthy container. Point HTTP health checks
-    here; `/api/health/` remains the deep check (database round trip) for humans.
+    `/healthz` answers on the event loop — before ALLOWED_HOSTS validation and before
+    Django's single sync thread, both of which have taken the app down when a platform
+    health prober met them: the prober's Host header is the container IP (DisallowedHost
+    → 400), and under a request burst the sync queue starved the probe until the platform
+    killed a perfectly healthy container.
+
+    It used to return a literal 200 and nothing else, which meant the reverse was also
+    true: a container whose connection pool had died — handing out dead connections so
+    that every real request failed with PoolTimeout — still reported itself healthy and
+    kept taking traffic. The probe now actually checks, on its own thread so it still
+    cannot queue behind request work. See `apps.core.health`.
+
+    `/api/health/` remains the fuller, human-facing check.
     """
     if scope["type"] == "http" and scope["path"] in ("/healthz", "/healthz/"):
+        from apps.core.health import probe
+
+        status, body = await probe()
         await send(
             {
                 "type": "http.response.start",
-                "status": 200,
+                "status": status,
                 "headers": [(b"content-type", b"text/plain"), (b"cache-control", b"no-store")],
             }
         )
-        await send({"type": "http.response.body", "body": b"ok"})
+        await send({"type": "http.response.body", "body": body})
         return
     await django_asgi_app(scope, receive, send)
 

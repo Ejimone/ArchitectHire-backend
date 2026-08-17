@@ -42,8 +42,11 @@ EXPOSE 8000
 # shared thread per worker (asgiref thread_sensitive), so each worker really
 # handles one HTTP request at a time; websockets are what the async loop
 # buys us. 6 workers (~650MB) on the 1GB instance = 6 concurrent sync
-# requests with headroom; DB_POOL_MAX=3 in the app spec keeps 6 workers
-# within the Postgres cluster's 22-connection cap (6 x 3 = 18).
+# requests with headroom; DB_POOL_MAX now *defaults* to 3 (settings/base.py)
+# so 6 workers stay within the Postgres cluster's 22-connection cap
+# (6 x 3 = 18, leaving 4 for migrations and the console). That default used to
+# be 8 — sized for the 2 workers this line had before — which is 48 against a
+# cap of 22 unless the app spec happened to override it.
 # Deliberately no --max-requests: gunicorn's counter only sees HTTP requests, but
 # these workers also hold every live WebSocket, so a recycle force-drops half the
 # connected users, each of whom reconnects and triggers a full router.refresh().

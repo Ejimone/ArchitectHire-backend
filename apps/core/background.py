@@ -28,9 +28,19 @@ from django.db import connections, transaction
 
 logger = logging.getLogger(__name__)
 
-# 4 is sized against the psycopg pool (max_size=20) — background threads must never be
-# able to starve request threads of connections.
-NOTIFY_POOL = ThreadPoolExecutor(max_workers=4, thread_name_prefix="ah-notify")
+# Sized *from* the psycopg pool, not guessed against it. Every job here opens a database
+# connection, so this width and `DB_POOL_MAX` are one number in two places — and they had
+# already drifted apart: this was a flat 4 justified by a comment claiming max_size=20,
+# while the real default fell to 3. Four notify threads against a pool of three means the
+# background work can hold every connection a worker has and the request thread waits out
+# `timeout` for one, which reads as an unexplained 10-second stall.
+#
+# Leaving one connection for the request thread is the whole rule; the `max(1, ...)`
+# only guards a deployment that pins DB_POOL_MAX to 1.
+NOTIFY_POOL = ThreadPoolExecutor(
+    max_workers=max(1, settings.DATABASES["default"]["OPTIONS"]["pool"]["max_size"] - 1),
+    thread_name_prefix="ah-notify",
+)
 # Serial: the flush sleeps through the debounce window and one purge at a time is
 # exactly what we want anyway.
 REVALIDATE_POOL = ThreadPoolExecutor(max_workers=1, thread_name_prefix="ah-revalidate")
