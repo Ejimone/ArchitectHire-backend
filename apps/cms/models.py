@@ -84,9 +84,27 @@ class MediaAsset(TimeStampedModel):
     image = ProcessedImageField(upload_to="cms/slots/", blank=True)
     alt_text = models.CharField(max_length=255, blank=True)
     notes = models.CharField(max_length=255, blank=True, help_text="Where this image appears")
+    credit = models.CharField(
+        max_length=255,
+        blank=True,
+        help_text=(
+            "Where this image came from. Set automatically for seeded stock photography; "
+            "left blank for the agency's own work. Clear it when you replace the image."
+        ),
+    )
 
     def __str__(self):
         return self.slot_key
+
+    @property
+    def is_seeded(self) -> bool:
+        """True while this slot still holds a stock placeholder rather than real work.
+
+        The seeded set exists so the site is never a wireframe, not because these are the
+        right pictures — so the admin needs to be able to show, at a glance, which slots
+        are still waiting for the agency's own photography.
+        """
+        return bool(self.image) and bool(self.credit)
 
 
 class NavGroup(OrderableModel, TimeStampedModel):

@@ -11,6 +11,12 @@ Per-user slots (chat avatars, matched-architect photos keyed by DB ids) are
 intentionally absent: they render from live account data, not admin uploads.
 """
 
+import json
+from pathlib import Path
+
+from django.conf import settings
+from django.core.files import File
+
 from apps.catalog.models import ProjectType
 from apps.cms.models import CaseCard, HeroCarouselSlide, MediaAsset, Persona, Testimonial
 from apps.jurisdictions.models import City
@@ -117,6 +123,50 @@ def expected_media_slots() -> list[tuple[str, str]]:
             )
 
     return slots
+
+
+#: Committed stock imagery, one file per slot, written by `scripts/fetch_seed_images.py`.
+#: Committed rather than fetched at deploy time so that having *any* imagery never depends
+#: on a third-party API being reachable or an API key being present — the site rendering as
+#: a wireframe is the failure this whole set exists to prevent.
+SEED_IMAGE_DIR = Path(settings.BASE_DIR) / "seeds" / "media"
+SEED_IMAGE_MANIFEST = SEED_IMAGE_DIR / "manifest.json"
+
+
+def attach_seed_images(*, overwrite: bool = False) -> tuple[int, int]:
+    """Fill empty slots from `seeds/media/`. Returns `(filled, skipped)`.
+
+    Only ever writes into a slot with **no image**, unless `overwrite` is asked for
+    explicitly: once the owner has uploaded their own photograph, a later `seed --all`
+    must not quietly put the stock placeholder back.
+    """
+    if not SEED_IMAGE_MANIFEST.exists():
+        return (0, 0)
+
+    manifest = json.loads(SEED_IMAGE_MANIFEST.read_text())
+    filled = skipped = 0
+
+    for slot_key, entry in manifest.items():
+        asset = MediaAsset.objects.filter(slot_key=slot_key).first()
+        if asset is None:
+            continue
+        if asset.image and not overwrite:
+            skipped += 1
+            continue
+        source = SEED_IMAGE_DIR / entry["file"]
+        if not source.exists():
+            continue
+
+        # `save(save=False)` then an explicit `.save()`, so the row is written once and
+        # the post-save signals (cache bump, frontend purge) fire exactly once too.
+        asset.image.save(entry["file"], File(source.open("rb")), save=False)
+        asset.credit = entry.get("credit", "")
+        if not asset.alt_text:
+            asset.alt_text = entry.get("alt", "") or asset.notes
+        asset.save()
+        filled += 1
+
+    return (filled, skipped)
 
 
 def sync_media_slots() -> tuple[int, int]:

@@ -1006,17 +1006,27 @@ class Command(BaseCommand):
         self.stdout.write(f"  providers: {Discipline.objects.count()} disciplines")
 
     def seed_media(self):
-        """One MediaAsset row per image slot on the site, so the owner uploads
-        into a labeled row instead of typing slot keys. Never touches images."""
+        """One MediaAsset row per image slot, then stock imagery into the empty ones.
+
+        Filling matters as much as creating. An empty inventory is what made the site
+        render as a grid of crosshatch placeholders on every deploy; the committed set in
+        `seeds/media/` means a fresh environment comes up looking finished. Slots the
+        owner has already filled are never overwritten.
+        """
         from apps.cms.models import MediaAsset
-        from apps.cms.slots import expected_media_slots, sync_media_slots
+        from apps.cms.slots import attach_seed_images, expected_media_slots, sync_media_slots
 
         created, pruned = sync_media_slots()
         # Refresh the where-this-appears notes on rows that predate a wording change.
         for slot_key, notes in expected_media_slots():
             MediaAsset.objects.filter(slot_key=slot_key).exclude(notes=notes).update(notes=notes)
+
+        filled, kept = attach_seed_images()
+        total = MediaAsset.objects.count()
+        empty = MediaAsset.objects.filter(image="").count()
         self.stdout.write(
-            f"  media: {MediaAsset.objects.count()} slots ({created} new, {pruned} pruned)"
+            f"  media: {total} slots ({created} new, {pruned} pruned) — "
+            f"{filled} seeded, {kept} already had an image, {empty} still empty"
         )
 
     def seed_payments(self):

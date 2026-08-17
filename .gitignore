@@ -6,7 +6,11 @@ db.sqlite3
 *.sqlite3
 .env
 staticfiles/
-media/
+# Anchored to the repo root on purpose. This is Django's MEDIA_ROOT — local uploads,
+# never committed. Unanchored (`media/`) it also swallowed `seeds/media/`, which is the
+# opposite case: committed stock imagery that has to ship so a fresh deploy renders a
+# finished site rather than a grid of empty placeholders.
+/media/
 .pytest_cache/
 .coverage
 htmlcov/

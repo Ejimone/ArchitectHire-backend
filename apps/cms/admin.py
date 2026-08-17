@@ -249,10 +249,18 @@ class MediaAssetAdmin(StudioModelAdmin):
     """Rows are auto-created (one per image slot on the site) — the owner just
     opens a row and uploads. `notes` says where the image appears."""
 
-    list_display = ["preview", "notes", "slot_key", "alt_text"]
-    list_filter = [("image", admin.EmptyFieldListFilter)]
+    list_display = ["preview", "notes", "slot_key", "alt_text", "source"]
+    # `credit` is set only on seeded stock, so filtering on it empty/not-empty is the
+    # "which slots still need our own photography?" question the owner actually asks.
+    list_filter = [("image", admin.EmptyFieldListFilter), ("credit", admin.EmptyFieldListFilter)]
     search_fields = ["slot_key", "alt_text", "notes"]
-    fields = ["notes", "slot_key", "image", "alt_text"]
+    fields = ["notes", "slot_key", "image", "alt_text", "credit"]
+
+    @admin.display(description="Source")
+    def source(self, obj):
+        if not obj.image:
+            return "— empty —"
+        return obj.credit or "Own photography"
 
     preview = thumbnail_display()
 
