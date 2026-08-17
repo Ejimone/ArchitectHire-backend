@@ -41,6 +41,20 @@ _SLUG_BY_TAG = {
 }
 _PAGE_TAG_PREFIX = "cms:page:"
 
+# Tags whose endpoints hold no server-side payload cache at all. `BlogListView`,
+# `BlogDetailView` and the case-study views are plain DRF generics, not
+# `CachedContentView` subclasses — they read the database on every request, so there is
+# nothing here for a write to invalidate.
+#
+# Naming them matters because the fallback for an unrecognised tag is "purge everything",
+# i.e. bump the global epoch. That was throwing away every cached page payload on the site
+# each time a blog post was saved, buying nothing and forcing a cold rebuild of all of
+# them — a single editing session could re-create the whole-site slowness by itself. The
+# frontend still gets the tags verbatim through `schedule_ping`; this only governs the
+# backend's own cache.
+_UNCACHED_TAGS = frozenset({"cms:blog", "cms:cases"})
+_UNCACHED_TAG_PREFIXES = ("cms:blog:", "cms:case:")
+
 
 def _counter(key: str) -> int:
     version = cache.get(key)
@@ -91,6 +105,8 @@ def slugs_for_tags(tags) -> set[str] | None:
             slugs.add(tag[len(_PAGE_TAG_PREFIX) :])
         elif tag in _SLUG_BY_TAG:
             slugs.add(_SLUG_BY_TAG[tag])
+        elif tag in _UNCACHED_TAGS or tag.startswith(_UNCACHED_TAG_PREFIXES):
+            continue  # nothing cached behind it — see the note on `_UNCACHED_TAGS`
         else:
             return None
     return slugs

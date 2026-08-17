@@ -8,7 +8,7 @@ allowlist in `drafts.resolve_model`, not by the URL pattern.
 
 from django.urls import path, re_path
 
-from . import views
+from . import views, views_posts
 
 app_name = "studio_api"
 
@@ -30,6 +30,23 @@ urlpatterns = [
         r"^rows/(?P<model_label>[\w.]+)/(?P<pk>-?\d+)/$",
         views.RowDetailView.as_view(),
         name="row-detail",
+    ),
+    # Blog authoring. `categories/` and `authors/` sit above `<int:pk>/` for readability
+    # only — a word never matches `<int:>`, so the order is not load-bearing.
+    path("posts/", views_posts.PostListView.as_view(), name="posts"),
+    path("posts/categories/", views_posts.CategoryCreateView.as_view(), name="post-categories"),
+    path("posts/authors/", views_posts.AuthorCreateView.as_view(), name="post-authors"),
+    path("posts/<int:pk>/", views_posts.PostDetailView.as_view(), name="post-detail"),
+    path("posts/<int:pk>/publish/", views_posts.PostPublishView.as_view(), name="post-publish"),
+    path(
+        "posts/<int:pk>/unpublish/",
+        views_posts.PostUnpublishView.as_view(),
+        name="post-unpublish",
+    ),
+    path(
+        "posts/<int:pk>/duplicate/",
+        views_posts.PostDuplicateView.as_view(),
+        name="post-duplicate",
     ),
     path("media/", views.MediaView.as_view(), name="media"),
     path("media/sync/", views.MediaSyncView.as_view(), name="media-sync"),

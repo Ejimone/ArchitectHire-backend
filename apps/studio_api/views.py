@@ -17,6 +17,7 @@ from rest_framework.views import APIView
 from apps.cms.compose import BLOCK_KEY_BY_LABEL, BLOCK_MODELS, compose_page
 from apps.cms.models import CopyBlock, MediaAsset, PageSEO
 from apps.cms.slots import sync_media_slots
+from apps.core.images import ProcessedImageField, process_image
 from apps.core.scopes import is_valid_scope, validate_slot_key
 from apps.studio.pages import all_pages, route_for
 
@@ -455,6 +456,10 @@ class MediaView(StudioView):
         # An unpublished upload leaves an orphaned file, which is cheap — a published
         # slot pointing at a file nobody wrote would be a broken image on the live site.
         field = MediaAsset._meta.get_field("image")
+        # Same reason as `UploadView`: writing to storage directly bypasses
+        # `ProcessedImageField.pre_save`, so the normalisation has to be applied by hand.
+        if isinstance(field, ProcessedImageField):
+            upload = process_image(upload, max_edge=field.max_edge, to_format=field.to_format)
         name = field.storage.save(field.generate_filename(asset, upload.name), upload)
 
         payload = {"image": name}
@@ -488,7 +493,7 @@ class UploadView(StudioView):
         if not upload:
             return Response({"detail": "A file is required."}, status=status.HTTP_400_BAD_REQUEST)
 
-        model = engine.resolve_model(model_label)
+        model = engine.resolve_upload_model(model_label)
         try:
             field = model._meta.get_field(field_name)
         except FieldDoesNotExist:
@@ -501,6 +506,14 @@ class UploadView(StudioView):
                 {"detail": f"{field_name} does not hold a file."},
                 status=status.HTTP_400_BAD_REQUEST,
             )
+
+        # This path writes to storage itself rather than through `Model.save`, so it never
+        # reaches `ProcessedImageField.pre_save` — the resize, EXIF strip and re-encode
+        # would be skipped and the untouched original would be the file Spaces serves.
+        # Apply the same transform here so an image uploaded from the studio is identical
+        # to one uploaded from the admin.
+        if isinstance(field, ProcessedImageField):
+            upload = process_image(upload, max_edge=field.max_edge, to_format=field.to_format)
 
         # `generate_filename` needs an instance for `upload_to` callables; a bare one is
         # enough because every `upload_to` in the CMS is a static path.

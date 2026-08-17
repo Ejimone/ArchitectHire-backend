@@ -33,16 +33,30 @@ CHROME_MODELS = [
 
 EDITABLE_LABELS = frozenset(list(BLOCK_MODELS) + CHROME_MODELS)
 
+# Models the Studio may store an image *for*, which is a wider set than the models it may
+# stage row edits on. Blog posts are written through `views_posts`, not through the draft
+# queue — but their hero and in-body images still arrive by the one upload endpoint, and
+# an upload could not be staged anyway: a file is on disk or it is not.
+UPLOAD_LABELS = EDITABLE_LABELS | frozenset(["cms.blogpost", "cms.blogcontentblock", "cms.author"])
+
 
 class DraftError(Exception):
     """A staged edit that cannot be applied — surfaced to the client as a 400."""
 
 
-def resolve_model(model_label: str):
+def _resolve(model_label: str, allowed: frozenset):
     label = (model_label or "").lower()
-    if label not in EDITABLE_LABELS:
+    if label not in allowed:
         raise DraftError(f"{model_label} is not editable from the Studio.")
     return django_apps.get_model(label)
+
+
+def resolve_model(model_label: str):
+    return _resolve(model_label, EDITABLE_LABELS)
+
+
+def resolve_upload_model(model_label: str):
+    return _resolve(model_label, UPLOAD_LABELS)
 
 
 def media_scope(slot_key: str) -> str:
