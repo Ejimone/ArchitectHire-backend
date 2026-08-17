@@ -63,16 +63,26 @@ EXPOSE 8000
 # `run_command`. The spec used to set one pinning `--workers 2`, which silently
 # overrode this line — so the app ran 2 workers no matter what the Dockerfile
 # said. If concurrency ever looks wrong again, check the spec before this file.
-# Deliberately no --max-requests: gunicorn's counter only sees HTTP requests, but
-# these workers also hold every live WebSocket, so a recycle force-drops half the
-# connected users, each of whom reconnects and triggers a full router.refresh().
-# That amplification costs far more than the speculative heap growth the recycling
-# guarded against, which the 45% headroom above already absorbs.
+# --max-requests, reversing an earlier decision, because the constraint changed.
+#
+# It was removed on the reasoning that recycling force-drops live WebSockets. True,
+# and with one worker it drops all of them. But on a 512MB instance there is no
+# "45% headroom to absorb heap growth" to trade against: MEASURED, a worker loads
+# at ~122MB and grows to ~300MB serving requests, because CPython returns freed
+# arenas to the OS only grudgingly. Without recycling that growth is one-way and
+# ends in an OOM loop -- which is exactly what 512MB did (healthy ~100s, down ~80s).
+#
+# So: recycle, and let the frontend reconnect. lib/realtime/manager.ts already
+# reconnects with exponential backoff and jitter and replays from its send queue,
+# so a dropped socket is a blip rather than a lost session. Jitter keeps a future
+# multi-worker deployment from recycling every worker at once.
 # --graceful-timeout gives uvicorn time to send real close frames on shutdown, so
 # clients see a clean close instead of an opaque 1006.
 CMD ["gunicorn", "architecture_backend.asgi:application", \
      "-k", "uvicorn_worker.UvicornWorker", \
      "-b", "0.0.0.0:8000", \
      "--workers", "1", \
+     "--max-requests", "400", \
+     "--max-requests-jitter", "100", \
      "--graceful-timeout", "30", \
      "--access-logfile", "-"]
