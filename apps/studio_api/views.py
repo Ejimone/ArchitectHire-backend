@@ -32,6 +32,7 @@ from .drafts import CHROME_MODELS, DraftError
 from .fields import field_schema, snapshot
 from .models import ContentDraft, ContentRevision, StudioSession
 from .permissions import IsStudioStaff
+from .registry import BY_LABEL, SPECS
 from .uploads import UploadRejected, validate_upload
 
 DRAFT = "draft"
@@ -299,6 +300,31 @@ def build_schema() -> dict:
         }
         for label in labels
     }
+    # Collections (registry.py) carry the extra facts a generic record form needs.
+    for spec in SPECS:
+        fields = field_schema(spec.model)
+        for entry in fields:
+            if entry["name"] in spec.json_shapes:
+                entry["json_shape"] = spec.json_shapes[entry["name"]]
+            if spec.readonly:
+                entry["readonly"] = True
+        models_[spec.label] = {
+            "collection": None,
+            "verbose_name": spec.verbose,
+            "fields": fields,
+            "record": {
+                "name": spec.name,
+                "section": spec.section,
+                "title_field": spec.title_field,
+                "search_fields": list(spec.search_fields),
+                "parent": spec.parent,
+                "children": list(spec.children),
+                "orderable": spec.orderable,
+                "publishable": spec.publishable,
+                "readonly": spec.readonly,
+                "page_prefix": spec.page_prefix,
+            },
+        }
     digest = hashlib.sha1(json.dumps(models_, sort_keys=True).encode()).hexdigest()[:12]
     return {"version": digest, "models": models_}
 
@@ -719,12 +745,33 @@ class QueueView(StudioView):
 
 
 def _selected_drafts(request):
-    """The drafts a publish/discard call targets: a page, a set of ids, or everything."""
+    """The drafts a publish/discard call targets: a page, a set of ids, one record (with
+    its children), or everything."""
     queryset = ContentDraft.objects.all()
     if scope := request.data.get("scope"):
         queryset = queryset.filter(scope=scope)
     if ids := request.data.get("ids"):
         queryset = queryset.filter(pk__in=ids)
+    label = (request.data.get("model_label") or "").lower()
+    object_id = request.data.get("object_id")
+    if label and object_id is not None:
+        object_id = int(object_id)
+        selection = models.Q(model_label=label, object_id=object_id)
+        if object_id < 0:
+            selection = models.Q(model_label=label, pk=-object_id, op=ContentDraft.Op.CREATE)
+        spec = BY_LABEL.get(label)
+        for child_label in spec.children if spec else ():
+            child = BY_LABEL[child_label]
+            live_ids = child.model._default_manager.filter(**{child.parent: object_id}).values_list(
+                "pk", flat=True
+            )
+            selection |= models.Q(model_label=child_label, object_id__in=list(live_ids))
+            selection |= models.Q(
+                model_label=child_label,
+                op=ContentDraft.Op.CREATE,
+                **{f"payload__{child.parent}": object_id},
+            )
+        queryset = queryset.filter(selection)
     return queryset
 
 

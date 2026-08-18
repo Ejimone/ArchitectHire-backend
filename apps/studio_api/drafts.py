@@ -17,6 +17,7 @@ from apps.cms.serializers import MediaAssetSerializer, PageSEOSerializer
 
 from .fields import assign, editable_fields, snapshot
 from .models import ContentDraft, ContentRevision
+from .registry import BY_LABEL, WRITABLE_COLLECTION_LABELS, image_labels, parent_of
 
 # Site-chrome and page-furniture models the Studio may edit alongside the 14 block
 # types. An allowlist rather than "any model": `model_label` arrives from the client.
@@ -32,21 +33,28 @@ CHROME_MODELS = [
     "cms.sitesettings",
 ]
 
-EDITABLE_LABELS = frozenset(list(BLOCK_MODELS) + CHROME_MODELS)
+# Blocks, chrome, and every writable collection in `registry.py` (case studies, jobs,
+# the catalog, the jurisdiction prose, …). Read-only collections (contact submissions,
+# newsletter subscribers) are deliberately absent: `resolve_model` refuses to write them.
+EDITABLE_LABELS = frozenset(list(BLOCK_MODELS) + CHROME_MODELS) | WRITABLE_COLLECTION_LABELS
 
 # Models the Studio may store an image *for*, which is a wider set than the models it may
 # stage row edits on. Blog posts are written through `views_posts`, not through the draft
 # queue — but their hero and in-body images still arrive by the one upload endpoint, and
 # an upload could not be staged anyway: a file is on disk or it is not.
-UPLOAD_LABELS = EDITABLE_LABELS | frozenset(
-    ["cms.blogpost", "cms.blogcontentblock", "cms.author", "cms.pageseo"]
+UPLOAD_LABELS = (
+    EDITABLE_LABELS
+    | frozenset(["cms.blogpost", "cms.blogcontentblock", "cms.author", "cms.pageseo"])
+    | image_labels()
 )
 
-# Which rows a new row is ordered among. Blocks share a page and a group; nav items and
-# footer links share a parent. Anything orderable and not listed here is a flat list.
+# Which rows a new row is ordered among. Blocks share a page and a group; nav items,
+# footer links and every child collection share a parent. Anything orderable and not
+# listed here is a flat list.
 ORDER_WITHIN = {
     "cms.navitem": ("group",),
     "cms.footerlink": ("column",),
+    **{label: (spec.parent,) for label, spec in BY_LABEL.items() if spec.parent},
 }
 
 
@@ -97,6 +105,23 @@ def scope_for(model_label: str, data: dict, obj=None) -> str:
         return value("page_key") or ""
     if model_label == "cms.mediaasset":
         return media_scope(value("slot_key") or "")
+    spec = BY_LABEL.get(model_label)
+    if spec is not None:
+        if spec.parent:
+            # A child's edits queue under its parent's page — a gallery image belongs to
+            # its case study, a policy section to its policy.
+            parent_spec = parent_of(spec)
+            parent_ref = value(spec.parent)
+            if isinstance(parent_ref, models.Model):
+                parent = parent_ref  # read off a live row: the FK descriptor gives the instance
+            elif parent_spec and parent_ref not in (None, ""):
+                parent = parent_spec.model._default_manager.filter(pk=parent_ref).first()
+            else:
+                parent = None
+            if parent is None:
+                return ""
+            return parent_spec.scope(lambda name: getattr(parent, name, ""))
+        return spec.scope(value)
     return ""
 
 
@@ -375,6 +400,19 @@ def _apply(draft, changes):
     before = snapshot(obj)
 
     if draft.op == ContentDraft.Op.DELETE:
+        # Children go with their parent (the FK cascades), so record each of them as its
+        # own delete *before* the parent's: `revert` walks the changes in reverse, which
+        # recreates the parent first and then every child that pointed at it.
+        for child_label, child in _children_of(draft.model_label, obj):
+            changes.append(
+                {
+                    "model_label": child_label,
+                    "object_id": child.pk,
+                    "op": draft.op,
+                    "before": snapshot(child),
+                    "after": None,
+                }
+            )
         obj.delete()  # per-row, so post_delete fires and the caches purge
         changes.append(
             {
@@ -398,6 +436,19 @@ def _apply(draft, changes):
             "after": snapshot(obj),
         }
     )
+
+
+def _children_of(model_label: str, obj):
+    """`(child_label, row)` for every child row of a collection record."""
+    spec = BY_LABEL.get(model_label)
+    if spec is None:
+        return []
+    rows = []
+    for child_label in spec.children:
+        child_spec = BY_LABEL[child_label]
+        queryset = child_spec.model._default_manager.filter(**{child_spec.parent: obj.pk})
+        rows.extend((child_label, child) for child in queryset.order_by("pk"))
+    return rows
 
 
 # Creates first so a row exists for anything that references it, deletes last so a

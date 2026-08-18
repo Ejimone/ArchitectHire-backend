@@ -8,7 +8,7 @@ allowlist in `drafts.resolve_model`, not by the URL pattern.
 
 from django.urls import path, re_path
 
-from . import views, views_posts
+from . import views, views_posts, views_records
 
 app_name = "studio_api"
 
@@ -47,6 +47,14 @@ urlpatterns = [
         "posts/<int:pk>/duplicate/",
         views_posts.PostDuplicateView.as_view(),
         name="post-duplicate",
+    ),
+    # Collections: every non-block record type (case studies, jobs, catalog, cities…).
+    path("records/", views_records.RecordsIndexView.as_view(), name="records"),
+    path("records/<str:label>/", views_records.RecordListView.as_view(), name="record-list"),
+    re_path(
+        r"^records/(?P<label>[\w.-]+)/(?P<pk>-?\d+)/$",
+        views_records.RecordDetailView.as_view(),
+        name="record-detail",
     ),
     path("media/", views.MediaView.as_view(), name="media"),
     # `sync/` before the slot-key catch-all: `<path:>` would otherwise swallow it.
