@@ -12,7 +12,15 @@ ALLOWED_HOSTS = env(
 )
 
 if not CORS_ALLOWED_ORIGINS:
-    CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "http://127.0.0.1:3000"]
+    # 3000 = the site, 3001 = the studio. The studio's canvas fetches search
+    # suggestions from the browser, and its direct upload + WebSocket paths carry a
+    # signed ticket in the browser — all of them are cross-origin from the studio.
+    CORS_ALLOWED_ORIGINS = [
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "http://localhost:3001",
+        "http://127.0.0.1:3001",
+    ]
 
 # Plain static storage in dev (no manifest hashing).
 STORAGES["staticfiles"] = {"BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage"}
