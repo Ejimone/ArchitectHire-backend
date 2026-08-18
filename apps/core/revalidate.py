@@ -124,20 +124,112 @@ def schedule_ping(tags=()) -> bool:
     return True
 
 
-def _flush_after_debounce() -> bool:
-    """Wait out the debounce window, then send one ping carrying everything that piled
-    up while we waited. Returns True if a ping went out."""
-    time.sleep(_debounce_seconds())
-
-    client = get_redis_connection("default")
+def _drain(client) -> list[str] | None:
+    """Take every pending tag off the set. None means "nothing pending"; the catch-all
+    list means "more than MAX_TAGS — purge everything"."""
     # Release the claim before draining, never after. A writer landing in that gap
     # claims a second flush which then finds an empty set — a wasted wake-up. The other
     # order drops the writer's tags with nothing scheduled to carry them.
     client.delete(_key(CLAIM_KEY))
     drained = client.spop(_key(PENDING_TAGS_KEY), MAX_TAGS + 1) or []
     if not drained:
-        return False
+        return None
     if len(drained) > MAX_TAGS:
         client.delete(_key(PENDING_TAGS_KEY))
-        return ping_frontend(CATCH_ALL_TAGS)
-    return ping_frontend(tag.decode() for tag in drained)
+        return list(CATCH_ALL_TAGS)
+    return sorted(tag.decode() for tag in drained)
+
+
+def _flush_after_debounce() -> bool:
+    """Wait out the debounce window, then send one ping carrying everything that piled
+    up while we waited. Returns True if a ping went out."""
+    time.sleep(_debounce_seconds())
+    tags = _drain(get_redis_connection("default"))
+    if tags is None:
+        return False
+    started = time.monotonic()
+    ok = ping_frontend(tags)
+    _announce(ok, tags, started)
+    return ok
+
+
+def _announce(ok: bool, tags, started: float) -> None:
+    """Tell the studio's editors the site cache was (or was not) purged. Best effort."""
+    from apps.studio_api.events import emit
+
+    emit(
+        {
+            "type": "site.purged",
+            "ok": ok,
+            "ms": round((time.monotonic() - started) * 1000),
+            "tags": sorted(tags),
+        }
+    )
+
+
+def ping_now(tags=()) -> dict:
+    """Purge synchronously — for a publish, where the editor is waiting to be told.
+
+    Sends `tags` together with anything a debounced flush had queued (so no earlier
+    write is left behind), then reports `{ok, ms, tags}`. Costs at most
+    `TIMEOUT_SECONDS` on the request that called it, which is the point: "Published —
+    site cache purged in 340 ms" is a fact, not a hope.
+    """
+    if not settings.FRONTEND_REVALIDATE_URL:
+        return {"ok": False, "ms": 0, "tags": sorted(tags), "reason": "not-configured"}
+    pending = _drain(get_redis_connection("default")) or []
+    if pending == list(CATCH_ALL_TAGS):
+        purge = list(CATCH_ALL_TAGS)
+    else:
+        purge = sorted(set(pending) | set(tags)) or list(CATCH_ALL_TAGS)
+        if len(purge) > MAX_TAGS:
+            purge = list(CATCH_ALL_TAGS)
+    started = time.monotonic()
+    ok = ping_frontend(purge)
+    result = {"ok": ok, "ms": round((time.monotonic() - started) * 1000), "tags": purge}
+    _announce(ok, purge, started)
+    return result
+
+
+#: How many times, and how far apart, `warm_routes` re-fetches a page waiting for the
+#: frontend to have rebuilt it. Vercel answers STALE from cache while it regenerates in
+#: the background; the next hit after that is the fresh page.
+WARM_ATTEMPTS = 6
+WARM_INTERVAL_SECONDS = 1.5
+
+
+def warm_routes(routes) -> dict:
+    """Fetch each purged route on the live site until it stops answering STALE, then tell
+    the studio. Runs on the revalidate pool; never raises."""
+    base = (settings.FRONTEND_URL or "").rstrip("/")
+    routes = [r for r in dict.fromkeys(routes) if r]
+    if not base or not routes:
+        return {"routes": [], "ms": 0}
+    started = time.monotonic()
+    warmed = []
+    for route in routes:
+        for _attempt in range(WARM_ATTEMPTS):
+            state = _fetch_cache_state(f"{base}{route}")
+            if state not in ("STALE", "ERROR"):
+                warmed.append(route)
+                break
+            time.sleep(WARM_INTERVAL_SECONDS)
+    result = {"routes": warmed, "ms": round((time.monotonic() - started) * 1000)}
+    from apps.studio_api.events import emit
+
+    emit({"type": "site.warmed", **result, "requested": routes})
+    return result
+
+
+def _fetch_cache_state(url: str) -> str:
+    """The `x-vercel-cache` header of a GET, or ERROR if the fetch failed."""
+    request = urllib.request.Request(url, headers={"user-agent": "architecthire-studio-warm/1"})
+    try:
+        with urllib.request.urlopen(request, timeout=TIMEOUT_SECONDS) as response:
+            return (response.headers.get("x-vercel-cache") or "HIT").upper()
+    except (urllib.error.URLError, TimeoutError, OSError):
+        return "ERROR"
+
+
+def schedule_warm(routes) -> None:
+    run_in_background(REVALIDATE_POOL, "warm", warm_routes, list(routes))

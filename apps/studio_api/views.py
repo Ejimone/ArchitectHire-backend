@@ -23,16 +23,19 @@ from apps.cms.compose import BLOCK_KEY_BY_LABEL, BLOCK_MODELS, compose_page
 from apps.cms.models import CopyBlock, MediaAsset, PageSEO
 from apps.cms.slots import expected_media_slots, sync_media_slots
 from apps.core.images import ProcessedImageField, process_image
+from apps.core.revalidate import ping_now, schedule_warm
 from apps.core.scopes import is_valid_scope, validate_slot_key
 from apps.studio.pages import all_pages, route_for
 
 from . import drafts as engine
-from .authentication import StudioTokenAuthentication
+from .authentication import StudioTokenAuthentication, StudioUploadTicketAuthentication
 from .drafts import CHROME_MODELS, DraftError
+from .events import actor, emit
 from .fields import field_schema, snapshot
 from .models import ContentDraft, ContentRevision, StudioSession
 from .permissions import IsStudioStaff
 from .registry import BY_LABEL, SPECS
+from .tickets import PURPOSES, issue_ticket
 from .uploads import UploadRejected, validate_upload
 
 DRAFT = "draft"
@@ -97,6 +100,9 @@ class StudioView(APIView):
                 payload=payload,
                 user=self.request.user,
             )
+            self.announce(
+                scope=revision.scope, model=model_label, object_id=change["object_id"], op=op
+            )
             return Response(
                 {"mode": LIVE, "object_id": change["object_id"], "revision": revision.pk}
             )
@@ -108,7 +114,9 @@ class StudioView(APIView):
             if draft is None:
                 raise DraftError(f"No pending row {model_label}:{object_id}.")
             if op == ContentDraft.Op.DELETE:
+                scope = draft.scope
                 draft.delete()
+                self.announce(scope=scope, model=model_label, object_id=object_id, op="discarded")
                 return Response({"mode": DRAFT, "object_id": object_id, "op": "discarded"})
             draft = engine.stage_create_edit(draft, payload or {})
         else:
@@ -119,7 +127,12 @@ class StudioView(APIView):
                 payload=payload,
                 user=self.request.user,
             )
+        self.announce(scope=draft.scope, model=model_label, object_id=draft.canvas_id, op=draft.op)
         return Response({"mode": DRAFT, "object_id": draft.canvas_id, "op": draft.op})
+
+    def announce(self, **fields):
+        """Tell the other editors. `client` lets the originating tab ignore its own echo."""
+        emit({"type": "draft.changed", "mode": self.mode, **fields, **actor(self.request)})
 
 
 # ------------------------------------------------------------------------------- auth
@@ -164,6 +177,26 @@ class MeView(StudioView):
                 "email": request.user.email,
                 "name": request.user.display_name,
                 "expires_at": request.auth.expires_at,
+            }
+        )
+
+
+class TicketView(StudioView):
+    """Mint a short-lived, purpose-bound ticket for the browser's two direct paths to
+    Django: large uploads and the WebSocket. See `tickets.py`."""
+
+    def post(self, request):
+        purpose = request.data.get("purpose") or ""
+        if purpose not in PURPOSES:
+            return Response(
+                {"detail": f"purpose must be one of {sorted(PURPOSES)}."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        return Response(
+            {
+                "ticket": issue_ticket(request.auth, purpose),
+                "purpose": purpose,
+                "expires_in": PURPOSES[purpose],
             }
         )
 
@@ -448,7 +481,13 @@ class ReorderView(StudioView):
             for index, row_id in enumerate(ids)
         ]
         if self.mode == LIVE:
-            engine.apply_now_many(items, user=request.user, summary="Reorder")
+            revision = engine.apply_now_many(items, user=request.user, summary="Reorder")
+            self.announce(
+                scope=revision.scope if revision else "",
+                model=model_label,
+                object_id=None,
+                op="reorder",
+            )
         else:
             for item in items:
                 self.write(op=ContentDraft.Op.UPDATE, **item)
@@ -511,6 +550,11 @@ def _store_upload(field, instance, upload):
     return field.storage.save(field.generate_filename(instance, upload.name), upload)
 
 
+#: The upload views also accept a ticket, so the browser can send a photograph straight
+#: to Django instead of through the studio's 4.5 MB proxy.
+UPLOAD_AUTH = [StudioTokenAuthentication, StudioUploadTicketAuthentication]
+
+
 class MediaView(StudioView):
     """The media library, and the upload that fills a slot.
 
@@ -518,6 +562,8 @@ class MediaView(StudioView):
     the canvas can hand back a slot key the inventory has not caught up with yet. The
     key is still validated, so it cannot escape the `<scope>:<slot>` namespace.
     """
+
+    authentication_classes = UPLOAD_AUTH
 
     def get(self, request):
         # Ordered, or the page boundary lands wherever the planner feels like — the same
@@ -600,6 +646,8 @@ class MediaSlotView(StudioView):
     to write its alt text or point it at a photo already in the library.
     """
 
+    authentication_classes = UPLOAD_AUTH
+
     def put(self, request, slot_key=None):
         return self.patch(request, slot_key=slot_key)
 
@@ -667,6 +715,8 @@ class UploadView(StudioView):
     that name onto the field like any other value, which keeps the upload and the edit on
     the same draft/live rails as everything else.
     """
+
+    authentication_classes = UPLOAD_AUTH
 
     def post(self, request):
         model_label = (request.data.get("model_label") or "").lower()
@@ -776,23 +826,53 @@ def _selected_drafts(request):
 
 
 class PublishView(StudioView):
+    """Apply the selected drafts, purge the live site *now*, and say how it went.
+
+    The purge is synchronous on purpose (bounded by the ping's own 3 s timeout): the
+    editor who pressed Publish is waiting to be told the site has it. The debounced,
+    signal-driven ping still runs for everything else. After responding, the published
+    routes are re-fetched in the background so the next visitor gets a warm page and the
+    editors get a `site.warmed` event.
+    """
+
     def post(self, request):
         selected = list(_selected_drafts(request))
+        scopes = sorted({draft.scope for draft in selected})
         revision = engine.publish(selected, user=request.user, scope=request.data.get("scope", ""))
         if revision is None:
-            return Response({"published": 0, "revision": None})
+            return Response({"published": 0, "revision": None, "purge": None})
+        purge = ping_now(getattr(revision, "purge_tags", set()))
+        routes = [route_for(scope) for scope in scopes]
+        schedule_warm(routes)
+        emit(
+            {
+                "type": "published",
+                "scopes": scopes,
+                "revision": revision.pk,
+                "summary": revision.summary,
+                "purge": purge,
+                **actor(request),
+            }
+        )
         return Response(
             {
                 "published": len(selected),
                 "revision": revision.pk,
                 "summary": revision.summary,
+                "purge": purge,
+                "scopes": scopes,
             }
         )
 
 
 class DiscardView(StudioView):
     def post(self, request):
-        return Response({"discarded": engine.discard(_selected_drafts(request))})
+        selected = list(_selected_drafts(request))
+        scopes = sorted({draft.scope for draft in selected})
+        discarded = engine.discard(selected)
+        if discarded:
+            emit({"type": "discarded", "scopes": scopes, "count": discarded, **actor(request)})
+        return Response({"discarded": discarded})
 
 
 class RevisionListView(StudioView):

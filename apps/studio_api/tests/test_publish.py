@@ -70,7 +70,7 @@ class TestPublish:
     def test_publishing_nothing_is_a_no_op(self, studio_client):
         studio_client.post(DISCARD, {}, format="json")
         body = studio_client.post(PUBLISH, {}, format="json").json()
-        assert body == {"published": 0, "revision": None}
+        assert body == {"published": 0, "revision": None, "purge": None}
 
     def test_publish_can_target_specific_drafts(self, studio_client):
         one = CopyBlock.objects.create(scope="landing", key="pub-one", text="a")

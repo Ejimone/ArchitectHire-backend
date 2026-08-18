@@ -13,6 +13,8 @@ from django.urls import path  # noqa: E402
 
 from apps.messaging.consumers import UserConsumer  # noqa: E402
 from apps.messaging.middleware import ClerkAuthMiddleware  # noqa: E402
+from apps.studio_api.consumers import StudioConsumer  # noqa: E402
+from apps.studio_api.middleware import StudioTicketMiddleware  # noqa: E402
 
 
 def websocket_application():
@@ -24,7 +26,13 @@ def websocket_application():
     other would reject every legitimate production handshake.
     """
     return OriginValidator(
-        ClerkAuthMiddleware(URLRouter([path("ws/", UserConsumer.as_asgi())])),
+        URLRouter(
+            [
+                # The studio's socket authenticates with a ticket, not a Clerk JWT.
+                path("ws/studio/", StudioTicketMiddleware(StudioConsumer.as_asgi())),
+                path("ws/", ClerkAuthMiddleware(UserConsumer.as_asgi())),
+            ]
+        ),
         settings.WS_ALLOWED_ORIGINS,
     )
 

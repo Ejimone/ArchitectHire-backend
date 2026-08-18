@@ -14,6 +14,7 @@ from django.utils import timezone
 
 from apps.cms.compose import BLOCK_KEY_BY_LABEL, BLOCK_MODELS, BLOCK_SERIALIZERS
 from apps.cms.serializers import MediaAssetSerializer, PageSEOSerializer
+from apps.core.tags import tags_for
 
 from .fields import assign, editable_fields, snapshot
 from .models import ContentDraft, ContentRevision
@@ -375,14 +376,20 @@ def _resort(payload, touched_collections):
 # --------------------------------------------------------------------------- publish
 
 
-def _apply(draft, changes):
-    """Apply one draft to the live table, recording a before/after pair."""
+def _apply(draft, changes, tags: set | None = None):
+    """Apply one draft to the live table, recording a before/after pair. `tags`, when
+    given, collects the frontend cache tags the writes invalidate."""
     model = resolve_model(draft.model_label)
+
+    def note(obj):
+        if tags is not None:
+            tags.update(tags_for(obj))
 
     if draft.op == ContentDraft.Op.CREATE:
         obj = model()
         assign(obj, draft.payload)
         obj.save()
+        note(obj)
         changes.append(
             {
                 "model_label": draft.model_label,
@@ -400,10 +407,12 @@ def _apply(draft, changes):
     before = snapshot(obj)
 
     if draft.op == ContentDraft.Op.DELETE:
+        note(obj)
         # Children go with their parent (the FK cascades), so record each of them as its
         # own delete *before* the parent's: `revert` walks the changes in reverse, which
         # recreates the parent first and then every child that pointed at it.
         for child_label, child in _children_of(draft.model_label, obj):
+            note(child)
             changes.append(
                 {
                     "model_label": child_label,
@@ -427,6 +436,7 @@ def _apply(draft, changes):
 
     assign(obj, draft.payload)
     obj.save()  # never .update(): post_save is what bumps the cache and pings the site
+    note(obj)
     changes.append(
         {
             "model_label": draft.model_label,
@@ -462,21 +472,26 @@ def publish(drafts, user=None, scope: str = "") -> ContentRevision | None:
     if not drafts:
         return None
 
+    tags: set[str] = set()
     with transaction.atomic():
         changes = []
         for op in _ORDER:
             for draft in [d for d in drafts if d.op == op]:
-                _apply_or_explain(draft, changes)
+                _apply_or_explain(draft, changes, tags)
         ContentDraft.objects.filter(pk__in=[d.pk for d in drafts]).delete()
-        return ContentRevision.objects.create(
+        revision = ContentRevision.objects.create(
             scope=scope,
             summary=_summarise(changes),
             applied_by=user,
             changes=changes,
         )
+    # Not persisted: the caller (PublishView) uses these to purge the site synchronously
+    # and report the result to the editor.
+    revision.purge_tags = tags
+    return revision
 
 
-def _apply_or_explain(draft, changes):
+def _apply_or_explain(draft, changes, tags=None):
     """`_apply`, but a database refusal names the draft instead of surfacing as a 500.
 
     Staging validates what it can (`validate_payload`), but a row can still collide with
@@ -487,7 +502,7 @@ def _apply_or_explain(draft, changes):
         # A savepoint, so the failure does not poison the enclosing transaction before
         # the exception is turned into a message.
         with transaction.atomic():
-            _apply(draft, changes)
+            _apply(draft, changes, tags)
     except (IntegrityError, ValidationError) as exc:
         raise DraftError(
             f"Could not publish {draft.model_label}:{draft.canvas_id} — {exc}. "

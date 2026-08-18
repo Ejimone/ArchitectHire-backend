@@ -10,8 +10,10 @@ proxy, a log line, or `ClerkAuthentication` sharing a header.
 from rest_framework import authentication, exceptions
 
 from .models import StudioSession, hash_token
+from .tickets import redeem_ticket
 
 SCHEME = "studio"
+TICKET_SCHEME = "studioticket"
 
 
 class StudioTokenAuthentication(authentication.BaseAuthentication):
@@ -41,3 +43,26 @@ class StudioTokenAuthentication(authentication.BaseAuthentication):
 
     def authenticate_header(self, request):
         return "Studio"
+
+
+class StudioUploadTicketAuthentication(authentication.BaseAuthentication):
+    """`Authorization: StudioTicket <ticket>` — accepted only by the upload views.
+
+    The browser uploads straight to Django with a ticket minted through the studio's own
+    server (see `tickets.py`), so a photograph never has to squeeze through the 4.5 MB
+    proxy limit. The ticket is purpose-bound: one issued for the WebSocket is refused here.
+    """
+
+    def authenticate(self, request):
+        header = authentication.get_authorization_header(request).decode("latin-1")
+        scheme, _, raw = header.partition(" ")
+        if scheme.lower() != TICKET_SCHEME:
+            return None
+        session = redeem_ticket(raw.strip(), "upload")
+        if session is None:
+            raise exceptions.AuthenticationFailed("Upload ticket is not valid.")
+        request.studio_session = session
+        return (session.user, session)
+
+    def authenticate_header(self, request):
+        return "StudioTicket"
