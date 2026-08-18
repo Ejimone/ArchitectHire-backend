@@ -76,6 +76,22 @@ class SocialLink(OrderableModel, TimeStampedModel):
         return self.platform
 
 
+class SeedRun(models.Model):
+    """Which seed domains have already been loaded into this database.
+
+    `manage.py seed` is a floor, not a sync: it fills an empty database with the design's
+    content and then leaves the owner's edits alone. That needs a durable memory of what
+    has run — a re-run on production (every deploy used to) must not overwrite a headline
+    the owner rewrote in the Studio last week. `--overwrite` ignores these rows on purpose.
+    """
+
+    domain = models.CharField(max_length=40, unique=True)
+    seeded_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.domain
+
+
 class MediaAsset(TimeStampedModel):
     """Named image slot. The design references ~150 slots (see design/image-slot.js);
     each becomes a row here so the owner can swap any image on the site."""
@@ -92,6 +108,12 @@ class MediaAsset(TimeStampedModel):
             "left blank for the agency's own work. Clear it when you replace the image."
         ),
     )
+    # Focal point as fractions of width/height, 0.5/0.5 = centre. Every slot renders
+    # `object-fit: cover` into a box whose shape the design fixed, so a portrait cropped
+    # at the centre loses the face; this lets the editor say where the subject is
+    # instead of re-cropping the file for every box it appears in.
+    focal_x = models.FloatField(default=0.5)
+    focal_y = models.FloatField(default=0.5)
 
     def __str__(self):
         return self.slot_key
@@ -270,6 +292,10 @@ class Persona(ScopedBlock):
     body = models.TextField(blank=True)
     points = models.TextField(blank=True, help_text="One point per line")
     image = ProcessedImageField(upload_to="cms/personas/", blank=True)
+    # What the empty image box says before a photo is uploaded ("ADU collection cover").
+    # The design's placeholder label; without it the site fell back to repeating the
+    # title inside the box, which collided with the card's own headline.
+    image_hint = models.CharField(max_length=120, blank=True)
     cta_label = models.CharField(max_length=64, blank=True)
     cta_href = models.CharField(max_length=255, blank=True)
 

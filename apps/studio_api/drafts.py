@@ -8,13 +8,14 @@ short-cuts the serializer previews a page the site would not render.
 """
 
 from django.apps import apps as django_apps
-from django.db import models, transaction
+from django.core.exceptions import ValidationError
+from django.db import IntegrityError, models, transaction
 from django.utils import timezone
 
 from apps.cms.compose import BLOCK_KEY_BY_LABEL, BLOCK_MODELS, BLOCK_SERIALIZERS
 from apps.cms.serializers import MediaAssetSerializer, PageSEOSerializer
 
-from .fields import assign, snapshot
+from .fields import assign, editable_fields, snapshot
 from .models import ContentDraft, ContentRevision
 
 # Site-chrome and page-furniture models the Studio may edit alongside the 14 block
@@ -37,11 +38,28 @@ EDITABLE_LABELS = frozenset(list(BLOCK_MODELS) + CHROME_MODELS)
 # stage row edits on. Blog posts are written through `views_posts`, not through the draft
 # queue — but their hero and in-body images still arrive by the one upload endpoint, and
 # an upload could not be staged anyway: a file is on disk or it is not.
-UPLOAD_LABELS = EDITABLE_LABELS | frozenset(["cms.blogpost", "cms.blogcontentblock", "cms.author"])
+UPLOAD_LABELS = EDITABLE_LABELS | frozenset(
+    ["cms.blogpost", "cms.blogcontentblock", "cms.author", "cms.pageseo"]
+)
+
+# Which rows a new row is ordered among. Blocks share a page and a group; nav items and
+# footer links share a parent. Anything orderable and not listed here is a flat list.
+ORDER_WITHIN = {
+    "cms.navitem": ("group",),
+    "cms.footerlink": ("column",),
+}
 
 
 class DraftError(Exception):
-    """A staged edit that cannot be applied — surfaced to the client as a 400."""
+    """A staged edit that cannot be applied — surfaced to the client as a 400.
+
+    `errors` maps field name → messages when the problem is a validation failure, so the
+    inspector can mark the offending input rather than show one blanket message.
+    """
+
+    def __init__(self, message: str, errors: dict | None = None):
+        super().__init__(message)
+        self.errors = errors or {}
 
 
 def _resolve(model_label: str, allowed: frozenset):
@@ -94,10 +112,12 @@ def stage(*, model_label: str, op: str, object_id=None, payload=None, user=None)
 
     if op == ContentDraft.Op.CREATE:
         scope = scope_for(model_label, payload)
+        full = {**_append_position(model, scope, payload), **payload}
+        validate_payload(model, full, base=None)
         draft = ContentDraft(
             model_label=model_label,
             op=op,
-            payload={**_append_position(model, scope, payload), **payload},
+            payload=full,
             scope=scope,
             created_by=user,
         )
@@ -121,9 +141,47 @@ def stage(*, model_label: str, op: str, object_id=None, payload=None, user=None)
     else:
         existing.op = op
         existing.payload = {**existing.payload, **payload}
+        validate_payload(model, existing.payload, base=obj)
     existing.scope = scope_for(model_label, existing.payload, obj)
     existing.save()
     return existing
+
+
+def validate_payload(model, payload: dict, base=None) -> None:
+    """Refuse a payload the live table would refuse, *now* rather than at publish time.
+
+    Runs Django's own field validation over exactly the fields the payload touches — a
+    URL that is not a URL, a choice that is not a choice, text past `max_length`, a
+    required field left blank — and checks that every foreign key names a row that
+    exists. Publishing used to be where these surfaced, as a 500 from `IntegrityError`,
+    long after the editor had moved on.
+    """
+    obj = base if base is not None else model()
+    assign(obj, payload)
+    touched = [name for name in payload if name in {f.name for f in editable_fields(model)}]
+    if not touched:
+        return
+    errors: dict[str, list[str]] = {}
+    exclude = [field.name for field in model._meta.fields if field.name not in touched]
+    try:
+        obj.clean_fields(exclude=exclude)
+    except ValidationError as exc:
+        errors.update({name: [str(m) for m in msgs] for name, msgs in exc.message_dict.items()})
+    for field in editable_fields(model):
+        if field.name not in touched or not field.is_relation:
+            continue
+        value = payload[field.name]
+        if value in (None, ""):
+            if not field.null and not field.blank:
+                errors.setdefault(field.name, []).append("This field is required.")
+            continue
+        if not field.related_model._default_manager.filter(pk=value).exists():
+            errors.setdefault(field.name, []).append(
+                f"No {field.related_model._meta.verbose_name} with id {value}."
+            )
+    if errors:
+        summary = "; ".join(f"{name}: {msgs[0]}" for name, msgs in errors.items())
+        raise DraftError(f"Invalid values — {summary}", errors)
 
 
 def _append_position(model, scope: str, payload: dict) -> dict:
@@ -134,19 +192,28 @@ def _append_position(model, scope: str, payload: dict) -> dict:
     rows sharing this row's `group` count — one page renders several lists from the same
     model, told apart by that field.
     """
-    # Scoped blocks only. `NavItem` and `FooterLink` are orderable too, but they are
-    # ordered within a parent group rather than within a page scope, and the studio does
-    # not create them yet.
-    if model._meta.label_lower not in BLOCK_MODELS or "sort_order" in payload:
+    label = model._meta.label_lower
+    field_names = {field.name for field in model._meta.fields}
+    if "sort_order" in payload or "sort_order" not in field_names:
         return {}
-    siblings = model._default_manager.filter(scope=scope, group=payload.get("group", ""))
-    last = siblings.aggregate(models.Max("sort_order"))["sort_order__max"]
+    # Which rows count as siblings: blocks share a page and a group; nav items and footer
+    # links share a parent; anything else orderable is one flat list.
+    if label in BLOCK_MODELS:
+        within = {"scope": scope, "group": payload.get("group", "")}
+    else:
+        within = {}
+        for name in ORDER_WITHIN.get(label, ()):
+            field = model._meta.get_field(name)
+            within[field.attname] = payload.get(name)
+    last = model._default_manager.filter(**within).aggregate(models.Max("sort_order"))[
+        "sort_order__max"
+    ]
     # Pending creates have no row yet, so count them too — adding three in a row should
     # produce three positions, not three rows fighting over one.
-    staged = ContentDraft.objects.filter(
-        model_label=model._meta.label_lower, op=ContentDraft.Op.CREATE, scope=scope
-    ).count()
-    return {"sort_order": (last or 0) + 1 + staged}
+    staged = ContentDraft.objects.filter(model_label=label, op=ContentDraft.Op.CREATE, scope=scope)
+    for name in ORDER_WITHIN.get(label, ()):
+        staged = staged.filter(**{f"payload__{name}": payload.get(name)})
+    return {"sort_order": (last or 0) + 1 + staged.count()}
 
 
 def stage_create_edit(draft: ContentDraft, payload: dict) -> ContentDraft:
@@ -348,7 +415,7 @@ def publish(drafts, user=None, scope: str = "") -> ContentRevision | None:
         changes = []
         for op in _ORDER:
             for draft in [d for d in drafts if d.op == op]:
-                _apply(draft, changes)
+                _apply_or_explain(draft, changes)
         ContentDraft.objects.filter(pk__in=[d.pk for d in drafts]).delete()
         return ContentRevision.objects.create(
             scope=scope,
@@ -358,14 +425,41 @@ def publish(drafts, user=None, scope: str = "") -> ContentRevision | None:
         )
 
 
+def _apply_or_explain(draft, changes):
+    """`_apply`, but a database refusal names the draft instead of surfacing as a 500.
+
+    Staging validates what it can (`validate_payload`), but a row can still collide with
+    a unique key or reference something deleted since — the transaction rolls back and
+    the editor is told which change to fix or discard.
+    """
+    try:
+        # A savepoint, so the failure does not poison the enclosing transaction before
+        # the exception is turned into a message.
+        with transaction.atomic():
+            _apply(draft, changes)
+    except (IntegrityError, ValidationError) as exc:
+        raise DraftError(
+            f"Could not publish {draft.model_label}:{draft.canvas_id} — {exc}. "
+            "Fix or discard that change and publish again."
+        ) from exc
+
+
 def apply_now(*, model_label: str, op: str, object_id=None, payload=None, user=None):
     """Live mode: skip the queue and write straight to the site.
 
     Still goes through `_apply`, so a live edit is snapshotted into a revision exactly
     like a published one — "edit live" costs you the queue, not the undo history.
     """
-    resolve_model(model_label)
+    model = resolve_model(model_label)
     payload = payload or {}
+    if op == ContentDraft.Op.CREATE:
+        payload = {**_append_position(model, scope_for(model_label, payload), payload), **payload}
+        validate_payload(model, payload, base=None)
+    elif op == ContentDraft.Op.UPDATE:
+        base = model._default_manager.filter(pk=object_id).first()
+        if base is None:
+            raise DraftError(f"{model_label}:{object_id} does not exist.")
+        validate_payload(model, payload, base=base)
     draft = ContentDraft(
         model_label=model_label,
         op=op,
@@ -375,7 +469,7 @@ def apply_now(*, model_label: str, op: str, object_id=None, payload=None, user=N
     )
     with transaction.atomic():
         changes = []
-        _apply(draft, changes)
+        _apply_or_explain(draft, changes)
         if not changes:
             raise DraftError(f"{model_label}:{object_id} does not exist.")
         scope = scope_for(model_label, changes[0]["after"] or changes[0]["before"] or {})

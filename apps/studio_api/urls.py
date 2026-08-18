@@ -49,7 +49,9 @@ urlpatterns = [
         name="post-duplicate",
     ),
     path("media/", views.MediaView.as_view(), name="media"),
+    # `sync/` before the slot-key catch-all: `<path:>` would otherwise swallow it.
     path("media/sync/", views.MediaSyncView.as_view(), name="media-sync"),
+    path("media/<path:slot_key>/", views.MediaSlotView.as_view(), name="media-slot"),
     path("uploads/", views.UploadView.as_view(), name="uploads"),
     path("queue/", views.QueueView.as_view(), name="queue"),
     path("publish/", views.PublishView.as_view(), name="publish"),

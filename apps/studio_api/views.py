@@ -5,9 +5,14 @@ Every view here is staff-only and uncached. The public content API next door
 writes through `apps.cms` models, so there is no second definition of what a page is.
 """
 
+import hashlib
+import json
+from functools import lru_cache
+
 from django.contrib.auth import authenticate
 from django.core.exceptions import FieldDoesNotExist
 from django.db import models, transaction
+from django.db.models import Count
 from rest_framework import status
 from rest_framework.parsers import FormParser, JSONParser, MultiPartParser
 from rest_framework.permissions import AllowAny
@@ -16,7 +21,7 @@ from rest_framework.views import APIView
 
 from apps.cms.compose import BLOCK_KEY_BY_LABEL, BLOCK_MODELS, compose_page
 from apps.cms.models import CopyBlock, MediaAsset, PageSEO
-from apps.cms.slots import sync_media_slots
+from apps.cms.slots import expected_media_slots, sync_media_slots
 from apps.core.images import ProcessedImageField, process_image
 from apps.core.scopes import is_valid_scope, validate_slot_key
 from apps.studio.pages import all_pages, route_for
@@ -27,6 +32,7 @@ from .drafts import CHROME_MODELS, DraftError
 from .fields import field_schema, snapshot
 from .models import ContentDraft, ContentRevision, StudioSession
 from .permissions import IsStudioStaff
+from .uploads import UploadRejected, validate_upload
 
 DRAFT = "draft"
 LIVE = "live"
@@ -47,8 +53,26 @@ class StudioView(APIView):
 
     def handle_exception(self, exc):
         if isinstance(exc, DraftError):
+            body = {"detail": str(exc)}
+            if exc.errors:
+                body["errors"] = exc.errors
+            return Response(body, status=status.HTTP_400_BAD_REQUEST)
+        if isinstance(exc, UploadRejected):
             return Response({"detail": str(exc)}, status=status.HTTP_400_BAD_REQUEST)
         return super().handle_exception(exc)
+
+    def page_number(self, default_size: int = 50, max_size: int = 200) -> tuple[int, int]:
+        """`(page, page_size)` from the query string, clamped."""
+
+        def as_int(name, fallback):
+            try:
+                return int(self.request.query_params.get(name, fallback))
+            except (TypeError, ValueError):
+                return fallback
+
+        page = max(1, as_int("page", 1))
+        size = min(max_size, max(1, as_int("page_size", default_size)))
+        return page, size
 
     @property
     def mode(self) -> str:
@@ -154,9 +178,10 @@ class PageListView(StudioView):
     """
 
     def get(self, request):
-        pending = {}
-        for scope in ContentDraft.objects.values_list("scope", flat=True):
-            pending[scope] = pending.get(scope, 0) + 1
+        pending = {
+            row["scope"]: row["n"]
+            for row in ContentDraft.objects.values("scope").annotate(n=Count("id"))
+        }
 
         sections = {}
         for ref in all_pages():
@@ -166,14 +191,19 @@ class PageListView(StudioView):
                     "label": ref.label,
                     "route": ref.route,
                     "subtitle": ref.subtitle,
-                    "editable": ref.route is not None,
+                    # A page is editable when it can be previewed at a public URL, or when
+                    # it is a record (a service, a blog post) the Studio edits as a form.
+                    "editable": ref.route is not None or ref.record is not None,
+                    "record": (
+                        {"model": ref.record[0], "id": ref.record[1]} if ref.record else None
+                    ),
                     "pending": pending.get(ref.key, 0),
                 }
             )
         return Response(
             {
                 "sections": [{"section": name, "pages": pages} for name, pages in sections.items()],
-                "pending_total": ContentDraft.objects.count(),
+                "pending_total": sum(pending.values()),
             }
         )
 
@@ -205,14 +235,37 @@ class PageDetailView(StudioView):
         """Where each part of the payload came from, so a click on the canvas resolves to
         a row without the client hard-coding the content model."""
         copy_ids = dict(CopyBlock.objects.filter(scope=page_key).values_list("key", "id"))
-        media_ids = dict(
-            MediaAsset.objects.filter(slot_key__startswith=f"{page_key}:").values_list(
-                "slot_key", "id"
-            )
-        )
+        rows = {
+            asset.slot_key: asset
+            for asset in MediaAsset.objects.filter(slot_key__startswith=f"{page_key}:")
+        }
         seo = PageSEO.objects.filter(page_key=page_key).values_list("id", flat=True).first()
+
+        # Every slot the page *could* show, filled or not. `compose_page` (rightly) omits
+        # empty slots from the public payload, but the one image an editor most wants to
+        # click is the one that has no picture yet — so the inventory travels here, and the
+        # canvas merges it under the payload's media map. Rows the inventory does not know
+        # (a slot the frontend added ahead of `sync_media_slots`) are listed too.
+        slots = {}
+        for slot_key, notes in expected_media_slots(page_key):
+            slots[slot_key] = {"slot_key": slot_key, "notes": notes}
+        for slot_key, asset in rows.items():
+            slots.setdefault(slot_key, {"slot_key": slot_key, "notes": asset.notes})
+        for slot_key, entry in slots.items():
+            asset = rows.get(slot_key)
+            entry.update(
+                {
+                    "id": asset.pk if asset else None,
+                    "alt_text": asset.alt_text if asset else "",
+                    "filled": bool(asset and asset.image),
+                    "focal_x": asset.focal_x if asset else 0.5,
+                    "focal_y": asset.focal_y if asset else 0.5,
+                }
+            )
+
         return {
             "scope": page_key,
+            "mode": self.mode,
             "copy": {
                 key: {"model": "cms.copyblock", "id": copy_ids.get(key)} for key in payload["copy"]
             },
@@ -222,11 +275,32 @@ class PageDetailView(StudioView):
                 if BLOCK_KEY_BY_LABEL[label] in payload["blocks"]
             },
             "media": {
-                slot: {"model": "cms.mediaasset", "id": media_ids.get(slot)}
+                slot: {
+                    "model": "cms.mediaasset",
+                    "id": rows[slot].pk if slot in rows else None,
+                }
                 for slot in payload["media"]
             },
+            "slots": sorted(slots.values(), key=lambda entry: entry["slot_key"]),
             "seo": {"model": "cms.pageseo", "id": seo},
         }
+
+
+@lru_cache(maxsize=1)
+def build_schema() -> dict:
+    """The schema is a function of the model definitions alone, so it is built once per
+    process. `version` lets a client notice a deploy changed it."""
+    labels = list(BLOCK_MODELS) + CHROME_MODELS
+    models_ = {
+        label: {
+            "collection": BLOCK_KEY_BY_LABEL.get(label),
+            "verbose_name": str(engine.resolve_model(label)._meta.verbose_name).capitalize(),
+            "fields": field_schema(engine.resolve_model(label)),
+        }
+        for label in labels
+    }
+    digest = hashlib.sha1(json.dumps(models_, sort_keys=True).encode()).hexdigest()[:12]
+    return {"version": digest, "models": models_}
 
 
 class SchemaView(StudioView):
@@ -234,21 +308,7 @@ class SchemaView(StudioView):
     type nobody wrote a form for. A new block on the backend is editable immediately."""
 
     def get(self, request):
-        labels = list(BLOCK_MODELS) + CHROME_MODELS
-        return Response(
-            {
-                "models": {
-                    label: {
-                        "collection": BLOCK_KEY_BY_LABEL.get(label),
-                        "verbose_name": str(
-                            engine.resolve_model(label)._meta.verbose_name
-                        ).capitalize(),
-                        "fields": field_schema(engine.resolve_model(label)),
-                    }
-                    for label in labels
-                }
-            }
-        )
+        return Response(build_schema())
 
 
 #: The chrome models with structure of their own. Copy, media and SEO are chrome too,
@@ -375,7 +435,7 @@ class SeoView(StudioView):
             return Response({"detail": "Unknown page."}, status=status.HTTP_404_NOT_FOUND)
         fields = {
             name: request.data[name]
-            for name in ("title", "description", "canonical")
+            for name in ("title", "description", "canonical", "og_image")
             if name in request.data
         }
         existing = PageSEO.objects.filter(page_key=page_key).first()
@@ -396,6 +456,35 @@ class SeoView(StudioView):
 # ------------------------------------------------------------------------------ media
 
 
+def _serialise_asset(request, asset: MediaAsset) -> dict:
+    return {
+        "id": asset.pk,
+        "slot_key": asset.slot_key,
+        "image": request.build_absolute_uri(asset.image.url) if asset.image else None,
+        # The storage name is what a row edit writes; the URL is only for showing it.
+        "name": asset.image.name if asset.image else "",
+        "alt_text": asset.alt_text,
+        "notes": asset.notes,
+        "credit": asset.credit,
+        "focal_x": asset.focal_x,
+        "focal_y": asset.focal_y,
+        "updated_at": asset.updated_at,
+    }
+
+
+def _store_upload(field, instance, upload):
+    """Normalise and store one uploaded image for `field`, returning the storage name.
+
+    Writing to storage directly bypasses `ProcessedImageField.pre_save`, so the resize,
+    EXIF strip and re-encode are applied by hand — an image uploaded from the Studio must
+    be byte-for-byte what the admin would have stored.
+    """
+    validate_upload(upload)
+    if isinstance(field, ProcessedImageField):
+        upload = process_image(upload, max_edge=field.max_edge, to_format=field.to_format)
+    return field.storage.save(field.generate_filename(instance, upload.name), upload)
+
+
 class MediaView(StudioView):
     """The media library, and the upload that fills a slot.
 
@@ -405,32 +494,33 @@ class MediaView(StudioView):
     """
 
     def get(self, request):
-        queryset = MediaAsset.objects.all()
+        # Ordered, or the page boundary lands wherever the planner feels like — the same
+        # bug the public media endpoint had, where *which* rows survived the cap was
+        # whatever the table scan returned first.
+        queryset = MediaAsset.objects.order_by("slot_key")
         if scope := request.query_params.get("scope"):
             queryset = queryset.filter(slot_key__startswith=f"{scope}:")
         if term := request.query_params.get("q"):
-            queryset = queryset.filter(slot_key__icontains=term)
+            queryset = queryset.filter(
+                models.Q(slot_key__icontains=term)
+                | models.Q(notes__icontains=term)
+                | models.Q(alt_text__icontains=term)
+            )
         state = request.query_params.get("state")
         if state == "filled":
             queryset = queryset.exclude(image="")
         elif state == "empty":
             queryset = queryset.filter(image="")
-        assets = list(queryset[:500])
+        page, size = self.page_number(default_size=60, max_size=200)
+        total = queryset.count()
+        assets = list(queryset[(page - 1) * size : page * size])
         return Response(
             {
-                "count": len(assets),
-                "slots": [
-                    {
-                        "id": asset.pk,
-                        "slot_key": asset.slot_key,
-                        "image": request.build_absolute_uri(asset.image.url)
-                        if asset.image
-                        else None,
-                        "alt_text": asset.alt_text,
-                        "notes": asset.notes,
-                    }
-                    for asset in assets
-                ],
+                "count": total,
+                "page": page,
+                "page_size": size,
+                "pages": max(1, -(-total // size)),
+                "slots": [_serialise_asset(request, asset) for asset in assets],
             }
         )
 
@@ -456,13 +546,11 @@ class MediaView(StudioView):
         # An unpublished upload leaves an orphaned file, which is cheap — a published
         # slot pointing at a file nobody wrote would be a broken image on the live site.
         field = MediaAsset._meta.get_field("image")
-        # Same reason as `UploadView`: writing to storage directly bypasses
-        # `ProcessedImageField.pre_save`, so the normalisation has to be applied by hand.
-        if isinstance(field, ProcessedImageField):
-            upload = process_image(upload, max_edge=field.max_edge, to_format=field.to_format)
-        name = field.storage.save(field.generate_filename(asset, upload.name), upload)
+        name = _store_upload(field, asset, upload)
 
-        payload = {"image": name}
+        # A new photograph is the agency's own unless told otherwise; the stock credit
+        # from the seeded placeholder must not survive its replacement.
+        payload = {"image": name, "credit": request.data.get("credit", "")}
         if "alt_text" in request.data:
             payload["alt_text"] = request.data["alt_text"]
         response = self.write(
@@ -472,7 +560,75 @@ class MediaView(StudioView):
             payload=payload,
         )
         response.data["slot_key"] = slot_key
+        response.data["name"] = name
         response.data["image"] = request.build_absolute_uri(field.storage.url(name))
+        return response
+
+
+class MediaSlotView(StudioView):
+    """Edit one slot by key — alt text, focal point, credit, and the image itself, whether
+    that is a fresh file, a storage name reused from another slot, or "" to clear it.
+
+    Addressed by slot key rather than row id because the row may not exist yet: the
+    payload only carries filled slots, and the editor's first act on an empty one is often
+    to write its alt text or point it at a photo already in the library.
+    """
+
+    def put(self, request, slot_key=None):
+        return self.patch(request, slot_key=slot_key)
+
+    def patch(self, request, slot_key=None):
+        try:
+            validate_slot_key(slot_key)
+        except Exception as exc:  # ValidationError
+            return Response({"detail": str(exc)}, status=status.HTTP_400_BAD_REQUEST)
+        asset, _created = MediaAsset.objects.get_or_create(slot_key=slot_key)
+        field = MediaAsset._meta.get_field("image")
+
+        payload = {}
+        upload = request.FILES.get("image")
+        if upload:
+            payload["image"] = _store_upload(field, asset, upload)
+            payload["credit"] = request.data.get("credit", "")
+        elif "image" in request.data:
+            name = (request.data.get("image") or "").strip()
+            if name and not field.storage.exists(name):
+                return Response(
+                    {"detail": "That image is not in the library."},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+            payload["image"] = name
+            if "credit" not in request.data:
+                # Reusing a library image inherits its credit; clearing clears it.
+                source = MediaAsset.objects.filter(image=name).exclude(pk=asset.pk).first()
+                payload["credit"] = source.credit if (name and source) else ""
+        for key in ("alt_text", "credit", "notes"):
+            if key in request.data:
+                payload[key] = request.data[key]
+        for key in ("focal_x", "focal_y"):
+            if key in request.data:
+                try:
+                    payload[key] = min(1.0, max(0.0, float(request.data[key])))
+                except (TypeError, ValueError):
+                    return Response(
+                        {"detail": f"{key} must be a number between 0 and 1."},
+                        status=status.HTTP_400_BAD_REQUEST,
+                    )
+        if not payload:
+            return Response({"detail": "Nothing to change."}, status=status.HTTP_400_BAD_REQUEST)
+
+        response = self.write(
+            model_label="cms.mediaasset",
+            op=ContentDraft.Op.UPDATE,
+            object_id=asset.pk,
+            payload=payload,
+        )
+        response.data["slot_key"] = slot_key
+        name = payload.get("image", asset.image.name if asset.image else "")
+        response.data["name"] = name
+        response.data["image"] = (
+            request.build_absolute_uri(field.storage.url(name)) if name else None
+        )
         return response
 
 
@@ -507,17 +663,9 @@ class UploadView(StudioView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        # This path writes to storage itself rather than through `Model.save`, so it never
-        # reaches `ProcessedImageField.pre_save` — the resize, EXIF strip and re-encode
-        # would be skipped and the untouched original would be the file Spaces serves.
-        # Apply the same transform here so an image uploaded from the studio is identical
-        # to one uploaded from the admin.
-        if isinstance(field, ProcessedImageField):
-            upload = process_image(upload, max_edge=field.max_edge, to_format=field.to_format)
-
         # `generate_filename` needs an instance for `upload_to` callables; a bare one is
         # enough because every `upload_to` in the CMS is a static path.
-        name = field.storage.save(field.generate_filename(model(), upload.name), upload)
+        name = _store_upload(field, model(), upload)
         return Response({"name": name, "url": request.build_absolute_uri(field.storage.url(name))})
 
 
@@ -535,8 +683,13 @@ class MediaSyncView(StudioView):
 
 class QueueView(StudioView):
     def get(self, request):
+        page, size = self.page_number(default_size=100, max_size=500)
+        queryset = ContentDraft.objects.select_related("created_by").order_by(
+            "scope", "-updated_at"
+        )
+        total = queryset.count()
         rows = []
-        for draft in ContentDraft.objects.select_related("created_by"):
+        for draft in queryset[(page - 1) * size : page * size]:
             rows.append(
                 {
                     "id": draft.pk,
@@ -554,7 +707,9 @@ class QueueView(StudioView):
             by_scope.setdefault(row["scope"], []).append(row)
         return Response(
             {
-                "total": len(rows),
+                "total": total,
+                "page": page,
+                "page_size": size,
                 "scopes": [
                     {"scope": scope, "route": route_for(scope), "changes": changes}
                     for scope, changes in by_scope.items()
@@ -598,8 +753,13 @@ class RevisionListView(StudioView):
         queryset = ContentRevision.objects.select_related("applied_by")
         if scope := request.query_params.get("scope"):
             queryset = queryset.filter(scope=scope)
+        page, size = self.page_number(default_size=50, max_size=200)
+        total = queryset.count()
         return Response(
             {
+                "count": total,
+                "page": page,
+                "page_size": size,
                 "revisions": [
                     {
                         "id": revision.pk,
@@ -610,8 +770,8 @@ class RevisionListView(StudioView):
                         "reverted_at": revision.reverted_at,
                         "rows": len(revision.changes),
                     }
-                    for revision in queryset[:100]
-                ]
+                    for revision in queryset[(page - 1) * size : page * size]
+                ],
             }
         )
 

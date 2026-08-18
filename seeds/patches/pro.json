@@ -587,19 +587,19 @@
       "scope": "pro",
       "key": "arch_terms_1",
       "text": "Architect Terms",
-      "href": "/privacy#terms"
+      "href": "/terms"
     },
     {
       "scope": "pro",
       "key": "terms_2",
       "text": "Subscription Agreement",
-      "href": "/privacy#terms"
+      "href": "/terms"
     },
     {
       "scope": "pro",
       "key": "terms_3",
       "text": "Code of Conduct",
-      "href": "/privacy#terms"
+      "href": "/terms"
     },
     {
       "scope": "pro",
@@ -977,7 +977,7 @@
       "scope": "pro",
       "key": "exp_terms_1",
       "text": "Provider Terms",
-      "href": "/privacy#terms"
+      "href": "/terms"
     },
     {
       "scope": "pro",

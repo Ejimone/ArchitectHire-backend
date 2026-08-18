@@ -95,6 +95,7 @@ class PersonaSerializer(serializers.ModelSerializer):
             "body",
             "points",
             "image",
+            "image_hint",
             "cta_label",
             "cta_href",
         ]
@@ -219,4 +220,4 @@ class MediaAssetSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MediaAsset
-        fields = ["slot_key", "image", "alt_text"]
+        fields = ["slot_key", "image", "alt_text", "focal_x", "focal_y"]

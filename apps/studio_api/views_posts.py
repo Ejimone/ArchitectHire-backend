@@ -26,6 +26,7 @@ from .serializers_posts import (
 )
 from .views import StudioView
 
+
 def posts_queryset():
     return BlogPost.objects.select_related("category", "author").prefetch_related("content_blocks")
 
@@ -41,7 +42,9 @@ def taxonomy() -> dict:
             {"id": a.pk, "name": a.name, "role": a.role}
             for a in Author.objects.all().order_by("name")
         ],
-        "kinds": [{"value": value, "label": label} for value, label in BlogContentBlock.Kind.choices],
+        "kinds": [
+            {"value": value, "label": label} for value, label in BlogContentBlock.Kind.choices
+        ],
     }
 
 
@@ -227,7 +230,9 @@ class AuthorCreateView(StudioView):
     def post(self, request):
         name = (request.data.get("name") or "").strip()
         if not name:
-            return Response({"detail": "An author needs a name."}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {"detail": "An author needs a name."}, status=status.HTTP_400_BAD_REQUEST
+            )
         existing = Author.objects.filter(name__iexact=name).first()
         if existing:
             return Response({"id": existing.pk, "name": existing.name, "role": existing.role})

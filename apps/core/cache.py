@@ -21,25 +21,43 @@ from django.db import transaction
 CONTENT_EPOCH_KEY = "cms:epoch"
 CONTENT_TTL = 60 * 15  # safety TTL regardless of version bumps
 
-# Tag prefix → cache slug, for the tags that name exactly one cached endpoint. Kept in
+# Tag → the cache slugs it invalidates, for the tags that name cached endpoints. Kept in
 # step with `apps.core.tags` (which produces them) and the `cache_slug` attributes on
 # the CachedContentView subclasses (which consume them).
-_SLUG_BY_TAG = {
-    "cms:nav": "_nav",
-    "cms:footer": "_footer",
-    "cms:settings": "_settings",
-    "cms:catalog": "_catalog",
-    "cms:catalog:plans": "_plans",
-    "cms:jurisdictions": "_states",
+_SLUGS_BY_TAG = {
+    "cms:nav": {"_nav"},
+    "cms:footer": {"_footer"},
+    "cms:settings": {"_settings"},
+    # The whole catalog: categories, addons, plans, project-type list, render matrix and
+    # drafting pricing are each cached under their own slug and any catalog write may
+    # feed several of them.
+    "cms:catalog": {
+        "_catalog",
+        "_addons",
+        "_plans",
+        "_project_types",
+        "_render_matrix",
+        "_drafting_pricing",
+    },
+    "cms:catalog:plans": {"_plans"},
+    "cms:jurisdictions": {"_states", "_cities"},
     # The media endpoint caches one payload per `?prefix=`, but versions them all off
     # this single slug — see `MediaSlotsView.get_version_slug`. Without it the slug
     # `_media:<prefix>` matched no tag, so its counter never moved past 1: an uploaded
     # image stayed invisible for the full TTL, and because the ETag is built from the
     # same frozen version, any client sending If-None-Match was told 304 against the
     # empty body indefinitely.
-    "cms:media": "_media",
+    "cms:media": {"_media"},
 }
 _PAGE_TAG_PREFIX = "cms:page:"
+# Per-record detail endpoints: the tag carries the slug, the cache slug carries it too.
+# Before these were mapped, every project-type, state or city save fell through to the
+# global epoch — one edit to Oakland's intro threw away every cached payload on the site.
+_PREFIXED_SLUGS = (
+    ("cms:catalog:project-type:", lambda rest: {f"_project_type:{rest}"}),
+    ("cms:jurisdictions:state:", lambda rest: {f"_state:{rest.upper()}"}),
+    ("cms:jurisdictions:city:", lambda rest: {f"_city:{rest}"}),
+)
 
 # Tags whose endpoints hold no server-side payload cache at all. `BlogListView`,
 # `BlogDetailView` and the case-study views are plain DRF generics, not
@@ -52,8 +70,23 @@ _PAGE_TAG_PREFIX = "cms:page:"
 # them — a single editing session could re-create the whole-site slowness by itself. The
 # frontend still gets the tags verbatim through `schedule_ping`; this only governs the
 # backend's own cache.
-_UNCACHED_TAGS = frozenset({"cms:blog", "cms:cases"})
-_UNCACHED_TAG_PREFIXES = ("cms:blog:", "cms:case:")
+# Careers, contact, policies, inspiration, subscription plans and popular searches are
+# plain DRF views as well. Two of those tags are reachable by *anonymous* writes (a like,
+# a contact-form submission, a newsletter signup) — under the catch-all fallback each one
+# of those was a whole-site purge the public could trigger at will.
+_UNCACHED_TAGS = frozenset(
+    {
+        "cms:blog",
+        "cms:cases",
+        "cms:careers",
+        "cms:contact",
+        "cms:inspiration",
+        "cms:plans",
+        "cms:search",
+        "cms:seed",
+    }
+)
+_UNCACHED_TAG_PREFIXES = ("cms:blog:", "cms:case:", "cms:policies:")
 
 
 def _counter(key: str) -> int:
@@ -103,10 +136,19 @@ def slugs_for_tags(tags) -> set[str] | None:
     for tag in tags:
         if tag.startswith(_PAGE_TAG_PREFIX):
             slugs.add(tag[len(_PAGE_TAG_PREFIX) :])
-        elif tag in _SLUG_BY_TAG:
-            slugs.add(_SLUG_BY_TAG[tag])
+        elif tag in _SLUGS_BY_TAG:
+            slugs |= _SLUGS_BY_TAG[tag]
         elif tag in _UNCACHED_TAGS or tag.startswith(_UNCACHED_TAG_PREFIXES):
             continue  # nothing cached behind it — see the note on `_UNCACHED_TAGS`
+        elif prefixed := next(
+            (
+                make(tag[len(prefix) :])
+                for prefix, make in _PREFIXED_SLUGS
+                if tag.startswith(prefix)
+            ),
+            None,
+        ):
+            slugs |= prefixed
         else:
             return None
     return slugs

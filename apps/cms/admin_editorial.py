@@ -25,6 +25,7 @@ from .models_editorial import (
     ContactTopic,
     Department,
     InspirationItem,
+    InspirationLike,
     JobPosting,
     NewsletterSubscriber,
     Perk,
@@ -230,6 +231,19 @@ class InspirationItemAdmin(StudioModelAdmin):
 
     preview = thumbnail_display()
     status_pill = status_display()
+
+
+@admin.register(InspirationLike)
+class InspirationLikeAdmin(StudioModelAdmin):
+    """Read-only: likes are public input, kept visible so a spike can be inspected."""
+
+    list_display = ["item", "user", "session_key", "created_at"]
+    list_filter = [("item", RelatedDropdownFilter)]
+    readonly_fields = ["item", "user", "session_key", "created_at"]
+    date_hierarchy = "created_at"
+
+    def has_add_permission(self, request):
+        return False
 
 
 @admin.register(NewsletterSubscriber)

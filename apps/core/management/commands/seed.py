@@ -1,13 +1,22 @@
 """Load design-extracted seed data (seeds/*.json) into the database.
 
-Idempotent: uses update_or_create on natural keys, safe to re-run anytime,
-including production. Regenerate the JSON from the design with:
+**A floor, not a sync.** On an empty database this loads the design's exact content.
+On a database that has already been seeded it does nothing to the content domains —
+the owner's edits in the Studio and the admin are the source of truth from then on,
+and a deploy that re-runs `seed --all` (they all do) must never overwrite them. The
+`media` and `searchindex` domains always run: filling empty slots and rebuilding the
+index are already idempotent floors of their own. Pass `--overwrite` to deliberately
+reset content to the seeds. Content corrections that must reach every environment ship
+as data migrations, not as seed edits.
+
+Regenerate the JSON from the design with:
 
     uv run python scripts/extract_seeds.py
 
 Usage:
     manage.py seed --all
     manage.py seed --domain jurisdictions,catalog,cms
+    manage.py seed --all --overwrite     # reset content to the seeds (destroys edits)
 """
 
 import json
@@ -62,14 +71,29 @@ def load_optional(name: str):
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+# Domains that are skipped once they have run, unless --overwrite. Everything in them is
+# owner-editable content; a second run would replace edits with the design's originals.
+FLOOR_DOMAINS = ("jurisdictions", "catalog", "cms", "providers", "payments", "content")
+
+
 class Command(BaseCommand):
-    help = "Seed the database with the design's exact content"
+    help = "Seed the database with the design's exact content (a floor — never overwrites edits)"
 
     def add_arguments(self, parser):
         parser.add_argument("--all", action="store_true")
         parser.add_argument("--domain", type=str, default="")
+        parser.add_argument(
+            "--overwrite",
+            action="store_true",
+            help=(
+                "Reset content domains to the seeds even where they have already been "
+                "loaded. Destroys edits made in the Studio and the admin."
+            ),
+        )
 
     def handle(self, *args, **options):
+        from apps.cms.models import SeedRun
+
         domains = (
             [
                 "jurisdictions",
@@ -86,12 +110,27 @@ class Command(BaseCommand):
         )
         if not domains:
             raise CommandError("Pass --all or --domain jurisdictions,catalog,cms")
+        overwrite = options.get("overwrite", False)
+        ran = []
         for domain in domains:
             handler = getattr(self, f"seed_{domain}", None)
             if handler is None:
                 raise CommandError(f"Unknown domain '{domain}'")
+            if (
+                domain in FLOOR_DOMAINS
+                and not overwrite
+                and SeedRun.objects.filter(domain=domain).exists()
+            ):
+                self.stdout.write(
+                    f"  {domain}: already seeded — edits made since are kept "
+                    "(pass --overwrite to reset to the seeds)"
+                )
+                continue
             handler()
-        self.stdout.write(self.style.SUCCESS(f"Seeded: {', '.join(domains)}"))
+            if domain in FLOOR_DOMAINS:
+                SeedRun.objects.update_or_create(domain=domain)
+            ran.append(domain)
+        self.stdout.write(self.style.SUCCESS(f"Seeded: {', '.join(ran) or 'nothing new'}"))
 
     # --- domains ------------------------------------------------------------
 

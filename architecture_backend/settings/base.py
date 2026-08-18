@@ -242,6 +242,11 @@ REST_FRAMEWORK = {
     "EXCEPTION_HANDLER": "rest_framework.views.exception_handler",
 }
 
+# Largest file the Studio's upload endpoints accept. A modern phone photo is 3–8 MB and
+# a DSLR JPEG 10–20 MB; anything above this is a mistake or an attack, and Caddy /
+# the App Platform edge should reject it before Django ever buffers it.
+STUDIO_MAX_UPLOAD_BYTES = env.int("STUDIO_MAX_UPLOAD_BYTES", default=30 * 1024 * 1024)
+
 SPECTACULAR_SETTINGS = {
     "TITLE": "ArchitectHire API",
     "DESCRIPTION": "CMS-driven marketplace API for ArchitectHire.",

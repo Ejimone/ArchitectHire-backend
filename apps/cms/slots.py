@@ -87,40 +87,76 @@ STATIC_SLOTS = [
 ]
 
 
-def expected_media_slots() -> list[tuple[str, str]]:
-    """(slot_key, notes) for every owner-fillable image slot, DB-derived included."""
-    slots = list(STATIC_SLOTS)
+def slot_scope(slot_key: str) -> str:
+    """`<scope>:<slot>` → `<scope>`. The scope may itself contain a colon
+    (`city:oakland:hero`), so split from the right — the rule `validate_slot_key` applies."""
+    return slot_key.rpartition(":")[0]
 
-    for city in City.objects.all():
-        slots.append((f"cities:city-{city.slug}", f"Cities index — card photo for {city.name}"))
-        slots.append((f"city:{city.slug}:hero", f"{city.name} city page — hero image"))
-        work = Testimonial.objects.filter(scope=f"city:{city.slug}").count()
-        for i in range(work):
-            slots.append(
-                (f"city:{city.slug}:work-{i + 1}", f"{city.name} city page — work photo {i + 1}")
-            )
+
+def expected_media_slots(page_key: str | None = None) -> list[tuple[str, str]]:
+    """(slot_key, notes) for every owner-fillable image slot, DB-derived included.
+
+    With `page_key`, only that page's slots — computed from that page's rows rather than
+    by filtering the whole inventory, because the Studio asks for one page per canvas
+    render and the full walk is a query per city and per project type.
+    """
+
+    def wants(scope: str) -> bool:
+        return page_key is None or scope == page_key
+
+    slots = [entry for entry in STATIC_SLOTS if wants(slot_scope(entry[0]))]
+
+    if page_key is None or page_key == "cities" or page_key.startswith("city:"):
+        cities = City.objects.all()
+        if page_key is not None and page_key.startswith("city:"):
+            cities = cities.filter(slug=page_key.partition(":")[2])
+        for city in cities:
+            if wants("cities"):
+                slots.append(
+                    (f"cities:city-{city.slug}", f"Cities index — card photo for {city.name}")
+                )
+            if wants(f"city:{city.slug}"):
+                slots.append((f"city:{city.slug}:hero", f"{city.name} city page — hero image"))
+                work = Testimonial.objects.filter(scope=f"city:{city.slug}").count()
+                for i in range(work):
+                    slots.append(
+                        (
+                            f"city:{city.slug}:work-{i + 1}",
+                            f"{city.name} city page — work photo {i + 1}",
+                        )
+                    )
 
     for scope, prefix, model, label in _DERIVED_GALLERIES:
+        if not wants(scope):
+            continue
         for i in range(model.objects.filter(scope=scope).count()):
             slots.append((f"{scope}:{prefix}{i + 1}", f"{label} {i + 1}"))
 
-    for project in ProjectType.objects.all():
-        if project.slot_id:
-            slots.append((f"projects:{project.slot_id}", f"Projects index — {project.name} card"))
-        gallery = CaseCard.objects.filter(scope=f"project-type:{project.slug}", group="gallery")
-        for i in range(gallery.count()):
-            slots.append(
-                (
-                    f"project-type:{project.slug}:proj-hero{i + 1}",
-                    f"{project.name} page — hero carousel slide {i + 1}",
+    if page_key is None or page_key == "projects" or page_key.startswith("project-type:"):
+        projects = ProjectType.objects.all()
+        if page_key is not None and page_key.startswith("project-type:"):
+            projects = projects.filter(slug=page_key.partition(":")[2])
+        for project in projects:
+            if wants("projects") and project.slot_id:
+                slots.append(
+                    (f"projects:{project.slot_id}", f"Projects index — {project.name} card")
                 )
-            )
-            slots.append(
-                (
-                    f"project-type:{project.slug}:p-g{i + 1}",
-                    f"{project.name} page — sample-work carousel slide {i + 1}",
+            if not wants(f"project-type:{project.slug}"):
+                continue
+            gallery = CaseCard.objects.filter(scope=f"project-type:{project.slug}", group="gallery")
+            for i in range(gallery.count()):
+                slots.append(
+                    (
+                        f"project-type:{project.slug}:proj-hero{i + 1}",
+                        f"{project.name} page — hero carousel slide {i + 1}",
+                    )
                 )
-            )
+                slots.append(
+                    (
+                        f"project-type:{project.slug}:p-g{i + 1}",
+                        f"{project.name} page — sample-work carousel slide {i + 1}",
+                    )
+                )
 
     return slots
 

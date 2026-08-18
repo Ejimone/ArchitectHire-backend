@@ -78,7 +78,8 @@
         "title": "Backyard ADUs under 700 sq ft",
         "body": "Rental-ready studios and one-bedrooms that fit tight lots.",
         "cta_label": "",
-        "cta_href": "/projects/backyard-adu"
+        "cta_href": "/projects/backyard-adu",
+        "image_hint": "ADU collection cover"
       },
       {
         "scope": "inspiration",
@@ -88,7 +89,8 @@
         "title": "Kitchens that open up",
         "body": "Wall removals, islands, and light-first layouts.",
         "cta_label": "",
-        "cta_href": "/projects/kitchen-and-bath"
+        "cta_href": "/projects/kitchen-and-bath",
+        "image_hint": "Kitchen collection cover"
       },
       {
         "scope": "inspiration",
@@ -98,7 +100,8 @@
         "title": "Additions that match the original",
         "body": "Second stories and rear extensions done seamlessly.",
         "cta_label": "",
-        "cta_href": "/projects/home-addition"
+        "cta_href": "/projects/home-addition",
+        "image_hint": "Addition collection cover"
       }
     ],
     "steps": [

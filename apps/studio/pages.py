@@ -22,7 +22,7 @@ from apps.core.scopes import STATIC_PAGE_KEYS
 STATIC_ROUTES: dict[str, str | None] = {
     "chrome": None,
     "landing": "/",
-    "services-landing": "/services",
+    "services-landing": "/services-landing",
     "services": "/services",
     "3d-visualization": "/services/3d-visualization",
     "cad-drafting": "/services/cad-drafting",
@@ -51,12 +51,15 @@ STATIC_ROUTES: dict[str, str | None] = {
     "pro": None,
 }
 
-# Route template per dynamic scope prefix.
+# Route template per dynamic scope prefix. A service has no page of its own on the site
+# — the two service *templates* (3D visualization, CAD drafting) are static scopes, and
+# every other service is a row inside the catalog on /services — so `service:*` has no
+# route; the Studio edits it as a record instead.
 DYNAMIC_ROUTES = {
     "project-type": "/projects/{slug}",
     "city": "/cities/{slug}",
     "state": "/jurisdictions/{slug}",
-    "service": "/services/{slug}",
+    "service": None,
     "blog-post": "/guides/{slug}",
     "case-study": "/case-studies/{slug}",
 }
@@ -98,6 +101,9 @@ class PageRef:
     route: str | None = None
     subtitle: str = ""
     counts: dict[str, int] = field(default_factory=dict)
+    #: `(model_label, pk)` for a dynamic page — the record whose row the scope belongs
+    #: to, so the Studio can open it as a form even when it has no page to preview.
+    record: tuple[str, int] | None = None
 
     @property
     def composer_url(self) -> str:
@@ -158,6 +164,7 @@ def dynamic_pages() -> list[PageRef]:
 
     refs = []
     for prefix, section, queryset, slug_field, label_field in sources:
+        label_lower = queryset.model._meta.label_lower
         for obj in queryset:
             slug = getattr(obj, slug_field, "")
             if not slug:
@@ -170,6 +177,7 @@ def dynamic_pages() -> list[PageRef]:
                     section=section,
                     route=route_for(key),
                     subtitle=key,
+                    record=(label_lower, obj.pk),
                 )
             )
     return refs

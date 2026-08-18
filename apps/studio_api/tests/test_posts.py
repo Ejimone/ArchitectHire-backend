@@ -303,10 +303,131 @@ class TestUploads:
         assert body["hero_image"] == name
         assert body["hero_image_url"].endswith(name)
 
-    def test_uploads_still_refuse_a_model_that_is_not_on_the_list(self, studio_client, image_upload):
+    def test_uploads_still_refuse_a_model_that_is_not_on_the_list(
+        self, studio_client, image_upload
+    ):
         response = studio_client.post(
             "/api/v1/studio/uploads/",
             {"model_label": "accounts.user", "field": "avatar", "file": image_upload},
             format="multipart",
         )
         assert response.status_code == 400
+
+
+class TestListFiltersAndMissingRows:
+    """The branches the first commit left untested: list filters, 404s, publish guards."""
+
+    def test_list_filters_by_search_status_and_category(self, studio_client):
+        category, _ = BlogCategory.objects.get_or_create(
+            slug="permits-probe", defaults={"name": "Permits probe"}
+        )
+        draft = create_post(studio_client, title="Draft about permits")
+        studio_client.patch(
+            f"{POSTS}{draft['id']}/",
+            {"category": category.pk, "content_blocks": blocks("Body")},
+            format="json",
+        )
+        published = create_post(studio_client, title="Published guide")
+        studio_client.patch(
+            f"{POSTS}{published['id']}/", {"content_blocks": blocks("Body")}, format="json"
+        )
+        assert studio_client.post(f"{POSTS}{published['id']}/publish/").status_code == 200
+
+        titles = lambda query: [  # noqa: E731
+            row["title"] for row in studio_client.get(f"{POSTS}?{query}").json()["results"]
+        ]
+        # The database may carry seeded posts from other test modules, so assert on
+        # membership rather than on exact lists.
+        assert titles("q=permits") == ["Draft about permits"]
+        assert "Published guide" in titles("status=published")
+        assert "Draft about permits" not in titles("status=published")
+        assert "Draft about permits" in titles("status=draft")
+        assert "Published guide" not in titles("status=draft")
+        assert {"Draft about permits", "Published guide"} <= set(titles("status=bogus"))
+        assert titles("category=permits-probe") == ["Draft about permits"]
+
+    def test_an_untitled_post_gets_a_default_title(self, studio_client):
+        response = studio_client.post(POSTS, {"title": "   "}, format="json")
+        assert response.status_code == 201
+        assert response.json()["title"] == "Untitled post"
+
+    @pytest.mark.parametrize(
+        ("method", "suffix"),
+        [
+            ("get", ""),
+            ("patch", ""),
+            ("delete", ""),
+            ("post", "publish/"),
+            ("post", "unpublish/"),
+            ("post", "duplicate/"),
+        ],
+    )
+    def test_missing_posts_404(self, studio_client, method, suffix):
+        response = getattr(studio_client, method)(f"{POSTS}999999/{suffix}", {}, format="json")
+        assert response.status_code == 404
+
+    def test_publish_refuses_a_blank_title_or_an_empty_body(self, studio_client):
+        post = create_post(studio_client, title="Has a title")
+        assert studio_client.post(f"{POSTS}{post['id']}/publish/").status_code == 400
+        BlogPost.objects.filter(pk=post["id"]).update(title="   ")
+        studio_client.patch(f"{POSTS}{post['id']}/", {"content_blocks": blocks("x")}, format="json")
+        response = studio_client.post(f"{POSTS}{post['id']}/publish/")
+        assert response.status_code == 400
+        assert "title" in response.json()["detail"]
+
+    def test_publish_keeps_an_existing_date_and_takes_an_explicit_one(self, studio_client):
+        post = create_post(studio_client)
+        studio_client.patch(f"{POSTS}{post['id']}/", {"content_blocks": blocks("x")}, format="json")
+        first = studio_client.post(
+            f"{POSTS}{post['id']}/publish/", {"published_at": "2026-01-02T00:00:00Z"}, format="json"
+        ).json()
+        assert first["published_at"].startswith("2026-01-02")
+        studio_client.post(f"{POSTS}{post['id']}/unpublish/")
+        again = studio_client.post(f"{POSTS}{post['id']}/publish/").json()
+        assert again["published_at"].startswith("2026-01-02")
+
+    def test_taxonomy_creation_edge_cases(self, studio_client):
+        assert (
+            studio_client.post(f"{POSTS}categories/", {"name": " "}, format="json").status_code
+            == 400
+        )
+        assert (
+            studio_client.post(f"{POSTS}authors/", {"name": ""}, format="json").status_code == 400
+        )
+        BlogCategory.objects.create(name="Design", slug="design")
+        existing = studio_client.post(f"{POSTS}categories/", {"name": "design"}, format="json")
+        assert existing.status_code == 200
+        # A new name whose slug collides with an existing slug gets a suffix.
+        BlogCategory.objects.create(name="Zoning rules", slug="zoning")
+        clash = studio_client.post(f"{POSTS}categories/", {"name": "Zoning"}, format="json")
+        assert clash.status_code == 201
+        assert clash.json()["slug"].startswith("zoning-")
+        author = Author.objects.create(name="Maya Ellison", role="Architect")
+        found = studio_client.post(f"{POSTS}authors/", {"name": "maya ellison"}, format="json")
+        assert found.json()["id"] == author.pk
+
+    def test_detail_get_returns_the_editor_payload(self, studio_client):
+        post = create_post(studio_client, title="Readable")
+        response = studio_client.get(f"{POSTS}{post['id']}/")
+        assert response.status_code == 200
+        assert response.json()["title"] == "Readable"
+
+
+class TestSlugs:
+    def test_a_colliding_slug_is_refused_and_a_blank_one_is_regenerated(self, studio_client):
+        first = create_post(studio_client, title="Same title")
+        second = create_post(studio_client, title="Same title")
+        assert second["slug"].startswith("same-title-")  # unique_slug walked to a suffix
+        clash = studio_client.patch(
+            f"{POSTS}{second['id']}/", {"slug": first["slug"]}, format="json"
+        )
+        assert clash.status_code == 400
+        assert "already uses" in str(clash.json())
+        blank = studio_client.patch(f"{POSTS}{second['id']}/", {"slug": ""}, format="json")
+        assert blank.status_code == 200
+        assert blank.json()["slug"].startswith("same-title")
+        renamed = studio_client.patch(
+            f"{POSTS}{second['id']}/", {"slug": "a-fresh-address"}, format="json"
+        )
+        assert renamed.status_code == 200
+        assert renamed.json()["slug"] == "a-fresh-address"

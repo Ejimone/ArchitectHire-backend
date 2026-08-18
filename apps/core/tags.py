@@ -101,6 +101,10 @@ _TAGS_BY_MODEL = {
         _page(f"city:{obj.slug}"),
     },
     "payments.subscriptionplan": lambda obj: {"cms:plans"},
+    "search.popularsearch": lambda obj: {"cms:search"},
+    # Bookkeeping, not content: nothing rendered reads it. Tagged at its own (uncached)
+    # surface so a seed run does not purge the site.
+    "cms.seedrun": lambda obj: {"cms:seed"},
 }
 
 # Everything else in these apps feeds pricing and the jurisdiction database wholesale.

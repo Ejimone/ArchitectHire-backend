@@ -1845,7 +1845,7 @@
     "scope": "chrome",
     "key": "footer_terms",
     "text": "Terms of Service",
-    "href": "/privacy#terms"
+    "href": "/terms"
   },
   {
     "scope": "chrome",
