@@ -1,6 +1,132 @@
 # Deploying ArchitectHire — runbooks
 
-## As deployed (2026-08-11)
+## Target deployment (2026-08-19 →): Oracle Cloud VM + Vercel
+
+| Piece | Where | Notes |
+|---|---|---|
+| Backend API + admin + WebSockets | **Oracle Cloud VM** (Always-Free tier), `docker-compose.prod.yml` — https://api.architecthire.com | Postgres 18 + Redis 7 + Django (gunicorn/uvicorn workers) + Caddy, all on the box. Deploys are `git pull && dc build web && dc run --rm web python manage.py migrate && dc up -d web`. |
+| Media | The VM's disk, `/srv/architecthire/media`, served by Caddy at `https://api.architecthire.com/media/` (`MEDIA_BACKEND=local`) | Bind-mounted (never a named volume), nightly `tar` to `/srv/backups`. Private files (deliverables, credential scans) in `/srv/architecthire/media-private`, reachable only through signed 10-minute URLs (`/api/v1/files/?t=…`). |
+| Site | **Vercel** — https://architecthire.com | Unchanged. `API_URL` / `NEXT_PUBLIC_API_URL` → `https://api.architecthire.com`, `BACKEND_MEDIA_HOST=api.architecthire.com`. |
+| Studio | **Vercel** — https://architecthire-studio.vercel.app (optionally `studio.architecthire.com`) | `STUDIO_API_URL` and `NEXT_PUBLIC_STUDIO_API_URL` → `https://api.architecthire.com`, `NEXT_PUBLIC_SITE_URL=https://architecthire.com`, `BACKEND_MEDIA_HOST=api.architecthire.com`. |
+
+Everything below "As deployed (2026-08-11)" describes the DigitalOcean deployment this
+replaced; it is kept for the rollback window and for the history.
+
+### 0. Prerequisites
+
+- An Oracle VM (Ubuntu 22.04/24.04, ARM64 `VM.Standard.A1.Flex` or x86) with a public IP,
+  SSH access, and — in the OCI console — the VCN's **security list ingress rules for TCP
+  80 and 443** from `0.0.0.0/0`.
+- DNS: an `A` record `api.architecthire.com → <VM public IP>` (lower the TTL to 60 s a day
+  before cutover). Caddy issues the certificate on first request once the name resolves.
+- The current `.env.prod` values from the DigitalOcean app spec (secrets never leave the
+  owner's machine — copy them into the VM's `.env.prod` by hand or `scp`).
+
+### 1. Prepare the VM (once)
+
+```bash
+ssh ubuntu@<ip>
+# Docker CE + compose plugin (official repository)
+sudo apt-get update && sudo apt-get install -y ca-certificates curl gnupg rclone
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] \
+  https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo $VERSION_CODENAME) stable" \
+  | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
+sudo apt-get update && sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+sudo usermod -aG docker $USER && newgrp docker
+
+# Oracle's Ubuntu images ship an iptables INPUT chain that REJECTs everything but 22.
+# The cloud firewall (security list) is not enough — open 80/443 on the host too:
+sudo iptables -I INPUT 6 -m state --state NEW -p tcp --dport 80 -j ACCEPT
+sudo iptables -I INPUT 6 -m state --state NEW -p tcp --dport 443 -j ACCEPT
+sudo iptables -I INPUT 6 -m state --state NEW -p udp --dport 443 -j ACCEPT
+sudo apt-get install -y iptables-persistent && sudo netfilter-persistent save
+
+# Directories the containers bind-mount. Owned by uid 999 (the `app` user in the image).
+sudo mkdir -p /srv/architecthire/media /srv/architecthire/media-private /srv/backups
+sudo chown -R 999:999 /srv/architecthire
+```
+
+### 2. Code and configuration
+
+```bash
+sudo mkdir -p /srv/architecthire && sudo chown $USER /srv/architecthire
+git clone https://github.com/Ejimone/ArchitectHire-backend.git /srv/architecthire/ArchitectHire-backend
+cd /srv/architecthire/ArchitectHire-backend
+cp .env.prod.example .env.prod && chmod 600 .env.prod
+nano .env.prod          # every value; see the example file for what each is
+alias dc='docker compose --env-file .env.prod -f docker-compose.prod.yml'
+```
+
+### 3. Build, restore the data, start
+
+```bash
+dc build
+dc up -d db redis
+
+# --- Data: bring the DigitalOcean database across (PG 18 → PG 18) -----------------
+# On the laptop (pg_dump 18 client; the DO URL needs ?sslmode=require):
+#   pg_dump "$DO_DATABASE_URL" -Fc --no-owner --no-acl -f architecthire.dump
+#   scp architecthire.dump ubuntu@<ip>:/tmp/
+dc exec -T db pg_restore -U architecthire -d architecthire --no-owner --no-acl < /tmp/architecthire.dump
+dc run --rm web python manage.py migrate         # applies anything newer than the dump
+dc run --rm web python manage.py showmigrations | grep -c '\[X\]'
+
+# --- Media: copy the Spaces bucket onto the disk (storage names are unchanged) ----
+rclone config    # new remote "spaces": type s3, provider DigitalOcean, the bucket's keys,
+                 # endpoint sfo3.digitaloceanspaces.com
+rclone sync spaces:allsermon-media/media /srv/architecthire/media -P
+sudo chown -R 999:999 /srv/architecthire/media
+dc run --rm web python manage.py sync_media_slots  # inventory rows for anything new
+
+dc up -d                                          # web + caddy
+dc ps
+```
+
+### 4. Verify, then point the world at it
+
+```bash
+curl -s https://api.architecthire.com/healthz             # {"status":"ok"} db=ok cache=ok
+curl -s https://api.architecthire.com/api/health/         # 200
+curl -sI https://api.architecthire.com/media/cms/slots/landing__hero-arch.webp | head -1   # 200
+curl -s https://api.architecthire.com/api/v1/content/pages/landing/ | head -c 300
+```
+
+Then, in this order:
+
+1. **Vercel — site** (`vercel env` or the dashboard): `API_URL`, `NEXT_PUBLIC_API_URL` →
+   `https://api.architecthire.com`; `BACKEND_MEDIA_HOST=api.architecthire.com`. Redeploy
+   (`NEXT_PUBLIC_*` are baked at build).
+2. **Vercel — studio**: `STUDIO_API_URL`, `NEXT_PUBLIC_STUDIO_API_URL` →
+   `https://api.architecthire.com`; `NEXT_PUBLIC_SITE_URL=https://architecthire.com`;
+   `BACKEND_MEDIA_HOST=api.architecthire.com`. Redeploy.
+3. **Clerk** dashboard → Webhooks → edit the endpoint URL to
+   `https://api.architecthire.com/api/webhooks/clerk/` (editing keeps the signing secret).
+4. **Stripe** dashboard → Developers → Webhooks → add
+   `https://api.architecthire.com/api/webhooks/stripe/` (a new endpoint has a new signing
+   secret → `STRIPE_WEBHOOK_SECRET` in `.env.prod` → `dc up -d --force-recreate web`).
+5. Vercel Cron already targets `API_URL`; nothing to change.
+
+### 5. Day-2
+
+| Task | Command |
+|---|---|
+| Deploy a change | `git pull && dc build web && dc run --rm web python manage.py migrate && dc up -d web` |
+| After editing `.env.prod` | `dc up -d --force-recreate web` (a plain restart does not re-read the file) |
+| Logs | `dc logs -f web` / `dc logs -f caddy` |
+| Django shell | `dc exec web python manage.py shell` |
+| Postgres shell | `dc exec db psql -U architecthire` |
+| Backup (add to `crontab -e`, nightly) | `cd /srv/architecthire/ArchitectHire-backend && dc exec -T db pg_dump -U architecthire -Fc architecthire > /srv/backups/db-$(date +%F).dump && tar czf /srv/backups/media-$(date +%F).tgz -C /srv/architecthire media media-private && find /srv/backups -mtime +7 -delete` |
+| Rollback to DigitalOcean (kept running for the soak week) | Flip the Vercel envs back, `dc down`; re-dump the VM's Postgres into DO if any writes happened in between |
+
+Health: `/healthz` is answered by asgi.py before Django and reflects the DB pool and Redis;
+Docker's own healthcheck polls it. Sizing: `WEB_CONCURRENCY` workers × ~150 MB; the
+Always-Free A1 (24 GB) is comfortable at 4–8.
+
+---
+
+## As deployed (2026-08-11) — DigitalOcean (superseded, kept for rollback)
 
 | Piece | Where | Notes |
 |---|---|---|

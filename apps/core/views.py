@@ -3,8 +3,9 @@ import logging
 
 from django.conf import settings
 from django.core.cache import cache
+from django.core.files.storage import storages
 from django.db import connection
-from django.http import JsonResponse
+from django.http import FileResponse, Http404, HttpResponseForbidden, JsonResponse
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.status import (
@@ -16,6 +17,7 @@ from rest_framework.status import (
 from rest_framework.views import APIView
 
 from apps.core.background import NOTIFY_POOL, run_in_background
+from apps.core.storages import unsign_private_name
 from apps.payments.tasks import cleanup_stale_data, sweep_pending_payouts
 from apps.search.tasks import rebuild_search_index
 
@@ -101,3 +103,22 @@ class CronRunView(APIView):
             run_in_background(NOTIFY_POOL, f"cron:{name}", task)
             started.append(name)
         return Response({"job": job, "started": started}, status=HTTP_202_ACCEPTED)
+
+
+def private_file(request):
+    """Serve one private file (a deliverable, a credential scan) named by a signed token.
+
+    Only meaningful when `STORAGES["private"]` is `SignedLocalStorage` — that backend is
+    what issues the tokens. A forged or expired token is a 403, a token for a file that no
+    longer exists is a 404, and a valid one streams the file with a no-store cache header
+    so a browser does not keep a copy past the link's lifetime.
+    """
+    name = unsign_private_name(request.GET.get("t", ""))
+    if name is None:
+        return HttpResponseForbidden("This link has expired or is not valid.")
+    storage = storages["private"]
+    if not storage.exists(name):
+        raise Http404
+    response = FileResponse(storage.open(name, "rb"), as_attachment=False)
+    response["Cache-Control"] = "private, no-store"
+    return response

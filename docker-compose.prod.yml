@@ -1,22 +1,76 @@
-# Production compose — one DigitalOcean droplet runs the whole stack.
+# Production compose — one VM runs the whole backend (Oracle Cloud, Ubuntu, ARM64 or x86).
 #
-# Postgres is NOT here: it lives in the owner's existing shared managed cluster
-# (create a database for architecthire inside it and point DATABASE_URL at it —
-# see DEPLOY.md). Redis stays local to the droplet; it holds only cache,
-# queues and presence, nothing that needs managed durability.
+#   Postgres 18 (must match the major version the data was dumped from — the DigitalOcean
+#   cluster it migrated off was PG 18; a custom-format dump does not restore across majors)
+#   Redis 7   (cache, presence, channels layer)
+#   web       Django under gunicorn/uvicorn workers; WEB_CONCURRENCY workers
+#   caddy     HTTPS termination with automatic certificates, serves /media/ from disk,
+#             proxies everything else (HTTP + WebSocket) to web
 #
-#   docker compose -f docker-compose.prod.yml build
-#   docker compose -f docker-compose.prod.yml run --rm web python manage.py migrate
-#   docker compose -f docker-compose.prod.yml run --rm web python manage.py seed --all
-#   docker compose -f docker-compose.prod.yml run --rm web python manage.py collectstatic --noinput
-#   docker compose -f docker-compose.prod.yml up -d
+# Media lives on the host at ${MEDIA_DIR:-/srv/architecthire/media} — bind-mounted so a
+# `docker compose down -v` cannot take the agency's photographs with it — and Caddy serves
+# it read-only at https://${API_HOST}/media/. Private files (deliverables, credentials)
+# live in ${PRIVATE_MEDIA_DIR:-/srv/architecthire/media-private}, which Caddy never sees;
+# Django hands out signed, expiring URLs for them.
+#
+# Compose interpolates ${…} from `--env-file`, and the Django services read the same file
+# through `env_file`, so one file holds everything:
+#   alias dc='docker compose --env-file .env.prod -f docker-compose.prod.yml'
+# First run (see DEPLOY.md for the full runbook):
+#   dc build && dc up -d db redis
+#   dc run --rm web python manage.py migrate
+#   dc run --rm web python manage.py seed --all      # a floor: fills an empty DB only
+#   dc up -d
+# Every later deploy:
+#   git pull && dc build web && dc run --rm web python manage.py migrate && dc up -d web
 
 name: architecthire-prod
 
+x-django: &django
+  build: .
+  restart: unless-stopped
+  env_file: .env.prod
+  environment:
+    DJANGO_SETTINGS_MODULE: architecture_backend.settings.prod
+    REDIS_URL: redis://redis:6379
+    DATABASE_URL: postgres://${POSTGRES_USER:-architecthire}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB:-architecthire}
+    MEDIA_BACKEND: local
+    MEDIA_ROOT: /app/media
+    PRIVATE_MEDIA_ROOT: /app/media-private
+    MEDIA_URL: https://${API_HOST}/media/
+  volumes:
+    - ${MEDIA_DIR:-/srv/architecthire/media}:/app/media
+    - ${PRIVATE_MEDIA_DIR:-/srv/architecthire/media-private}:/app/media-private
+  depends_on:
+    db:
+      condition: service_healthy
+    redis:
+      condition: service_healthy
+
 services:
+  db:
+    image: postgres:18-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-architecthire}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:-architecthire}
+    volumes:
+      - pgdata:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-architecthire} -d ${POSTGRES_DB:-architecthire}"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    # Not published on the host: only the compose network can reach it. Use
+    # `docker compose exec db psql -U architecthire` for a shell.
+
   redis:
     image: redis:7-alpine
     restart: unless-stopped
+    command: ["redis-server", "--maxmemory", "256mb", "--maxmemory-policy", "allkeys-lru"]
+    volumes:
+      - redisdata:/data
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 5s
@@ -24,73 +78,49 @@ services:
       retries: 10
 
   web:
-    build: .
-    restart: unless-stopped
-    env_file: .env.prod
-    environment:
-      DJANGO_SETTINGS_MODULE: architecture_backend.settings.prod
-      REDIS_URL: redis://redis:6379
+    <<: *django
+    # Workers are the HTTP concurrency limit (Django runs sync views on one thread per
+    # worker). A worker is ~150 MB resident; size WEB_CONCURRENCY to the VM: 2 on a
+    # 1 GB box, 4 on 4 GB+, 6-8 on an Always-Free ARM A1 (24 GB).
+    command:
+      - gunicorn
+      - architecture_backend.asgi:application
+      - -k
+      - uvicorn_worker.UvicornWorker
+      - -b
+      - 0.0.0.0:8000
+      - --workers
+      - ${WEB_CONCURRENCY:-4}
+      - --max-requests
+      - "1000"
+      - --max-requests-jitter
+      - "200"
+      - --graceful-timeout
+      - "30"
+      - --access-logfile
+      - "-"
     expose:
       - "8000"
-    volumes:
-      - staticfiles:/app/staticfiles
-      - media:/app/media
-    depends_on:
-      redis:
-        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/healthz', timeout=5).status == 200 else 1)\""]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 
+  # Background workers are opt-in: notifications and cron jobs run in-process / from
+  # Vercel Cron by default (NOTIFY_VIA_CELERY=false). Start them with
+  #   docker compose -f docker-compose.prod.yml --profile workers up -d
+  # after setting NOTIFY_VIA_CELERY=true in .env.prod.
   worker:
-    build: .
-    restart: unless-stopped
-    command: celery -A architecture_backend worker -l info -Q default,notifications --concurrency 4
-    env_file: .env.prod
-    environment:
-      DJANGO_SETTINGS_MODULE: architecture_backend.settings.prod
-      REDIS_URL: redis://redis:6379
-    volumes:
-      - media:/app/media
-    depends_on:
-      redis:
-        condition: service_healthy
+    <<: *django
+    profiles: ["workers"]
+    command: celery -A architecture_backend worker -l info -Q default,notifications --concurrency 2
 
   beat:
-    build: .
-    restart: unless-stopped
+    <<: *django
+    profiles: ["workers"]
     command: celery -A architecture_backend beat -l info
-    env_file: .env.prod
-    environment:
-      DJANGO_SETTINGS_MODULE: architecture_backend.settings.prod
-      REDIS_URL: redis://redis:6379
-    depends_on:
-      redis:
-        condition: service_healthy
-
-  frontend:
-    # The frontend repo sits beside this one on the droplet:
-    #   /srv/architecthire/ArchitectHire-backend  (this file)
-    #   /srv/architecthire/Architecture-hire
-    build:
-      context: ../Architecture-hire
-      args:
-        # NEXT_PUBLIC_* ship to the browser and are baked at build time.
-        # API_URL is used server-side during the build's prerender pass, so the
-        # backend must be up before building the frontend (DEPLOY.md orders this).
-        API_URL: http://web:8000
-        NEXT_PUBLIC_API_URL: https://${SITE_HOST}
-        NEXT_PUBLIC_SITE_URL: https://${SITE_HOST}
-        NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
-        NEXT_PUBLIC_VAPID_PUBLIC_KEY: ${NEXT_PUBLIC_VAPID_PUBLIC_KEY}
-        NEXT_PUBLIC_ENABLE_PUSH: ${NEXT_PUBLIC_ENABLE_PUSH:-1}
-        BACKEND_MEDIA_HOST: ${SITE_HOST}
-    restart: unless-stopped
-    environment:
-      API_URL: http://web:8000
-      CLERK_SECRET_KEY: ${CLERK_SECRET_KEY}
-      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
-    expose:
-      - "3000"
-    depends_on:
-      - web
 
   caddy:
     image: caddy:2-alpine
@@ -98,19 +128,19 @@ services:
     ports:
       - "80:80"
       - "443:443"
+      - "443:443/udp"
     environment:
-      SITE_HOST: ${SITE_HOST}
+      API_HOST: ${API_HOST}
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - media:/srv/media:ro
+      - ${MEDIA_DIR:-/srv/architecthire/media}:/srv/media:ro
       - caddy_data:/data
       - caddy_config:/config
     depends_on:
       - web
-      - frontend
 
 volumes:
-  staticfiles:
-  media:
+  pgdata:
+  redisdata:
   caddy_data:
   caddy_config:

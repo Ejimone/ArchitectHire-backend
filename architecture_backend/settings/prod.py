@@ -1,4 +1,4 @@
-"""Production settings — hardened, DigitalOcean Spaces media, Sentry."""
+"""Production settings — hardened, object-storage or VM-disk media, Sentry."""
 
 import sentry_sdk
 from django.core.exceptions import ImproperlyConfigured
@@ -31,41 +31,63 @@ SESSION_COOKIE_HTTPONLY = True
 X_FRAME_OPTIONS = "DENY"
 
 # --- Media -------------------------------------------------------------------
-# DigitalOcean Spaces, and only Spaces.
+# Two supported shapes, chosen explicitly with MEDIA_BACKEND. Never a silent fallback:
+# a FileSystemStorage that nothing serves accepts uploads and 404s every one of them, and
+# on an ephemeral filesystem loses them at the next deploy — that failure was live once.
 #
-# There used to be a FileSystemStorage fallback here for "test-mode deploys without a
-# bucket", justified by a droplet where Caddy served /media from a shared volume. On App
-# Platform — the deployment we actually run — that fallback is worse than useless:
-# `urls.py` mounts MEDIA_URL only when DEBUG, and whitenoise is never given
-# WHITENOISE_ROOT, so *every* media URL 404s. Worse, the container filesystem is
-# ephemeral, so each upload also vanished on the next deploy. It failed silently: the
-# admin reported a successful save and the site showed a broken image.
-#
-# So: refuse to boot instead. A missing credential is a deployment mistake, and a
-# container that will not start is a mistake you find in 30 seconds rather than in a
-# demo. The droplet runbook in DEPLOY.md sets these too.
-_missing_media_env = [
-    name
-    for name, value in (
-        ("AWS_ACCESS_KEY_ID", AWS_ACCESS_KEY_ID),
-        ("AWS_SECRET_ACCESS_KEY", AWS_SECRET_ACCESS_KEY),
-        ("AWS_STORAGE_BUCKET_NAME", AWS_STORAGE_BUCKET_NAME),
-        ("AWS_S3_ENDPOINT_URL", AWS_S3_ENDPOINT_URL),
-    )
-    if not value
-]
-if _missing_media_env:
-    raise ImproperlyConfigured(
-        "Object storage is required in production; these are unset: "
-        f"{', '.join(_missing_media_env)}. Without them Django would accept uploads and "
-        "serve 404 for every one of them. Set them in the App Platform app spec."
-    )
+#   MEDIA_BACKEND=s3     Object storage (DigitalOcean Spaces or any S3-compatible bucket).
+#                        Requires the four AWS_* values; refuses to boot without them.
+#   MEDIA_BACKEND=local  The VM's disk. MEDIA_URL must be the *absolute* public URL Caddy
+#                        serves MEDIA_ROOT at (https://api.architecthire.com/media/), so
+#                        the frontends' image allowlists see a stable hostname. Private
+#                        files live outside MEDIA_ROOT and are only reachable through
+#                        signed, expiring URLs (apps.core.storages.SignedLocalStorage).
+MEDIA_BACKEND = env("MEDIA_BACKEND", default="s3")
 
-STORAGES = {
-    "default": {"BACKEND": "apps.core.storages.PublicMediaStorage"},
-    "private": {"BACKEND": "apps.core.storages.PrivateMediaStorage"},
-    "staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"},
-}
+if MEDIA_BACKEND == "local":
+    MEDIA_ROOT = env("MEDIA_ROOT", default="/app/media")
+    MEDIA_URL = env("MEDIA_URL")  # required — absolute, with a trailing slash
+    if not MEDIA_URL.startswith(("http://", "https://")) or not MEDIA_URL.endswith("/"):
+        raise ImproperlyConfigured(
+            "MEDIA_URL must be an absolute URL ending in '/' when MEDIA_BACKEND=local, e.g. "
+            "https://api.architecthire.com/media/ — the frontends allowlist images by hostname."
+        )
+    PRIVATE_MEDIA_ROOT = env("PRIVATE_MEDIA_ROOT", default="/app/media-private")
+    STORAGES = {
+        "default": {
+            "BACKEND": "django.core.files.storage.FileSystemStorage",
+            "OPTIONS": {"location": MEDIA_ROOT, "base_url": MEDIA_URL},
+        },
+        "private": {
+            "BACKEND": "apps.core.storages.SignedLocalStorage",
+            "OPTIONS": {"location": PRIVATE_MEDIA_ROOT},
+        },
+        "staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"},
+    }
+elif MEDIA_BACKEND == "s3":
+    _missing_media_env = [
+        name
+        for name, value in (
+            ("AWS_ACCESS_KEY_ID", AWS_ACCESS_KEY_ID),
+            ("AWS_SECRET_ACCESS_KEY", AWS_SECRET_ACCESS_KEY),
+            ("AWS_STORAGE_BUCKET_NAME", AWS_STORAGE_BUCKET_NAME),
+            ("AWS_S3_ENDPOINT_URL", AWS_S3_ENDPOINT_URL),
+        )
+        if not value
+    ]
+    if _missing_media_env:
+        raise ImproperlyConfigured(
+            "Object storage is required when MEDIA_BACKEND=s3; these are unset: "
+            f"{', '.join(_missing_media_env)}. Without them Django would accept uploads and "
+            "serve 404 for every one of them. Set them, or set MEDIA_BACKEND=local."
+        )
+    STORAGES = {
+        "default": {"BACKEND": "apps.core.storages.PublicMediaStorage"},
+        "private": {"BACKEND": "apps.core.storages.PrivateMediaStorage"},
+        "staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"},
+    }
+else:
+    raise ImproperlyConfigured(f"MEDIA_BACKEND must be 's3' or 'local', not {MEDIA_BACKEND!r}.")
 
 # --- Email ------------------------------------------------------------------
 

@@ -1,24 +1,31 @@
-# One origin for the whole platform. Caddy terminates HTTPS (automatic
-# certificates once SITE_HOST resolves to the droplet) and routes:
-#   /api/* /admin/* /ws/*  → Django
-#   /media/*               → uploaded files (droplet-local mode; with Spaces
-#                            configured, media URLs bypass Caddy entirely)
-#   everything else        → Next.js
+# The backend's front door. Caddy terminates HTTPS (certificates are issued and renewed
+# automatically once API_HOST resolves to this machine and ports 80/443 are open) and:
+#   /media/*        → uploaded images, straight from disk, long-cached (filenames never
+#                     change — storage never overwrites, so a URL is immutable)
+#   everything else → Django (HTTP and WebSocket alike; the upgrade is transparent)
+#
+# /healthz stays on Django on purpose: it is a readiness probe for the app, not for Caddy.
 
-{$SITE_HOST} {
-	encode gzip
+{$API_HOST} {
+	encode zstd gzip
 
-	@backend path /api/* /admin/* /ws/*
-	handle @backend {
-		reverse_proxy web:8000
+	# Uploads: the studio sends whole photographs. Django enforces its own limit
+	# (STUDIO_MAX_UPLOAD_BYTES, 30 MB); this stops anything larger at the edge.
+	request_body {
+		max_size 32MB
 	}
 
 	handle_path /media/* {
 		root * /srv/media
+		header Cache-Control "public, max-age=31536000, immutable"
+		header Access-Control-Allow-Origin "*"
 		file_server
 	}
 
 	handle {
-		reverse_proxy frontend:3000
+		reverse_proxy web:8000 {
+			# Django's SECURE_PROXY_SSL_HEADER trusts this to know the request was HTTPS.
+			header_up X-Forwarded-Proto {scheme}
+		}
 	}
 }
