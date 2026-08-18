@@ -396,7 +396,26 @@ class ChromeView(StudioView):
         for label in CHROME_STRUCTURAL:
             model = engine.resolve_model(label)
             instances = [model.get_solo()] if label == "cms.sitesettings" else model.objects.all()
-            rows[label] = [{"id": obj.pk, **snapshot(obj)} for obj in instances]
+            file_fields = [
+                field for field in model._meta.fields if isinstance(field, models.FileField)
+            ]
+            rows[label] = [
+                {
+                    "id": obj.pk,
+                    **snapshot(obj),
+                    # Snapshots hold storage names; the editor needs a URL to *show* the
+                    # image (a nav item's picture, the settings hero).
+                    "files": {
+                        field.name: (
+                            request.build_absolute_uri(getattr(obj, field.name).url)
+                            if getattr(obj, field.name)
+                            else None
+                        )
+                        for field in file_fields
+                    },
+                }
+                for obj in instances
+            ]
         pending = {
             f"{draft.model_label}:{draft.canvas_id}": draft.op
             # Chrome rows are site-wide, which the draft engine records as scope "".

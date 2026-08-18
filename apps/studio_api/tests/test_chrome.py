@@ -64,3 +64,18 @@ class TestChrome:
         )
         body = studio_client.get("/api/v1/studio/chrome/").json()
         assert f"cms.copyblock:{draft.canvas_id}" not in body["pending"]
+
+
+@pytest.mark.django_db
+def test_rows_carry_file_urls_for_their_image_fields(studio_client, image_upload):
+    from apps.cms.models import NavGroup, NavItem
+
+    group = NavGroup.objects.create(menu="services", heading="Files probe")
+    item = NavItem.objects.create(group=group, label="With picture", href="/x")
+    item.image.save("nav.png", image_upload, save=True)
+    NavItem.objects.create(group=group, label="Without", href="/y")
+    body = studio_client.get("/api/v1/studio/chrome/").json()
+    rows = {row["label"]: row for row in body["rows"]["cms.navitem"]}
+    assert rows["With picture"]["files"]["image"].startswith("http")
+    assert rows["Without"]["files"]["image"] is None
+    assert "hero_image" in body["rows"]["cms.sitesettings"][0]["files"]
