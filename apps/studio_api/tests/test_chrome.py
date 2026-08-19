@@ -79,3 +79,77 @@ def test_rows_carry_file_urls_for_their_image_fields(studio_client, image_upload
     assert rows["With picture"]["files"]["image"].startswith("http")
     assert rows["Without"]["files"]["image"] is None
     assert "hero_image" in body["rows"]["cms.sitesettings"][0]["files"]
+
+
+@pytest.mark.django_db
+class TestSiteSettingsOnTheCanvas:
+    """The one piece of site chrome that travels *inside* a page payload.
+
+    The landing hero is painted from `settings.hero_image`, and site settings are
+    deliberately scope-blank because they are site-wide. `overlay()` filtered drafts on
+    scope alone, so replacing the hero was accepted, queued and badged as pending — and
+    the canvas went on rendering the live value. From the editor's chair the upload
+    simply did nothing.
+    """
+
+    def _stage(self, studio_client, image_upload):
+        settings_row = SiteSettings.get_solo()
+        stored = studio_client.post(
+            "/api/v1/studio/uploads/",
+            {"model_label": "cms.sitesettings", "field": "hero_image", "file": image_upload},
+            format="multipart",
+        )
+        assert stored.status_code == 200, stored.data
+        name = stored.json()["name"]
+        patched = studio_client.patch(
+            f"/api/v1/studio/rows/cms.sitesettings/{settings_row.pk}/",
+            {"hero_image": name},
+            format="json",
+        )
+        assert patched.status_code == 200, patched.data
+        return settings_row, name
+
+    def test_a_staged_hero_shows_on_the_canvas(self, studio_client, image_upload):
+        row, name = self._stage(studio_client, image_upload)
+
+        body = studio_client.get("/api/v1/studio/pages/landing/?mode=draft").json()
+
+        assert body["settings"]["hero_image"], "the draft canvas still shows the live hero"
+        assert name.rsplit("/", 1)[-1] in body["settings"]["hero_image"]
+        assert body["pending"][f"cms.sitesettings:{row.pk}"] == "update"
+
+    def test_live_mode_keeps_showing_the_published_hero(self, studio_client, image_upload):
+        self._stage(studio_client, image_upload)
+        published = SiteSettings.get_solo().hero_image.name
+
+        body = studio_client.get("/api/v1/studio/pages/landing/?mode=live").json()
+
+        # A draft must never leak into what the public site is serving.
+        hero = body["settings"]["hero_image"]
+        assert (hero is None) if not published else published.rsplit("/", 1)[-1] in hero
+
+    def test_settings_reach_every_page_not_just_the_one_that_was_open(
+        self, studio_client, image_upload
+    ):
+        """They are site-wide: the promo banner is on every page, so a pending change
+        has to be visible from whichever canvas the editor is standing on."""
+        _, name = self._stage(studio_client, image_upload)
+
+        body = studio_client.get("/api/v1/studio/pages/about/?mode=draft").json()
+
+        assert name.rsplit("/", 1)[-1] in body["settings"]["hero_image"]
+
+    def test_publishing_moves_it_to_live(self, studio_client, image_upload):
+        _, name = self._stage(studio_client, image_upload)
+
+        assert studio_client.post("/api/v1/studio/publish/").status_code == 200
+
+        body = studio_client.get("/api/v1/studio/pages/landing/?mode=live").json()
+        assert name.rsplit("/", 1)[-1] in body["settings"]["hero_image"]
+
+    def test_the_records_api_still_refuses_site_settings(self, studio_client):
+        """Why the studio panel must read the page payload rather than `/records/`:
+        site settings are chrome, not a collection, and this answers 400."""
+        row = SiteSettings.get_solo()
+        response = studio_client.get(f"/api/v1/studio/records/cms.sitesettings/{row.pk}/")
+        assert response.status_code == 400

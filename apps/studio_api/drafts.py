@@ -10,10 +10,11 @@ short-cuts the serializer previews a page the site would not render.
 from django.apps import apps as django_apps
 from django.core.exceptions import ValidationError
 from django.db import IntegrityError, models, transaction
+from django.db.models import Q
 from django.utils import timezone
 
 from apps.cms.compose import BLOCK_KEY_BY_LABEL, BLOCK_MODELS, BLOCK_SERIALIZERS
-from apps.cms.serializers import MediaAssetSerializer, PageSEOSerializer
+from apps.cms.serializers import MediaAssetSerializer, PageSEOSerializer, SiteSettingsSerializer
 from apps.core.tags import tags_for
 
 from .fields import assign, editable_fields, snapshot
@@ -33,6 +34,9 @@ CHROME_MODELS = [
     "cms.sociallink",
     "cms.sitesettings",
 ]
+
+#: The site-wide singleton whose fields ride inside every page payload.
+SETTINGS_LABEL = "cms.sitesettings"
 
 # Blocks, chrome, and every writable collection in `registry.py` (case studies, jobs,
 # the catalog, the jurisdiction prose, …). Read-only collections (contact submissions,
@@ -291,7 +295,13 @@ def overlay(payload: dict, page_key: str, request) -> dict:
     Returns the same payload object, plus a `pending` map naming the rows that carry
     unpublished edits so the canvas can badge them.
     """
-    drafts = list(ContentDraft.objects.filter(scope=page_key))
+    # Page-scoped drafts, plus site settings. A chrome row is deliberately scope-blank
+    # ("site-wide" — see `scope_for`), and for nav and footer that is the end of it: they
+    # reach the canvas through `/chrome/`, not through this payload. Site settings are the
+    # exception, because `settings` travels *inside* every page payload and the landing
+    # hero is painted from it. Filtering on scope alone left that draft invisible here, so
+    # replacing the hero staged correctly, badged correctly, and changed nothing on screen.
+    drafts = list(ContentDraft.objects.filter(Q(scope=page_key) | Q(model_label=SETTINGS_LABEL)))
     pending = {}
     touched_collections = {}
 
@@ -348,6 +358,15 @@ def overlay(payload: dict, page_key: str, request) -> dict:
         elif label == "cms.pageseo":
             obj = _row_for(model, draft, _live_row(model, draft))
             payload["seo"] = PageSEOSerializer(obj, context={"request": request}).data
+
+        elif label == "cms.sitesettings":
+            # The one piece of site chrome that travels inside a page payload: the canvas
+            # paints the landing hero from `settings.hero_image`. Without this the write
+            # was accepted, the draft was queued, the row badged as pending — and the
+            # canvas went on rendering the live value, so replacing the hero looked like
+            # it had done nothing at all until someone pressed Publish.
+            obj = _row_for(model, draft, _live_row(model, draft))
+            payload["settings"] = SiteSettingsSerializer(obj, context={"request": request}).data
 
     _resort(payload, touched_collections)
     payload["pending"] = pending

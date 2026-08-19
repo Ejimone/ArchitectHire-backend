@@ -75,9 +75,7 @@ class TestCopyMediaLocal:
         """A credential scan must never end up under a root Caddy serves as static files."""
         from apps.providers.models import Credential
 
-        user = django_user_model.objects.create_user(
-            email="copy-probe@example.com", password="x"
-        )
+        user = django_user_model.objects.create_user(email="copy-probe@example.com", password="x")
         credential = Credential.objects.create(user=user, kind=Credential.Kind.PE_LICENSE)
         credential.document.save("licence.pdf", ContentFile(b"private bytes"), save=True)
 
