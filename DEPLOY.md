@@ -124,6 +124,45 @@ Health: `/healthz` is answered by asgi.py before Django and reflects the DB pool
 Docker's own healthcheck polls it. Sizing: `WEB_CONCURRENCY` workers × ~150 MB; the
 Always-Free A1 (24 GB) is comfortable at 4–8.
 
+### 6. Taking media off DigitalOcean Spaces
+
+The running containers still store media in the bucket (probed 2026-08-19: `GET
+https://<api-host>/media/cms/slots/landing__hero-arch.webp` 404s while the same path on
+the bucket 200s). Moving it onto the VM's disk is what lets the Spaces bill stop; Caddy
+already serves `/media/*` from `/srv/architecthire/media`, and the compose file already
+bind-mounts it.
+
+**The database stores names, not URLs** — `cms/case-cards/adu-3.webp` — and the public URL
+is built from `MEDIA_URL` when a page renders. So a byte-for-byte copy under the same
+names *is* the whole migration: no rows change, no links are rewritten, and the rollback
+is one variable.
+
+```bash
+cd /srv/architecthire/ArchitectHire-backend
+alias dc='docker compose --env-file .env.prod -f docker-compose.prod.yml'
+
+# 1. Copy, while the site is still serving from the bucket. Nothing changes for anyone;
+#    safe to run as many times as you like — it skips what is already there.
+dc run --rm web python manage.py copy_media_local --dry-run   # what would move
+dc run --rm web python manage.py copy_media_local
+
+# 2. Flip the switch. MEDIA_URL must be absolute and end in a slash: the two Vercel
+#    projects allowlist images by hostname.
+printf 'MEDIA_BACKEND=local\nMEDIA_URL=https://<api-host>/media/\n' >> .env.prod
+dc up -d --force-recreate web        # a plain restart does not re-read .env.prod
+
+# 3. Verify before touching the bucket.
+curl -sI https://<api-host>/media/cms/slots/landing__hero-arch.webp | head -1   # 200
+```
+
+Then set `BACKEND_MEDIA_HOST=<api-host>` on both Vercel projects and redeploy them
+(`NEXT_PUBLIC_*` and the image allowlist are baked at build time). **Keep the Spaces host
+in both allowlists for one release** as a safety net, and only cancel the bucket after a
+week of the site serving its own images.
+
+Rollback is `MEDIA_BACKEND=s3` and `dc up -d --force-recreate web`: the objects are still
+in the bucket, because the copy only ever reads from it.
+
 ---
 
 ## As deployed (2026-08-11) — DigitalOcean (superseded, kept for rollback)
