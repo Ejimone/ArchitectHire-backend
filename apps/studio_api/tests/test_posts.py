@@ -260,6 +260,17 @@ class TestTaxonomy:
         assert response.status_code == 201
         assert Author.objects.filter(name="Test Newcomer, AIA").exists()
 
+    def test_authors_carry_their_portrait_for_the_editor_preview(self, studio_client, image_upload):
+        author = Author.objects.create(name="Portrait Probe", role="Architect")
+        body = studio_client.get(POSTS).json()
+        rows = {a["name"]: a for a in body["authors"]}
+        assert rows["Portrait Probe"]["photo"] is None
+
+        author.photo.save("face.png", image_upload, save=True)
+        body = studio_client.get(POSTS).json()
+        rows = {a["name"]: a for a in body["authors"]}
+        assert rows["Portrait Probe"]["photo"].startswith("http")
+
 
 class TestCachePurge:
     """A blog write must not throw away every cached page payload on the site."""

@@ -31,7 +31,7 @@ def posts_queryset():
     return BlogPost.objects.select_related("category", "author").prefetch_related("content_blocks")
 
 
-def taxonomy() -> dict:
+def taxonomy(request=None) -> dict:
     """The dropdown contents, sent alongside every list so the editor needs no second call."""
     return {
         "categories": [
@@ -39,7 +39,16 @@ def taxonomy() -> dict:
             for c in BlogCategory.objects.all().order_by("sort_order", "name")
         ],
         "authors": [
-            {"id": a.pk, "name": a.name, "role": a.role}
+            {
+                "id": a.pk,
+                "name": a.name,
+                "role": a.role,
+                # The editor's live preview draws the byline; without this it always drew
+                # the placeholder, even for an author whose portrait is set.
+                "photo": (
+                    request.build_absolute_uri(a.photo.url) if (request and a.photo) else None
+                ),
+            }
             for a in Author.objects.all().order_by("name")
         ],
         "kinds": [
@@ -71,7 +80,7 @@ class PostListView(StudioView):
         queryset = queryset.order_by("-updated_at")
 
         rows = PostSummarySerializer(queryset, many=True, context={"request": request}).data
-        return Response({"results": rows, "count": len(rows), **taxonomy()})
+        return Response({"results": rows, "count": len(rows), **taxonomy(request)})
 
     def post(self, request):
         title = (request.data.get("title") or "Untitled post").strip() or "Untitled post"
