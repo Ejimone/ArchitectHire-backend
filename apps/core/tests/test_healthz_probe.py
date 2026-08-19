@@ -47,7 +47,20 @@ class TestProbe:
     def test_a_healthy_app_reports_ok(self):
         status, body = _probe()
         assert status == 200
-        assert body == b"db=ok cache=ok"
+        assert body.startswith(b"db=ok cache=ok started=")
+
+    def test_the_body_names_when_the_process_started(self):
+        """A deploy here is a `git push` and nothing reports back, so "did it land?" was
+        answered by polling for a gap in this endpoint and hoping to catch a restart that
+        can be over in seconds. The start time settles it in one request."""
+        from datetime import UTC, datetime
+
+        _, body = _probe()
+
+        stamp = body.decode().split("started=")[1]
+        started = datetime.fromisoformat(stamp.replace("Z", "+00:00"))
+        assert started <= datetime.now(UTC)
+        assert stamp.endswith("Z"), "UTC, so it can be compared against a push time"
 
     def test_a_dead_database_fails_the_probe(self, monkeypatch):
         """The regression this endpoint was rebuilt for.
@@ -75,7 +88,7 @@ class TestProbe:
 
         status, body = _probe()
         assert status == 200
-        assert body == b"db=ok cache=fail"
+        assert body.startswith(b"db=ok cache=fail started=")
 
     def test_a_check_that_hangs_answers_unhealthy_rather_than_hanging(self, monkeypatch):
         """The pool's own timeout is 10s; a probe that waited for it would be killed by
@@ -162,7 +175,7 @@ class TestHealthzRouting:
 
         asyncio.run(run())
         assert sent[0]["status"] == 200  # not the 400 DisallowedHost would give
-        assert sent[1]["body"] == b"db=ok cache=ok"
+        assert sent[1]["body"].startswith(b"db=ok cache=ok started=")
         assert (b"cache-control", b"no-store") in sent[0]["headers"]
 
 

@@ -27,6 +27,7 @@ import asyncio
 import logging
 import time
 from concurrent.futures import ThreadPoolExecutor
+from datetime import UTC, datetime
 
 from django.core.cache import cache
 from django.db import connections
@@ -45,6 +46,15 @@ TIMEOUT_SECONDS = 3.0
 #: thread that serves requests; sharing a pool with anything else would reintroduce the
 #: starvation this exists to avoid.
 _EXECUTOR = ThreadPoolExecutor(max_workers=1, thread_name_prefix="ah-health")
+
+#: When this process started, to the second, UTC.
+#:
+#: Deploys here are a `git push`: a hook on the VM pulls, rebuilds and restarts, and
+#: nothing in that loop reports back. Answering "did my push actually land?" from the
+#: outside meant polling for a gap in `/healthz` and hoping to catch a restart that can
+#: be over in seconds — twice today that guess was wrong in both directions. An uptime
+#: is not a secret and it settles the question in one request.
+_STARTED = datetime.now(UTC).replace(microsecond=0)
 
 _cached: tuple[float, int, bytes] | None = None
 _lock = asyncio.Lock()
@@ -77,7 +87,10 @@ def _check() -> tuple[int, bytes]:
 
     # Only the database gates readiness — see the module docstring on cascades.
     status = 200 if db_ok else 503
-    body = f"db={'ok' if db_ok else 'fail'} cache={'ok' if cache_ok else 'fail'}"
+    body = (
+        f"db={'ok' if db_ok else 'fail'} cache={'ok' if cache_ok else 'fail'} "
+        f"started={_STARTED.isoformat().replace('+00:00', 'Z')}"
+    )
     return status, body.encode()
 
 
