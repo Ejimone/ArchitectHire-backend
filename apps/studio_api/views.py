@@ -818,7 +818,15 @@ def _selected_drafts(request):
     its children), or everything."""
     queryset = ContentDraft.objects.all()
     if scope := request.data.get("scope"):
-        queryset = queryset.filter(scope=scope)
+        # Site settings travel inside every page payload — the landing hero is painted
+        # from `settings.hero_image` — so `overlay()` shows their pending edits on
+        # whichever canvas the editor is standing on, and the Publish button counts
+        # them. Selecting on scope alone would then count a change this button could
+        # never ship: press Publish, watch the number stay where it was. Whatever the
+        # canvas shows as pending is what publishing the canvas has to apply.
+        queryset = queryset.filter(
+            models.Q(scope=scope) | models.Q(model_label=engine.SETTINGS_LABEL)
+        )
     if ids := request.data.get("ids"):
         queryset = queryset.filter(pk__in=ids)
     label = (request.data.get("model_label") or "").lower()

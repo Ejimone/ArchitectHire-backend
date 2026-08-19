@@ -147,6 +147,37 @@ class TestSiteSettingsOnTheCanvas:
         body = studio_client.get("/api/v1/studio/pages/landing/?mode=live").json()
         assert name.rsplit("/", 1)[-1] in body["settings"]["hero_image"]
 
+    def test_publishing_the_page_clears_the_badge_it_shows(self, studio_client, image_upload):
+        """The regression that made the button look broken.
+
+        `overlay()` shows a pending settings edit on whichever canvas the editor is
+        standing on, and the Publish button counts what the canvas reports. Selecting
+        drafts on scope alone meant the page's own Publish could never ship the one it
+        was counting: press it, watch "Publish (1)" stay at one.
+        """
+        self._stage(studio_client, image_upload)
+        before = studio_client.get("/api/v1/studio/pages/landing/?mode=draft").json()
+        assert before["pending"], "the canvas has to be showing it for this to matter"
+
+        published = studio_client.post(
+            "/api/v1/studio/publish/", {"scope": "landing"}, format="json"
+        )
+
+        assert published.status_code == 200
+        assert published.json()["published"] >= 1
+        after = studio_client.get("/api/v1/studio/pages/landing/?mode=draft").json()
+        assert "cms.sitesettings:1" not in after["pending"]
+
+    def test_discarding_the_page_also_drops_it(self, studio_client, image_upload):
+        """Whatever a page's Publish applies, its Discard has to throw away — the count
+        beside both buttons is the same number."""
+        self._stage(studio_client, image_upload)
+
+        studio_client.post("/api/v1/studio/discard/", {"scope": "landing"}, format="json")
+
+        after = studio_client.get("/api/v1/studio/pages/landing/?mode=draft").json()
+        assert "cms.sitesettings:1" not in after["pending"]
+
     def test_the_records_api_still_refuses_site_settings(self, studio_client):
         """Why the studio panel must read the page payload rather than `/records/`:
         site settings are chrome, not a collection, and this answers 400."""
