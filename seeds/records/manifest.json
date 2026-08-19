@@ -1,0 +1,1667 @@
+{
+  "cms.author|Devon P., AIA": {
+    "alt": "Studio portrait of a man wearing a black shirt against a purple gradient background.",
+    "credit": "Photo by Gustavo Rangel on Pexels",
+    "file": "portrait-1.webp",
+    "photographer_url": "https://www.pexels.com/@gustavo-rangel-90236833",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/photo-of-man-in-black-shirt-9092311/"
+  },
+  "cms.author|Maya E., AIA": {
+    "alt": "Striking black and white portrait showcasing a man's thoughtful expression.",
+    "credit": "Photo by Jean Marc Bonnel on Pexels",
+    "file": "portrait-2.webp",
+    "photographer_url": "https://www.pexels.com/@jean-marc-bonnel-387362531",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/black-and-white-portrait-of-a-man-28736497/"
+  },
+  "cms.author|Priya N., AIA": {
+    "alt": "Black and white portrait of a young man in a suit looking upwards.",
+    "credit": "Photo by Kaue Barbier on Pexels",
+    "file": "portrait-3.webp",
+    "photographer_url": "https://www.pexels.com/@kaue-barbier-710715348",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/thoughtful-young-man-in-a-suit-portrait-30181294/"
+  },
+  "cms.blogcontentblock|the-complete-backyard-adu-planning-guide|7": {
+    "alt": "A serene rustic cabin nestled among fall foliage in a tranquil forest setting.",
+    "credit": "Photo by Br\u00e1ulio jardim on Pexels",
+    "file": "adu-1.webp",
+    "photographer_url": "https://www.pexels.com/@braujardim",
+    "pool": "adu",
+    "query": "small backyard studio cabin exterior",
+    "source_url": "https://www.pexels.com/photo/rustic-wooden-cabin-in-autumn-forest-scene-29066985/"
+  },
+  "cms.blogpost|8-questions-to-ask-before-you-hire-an-architect": {
+    "alt": "Architectural team reviewing blueprints at a construction site in Los Mochis, Mexico.",
+    "credit": "Photo by Gerzon Pi\u00f1ata on Pexels",
+    "file": "site-1.webp",
+    "photographer_url": "https://www.pexels.com/@fotografiarqmx",
+    "pool": "site",
+    "query": "architect construction site meeting plans",
+    "source_url": "https://www.pexels.com/photo/group-of-professionals-having-a-discussion-in-a-construction-site-9405431/"
+  },
+  "cms.blogpost|building-in-oakland-seismic-rules-you-should-know": {
+    "alt": "Two female architects discussing building plans outdoors, emphasizing teamwork and women leadership.",
+    "credit": "Photo by Gerzon Pi\u00f1ata on Pexels",
+    "file": "site-2.webp",
+    "photographer_url": "https://www.pexels.com/@fotografiarqmx",
+    "pool": "site",
+    "query": "architect construction site meeting plans",
+    "source_url": "https://www.pexels.com/photo/female-architects-working-together-9405477/"
+  },
+  "cms.blogpost|home-additions-where-the-money-really-goes": {
+    "alt": "Real estate agent with hard hat standing by a modern house for sale.",
+    "credit": "Photo by Pavel Danilyuk on Pexels",
+    "file": "addition-1.webp",
+    "photographer_url": "https://www.pexels.com/@pavel-danilyuk",
+    "pool": "addition",
+    "query": "house extension construction exterior",
+    "source_url": "https://www.pexels.com/photo/a-man-posting-a-for-sale-sign-near-a-house-7937748/"
+  },
+  "cms.blogpost|how-to-hire-an-architect-remotely-and-get-a-permit-ready-set": {
+    "alt": "Young architect at a desk working on blueprint designs under lamp light.",
+    "credit": "Photo by Ron Lach on Pexels",
+    "file": "drafting-1.webp",
+    "photographer_url": "https://www.pexels.com/@ron-lach",
+    "pool": "drafting",
+    "query": "architect blueprint technical drawing desk",
+    "source_url": "https://www.pexels.com/photo/adult-man-sitting-on-chair-by-deck-and-drawing-9617369/"
+  },
+  "cms.blogpost|reading-your-jurisdiction-a-permit-primer": {
+    "alt": "Creative workspace with architectural sketches, blueprints, and drawing tools, perfect for planning and design.",
+    "credit": "Photo by Tima Miroshnichenko on Pexels",
+    "file": "drafting-2.webp",
+    "photographer_url": "https://www.pexels.com/@tima-miroshnichenko",
+    "pool": "drafting",
+    "query": "architect blueprint technical drawing desk",
+    "source_url": "https://www.pexels.com/photo/person-people-building-desk-6615235/"
+  },
+  "cms.blogpost|the-complete-backyard-adu-planning-guide": {
+    "alt": "Aged wooden cottage with steps and fence located on grassy ground near green trees growing in woods on summer day",
+    "credit": "Photo by Matheus Bertelli on Pexels",
+    "file": "adu-2.webp",
+    "photographer_url": "https://www.pexels.com/@bertellifotografia",
+    "pool": "adu",
+    "query": "small backyard studio cabin exterior",
+    "source_url": "https://www.pexels.com/photo/terrace-of-old-house-near-forest-7163655/"
+  },
+  "cms.blogpost|what-does-an-architect-actually-cost-in-2026": {
+    "alt": "A creative professional using a compass on blueprints at an office desk.",
+    "credit": "Photo by Tima Miroshnichenko on Pexels",
+    "file": "drafting-3.webp",
+    "photographer_url": "https://www.pexels.com/@tima-miroshnichenko",
+    "pool": "drafting",
+    "query": "architect blueprint technical drawing desk",
+    "source_url": "https://www.pexels.com/photo/a-person-using-a-compass-6615028/"
+  },
+  "cms.casecard|3d-visualization|360\u00b0 / VR tour": {
+    "alt": "3D rendering of a futuristic cityscape with modern skyscrapers partially submerged in water.",
+    "credit": "Photo by Steve A Johnson on Pexels",
+    "file": "render-1.webp",
+    "photographer_url": "https://www.pexels.com/@steve",
+    "pool": "render",
+    "query": "architectural 3d render building visualization",
+    "source_url": "https://www.pexels.com/photo/futuristic-cityscape-with-skyscrapers-at-sea-29791458/"
+  },
+  "cms.casecard|3d-visualization|3D floor plan": {
+    "alt": "A modern abstract 3D render with blue geometric shapes and a sphere.",
+    "credit": "Photo by Steve A Johnson on Pexels",
+    "file": "render-2.webp",
+    "photographer_url": "https://www.pexels.com/@steve",
+    "pool": "render",
+    "query": "architectural 3d render building visualization",
+    "source_url": "https://www.pexels.com/photo/abstract-blue-geometric-3d-render-art-29506610/"
+  },
+  "cms.casecard|3d-visualization|Aerial view": {
+    "alt": "Futuristic 3D illustration of city skyscrapers with a dark, modern aesthetic.",
+    "credit": "Photo by Steve A Johnson on Pexels",
+    "file": "render-3.webp",
+    "photographer_url": "https://www.pexels.com/@steve",
+    "pool": "render",
+    "query": "architectural 3d render building visualization",
+    "source_url": "https://www.pexels.com/photo/abstract-3d-render-of-urban-skyscraper-buildings-29791459/"
+  },
+  "cms.casecard|3d-visualization|Animated walkthrough": {
+    "alt": "A digital render of a futuristic cityscape featuring skyscrapers at dusk with muted tones.",
+    "credit": "Photo by Steve A Johnson on Pexels",
+    "file": "render-4.webp",
+    "photographer_url": "https://www.pexels.com/@steve",
+    "pool": "render",
+    "query": "architectural 3d render building visualization",
+    "source_url": "https://www.pexels.com/photo/futuristic-cityscape-with-skyscrapers-at-dusk-29791462/"
+  },
+  "cms.casecard|3d-visualization|Exterior still": {
+    "alt": "Intricate monochrome 3D render of abstract geometric cubes and structures.",
+    "credit": "Photo by Steve A Johnson on Pexels",
+    "file": "render-5.webp",
+    "photographer_url": "https://www.pexels.com/@steve",
+    "pool": "render",
+    "query": "architectural 3d render building visualization",
+    "source_url": "https://www.pexels.com/photo/monochrome-abstract-3d-geometric-render-29546665/"
+  },
+  "cms.casecard|3d-visualization|Interior still": {
+    "alt": "Intricate 3D abstract render of blue cubes creating a modern geometric landscape.",
+    "credit": "Photo by Steve A Johnson on Pexels",
+    "file": "render-6.webp",
+    "photographer_url": "https://www.pexels.com/@steve",
+    "pool": "render",
+    "query": "architectural 3d render building visualization",
+    "source_url": "https://www.pexels.com/photo/abstract-geometric-3d-render-with-blue-cubes-29546666/"
+  },
+  "cms.casecard|cad-drafting|Maya E.": {
+    "alt": "Black and white studio portrait of an elegant woman in a blazer with a subtle smile.",
+    "credit": "Photo by Jonathan Borba on Pexels",
+    "file": "portrait-4.webp",
+    "photographer_url": "https://www.pexels.com/@jonathanborba",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/portrait-of-an-elegant-woman-in-black-and-white-20022691/"
+  },
+  "cms.casecard|cad-drafting|Nadia R.": {
+    "alt": "Portrait of a confident woman posing under dramatic, moody lighting in a studio setting.",
+    "credit": "Photo by Omar Tapia on Pexels",
+    "file": "portrait-5.webp",
+    "photographer_url": "https://www.pexels.com/@omar-tapia-129681804",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/confident-woman-in-studio-portrait-with-dramatic-lighting-38969192/"
+  },
+  "cms.casecard|cad-drafting|Sam T.": {
+    "alt": "Studio portrait of a young man wearing a vibrant floral shirt against a dark background.",
+    "credit": "Photo by Ansey Photography on Pexels",
+    "file": "portrait-6.webp",
+    "photographer_url": "https://www.pexels.com/@ansey",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/portrait-of-a-young-man-in-floral-shirt-38977010/"
+  },
+  "cms.casecard|landing|A 640 sq ft ADU that cleared plan check first try": {
+    "alt": "A stylish wooden cabin amidst lush greenery, ideal for a nature escape.",
+    "credit": "Photo by Rachel Claire on Pexels",
+    "file": "adu-3.webp",
+    "photographer_url": "https://www.pexels.com/@rachel-claire",
+    "pool": "adu",
+    "query": "small backyard studio cabin exterior",
+    "source_url": "https://www.pexels.com/photo/brown-wooden-house-surrounded-by-trees-8112957/"
+  },
+  "cms.casecard|landing|Retail-to-restaurant change of use, hourly": {
+    "alt": "Spacious restaurant with stylish interior design, featuring wooden tables and a group of diners enjoying a meal.",
+    "credit": "Photo by Adrien Olichon on Pexels",
+    "file": "commercial-1.webp",
+    "photographer_url": "https://www.pexels.com/@adrien-olichon-1257089",
+    "pool": "commercial",
+    "query": "modern restaurant interior design",
+    "source_url": "https://www.pexels.com/photo/people-in-a-bar-2387675/"
+  },
+  "cms.casecard|landing|Second-story addition on a 1920s bungalow": {
+    "alt": "Corner view of a modern brick building with reflective windows against a cloudy sky.",
+    "credit": "Photo by Sandin Redzo on Pexels",
+    "file": "addition-2.webp",
+    "photographer_url": "https://www.pexels.com/@sandin-redzo-1780184288",
+    "pool": "addition",
+    "query": "house extension construction exterior",
+    "source_url": "https://www.pexels.com/photo/a-building-with-windows-and-a-blue-sky-28242466/"
+  },
+  "cms.casecard|project-type:backyard-adu|Detached 2-bed ADU": {
+    "alt": "A quaint red wooden house nestled in a vibrant green countryside setting, surrounded by trees.",
+    "credit": "Photo by Damir K on Pexels",
+    "file": "adu-4.webp",
+    "photographer_url": "https://www.pexels.com/@damir",
+    "pool": "adu",
+    "query": "small backyard studio cabin exterior",
+    "source_url": "https://www.pexels.com/photo/house-near-trees-in-forest-26977205/"
+  },
+  "cms.casecard|project-type:backyard-adu|Garage conversion": {
+    "alt": "A serene view of a traditional bungalow surrounded by lush greenery and a flowing stream.",
+    "credit": "Photo by Jose  Lopez on Pexels",
+    "file": "adu-5.webp",
+    "photographer_url": "https://www.pexels.com/@filmjose",
+    "pool": "adu",
+    "query": "small backyard studio cabin exterior",
+    "source_url": "https://www.pexels.com/photo/house-in-summer-garden-with-stream-near-19833841/"
+  },
+  "cms.casecard|project-type:backyard-adu|Studio ADU + deck": {
+    "alt": "Quaint wooden house nestled in a tranquil Polish forest, surrounded by tall trees.",
+    "credit": "Photo by Daniel \u017babi\u0144ski on Pexels",
+    "file": "adu-6.webp",
+    "photographer_url": "https://www.pexels.com/@daniel-zabinski-2151650935",
+    "pool": "adu",
+    "query": "small backyard studio cabin exterior",
+    "source_url": "https://www.pexels.com/photo/charming-wooden-house-in-polish-forest-setting-31853791/"
+  },
+  "cms.casecard|project-type:change-of-use|Office to clinic": {
+    "alt": "Contemporary bar interior with blue seating and lighting setup.",
+    "credit": "Photo by JULIUS LUCERO on Pexels",
+    "file": "commercial-2.webp",
+    "photographer_url": "https://www.pexels.com/@julius-lucero-443952913",
+    "pool": "commercial",
+    "query": "modern restaurant interior design",
+    "source_url": "https://www.pexels.com/photo/modern-bar-interior-with-blue-accents-30990872/"
+  },
+  "cms.casecard|project-type:change-of-use|Retail to cafe": {
+    "alt": "Cozy restaurant interior featuring elegant decor and warm lighting.",
+    "credit": "Photo by Valeria Boltneva on Pexels",
+    "file": "commercial-3.webp",
+    "photographer_url": "https://www.pexels.com/@valeriya",
+    "pool": "commercial",
+    "query": "modern restaurant interior design",
+    "source_url": "https://www.pexels.com/photo/interior-of-restaurant-10135116/"
+  },
+  "cms.casecard|project-type:change-of-use|Warehouse to studio": {
+    "alt": "Inviting restaurant interior with orange chairs and bamboo plants, offering a calm dining atmosphere.",
+    "credit": "Photo by Valeria Boltneva on Pexels",
+    "file": "commercial-4.webp",
+    "photographer_url": "https://www.pexels.com/@valeriya",
+    "pool": "commercial",
+    "query": "modern restaurant interior design",
+    "source_url": "https://www.pexels.com/photo/chairs-near-plants-1860198/"
+  },
+  "cms.casecard|project-type:commercial-ti|Medical suite fit-out": {
+    "alt": "Spacious modern restaurant interior with unique architectural design and ambient lighting.",
+    "credit": "Photo by Quang Nguyen Vinh on Pexels",
+    "file": "commercial-5.webp",
+    "photographer_url": "https://www.pexels.com/@quang-nguyen-vinh-222549",
+    "pool": "commercial",
+    "query": "modern restaurant interior design",
+    "source_url": "https://www.pexels.com/photo/tables-in-a-restaurant-12387869/"
+  },
+  "cms.casecard|project-type:commercial-ti|Open office fit-out": {
+    "alt": "Sunlit cafe interior with contemporary design and cozy ambiance, perfect for a relaxing dining experience.",
+    "credit": "Photo by Mathias Reding on Pexels",
+    "file": "commercial-6.webp",
+    "photographer_url": "https://www.pexels.com/@matreding",
+    "pool": "commercial",
+    "query": "modern restaurant interior design",
+    "source_url": "https://www.pexels.com/photo/white-and-black-wooden-table-and-chairs-9685242/"
+  },
+  "cms.casecard|project-type:commercial-ti|Retail storefront TI": {
+    "alt": "Elegant restaurant with a modern wine display wall and cozy seating area.",
+    "credit": "Photo by Diana \u2728 on Pexels",
+    "file": "commercial-7.webp",
+    "photographer_url": "https://www.pexels.com/@didsss",
+    "pool": "commercial",
+    "query": "modern restaurant interior design",
+    "source_url": "https://www.pexels.com/photo/elegant-wine-wall-in-modern-restaurant-setting-32523798/"
+  },
+  "cms.casecard|project-type:garage-conversion|Detached home office": {
+    "alt": "A charming A-frame cabin nestled among lush trees featuring a stone patio and outdoor stove.",
+    "credit": "Photo by Bet\u00fcl  \u00dcst\u00fcn on Pexels",
+    "file": "adu-7.webp",
+    "photographer_url": "https://www.pexels.com/@betul-ustun-236006735",
+    "pool": "adu",
+    "query": "small backyard studio cabin exterior",
+    "source_url": "https://www.pexels.com/photo/house-under-trees-18323761/"
+  },
+  "cms.casecard|project-type:garage-conversion|Garage-to-ADU conversion": {
+    "alt": "Bright and airy modern cabin with large glass panels surrounded by lush greenery.",
+    "credit": "Photo by Lara on Pexels",
+    "file": "adu-8.webp",
+    "photographer_url": "https://www.pexels.com/@larissafarber",
+    "pool": "adu",
+    "query": "small backyard studio cabin exterior",
+    "source_url": "https://www.pexels.com/photo/a-house-with-glass-panels-7410709/"
+  },
+  "cms.casecard|project-type:garage-conversion|Studio suite conversion": {
+    "alt": "A serene backyard scene in Key West, featuring tropical trees and a small outbuilding.",
+    "credit": "Photo by PeopleByOwen on Pexels",
+    "file": "adu-9.webp",
+    "photographer_url": "https://www.pexels.com/@ogproductionz",
+    "pool": "adu",
+    "query": "small backyard studio cabin exterior",
+    "source_url": "https://www.pexels.com/photo/shed-in-a-backyard-15822397/"
+  },
+  "cms.casecard|project-type:home-addition|Rear great-room + pool wing": {
+    "alt": "A partially built wooden house under construction, showcasing its progress and design in daylight.",
+    "credit": "Photo by Pixabay on Pexels",
+    "file": "addition-3.webp",
+    "photographer_url": "https://www.pexels.com/@pixabay",
+    "pool": "addition",
+    "query": "house extension construction exterior",
+    "source_url": "https://www.pexels.com/photo/brown-and-gray-wooden-2-storey-house-near-tree-209266/"
+  },
+  "cms.casecard|project-type:home-addition|Second-story addition": {
+    "alt": "A view of concrete and wooden scaffolding at a construction site under the clear blue sky.",
+    "credit": "Photo by Ridwan Nugraha on Pexels",
+    "file": "addition-4.webp",
+    "photographer_url": "https://www.pexels.com/@ridwan-nugraha-692540814",
+    "pool": "addition",
+    "query": "house extension construction exterior",
+    "source_url": "https://www.pexels.com/photo/scaffolding-at-construction-site-18080900/"
+  },
+  "cms.casecard|project-type:home-addition|Two-story rear addition": {
+    "alt": "A professional architect walks out of a modern building holding house plans, symbolizing construction and development.",
+    "credit": "Photo by Pavel Danilyuk on Pexels",
+    "file": "addition-5.webp",
+    "photographer_url": "https://www.pexels.com/@pavel-danilyuk",
+    "pool": "addition",
+    "query": "house extension construction exterior",
+    "source_url": "https://www.pexels.com/photo/man-walking-out-of-house-with-plans-on-paper-7937740/"
+  },
+  "cms.casecard|project-type:home-addition|Upper-level + garage addition": {
+    "alt": "Rustic log pavilion in a garden setting, perfect for outdoor gatherings.",
+    "credit": "Photo by Max Vakhtbovych on Pexels",
+    "file": "adu-10.webp",
+    "photographer_url": "https://www.pexels.com/@artbovich",
+    "pool": "adu",
+    "query": "small backyard studio cabin exterior",
+    "source_url": "https://www.pexels.com/photo/wooden-fence-and-roof-over-a-grill-and-a-table-with-chairs-in-a-garden-8092381/"
+  },
+  "cms.casecard|project-type:kitchen-and-bath|Chef\u2019s kitchen remodel": {
+    "alt": "Bright and spacious modern kitchen featuring stainless steel appliances and granite countertops.",
+    "credit": "Photo by Curtis Adams on Pexels",
+    "file": "kitchen-1.webp",
+    "photographer_url": "https://www.pexels.com/@curtis-adams-1694007",
+    "pool": "kitchen",
+    "query": "modern kitchen interior renovation",
+    "source_url": "https://www.pexels.com/photo/kitchen-design-with-white-cabinets-and-wooden-flooring-6510984/"
+  },
+  "cms.casecard|project-type:kitchen-and-bath|Powder room refresh": {
+    "alt": "Bright modern kitchen with white cabinets, wooden floor, and appliances.",
+    "credit": "Photo by Lee Salem on Pexels",
+    "file": "kitchen-2.webp",
+    "photographer_url": "https://www.pexels.com/@charlotteblackcarservice",
+    "pool": "kitchen",
+    "query": "modern kitchen interior renovation",
+    "source_url": "https://www.pexels.com/photo/modern-white-kitchen-with-wooden-floor-36511379/"
+  },
+  "cms.casecard|project-type:kitchen-and-bath|Spa primary bath": {
+    "alt": "Sleek modern kitchen featuring white cabinetry, built-in appliances, and minimalist design.",
+    "credit": "Photo by Alex Tyson on Pexels",
+    "file": "kitchen-3.webp",
+    "photographer_url": "https://www.pexels.com/@alex-tyson-919593032",
+    "pool": "kitchen",
+    "query": "modern kitchen interior renovation",
+    "source_url": "https://www.pexels.com/photo/white-furniture-in-modern-kitchen-19966809/"
+  },
+  "cms.casecard|project-type:new-custom-home|Hillside stepped home": {
+    "alt": "Scenery green yard of modern residential house with trees outside fence under blue cloudy sky",
+    "credit": "Photo by Max Vakhtbovych on Pexels",
+    "file": "exterior-1.webp",
+    "photographer_url": "https://www.pexels.com/@artbovich",
+    "pool": "exterior",
+    "query": "modern house exterior architecture",
+    "source_url": "https://www.pexels.com/photo/yard-of-contemporary-house-with-trees-outside-fence-7031581/"
+  },
+  "cms.casecard|project-type:new-custom-home|Modern courtyard home": {
+    "alt": "Contemporary minimalist architecture with white houses contrasting a vivid blue sky.",
+    "credit": "Photo by Jan van der Wolf on Pexels",
+    "file": "exterior-2.webp",
+    "photographer_url": "https://www.pexels.com/@jan-van-der-wolf-11680885",
+    "pool": "exterior",
+    "query": "modern house exterior architecture",
+    "source_url": "https://www.pexels.com/photo/two-white-houses-with-blue-sky-in-the-background-27953061/"
+  },
+  "cms.casecard|project-type:new-custom-home|Modern farmhouse": {
+    "alt": "Exterior of contemporary residential house with panoramic windows glass doors and green lawn in yard on sunny day against blue sky with white clouds",
+    "credit": "Photo by Max Vakhtbovych on Pexels",
+    "file": "exterior-3.webp",
+    "photographer_url": "https://www.pexels.com/@artbovich",
+    "pool": "exterior",
+    "query": "modern house exterior architecture",
+    "source_url": "https://www.pexels.com/photo/courtyard-of-modern-villa-with-glass-walls-7031604/"
+  },
+  "cms.casecard|project-type:restaurant-build-out|Fast-casual counter": {
+    "alt": "Elegant restaurant interior featuring modern design and a poolside view, ideal for luxury dining experiences.",
+    "credit": "Photo by Zak Chapman on Pexels",
+    "file": "commercial-8.webp",
+    "photographer_url": "https://www.pexels.com/@naimbic",
+    "pool": "commercial",
+    "query": "modern restaurant interior design",
+    "source_url": "https://www.pexels.com/photo/man-in-black-dress-shirt-in-counter-2290740/"
+  },
+  "cms.casecard|project-type:restaurant-build-out|Full-service dining room": {
+    "alt": "Spacious restaurant with stylish interior design, featuring wooden tables and a group of diners enjoying a meal.",
+    "credit": "Photo by Adrien Olichon on Pexels",
+    "file": "commercial-1.webp",
+    "photographer_url": "https://www.pexels.com/@adrien-olichon-1257089",
+    "pool": "commercial",
+    "query": "modern restaurant interior design",
+    "source_url": "https://www.pexels.com/photo/people-in-a-bar-2387675/"
+  },
+  "cms.casecard|project-type:restaurant-build-out|Neighborhood cafe": {
+    "alt": "Contemporary bar interior with blue seating and lighting setup.",
+    "credit": "Photo by JULIUS LUCERO on Pexels",
+    "file": "commercial-2.webp",
+    "photographer_url": "https://www.pexels.com/@julius-lucero-443952913",
+    "pool": "commercial",
+    "query": "modern restaurant interior design",
+    "source_url": "https://www.pexels.com/photo/modern-bar-interior-with-blue-accents-30990872/"
+  },
+  "cms.casecard|project-type:whole-home-renovation|Exterior & envelope refresh": {
+    "alt": "Stylish interior of spacious living room with comfortable sofa in contemporary apartment in daytime",
+    "credit": "Photo by Max Vakhtbovych on Pexels",
+    "file": "living-1.webp",
+    "photographer_url": "https://www.pexels.com/@artbovich",
+    "pool": "living",
+    "query": "modern living room interior daylight",
+    "source_url": "https://www.pexels.com/photo/interior-of-living-room-in-modern-apartment-7214166/"
+  },
+  "cms.casecard|project-type:whole-home-renovation|Full interior gut renovation": {
+    "alt": "Interior of stylish living room with comfortable sofa with colorful pillows and large TV in modern apartment",
+    "credit": "Photo by Max Vakhtbovych on Pexels",
+    "file": "living-2.webp",
+    "photographer_url": "https://www.pexels.com/@artbovich",
+    "pool": "living",
+    "query": "modern living room interior daylight",
+    "source_url": "https://www.pexels.com/photo/spacious-living-room-in-stylish-apartment-7167073/"
+  },
+  "cms.casecard|project-type:whole-home-renovation|Open-plan main floor": {
+    "alt": "Creative design of room interior with chairs and table against sofa on floor and television set on wall",
+    "credit": "Photo by Max Vakhtbovych on Pexels",
+    "file": "living-3.webp",
+    "photographer_url": "https://www.pexels.com/@artbovich",
+    "pool": "living",
+    "query": "modern living room interior daylight",
+    "source_url": "https://www.pexels.com/photo/living-room-interior-with-furniture-in-modern-house-6436744/"
+  },
+  "cms.casecard|services-landing|1-hour video consult": {
+    "alt": "Exterior design of modern cottage house facade with large windows and mixed wooden and stone cladding and spacious yard in snowy winter suburban area",
+    "credit": "Photo by Max Vakhtbovych on Pexels",
+    "file": "exterior-4.webp",
+    "photographer_url": "https://www.pexels.com/@artbovich",
+    "pool": "exterior",
+    "query": "modern house exterior architecture",
+    "source_url": "https://www.pexels.com/photo/modern-residential-house-facade-in-countryside-7031405/"
+  },
+  "cms.casecard|services-landing|As-built package": {
+    "alt": "Contemporary residential facade featuring minimalist design and vibrant garden element.",
+    "credit": "Photo by David Brown on Pexels",
+    "file": "exterior-5.webp",
+    "photographer_url": "https://www.pexels.com/@ninobur",
+    "pool": "exterior",
+    "query": "modern house exterior architecture",
+    "source_url": "https://www.pexels.com/photo/a-shrub-in-front-of-a-modern-house-16787446/"
+  },
+  "cms.casecard|services-landing|CAD drafting": {
+    "alt": "Striking minimalist facade of a modern house with geometric patterns in black and white.",
+    "credit": "Photo by Tiago Chaves on Pexels",
+    "file": "exterior-6.webp",
+    "photographer_url": "https://www.pexels.com/@tiago-chaves-2154478168",
+    "pool": "exterior",
+    "query": "modern house exterior architecture",
+    "source_url": "https://www.pexels.com/photo/modern-minimalist-architecture-in-black-and-white-34147672/"
+  },
+  "cms.casecard|services-landing|Permit set \u2014 small residential": {
+    "alt": "Engineer reviewing architectural blueprints on a desk with technical drawings.",
+    "credit": "Photo by Tima Miroshnichenko on Pexels",
+    "file": "drafting-4.webp",
+    "photographer_url": "https://www.pexels.com/@tima-miroshnichenko",
+    "pool": "drafting",
+    "query": "architect blueprint technical drawing desk",
+    "source_url": "https://www.pexels.com/photo/person-in-blue-denim-jacket-holding-white-printer-paper-6615234/"
+  },
+  "cms.casecard|services-landing|Single 3D render": {
+    "alt": "A modern residential building with closed shutters illuminated by dusk light, offering a dramatic architectural view.",
+    "credit": "Photo by Francesco Ungaro on Pexels",
+    "file": "exterior-7.webp",
+    "photographer_url": "https://www.pexels.com/@francesco-ungaro",
+    "pool": "exterior",
+    "query": "modern house exterior architecture",
+    "source_url": "https://www.pexels.com/photo/shuttered-windows-of-a-residential-building-7981800/"
+  },
+  "cms.casecard|services-landing|Zoning & feasibility study": {
+    "alt": "Exterior view of contemporary residential house with terrace and large windows located in suburban area in winter day",
+    "credit": "Photo by Max Vakhtbovych on Pexels",
+    "file": "exterior-8.webp",
+    "photographer_url": "https://www.pexels.com/@artbovich",
+    "pool": "exterior",
+    "query": "modern house exterior architecture",
+    "source_url": "https://www.pexels.com/photo/facade-of-modern-suburban-mansion-7031412/"
+  },
+  "cms.casestudyimage|a-640-sq-ft-adu-that-cleared-plan-check-first-try|": {
+    "alt": "A serene rustic cabin nestled among fall foliage in a tranquil forest setting.",
+    "credit": "Photo by Br\u00e1ulio jardim on Pexels",
+    "file": "adu-1.webp",
+    "photographer_url": "https://www.pexels.com/@braujardim",
+    "pool": "adu",
+    "query": "small backyard studio cabin exterior",
+    "source_url": "https://www.pexels.com/photo/rustic-wooden-cabin-in-autumn-forest-scene-29066985/"
+  },
+  "cms.casestudyimage|a-640-sq-ft-adu-that-cleared-plan-check-first-try|1": {
+    "alt": "Aged wooden cottage with steps and fence located on grassy ground near green trees growing in woods on summer day",
+    "credit": "Photo by Matheus Bertelli on Pexels",
+    "file": "adu-2.webp",
+    "photographer_url": "https://www.pexels.com/@bertellifotografia",
+    "pool": "adu",
+    "query": "small backyard studio cabin exterior",
+    "source_url": "https://www.pexels.com/photo/terrace-of-old-house-near-forest-7163655/"
+  },
+  "cms.casestudyimage|a-640-sq-ft-adu-that-cleared-plan-check-first-try|2": {
+    "alt": "A stylish wooden cabin amidst lush greenery, ideal for a nature escape.",
+    "credit": "Photo by Rachel Claire on Pexels",
+    "file": "adu-3.webp",
+    "photographer_url": "https://www.pexels.com/@rachel-claire",
+    "pool": "adu",
+    "query": "small backyard studio cabin exterior",
+    "source_url": "https://www.pexels.com/photo/brown-wooden-house-surrounded-by-trees-8112957/"
+  },
+  "cms.casestudyimage|a-640-sq-ft-adu-that-cleared-plan-check-first-try|3": {
+    "alt": "A quaint red wooden house nestled in a vibrant green countryside setting, surrounded by trees.",
+    "credit": "Photo by Damir K on Pexels",
+    "file": "adu-4.webp",
+    "photographer_url": "https://www.pexels.com/@damir",
+    "pool": "adu",
+    "query": "small backyard studio cabin exterior",
+    "source_url": "https://www.pexels.com/photo/house-near-trees-in-forest-26977205/"
+  },
+  "cms.casestudyimage|a-full-gut-kitchen-bath-in-a-victorian-flat|": {
+    "alt": "A modern kitchen undergoing renovation, featuring a worker, tools, and materials.",
+    "credit": "Photo by Th\u1edbi Nam Cao on Pexels",
+    "file": "kitchen-4.webp",
+    "photographer_url": "https://www.pexels.com/@thoinamcao",
+    "pool": "kitchen",
+    "query": "modern kitchen interior renovation",
+    "source_url": "https://www.pexels.com/photo/men-working-inside-a-house-under-repairs-15124970/"
+  },
+  "cms.casestudyimage|a-full-gut-kitchen-bath-in-a-victorian-flat|1": {
+    "alt": "Bright and inviting kitchen interior featuring marble countertops, wooden cabinets, and large windows.",
+    "credit": "Photo by Curtis Adams on Pexels",
+    "file": "kitchen-5.webp",
+    "photographer_url": "https://www.pexels.com/@curtis-adams-1694007",
+    "pool": "kitchen",
+    "query": "modern kitchen interior renovation",
+    "source_url": "https://www.pexels.com/photo/spacious-modern-kitchen-with-marble-island-37153451/"
+  },
+  "cms.casestudyimage|a-full-gut-kitchen-bath-in-a-victorian-flat|2": {
+    "alt": "Bright modern kitchen with white cabinetry, wooden stools, and pendant lighting.",
+    "credit": "Photo by Curtis Adams on Pexels",
+    "file": "kitchen-6.webp",
+    "photographer_url": "https://www.pexels.com/@curtis-adams-1694007",
+    "pool": "kitchen",
+    "query": "modern kitchen interior renovation",
+    "source_url": "https://www.pexels.com/photo/modern-kitchen-in-white-colour-5502219/"
+  },
+  "cms.casestudyimage|a-full-gut-kitchen-bath-in-a-victorian-flat|3": {
+    "alt": "A bright, spacious kitchen featuring minimalist design and modern appliances.",
+    "credit": "Photo by Max Vakhtbovych on Pexels",
+    "file": "kitchen-7.webp",
+    "photographer_url": "https://www.pexels.com/@artbovich",
+    "pool": "kitchen",
+    "query": "modern kitchen interior renovation",
+    "source_url": "https://www.pexels.com/photo/kitchen-with-cabinets-and-oven-near-window-8134772/"
+  },
+  "cms.casestudyimage|a-ground-up-custom-home-on-a-wooded-slope|": {
+    "alt": "Spacious suburban cottage house with modern architecture design with stone and wooden panels and large private yard in winter countryside",
+    "credit": "Photo by Max Vakhtbovych on Pexels",
+    "file": "exterior-9.webp",
+    "photographer_url": "https://www.pexels.com/@artbovich",
+    "pool": "exterior",
+    "query": "modern house exterior architecture",
+    "source_url": "https://www.pexels.com/photo/new-cottage-house-facade-and-snowy-yard-7031411/"
+  },
+  "cms.casestudyimage|a-ground-up-custom-home-on-a-wooded-slope|1": {
+    "alt": "Contemporary house surrounded by tall trees in a forest setting.",
+    "credit": "Photo by Max Vakhtbovych on Pexels",
+    "file": "exterior-10.webp",
+    "photographer_url": "https://www.pexels.com/@artbovich",
+    "pool": "exterior",
+    "query": "modern house exterior architecture",
+    "source_url": "https://www.pexels.com/photo/contemporary-house-in-a-forest-7598375/"
+  },
+  "cms.casestudyimage|a-ground-up-custom-home-on-a-wooded-slope|2": {
+    "alt": "Scenery green yard of modern residential house with trees outside fence under blue cloudy sky",
+    "credit": "Photo by Max Vakhtbovych on Pexels",
+    "file": "exterior-1.webp",
+    "photographer_url": "https://www.pexels.com/@artbovich",
+    "pool": "exterior",
+    "query": "modern house exterior architecture",
+    "source_url": "https://www.pexels.com/photo/yard-of-contemporary-house-with-trees-outside-fence-7031581/"
+  },
+  "cms.casestudyimage|a-ground-up-custom-home-on-a-wooded-slope|3": {
+    "alt": "Contemporary minimalist architecture with white houses contrasting a vivid blue sky.",
+    "credit": "Photo by Jan van der Wolf on Pexels",
+    "file": "exterior-2.webp",
+    "photographer_url": "https://www.pexels.com/@jan-van-der-wolf-11680885",
+    "pool": "exterior",
+    "query": "modern house exterior architecture",
+    "source_url": "https://www.pexels.com/photo/two-white-houses-with-blue-sky-in-the-background-27953061/"
+  },
+  "cms.casestudyimage|garage-conversion-into-a-one-bedroom-adu|": {
+    "alt": "A serene view of a traditional bungalow surrounded by lush greenery and a flowing stream.",
+    "credit": "Photo by Jose  Lopez on Pexels",
+    "file": "adu-5.webp",
+    "photographer_url": "https://www.pexels.com/@filmjose",
+    "pool": "adu",
+    "query": "small backyard studio cabin exterior",
+    "source_url": "https://www.pexels.com/photo/house-in-summer-garden-with-stream-near-19833841/"
+  },
+  "cms.casestudyimage|garage-conversion-into-a-one-bedroom-adu|1": {
+    "alt": "Quaint wooden house nestled in a tranquil Polish forest, surrounded by tall trees.",
+    "credit": "Photo by Daniel \u017babi\u0144ski on Pexels",
+    "file": "adu-6.webp",
+    "photographer_url": "https://www.pexels.com/@daniel-zabinski-2151650935",
+    "pool": "adu",
+    "query": "small backyard studio cabin exterior",
+    "source_url": "https://www.pexels.com/photo/charming-wooden-house-in-polish-forest-setting-31853791/"
+  },
+  "cms.casestudyimage|garage-conversion-into-a-one-bedroom-adu|2": {
+    "alt": "A charming A-frame cabin nestled among lush trees featuring a stone patio and outdoor stove.",
+    "credit": "Photo by Bet\u00fcl  \u00dcst\u00fcn on Pexels",
+    "file": "adu-7.webp",
+    "photographer_url": "https://www.pexels.com/@betul-ustun-236006735",
+    "pool": "adu",
+    "query": "small backyard studio cabin exterior",
+    "source_url": "https://www.pexels.com/photo/house-under-trees-18323761/"
+  },
+  "cms.casestudyimage|garage-conversion-into-a-one-bedroom-adu|3": {
+    "alt": "Bright and airy modern cabin with large glass panels surrounded by lush greenery.",
+    "credit": "Photo by Lara on Pexels",
+    "file": "adu-8.webp",
+    "photographer_url": "https://www.pexels.com/@larissafarber",
+    "pool": "adu",
+    "query": "small backyard studio cabin exterior",
+    "source_url": "https://www.pexels.com/photo/a-house-with-glass-panels-7410709/"
+  },
+  "cms.casestudyimage|rear-extension-to-open-up-a-hillside-kitchen|": {
+    "alt": "Spacious kitchen with modern wooden cabinets and sleek design lighting.",
+    "credit": "Photo by Max Vakhtbovych on Pexels",
+    "file": "kitchen-8.webp",
+    "photographer_url": "https://www.pexels.com/@artbovich",
+    "pool": "kitchen",
+    "query": "modern kitchen interior renovation",
+    "source_url": "https://www.pexels.com/photo/spacious-kitchen-with-black-leather-padded-bar-stools-and-wooden-cabinets-8089079/"
+  },
+  "cms.casestudyimage|rear-extension-to-open-up-a-hillside-kitchen|1": {
+    "alt": "Bright and spacious modern kitchen featuring stainless steel appliances and granite countertops.",
+    "credit": "Photo by Curtis Adams on Pexels",
+    "file": "kitchen-1.webp",
+    "photographer_url": "https://www.pexels.com/@curtis-adams-1694007",
+    "pool": "kitchen",
+    "query": "modern kitchen interior renovation",
+    "source_url": "https://www.pexels.com/photo/kitchen-design-with-white-cabinets-and-wooden-flooring-6510984/"
+  },
+  "cms.casestudyimage|rear-extension-to-open-up-a-hillside-kitchen|2": {
+    "alt": "Bright modern kitchen with white cabinets, wooden floor, and appliances.",
+    "credit": "Photo by Lee Salem on Pexels",
+    "file": "kitchen-2.webp",
+    "photographer_url": "https://www.pexels.com/@charlotteblackcarservice",
+    "pool": "kitchen",
+    "query": "modern kitchen interior renovation",
+    "source_url": "https://www.pexels.com/photo/modern-white-kitchen-with-wooden-floor-36511379/"
+  },
+  "cms.casestudyimage|rear-extension-to-open-up-a-hillside-kitchen|3": {
+    "alt": "Sleek modern kitchen featuring white cabinetry, built-in appliances, and minimalist design.",
+    "credit": "Photo by Alex Tyson on Pexels",
+    "file": "kitchen-3.webp",
+    "photographer_url": "https://www.pexels.com/@alex-tyson-919593032",
+    "pool": "kitchen",
+    "query": "modern kitchen interior renovation",
+    "source_url": "https://www.pexels.com/photo/white-furniture-in-modern-kitchen-19966809/"
+  },
+  "cms.casestudyimage|retail-to-restaurant-change-of-use|": {
+    "alt": "Cozy restaurant interior featuring elegant decor and warm lighting.",
+    "credit": "Photo by Valeria Boltneva on Pexels",
+    "file": "commercial-3.webp",
+    "photographer_url": "https://www.pexels.com/@valeriya",
+    "pool": "commercial",
+    "query": "modern restaurant interior design",
+    "source_url": "https://www.pexels.com/photo/interior-of-restaurant-10135116/"
+  },
+  "cms.casestudyimage|retail-to-restaurant-change-of-use|1": {
+    "alt": "Inviting restaurant interior with orange chairs and bamboo plants, offering a calm dining atmosphere.",
+    "credit": "Photo by Valeria Boltneva on Pexels",
+    "file": "commercial-4.webp",
+    "photographer_url": "https://www.pexels.com/@valeriya",
+    "pool": "commercial",
+    "query": "modern restaurant interior design",
+    "source_url": "https://www.pexels.com/photo/chairs-near-plants-1860198/"
+  },
+  "cms.casestudyimage|retail-to-restaurant-change-of-use|2": {
+    "alt": "Spacious modern restaurant interior with unique architectural design and ambient lighting.",
+    "credit": "Photo by Quang Nguyen Vinh on Pexels",
+    "file": "commercial-5.webp",
+    "photographer_url": "https://www.pexels.com/@quang-nguyen-vinh-222549",
+    "pool": "commercial",
+    "query": "modern restaurant interior design",
+    "source_url": "https://www.pexels.com/photo/tables-in-a-restaurant-12387869/"
+  },
+  "cms.casestudyimage|retail-to-restaurant-change-of-use|3": {
+    "alt": "Sunlit cafe interior with contemporary design and cozy ambiance, perfect for a relaxing dining experience.",
+    "credit": "Photo by Mathias Reding on Pexels",
+    "file": "commercial-6.webp",
+    "photographer_url": "https://www.pexels.com/@matreding",
+    "pool": "commercial",
+    "query": "modern restaurant interior design",
+    "source_url": "https://www.pexels.com/photo/white-and-black-wooden-table-and-chairs-9685242/"
+  },
+  "cms.casestudyimage|second-story-addition-on-a-1920s-bungalow|": {
+    "alt": "A modern house under construction with scaffolding, fences, and construction signs on a cloudy day.",
+    "credit": "Photo by Freek Wolsink on Pexels",
+    "file": "addition-6.webp",
+    "photographer_url": "https://www.pexels.com/@freek-wolsink-508219",
+    "pool": "addition",
+    "query": "house extension construction exterior",
+    "source_url": "https://www.pexels.com/photo/modern-house-construction-on-cloudy-day-35974193/"
+  },
+  "cms.casestudyimage|second-story-addition-on-a-1920s-bungalow|1": {
+    "alt": "Real estate agent with hard hat standing by a modern house for sale.",
+    "credit": "Photo by Pavel Danilyuk on Pexels",
+    "file": "addition-1.webp",
+    "photographer_url": "https://www.pexels.com/@pavel-danilyuk",
+    "pool": "addition",
+    "query": "house extension construction exterior",
+    "source_url": "https://www.pexels.com/photo/a-man-posting-a-for-sale-sign-near-a-house-7937748/"
+  },
+  "cms.casestudyimage|second-story-addition-on-a-1920s-bungalow|2": {
+    "alt": "Corner view of a modern brick building with reflective windows against a cloudy sky.",
+    "credit": "Photo by Sandin Redzo on Pexels",
+    "file": "addition-2.webp",
+    "photographer_url": "https://www.pexels.com/@sandin-redzo-1780184288",
+    "pool": "addition",
+    "query": "house extension construction exterior",
+    "source_url": "https://www.pexels.com/photo/a-building-with-windows-and-a-blue-sky-28242466/"
+  },
+  "cms.casestudyimage|second-story-addition-on-a-1920s-bungalow|3": {
+    "alt": "A partially built wooden house under construction, showcasing its progress and design in daylight.",
+    "credit": "Photo by Pixabay on Pexels",
+    "file": "addition-3.webp",
+    "photographer_url": "https://www.pexels.com/@pixabay",
+    "pool": "addition",
+    "query": "house extension construction exterior",
+    "source_url": "https://www.pexels.com/photo/brown-and-gray-wooden-2-storey-house-near-tree-209266/"
+  },
+  "cms.casestudy|a-640-sq-ft-adu-that-cleared-plan-check-first-try": {
+    "alt": "A serene backyard scene in Key West, featuring tropical trees and a small outbuilding.",
+    "credit": "Photo by PeopleByOwen on Pexels",
+    "file": "adu-9.webp",
+    "photographer_url": "https://www.pexels.com/@ogproductionz",
+    "pool": "adu",
+    "query": "small backyard studio cabin exterior",
+    "source_url": "https://www.pexels.com/photo/shed-in-a-backyard-15822397/"
+  },
+  "cms.casestudy|a-full-gut-kitchen-bath-in-a-victorian-flat": {
+    "alt": "A modern kitchen undergoing renovation, featuring a worker, tools, and materials.",
+    "credit": "Photo by Th\u1edbi Nam Cao on Pexels",
+    "file": "kitchen-4.webp",
+    "photographer_url": "https://www.pexels.com/@thoinamcao",
+    "pool": "kitchen",
+    "query": "modern kitchen interior renovation",
+    "source_url": "https://www.pexels.com/photo/men-working-inside-a-house-under-repairs-15124970/"
+  },
+  "cms.casestudy|a-ground-up-custom-home-on-a-wooded-slope": {
+    "alt": "Exterior of contemporary residential house with panoramic windows glass doors and green lawn in yard on sunny day against blue sky with white clouds",
+    "credit": "Photo by Max Vakhtbovych on Pexels",
+    "file": "exterior-3.webp",
+    "photographer_url": "https://www.pexels.com/@artbovich",
+    "pool": "exterior",
+    "query": "modern house exterior architecture",
+    "source_url": "https://www.pexels.com/photo/courtyard-of-modern-villa-with-glass-walls-7031604/"
+  },
+  "cms.casestudy|garage-conversion-into-a-one-bedroom-adu": {
+    "alt": "Rustic log pavilion in a garden setting, perfect for outdoor gatherings.",
+    "credit": "Photo by Max Vakhtbovych on Pexels",
+    "file": "adu-10.webp",
+    "photographer_url": "https://www.pexels.com/@artbovich",
+    "pool": "adu",
+    "query": "small backyard studio cabin exterior",
+    "source_url": "https://www.pexels.com/photo/wooden-fence-and-roof-over-a-grill-and-a-table-with-chairs-in-a-garden-8092381/"
+  },
+  "cms.casestudy|rear-extension-to-open-up-a-hillside-kitchen": {
+    "alt": "Bright and inviting kitchen interior featuring marble countertops, wooden cabinets, and large windows.",
+    "credit": "Photo by Curtis Adams on Pexels",
+    "file": "kitchen-5.webp",
+    "photographer_url": "https://www.pexels.com/@curtis-adams-1694007",
+    "pool": "kitchen",
+    "query": "modern kitchen interior renovation",
+    "source_url": "https://www.pexels.com/photo/spacious-modern-kitchen-with-marble-island-37153451/"
+  },
+  "cms.casestudy|retail-to-restaurant-change-of-use": {
+    "alt": "Elegant restaurant with a modern wine display wall and cozy seating area.",
+    "credit": "Photo by Diana \u2728 on Pexels",
+    "file": "commercial-7.webp",
+    "photographer_url": "https://www.pexels.com/@didsss",
+    "pool": "commercial",
+    "query": "modern restaurant interior design",
+    "source_url": "https://www.pexels.com/photo/elegant-wine-wall-in-modern-restaurant-setting-32523798/"
+  },
+  "cms.casestudy|second-story-addition-on-a-1920s-bungalow": {
+    "alt": "A view of concrete and wooden scaffolding at a construction site under the clear blue sky.",
+    "credit": "Photo by Ridwan Nugraha on Pexels",
+    "file": "addition-4.webp",
+    "photographer_url": "https://www.pexels.com/@ridwan-nugraha-692540814",
+    "pool": "addition",
+    "query": "house extension construction exterior",
+    "source_url": "https://www.pexels.com/photo/scaffolding-at-construction-site-18080900/"
+  },
+  "cms.herocarouselslide|3d-visualization|3D plan": {
+    "alt": "3D rendering of a futuristic cityscape with modern skyscrapers partially submerged in water.",
+    "credit": "Photo by Steve A Johnson on Pexels",
+    "file": "render-1.webp",
+    "photographer_url": "https://www.pexels.com/@steve",
+    "pool": "render",
+    "query": "architectural 3d render building visualization",
+    "source_url": "https://www.pexels.com/photo/futuristic-cityscape-with-skyscrapers-at-sea-29791458/"
+  },
+  "cms.herocarouselslide|3d-visualization|Aerial": {
+    "alt": "A modern abstract 3D render with blue geometric shapes and a sphere.",
+    "credit": "Photo by Steve A Johnson on Pexels",
+    "file": "render-2.webp",
+    "photographer_url": "https://www.pexels.com/@steve",
+    "pool": "render",
+    "query": "architectural 3d render building visualization",
+    "source_url": "https://www.pexels.com/photo/abstract-blue-geometric-3d-render-art-29506610/"
+  },
+  "cms.herocarouselslide|3d-visualization|Exterior": {
+    "alt": "Futuristic 3D illustration of city skyscrapers with a dark, modern aesthetic.",
+    "credit": "Photo by Steve A Johnson on Pexels",
+    "file": "render-3.webp",
+    "photographer_url": "https://www.pexels.com/@steve",
+    "pool": "render",
+    "query": "architectural 3d render building visualization",
+    "source_url": "https://www.pexels.com/photo/abstract-3d-render-of-urban-skyscraper-buildings-29791459/"
+  },
+  "cms.herocarouselslide|3d-visualization|Interior": {
+    "alt": "A digital render of a futuristic cityscape featuring skyscrapers at dusk with muted tones.",
+    "credit": "Photo by Steve A Johnson on Pexels",
+    "file": "render-4.webp",
+    "photographer_url": "https://www.pexels.com/@steve",
+    "pool": "render",
+    "query": "architectural 3d render building visualization",
+    "source_url": "https://www.pexels.com/photo/futuristic-cityscape-with-skyscrapers-at-dusk-29791462/"
+  },
+  "cms.herocarouselslide|3d-visualization|Walkthrough": {
+    "alt": "Intricate monochrome 3D render of abstract geometric cubes and structures.",
+    "credit": "Photo by Steve A Johnson on Pexels",
+    "file": "render-5.webp",
+    "photographer_url": "https://www.pexels.com/@steve",
+    "pool": "render",
+    "query": "architectural 3d render building visualization",
+    "source_url": "https://www.pexels.com/photo/monochrome-abstract-3d-geometric-render-29546665/"
+  },
+  "cms.herocarouselslide|cad-drafting|As-built": {
+    "alt": "Engineers discussing blueprints at a workspace, focusing on teamwork and architecture design.",
+    "credit": "Photo by RDNE Stock project on Pexels",
+    "file": "drafting-5.webp",
+    "photographer_url": "https://www.pexels.com/@rdne",
+    "pool": "drafting",
+    "query": "architect blueprint technical drawing desk",
+    "source_url": "https://www.pexels.com/photo/person-pointing-on-a-project-plan-in-blueprint-5922202/"
+  },
+  "cms.herocarouselslide|cad-drafting|Detail": {
+    "alt": "An architect diligently works on blueprints at a well-lit office desk with design tools.",
+    "credit": "Photo by Yaroslav Shuraev on Pexels",
+    "file": "drafting-6.webp",
+    "photographer_url": "https://www.pexels.com/@yaroslav-shuraev",
+    "pool": "drafting",
+    "query": "architect blueprint technical drawing desk",
+    "source_url": "https://www.pexels.com/photo/a-person-holding-a-pencil-6281167/"
+  },
+  "cms.herocarouselslide|cad-drafting|Elevation": {
+    "alt": "Young architect at a desk working on blueprint designs under lamp light.",
+    "credit": "Photo by Ron Lach on Pexels",
+    "file": "drafting-1.webp",
+    "photographer_url": "https://www.pexels.com/@ron-lach",
+    "pool": "drafting",
+    "query": "architect blueprint technical drawing desk",
+    "source_url": "https://www.pexels.com/photo/adult-man-sitting-on-chair-by-deck-and-drawing-9617369/"
+  },
+  "cms.herocarouselslide|cad-drafting|Floor plan": {
+    "alt": "Creative workspace with architectural sketches, blueprints, and drawing tools, perfect for planning and design.",
+    "credit": "Photo by Tima Miroshnichenko on Pexels",
+    "file": "drafting-2.webp",
+    "photographer_url": "https://www.pexels.com/@tima-miroshnichenko",
+    "pool": "drafting",
+    "query": "architect blueprint technical drawing desk",
+    "source_url": "https://www.pexels.com/photo/person-people-building-desk-6615235/"
+  },
+  "cms.herocarouselslide|cad-drafting|PDF\u2192CAD": {
+    "alt": "A creative professional using a compass on blueprints at an office desk.",
+    "credit": "Photo by Tima Miroshnichenko on Pexels",
+    "file": "drafting-3.webp",
+    "photographer_url": "https://www.pexels.com/@tima-miroshnichenko",
+    "pool": "drafting",
+    "query": "architect blueprint technical drawing desk",
+    "source_url": "https://www.pexels.com/photo/a-person-using-a-compass-6615028/"
+  },
+  "cms.herocarouselslide|cities|Architect reviewing local plans": {
+    "alt": "Aerial photo capturing an intersection in a suburban neighborhood with houses and greenery.",
+    "credit": "Photo by K on Pexels",
+    "file": "city-1.webp",
+    "photographer_url": "https://www.pexels.com/@kelly",
+    "pool": "city",
+    "query": "city neighbourhood street aerial",
+    "source_url": "https://www.pexels.com/photo/an-aerial-shot-of-an-intersection-in-a-town-8148350/"
+  },
+  "cms.herocarouselslide|cities|City skyline / neighborhood": {
+    "alt": "A typical Sarajevo street scene with a mosque minaret and cars parked along the road.",
+    "credit": "Photo by Markus Winkler on Pexels",
+    "file": "city-2.webp",
+    "photographer_url": "https://www.pexels.com/@markus-winkler-1430818",
+    "pool": "city",
+    "query": "city neighbourhood street aerial",
+    "source_url": "https://www.pexels.com/photo/cars-road-landscape-vacation-3267338/"
+  },
+  "cms.herocarouselslide|cities|Residential street aerial": {
+    "alt": "Aerial view of a residential neighborhood intersection in Philadelphia, PA.",
+    "credit": "Photo by K on Pexels",
+    "file": "city-3.webp",
+    "photographer_url": "https://www.pexels.com/@kelly",
+    "pool": "city",
+    "query": "city neighbourhood street aerial",
+    "source_url": "https://www.pexels.com/photo/road-intersection-in-town-17554869/"
+  },
+  "cms.herocarouselslide|landing|Daniel O. \u00b7 East Bay ADU": {
+    "alt": "Exterior design of modern cottage house facade with large windows and mixed wooden and stone cladding and spacious yard in snowy winter suburban area",
+    "credit": "Photo by Max Vakhtbovych on Pexels",
+    "file": "exterior-4.webp",
+    "photographer_url": "https://www.pexels.com/@artbovich",
+    "pool": "exterior",
+    "query": "modern house exterior architecture",
+    "source_url": "https://www.pexels.com/photo/modern-residential-house-facade-in-countryside-7031405/"
+  },
+  "cms.herocarouselslide|landing|Maya E. \u00b7 Oakland addition": {
+    "alt": "Contemporary residential facade featuring minimalist design and vibrant garden element.",
+    "credit": "Photo by David Brown on Pexels",
+    "file": "exterior-5.webp",
+    "photographer_url": "https://www.pexels.com/@ninobur",
+    "pool": "exterior",
+    "query": "modern house exterior architecture",
+    "source_url": "https://www.pexels.com/photo/a-shrub-in-front-of-a-modern-house-16787446/"
+  },
+  "cms.herocarouselslide|landing|Priya N. \u00b7 Restaurant change-of-use": {
+    "alt": "Striking minimalist facade of a modern house with geometric patterns in black and white.",
+    "credit": "Photo by Tiago Chaves on Pexels",
+    "file": "exterior-6.webp",
+    "photographer_url": "https://www.pexels.com/@tiago-chaves-2154478168",
+    "pool": "exterior",
+    "query": "modern house exterior architecture",
+    "source_url": "https://www.pexels.com/photo/modern-minimalist-architecture-in-black-and-white-34147672/"
+  },
+  "cms.herocarouselslide|projects|Architect at work / floor plan": {
+    "alt": "A modern residential building with closed shutters illuminated by dusk light, offering a dramatic architectural view.",
+    "credit": "Photo by Francesco Ungaro on Pexels",
+    "file": "exterior-7.webp",
+    "photographer_url": "https://www.pexels.com/@francesco-ungaro",
+    "pool": "exterior",
+    "query": "modern house exterior architecture",
+    "source_url": "https://www.pexels.com/photo/shuttered-windows-of-a-residential-building-7981800/"
+  },
+  "cms.herocarouselslide|projects|Finished ADU exterior": {
+    "alt": "Exterior view of contemporary residential house with terrace and large windows located in suburban area in winter day",
+    "credit": "Photo by Max Vakhtbovych on Pexels",
+    "file": "exterior-8.webp",
+    "photographer_url": "https://www.pexels.com/@artbovich",
+    "pool": "exterior",
+    "query": "modern house exterior architecture",
+    "source_url": "https://www.pexels.com/photo/facade-of-modern-suburban-mansion-7031412/"
+  },
+  "cms.herocarouselslide|projects|Modern renovated interior": {
+    "alt": "Spacious suburban cottage house with modern architecture design with stone and wooden panels and large private yard in winter countryside",
+    "credit": "Photo by Max Vakhtbovych on Pexels",
+    "file": "exterior-9.webp",
+    "photographer_url": "https://www.pexels.com/@artbovich",
+    "pool": "exterior",
+    "query": "modern house exterior architecture",
+    "source_url": "https://www.pexels.com/photo/new-cottage-house-facade-and-snowy-yard-7031411/"
+  },
+  "cms.herocarouselslide|services|3D render / finished space": {
+    "alt": "Engineer reviewing architectural blueprints on a desk with technical drawings.",
+    "credit": "Photo by Tima Miroshnichenko on Pexels",
+    "file": "drafting-4.webp",
+    "photographer_url": "https://www.pexels.com/@tima-miroshnichenko",
+    "pool": "drafting",
+    "query": "architect blueprint technical drawing desk",
+    "source_url": "https://www.pexels.com/photo/person-in-blue-denim-jacket-holding-white-printer-paper-6615234/"
+  },
+  "cms.herocarouselslide|services|Architect at drafting table": {
+    "alt": "Engineers discussing blueprints at a workspace, focusing on teamwork and architecture design.",
+    "credit": "Photo by RDNE Stock project on Pexels",
+    "file": "drafting-5.webp",
+    "photographer_url": "https://www.pexels.com/@rdne",
+    "pool": "drafting",
+    "query": "architect blueprint technical drawing desk",
+    "source_url": "https://www.pexels.com/photo/person-pointing-on-a-project-plan-in-blueprint-5922202/"
+  },
+  "cms.herocarouselslide|services|Designed interior render": {
+    "alt": "An architect diligently works on blueprints at a well-lit office desk with design tools.",
+    "credit": "Photo by Yaroslav Shuraev on Pexels",
+    "file": "drafting-6.webp",
+    "photographer_url": "https://www.pexels.com/@yaroslav-shuraev",
+    "pool": "drafting",
+    "query": "architect blueprint technical drawing desk",
+    "source_url": "https://www.pexels.com/photo/a-person-holding-a-pencil-6281167/"
+  },
+  "cms.inspirationitem|Charred-cedar facade with bronze windows": {
+    "alt": "Modern living room with small round shaped table and gray shelf with purple flower in blossom",
+    "credit": "Photo by Max Vakhtbovych on Pexels",
+    "file": "living-4.webp",
+    "photographer_url": "https://www.pexels.com/@artbovich",
+    "pool": "living",
+    "query": "modern living room interior daylight",
+    "source_url": "https://www.pexels.com/photo/comfortable-lounge-with-modern-interior-and-large-cozy-cofa-6782369/"
+  },
+  "cms.inspirationitem|Compact backyard studio, full-height glass": {
+    "alt": "A serene rustic cabin nestled among fall foliage in a tranquil forest setting.",
+    "credit": "Photo by Br\u00e1ulio jardim on Pexels",
+    "file": "adu-1.webp",
+    "photographer_url": "https://www.pexels.com/@braujardim",
+    "pool": "adu",
+    "query": "small backyard studio cabin exterior",
+    "source_url": "https://www.pexels.com/photo/rustic-wooden-cabin-in-autumn-forest-scene-29066985/"
+  },
+  "cms.inspirationitem|Courtyard entry with a slatted screen": {
+    "alt": "Stylishly designed living room with luxurious elements and modern decor.",
+    "credit": "Photo by Max Vakhtbovych on Pexels",
+    "file": "living-5.webp",
+    "photographer_url": "https://www.pexels.com/@artbovich",
+    "pool": "living",
+    "query": "modern living room interior daylight",
+    "source_url": "https://www.pexels.com/photo/modern-design-of-an-apartment-flat-6580396/"
+  },
+  "cms.inspirationitem|Double-height living room with a black steel stair": {
+    "alt": "Stylish interior of spacious living room with comfortable sofa in contemporary apartment in daytime",
+    "credit": "Photo by Max Vakhtbovych on Pexels",
+    "file": "living-1.webp",
+    "photographer_url": "https://www.pexels.com/@artbovich",
+    "pool": "living",
+    "query": "modern living room interior daylight",
+    "source_url": "https://www.pexels.com/photo/interior-of-living-room-in-modern-apartment-7214166/"
+  },
+  "cms.inspirationitem|Fluted vanity in a windowed powder room": {
+    "alt": "Interior of contemporary bathroom with round ceramic bathtub and sink and wooden cabinet in daytime",
+    "credit": "Photo by Max Vakhtbovych on Pexels",
+    "file": "bathroom-1.webp",
+    "photographer_url": "https://www.pexels.com/@artbovich",
+    "pool": "bathroom",
+    "query": "modern bathroom interior design",
+    "source_url": "https://www.pexels.com/photo/white-bathtub-and-sink-in-spacious-bathtub-at-home-6957081/"
+  },
+  "cms.inspirationitem|Garage conversion loft with a kitchenette": {
+    "alt": "Aged wooden cottage with steps and fence located on grassy ground near green trees growing in woods on summer day",
+    "credit": "Photo by Matheus Bertelli on Pexels",
+    "file": "adu-2.webp",
+    "photographer_url": "https://www.pexels.com/@bertellifotografia",
+    "pool": "adu",
+    "query": "small backyard studio cabin exterior",
+    "source_url": "https://www.pexels.com/photo/terrace-of-old-house-near-forest-7163655/"
+  },
+  "cms.inspirationitem|Micro-cement wet room in sage": {
+    "alt": "A sleek modern bathroom featuring pendant lighting and a contemporary sink.",
+    "credit": "Photo by Max Vakhtbovych on Pexels",
+    "file": "bathroom-2.webp",
+    "photographer_url": "https://www.pexels.com/@artbovich",
+    "pool": "bathroom",
+    "query": "modern bathroom interior design",
+    "source_url": "https://www.pexels.com/photo/photo-of-a-bathroom-8089092/"
+  },
+  "cms.inspirationitem|Retail-to-restaurant fit-out, warm brick": {
+    "alt": "Elegant restaurant interior featuring modern design and a poolside view, ideal for luxury dining experiences.",
+    "credit": "Photo by Zak Chapman on Pexels",
+    "file": "commercial-8.webp",
+    "photographer_url": "https://www.pexels.com/@naimbic",
+    "pool": "commercial",
+    "query": "modern restaurant interior design",
+    "source_url": "https://www.pexels.com/photo/man-in-black-dress-shirt-in-counter-2290740/"
+  },
+  "cms.inspirationitem|Second-story addition on a 1920s bungalow": {
+    "alt": "A professional architect walks out of a modern building holding house plans, symbolizing construction and development.",
+    "credit": "Photo by Pavel Danilyuk on Pexels",
+    "file": "addition-5.webp",
+    "photographer_url": "https://www.pexels.com/@pavel-danilyuk",
+    "pool": "addition",
+    "query": "house extension construction exterior",
+    "source_url": "https://www.pexels.com/photo/man-walking-out-of-house-with-plans-on-paper-7937740/"
+  },
+  "cms.inspirationitem|Sunken lounge around a plaster fireplace": {
+    "alt": "Interior of stylish living room with comfortable sofa with colorful pillows and large TV in modern apartment",
+    "credit": "Photo by Max Vakhtbovych on Pexels",
+    "file": "living-2.webp",
+    "photographer_url": "https://www.pexels.com/@artbovich",
+    "pool": "living",
+    "query": "modern living room interior daylight",
+    "source_url": "https://www.pexels.com/photo/spacious-living-room-in-stylish-apartment-7167073/"
+  },
+  "cms.inspirationitem|Two-tone shaker with a plaster hood": {
+    "alt": "Bright modern kitchen with white cabinetry, wooden stools, and pendant lighting.",
+    "credit": "Photo by Curtis Adams on Pexels",
+    "file": "kitchen-6.webp",
+    "photographer_url": "https://www.pexels.com/@curtis-adams-1694007",
+    "pool": "kitchen",
+    "query": "modern kitchen interior renovation",
+    "source_url": "https://www.pexels.com/photo/modern-kitchen-in-white-colour-5502219/"
+  },
+  "cms.inspirationitem|Warm oak galley with a marble run": {
+    "alt": "A bright, spacious kitchen featuring minimalist design and modern appliances.",
+    "credit": "Photo by Max Vakhtbovych on Pexels",
+    "file": "kitchen-7.webp",
+    "photographer_url": "https://www.pexels.com/@artbovich",
+    "pool": "kitchen",
+    "query": "modern kitchen interior renovation",
+    "source_url": "https://www.pexels.com/photo/kitchen-with-cabinets-and-oven-near-window-8134772/"
+  },
+  "cms.persona|3d-visualization|CONCEPTUAL": {
+    "alt": "Portrait of a confident woman in business attire with a spotlight effect.",
+    "credit": "Photo by Jonathan Goncalves on Pexels",
+    "file": "portrait-7.webp",
+    "photographer_url": "https://www.pexels.com/@thisisjooh",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/confident-woman-in-business-attire-34486175/"
+  },
+  "cms.persona|3d-visualization|Leah K.": {
+    "alt": "Striking black and white portrait of a young man engaged in a phone call, exuding professionalism.",
+    "credit": "Photo by Michael Obstoj on Pexels",
+    "file": "portrait-8.webp",
+    "photographer_url": "https://www.pexels.com/@michael-obstoj-1772571864",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/dynamic-black-and-white-portrait-of-young-man-on-phone-28773362/"
+  },
+  "cms.persona|3d-visualization|Marco V.": {
+    "alt": "Portrait of a curly-haired woman in a studio setting, wearing a green top and smiling slightly.",
+    "credit": "Photo by Bet\u00fcl  \u00dcst\u00fcn on Pexels",
+    "file": "portrait-9.webp",
+    "photographer_url": "https://www.pexels.com/@betul-ustun-236006735",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/studio-portrait-of-a-smiling-woman-with-curly-hair-38486802/"
+  },
+  "cms.persona|3d-visualization|PHOTOREAL": {
+    "alt": "Close-up portrait of a man in a Berlin studio with a dark background, conveying a moody yet professional tone.",
+    "credit": "Photo by Travel with  Lenses on Pexels",
+    "file": "portrait-10.webp",
+    "photographer_url": "https://www.pexels.com/@travel-with-lenses-734723610",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/professional-portrait-of-a-man-in-berlin-studio-36687799/"
+  },
+  "cms.persona|3d-visualization|PROFESSIONAL": {
+    "alt": "Smiling businessman in suit with folded arms posing at sunset, showing confidence and professionalism.",
+    "credit": "Photo by Sandro  Tavares on Pexels",
+    "file": "portrait-11.webp",
+    "photographer_url": "https://www.pexels.com/@sandro-tavares-260503371",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/a-man-in-black-suit-with-his-arms-crossed-13111213/"
+  },
+  "cms.persona|3d-visualization|Priya N.": {
+    "alt": "A portrait of a confident businessman in a blue suit with a serious expression.",
+    "credit": "Photo by Vincent Santamaria on Pexels",
+    "file": "portrait-12.webp",
+    "photographer_url": "https://www.pexels.com/@vincent-santamaria-194760512",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/confident-businessman-portrait-in-suit-and-tie-37148342/"
+  },
+  "cms.persona|about|You, free to do the work you trained for": {
+    "alt": "Black and white portrait of a smiling woman in a suit exuding confidence and elegance.",
+    "credit": "Photo by Jonathan Borba on Pexels",
+    "file": "portrait-13.webp",
+    "photographer_url": "https://www.pexels.com/@jonathanborba",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/portrait-of-smiling-woman-in-suit-in-black-and-white-20022699/"
+  },
+  "cms.persona|about|You, with a project worth getting right": {
+    "alt": "Portrait of a middle-aged man with a lanyard against a white background.",
+    "credit": "Photo by Jelly Marketing on Pexels",
+    "file": "portrait-14.webp",
+    "photographer_url": "https://www.pexels.com/@jellymarketing",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/professional-portrait-of-smiling-man-with-id-38774903/"
+  },
+  "cms.persona|inspiration|Additions that match the original": {
+    "alt": "A modern house under construction with scaffolding, fences, and construction signs on a cloudy day.",
+    "credit": "Photo by Freek Wolsink on Pexels",
+    "file": "addition-6.webp",
+    "photographer_url": "https://www.pexels.com/@freek-wolsink-508219",
+    "pool": "addition",
+    "query": "house extension construction exterior",
+    "source_url": "https://www.pexels.com/photo/modern-house-construction-on-cloudy-day-35974193/"
+  },
+  "cms.persona|inspiration|Backyard ADUs under 700 sq ft": {
+    "alt": "A stylish wooden cabin amidst lush greenery, ideal for a nature escape.",
+    "credit": "Photo by Rachel Claire on Pexels",
+    "file": "adu-3.webp",
+    "photographer_url": "https://www.pexels.com/@rachel-claire",
+    "pool": "adu",
+    "query": "small backyard studio cabin exterior",
+    "source_url": "https://www.pexels.com/photo/brown-wooden-house-surrounded-by-trees-8112957/"
+  },
+  "cms.persona|inspiration|Kitchens that open up": {
+    "alt": "Spacious kitchen with modern wooden cabinets and sleek design lighting.",
+    "credit": "Photo by Max Vakhtbovych on Pexels",
+    "file": "kitchen-8.webp",
+    "photographer_url": "https://www.pexels.com/@artbovich",
+    "pool": "kitchen",
+    "query": "modern kitchen interior renovation",
+    "source_url": "https://www.pexels.com/photo/spacious-kitchen-with-black-leather-padded-bar-stools-and-wooden-cabinets-8089079/"
+  },
+  "cms.testimonial|architect-landing|Daniel C., AIA": {
+    "alt": "Portrait of a confident young man with tattoos standing indoors against a neutral background.",
+    "credit": "Photo by Grigore Scar on Pexels",
+    "file": "portrait-15.webp",
+    "photographer_url": "https://www.pexels.com/@grigore-scar-2153317134",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/confident-man-with-tattoos-portrait-indoors-35495795/"
+  },
+  "cms.testimonial|architect-landing|Maya E., AIA": {
+    "alt": "Portrait of a confident Asian man in business attire adjusting his necktie.",
+    "credit": "Photo by Lil K on Pexels",
+    "file": "portrait-16.webp",
+    "photographer_url": "https://www.pexels.com/@lil-k-706180881",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/man-wearing-a-suit-and-tie-18165006/"
+  },
+  "cms.testimonial|architect-landing|Priya N., AIA": {
+    "alt": "Close-up portrait of a man with a dark background, showcasing emotion and introspection.",
+    "credit": "Photo by Travel with  Lenses on Pexels",
+    "file": "portrait-17.webp",
+    "photographer_url": "https://www.pexels.com/@travel-with-lenses-734723610",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/studio-portrait-of-a-thoughtful-man-in-berlin-36687795/"
+  },
+  "cms.testimonial|city:austin|Luis N., AIA": {
+    "alt": "A confident African American businesswoman poses with arms crossed in a modern office setting.",
+    "credit": "Photo by Mikhail Nilov on Pexels",
+    "file": "portrait-18.webp",
+    "photographer_url": "https://www.pexels.com/@mikhail-nilov",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/portrait-of-a-woman-in-a-blazer-posing-with-her-arms-crossed-9304685/"
+  },
+  "cms.testimonial|city:austin|Priyanka D., AIA": {
+    "alt": "Elegant black and white portrait of a smiling woman with curly hair.",
+    "credit": "Photo by BULE on Pexels",
+    "file": "portrait-19.webp",
+    "photographer_url": "https://www.pexels.com/@bule-2127348686",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/black-and-white-portrait-of-a-smiling-woman-35288343/"
+  },
+  "cms.testimonial|city:austin|Wes T., AIA": {
+    "alt": "African American man standing in a black suit with green pocket square, exuding confidence indoors.",
+    "credit": "Photo by RDNE Stock project on Pexels",
+    "file": "portrait-20.webp",
+    "photographer_url": "https://www.pexels.com/@rdne",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/a-man-in-black-suit-jacket-5778410/"
+  },
+  "cms.testimonial|city:denver|Ethan L., AIA": {
+    "alt": "Studio portrait of a man wearing a black shirt against a purple gradient background.",
+    "credit": "Photo by Gustavo Rangel on Pexels",
+    "file": "portrait-1.webp",
+    "photographer_url": "https://www.pexels.com/@gustavo-rangel-90236833",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/photo-of-man-in-black-shirt-9092311/"
+  },
+  "cms.testimonial|city:denver|Hollis B., AIA": {
+    "alt": "Striking black and white portrait showcasing a man's thoughtful expression.",
+    "credit": "Photo by Jean Marc Bonnel on Pexels",
+    "file": "portrait-2.webp",
+    "photographer_url": "https://www.pexels.com/@jean-marc-bonnel-387362531",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/black-and-white-portrait-of-a-man-28736497/"
+  },
+  "cms.testimonial|city:denver|Zoe P., AIA": {
+    "alt": "Black and white portrait of a young man in a suit looking upwards.",
+    "credit": "Photo by Kaue Barbier on Pexels",
+    "file": "portrait-3.webp",
+    "photographer_url": "https://www.pexels.com/@kaue-barbier-710715348",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/thoughtful-young-man-in-a-suit-portrait-30181294/"
+  },
+  "cms.testimonial|city:los-angeles|Camila F., AIA": {
+    "alt": "Black and white studio portrait of an elegant woman in a blazer with a subtle smile.",
+    "credit": "Photo by Jonathan Borba on Pexels",
+    "file": "portrait-4.webp",
+    "photographer_url": "https://www.pexels.com/@jonathanborba",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/portrait-of-an-elegant-woman-in-black-and-white-20022691/"
+  },
+  "cms.testimonial|city:los-angeles|Jordan V., AIA": {
+    "alt": "Portrait of a confident woman posing under dramatic, moody lighting in a studio setting.",
+    "credit": "Photo by Omar Tapia on Pexels",
+    "file": "portrait-5.webp",
+    "photographer_url": "https://www.pexels.com/@omar-tapia-129681804",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/confident-woman-in-studio-portrait-with-dramatic-lighting-38969192/"
+  },
+  "cms.testimonial|city:los-angeles|Theo B., AIA": {
+    "alt": "Studio portrait of a young man wearing a vibrant floral shirt against a dark background.",
+    "credit": "Photo by Ansey Photography on Pexels",
+    "file": "portrait-6.webp",
+    "photographer_url": "https://www.pexels.com/@ansey",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/portrait-of-a-young-man-in-floral-shirt-38977010/"
+  },
+  "cms.testimonial|city:new-york|Ben H., AIA": {
+    "alt": "Portrait of a confident woman in business attire with a spotlight effect.",
+    "credit": "Photo by Jonathan Goncalves on Pexels",
+    "file": "portrait-7.webp",
+    "photographer_url": "https://www.pexels.com/@thisisjooh",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/confident-woman-in-business-attire-34486175/"
+  },
+  "cms.testimonial|city:new-york|Julia S., AIA": {
+    "alt": "Striking black and white portrait of a young man engaged in a phone call, exuding professionalism.",
+    "credit": "Photo by Michael Obstoj on Pexels",
+    "file": "portrait-8.webp",
+    "photographer_url": "https://www.pexels.com/@michael-obstoj-1772571864",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/dynamic-black-and-white-portrait-of-young-man-on-phone-28773362/"
+  },
+  "cms.testimonial|city:new-york|Rosa I., AIA": {
+    "alt": "Portrait of a curly-haired woman in a studio setting, wearing a green top and smiling slightly.",
+    "credit": "Photo by Bet\u00fcl  \u00dcst\u00fcn on Pexels",
+    "file": "portrait-9.webp",
+    "photographer_url": "https://www.pexels.com/@betul-ustun-236006735",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/studio-portrait-of-a-smiling-woman-with-curly-hair-38486802/"
+  },
+  "cms.testimonial|city:oakland|Daniel O., AIA": {
+    "alt": "Close-up portrait of a man in a Berlin studio with a dark background, conveying a moody yet professional tone.",
+    "credit": "Photo by Travel with  Lenses on Pexels",
+    "file": "portrait-10.webp",
+    "photographer_url": "https://www.pexels.com/@travel-with-lenses-734723610",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/professional-portrait-of-a-man-in-berlin-studio-36687799/"
+  },
+  "cms.testimonial|city:oakland|Maya E., AIA": {
+    "alt": "Smiling businessman in suit with folded arms posing at sunset, showing confidence and professionalism.",
+    "credit": "Photo by Sandro  Tavares on Pexels",
+    "file": "portrait-11.webp",
+    "photographer_url": "https://www.pexels.com/@sandro-tavares-260503371",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/a-man-in-black-suit-with-his-arms-crossed-13111213/"
+  },
+  "cms.testimonial|city:oakland|Priya N., AIA": {
+    "alt": "A portrait of a confident businessman in a blue suit with a serious expression.",
+    "credit": "Photo by Vincent Santamaria on Pexels",
+    "file": "portrait-12.webp",
+    "photographer_url": "https://www.pexels.com/@vincent-santamaria-194760512",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/confident-businessman-portrait-in-suit-and-tie-37148342/"
+  },
+  "cms.testimonial|city:phoenix|Amara O., AIA": {
+    "alt": "Black and white portrait of a smiling woman in a suit exuding confidence and elegance.",
+    "credit": "Photo by Jonathan Borba on Pexels",
+    "file": "portrait-13.webp",
+    "photographer_url": "https://www.pexels.com/@jonathanborba",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/portrait-of-smiling-woman-in-suit-in-black-and-white-20022699/"
+  },
+  "cms.testimonial|city:phoenix|Carlos V., AIA": {
+    "alt": "Portrait of a middle-aged man with a lanyard against a white background.",
+    "credit": "Photo by Jelly Marketing on Pexels",
+    "file": "portrait-14.webp",
+    "photographer_url": "https://www.pexels.com/@jellymarketing",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/professional-portrait-of-smiling-man-with-id-38774903/"
+  },
+  "cms.testimonial|city:phoenix|Dana M., AIA": {
+    "alt": "Portrait of a confident young man with tattoos standing indoors against a neutral background.",
+    "credit": "Photo by Grigore Scar on Pexels",
+    "file": "portrait-15.webp",
+    "photographer_url": "https://www.pexels.com/@grigore-scar-2153317134",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/confident-man-with-tattoos-portrait-indoors-35495795/"
+  },
+  "cms.testimonial|city:portland|Hana K., AIA": {
+    "alt": "Portrait of a confident Asian man in business attire adjusting his necktie.",
+    "credit": "Photo by Lil K on Pexels",
+    "file": "portrait-16.webp",
+    "photographer_url": "https://www.pexels.com/@lil-k-706180881",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/man-wearing-a-suit-and-tie-18165006/"
+  },
+  "cms.testimonial|city:portland|Ingrid S., AIA": {
+    "alt": "Close-up portrait of a man with a dark background, showcasing emotion and introspection.",
+    "credit": "Photo by Travel with  Lenses on Pexels",
+    "file": "portrait-17.webp",
+    "photographer_url": "https://www.pexels.com/@travel-with-lenses-734723610",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/studio-portrait-of-a-thoughtful-man-in-berlin-36687795/"
+  },
+  "cms.testimonial|city:portland|Mateo R., AIA": {
+    "alt": "A confident African American businesswoman poses with arms crossed in a modern office setting.",
+    "credit": "Photo by Mikhail Nilov on Pexels",
+    "file": "portrait-18.webp",
+    "photographer_url": "https://www.pexels.com/@mikhail-nilov",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/portrait-of-a-woman-in-a-blazer-posing-with-her-arms-crossed-9304685/"
+  },
+  "cms.testimonial|city:sacramento|Bianca J., AIA": {
+    "alt": "Elegant black and white portrait of a smiling woman with curly hair.",
+    "credit": "Photo by BULE on Pexels",
+    "file": "portrait-19.webp",
+    "photographer_url": "https://www.pexels.com/@bule-2127348686",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/black-and-white-portrait-of-a-smiling-woman-35288343/"
+  },
+  "cms.testimonial|city:sacramento|Grace H., AIA": {
+    "alt": "African American man standing in a black suit with green pocket square, exuding confidence indoors.",
+    "credit": "Photo by RDNE Stock project on Pexels",
+    "file": "portrait-20.webp",
+    "photographer_url": "https://www.pexels.com/@rdne",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/a-man-in-black-suit-jacket-5778410/"
+  },
+  "cms.testimonial|city:sacramento|Owen D., AIA": {
+    "alt": "Studio portrait of a man wearing a black shirt against a purple gradient background.",
+    "credit": "Photo by Gustavo Rangel on Pexels",
+    "file": "portrait-1.webp",
+    "photographer_url": "https://www.pexels.com/@gustavo-rangel-90236833",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/photo-of-man-in-black-shirt-9092311/"
+  },
+  "cms.testimonial|city:san-diego|Andre K., AIA": {
+    "alt": "Striking black and white portrait showcasing a man's thoughtful expression.",
+    "credit": "Photo by Jean Marc Bonnel on Pexels",
+    "file": "portrait-2.webp",
+    "photographer_url": "https://www.pexels.com/@jean-marc-bonnel-387362531",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/black-and-white-portrait-of-a-man-28736497/"
+  },
+  "cms.testimonial|city:san-diego|Lucia G., AIA": {
+    "alt": "Black and white portrait of a young man in a suit looking upwards.",
+    "credit": "Photo by Kaue Barbier on Pexels",
+    "file": "portrait-3.webp",
+    "photographer_url": "https://www.pexels.com/@kaue-barbier-710715348",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/thoughtful-young-man-in-a-suit-portrait-30181294/"
+  },
+  "cms.testimonial|city:san-diego|Nina C., AIA": {
+    "alt": "Black and white studio portrait of an elegant woman in a blazer with a subtle smile.",
+    "credit": "Photo by Jonathan Borba on Pexels",
+    "file": "portrait-4.webp",
+    "photographer_url": "https://www.pexels.com/@jonathanborba",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/portrait-of-an-elegant-woman-in-black-and-white-20022691/"
+  },
+  "cms.testimonial|city:san-francisco|Elena R., AIA": {
+    "alt": "Portrait of a confident woman posing under dramatic, moody lighting in a studio setting.",
+    "credit": "Photo by Omar Tapia on Pexels",
+    "file": "portrait-5.webp",
+    "photographer_url": "https://www.pexels.com/@omar-tapia-129681804",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/confident-woman-in-studio-portrait-with-dramatic-lighting-38969192/"
+  },
+  "cms.testimonial|city:san-francisco|Marcus T., AIA": {
+    "alt": "Studio portrait of a young man wearing a vibrant floral shirt against a dark background.",
+    "credit": "Photo by Ansey Photography on Pexels",
+    "file": "portrait-6.webp",
+    "photographer_url": "https://www.pexels.com/@ansey",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/portrait-of-a-young-man-in-floral-shirt-38977010/"
+  },
+  "cms.testimonial|city:san-francisco|Sofia L., AIA": {
+    "alt": "Portrait of a confident woman in business attire with a spotlight effect.",
+    "credit": "Photo by Jonathan Goncalves on Pexels",
+    "file": "portrait-7.webp",
+    "photographer_url": "https://www.pexels.com/@thisisjooh",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/confident-woman-in-business-attire-34486175/"
+  },
+  "cms.testimonial|city:san-jose|Anh P., AIA": {
+    "alt": "Striking black and white portrait of a young man engaged in a phone call, exuding professionalism.",
+    "credit": "Photo by Michael Obstoj on Pexels",
+    "file": "portrait-8.webp",
+    "photographer_url": "https://www.pexels.com/@michael-obstoj-1772571864",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/dynamic-black-and-white-portrait-of-young-man-on-phone-28773362/"
+  },
+  "cms.testimonial|city:san-jose|Claire M., AIA": {
+    "alt": "Portrait of a curly-haired woman in a studio setting, wearing a green top and smiling slightly.",
+    "credit": "Photo by Bet\u00fcl  \u00dcst\u00fcn on Pexels",
+    "file": "portrait-9.webp",
+    "photographer_url": "https://www.pexels.com/@betul-ustun-236006735",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/studio-portrait-of-a-smiling-woman-with-curly-hair-38486802/"
+  },
+  "cms.testimonial|city:san-jose|Raj S., AIA": {
+    "alt": "Close-up portrait of a man in a Berlin studio with a dark background, conveying a moody yet professional tone.",
+    "credit": "Photo by Travel with  Lenses on Pexels",
+    "file": "portrait-10.webp",
+    "photographer_url": "https://www.pexels.com/@travel-with-lenses-734723610",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/professional-portrait-of-a-man-in-berlin-studio-36687799/"
+  },
+  "cms.testimonial|city:seattle|Colin A., AIA": {
+    "alt": "Smiling businessman in suit with folded arms posing at sunset, showing confidence and professionalism.",
+    "credit": "Photo by Sandro  Tavares on Pexels",
+    "file": "portrait-11.webp",
+    "photographer_url": "https://www.pexels.com/@sandro-tavares-260503371",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/a-man-in-black-suit-with-his-arms-crossed-13111213/"
+  },
+  "cms.testimonial|city:seattle|Ravi M., AIA": {
+    "alt": "A portrait of a confident businessman in a blue suit with a serious expression.",
+    "credit": "Photo by Vincent Santamaria on Pexels",
+    "file": "portrait-12.webp",
+    "photographer_url": "https://www.pexels.com/@vincent-santamaria-194760512",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/confident-businessman-portrait-in-suit-and-tie-37148342/"
+  },
+  "cms.testimonial|city:seattle|Tessa W., AIA": {
+    "alt": "Black and white portrait of a smiling woman in a suit exuding confidence and elegance.",
+    "credit": "Photo by Jonathan Borba on Pexels",
+    "file": "portrait-13.webp",
+    "photographer_url": "https://www.pexels.com/@jonathanborba",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/portrait-of-smiling-woman-in-suit-in-black-and-white-20022699/"
+  },
+  "cms.testimonial|for-experts|Leah K.": {
+    "alt": "Portrait of a middle-aged man with a lanyard against a white background.",
+    "credit": "Photo by Jelly Marketing on Pexels",
+    "file": "portrait-14.webp",
+    "photographer_url": "https://www.pexels.com/@jellymarketing",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/professional-portrait-of-smiling-man-with-id-38774903/"
+  },
+  "cms.testimonial|for-experts|Nadia R.": {
+    "alt": "Portrait of a confident young man with tattoos standing indoors against a neutral background.",
+    "credit": "Photo by Grigore Scar on Pexels",
+    "file": "portrait-15.webp",
+    "photographer_url": "https://www.pexels.com/@grigore-scar-2153317134",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/confident-man-with-tattoos-portrait-indoors-35495795/"
+  },
+  "cms.testimonial|for-experts|Sam T.": {
+    "alt": "Portrait of a confident Asian man in business attire adjusting his necktie.",
+    "credit": "Photo by Lil K on Pexels",
+    "file": "portrait-16.webp",
+    "photographer_url": "https://www.pexels.com/@lil-k-706180881",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/man-wearing-a-suit-and-tie-18165006/"
+  },
+  "cms.testimonial|landing|Grace Okafor": {
+    "alt": "Close-up portrait of a man with a dark background, showcasing emotion and introspection.",
+    "credit": "Photo by Travel with  Lenses on Pexels",
+    "file": "portrait-17.webp",
+    "photographer_url": "https://www.pexels.com/@travel-with-lenses-734723610",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/studio-portrait-of-a-thoughtful-man-in-berlin-36687795/"
+  },
+  "cms.testimonial|landing|Marcus Reed": {
+    "alt": "A confident African American businesswoman poses with arms crossed in a modern office setting.",
+    "credit": "Photo by Mikhail Nilov on Pexels",
+    "file": "portrait-18.webp",
+    "photographer_url": "https://www.pexels.com/@mikhail-nilov",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/portrait-of-a-woman-in-a-blazer-posing-with-her-arms-crossed-9304685/"
+  },
+  "cms.testimonial|landing|Rebecca Lin": {
+    "alt": "Elegant black and white portrait of a smiling woman with curly hair.",
+    "credit": "Photo by BULE on Pexels",
+    "file": "portrait-19.webp",
+    "photographer_url": "https://www.pexels.com/@bule-2127348686",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/black-and-white-portrait-of-a-smiling-woman-35288343/"
+  },
+  "cms.testimonial|services-landing|Elena D.": {
+    "alt": "African American man standing in a black suit with green pocket square, exuding confidence indoors.",
+    "credit": "Photo by RDNE Stock project on Pexels",
+    "file": "portrait-20.webp",
+    "photographer_url": "https://www.pexels.com/@rdne",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/a-man-in-black-suit-jacket-5778410/"
+  },
+  "cms.testimonial|services-landing|Grace O.": {
+    "alt": "Studio portrait of a man wearing a black shirt against a purple gradient background.",
+    "credit": "Photo by Gustavo Rangel on Pexels",
+    "file": "portrait-1.webp",
+    "photographer_url": "https://www.pexels.com/@gustavo-rangel-90236833",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/photo-of-man-in-black-shirt-9092311/"
+  },
+  "cms.testimonial|services-landing|Marcus R.": {
+    "alt": "Striking black and white portrait showcasing a man's thoughtful expression.",
+    "credit": "Photo by Jean Marc Bonnel on Pexels",
+    "file": "portrait-2.webp",
+    "photographer_url": "https://www.pexels.com/@jean-marc-bonnel-387362531",
+    "pool": "portrait",
+    "query": "professional headshot portrait person",
+    "source_url": "https://www.pexels.com/photo/black-and-white-portrait-of-a-man-28736497/"
+  }
+}

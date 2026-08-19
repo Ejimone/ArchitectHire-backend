@@ -158,6 +158,28 @@ class TestRecordList:
         assert len(row["gallery"]) == 1  # nested children come through
         assert row["gallery"][0]["id"] == study.gallery.first().pk  # …with their ids
 
+    @pytest.mark.django_db
+    def test_ids_are_skipped_when_the_serializer_does_not_nest_its_children(self):
+        """Ids are injected into the nested list by *position*, so they are injected only
+        when the two lists provably line up.
+
+        A collection whose serializer omits its children (or filters them — published
+        only, active only) would otherwise pair a caption with the wrong row's id, and
+        the studio would edit a record the editor never clicked."""
+        import dataclasses
+
+        from apps.studio_api.views_records import public_row
+
+        study = CaseStudy.objects.create(slug="no-nest", title="No nest")
+        CaseStudyImage.objects.create(case_study=study, caption="Solo")
+        # `snapshot()` returns columns, never the reverse accessor.
+        spec = dataclasses.replace(BY_LABEL["cms.casestudy"], serializer=None)
+
+        data = public_row(None, spec, study, "live")
+
+        assert data["id"] == study.pk
+        assert "gallery" not in data
+
     def test_children_can_be_listed_by_parent(self, studio_client):
         page = PolicyPage.objects.create(slug="probe-policy", title="Probe")
         PolicySection.objects.create(page=page, anchor="a", heading="A", body="x")

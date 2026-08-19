@@ -4,8 +4,8 @@
 On a database that has already been seeded it does nothing to the content domains —
 the owner's edits in the Studio and the admin are the source of truth from then on,
 and a deploy that re-runs `seed --all` (they all do) must never overwrite them. The
-`media` and `searchindex` domains always run: filling empty slots and rebuilding the
-index are already idempotent floors of their own. Pass `--overwrite` to deliberately
+`media`, `record_media` and `searchindex` domains always run: filling empty images and
+rebuilding the index are already idempotent floors of their own. Pass `--overwrite` to deliberately
 reset content to the seeds. Content corrections that must reach every environment ship
 as data migrations, not as seed edits.
 
@@ -103,6 +103,7 @@ class Command(BaseCommand):
                 "payments",
                 "content",
                 "media",
+                "record_media",
                 "searchindex",
             ]
             if options["all"]
@@ -1066,6 +1067,20 @@ class Command(BaseCommand):
         self.stdout.write(
             f"  media: {total} slots ({created} new, {pruned} pruned) — "
             f"{filled} seeded, {kept} already had an image, {empty} still empty"
+        )
+
+    def seed_record_media(self):
+        """Stock photography for images that live on a content row rather than in a slot.
+
+        Same contract as `seed_media`: fills only what is empty, never overwrites the
+        owner's own photograph, and re-runs harmlessly on every deploy.
+        """
+        from apps.cms.record_media import attach_seed_record_images, expected_record_images
+
+        filled, kept = attach_seed_record_images()
+        remaining = sum(1 for _ in expected_record_images())
+        self.stdout.write(
+            f"  record media: {filled} seeded, {kept} already had an image, {remaining} still empty"
         )
 
     def seed_payments(self):
