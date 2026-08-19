@@ -156,6 +156,7 @@ class TestRecordList:
         assert row["id"] == study.pk
         assert row["title"] == "Public shape"
         assert len(row["gallery"]) == 1  # nested children come through
+        assert row["gallery"][0]["id"] == study.gallery.first().pk  # …with their ids
 
     def test_children_can_be_listed_by_parent(self, studio_client):
         page = PolicyPage.objects.create(slug="probe-policy", title="Probe")

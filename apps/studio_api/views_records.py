@@ -155,6 +155,23 @@ def public_row(request, spec: CollectionSpec, obj, mode: str) -> dict:
     else:
         data = dict(spec.serializer(obj, context={"request": request}).data)
     data["id"] = obj.pk
+    # Nested children (a case study's gallery, a category's services, a policy's
+    # sections) come out of the site's serializers without ids. The canvas needs them to
+    # make each child clickable, so they are injected by position — the nested list is
+    # rendered from the same overlaid rows, in the same order.
+    for child_label in spec.children:
+        child_spec = BY_LABEL[child_label]
+        parent_field = child_spec.model._meta.get_field(child_spec.parent)
+        accessor = parent_field.remote_field.get_accessor_name()
+        rows = getattr(obj, "_prefetched_objects_cache", {}).get(
+            parent_field.remote_field.cache_name
+        )
+        nested = data.get(accessor)
+        if rows is None or not isinstance(nested, list) or len(nested) != len(rows):
+            continue
+        for entry, child in zip(nested, rows, strict=True):
+            if isinstance(entry, dict):
+                entry["id"] = child.pk
     return data
 
 
