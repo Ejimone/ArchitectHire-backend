@@ -29,6 +29,8 @@ RUN SECRET_KEY=build-only ALLOWED_HOSTS=build \
     MEDIA_BACKEND=local MEDIA_URL=https://build-only.invalid/media/ \
     python manage.py collectstatic --noinput
 EXPOSE 8000
+# Migrations run here, not in the deploy hook — see the script for why.
+ENTRYPOINT ["/app/scripts/docker-entrypoint.sh"]
 # Worker count is memory-bound, not CPU-bound: each worker loads its own copy of
 # Django + DRF + channels + celery + stripe and costs ~110MB resident. Measured
 # anonymous memory under load on the 512MB App Platform instance:
